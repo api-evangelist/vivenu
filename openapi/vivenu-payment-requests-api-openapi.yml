@@ -1,0 +1,803 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists payment-requests API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: payment-requests
+paths:
+  /api/payments/requests:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: customerId
+        required: false
+        schema:
+          type: string
+          description: Filter payment requests by customer ID
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: checkoutId
+        required: false
+        schema:
+          type: string
+          description: Filter payment requests by checkout ID
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: status
+        required: false
+        schema:
+          type: array
+          items:
+            oneOf:
+            - type: array
+            - type: boolean
+            - type: number
+            - type: object
+            - type: string
+            enum:
+            - NEW
+            - SUCCEEDED
+            - CANCELED
+            metas: {}
+          description: Filter payment requests by status
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: gatewayId
+        required: false
+        schema:
+          type: string
+          description: Filter payment requests by gateway ID
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: origin
+        required: false
+        schema:
+          type: array
+          items:
+            oneOf:
+            - type: array
+            - type: boolean
+            - type: number
+            - type: object
+            - type: string
+            enum:
+            - pos
+            - online
+            - setup
+            - subscription
+            - paymentPlan
+            metas: {}
+          description: Filter payment requests by origin
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: createdAt
+        required: false
+        schema:
+          type: object
+          properties:
+            $gt:
+              type: string
+              format: date-time
+              description: value is greater than
+              metas: {}
+            $gte:
+              type: string
+              format: date-time
+              description: value is greater than or equal
+              metas: {}
+            $lt:
+              type: string
+              format: date-time
+              description: value is less than
+              metas: {}
+            $lte:
+              type: string
+              format: date-time
+              description: value is less than or equal
+              metas: {}
+            $eq:
+              type: string
+              format: date-time
+              description: value is equal
+              metas: {}
+            $ne:
+              type: string
+              format: date-time
+              description: value is not equal
+              metas: {}
+          description: Range of dates to filter by when the payment request was created in ISO format.
+          metas: {}
+        in: query
+        style: deepObject
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: number
+          format: float
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: top
+        required: false
+        schema:
+          type: number
+          format: float
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Payment-requests_GetPaymentRequests_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - payment-requests
+      description: Get Payment Requests
+      operationId: payment-requests/list
+    post:
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentRequestResource'
+        '400':
+          description: Bad Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Payment-requests_CreateAPaymentRequest'
+      tags:
+      - payment-requests
+      description: Create a Payment Request
+      operationId: payment-requests/create
+  /api/payments/requests/{id}:
+    get:
+      parameters:
+      - name: secret
+        required: false
+        schema:
+          type: string
+          description: Secret of the payment request
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the payment request
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentRequestResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - payment-requests
+      description: Get a Payment Request
+      operationId: payment-requests/get
+    put:
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the payment request
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentRequestResource'
+        '400':
+          description: Bad Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Payment-requests_UpdateAPaymentRequest'
+      tags:
+      - payment-requests
+      description: Update a Payment Request
+      operationId: payment-requests/update
+  /api/payments/requests/setup:
+    post:
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentRequestResource'
+        '400':
+          description: Bad Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Payment-requests_CreateAPaymentRequestForCustomerPaymentMethodSetup'
+      tags:
+      - payment-requests
+      description: Create a Payment Request for Customer Payment Method Setup
+      operationId: payment-requests/createSetup
+  /api/payments/requests/{id}/processor:
+    post:
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentRequestProcessorResource'
+        '400':
+          description: Bad Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Payment-requests_ReceiveProcessorInfo'
+      tags:
+      - payment-requests
+      description: Receive Processor Info
+      operationId: payment-requests/receiveProcessor
+  /api/payments/requests/{id}/confirm:
+    post:
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the payment request
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentRequestResource'
+        '400':
+          description: Bad Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Payment-requests_ConfirmAPaymentRequest'
+      tags:
+      - payment-requests
+      description: Confirm a Payment Request
+      operationId: payment-requests/confirm
+  /api/payments/requests/{id}/payment-status:
+    post:
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the payment request
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentRequestResource'
+        '400':
+          description: Bad Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Payment-requests_ChangePaymentRequestPaymentStatus'
+      tags:
+      - payment-requests
+      description: Change Payment Request Payment Status
+      operationId: payment-requests/changeStatus
+  /api/payments/requests/{id}/verify:
+    post:
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentRequestResource'
+        '400':
+          description: Bad Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Payment-requests_VerifyAPaymentRequest'
+      tags:
+      - payment-requests
+      description: Verify a payment request
+      operationId: payment-requests/verify
+components:
+  schemas:
+    POST_Payment-requests_CreateAPaymentRequest:
+      type: object
+      properties:
+        checkoutId:
+          type: string
+          description: The ID of the checkout object to create the payment request
+        transactionId:
+          type: string
+          description: The ID of the transaction object to create the payment request
+        secret:
+          type: string
+          description: The secret of the transaction
+      required:
+      - secret
+    POST_Payment-requests_ConfirmAPaymentRequest:
+      type: object
+      properties:
+        gatewaySecret:
+          type: string
+          description: The secret of the payment gateway responsible for the payment
+        reference:
+          type: string
+          description: A reference to the payment
+        paymentStatus:
+          type: string
+          enum:
+          - SUCCEEDED
+          - PENDING
+          description: The status of the payment
+          default: SUCCEEDED
+        paymentMethod:
+          type: string
+          enum:
+          - visa
+          - mc
+          - sepadirectdebit
+          - amex
+          - sofort
+          - klarna
+          - ideal
+          - giropay
+          - paypal
+          - local
+          - discover
+          - custom
+          - twint
+          - postfinance
+          - blik
+          - p24
+          - affirm
+          - dankort
+          - eps
+          - mobilepay
+          - payconiq
+          - bancontact
+          - payfast
+          - distributor
+          - marketplace
+          - cartebancaire
+          - paymentplan
+          - bizum
+          - afterpay
+          - zip
+          - ach
+          - paybybank
+          - link
+          - alipay
+          - wechatpay
+          - pix
+          - eftpos
+          - revolutpay
+          - wero
+          - scalapay
+          - vipps
+          - cashapppay
+          - crypto
+          - unknown
+          - none
+          description: The payment method used to pay
+        paymentMethodVariant:
+          type: string
+          enum:
+          - applepay
+          - googlepay
+          description: The payment variant used to pay
+      required:
+      - gatewaySecret
+    PUT_Payment-requests_UpdateAPaymentRequest:
+      type: object
+      properties:
+        secret:
+          type: string
+          description: The secret of the payment request
+        paymentStrategyId:
+          type: string
+          description: The ID of the payment strategy
+        paymentOptionId:
+          type: string
+          description: The ID of the payment option
+      required:
+      - secret
+      - paymentStrategyId
+      - paymentOptionId
+    POST_Payment-requests_VerifyAPaymentRequest:
+      type: object
+      properties:
+        paymentGatewayId:
+          type: string
+          description: The ID of the payment gateway the client intents to use
+        data:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+          description: custom data to verify the payment
+      required:
+      - paymentGatewayId
+    POST_Payment-requests_CreateAPaymentRequestForCustomerPaymentMethodSetup:
+      type: object
+      properties:
+        customerId:
+          type: string
+          description: The ID of the customer object to create the payment request for
+        amount:
+          type: number
+          format: float
+          description: The amount to charge
+          default: 1
+        paymentStrategyId:
+          type: string
+          description: The ID of the payment strategy to use
+        paymentOptionId:
+          type: string
+          description: The ID of the payment option to use
+    PaymentRequestProcessorResource:
+      type: object
+      properties:
+        paymentGatewayType:
+          type: string
+          enum:
+          - stripe
+          - paypal
+          - adyen
+          - custom
+          - cardconnect
+          - worldline
+          - shift4
+          - authorizenet
+          - wallee
+          - square
+          - payfast
+          - touchnet
+          - transact
+          - unzer
+          - monext
+          - vivenuPayments
+          - ebanx
+          - rapyd
+          - additional-payment-method
+        paymentGatewayId:
+          type: string
+        reference:
+          type: string
+        redirectUrl:
+          type: string
+        data:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the payment request processor was created
+      required:
+      - paymentGatewayType
+      - createdAt
+    GET_Payment-requests_GetPaymentRequests_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentRequestResource'
+        total:
+          type: integer
+    POST_Payment-requests_ReceiveProcessorInfo:
+      type: object
+      properties:
+        paymentGatewayId:
+          type: string
+          description: The ID of the payment gateway the client intents to use
+        returnUrl:
+          type: string
+          description: The URL to return after the user has completed the payment
+      required:
+      - paymentGatewayId
+    POST_Payment-requests_ChangePaymentRequestPaymentStatus:
+      type: object
+      properties:
+        paymentStatus:
+          type: string
+          enum:
+          - SUCCEEDED
+          - FAILED
+          description: The new payment status
+        gatewaySecret:
+          type: string
+          description: The secret of the payment gateway responsible for the payment
+      required:
+      - paymentStatus
+      - gatewaySecret
+    PaymentRequestResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the payment request
+        secret:
+          type: string
+          description: The secret token of the payment request
+        amount:
+          type: number
+          format: float
+          description: The amount which needs to be paid
+        currency:
+          type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: An ISO 4217 3-character code of the currency
+        checkoutId:
+          type: string
+          description: The ID of the checkout that request belongs to
+        subscriptionId:
+          type: string
+          description: The ID of the subscription that request belongs to
+        paymentPlanId:
+          type: string
+          description: The ID of the payment plan that request belongs to
+        paymentGatewayId:
+          type: string
+          description: The ID of the payment gateway responsible for the payment
+        reference:
+          type: string
+        processors:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentRequestProcessorResource'
+        status:
+          type: string
+          enum:
+          - NEW
+          - SUCCEEDED
+          - CANCELED
+          default: NEW
+        history:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - payment_request.created
+                - payment_request.details_submitted
+                - payment_request.verified
+                - payment_request.confirmed
+                - payment_request.succeeded
+                - payment_request.canceled
+              date:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the history entry was added
+              data:
+                oneOf:
+                - type: array
+                - type: boolean
+                - type: number
+                - type: object
+                - type: string
+            required:
+            - type
+            - date
+        applications:
+          type: array
+          items:
+            type: object
+            properties:
+              amount:
+                type: number
+                format: float
+                description: The amount of the application
+              method:
+                type: string
+                enum:
+                - deposit
+                description: The method of the application
+            required:
+            - amount
+            - method
+        customer:
+          type: object
+          properties:
+            customerId:
+              type: string
+              description: The ID of the customer of the payment request
+            email:
+              type: string
+              format: email
+              description: The email of the user of the payment request
+            country:
+              type: string
+              description: The country of the user of the payment request
+        sellerId:
+          type: string
+        expiresAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the payment request will expire and a new one will be created if requested
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the payment request was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the payment request was last updated
+      required:
+      - _id
+      - secret
+      - status
+      - sellerId
+      - createdAt
+      - updatedAt
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

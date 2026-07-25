@@ -1,0 +1,358 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists short-links API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: short-links
+paths:
+  /api/marketing/short-links:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: top
+        schema:
+          default: 25
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          type: integer
+          minimum: 1
+          maximum: 1000
+        description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+        in: query
+        required: true
+        style: form
+        explode: true
+      - name: skip
+        schema:
+          default: 0
+          description: The number of objects to skip for the requested result
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        description: The number of objects to skip for the requested result
+        in: query
+        required: true
+        style: form
+        explode: true
+      - name: campaignId
+        schema:
+          type: string
+        in: query
+        required: false
+        style: form
+        explode: true
+      - name: target
+        schema:
+          type: string
+        in: query
+        required: false
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  docs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ShortLinkResource'
+                  total:
+                    type: number
+                required:
+                - docs
+                - total
+                additionalProperties: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - short-links
+      description: Get All Short Links
+      operationId: short-links/list
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShortLinkResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                campaignId:
+                  description: The ID of the campaign of the link.
+                  type: string
+                target:
+                  description: The target of the link.
+                  type: string
+                  format: uri
+                utmCampaign:
+                  description: The UTM campaign of the link.
+                  type: string
+                utmSource:
+                  description: The UTM source of the link.
+                  type: string
+                utmMedium:
+                  description: The UTM medium of the link.
+                  type: string
+                utmContent:
+                  description: The UTM content of the link.
+                  type: string
+                utmTerm:
+                  description: The UTM term of the link.
+                  type: string
+                code:
+                  anyOf:
+                  - type: string
+                    maxLength: 128
+                  - type: string
+                    enum:
+                    - ''
+                  description: The code of the marketing campaign
+              additionalProperties: false
+      tags:
+      - short-links
+      description: Create a Short Link
+      operationId: short-link/create
+  /api/public/sellers/{sellerId}/marketing/short-links/{code}:
+    get:
+      parameters:
+      - name: sellerId
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^[a-fA-F0-9]{24}$
+          - type: string
+            pattern: ^[a-z]+_.*$
+        in: path
+        required: true
+      - name: code
+        schema:
+          type: string
+          maxLength: 128
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  target:
+                    description: The target of the link.
+                    type: string
+                    format: uri
+                  utmCampaign:
+                    description: The UTM campaign of the link.
+                    type: string
+                  utmSource:
+                    description: The UTM source of the link.
+                    type: string
+                  utmMedium:
+                    description: The UTM medium of the link.
+                    type: string
+                  utmContent:
+                    description: The UTM content of the link.
+                    type: string
+                  utmTerm:
+                    description: The UTM term of the link.
+                    type: string
+                additionalProperties: false
+        '400':
+          description: Bad Request
+      tags:
+      - short-links
+      description: Public Get Sellers Short Link
+      operationId: short-links/publicGet
+  /api/marketing/short-links/{id}:
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^[a-fA-F0-9]{24}$
+          - type: string
+            pattern: ^[a-z]+_.*$
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShortLinkResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                campaignId:
+                  description: The ID of the campaign of the link.
+                  type: string
+                target:
+                  description: The target of the link.
+                  type: string
+                  format: uri
+                utmSource:
+                  description: The UTM source of the link.
+                  type: string
+                utmMedium:
+                  description: The UTM medium of the link.
+                  type: string
+                utmContent:
+                  description: The UTM content of the link.
+                  type: string
+                utmTerm:
+                  description: The UTM term of the link.
+                  type: string
+              additionalProperties: false
+      tags:
+      - short-links
+      description: Update a Short Link
+      operationId: short-link/update
+    delete:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^[a-fA-F0-9]{24}$
+          - type: string
+            pattern: ^[a-z]+_.*$
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShortLinkResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - short-links
+      description: Delete a Short Link
+      operationId: short-links/delete
+components:
+  schemas:
+    ShortLinkResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the link.
+        code:
+          type: string
+          maxLength: 128
+          description: The code of the link.
+        campaignId:
+          description: The ID of the campaign of the link.
+          type: string
+        sellerId:
+          type: string
+          description: The ID of the seller owning the link
+        target:
+          description: The target of the link.
+          type: string
+          format: uri
+        utmCampaign:
+          description: The UTM campaign of the link.
+          type: string
+        utmSource:
+          description: The UTM source of the link.
+          type: string
+        utmMedium:
+          description: The UTM medium of the link.
+          type: string
+        utmContent:
+          description: The UTM content of the link.
+          type: string
+        utmTerm:
+          description: The UTM term of the link.
+          type: string
+        isArchived:
+          default: false
+          description: Whether the link is archived or not.
+          type: boolean
+        createdAt:
+          description: An ISO timestamp indicating when the short link was created.
+          type: string
+          format: date-time
+        updatedAt:
+          description: An ISO timestamp indicating when the short link was updated.
+          type: string
+          format: date-time
+      required:
+      - _id
+      - code
+      - sellerId
+      - isArchived
+      - createdAt
+      - updatedAt
+      additionalProperties: false
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

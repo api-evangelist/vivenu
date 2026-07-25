@@ -1,0 +1,954 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists webhooks API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: webhooks
+paths:
+  /api/webhooks:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: top
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: integer
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Webhooks_GetAllWebhooks_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - webhooks
+      description: Get all webhooks
+      operationId: webhooks/list
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POST_Webhooks_CreateANewWebhook_201_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Webhooks_CreateANewWebhook'
+      tags:
+      - webhooks
+      description: Create a new webhook
+      operationId: webhooks/create
+  /api/webhook/{id}:
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the webhook to update.
+          metas: {}
+        in: path
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PUT_Webhooks_UpdateAWebhook_201_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Webhooks_UpdateAWebhook'
+      tags:
+      - webhooks
+      description: Update a webhook
+      operationId: webhooks/update
+    delete:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the webhook.
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DELETE_Webhooks_DeleteAWebhook_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - webhooks
+      description: Delete a Webhook
+      operationId: webhooks/delete
+components:
+  schemas:
+    PUT_Webhooks_UpdateAWebhook:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 30
+          minLength: 5
+          description: An internal name to identify the webhook listener
+        enabled:
+          type: boolean
+          description: Whether this listener should be notified.
+        url:
+          type: string
+          format: uri
+          description: An HTTPS URL to post the webhook data
+        events:
+          type: object
+          properties:
+            transaction.complete:
+              type: boolean
+            transaction.reservedBySystem:
+              type: boolean
+            transaction.canceled:
+              type: boolean
+            transaction.partiallyCanceled:
+              type: boolean
+            checkout.completed:
+              type: boolean
+            checkout.aborted:
+              type: boolean
+            checkout.detailsSubmitted:
+              type: boolean
+            ticket.created:
+              type: boolean
+            ticket.updated:
+              type: boolean
+            purchaseIntent.created:
+              type: boolean
+            purchaseIntent.approved:
+              type: boolean
+            purchaseIntent.rejected:
+              type: boolean
+            purchaseIntent.updated:
+              type: boolean
+            purchaseIntent.expired:
+              type: boolean
+            purchaseIntent.completed:
+              type: boolean
+            purchaseIntent.cancelled:
+              type: boolean
+            customer.created:
+              type: boolean
+            customer.updated:
+              type: boolean
+            event.created:
+              type: boolean
+            event.updated:
+              type: boolean
+            event.deleted:
+              type: boolean
+            job.started:
+              type: boolean
+            job.failed:
+              type: boolean
+            job.completed:
+              type: boolean
+            support.assignedToSeller:
+              type: boolean
+            ticketTransfer.created:
+              type: boolean
+            ticketTransfer.rejected:
+              type: boolean
+            ticketTransfer.transferred:
+              type: boolean
+            ticketTransfer.expired:
+              type: boolean
+            scan.created:
+              type: boolean
+            bundle.created:
+              type: boolean
+            bundle.updated:
+              type: boolean
+            product.created:
+              type: boolean
+            product.updated:
+              type: boolean
+            product.deleted:
+              type: boolean
+            subscription.created:
+              type: boolean
+            subscription.updated:
+              type: boolean
+            subscription.payment.succeeded:
+              type: boolean
+            subscription.payment.failed:
+              type: boolean
+            fund.created:
+              type: boolean
+            fund.updated:
+              type: boolean
+            campaign.created:
+              type: boolean
+            campaign.updated:
+              type: boolean
+            donation.created:
+              type: boolean
+            pledge.created:
+              type: boolean
+          description: An object with the subscription status to the webhook event types.
+        hmacKey:
+          type: string
+          nullable: true
+          description: The HMAC key used to validate webhooks.
+      required:
+      - name
+      - url
+    POST_Webhooks_CreateANewWebhook_201_response:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+          maxLength: 30
+          minLength: 5
+          description: An internal name to identify the webhook listener
+        enabled:
+          type: boolean
+          description: Whether this listener should be notified.
+        url:
+          type: string
+          format: uri
+          description: An HTTPS URL to post the webhook data
+        events:
+          type: object
+          properties:
+            transaction.complete:
+              type: boolean
+            transaction.reservedBySystem:
+              type: boolean
+            transaction.canceled:
+              type: boolean
+            transaction.partiallyCanceled:
+              type: boolean
+            checkout.completed:
+              type: boolean
+            checkout.aborted:
+              type: boolean
+            checkout.detailsSubmitted:
+              type: boolean
+            ticket.created:
+              type: boolean
+            ticket.updated:
+              type: boolean
+            purchaseIntent.created:
+              type: boolean
+            purchaseIntent.approved:
+              type: boolean
+            purchaseIntent.rejected:
+              type: boolean
+            purchaseIntent.updated:
+              type: boolean
+            purchaseIntent.expired:
+              type: boolean
+            purchaseIntent.completed:
+              type: boolean
+            purchaseIntent.cancelled:
+              type: boolean
+            customer.created:
+              type: boolean
+            customer.updated:
+              type: boolean
+            event.created:
+              type: boolean
+            event.updated:
+              type: boolean
+            event.deleted:
+              type: boolean
+            job.started:
+              type: boolean
+            job.failed:
+              type: boolean
+            job.completed:
+              type: boolean
+            support.assignedToSeller:
+              type: boolean
+            ticketTransfer.created:
+              type: boolean
+            ticketTransfer.rejected:
+              type: boolean
+            ticketTransfer.transferred:
+              type: boolean
+            ticketTransfer.expired:
+              type: boolean
+            scan.created:
+              type: boolean
+            bundle.created:
+              type: boolean
+            bundle.updated:
+              type: boolean
+            product.created:
+              type: boolean
+            product.updated:
+              type: boolean
+            product.deleted:
+              type: boolean
+            subscription.created:
+              type: boolean
+            subscription.updated:
+              type: boolean
+            subscription.payment.succeeded:
+              type: boolean
+            subscription.payment.failed:
+              type: boolean
+            fund.created:
+              type: boolean
+            fund.updated:
+              type: boolean
+            campaign.created:
+              type: boolean
+            campaign.updated:
+              type: boolean
+            donation.created:
+              type: boolean
+            pledge.created:
+              type: boolean
+          description: An object with the subscription status to the webhook event types.
+        hmacKey:
+          type: string
+          nullable: true
+          description: The HMAC key used to validate webhooks.
+        createdBy:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - USER
+              - APP
+              - API_KEY
+              - SYSTEM
+              description: The type of the entity
+            id:
+              type: string
+              description: The ID of the entity
+          required:
+          - type
+          - id
+          description: The entity that created this webhook.
+      required:
+      - _id
+      - name
+      - url
+    GET_Webhooks_GetAllWebhooks_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              name:
+                type: string
+                maxLength: 30
+                minLength: 5
+                description: An internal name to identify the webhook listener
+              enabled:
+                type: boolean
+                description: Whether this listener should be notified.
+              url:
+                type: string
+                format: uri
+                description: An HTTPS URL to post the webhook data
+              events:
+                type: object
+                properties:
+                  transaction.complete:
+                    type: boolean
+                  transaction.reservedBySystem:
+                    type: boolean
+                  transaction.canceled:
+                    type: boolean
+                  transaction.partiallyCanceled:
+                    type: boolean
+                  checkout.completed:
+                    type: boolean
+                  checkout.aborted:
+                    type: boolean
+                  checkout.detailsSubmitted:
+                    type: boolean
+                  ticket.created:
+                    type: boolean
+                  ticket.updated:
+                    type: boolean
+                  purchaseIntent.created:
+                    type: boolean
+                  purchaseIntent.approved:
+                    type: boolean
+                  purchaseIntent.rejected:
+                    type: boolean
+                  purchaseIntent.updated:
+                    type: boolean
+                  purchaseIntent.expired:
+                    type: boolean
+                  purchaseIntent.completed:
+                    type: boolean
+                  purchaseIntent.cancelled:
+                    type: boolean
+                  customer.created:
+                    type: boolean
+                  customer.updated:
+                    type: boolean
+                  event.created:
+                    type: boolean
+                  event.updated:
+                    type: boolean
+                  event.deleted:
+                    type: boolean
+                  job.started:
+                    type: boolean
+                  job.failed:
+                    type: boolean
+                  job.completed:
+                    type: boolean
+                  support.assignedToSeller:
+                    type: boolean
+                  ticketTransfer.created:
+                    type: boolean
+                  ticketTransfer.rejected:
+                    type: boolean
+                  ticketTransfer.transferred:
+                    type: boolean
+                  ticketTransfer.expired:
+                    type: boolean
+                  scan.created:
+                    type: boolean
+                  bundle.created:
+                    type: boolean
+                  bundle.updated:
+                    type: boolean
+                  product.created:
+                    type: boolean
+                  product.updated:
+                    type: boolean
+                  product.deleted:
+                    type: boolean
+                  subscription.created:
+                    type: boolean
+                  subscription.updated:
+                    type: boolean
+                  subscription.payment.succeeded:
+                    type: boolean
+                  subscription.payment.failed:
+                    type: boolean
+                  fund.created:
+                    type: boolean
+                  fund.updated:
+                    type: boolean
+                  campaign.created:
+                    type: boolean
+                  campaign.updated:
+                    type: boolean
+                  donation.created:
+                    type: boolean
+                  pledge.created:
+                    type: boolean
+                description: An object with the subscription status to the webhook event types.
+              hmacKey:
+                type: string
+                nullable: true
+                description: The HMAC key used to validate webhooks.
+              createdBy:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - USER
+                    - APP
+                    - API_KEY
+                    - SYSTEM
+                    description: The type of the entity
+                  id:
+                    type: string
+                    description: The ID of the entity
+                required:
+                - type
+                - id
+                description: The entity that created this webhook.
+            required:
+            - _id
+            - name
+            - url
+        total:
+          type: integer
+    POST_Webhooks_CreateANewWebhook:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 30
+          minLength: 5
+          description: An internal name to identify the webhook listener
+        enabled:
+          type: boolean
+          description: Whether this listener should be notified.
+        url:
+          type: string
+          format: uri
+          description: An HTTPS URL to post the webhook data
+        events:
+          type: object
+          properties:
+            transaction.complete:
+              type: boolean
+            transaction.reservedBySystem:
+              type: boolean
+            transaction.canceled:
+              type: boolean
+            transaction.partiallyCanceled:
+              type: boolean
+            checkout.completed:
+              type: boolean
+            checkout.aborted:
+              type: boolean
+            checkout.detailsSubmitted:
+              type: boolean
+            ticket.created:
+              type: boolean
+            ticket.updated:
+              type: boolean
+            purchaseIntent.created:
+              type: boolean
+            purchaseIntent.approved:
+              type: boolean
+            purchaseIntent.rejected:
+              type: boolean
+            purchaseIntent.updated:
+              type: boolean
+            purchaseIntent.expired:
+              type: boolean
+            purchaseIntent.completed:
+              type: boolean
+            purchaseIntent.cancelled:
+              type: boolean
+            customer.created:
+              type: boolean
+            customer.updated:
+              type: boolean
+            event.created:
+              type: boolean
+            event.updated:
+              type: boolean
+            event.deleted:
+              type: boolean
+            job.started:
+              type: boolean
+            job.failed:
+              type: boolean
+            job.completed:
+              type: boolean
+            support.assignedToSeller:
+              type: boolean
+            ticketTransfer.created:
+              type: boolean
+            ticketTransfer.rejected:
+              type: boolean
+            ticketTransfer.transferred:
+              type: boolean
+            ticketTransfer.expired:
+              type: boolean
+            scan.created:
+              type: boolean
+            bundle.created:
+              type: boolean
+            bundle.updated:
+              type: boolean
+            product.created:
+              type: boolean
+            product.updated:
+              type: boolean
+            product.deleted:
+              type: boolean
+            subscription.created:
+              type: boolean
+            subscription.updated:
+              type: boolean
+            subscription.payment.succeeded:
+              type: boolean
+            subscription.payment.failed:
+              type: boolean
+            fund.created:
+              type: boolean
+            fund.updated:
+              type: boolean
+            campaign.created:
+              type: boolean
+            campaign.updated:
+              type: boolean
+            donation.created:
+              type: boolean
+            pledge.created:
+              type: boolean
+          description: An object with the subscription status to the webhook event types.
+        hmacKey:
+          type: string
+          nullable: true
+          description: The HMAC key used to validate webhooks.
+      required:
+      - name
+      - url
+    PUT_Webhooks_UpdateAWebhook_201_response:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+          maxLength: 30
+          minLength: 5
+          description: An internal name to identify the webhook listener
+        enabled:
+          type: boolean
+          description: Whether this listener should be notified.
+        url:
+          type: string
+          format: uri
+          description: An HTTPS URL to post the webhook data
+        events:
+          type: object
+          properties:
+            transaction.complete:
+              type: boolean
+            transaction.reservedBySystem:
+              type: boolean
+            transaction.canceled:
+              type: boolean
+            transaction.partiallyCanceled:
+              type: boolean
+            checkout.completed:
+              type: boolean
+            checkout.aborted:
+              type: boolean
+            checkout.detailsSubmitted:
+              type: boolean
+            ticket.created:
+              type: boolean
+            ticket.updated:
+              type: boolean
+            purchaseIntent.created:
+              type: boolean
+            purchaseIntent.approved:
+              type: boolean
+            purchaseIntent.rejected:
+              type: boolean
+            purchaseIntent.updated:
+              type: boolean
+            purchaseIntent.expired:
+              type: boolean
+            purchaseIntent.completed:
+              type: boolean
+            purchaseIntent.cancelled:
+              type: boolean
+            customer.created:
+              type: boolean
+            customer.updated:
+              type: boolean
+            event.created:
+              type: boolean
+            event.updated:
+              type: boolean
+            event.deleted:
+              type: boolean
+            job.started:
+              type: boolean
+            job.failed:
+              type: boolean
+            job.completed:
+              type: boolean
+            support.assignedToSeller:
+              type: boolean
+            ticketTransfer.created:
+              type: boolean
+            ticketTransfer.rejected:
+              type: boolean
+            ticketTransfer.transferred:
+              type: boolean
+            ticketTransfer.expired:
+              type: boolean
+            scan.created:
+              type: boolean
+            bundle.created:
+              type: boolean
+            bundle.updated:
+              type: boolean
+            product.created:
+              type: boolean
+            product.updated:
+              type: boolean
+            product.deleted:
+              type: boolean
+            subscription.created:
+              type: boolean
+            subscription.updated:
+              type: boolean
+            subscription.payment.succeeded:
+              type: boolean
+            subscription.payment.failed:
+              type: boolean
+            fund.created:
+              type: boolean
+            fund.updated:
+              type: boolean
+            campaign.created:
+              type: boolean
+            campaign.updated:
+              type: boolean
+            donation.created:
+              type: boolean
+            pledge.created:
+              type: boolean
+          description: An object with the subscription status to the webhook event types.
+        hmacKey:
+          type: string
+          nullable: true
+          description: The HMAC key used to validate webhooks.
+        createdBy:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - USER
+              - APP
+              - API_KEY
+              - SYSTEM
+              description: The type of the entity
+            id:
+              type: string
+              description: The ID of the entity
+          required:
+          - type
+          - id
+          description: The entity that created this webhook.
+      required:
+      - _id
+      - name
+      - url
+    DELETE_Webhooks_DeleteAWebhook_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+          maxLength: 30
+          minLength: 5
+          description: An internal name to identify the webhook listener
+        enabled:
+          type: boolean
+          description: Whether this listener should be notified.
+        url:
+          type: string
+          format: uri
+          description: An HTTPS URL to post the webhook data
+        events:
+          type: object
+          properties:
+            transaction.complete:
+              type: boolean
+            transaction.reservedBySystem:
+              type: boolean
+            transaction.canceled:
+              type: boolean
+            transaction.partiallyCanceled:
+              type: boolean
+            checkout.completed:
+              type: boolean
+            checkout.aborted:
+              type: boolean
+            checkout.detailsSubmitted:
+              type: boolean
+            ticket.created:
+              type: boolean
+            ticket.updated:
+              type: boolean
+            purchaseIntent.created:
+              type: boolean
+            purchaseIntent.approved:
+              type: boolean
+            purchaseIntent.rejected:
+              type: boolean
+            purchaseIntent.updated:
+              type: boolean
+            purchaseIntent.expired:
+              type: boolean
+            purchaseIntent.completed:
+              type: boolean
+            purchaseIntent.cancelled:
+              type: boolean
+            customer.created:
+              type: boolean
+            customer.updated:
+              type: boolean
+            event.created:
+              type: boolean
+            event.updated:
+              type: boolean
+            event.deleted:
+              type: boolean
+            job.started:
+              type: boolean
+            job.failed:
+              type: boolean
+            job.completed:
+              type: boolean
+            support.assignedToSeller:
+              type: boolean
+            ticketTransfer.created:
+              type: boolean
+            ticketTransfer.rejected:
+              type: boolean
+            ticketTransfer.transferred:
+              type: boolean
+            ticketTransfer.expired:
+              type: boolean
+            scan.created:
+              type: boolean
+            bundle.created:
+              type: boolean
+            bundle.updated:
+              type: boolean
+            product.created:
+              type: boolean
+            product.updated:
+              type: boolean
+            product.deleted:
+              type: boolean
+            subscription.created:
+              type: boolean
+            subscription.updated:
+              type: boolean
+            subscription.payment.succeeded:
+              type: boolean
+            subscription.payment.failed:
+              type: boolean
+            fund.created:
+              type: boolean
+            fund.updated:
+              type: boolean
+            campaign.created:
+              type: boolean
+            campaign.updated:
+              type: boolean
+            donation.created:
+              type: boolean
+            pledge.created:
+              type: boolean
+          description: An object with the subscription status to the webhook event types.
+        hmacKey:
+          type: string
+          nullable: true
+          description: The HMAC key used to validate webhooks.
+        createdBy:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - USER
+              - APP
+              - API_KEY
+              - SYSTEM
+              description: The type of the entity
+            id:
+              type: string
+              description: The ID of the entity
+          required:
+          - type
+          - id
+          description: The entity that created this webhook.
+      required:
+      - _id
+      - name
+      - url
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

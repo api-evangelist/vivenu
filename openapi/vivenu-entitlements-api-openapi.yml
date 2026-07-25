@@ -1,0 +1,605 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists entitlements API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: entitlements
+paths:
+  /api/entitlements:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: top
+        schema:
+          default: 25
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          type: integer
+          minimum: 1
+          maximum: 1000
+        description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+        in: query
+        required: true
+        style: form
+        explode: true
+      - name: skip
+        schema:
+          default: 0
+          description: The number of objects to skip for the requested result
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        description: The number of objects to skip for the requested result
+        in: query
+        required: true
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  docs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EntitlementResource'
+                  total:
+                    type: number
+                required:
+                - docs
+                - total
+                additionalProperties: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - entitlements
+      description: List entitlements
+      operationId: entitlements/list
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitlementResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  description: The name of the entitlement
+                publicName:
+                  type: string
+                  minLength: 1
+                  description: The public name of the entitlement
+                conditions:
+                  $ref: '#/components/schemas/EntitlementConditionTree'
+                modifiers:
+                  type: array
+                  items:
+                    oneOf:
+                    - type: object
+                      properties:
+                        _id:
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - var_discount
+                        config:
+                          type: object
+                          properties:
+                            value:
+                              type: number
+                              minimum: 0
+                              maximum: 1
+                              description: Discount percentage
+                            max:
+                              nullable: true
+                              description: Maximum discount amount
+                              type: number
+                          required:
+                          - value
+                          additionalProperties: false
+                      required:
+                      - _id
+                      - type
+                      - config
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        _id:
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - fix_discount
+                        config:
+                          type: object
+                          properties:
+                            amount:
+                              type: number
+                              minimum: 0
+                              description: Fixed discount amount
+                          required:
+                          - amount
+                          additionalProperties: false
+                      required:
+                      - _id
+                      - type
+                      - config
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        _id:
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - waive_fees
+                        config:
+                          default: {}
+                          type: object
+                          properties: {}
+                          additionalProperties: false
+                      required:
+                      - _id
+                      - type
+                      - config
+                      additionalProperties: false
+                    type: object
+                  description: The checkout modifiers applied when this entitlement matches
+                active:
+                  description: Whether the entitlement is active
+                  default: false
+                  type: boolean
+              required:
+              - name
+              - publicName
+              - modifiers
+              additionalProperties: false
+      tags:
+      - entitlements
+      description: Create a new entitlement
+      operationId: entitlements-create/create
+  /api/entitlements/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^[a-fA-F0-9]{24}$
+          - type: string
+            pattern: ^[a-z]+_.*$
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitlementResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - entitlements
+      description: Get an entitlement by ID
+      operationId: entitlements/get
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^[a-fA-F0-9]{24}$
+          - type: string
+            pattern: ^[a-z]+_.*$
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitlementResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  description: The name of the entitlement
+                publicName:
+                  type: string
+                  minLength: 1
+                  description: The public name of the entitlement
+                conditions:
+                  $ref: '#/components/schemas/EntitlementConditionTree'
+                modifiers:
+                  type: array
+                  items:
+                    oneOf:
+                    - type: object
+                      properties:
+                        _id:
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - var_discount
+                        config:
+                          type: object
+                          properties:
+                            value:
+                              type: number
+                              minimum: 0
+                              maximum: 1
+                              description: Discount percentage
+                            max:
+                              nullable: true
+                              description: Maximum discount amount
+                              type: number
+                          required:
+                          - value
+                          additionalProperties: false
+                      required:
+                      - _id
+                      - type
+                      - config
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        _id:
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - fix_discount
+                        config:
+                          type: object
+                          properties:
+                            amount:
+                              type: number
+                              minimum: 0
+                              description: Fixed discount amount
+                          required:
+                          - amount
+                          additionalProperties: false
+                      required:
+                      - _id
+                      - type
+                      - config
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        _id:
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - waive_fees
+                        config:
+                          default: {}
+                          type: object
+                          properties: {}
+                          additionalProperties: false
+                      required:
+                      - _id
+                      - type
+                      - config
+                      additionalProperties: false
+                    type: object
+                  description: The checkout modifiers applied when this entitlement matches
+                active:
+                  description: Whether the entitlement is active
+                  default: false
+                  type: boolean
+              additionalProperties: false
+      tags:
+      - entitlements
+      description: Update an entitlement
+      operationId: entitlements/update
+components:
+  schemas:
+    EntitlementResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the entitlement
+        name:
+          type: string
+          minLength: 1
+          description: The name of the entitlement
+        publicName:
+          type: string
+          minLength: 1
+          description: The public name of the entitlement
+        active:
+          description: Whether the entitlement is active
+          default: false
+          type: boolean
+        conditions:
+          $ref: '#/components/schemas/EntitlementConditionTree'
+        modifiers:
+          type: array
+          items:
+            oneOf:
+            - type: object
+              properties:
+                _id:
+                  type: string
+                type:
+                  type: string
+                  enum:
+                  - var_discount
+                config:
+                  type: object
+                  properties:
+                    value:
+                      type: number
+                      minimum: 0
+                      maximum: 1
+                      description: Discount percentage
+                    max:
+                      nullable: true
+                      description: Maximum discount amount
+                      type: number
+                  required:
+                  - value
+                  additionalProperties: false
+              required:
+              - _id
+              - type
+              - config
+              additionalProperties: false
+            - type: object
+              properties:
+                _id:
+                  type: string
+                type:
+                  type: string
+                  enum:
+                  - fix_discount
+                config:
+                  type: object
+                  properties:
+                    amount:
+                      type: number
+                      minimum: 0
+                      description: Fixed discount amount
+                  required:
+                  - amount
+                  additionalProperties: false
+              required:
+              - _id
+              - type
+              - config
+              additionalProperties: false
+            - type: object
+              properties:
+                _id:
+                  type: string
+                type:
+                  type: string
+                  enum:
+                  - waive_fees
+                config:
+                  default: {}
+                  type: object
+                  properties: {}
+                  additionalProperties: false
+              required:
+              - _id
+              - type
+              - config
+              additionalProperties: false
+            type: object
+          description: The checkout modifiers applied when this entitlement matches
+        sellerId:
+          type: string
+          description: The ID of the seller owning the entitlement
+        createdAt:
+          description: An ISO timestamp indicating when the entitlement was created.
+          type: string
+          format: date-time
+        updatedAt:
+          description: An ISO timestamp indicating when the entitlement was updated.
+          type: string
+          format: date-time
+      required:
+      - _id
+      - name
+      - publicName
+      - modifiers
+      - sellerId
+      - createdAt
+      - updatedAt
+      additionalProperties: false
+    EntitlementConditionTree:
+      type: object
+      properties:
+        $or:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntitlementConditionTree'
+        $and:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntitlementConditionTree'
+        $condition:
+          oneOf:
+          - type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - product_in_cart
+              config:
+                type: object
+                properties:
+                  productId:
+                    type: string
+                  productVariantId:
+                    type: string
+                  minQuantity:
+                    type: number
+                    minimum: 1
+                  maxQuantity:
+                    type: number
+                    minimum: 1
+                required:
+                - productId
+                - productVariantId
+                additionalProperties: false
+            required:
+            - type
+            - config
+            additionalProperties: false
+          - type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - has_membership
+              config:
+                type: object
+                properties:
+                  membershipProgramId:
+                    type: string
+                required:
+                - membershipProgramId
+                additionalProperties: false
+            required:
+            - type
+            - config
+            additionalProperties: false
+          - type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - is_in_segment
+              config:
+                type: object
+                properties:
+                  segmentSlug:
+                    type: string
+                required:
+                - segmentSlug
+                additionalProperties: false
+            required:
+            - type
+            - config
+            additionalProperties: false
+          - type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - sales_channel
+              config:
+                type: object
+                properties:
+                  salesChannelId:
+                    type: string
+                required:
+                - salesChannelId
+                additionalProperties: false
+            required:
+            - type
+            - config
+            additionalProperties: false
+          - type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - event_has_attribute
+              config:
+                type: object
+                properties:
+                  attributeId:
+                    type: string
+                  slug:
+                    type: string
+                  value:
+                    type: string
+                required:
+                - attributeId
+                - slug
+                - value
+                additionalProperties: false
+            required:
+            - type
+            - config
+            additionalProperties: false
+          type: object
+      additionalProperties: false
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

@@ -1,0 +1,911 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: access-lists
+paths:
+  /api/access-lists:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: name
+        required: false
+        schema:
+          type: string
+          description: The name to filter for.
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: number
+          format: float
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: top
+        required: false
+        schema:
+          type: number
+          format: float
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Access-lists_GetAccessLists_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - access-lists
+      description: Get Access Lists
+      operationId: access-lists/list
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessListResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Access-lists_CreateAnAccessList'
+      tags:
+      - access-lists
+      description: Create an Access List
+      operationId: access-lists/create
+  /api/access-lists/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the Access List
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessListResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - access-lists
+      description: Get an Access List
+      operationId: access-lists/get
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the Access List
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessListResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Access-lists_UpdateAnAccessList'
+      tags:
+      - access-lists
+      description: Update an Access List
+      operationId: access-lists/update
+    delete:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the Access List
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessListResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - access-lists
+      description: Delete an Access List
+      operationId: access-lists/delete
+  /api/access-lists/{listId}/entries:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: customerId
+        required: false
+        schema:
+          type: string
+          description: The ID of the customer to filter for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: externalCode
+        required: false
+        schema:
+          type: string
+          description: The external code to filter for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: email
+        required: false
+        schema:
+          type: string
+          description: The email to filter for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: number
+          format: float
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: top
+        required: false
+        schema:
+          type: number
+          format: float
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: listId
+        required: true
+        schema:
+          type: string
+          description: The ID of the Access List
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Access-lists_GetAllAccessListEntries_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - access-lists
+      description: Get all Access List Entries
+      operationId: access-list-entries/getAllAccessListEntries
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: listId
+        required: true
+        schema:
+          type: string
+          description: The ID of the Access List
+          metas: {}
+        in: path
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessListEntryResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Access-lists_CreateAnAccessListEntry'
+      tags:
+      - access-lists
+      description: Create an Access List Entry
+      operationId: access-list-entries/createAccessListEntry
+  /api/access-lists/entries/{externalCode}/ticket:
+    get:
+      parameters:
+      - name: eventId
+        required: true
+        schema:
+          type: string
+          description: The ID of the event to get a ticket for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: externalCode
+        schema:
+          type: string
+        required: true
+        in: path
+      - name: token
+        required: true
+        schema:
+          type: string
+          description: The token to authenticate against the access-control endpoints.
+          metas: {}
+        in: header
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Access-lists_GetAnAccessListEntrysTicket_200_response'
+        '400':
+          description: Bad Request
+      tags:
+      - access-lists
+      description: Get an Access List Entry's Ticket
+      operationId: access-list-entries/getAnAccessListEntryTicket
+  /api/access-lists/{listId}/entries/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the Access List Entry
+          metas: {}
+        in: path
+      - name: listId
+        required: true
+        schema:
+          type: string
+          description: The ID of the Access List
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessListEntryResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - access-lists
+      description: Get an Access List Entry
+      operationId: access-list-entries/getAnAccessListEntry
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the Access List Entry
+          metas: {}
+        in: path
+      - name: listId
+        required: true
+        schema:
+          type: string
+          description: The ID of the Access List
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessListEntryResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Access-lists_UpdateAnAccessListEntry'
+      tags:
+      - access-lists
+      description: Update an Access List Entry
+      operationId: access-list-entries/updateAccessListEntry
+    delete:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the Access List Entry
+          metas: {}
+        in: path
+      - name: listId
+        required: true
+        schema:
+          type: string
+          description: The ID of the Access List
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessListEntryResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - access-lists
+      description: Delete an Access List Entry
+      operationId: access-list-entries/deleteAccessListEntry
+components:
+  schemas:
+    POST_Access-lists_CreateAnAccessListEntry:
+      type: object
+      properties:
+        externalCode:
+          type: string
+          description: The external code of the access list entry.
+        customerId:
+          type: string
+          nullable: true
+          description: The ID of the customer of the access list entry.
+        firstname:
+          type: string
+          nullable: true
+          description: The first name of the access list entry.
+        lastname:
+          type: string
+          nullable: true
+          description: The last name of the access list entry.
+        email:
+          type: string
+          format: email
+          nullable: true
+          description: The email of the access list entry.
+        phone:
+          type: string
+          nullable: true
+          description: The phone number of the access list entry.
+        meta:
+          type: object
+          description: The key-value pairs of the extra data of the access list entry.
+      required:
+      - externalCode
+    GET_Access-lists_GetAllAccessListEntries_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessListEntryResource'
+        total:
+          type: integer
+    AccessListResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the access list.
+        type:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+          enum:
+          - static
+          - remote
+          description: The type of the access list.
+        sellerId:
+          type: string
+          description: The ID of the seller of the access list.
+        name:
+          type: string
+          description: The name of the access list.
+        http:
+          type: object
+          properties:
+            url:
+              type: string
+              format: uri
+              description: The remote URL of the access list.
+            hmacKey:
+              type: string
+              description: The HMAC key used to sign requests to the remote URL.
+          required:
+          - url
+          description: The remote URL of the access list.
+      required:
+      - _id
+      - type
+      - sellerId
+      - name
+    GET_Access-lists_GetAnAccessListEntrysTicket_200_response:
+      type: object
+      properties:
+        sellerId:
+          type: string
+          description: The ID of the seller that ticket belongs to.
+        name:
+          type: string
+          description: The name of the ticket owner
+        firstname:
+          type: string
+          description: The first name of the ticket owner
+        lastname:
+          type: string
+          description: The last name of the ticket owner
+        email:
+          type: string
+        street:
+          type: string
+        line2:
+          type: string
+          description: The additional address field of the user of the ticket
+        city:
+          type: string
+        postal:
+          type: string
+        state:
+          type: string
+          description: The state of the user of the ticket
+        country:
+          type: string
+          description: The country of the user of the ticket
+        eventId:
+          type: string
+          description: The ID of the event the ticket belongs to
+        categoryRef:
+          type: string
+          description: A UUID of the category the ticket belongs to.
+        ticketTypeId:
+          type: string
+          description: The ID of the ticket type this ticket inherits from
+        ticketName:
+          type: string
+          description: The name of the ticket type this ticket inherits from
+        categoryName:
+          type: string
+          description: The name of the category the ticket belongs to.
+        regularPrice:
+          type: number
+          format: float
+          description: The original non discounted price for the ticket
+        realPrice:
+          type: number
+          format: float
+          description: The real price for the ticket
+        completed:
+          type: boolean
+          description: Whether all steps for validating the ticket has been made
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the ticket was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the ticket was updated.
+        status:
+          type: string
+          enum:
+          - VALID
+          - INVALID
+          - RESERVED
+          - DETAILSREQUIRED
+          - BLANK
+          description: The status of the ticket
+        secret:
+          type: string
+          description: The secret token of the ticket
+        barcode:
+          type: string
+          minLength: 8
+          description: The barcode of the ticket
+        seat:
+          type: string
+        seatingInfo:
+          type: object
+          properties:
+            _id:
+              type: string
+              description: The ID of the seating object.
+            _type:
+              type: number
+              format: float
+              enum:
+              - 6
+              - 7
+              description: Indicates the type of seating object. Seat = 6, General Admission = 7.
+            categoryId:
+              type: string
+              description: The ID of the category containing the seating object.
+            statusId:
+              type: string
+              description: The ID of a container holding information about the seating status of the seating object.
+            name:
+              type: string
+              nullable: true
+              description: If _type == 7. The name of the general admission.
+            seatType:
+              type: string
+              nullable: true
+              enum:
+              - handicapped
+              - limitedView
+              - foldable
+              description: If _type == 6. The type of the seat. null = normal.
+            sectionName:
+              type: string
+              nullable: true
+              description: If _type == 6. The name of the section where the seat is located.
+            groupName:
+              type: string
+              nullable: true
+              description: If _type == 6. The name of the row group where the seat is located.
+            rowName:
+              type: string
+              nullable: true
+              description: If _type == 6. The name of the row where the seat is located.
+            seatName:
+              type: string
+              nullable: true
+              description: If _type == 6. The seat name.
+            gate:
+              type: string
+              nullable: true
+              description: The entry gate associated with the seating object.
+          required:
+          - _type
+          - statusId
+          description: The associated seating object.
+        type:
+          type: string
+          enum:
+          - SINGLE
+          - MULTI
+          description: The type of the ticket
+        origin:
+          type: string
+          enum:
+          - yourticket
+          - pos
+          - rebooking
+          - upgrade
+          - subscription
+          - transfer
+        extraFields:
+          type: object
+          description: A hashmap of extra fields for the ticket
+        deliveryType:
+          type: string
+          enum:
+          - HARD
+          - VIRTUAL
+          description: The delivery type of the ticket
+        transactionId:
+          type: string
+          description: The transaction the ticket originated from
+        batchCounter:
+          type: number
+          format: float
+          description: A counter indicating the order of the ticket in the batch
+        slotId:
+          type: string
+          description: The ID of the time slot this ticket belongs to, if exists
+        slotStartTime:
+          type: string
+          description: The start time of the time slot this ticket belongs to, if exists.
+        personalized:
+          type: boolean
+        _locks:
+          type: array
+          items:
+            type: object
+            properties:
+              by:
+                type: string
+              at:
+                type: string
+                format: date-time
+              eventId:
+                type: string
+              type:
+                oneOf:
+                - type: array
+                - type: boolean
+                - type: number
+                - type: object
+                - type: string
+                enum:
+                - resell
+            required:
+            - by
+            - at
+          description: List of locks on this ticket
+        barcodeRevealed:
+          type: boolean
+          description: Whether the ticket barcode revealed.
+        barcodeRevealDate:
+          type: string
+          format: date-time
+          description: The date on which the ticket barcode will be revealed.
+      required:
+      - sellerId
+      - eventId
+      - ticketTypeId
+      - ticketName
+      - createdAt
+      - updatedAt
+      - status
+      - secret
+      - barcode
+    AccessListEntryResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the access list entry.
+        listId:
+          type: string
+          description: The ID of the access list of the access list entry.
+        externalCode:
+          type: string
+          description: The external code of the access list entry.
+        customerId:
+          type: string
+          nullable: true
+          description: The ID of the customer of the access list entry.
+        sellerId:
+          type: string
+          description: The ID of the seller of the access list entry.
+        firstname:
+          type: string
+          nullable: true
+          description: The first name of the access list entry.
+        lastname:
+          type: string
+          nullable: true
+          description: The last name of the access list entry.
+        email:
+          type: string
+          format: email
+          nullable: true
+          description: The email of the access list entry.
+        phone:
+          type: string
+          nullable: true
+          description: The phone number of the access list entry.
+        meta:
+          type: object
+          description: The key-value pairs of the extra data of the access list entry.
+      required:
+      - _id
+      - listId
+      - externalCode
+      - sellerId
+    POST_Access-lists_CreateAnAccessList:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the access list.
+        http:
+          type: object
+          properties:
+            url:
+              type: string
+              format: uri
+              description: The remote URL of the access list.
+            hmacKey:
+              type: string
+              description: The HMAC key used to sign requests to the remote URL.
+          required:
+          - url
+          description: The remote URL of the access list.
+        type:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+          enum:
+          - static
+          - remote
+          description: The type of the access list.
+      required:
+      - name
+    PUT_Access-lists_UpdateAnAccessList:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the access list.
+        http:
+          type: object
+          properties:
+            url:
+              type: string
+              format: uri
+              description: The remote URL of the access list.
+            hmacKey:
+              type: string
+              description: The HMAC key used to sign requests to the remote URL.
+          required:
+          - url
+          description: The remote URL of the access list.
+      required:
+      - name
+    GET_Access-lists_GetAccessLists_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessListResource'
+        total:
+          type: integer
+    PUT_Access-lists_UpdateAnAccessListEntry:
+      type: object
+      properties:
+        externalCode:
+          type: string
+          description: The external code of the access list entry.
+        customerId:
+          type: string
+          nullable: true
+          description: The ID of the customer of the access list entry.
+        firstname:
+          type: string
+          nullable: true
+          description: The first name of the access list entry.
+        lastname:
+          type: string
+          nullable: true
+          description: The last name of the access list entry.
+        email:
+          type: string
+          format: email
+          nullable: true
+          description: The email of the access list entry.
+        phone:
+          type: string
+          nullable: true
+          description: The phone number of the access list entry.
+        meta:
+          type: object
+          description: The key-value pairs of the extra data of the access list entry.
+      required:
+      - externalCode
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

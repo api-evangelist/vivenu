@@ -1,0 +1,60 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists subscriptions API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: subscriptions
+paths:
+  /api/subscriptions/{id}/checkout:
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+          description: ID of the subscription
+        description: ID of the subscription
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - subscriptions
+      description: Creates a checkout for a draft subscription (internal)
+      operationId: creates_a_checkout_for_a_draft_subscription_internal
+components:
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

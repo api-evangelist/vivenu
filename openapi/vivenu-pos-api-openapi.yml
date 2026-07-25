@@ -1,0 +1,2923 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists pos API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: pos
+paths:
+  /api/pos:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: top
+        required: false
+        schema:
+          type: number
+          format: float
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: number
+          format: float
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: sellerId
+        required: false
+        schema:
+          type: string
+          nullable: true
+          description: Filter by seller ID
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Pos_GetAllPos_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - pos
+      description: Get all POS
+      operationId: get_all_pos
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POSResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Pos_CreateAPos'
+      tags:
+      - pos
+      description: Create a POS
+      operationId: create_a_pos
+  /api/posinfo:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: top
+        required: false
+        schema:
+          type: number
+          format: float
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: number
+          format: float
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: name
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: operationMode
+        required: false
+        schema:
+          type: string
+          enum:
+          - OPERATOR
+          - KIOSK
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: sellerId
+        required: false
+        schema:
+          type: string
+          nullable: true
+          description: Filter by seller ID
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Pos_GetAllPosInfos_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - pos
+      description: Get all POS Infos
+      operationId: get_all_pos_infos
+  /api/pos/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POSResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - pos
+      description: Get POS
+      operationId: get_pos
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POSResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Pos_UpdatePos'
+      tags:
+      - pos
+      description: Update POS
+      operationId: update_pos
+  /api/posinfo/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POSInfoResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - pos
+      description: Get POS Info
+      operationId: get_pos_info
+  /api/pos/payments/gateways:
+    get:
+      security:
+      - jwt: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Pos_GetTheIDsAndTheTypesOfAllActivePosPaymentGateways_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - pos
+      description: Get the IDs and the types of all active POS payment gateways
+      operationId: get_the_i_ds_and_the_types_of_all_active_pos_payment_gateways
+  /api/pos/{id}/scannable:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: code
+        required: true
+        schema:
+          type: string
+          description: The scannable code
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Pos_GetScannableInformationForACode_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - pos
+      description: Get scannable information for a code
+      operationId: get_scannable_information_for_a_code
+  /api/pos/{id}/xreport:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - pos
+      description: Get X report
+      operationId: get_x_report
+  /api/pos/{id}/status:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POSWithStatusResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - pos
+      description: Get POS Status
+      operationId: get_pos_status
+  /api/pos/{id}/sessions:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Pos_GetPosSessions_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - pos
+      description: Get POS sessions
+      operationId: get_pos_sessions
+  /api/pos/{id}/fiscalization-info:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  serialNumberEA:
+                    type: string
+                    description: The serial number of the EA
+                  serialNumberTSE:
+                    type: string
+                    description: The serial number of the TSE
+                  createdAt:
+                    description: The date when the fiscalization data was created
+                    type: string
+                    format: date-time
+                required:
+                - serialNumberEA
+                - serialNumberTSE
+                - createdAt
+                additionalProperties: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - pos
+      description: Get POS fiscalization info
+      operationId: get_pos_fiscalization_info
+  /api/pos/{id}/logs:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: top
+        required: false
+        schema:
+          type: number
+          format: float
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: number
+          format: float
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: type
+        required: false
+        schema:
+          type: string
+          enum:
+          - SALE
+          - CANCELLATION
+          - SESSION_CREATED
+          - SESSION_CLOSED
+          description: Type of logs to filter
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: referenceId
+        required: false
+        schema:
+          type: string
+          description: ID of the referenced object
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Pos_GetPosJournalLogs_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - pos
+      description: Get POS journal logs
+      operationId: get_pos_journal_logs
+  /api/pos/{id}/events:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: top
+        required: false
+        schema:
+          type: number
+          format: float
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: number
+          format: float
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: startMin
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: startMax
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: endMin
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: endMax
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: sellStart
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: sellEnd
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: rootId
+        required: false
+        schema:
+          oneOf:
+          - type: array
+            items:
+              type: string
+              metas: {}
+            minItems: 0
+            metas: {}
+          - type: string
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: sortBy
+        required: false
+        schema:
+          type: string
+          enum:
+          - start
+          default: start
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: sortOrder
+        required: false
+        schema:
+          type: string
+          enum:
+          - ASC
+          - DESC
+          default: ASC
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: locale
+        required: false
+        schema:
+          type: string
+          description: Get the info for a specific language
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: eventTypes
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - SINGLE
+            - GROUP
+            - RECURRENCE
+            - ROOT
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: name
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Pos_GetPosEvents_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - pos
+      description: Get pos events
+      operationId: get_pos_events
+  /api/pos/{id}/export/orderdiscounts:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: start
+        required: true
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: true
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - pos
+      description: Export POS order discounts
+      operationId: export_pos_order_discounts
+  /api/pos/{id}/export/orders:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: start
+        required: true
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: true
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - pos
+      description: Export POS orders
+      operationId: export_pos_orders
+  /api/pos/{id}/export/journallogs:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: start
+        required: true
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: true
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - pos
+      description: Export POS journal logs
+      operationId: export_pos_journal_logs
+  /api/pos/{id}/zreport/{reportId}:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      - name: reportId
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - pos
+      description: Get Z report
+      operationId: get_z_report
+  /api/pos/{id}/export/cancellations:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: start
+        required: true
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: true
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - pos
+      description: Export POS cancellations
+      operationId: export_pos_cancellations
+  /api/pos/{id}/export/orderitems:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: start
+        required: true
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: true
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - pos
+      description: Export POS order items
+      operationId: export_pos_order_items
+  /api/pos/{id}/disable:
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POSResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - pos
+      description: Disable POS
+      operationId: disable_pos
+  /api/pos/{id}/close:
+    post:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POSCloseSessionResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - pos
+      description: Close a POS session
+      operationId: close_a_pos_session
+  /api/pos/{id}/open:
+    post:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POSOpenSessionResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Pos_OpenAPosSession'
+      tags:
+      - pos
+      description: Open a POS session
+      operationId: open_a_pos_session
+components:
+  schemas:
+    POSInfoResource:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the POS
+        sellerId:
+          type: string
+          description: The ID of the seller owning this POS
+        active:
+          type: boolean
+          description: Whether the POS is active or not
+        name:
+          type: string
+          description: The name of the POS
+        posNo:
+          type: string
+          description: The number of the POS
+        printingType:
+          type: string
+          enum:
+          - EXTERNAL
+          - DIRECT
+          description: The printing type of the POS. DIRECT = direct printing. EXTERNAL = extenral printing.
+          default: EXTERNAL
+        restrictions:
+          type: object
+          properties:
+            restrictPurchaseIntents:
+              type: boolean
+              description: Whether the POS user can manage purchase intents
+              default: true
+          description: Restrictions exposed for POS info
+      required:
+      - id
+      - sellerId
+      - active
+      - name
+      - posNo
+      - printingType
+      - restrictions
+    GET_Pos_GetScannableInformationForACode_200_response:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - product
+          resource:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the product
+              name:
+                type: string
+                description: The name of the product
+              active:
+                type: boolean
+                description: Whether the product is active and can be distributed
+                default: true
+              isFulfillable:
+                type: boolean
+                description: Whether the product can be delivered
+              type:
+                type: string
+                enum:
+                - voucher
+                - product
+                - donation
+                - membership
+                - addOn
+                description: The type of the product
+              image:
+                type: string
+                nullable: true
+                description: The image of the product
+              description:
+                type: string
+                nullable: true
+                description: The description of the product
+              variants:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The ID of the product variant of the product
+                    name:
+                      type: string
+                      nullable: true
+                      description: The Name of the product variant, defaults to product name if not specified
+                    description:
+                      type: string
+                      nullable: true
+                      description: A description of the variant
+                    priceType:
+                      type: string
+                      enum:
+                      - fixed
+                      - range
+                      default: fixed
+                    price:
+                      type: number
+                      format: float
+                      nullable: true
+                      description: The price of the product
+                    priceRange:
+                      type: object
+                      properties:
+                        min:
+                          type: number
+                          format: float
+                          minimum: 0
+                          nullable: true
+                          description: The minimum price of the product
+                        max:
+                          type: number
+                          format: float
+                          minimum: 0
+                          nullable: true
+                          description: The maximum price of the product
+                    taxable:
+                      type: boolean
+                      description: Whether the product is taxable or not
+                    taxRate:
+                      type: number
+                      format: float
+                      description: The tax rate of the product
+                    compareAtPrice:
+                      type: number
+                      format: float
+                      nullable: true
+                      description: The recommended retail price to compare with the actual price.
+                    taxServiceTypeId:
+                      type: string
+                      nullable: true
+                      description: The ID of the tax service of the product
+                    gtin:
+                      type: string
+                      pattern: ^\d+$
+                    localization:
+                      type: object
+                      description: Localization of the product for multiple languages
+                  required:
+                  - _id
+                  - taxable
+                description: An array of variants of the product
+              categoryIds:
+                type: array
+                items:
+                  type: string
+                description: An array of categories to which the product belongs
+              voucherSettings:
+                type: object
+                properties:
+                  limitedValidityPeriod:
+                    type: boolean
+                    description: Whether the voucher should expire
+                  validityConfig:
+                    type: object
+                    properties:
+                      amount:
+                        type: number
+                        format: float
+                        minimum: 1
+                      type:
+                        type: number
+                        format: float
+                      untilEndOfPeriod:
+                        type: boolean
+                  pdfImage:
+                    type: string
+                    description: A marketing image printed onto voucher pdf
+                  disclaimer:
+                    type: string
+                    nullable: true
+                    description: A disclaimer text printed onto voucher pdf
+                  documentTemplateSettings:
+                    type: object
+                    properties:
+                      templates:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            templateId:
+                              type: string
+                              description: The ID of the document template
+                            format:
+                              type: string
+                              enum:
+                              - A4
+                              - LETTER
+                              - LEGAL
+                              - BOARDING-PASS
+                              - PLASTIC-CARD
+                              - CARD
+                              - LABEL
+                              - CUSTOM
+                              - APPLE
+                              - GOOGLE
+                              description: The format of document template for the dimensions.
+                            target:
+                              type: string
+                              enum:
+                              - thermal
+                              - digital
+                              - wallet
+                              description: The target of document template for which targets it should be used.
+                            type:
+                              type: string
+                              enum:
+                              - ticket
+                              - invoice
+                              - voucher
+                              - member-card
+                              - header-card
+                              description: The type of document template for which document it should be used. ticket = The document template will be used on tickets. invoice = The document template will be used on invoices.
+                          required:
+                          - templateId
+                          - format
+                          - target
+                          - type
+                nullable: true
+                description: If the product is of type voucher
+              addOnSettings:
+                type: object
+                properties:
+                  optOutDescription:
+                    type: string
+                    nullable: true
+                    description: The description that is shown to the user if he decides to not buy the addOn
+                  localization:
+                    type: object
+                    description: Localization of the addOnSettings for multiple languages
+                nullable: true
+              donationSettings:
+                type: object
+                properties:
+                  campaignId:
+                    type: string
+                    description: The ID of the fundraise campaign
+                  fundId:
+                    type: string
+                    description: The ID of the donation fund
+                required:
+                - campaignId
+                - fundId
+                nullable: true
+                description: Settings for donation products
+              sellerId:
+                type: string
+                description: The ID of the seller of the product
+              meta:
+                type: object
+                description: Custom key-value data. Metadata is useful for storing additional, structured information on an object.
+              localization:
+                type: object
+                description: Localization of the product for multiple languages
+              createdAt:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the product was created
+              updatedAt:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the product was updated
+            required:
+            - _id
+            - name
+            - type
+            - sellerId
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - coupon
+          resource:
+            $ref: '#/components/schemas/CouponResource'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - voucher
+          resource:
+            $ref: '#/components/schemas/PublicVoucherInfoResource'
+        required:
+        - type
+    POSResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the POS
+        sellerId:
+          type: string
+          description: The ID of the seller owning this POS
+        active:
+          type: boolean
+          description: Whether the POS is active or not
+        name:
+          type: string
+          description: The name of the POS
+        posNo:
+          type: string
+          description: The number of the POS
+        printingType:
+          type: string
+          enum:
+          - EXTERNAL
+          - DIRECT
+          description: The printing type of the POS. DIRECT = direct printing. EXTERNAL = extenral printing.
+          default: EXTERNAL
+        restrictions:
+          type: object
+          properties:
+            restrictXReportAccess:
+              type: boolean
+              description: Whether the code must be inserted in order to see the x reports
+            restrictZReportAccess:
+              type: boolean
+              description: Whether the code must be inserted in order to generate a z report and to finish the session
+            restrictDashboardAccess:
+              type: boolean
+              description: Whether the POS user can see the dashboard
+            restrictInstantCancellation:
+              type: boolean
+              description: Whether POS user can cancel a transaction immediately
+            code:
+              type: string
+              description: Code to unlock x and z reports if restricted
+            restrictEventAccess:
+              type: boolean
+              description: Whether the POS user can only choose specific events and/or specific secret shops
+            restrictPurchaseIntents:
+              type: boolean
+              description: Whether the POS user can manage purchase intents
+              default: true
+            restrictCustomerAccess:
+              type: boolean
+              description: Whether the POS user can manage customers and select them during transactions
+            allowedEvents:
+              type: array
+              items:
+                type: string
+              description: An array of IDs of allowed events
+          description: Restrictions of the POS
+        signature:
+          type: object
+          properties:
+            fiskaly:
+              type: object
+              properties:
+                tssId:
+                  type: string
+                  description: The ID of the TSS
+                clientId:
+                  type: string
+                  description: The  ID of the client
+                state:
+                  type: string
+                  enum:
+                  - UNINITIALIZED
+                  - INITIALIZED
+                  - DISABLED
+                  description: The state of the TSS
+              description: Fiskaly settings
+          description: POS signature settings
+        state:
+          type: string
+          enum:
+          - disabled
+          - active
+          description: The state of the POS
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the POS was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the POS was updated
+      required:
+      - _id
+      - active
+      - name
+      - posNo
+      - printingType
+    CouponWithSeriesResource:
+      type: object
+      properties:
+        couponType:
+          type: string
+          enum:
+          - couponSeries
+        couponSeriesId:
+          type: string
+          description: The ID of the coupon series.
+        _id:
+          type: string
+          description: The ID of the coupon.
+        code:
+          type: string
+          nullable: true
+          description: A random generated 8 char code use to redeem the coupon.
+        sellerId:
+          type: string
+          description: The ID of the seller.
+        customer:
+          type: string
+          nullable: true
+          description: The customer that this promotion code can be used by.
+        createdAt:
+          type: string
+          format: date-time
+          description: The date the coupon was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: The date the coupon was last updated.
+        __v:
+          type: integer
+      required:
+      - couponType
+      - couponSeriesId
+    POST_Pos_OpenAPosSession:
+      type: object
+      properties:
+        cash:
+          type: number
+          format: float
+    GET_Pos_GetTheIDsAndTheTypesOfAllActivePosPaymentGateways_200_response:
+      type: object
+      properties:
+        paymentGateway:
+          type: array
+          items:
+            oneOf:
+            - type: string
+            - type: number
+            - type: boolean
+            - type: integer
+            - type: object
+    CouponResource:
+      oneOf:
+      - $ref: '#/components/schemas/CouponWithSeriesResource'
+      - $ref: '#/components/schemas/CouponSingleResource'
+    POSListingEventResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the event
+        url:
+          type: string
+          description: The url of the event
+        name:
+          type: string
+          description: The name of the event
+        image:
+          type: string
+          description: An image for the event
+        slogan:
+          type: string
+          description: The slogan of the event
+        sellerId:
+          type: string
+          description: The ID of the seller owning this event
+        start:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the event starts
+        end:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the event ends
+        locationName:
+          type: string
+          description: The name of the location where the event takes place
+        locationStreet:
+          type: string
+          description: The street of the location where the event takes place
+        locationCity:
+          type: string
+          description: The city of the location where the event takes place
+        locationPostal:
+          type: string
+          description: The postal code of the location where the event takes place
+        locationCountry:
+          type: string
+          description: The country code of the location where the event takes place
+        styleOptions:
+          type: object
+          properties:
+            headerStyle:
+              type: string
+              description: Header style of the event page
+              default: default
+            brandOne:
+              type: string
+              description: First brand of the event
+            brandTwo:
+              type: string
+              description: Second brand of the event
+            hideLocationMap:
+              type: boolean
+              description: Whether the location map on the event page hide
+            hideLocationAddress:
+              type: boolean
+              description: Whether the location address on the event page hide
+            categoryAlignment:
+              type: number
+              format: float
+              enum:
+              - cascade
+              - asTabs
+              - boxes
+              - ticketWizard
+              - 0
+              - 1
+              - 2
+              - 3
+              description: The style of category alignment. 0 = cascade = categories among themselves. 1 = asTabs = categories as tabs. 2 = boxes = categories as boxes. 3 = ticket wizard = categories as ticket wizard if configured.
+            showAvailabilityIndicator:
+              type: boolean
+              description: Whether the availability indicator on the event page should be shown
+            availabilityIndicatorThresholds:
+              type: array
+              items:
+                type: number
+                format: float
+              description: The availability indicator thresholds of the event
+              default:
+              - 0.3
+              - 0.7
+            showAvailable:
+              type: boolean
+              description: Whether to show availability of the time slot. Only applicable for time slot events.
+            timeSlotsCheckoutSelection:
+              type: string
+              enum:
+              - beforeTickets
+              - afterTickets
+              description: Time slots selection in checkout.
+          description: Style options of the event page
+          default:
+            headerStyle: default
+            hideLocationMap: false
+            hideLocationAddress: false
+            categoryAlignment: 0
+            showAvailabilityIndicator: false
+            availabilityIndicatorThresholds:
+            - 0.3
+            - 0.7
+        accountSettings:
+          type: object
+          properties:
+            _id:
+              type: string
+              description: The ID of the account settings of the event
+            enforceAccounts:
+              type: boolean
+              description: Whether to enforce accounts for the event
+              deprecated: true
+            enforceAuthentication:
+              type: string
+              enum:
+              - DISABLED
+              - PREVENT_CHECKOUT
+              - PREVENT_DETAILS_STEP
+              description: Whether to enforce authentication for the event and how to enforce it
+              default: DISABLED
+          required:
+          - _id
+          description: Account settings of the event
+        meta:
+          type: object
+          description: Custom key-value data. Metadata is useful for storing additional, structured information on an object.
+        eventType:
+          type: string
+          enum:
+          - SINGLE
+          - GROUP
+          - RECURRENCE
+          - ROOT
+          description: The type of the event. SINGLE = it is a single event. GROUP = the event is part of a group of events
+          default: SINGLE
+        childEvents:
+          type: array
+          items:
+            type: string
+          description: An array of IDs of child events
+        daySchemeId:
+          type: string
+          description: The ID of the day scheme assigned to the event.
+        rootId:
+          type: string
+          description: The id of the root event
+        seoSettings:
+          type: object
+          properties:
+            _id:
+              type: string
+              description: The ID of the SEO setting
+            tags:
+              type: array
+              items:
+                type: string
+              description: An array of tags of the seo settings
+            noIndex:
+              type: boolean
+              description: Whether the seo setting has no indexing
+            title:
+              type: string
+              description: The title of the seo settings
+            description:
+              type: string
+              description: The description of the seo settings
+          required:
+          - _id
+          description: The search engine optimization settings of the event
+        customSettings:
+          type: object
+          properties:
+            _id:
+              type: string
+              description: The ID of the custom settings of the event
+            hideTicketsInTransactionPage:
+              type: boolean
+              description: Whether the ticket types of the event should be visible on transaction page
+            dontSendTicketMail:
+              type: boolean
+              description: Whether an email should be sent of tickets of the event
+            dontSendBookingConfirmationMail:
+              type: boolean
+              description: Whether an email should be sent for booking confirmation
+            customMailHeaderImage:
+              type: string
+              description: A custom header image of the mail for ticket types of the event
+            customTransactionCompletionText:
+              type: string
+              description: A custom transaction completion text for completed transactions of the event
+            disableAppleWallet:
+              type: boolean
+              description: 'Whether the Apple and Google Wallet functionality should be disabled on the event. Deprecated: use event.deliverySettings.wallet instead'
+              deprecated: true
+            disablePdfTickets:
+              type: boolean
+              description: 'Whether the PDF tickets download functionality should be disabled on the event. Deprecated: use event.deliverySettings.pdf instead'
+              deprecated: true
+            showStartDate:
+              type: boolean
+              description: Whether the start date of the event should be visible on listings
+              default: true
+            showStartTime:
+              type: boolean
+              description: Whether the start time of the event should be visible on listings
+              default: true
+            showEndDate:
+              type: boolean
+              description: Whether the end date of the event should be visible on listings
+            showEndTime:
+              type: boolean
+              description: Whether the end time of the event should be visible on listings
+            showTimeRangeInListing:
+              type: boolean
+              description: Whether the end time of the event should be visible on listings
+              deprecated: true
+            showTimeRangeInTicket:
+              type: boolean
+              description: Whether the time range of the event should be visible on ticket PDFs
+            customCheckoutCSS:
+              type: string
+              description: Custom CSS styling of the checkout of the event
+            useCustomCheckoutBrand:
+              type: boolean
+              description: Whether the checkout of the event should use custom brand
+            customCheckoutBrand:
+              type: string
+              description: A custom checkout brand of the event
+            hideLogoInCheckout:
+              type: boolean
+              description: Whether the logo should be hide on the checkout of the event
+            customEventPageHTML:
+              type: string
+              description: A custom HTML of the event page
+            customEventPageCSS:
+              type: string
+              description: A custom css styling of the event page
+            customConfirmationPage:
+              type: string
+              description: A custom css styling of the event page
+            hideSeatmapInCheckout:
+              type: boolean
+              description: Hides the seatmap from the ticket buyer even if seating ticket types are available
+            dontSendBookingConfirmationSMS:
+              type: boolean
+              description: Whether a sms should be sent for booking confirmation
+          required:
+          - _id
+          description: Custom settings of the event
+          default: {}
+        ticketSettings:
+          type: object
+          properties:
+            cancellationStrategy:
+              type: string
+              enum:
+              - disabled
+              - freeTicketsOnly
+              - withoutRefund
+              description: Cancellation strategy of the ticket types
+              default: disabled
+            revealingSettings:
+              type: object
+              properties:
+                enabled:
+                  type: string
+                  nullable: true
+                  enum:
+                  - ENABLED
+                  - DISABLED
+                beforeEvent:
+                  type: object
+                  properties:
+                    target:
+                      type: string
+                      nullable: true
+                      description: The target of the relative date
+                    unit:
+                      type: string
+                      enum:
+                      - hours
+                      - days
+                      - weeks
+                      - months
+                      - years
+                      description: The unit in which the offset is specified
+                    offset:
+                      type: integer
+                      description: The offset to the date
+                  required:
+                  - unit
+                  - offset
+              description: Barcode reveal settings of the event.
+            transferSettings:
+              type: object
+              properties:
+                mode:
+                  type: string
+                  enum:
+                  - ALLOWED
+                  - DISABLED
+                  description: Ticket transfer mode.
+                expiresAfter:
+                  type: object
+                  properties:
+                    target:
+                      type: string
+                      nullable: true
+                      description: The target of the relative date
+                    unit:
+                      type: string
+                      enum:
+                      - hours
+                      - days
+                      - weeks
+                      - months
+                      - years
+                      description: The unit in which the offset is specified
+                    offset:
+                      type: integer
+                      description: The offset to the date
+                  required:
+                  - unit
+                  - offset
+                  description: If 'mode = ALLOWED'. A relatve date specification until when ticket transfer is valid.
+                retransferMode:
+                  type: string
+                  enum:
+                  - ALLOWED
+                  - DISABLED
+                  description: Ticket retransfer mode.
+                allowedUntil:
+                  type: object
+                  properties:
+                    target:
+                      type: string
+                      nullable: true
+                      description: The target of the relative date
+                    unit:
+                      type: string
+                      enum:
+                      - hours
+                      - days
+                      - weeks
+                      - months
+                      - years
+                      description: The unit in which the offset is specified
+                    offset:
+                      type: integer
+                      description: The offset to the date
+                  required:
+                  - unit
+                  - offset
+                  description: If 'mode = ALLOWED'. A relatve date specification until the end of the event where ticket transfer is possible.
+                hardTicketsMode:
+                  type: string
+                  enum:
+                  - ALLOWED
+                  - DISABLED
+                  description: If 'hardTicketsMode = ALLOWED' then hard tickets transfers allowed.
+                seasonTicketMode:
+                  type: string
+                  enum:
+                  - NO_RESTRICTION
+                  - CHILDREN_ONLY
+                  - GROUP_ONLY
+                  description: Restrict how season tickets can be transferred.
+                useSeasonCardTemplate:
+                  type: boolean
+                  description: Whether to use the season card template for individual tickets transferred from the season.
+              description: Transfer settings of the ticket types
+              default: {}
+            upgradeSettings:
+              type: object
+              properties:
+                enabled:
+                  type: string
+                  enum:
+                  - ENABLED
+                  - DISABLED
+                  description: Whether ticket upgrade settings enabled.
+                underShopMapping:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - tag
+                      tag:
+                        type: string
+                        description: The customer tag
+                      underShopId:
+                        type: string
+                        description: The ID of the under shop.
+                    required:
+                    - type
+                    - tag
+                    - underShopId
+                  description: Mapping to define the under shop in which a ticket upgrade will be performed.
+              description: Upgrade settings of the ticket types
+            resellSettings:
+              type: object
+              properties:
+                enabled:
+                  type: string
+                  nullable: true
+                  enum:
+                  - ENABLED
+                  - DISABLED
+                  description: Whether resell is enabled
+                resellerFeeFix:
+                  type: number
+                  format: float
+                  minimum: 0
+                  nullable: true
+                  description: The fixed fee per ticket that the reseller pays
+                resellerFeeVar:
+                  type: number
+                  format: float
+                  minimum: 0
+                  nullable: true
+                  description: The variable fee per ticket that the reseller pays
+                buyerFeeFix:
+                  type: number
+                  format: float
+                  minimum: 0
+                  nullable: true
+                  description: The fixed fee per ticket that the buyer pays
+                buyerFeeVar:
+                  type: number
+                  format: float
+                  minimum: 0
+                  nullable: true
+                  description: The variable fee per ticket that the buyer pays
+                offerCreationStart:
+                  type: object
+                  properties:
+                    target:
+                      type: string
+                      nullable: true
+                      description: The target of the relative date
+                    unit:
+                      type: string
+                      enum:
+                      - hours
+                      - days
+                      - weeks
+                      - months
+                      - years
+                      description: The unit in which the offset is specified
+                    offset:
+                      type: integer
+                      description: The offset to the date
+                  required:
+                  - unit
+                  - offset
+                  nullable: true
+                  description: A relative date specification of offers creation start.
+                offerCreationEnd:
+                  type: object
+                  properties:
+                    target:
+                      type: string
+                      nullable: true
+                      description: The target of the relative date
+                    unit:
+                      type: string
+                      enum:
+                      - hours
+                      - days
+                      - weeks
+                      - months
+                      - years
+                      description: The unit in which the offset is specified
+                    offset:
+                      type: integer
+                      description: The offset to the date
+                  required:
+                  - unit
+                  - offset
+                  nullable: true
+                  description: A relative date specification of offers creation end.
+                salesStart:
+                  type: object
+                  properties:
+                    target:
+                      type: string
+                      nullable: true
+                      description: The target of the relative date
+                    unit:
+                      type: string
+                      enum:
+                      - hours
+                      - days
+                      - weeks
+                      - months
+                      - years
+                      description: The unit in which the offset is specified
+                    offset:
+                      type: integer
+                      description: The offset to the date
+                  required:
+                  - unit
+                  - offset
+                  nullable: true
+                  description: A relative date specification of sales start.
+                priceMarkup:
+                  type: number
+                  format: float
+                  minimum: -0.5
+                  maximum: 3
+                  nullable: true
+                  description: The markup applied to the price of each ticket bought on the secondary market.
+                cartAutomationMode:
+                  type: string
+                  nullable: true
+                  enum:
+                  - BLOCKED
+                  - INDIVIDUAL
+                  description: Controls whether tickets involved in cart automations can be resold.
+              description: Resell settings
+            barcodeSettings:
+              type: object
+              properties:
+                issueOfflineBarcodes:
+                  type: string
+                  enum:
+                  - ENABLED
+                  - DISABLED
+                  description: Whether offline barcodes are enabled
+              description: Barcode settings
+            childEventMapping:
+              type: array
+              items:
+                type: object
+                properties:
+                  childEventId:
+                    type: string
+                    description: The child event for this mapping
+                  ticketTypeMapping:
+                    type: object
+                    description: Mapping between ticket types of the parent event and the child events
+                  valueShare:
+                    type: number
+                    format: float
+                    minimum: 0
+                    maximum: 1
+                    nullable: true
+                    description: The percentage value of this child event from the value of the parent event
+                required:
+                - childEventId
+                - ticketTypeMapping
+              description: Child event mapping
+            seasonCardValueStrategy:
+              type: string
+              enum:
+              - childValue
+              - averagePerChild
+              - sharePerChild
+              description: The strategy used to determine the value of a child event in the context of the parent event
+          description: The event ticket settings
+          default: {}
+        groups:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of of the ticket group of the event
+              name:
+                type: string
+                description: The name of the ticket group of the event
+              tickets:
+                type: array
+                items:
+                  type: string
+                description: An array of ID's of ticket types of the event
+            required:
+            - _id
+            - name
+            - tickets
+          description: An array of groups of ticket types of the event
+        underShopId:
+          type: string
+          description: The ID of the under shop of the event
+        startingPrice:
+          type: string
+          description: The starting price of the event
+        showStartDate:
+          type: boolean
+          description: Whether to show the start time of the event in listings or not
+          default: true
+        showEndDate:
+          type: boolean
+          description: Whether to show the end time of the event in listings or not
+        showTimeRangeInListing:
+          type: boolean
+          description: Whether to show the end time of the event in listings or not
+          deprecated: true
+        availabilityIndicator:
+          type: string
+          enum:
+          - green
+          - yellow
+          - red
+          description: The availability of the event. It shows whether there are tickets available. green = Enough available tickets. yellow = The tickets are almost sold out. red = There are no more available tickets
+        currency:
+          type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: The currency of event tickets prices
+        saleStatus:
+          type: string
+          enum:
+          - onSale
+          - planned
+          - past
+          - soldOut
+          description: status of event sale
+        timezone:
+          type: string
+          description: Timezone of event
+        category:
+          type: string
+          description: ' '
+        subCategory:
+          type: string
+          description: ' '
+        resell:
+          type: object
+          properties:
+            saleActive:
+              type: boolean
+              description: Whether the event has buying on the secondary market active.
+            offerActive:
+              type: boolean
+              description: Whether the event has selling on the secondary market active.
+            fees:
+              type: object
+              properties:
+                buyerFeeFix:
+                  type: number
+                  format: float
+                  description: The fixed fees charged for each ticket to the buyer.
+                buyerFeeVar:
+                  type: number
+                  format: float
+                  description: The variable fees charged to the buyer.
+              description: Fee information
+            priceMarkup:
+              type: number
+              format: float
+              description: The markup applied to the price of each ticket bought on the secondary market.
+          description: Resell information
+        attributes:
+          type: object
+        underShops:
+          type: array
+          items:
+            type: object
+          description: List of under shops for POS context
+        reservationSettings:
+          type: object
+          description: Reservation settings for the POS context to determine if it is reservation only
+        isDirectTicketSalesEnabled:
+          type: boolean
+          description: Indicates whether direct ticket sales are enabled for the main event
+        isMainEventAssignedToSalesChannel:
+          type: boolean
+          description: Indicates that the event is assigned to the sales channel
+      required:
+      - _id
+      - name
+      - start
+      - end
+      - underShops
+    GET_Pos_GetAllPos_200_response:
+      type: array
+      items:
+        $ref: '#/components/schemas/POSResource'
+    GET_Pos_GetPosJournalLogs_200_response:
+      type: object
+      properties:
+        rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/POSJournalLogResource'
+        total:
+          type: integer
+    POSCloseSessionResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the POS session
+        sessionNo:
+          type: string
+          description: The number of the POS session
+        posId:
+          type: string
+          description: The ID of the POS
+        opened:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the POS session was opened
+        closed:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the POS session was closed
+        cashAtOpen:
+          type: number
+          format: float
+          description: Cash opening stock
+        totalAmount:
+          type: number
+          format: float
+          description: The total revenue
+        includedTax:
+          type: number
+          format: float
+          description: The total taxes
+        totalByPaymentMethod:
+          type: object
+          description: Total by payment methods. Values will only be inserted after closing the session
+        taxInfo:
+          type: object
+          properties:
+            detailsPerRate:
+              type: array
+              items:
+                type: object
+                properties:
+                  taxRate:
+                    type: number
+                    format: float
+                    description: The applied tax rate
+                  includedTax:
+                    type: number
+                    format: float
+                    description: Total of taxes with this rate
+                  reducedTax:
+                    type: number
+                    format: float
+                    description: Tax reduction through applied discounts
+              description: Tax details grouped by tax rates.
+          description: Taxes details
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the POS session was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the POS session was updated
+        message:
+          type: string
+          enum:
+          - opened
+          - already-open
+          - already-closed
+        posNo:
+          type: string
+          description: The number of the POS
+        storno:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: object
+                properties:
+                  reason:
+                    type: string
+                    enum:
+                    - REQUESTED_BY_CUSTOMER
+                    - CLAIM
+                    - COMMUNICATION_ERROR
+                    - TRAINING/TEST
+                    description: Cancellation reason
+              total:
+                type: number
+                format: float
+                description: Total amount
+          description: Array of amount grouped by cancellation reason
+      required:
+      - _id
+      - sessionNo
+      - posId
+      - opened
+    PUT_Pos_UpdatePos:
+      type: object
+      properties:
+        name:
+          type: string
+        posNo:
+          type: string
+        active:
+          type: boolean
+        printingType:
+          type: string
+        restrictions:
+          type: object
+          properties:
+            restrictXReportAccess:
+              type: boolean
+            restrictZReportAccess:
+              type: boolean
+            code:
+              type: string
+            restrictDashboardAccess:
+              type: boolean
+            restrictInstantCancellation:
+              type: boolean
+            restrictEventAccess:
+              type: boolean
+            restrictPurchaseIntents:
+              type: boolean
+            restrictCustomerAccess:
+              type: boolean
+            allowedEvents:
+              type: array
+              items:
+                oneOf:
+                - type: string
+                - type: number
+                - type: boolean
+                - type: integer
+                - type: object
+            allowedPaymentMethods:
+              type: array
+              items:
+                type: string
+              nullable: true
+              default:
+              - cash
+              - ec
+              - creditcard
+      required:
+      - name
+      - posNo
+      - active
+      - printingType
+    GET_Pos_GetAllPosInfos_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/POSInfoResource'
+        total:
+          type: integer
+    CouponSingleResource:
+      type: object
+      properties:
+        couponType:
+          type: string
+          enum:
+          - coupon
+          default: coupon
+        _id:
+          type: string
+          description: The ID of the coupon.
+        code:
+          type: string
+          nullable: true
+          description: A random generated 8 char code use to redeem the coupon.
+        sellerId:
+          type: string
+          description: The ID of the seller.
+        customer:
+          type: string
+          nullable: true
+          description: The customer that this promotion code can be used by.
+        createdAt:
+          type: string
+          format: date-time
+          description: The date the coupon was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: The date the coupon was last updated.
+        __v:
+          type: integer
+        name:
+          type: string
+          maxLength: 200
+          description: The Name for the coupon. Visible to public.
+        singleUsage:
+          type: boolean
+          description: Whether this coupon can only be used once
+        active:
+          type: boolean
+          description: Whether the coupon can be used
+          default: true
+        maxUsage:
+          type: number
+          format: float
+          minimum: 0
+          description: The max amount of usages. A usage is counted as a completed transaction that used the coupon.
+          default: 1
+        maxUsagePerEvent:
+          type: number
+          format: float
+          minimum: 0
+          nullable: true
+          description: The max amount of usages per event. A usage is counted as a completed transaction that used the coupon.
+        maxTickets:
+          type: number
+          format: float
+          minimum: 0
+          nullable: true
+          description: The number of tickets that can be purchased with this coupon
+        canBeCombined:
+          type: boolean
+          description: Whether this coupon can be combined with others within one transaction.
+        discountType:
+          type: string
+          enum:
+          - fix
+          - var
+          - fixPerItem
+          - waiveFees
+        discountValue:
+          type: number
+          format: float
+          description: The amount of the discount in seller's currency. eg. 50.0 -> 50 EUR
+        discountMaxValue:
+          type: number
+          format: float
+          nullable: true
+          description: When discountType is VAR the max amount of the discount in seller's currency
+        allowAllEvents:
+          type: boolean
+          description: Whether the coupon can be used across all events
+          default: true
+        allowedEvents:
+          type: array
+          items:
+            type: string
+          description: The ID's of events where the coupon can be used
+        allowAllTickets:
+          type: boolean
+          description: Whether the coupon can be used across all tickets within the events
+          default: true
+        allowedTickets:
+          type: array
+          items:
+            type: string
+          description: The ID's of the ticket types on which the coupon should be applied
+        taggingEnabled:
+          type: boolean
+          description: Whether this coupon tags customers
+        tags:
+          type: array
+          items:
+            type: string
+          description: Which tags to add to customers which bought with this coupon
+        validFrom:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date from which this coupon can be redeemed.
+        validUntil:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date until this coupon can be redeemed.
+        limitMaxTicketsInCart:
+          type: boolean
+          description: Whether this coupon limits the max tickets in cart.
+        maxTicketsInCart:
+          type: number
+          format: float
+          nullable: true
+          description: If limitMaxTicketsInCart is true, the amount of the max allowed tickets.
+        minTicketsInCart:
+          type: number
+          format: float
+          minimum: 0
+          nullable: true
+          description: The minimum number of tickets that need to be purchased with this coupon
+        note:
+          type: string
+          nullable: true
+          description: The Note for this coupon.
+        revealAllowedTickets:
+          type: boolean
+          description: Whether this coupon reveals the allowed tickets.
+        unlocks:
+          type: array
+          items:
+            oneOf:
+            - type: object
+              properties:
+                target:
+                  type: string
+                  enum:
+                  - underShop
+                eventId:
+                  type: string
+                  description: The ID of the event.
+                underShopId:
+                  type: string
+                  description: The ID of the under shop.
+              required:
+              - target
+              - eventId
+              - underShopId
+          description: The array of the resources unlocked by undershop.
+      required:
+      - name
+    POST_Pos_CreateAPos:
+      type: object
+      properties:
+        name:
+          type: string
+        posNo:
+          type: string
+          nullable: true
+        printingType:
+          type: string
+      required:
+      - name
+      - printingType
+    POSWithStatusResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the POS
+        sellerId:
+          type: string
+          description: The ID of the seller owning this POS
+        active:
+          type: boolean
+          description: Whether the POS is active or not
+        name:
+          type: string
+          description: The name of the POS
+        posNo:
+          type: string
+          description: The number of the POS
+        printingType:
+          type: string
+          enum:
+          - EXTERNAL
+          - DIRECT
+          description: The printing type of the POS. DIRECT = direct printing. EXTERNAL = extenral printing.
+          default: EXTERNAL
+        restrictions:
+          type: object
+          properties:
+            restrictXReportAccess:
+              type: boolean
+              description: Whether the code must be inserted in order to see the x reports
+            restrictZReportAccess:
+              type: boolean
+              description: Whether the code must be inserted in order to generate a z report and to finish the session
+            restrictDashboardAccess:
+              type: boolean
+              description: Whether the POS user can see the dashboard
+            restrictInstantCancellation:
+              type: boolean
+              description: Whether POS user can cancel a transaction immediately
+            code:
+              type: string
+              description: Code to unlock x and z reports if restricted
+            restrictEventAccess:
+              type: boolean
+              description: Whether the POS user can only choose specific events and/or specific secret shops
+            restrictPurchaseIntents:
+              type: boolean
+              description: Whether the POS user can manage purchase intents
+              default: true
+            restrictCustomerAccess:
+              type: boolean
+              description: Whether the POS user can manage customers and select them during transactions
+            allowedEvents:
+              type: array
+              items:
+                type: string
+              description: An array of IDs of allowed events
+          description: Restrictions of the POS
+        signature:
+          type: object
+          properties:
+            fiskaly:
+              type: object
+              properties:
+                tssId:
+                  type: string
+                  description: The ID of the TSS
+                clientId:
+                  type: string
+                  description: The  ID of the client
+                state:
+                  type: string
+                  enum:
+                  - UNINITIALIZED
+                  - INITIALIZED
+                  - DISABLED
+                  description: The state of the TSS
+              description: Fiskaly settings
+          description: POS signature settings
+        state:
+          type: string
+          enum:
+          - disabled
+          - active
+          description: The state of the POS
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the POS was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the POS was updated
+        open:
+          type: boolean
+          description: Whether the POS session is opened
+        sessionId:
+          type: string
+          description: The ID of the POS session if opened
+      required:
+      - _id
+      - active
+      - name
+      - posNo
+      - printingType
+    POSJournalLogResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the POS journal log
+        posId:
+          type: string
+          description: The ID of the POS
+        referenceId:
+          type: string
+          description: The ID of the POS session
+        type:
+          type: string
+          enum:
+          - SALE
+          - CANCELLATION
+          - SESSION_CREATED
+          - SESSION_CLOSED
+          description: The type type of the POS journal log. SALE = sales. CANCELLATION = cancellation. SESSION_CREATED = new session. SESSION_CLOSED = session finished.
+          default: SALE
+        typeDescriptor:
+          type: string
+          description: Additional data for the type of the journal log
+        fiscalization:
+          $ref: '#/components/schemas/FiscalizationDataResource'
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the POS journal log was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the POS journal log was updated
+      required:
+      - _id
+      - posId
+      - referenceId
+      - type
+    PublicVoucherInfoResource:
+      type: object
+      properties:
+        _id:
+          type: string
+        code:
+          type: string
+        balance:
+          type: number
+          format: float
+      required:
+      - _id
+      - code
+      - balance
+    POSSessionResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the POS session
+        sessionNo:
+          type: string
+          description: The number of the POS session
+        posId:
+          type: string
+          description: The ID of the POS
+        opened:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the POS session was opened
+        closed:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the POS session was closed
+        cashAtOpen:
+          type: number
+          format: float
+          description: Cash opening stock
+        totalAmount:
+          type: number
+          format: float
+          description: The total revenue
+        includedTax:
+          type: number
+          format: float
+          description: The total taxes
+        totalByPaymentMethod:
+          type: object
+          description: Total by payment methods. Values will only be inserted after closing the session
+        taxInfo:
+          type: object
+          properties:
+            detailsPerRate:
+              type: array
+              items:
+                type: object
+                properties:
+                  taxRate:
+                    type: number
+                    format: float
+                    description: The applied tax rate
+                  includedTax:
+                    type: number
+                    format: float
+                    description: Total of taxes with this rate
+                  reducedTax:
+                    type: number
+                    format: float
+                    description: Tax reduction through applied discounts
+              description: Tax details grouped by tax rates.
+          description: Taxes details
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the POS session was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the POS session was updated
+      required:
+      - _id
+      - sessionNo
+      - posId
+      - opened
+    FiscalizationDataResource:
+      oneOf:
+      - type: object
+        properties:
+          _id:
+            type: string
+          type:
+            type: string
+            enum:
+            - RECEIPT
+            - TRAINING
+            - TRANSFER
+            - ORDER
+            - CANCELLATION
+            - ABORT
+            - BENEFIT_IN_KIND
+            - INVOICE
+            - OTHER
+            - ANNULATION
+            default: RECEIPT
+          qrCodeData:
+            type: string
+          signatureType:
+            type: string
+            enum:
+            - KassenSichV
+          transactionId:
+            type: string
+          transactionNumber:
+            type: number
+            format: float
+          timeStart:
+            type: number
+            format: float
+          timeEnd:
+            type: number
+            format: float
+          certificateSerial:
+            type: string
+          timestampFormat:
+            type: string
+          signatureValue:
+            type: string
+          signatureCount:
+            type: number
+            format: float
+          signatureAlgorithm:
+            type: string
+          signaturePublicKey:
+            type: string
+          clientSerialNumber:
+            type: string
+          tssSerialNumber:
+            type: string
+          revision:
+            type: number
+            format: float
+          tssId:
+            type: string
+          clientId:
+            type: string
+        required:
+        - _id
+      - type: object
+        properties:
+          _id:
+            type: string
+          type:
+            type: string
+            enum:
+            - RECEIPT
+            - TRAINING
+            - TRANSFER
+            - ORDER
+            - CANCELLATION
+            - ABORT
+            - BENEFIT_IN_KIND
+            - INVOICE
+            - OTHER
+            - ANNULATION
+            default: RECEIPT
+          qrCodeData:
+            type: string
+          signatureType:
+            type: string
+            enum:
+            - RKSV
+          rksvTimeSignature:
+            type: string
+          rksvReceiptNumber:
+            type: string
+          rksvRegisterSerialNumber:
+            type: string
+          rksvCashRegisterId:
+            type: string
+        required:
+        - _id
+      description: Fiscalization data
+    GET_Pos_GetPosSessions_200_response:
+      type: array
+      items:
+        $ref: '#/components/schemas/POSSessionResource'
+    POSOpenSessionResource:
+      type: object
+      properties:
+        message:
+          type: string
+          enum:
+          - opened
+          - already-open
+          - already-closed
+    GET_Pos_GetPosEvents_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/POSListingEventResource'
+        total:
+          type: integer
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

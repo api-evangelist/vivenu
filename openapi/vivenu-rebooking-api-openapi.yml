@@ -1,0 +1,492 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists rebooking API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: rebooking
+paths:
+  /api/rebookings:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: sourceTransactionId
+        schema:
+          type: string
+          pattern: ^[a-fA-F0-9]{24}$
+        in: query
+        required: false
+        style: form
+        explode: true
+      - name: targetCheckoutId
+        schema:
+          type: string
+          pattern: ^[a-fA-F0-9]{24}$
+        in: query
+        required: false
+        style: form
+        explode: true
+      - name: status
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - PENDING
+            - CANCELED
+            - COMPLETE
+        in: query
+        required: false
+        style: form
+        explode: true
+      - name: top
+        schema:
+          default: 25
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          type: integer
+          minimum: 1
+          maximum: 1000
+        description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+        in: query
+        required: true
+        style: form
+        explode: true
+      - name: skip
+        schema:
+          default: 0
+          description: The number of objects to skip for the requested result
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        description: The number of objects to skip for the requested result
+        in: query
+        required: true
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  docs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                        channel:
+                          type: string
+                          enum:
+                          - online
+                          - internal
+                          - pos
+                        status:
+                          type: string
+                          enum:
+                          - PENDING
+                          - CANCELED
+                          - COMPLETE
+                        source:
+                          type: object
+                          properties:
+                            transactionId:
+                              type: string
+                            eventId:
+                              type: string
+                            groupEventId:
+                              type: string
+                          required:
+                          - transactionId
+                          - eventId
+                          additionalProperties: false
+                        target:
+                          type: object
+                          properties:
+                            eventId:
+                              type: string
+                            checkoutId:
+                              type: string
+                          required:
+                          - eventId
+                          - checkoutId
+                          additionalProperties: false
+                        tickets:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              ticketId:
+                                type: string
+                              credit:
+                                type: string
+                              strategyId:
+                                type: string
+                            required:
+                            - ticketId
+                            - credit
+                            additionalProperties: false
+                        cancellableItemIds:
+                          type: array
+                          items:
+                            type: string
+                        credit:
+                          type: number
+                        secret:
+                          type: string
+                        customerId:
+                          type: string
+                        sellerId:
+                          type: string
+                        createResidualVoucher:
+                          type: boolean
+                        history:
+                          default: []
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              type:
+                                type: string
+                                enum:
+                                - rebooking.created
+                                - rebooking.completed
+                                - rebooking.canceled
+                                description: The type of the history entry.
+                              date:
+                                description: An ISO timestamp indicating the date of the history entry.
+                                type: string
+                                format: date-time
+                              userId:
+                                nullable: true
+                                description: The user ID of the history entry.
+                                type: string
+                              data:
+                                description: The data of the history entry.
+                            required:
+                            - type
+                            - date
+                            additionalProperties: false
+                        createdAt:
+                          description: An ISO timestamp indicating when the donation was created.
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          description: An ISO timestamp indicating when the donation was updated.
+                          type: string
+                          format: date-time
+                      required:
+                      - _id
+                      - channel
+                      - status
+                      - source
+                      - target
+                      - tickets
+                      - cancellableItemIds
+                      - credit
+                      - secret
+                      - customerId
+                      - sellerId
+                      - history
+                      - createdAt
+                      - updatedAt
+                      additionalProperties: false
+                  total:
+                    type: number
+                required:
+                - docs
+                - total
+                additionalProperties: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - rebooking
+      description: Get All Rebookings
+      operationId: rebookings/list
+  /api/rebookings/strategies:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: top
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: integer
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - rebooking
+      operationId: ''
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Rebooking'
+      tags:
+      - rebooking
+      operationId: ''
+  /api/public/rebookings/info:
+    get:
+      parameters:
+      - name: checkoutId
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: secret
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+      tags:
+      - rebooking
+      operationId: ''
+  /api/rebookings/strategies/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+      tags:
+      - rebooking
+      operationId: ''
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Rebooking'
+      tags:
+      - rebooking
+      operationId: ''
+    delete:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+      tags:
+      - rebooking
+      operationId: ''
+  /api/public/rebookings/strategies/{id}:
+    get:
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+      tags:
+      - rebooking
+      operationId: rebooking-strategy/getPublic
+  /api/public/rebookings:
+    post:
+      parameters: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Rebooking'
+      tags:
+      - rebooking
+      operationId: ''
+components:
+  schemas:
+    PUT_Rebooking:
+      type: object
+      properties:
+        name:
+          type: string
+        deadline:
+          type: object
+          properties:
+            unit:
+              type: string
+              enum:
+              - hours
+              - days
+              - weeks
+              - months
+              - years
+              description: The unit in which the offset is specified
+            offset:
+              type: integer
+              description: The offset to the date
+            target:
+              type: string
+              description: The target of the relative date
+          required:
+          - unit
+          - offset
+          - target
+        defaultFee:
+          type: object
+        rules:
+          type: array
+          items:
+            type: object
+        exceptions:
+          type: array
+          items:
+            type: object
+      required:
+      - name
+      - deadline
+    POST_Rebooking:
+      type: object
+      properties:
+        target:
+          type: object
+          properties:
+            eventId:
+              type: string
+          required:
+          - eventId
+        source:
+          type: object
+          properties:
+            eventId:
+              type: string
+          required:
+          - eventId
+        transaction:
+          type: object
+          properties:
+            _id:
+              type: string
+            secret:
+              type: string
+          required:
+          - _id
+          - secret
+        ticketIds:
+          type: array
+          items:
+            type: string
+      required:
+      - ticketIds
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

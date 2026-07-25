@@ -1,0 +1,891 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists customer-payment-methods API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: customer-payment-methods
+paths:
+  /api/customers/payment-methods:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: channel
+        required: false
+        schema:
+          type: string
+          description: Channel the methods are used for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: primary
+        required: false
+        schema:
+          type: boolean
+          description: Whether the payment method is primary or not
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: active
+        required: false
+        schema:
+          type: boolean
+          description: Whether the payment method is active or not
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: gatewayId
+        required: false
+        schema:
+          type: string
+          description: The ID of the payment gateway or additional payment method which the payment method belongs to
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: paymentGatewayChannels
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - online
+            - pos
+            - subscription
+            - subscription_internal
+            metas: {}
+          description: The allowed payment gateway channels
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: status
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - ACTIVE
+            - DELETED
+            - EXPIRED
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Customer-payment-methods_GetCustomerPaymentMethods_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - customer-payment-methods
+      description: Get customer payment methods
+      operationId: get_customer_payment_methods
+  /api/customers/me/payment-methods:
+    get:
+      security:
+      - customer-jwt: []
+      parameters:
+      - name: channel
+        required: false
+        schema:
+          type: string
+          description: Channel the methods are used for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: primary
+        required: false
+        schema:
+          type: boolean
+          description: Whether the payment method is primary or not
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: active
+        required: false
+        schema:
+          type: boolean
+          description: Whether the payment method is active or not
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: gatewayId
+        required: false
+        schema:
+          type: string
+          description: The ID of the payment gateway or additional payment method which the payment method belongs to
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: paymentGatewayChannels
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - online
+            - pos
+            - subscription
+            - subscription_internal
+            metas: {}
+          description: The allowed payment gateway channels
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: status
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - ACTIVE
+            - EXPIRED
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - customer-payment-methods
+      description: Get payment methods for logged in customer
+      operationId: get_payment_methods_for_logged_in_customer
+    post:
+      security:
+      - customer-jwt: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      iban:
+                        description: The IBAN of the customer payment method.
+                      bic:
+                        description: The BIC of the customer payment method.
+                      accountHolderName:
+                        type: string
+                        description: The account holder name of the customer payment method.
+                    required:
+                    - iban
+                    - bic
+                    - accountHolderName
+                    additionalProperties: false
+                  gatewayId:
+                    type: string
+                    description: The ID of the payment gateway or additional payment method which the payment method belongs to
+                required:
+                - data
+                - gatewayId
+                additionalProperties: false
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      accountNumber:
+                        description: The account number of the customer payment method.
+                      routingNumber:
+                        description: The routing number of the customer payment method.
+                      accountHolderName:
+                        type: string
+                        description: The account holder name of the customer payment method.
+                    required:
+                    - accountNumber
+                    - routingNumber
+                    - accountHolderName
+                    additionalProperties: false
+                  gatewayId:
+                    type: string
+                    description: The ID of the payment gateway or additional payment method which the payment method belongs to
+                required:
+                - data
+                - gatewayId
+                additionalProperties: false
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      bankCode:
+                        description: The bank code of the customer payment method.
+                      branchCode:
+                        description: The branch code of the customer payment method.
+                      accountNumber:
+                        description: The account number of the customer payment method.
+                      accountHolderName:
+                        type: string
+                        description: The account holder name of the customer payment method.
+                    required:
+                    - bankCode
+                    - branchCode
+                    - accountNumber
+                    - accountHolderName
+                    additionalProperties: false
+                  gatewayId:
+                    type: string
+                    description: The ID of the payment gateway or additional payment method which the payment method belongs to
+                required:
+                - data
+                - gatewayId
+                additionalProperties: false
+              - type: object
+                properties:
+                  gatewayId:
+                    type: string
+                    description: The ID of the payment gateway or additional payment method which the payment method belongs to
+                  data:
+                    description: The payment-method specific payload.
+                    type: object
+                    properties: {}
+                    additionalProperties: {}
+                required:
+                - gatewayId
+                additionalProperties: false
+      tags:
+      - customer-payment-methods
+      description: Create a payment method
+      operationId: create_a_payment_method
+  /api/customers/{id}/payment-methods:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: channel
+        required: false
+        schema:
+          type: string
+          description: Channel the methods are used for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: primary
+        required: false
+        schema:
+          type: boolean
+          description: Whether the payment method is primary or not
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: active
+        required: false
+        schema:
+          type: boolean
+          description: Whether the payment method is active or not
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: gatewayId
+        required: false
+        schema:
+          type: string
+          description: The ID of the payment gateway or additional payment method which the payment method belongs to
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: paymentGatewayChannels
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - online
+            - pos
+            - subscription
+            - subscription_internal
+            metas: {}
+          description: The allowed payment gateway channels
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: status
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - ACTIVE
+            - DELETED
+            - EXPIRED
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: ID of the customer
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Customer-payment-methods_GetPaymentMethodsForCustomer_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - customer-payment-methods
+      description: Get payment methods for customer
+      operationId: get_payment_methods_for_customer
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerPaymentMethodResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      iban:
+                        description: The IBAN of the customer payment method.
+                      bic:
+                        description: The BIC of the customer payment method.
+                      accountHolderName:
+                        type: string
+                        description: The account holder name of the customer payment method.
+                    required:
+                    - iban
+                    - bic
+                    - accountHolderName
+                    additionalProperties: false
+                  gatewayId:
+                    type: string
+                    description: The ID of the payment gateway or additional payment method which the payment method belongs to
+                required:
+                - data
+                - gatewayId
+                additionalProperties: false
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      accountNumber:
+                        description: The account number of the customer payment method.
+                      routingNumber:
+                        description: The routing number of the customer payment method.
+                      accountHolderName:
+                        type: string
+                        description: The account holder name of the customer payment method.
+                    required:
+                    - accountNumber
+                    - routingNumber
+                    - accountHolderName
+                    additionalProperties: false
+                  gatewayId:
+                    type: string
+                    description: The ID of the payment gateway or additional payment method which the payment method belongs to
+                required:
+                - data
+                - gatewayId
+                additionalProperties: false
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      bankCode:
+                        description: The bank code of the customer payment method.
+                      branchCode:
+                        description: The branch code of the customer payment method.
+                      accountNumber:
+                        description: The account number of the customer payment method.
+                      accountHolderName:
+                        type: string
+                        description: The account holder name of the customer payment method.
+                    required:
+                    - bankCode
+                    - branchCode
+                    - accountNumber
+                    - accountHolderName
+                    additionalProperties: false
+                  gatewayId:
+                    type: string
+                    description: The ID of the payment gateway or additional payment method which the payment method belongs to
+                required:
+                - data
+                - gatewayId
+                additionalProperties: false
+              - type: object
+                properties:
+                  gatewayId:
+                    type: string
+                    description: The ID of the payment gateway or additional payment method which the payment method belongs to
+                  data:
+                    description: The payment-method specific payload.
+                    type: object
+                    properties: {}
+                    additionalProperties: {}
+                required:
+                - gatewayId
+                additionalProperties: false
+      tags:
+      - customer-payment-methods
+      description: Create a customer payment method
+      operationId: create_a_customer_payment_method
+  /api/customers/me/payment-methods/{id}:
+    get:
+      security:
+      - customer-jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: ID of the customer payment method
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: The ID of the payment method
+                  paymentDetails:
+                    description: Payment details visible to the customer
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - visa
+                        - mc
+                        - sepadirectdebit
+                        - amex
+                        - sofort
+                        - klarna
+                        - ideal
+                        - giropay
+                        - paypal
+                        - local
+                        - discover
+                        - custom
+                        - twint
+                        - postfinance
+                        - blik
+                        - p24
+                        - affirm
+                        - dankort
+                        - eps
+                        - mobilepay
+                        - payconiq
+                        - bancontact
+                        - payfast
+                        - distributor
+                        - marketplace
+                        - cartebancaire
+                        - paymentplan
+                        - bizum
+                        - afterpay
+                        - zip
+                        - ach
+                        - paybybank
+                        - link
+                        - alipay
+                        - wechatpay
+                        - pix
+                        - eftpos
+                        - revolutpay
+                        - wero
+                        - scalapay
+                        - vipps
+                        - cashapppay
+                        - crypto
+                        - unknown
+                        - none
+                      identifier:
+                        type: string
+                      expiration:
+                        type: object
+                        properties:
+                          month:
+                            type: number
+                          year:
+                            type: number
+                        required:
+                        - month
+                        - year
+                        additionalProperties: false
+                    required:
+                    - type
+                    - identifier
+                    additionalProperties: false
+                required:
+                - _id
+                additionalProperties: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - customer-payment-methods
+      description: Get payment method for logged in customer
+      operationId: get_payment_method_for_logged_in_customer
+  /api/customers/{customerId}/payment-methods/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: customerId
+        schema:
+          type: string
+          pattern: ^[a-fA-F0-9]{24}$
+          description: ID of the customer
+        description: ID of the customer
+        in: path
+        required: true
+      - name: id
+        schema:
+          type: string
+          pattern: ^[a-z]+_.*$
+          description: The ID of the customer payment method
+        description: The ID of the customer payment method
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerPaymentMethodResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - customer-payment-methods
+      description: Get payment method for customer
+      operationId: get_payment_method_for_customer
+  /api/customers/me/payment-methods/{id}/delete:
+    post:
+      security:
+      - customer-jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: ID of the customer payment method
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerPaymentMethodResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - customer-payment-methods
+      description: Delete customer payment method of logged in customer
+      operationId: delete_customer_payment_method_of_logged_in_customer
+  /api/customers/me/payment-methods/{id}/primary:
+    post:
+      security:
+      - customer-jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: ID of the customer
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - customer-payment-methods
+      description: Set customer payment method of logged in customer to primary
+      operationId: set_customer_payment_method_of_logged_in_customer_to_primary
+  /api/customers/{customerId}/payment-methods/{paymentMethodId}/primary:
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: customerId
+        required: true
+        schema:
+          type: string
+          description: ID of the customer
+          metas: {}
+        in: path
+      - name: paymentMethodId
+        required: true
+        schema:
+          type: string
+          description: ID of the customer
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerPaymentMethodResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - customer-payment-methods
+      description: Set customer payment method to primary
+      operationId: set_customer_payment_method_to_primary
+  /api/customers/{customerId}/payment-methods/{paymentMethodId}/delete:
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: customerId
+        required: true
+        schema:
+          type: string
+          description: ID of the customer
+          metas: {}
+        in: path
+      - name: paymentMethodId
+        required: true
+        schema:
+          type: string
+          description: ID of the customer payment method
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerPaymentMethodResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - customer-payment-methods
+      description: Delete customer payment method
+      operationId: delete_customer_payment_method
+components:
+  schemas:
+    GET_Customer-payment-methods_GetPaymentMethodsForCustomer_200_response:
+      type: array
+      items:
+        $ref: '#/components/schemas/CustomerPaymentMethodResource'
+    GET_Customer-payment-methods_GetCustomerPaymentMethods_200_response:
+      type: array
+      items:
+        $ref: '#/components/schemas/CustomerPaymentMethodResource'
+    CustomerPaymentMethodResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the payment method
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - DELETED
+          - EXPIRED
+          description: The status of the payment method
+        sellerId:
+          type: string
+          description: The ID of the seller this payment method
+        data:
+          type: object
+          description: Whether the payment method is primary
+        paymentDetails:
+          type: object
+          description: Whether the payment method is primary
+        primary:
+          type: boolean
+          description: Whether the payment method is primary
+        active:
+          type: boolean
+          description: Whether the payment method is primary
+        gatewayType:
+          type: string
+          enum:
+          - stripe
+          - paypal
+          - adyen
+          - custom
+          - cardconnect
+          - worldline
+          - shift4
+          - authorizenet
+          - wallee
+          - square
+          - payfast
+          - touchnet
+          - transact
+          - unzer
+          - monext
+          - vivenuPayments
+          - ebanx
+          - rapyd
+          - additional-payment-method
+          description: The type of the payment gateway associated to this method
+        gatewayId:
+          type: string
+          description: The ID of the attached payment gateway or additional payment method
+        channels:
+          type: array
+          items:
+            oneOf:
+            - oneOf:
+              - type: array
+              - type: boolean
+              - type: number
+              - type: object
+              - type: string
+              enum:
+              - onSession
+            - oneOf:
+              - type: array
+              - type: boolean
+              - type: number
+              - type: object
+              - type: string
+              enum:
+              - offSession
+          description: The type of the customer payment method
+        createdAt:
+          type: string
+          format: date-time
+          description: The created ISO timestamp
+        updatedAt:
+          type: string
+          format: date-time
+          description: The last updated ISO timestamp
+      required:
+      - _id
+      - status
+      - sellerId
+      - primary
+      - active
+      - gatewayId
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

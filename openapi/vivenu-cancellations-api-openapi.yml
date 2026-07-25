@@ -1,0 +1,464 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists cancellations API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: cancellations
+paths:
+  /api/cancellations:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: transactionId
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: top
+        required: false
+        schema:
+          type: number
+          format: float
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: number
+          format: float
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Cancellations_GetAllCancellations_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - cancellations
+      description: Get all cancellations
+      operationId: get_all_cancellations
+  /api/cancellations/{id}/invoice:
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - cancellations
+      description: Create invoice for cancellation
+      operationId: create_invoice_for_cancellation
+components:
+  schemas:
+    InvoiceResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the invoice.
+        type:
+          type: string
+          enum:
+          - invoice
+          - cancellation
+          description: The type of the invoice.
+          default: invoice
+        sellerId:
+          type: string
+          description: The ID of the seller associated with the invoice.
+        recipient:
+          type: object
+          properties:
+            company:
+              type: string
+              description: The company name of the recipient.
+            name:
+              type: string
+              description: The name of the recipient.
+            firstname:
+              type: string
+              description: The first name of the recipient.
+            lastname:
+              type: string
+              description: The last name of the recipient.
+            address:
+              type: object
+              properties:
+                fullAddress:
+                  type: string
+                  nullable: true
+                  description: Optional full address
+                street:
+                  type: string
+                  nullable: true
+                  description: The street of the address. Street name including number.
+                line2:
+                  type: string
+                  nullable: true
+                  description: The additional field of the address.
+                postal:
+                  type: string
+                  nullable: true
+                  description: The postal code of the address.
+                city:
+                  type: string
+                  nullable: true
+                  description: The city of the address.
+                country:
+                  type: string
+                  nullable: true
+                  description: The country of the address. An ISO 3166 country code.
+                state:
+                  type: string
+                  nullable: true
+                  description: The state of the address. If applicable
+              description: The address of the recipient.
+          required:
+          - name
+          - firstname
+          - lastname
+          description: Information on the recipient of the invoice.
+        transactionId:
+          type: string
+          description: The ID of the transaction the invoice originated from.
+        cancellationId:
+          type: string
+          description: The ID of the associated cancellation.
+        counter:
+          type: number
+          format: float
+          description: The counter used to create no.
+        'no':
+          type: string
+          description: A unique number for the invoice consisting of the creation date and an increasing counter.
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - product
+                - ticket
+                - fulfillment
+                - outerCharge
+                - discount
+                - voucher
+                - bundle
+                - additionalFee
+                - insurance
+                description: The type of the invoice item.
+              title:
+                type: string
+                description: The title of the invoice item.
+              amount:
+                type: number
+                format: float
+                minimum: 1
+                description: The amount of the invoice item.
+              total:
+                type: number
+                format: float
+                minimum: 1
+                description: The total of the invoice item.
+              regularTotal:
+                type: number
+                format: float
+                minimum: 1
+                description: The non-discounted total of the invoice item.
+              includedTax:
+                type: number
+                format: float
+                minimum: 1
+                description: The total of taxes included in the invoice item.
+              taxRate:
+                type: number
+                format: float
+                minimum: 1
+                description: The tax rate applied on the invoice item.
+            required:
+            - title
+            - amount
+            - total
+            - regularTotal
+            - includedTax
+            - taxRate
+            description: An invoice item.
+          description: An array of invoice items.
+        components:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              total:
+                type: number
+                format: float
+          description: An array of exposed price components.
+        total:
+          type: number
+          format: float
+          description: The invoice total after discounts and taxes.
+        discountSum:
+          type: number
+          format: float
+          description: The total of all discounts applied.
+        detailsPerRate:
+          type: array
+          items:
+            type: object
+            properties:
+              taxRate:
+                type: number
+                format: float
+                minimum: 1
+                description: The applied tax rate.
+              includedTax:
+                type: number
+                format: float
+                minimum: 1
+                description: The total of taxes associated with the tax rate.
+              reducedTax:
+                type: number
+                format: float
+                minimum: 1
+                description: The tax reduction through applied discounts.
+            required:
+            - taxRate
+            - includedTax
+            - reducedTax
+            description: The details on the applied tax rate.
+          description: The tax details grouped by tax rates.
+        taxItems:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                nullable: true
+              taxTypeId:
+                type: string
+                nullable: true
+              rate:
+                type: number
+                format: float
+              perUnit:
+                type: number
+                format: float
+              total:
+                type: number
+                format: float
+              netTotal:
+                type: number
+                format: float
+                nullable: true
+              netPerUnit:
+                type: number
+                format: float
+                nullable: true
+              taxPayableAccountId:
+                type: string
+                nullable: true
+              taxPayableAccountCode:
+                type: string
+                nullable: true
+            required:
+            - rate
+            - perUnit
+            - total
+          description: An array of tax items.
+        includedTax:
+          type: number
+          format: float
+          description: The total of all taxes included.
+        taxRate:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: The default tax rate applied on items.
+        includedOuterChargeTax:
+          type: number
+          format: float
+          description: The total of all taxes on included outer charges.
+        outerChargeTaxRate:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: The tax rate applied on outer charges.
+        origin:
+          type: string
+          enum:
+          - onlinesale
+          - pos
+          description: Whether the invoice has been created through an online or offline transaction.
+        currency:
+          type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: An ISO 4217 3-character code of the currency.
+          default: EUR
+        extraFields:
+          type: object
+          description: The extra fields of the invoice.
+        secret:
+          type: string
+          description: The secret of the invoice.
+        referenceInvoiceId:
+          type: string
+          description: The reference invoice which the invoice evolved from.
+        footerText:
+          type: array
+          items:
+            type: string
+          description: The custom footer columns of the invoice.
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the invoice was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the invoice was last updated.
+      required:
+      - _id
+      - sellerId
+      - recipient
+      - counter
+      - 'no'
+      - items
+      - currency
+      description: The invoice of the transaction
+    GET_Cancellations_GetAllCancellations_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            type: object
+        total:
+          type: integer
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

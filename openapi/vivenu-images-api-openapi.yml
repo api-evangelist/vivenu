@@ -1,0 +1,348 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists images API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: images
+paths:
+  /api/image:
+    get:
+      security:
+      - jwt: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Images_GetAllImages_200_response'
+        '401':
+          description: Unauthorized
+      tags:
+      - images
+      description: Get all Images
+      operationId: get_all_images
+    post:
+      security:
+      - jwt: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POST_Images_CreateAnImage_201_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Images_CreateAnImage'
+      tags:
+      - images
+      description: Create an Image
+      operationId: create_an_image
+  /api/image/{id}:
+    put:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the image
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PUT_Images_UpdateAnImage_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Images_UpdateAnImage'
+      tags:
+      - images
+      description: Update an Image
+      operationId: update_an_image
+    delete:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DELETE_Images_DeleteAnImage_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - images
+      description: Delete an Image
+      operationId: delete_an_image
+components:
+  schemas:
+    GET_Images_GetAllImages_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the image.
+              sellerId:
+                type: string
+                description: The ID of the seller of the image.
+              name:
+                type: string
+                description: The name of the image.
+              url:
+                type: string
+                format: uri
+                description: The URL of the image.
+              tags:
+                type: array
+                items:
+                  type: string
+                description: An array of tags of the image.
+              type:
+                type: string
+                enum:
+                - img
+                - video
+                description: The type of the asset (img or video)
+              createdAt:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the image was created.
+              updatedAt:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the image was updated.
+            required:
+            - _id
+            - sellerId
+            - name
+            - url
+        total:
+          type: integer
+    DELETE_Images_DeleteAnImage_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the image.
+        sellerId:
+          type: string
+          description: The ID of the seller of the image.
+        name:
+          type: string
+          description: The name of the image.
+        url:
+          type: string
+          format: uri
+          description: The URL of the image.
+        tags:
+          type: array
+          items:
+            type: string
+          description: An array of tags of the image.
+        type:
+          type: string
+          enum:
+          - img
+          - video
+          description: The type of the asset (img or video)
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the image was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the image was updated.
+      required:
+      - _id
+      - sellerId
+      - name
+      - url
+    POST_Images_CreateAnImage_201_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the image.
+        sellerId:
+          type: string
+          description: The ID of the seller of the image.
+        name:
+          type: string
+          description: The name of the image.
+        url:
+          type: string
+          format: uri
+          description: The URL of the image.
+        tags:
+          type: array
+          items:
+            type: string
+          description: An array of tags of the image.
+        type:
+          type: string
+          enum:
+          - img
+          - video
+          description: The type of the asset (img or video)
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the image was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the image was updated.
+      required:
+      - _id
+      - sellerId
+      - name
+      - url
+    PUT_Images_UpdateAnImage:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the image.
+        tags:
+          type: array
+          items:
+            type: string
+          description: An array of tags of the image.
+        type:
+          type: string
+          enum:
+          - img
+          - video
+          description: The type of the asset (img or video)
+      required:
+      - name
+    PUT_Images_UpdateAnImage_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the image.
+        sellerId:
+          type: string
+          description: The ID of the seller of the image.
+        name:
+          type: string
+          description: The name of the image.
+        url:
+          type: string
+          format: uri
+          description: The URL of the image.
+        tags:
+          type: array
+          items:
+            type: string
+          description: An array of tags of the image.
+        type:
+          type: string
+          enum:
+          - img
+          - video
+          description: The type of the asset (img or video)
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the image was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the image was updated.
+      required:
+      - _id
+      - sellerId
+      - name
+      - url
+    POST_Images_CreateAnImage:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the image.
+        url:
+          type: string
+          format: uri
+          description: The URL of the image.
+        tags:
+          type: array
+          items:
+            type: string
+          description: An array of tags of the image.
+        type:
+          type: string
+          enum:
+          - img
+          - video
+          description: The type of the asset (img or video)
+      required:
+      - name
+      - url
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

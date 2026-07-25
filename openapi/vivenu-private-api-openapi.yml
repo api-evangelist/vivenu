@@ -1,0 +1,322 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists private API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: private
+paths:
+  /api/stats/reports/billing:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: eventId
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: pos
+        required: false
+        schema:
+          type: boolean
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: managed
+        required: false
+        schema:
+          type: boolean
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: vivenuPayments
+        required: false
+        schema:
+          type: boolean
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: start
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+      tags:
+      - private
+      description: Get Event Billing Report
+      operationId: get_event_billing_report
+  /api/stats/reports/corrections:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: sellerId
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: eventId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: membershipProgramId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: start
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+      tags:
+      - private
+      description: Get Corrections Billing Report
+      operationId: get_corrections_billing_report
+  /api/stats/reports/fees:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: sellerId
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: eventId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: start
+        required: true
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: true
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: scope
+        required: true
+        schema:
+          type: string
+          enum:
+          - managed
+          - unmanaged
+          - vivenu-payments
+          - pos
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+      tags:
+      - private
+      description: Get Fee Report
+      operationId: get_fee_report
+  /api/stats/reports/membership-billing:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: sellerId
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: true
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+      tags:
+      - private
+      description: Get Membership Billing Report
+      operationId: get_membership_billing_report
+  /api/stats/reports/multi-billing:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: eventIds
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: pos
+        required: false
+        schema:
+          type: boolean
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: managed
+        required: false
+        schema:
+          type: boolean
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: vivenuPayments
+        required: false
+        schema:
+          type: boolean
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: start
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+      tags:
+      - private
+      description: Get Multi Event Billing Report
+      operationId: get_multi_event_billing_report
+  /api/stats/reports/billing/seller:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: sellerId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+      tags:
+      - private
+      description: Get Seller Billing Report
+      operationId: get_seller_billing_report
+components:
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

@@ -1,0 +1,226 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists insurance API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: insurance
+paths:
+  /api/insurance/offers:
+    post:
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    description: The request ID will be used to identify the request during booking process
+                  title:
+                    description: The title will be shown to the user in the checkout
+                    type: string
+                  description:
+                    description: The description will be shown to the user in the checkout
+                    type: string
+                  disclaimer:
+                    description: The disclaimer will be shown to the user in the checkout
+                    type: string
+                  logo:
+                    description: 'The URL of a logo of the insurance provider. Recommended size: 256x256'
+                    type: string
+                    format: uri
+                  events:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          description: The ID of the event
+                        optOut:
+                          type: object
+                          properties:
+                            title:
+                              description: The opt-out text will be shown to the user in the checkout
+                              type: string
+                          additionalProperties: false
+                        offers:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              _id:
+                                type: string
+                                description: The ID will be used to identify the insurance offer during booking process
+                              title:
+                                type: string
+                                description: The title will be shown to the user in the checkout
+                              productName:
+                                description: The product name will be shown to the user in the cart
+                                type: string
+                              productId:
+                                type: string
+                                description: The product ID will be used to identify the insurance product during booking process. The product ID will be used to identify the insurance product during booking process.
+                              netPrice:
+                                type: number
+                                minimum: 0
+                                description: The net price of the offer
+                              badgeLabel:
+                                description: The badge label will be shown to the user in the checkout within a badge box (e.g. 'recommended')
+                                type: string
+                              included:
+                                description: The array of included services (e.g. 'Medical Expenses', 'Accident Protection') will be shown to the user in the checkout
+                                type: array
+                                items:
+                                  type: string
+                              excluded:
+                                description: The array of excluded services (e.g. 'Cancellation', 'Lost Luggage') will be shown to the user in the checkout
+                                type: array
+                                items:
+                                  type: string
+                              termsAndConditionsUrl:
+                                type: string
+                                format: uri
+                                description: The URL of the terms and conditions will be shown to the user in the checkout
+                              taxServiceTypeId:
+                                description: The tax service type ID will be used to calculate taxes & gross price of the insurance product
+                                type: string
+                              price:
+                                type: number
+                                description: The price of the offer including taxes
+                              taxRate:
+                                type: number
+                                description: The tax rate of the offer
+                              taxInfo:
+                                type: object
+                                properties:
+                                  serviceTypeId:
+                                    description: The tax service type ID
+                                    type: string
+                                  exceptionId:
+                                    description: The tax exception ID
+                                    type: string
+                                  proceedsAccountId:
+                                    description: The proceeds account ID
+                                    type: string
+                                  proceedsAccountCode:
+                                    description: The proceeds account code
+                                    type: string
+                                  taxItems:
+                                    description: An array of tax items
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        name:
+                                          description: The name of the tax item
+                                          type: string
+                                        taxTypeId:
+                                          description: The tax type ID
+                                          type: string
+                                        rate:
+                                          type: number
+                                          description: The rate of the tax item
+                                        perUnit:
+                                          type: number
+                                          description: The per unit amount of the tax item
+                                        total:
+                                          type: number
+                                          description: The total amount of the tax item
+                                        netTotal:
+                                          description: The net total amount of the tax item
+                                          type: number
+                                        netPerUnit:
+                                          description: The net per unit amount of the tax item
+                                          type: number
+                                        taxPayableAccountId:
+                                          description: The tax payable account ID
+                                          type: string
+                                        taxPayableAccountCode:
+                                          description: The tax payable account code
+                                          type: string
+                                      required:
+                                      - rate
+                                      - perUnit
+                                      - total
+                                      additionalProperties: false
+                                additionalProperties: false
+                                description: The tax information of the offer
+                            required:
+                            - _id
+                            - title
+                            - productId
+                            - netPrice
+                            - termsAndConditionsUrl
+                            - price
+                            - taxRate
+                            - taxInfo
+                            additionalProperties: false
+                      required:
+                      - _id
+                      - optOut
+                      - offers
+                      additionalProperties: false
+                required:
+                - requestId
+                - events
+                additionalProperties: false
+        '400':
+          description: Bad Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                checkoutId:
+                  type: string
+                  description: The ID of the checkout for which to get offers
+                secret:
+                  type: string
+                  description: The secret of the checkout for which to get offers
+                sellerId:
+                  type: string
+                  description: The ID of the seller for which to get offers
+              required:
+              - checkoutId
+              - secret
+              - sellerId
+              additionalProperties: false
+      tags:
+      - insurance
+      description: Get insurance offers for a Checkout
+      operationId: get_insurance_offers_for_a_checkout
+components:
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

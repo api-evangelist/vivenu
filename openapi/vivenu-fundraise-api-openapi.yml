@@ -1,0 +1,1014 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists fundraise API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: fundraise
+paths:
+  /api/fundraise/campaigns:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: top
+        schema:
+          default: 25
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          type: integer
+          minimum: 1
+          maximum: 1000
+        description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+        in: query
+        required: true
+        style: form
+        explode: true
+      - name: skip
+        schema:
+          default: 0
+          description: The number of objects to skip for the requested result
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        description: The number of objects to skip for the requested result
+        in: query
+        required: true
+        style: form
+        explode: true
+      - name: _id
+        schema:
+          description: The ID of the campaign to search for
+          type: string
+        description: The ID of the campaign to search for
+        in: query
+        required: false
+        style: form
+        explode: true
+      - name: name
+        schema:
+          description: The name of the campaign to search for
+          type: string
+        description: The name of the campaign to search for
+        in: query
+        required: false
+        style: form
+        explode: true
+      - name: externalId
+        schema:
+          description: The external ID of the campaign to search for
+          type: string
+        description: The external ID of the campaign to search for
+        in: query
+        required: false
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  docs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CampaignResource'
+                  total:
+                    type: number
+                required:
+                - docs
+                - total
+                additionalProperties: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - fundraise
+      description: Get All Campaigns
+      operationId: get_all_campaigns
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampaignResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the campaign
+                target:
+                  description: The target (goal) amount and date of the campaign
+                  type: object
+                  properties:
+                    amount:
+                      description: The target amount of the campaign
+                      type: number
+                    date:
+                      description: An ISO timestamp indicating when the campaign is planned to reach the goal (amount).
+                      type: string
+                      format: date-time
+                  additionalProperties: false
+                externalId:
+                  description: The external ID of the campaign
+                  type: string
+              required:
+              - name
+              additionalProperties: false
+      tags:
+      - fundraise
+      description: Create a Campaign
+      operationId: create_a_campaign
+  /api/fundraise/funds:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: top
+        schema:
+          default: 25
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          type: integer
+          minimum: 1
+          maximum: 1000
+        description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+        in: query
+        required: true
+        style: form
+        explode: true
+      - name: skip
+        schema:
+          default: 0
+          description: The number of objects to skip for the requested result
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        description: The number of objects to skip for the requested result
+        in: query
+        required: true
+        style: form
+        explode: true
+      - name: _id
+        schema:
+          description: The ID of the fund to search for
+          type: string
+        description: The ID of the fund to search for
+        in: query
+        required: false
+        style: form
+        explode: true
+      - name: name
+        schema:
+          description: The name of the fund to search for
+          type: string
+        description: The name of the fund to search for
+        in: query
+        required: false
+        style: form
+        explode: true
+      - name: externalId
+        schema:
+          description: The external ID of the fund to search for
+          type: string
+        description: The external ID of the fund to search for
+        in: query
+        required: false
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  docs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FundResource'
+                  total:
+                    type: number
+                required:
+                - docs
+                - total
+                additionalProperties: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - fundraise
+      description: Get All Funds
+      operationId: get_all_funds
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FundResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the fund
+                target:
+                  description: The target (goal) amount and date of the fund
+                  type: object
+                  properties:
+                    amount:
+                      description: The target amount of the fund
+                      type: number
+                    date:
+                      description: An ISO timestamp indicating when the fund is planned to reach the goal (amount).
+                      type: string
+                      format: date-time
+                  additionalProperties: false
+                externalId:
+                  description: The external ID of the fund
+                  type: string
+              required:
+              - name
+              additionalProperties: false
+      tags:
+      - fundraise
+      description: Create a Fund
+      operationId: create_a_fund
+  /api/fundraise/campaigns/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+          description: The ID of the campaign to get the campaign (can be external ID). In case of external ID, the external ID must be prefixed with 'externalId:'
+        description: The ID of the campaign to get the campaign (can be external ID). In case of external ID, the external ID must be prefixed with 'externalId:'
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampaignResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - fundraise
+      description: Get a Campaign
+      operationId: get_a_campaign
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+          description: The ID of the campaign to update (can be external ID). In case of external ID, the external ID must be prefixed with 'externalId:'
+        description: The ID of the campaign to update (can be external ID). In case of external ID, the external ID must be prefixed with 'externalId:'
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampaignResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the campaign
+                target:
+                  description: The target (goal) amount and date of the campaign
+                  type: object
+                  properties:
+                    amount:
+                      description: The target amount of the campaign
+                      type: number
+                    date:
+                      description: An ISO timestamp indicating when the campaign is planned to reach the goal (amount).
+                      type: string
+                      format: date-time
+                  additionalProperties: false
+                externalId:
+                  description: The external ID of the campaign
+                  type: string
+              additionalProperties: false
+      tags:
+      - fundraise
+      description: Update a Campaign
+      operationId: update_a_campaign
+  /api/fundraise/donations/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+          description: The ID of the donation to get the donation (can be external ID). In case of external ID, the external ID must be prefixed with 'externalId:'
+        description: The ID of the donation to get the donation (can be external ID). In case of external ID, the external ID must be prefixed with 'externalId:'
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DonationResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - fundraise
+      description: Get a Donation
+      operationId: get_a_donation
+  /api/fundraise/funds/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+          description: The ID of the to get the fund (can be external ID). In case of external ID, the external ID must be prefixed with 'externalId:'
+        description: The ID of the to get the fund (can be external ID). In case of external ID, the external ID must be prefixed with 'externalId:'
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FundResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - fundraise
+      description: Get a Fund
+      operationId: get_a_fund
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+          description: The ID of the fund to update (can be external ID). In case of external ID, the external ID must be prefixed with 'externalId:'
+        description: The ID of the fund to update (can be external ID). In case of external ID, the external ID must be prefixed with 'externalId:'
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FundResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the fund
+                target:
+                  description: The target (goal) amount and date of the fund
+                  type: object
+                  properties:
+                    amount:
+                      description: The target amount of the fund
+                      type: number
+                    date:
+                      description: An ISO timestamp indicating when the fund is planned to reach the goal (amount).
+                      type: string
+                      format: date-time
+                  additionalProperties: false
+                externalId:
+                  description: The external ID of the fund
+                  type: string
+              additionalProperties: false
+      tags:
+      - fundraise
+      description: Update a Fund
+      operationId: update_a_fund
+  /api/fundraise/pledges/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+          description: The ID of the pledge to get the pledge (can be external ID). In case of external ID, the external ID must be prefixed with 'externalId:'
+        description: The ID of the pledge to get the pledge (can be external ID). In case of external ID, the external ID must be prefixed with 'externalId:'
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PledgeResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - fundraise
+      description: Get a Pledge
+      operationId: get_a_pledge
+  /api/fundraise/donations:
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DonationResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: number
+                  description: The amount of the donation
+                campaignId:
+                  description: The ID of the campaign of the donation
+                  type: string
+                fundId:
+                  type: string
+                  description: The ID of the fund of the donation
+                customerId:
+                  type: string
+                  description: The ID of the customer of the donation
+                salesChannelId:
+                  description: The ID of the sales channel of the donation
+                  type: string
+                notes:
+                  description: The notes of the donation
+                  type: string
+                externalId:
+                  description: The external ID of the donation
+                  type: string
+                appliedAt:
+                  description: An ISO timestamp indicating when the donation was applied. (esp. helpful for donations from external integrations)
+                  type: string
+                  format: date-time
+                pledgeId:
+                  description: The ID of the pledge that will fulfill (partly or fully) through this donation.
+                  type: string
+              required:
+              - amount
+              - fundId
+              - customerId
+              additionalProperties: false
+      tags:
+      - fundraise
+      description: Create a Donation
+      operationId: create_a_donation
+  /api/fundraise/pledges:
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PledgeResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: number
+                  description: The amount of the pledge
+                campaignId:
+                  description: The ID of the campaign of the pledge
+                  type: string
+                fundId:
+                  type: string
+                  description: The ID of the fund of the pledge
+                customerId:
+                  type: string
+                  description: The ID of the customer of the pledge
+                salesChannelId:
+                  description: The ID of the sales channel of the pledge
+                  type: string
+                notes:
+                  description: The notes of the pledge
+                  type: string
+                targetDate:
+                  description: An ISO timestamp indicating when the pledge is planned to be fulfilled.
+                  type: string
+                  format: date-time
+                externalId:
+                  description: The external ID of the pledge
+                  type: string
+                pledgedAt:
+                  description: An ISO timestamp indicating when the pledge was pledged. (esp. helpful for pledges from external integrations)
+                  type: string
+                  format: date-time
+              required:
+              - amount
+              - fundId
+              - customerId
+              additionalProperties: false
+      tags:
+      - fundraise
+      description: Create a Pledge
+      operationId: create_a_pledge
+components:
+  schemas:
+    PledgeResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the Pledge
+        amount:
+          type: number
+          description: The amount of the pledge
+        currency:
+          type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: The currency of the pledge (will be automatically set using the seller's currency)
+        applications:
+          description: An array of donations that have fulfilled this pledge.
+          type: array
+          items:
+            type: object
+            properties:
+              donationId:
+                type: string
+                description: An ISO timestamp indicating when the application was applied.
+              amount:
+                type: number
+                description: The amount of the donation that was applied to the pledge.
+              appliedAt:
+                description: An ISO timestamp indicating when the application was applied.
+                type: string
+                format: date-time
+            required:
+            - donationId
+            - amount
+            - appliedAt
+            additionalProperties: false
+        customerId:
+          type: string
+          description: The ID of the customer of the pledge
+        fundId:
+          type: string
+          description: The ID of the fund of the pledge
+        campaignId:
+          description: The ID of the campaign of the pledge
+          type: string
+        salesChannelId:
+          description: The ID of the sales channel of the pledge
+          type: string
+        notes:
+          description: The notes of the pledge
+          type: string
+        targetDate:
+          description: An ISO timestamp indicating when the pledge is planned to be fulfilled.
+          type: string
+          format: date-time
+        externalId:
+          description: The external ID of the pledge
+          type: string
+        pledgedAt:
+          description: An ISO timestamp indicating when the pledge was pledged. (esp. helpful for pledges from external integrations)
+          type: string
+          format: date-time
+        sellerId:
+          type: string
+          description: The ID of the seller owning the pledge
+        createdAt:
+          description: An ISO timestamp indicating when the pledge was created.
+          type: string
+          format: date-time
+        updatedAt:
+          description: An ISO timestamp indicating when the pledge was updated.
+          type: string
+          format: date-time
+      required:
+      - _id
+      - amount
+      - currency
+      - customerId
+      - fundId
+      - sellerId
+      - createdAt
+      - updatedAt
+      additionalProperties: false
+    CampaignResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the marketing campaign
+        name:
+          type: string
+          minLength: 3
+          description: The name of the marketing campaign
+        code:
+          type: string
+          maxLength: 128
+          description: The code of the marketing campaign
+        createdBy:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - USER
+              - APP
+              - API_KEY
+              - SYSTEM
+              description: The type of the entity
+            id:
+              type: string
+              description: The ID of the entity
+          required:
+          - type
+          - id
+          additionalProperties: false
+          description: The entity that created this marketing campaign
+        sellerId:
+          type: string
+          description: The ID of the seller owning the marketing campaign
+        isArchived:
+          default: false
+          description: Whether the marketing campaign is archived or not.
+          type: boolean
+        createdAt:
+          description: An ISO timestamp indicating when the marketing campaign was created.
+          type: string
+          format: date-time
+        updatedAt:
+          description: An ISO timestamp indicating when the marketing campaign was updated.
+          type: string
+          format: date-time
+      required:
+      - _id
+      - name
+      - code
+      - createdBy
+      - sellerId
+      - isArchived
+      - createdAt
+      - updatedAt
+      additionalProperties: false
+    FundResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the Fund
+        name:
+          type: string
+          description: The name of the fund
+        target:
+          description: The target (goal) amount and date of the fund
+          type: object
+          properties:
+            amount:
+              description: The target amount of the fund
+              type: number
+            date:
+              description: An ISO timestamp indicating when the fund is planned to reach the goal (amount).
+              type: string
+              format: date-time
+          additionalProperties: false
+        externalId:
+          description: The external ID of the fund
+          type: string
+        sellerId:
+          type: string
+          description: The ID of the seller owning the fund
+        createdAt:
+          description: An ISO timestamp indicating when the fund was created.
+          type: string
+          format: date-time
+        updatedAt:
+          description: An ISO timestamp indicating when the fund was created.
+          type: string
+          format: date-time
+      required:
+      - _id
+      - name
+      - sellerId
+      - createdAt
+      - updatedAt
+      additionalProperties: false
+    DonationResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the Donation
+        amount:
+          type: number
+          description: The amount of the donation
+        currency:
+          type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: The currency of the donation
+        applications:
+          description: An array of pledges that have been fulfilled through this donation.
+          type: array
+          items:
+            type: object
+            properties:
+              pledgeId:
+                type: string
+                description: The ID of the pledge that was fulfilled through this donation.
+              amount:
+                type: number
+                description: The amount of the donation that was applied to the pledge.
+            required:
+            - pledgeId
+            - amount
+            additionalProperties: false
+        customerId:
+          type: string
+          description: The ID of the customer of the donation
+        fundId:
+          type: string
+          description: The ID of the fund of the donation
+        campaignId:
+          description: The ID of the campaign of the donation
+          type: string
+        salesChannelId:
+          description: The ID of the sales channel of the donation
+          type: string
+        notes:
+          description: The notes of the donation
+          type: string
+        externalId:
+          description: The external ID of the donation
+          type: string
+        cartItemId:
+          description: The ID of the cart item from which the donation created
+          type: string
+        appliedAt:
+          description: An ISO timestamp indicating when the donation was applied. (esp. helpful for donations from external integrations)
+          type: string
+          format: date-time
+        sellerId:
+          type: string
+          description: The ID of the seller owning the donation
+        createdAt:
+          description: An ISO timestamp indicating when the donation was created.
+          type: string
+          format: date-time
+        updatedAt:
+          description: An ISO timestamp indicating when the donation was updated.
+          type: string
+          format: date-time
+      required:
+      - _id
+      - amount
+      - currency
+      - customerId
+      - fundId
+      - sellerId
+      - createdAt
+      - updatedAt
+      additionalProperties: false
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

@@ -1,0 +1,812 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists sales-channels API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: sales-channels
+paths:
+  /api/sales-channels:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: status
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - ACTIVE
+            - INACTIVE
+            metas: {}
+          description: Filter sales channels by status
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: name
+        required: false
+        schema:
+          type: string
+          description: Filter sales channels by name
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: type
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - POS
+            - DISTRIBUTOR
+            - INTERNAL_BOOKING
+            - WEB
+            - MARKETPLACE_APP
+            - KIOSK
+            metas: {}
+          description: Filter sales channels by type
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: permissions
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - salesChannels:access
+            metas: {}
+          description: Filter sales channnels by permissions
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: groupIds
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            description: Filter sales channels by group id
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: sellerId
+        required: false
+        schema:
+          type: string
+          description: The ID of the seller
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: top
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: integer
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Sales-channels_GetAllSalesChannels_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - sales-channels
+      description: Get all sales channels
+      operationId: sales-channels/list
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesChannelResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Sales-channels_CreateASalesChannel'
+      tags:
+      - sales-channels
+      description: Create a sales channel
+      operationId: sales-channels/create
+  /api/sales-channels/groups:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: status
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - ACTIVE
+            - INACTIVE
+            metas: {}
+          description: Filter sales channel groups by status
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: name
+        required: false
+        schema:
+          type: string
+          description: Filter sales channel groups by name
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: includeDefaultGroups
+        required: false
+        schema:
+          type: boolean
+          description: Whether default groups should be included
+          default: true
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: top
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: integer
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesChannelGroupResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - sales-channels
+      description: Get all sales channel groups
+      operationId: sales-channel-groups/getAllSalesChannelGroups
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesChannelGroupResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Sales-channels_CreateASalesChannelGroup'
+      tags:
+      - sales-channels
+      description: Create a sales channel group
+      operationId: sales-channel-groups/createSalesChannelGroup
+  /api/sales-channels/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: sellerId
+        required: false
+        schema:
+          type: string
+          description: The ID of the seller
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the sales channel.
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesChannelResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - sales-channels
+      description: Get a SalesChannel
+      operationId: sales-channels/get
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the sales channel.
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesChannelResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Sales-channels_UpdateASalesChannel'
+      tags:
+      - sales-channels
+      description: Update a sales channel
+      operationId: sales-channels/update
+  /api/sales-channels/groups/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the sales channel group.
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesChannelGroupResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - sales-channels
+      description: Get a SalesChannelGroup
+      operationId: sales-channel-groups/getASalesChannelGroup
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the sales channel group.
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesChannelGroupResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Sales-channels_UpdateASalesChannelGroup'
+      tags:
+      - sales-channels
+      description: Update a sales channel group
+      operationId: sales-channel-groups/updateSalesChannelGroup
+  /api/sales-channels/{id}/archive:
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the sales channel.
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesChannelResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - sales-channels
+      description: Archive a sales channel
+      operationId: sales-channels/archive
+components:
+  schemas:
+    PUT_Sales-channels_UpdateASalesChannelGroup:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the sales channel group
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          description: The status of the sales channel group, whether it is active or not
+        salesChannelIds:
+          type: array
+          items:
+            type: string
+          description: The sales channels that are in the group
+        restrictEventAccess:
+          type: boolean
+          description: Wether channels in this group can only access some events or all
+      required:
+      - name
+      - status
+      - restrictEventAccess
+    GET_Sales-channels_GetAllSalesChannels_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/SalesChannelResource'
+        total:
+          type: integer
+    SalesChannelGroupResource:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the sales channel group
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          description: The status of the sales channel group, whether it is active or not
+        salesChannelIds:
+          type: array
+          items:
+            type: string
+          description: The sales channels that are in the group
+        restrictEventAccess:
+          type: boolean
+          description: Wether channels in this group can only access some events or all
+        _id:
+          type: string
+          description: The ID of the sales channel group
+        sellerId:
+          type: string
+          description: The ID of the seller of the sales channel group
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the sales channel group was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the sales channel group was updated
+      required:
+      - name
+      - status
+      - restrictEventAccess
+      - _id
+      - sellerId
+    POST_Sales-channels_CreateASalesChannelGroup:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the sales channel group
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          description: The status of the sales channel group, whether it is active or not
+        salesChannelIds:
+          type: array
+          items:
+            type: string
+          description: The sales channels that are in the group
+        restrictEventAccess:
+          type: boolean
+          description: Wether channels in this group can only access some events or all
+      required:
+      - name
+      - status
+      - restrictEventAccess
+    SalesChannelResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the sales channel
+        sellerId:
+          type: string
+          description: The ID of the seller of the sales channel
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the sales channel was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the sales channel was updated
+        name:
+          type: string
+          description: The name of the sales channel
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          description: The status of the object, whether it is active or not
+        type:
+          type: string
+          enum:
+          - POS
+          - DISTRIBUTOR
+          - INTERNAL_BOOKING
+          - WEB
+          - MARKETPLACE_APP
+          - KIOSK
+          description: The type of the sales channel
+        groupId:
+          type: string
+          description: The group of the sales channel
+        contractTypeIds:
+          type: array
+          items:
+            type: string
+          description: The contract types that are available through this sales channel
+        owner:
+          type: string
+          description: The app owner id, if the channel was created by a marketplace app
+      required:
+      - _id
+      - sellerId
+      - name
+      - status
+      - type
+    POST_Sales-channels_CreateASalesChannel:
+      oneOf:
+      - type: object
+        properties:
+          name:
+            type: string
+            description: The name of the sales channel
+          status:
+            type: string
+            enum:
+            - ACTIVE
+            - INACTIVE
+            description: The status of the object, whether it is active or not
+          type:
+            type: string
+            enum:
+            - DISTRIBUTOR
+          groupId:
+            type: string
+            description: The group of the sales channel
+          contractTypeIds:
+            type: array
+            items:
+              type: string
+            description: The contract types that are available through this sales channel
+          distributor:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - Redeam
+                - GetYourGuide
+                - Logitix
+                - EventDynamic
+                - StubHub
+                - TicketmasterFrance
+                - ProjectAdmission
+                - Tiqets
+                - TripCom
+                - ANI
+                - TicketNetwork
+                - KorusTicket
+                - ComeToParis
+                - Experticket
+                - Prioticket
+                - RevPro
+                - Automatiq
+                description: The type of the sales channel
+              integrationType:
+                type: string
+                enum:
+                - DistributionService
+                - Logitix
+                - EventDynamic
+                - StubHub
+                - TicketmasterFrance
+                - ProjectAdmission
+                - Tiqets
+                - TripCom
+                - ANI
+                - TicketNetwork
+                - KorusTicket
+                - ComeToParis
+                - Experticket
+                - Prioticket
+                - RevPro
+                - Automatiq
+                description: The integration type of the sales channel
+            required:
+            - type
+            - integrationType
+        required:
+        - name
+        - status
+        - type
+      - type: object
+        properties:
+          name:
+            type: string
+            description: The name of the sales channel
+          status:
+            type: string
+            enum:
+            - ACTIVE
+            - INACTIVE
+            description: The status of the object, whether it is active or not
+          groupId:
+            type: string
+            description: The group of the sales channel
+          contractTypeIds:
+            type: array
+            items:
+              type: string
+            description: The contract types that are available through this sales channel
+          type:
+            type: string
+            enum:
+            - POS
+            - INTERNAL_BOOKING
+            - WEB
+            - MARKETPLACE_APP
+            - KIOSK
+            description: The type of the sales channel
+        required:
+        - name
+        - status
+        - type
+    PUT_Sales-channels_UpdateASalesChannel:
+      oneOf:
+      - type: object
+        properties:
+          name:
+            type: string
+            description: The name of the sales channel
+          status:
+            type: string
+            enum:
+            - ACTIVE
+            - INACTIVE
+            description: The status of the object, whether it is active or not
+          type:
+            type: string
+            enum:
+            - DISTRIBUTOR
+          groupId:
+            type: string
+            description: The group of the sales channel
+          contractTypeIds:
+            type: array
+            items:
+              type: string
+            description: The contract types that are available through this sales channel
+          distributor:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - Redeam
+                - GetYourGuide
+                - Logitix
+                - EventDynamic
+                - StubHub
+                - TicketmasterFrance
+                - ProjectAdmission
+                - Tiqets
+                - TripCom
+                - ANI
+                - TicketNetwork
+                - KorusTicket
+                - ComeToParis
+                - Experticket
+                - Prioticket
+                - RevPro
+                - Automatiq
+                description: The type of the sales channel
+              integrationType:
+                type: string
+                enum:
+                - DistributionService
+                - Logitix
+                - EventDynamic
+                - StubHub
+                - TicketmasterFrance
+                - ProjectAdmission
+                - Tiqets
+                - TripCom
+                - ANI
+                - TicketNetwork
+                - KorusTicket
+                - ComeToParis
+                - Experticket
+                - Prioticket
+                - RevPro
+                - Automatiq
+                description: The integration type of the sales channel
+            required:
+            - type
+            - integrationType
+        required:
+        - name
+        - status
+        - type
+      - type: object
+        properties:
+          name:
+            type: string
+            description: The name of the sales channel
+          status:
+            type: string
+            enum:
+            - ACTIVE
+            - INACTIVE
+            description: The status of the object, whether it is active or not
+          groupId:
+            type: string
+            description: The group of the sales channel
+          contractTypeIds:
+            type: array
+            items:
+              type: string
+            description: The contract types that are available through this sales channel
+          type:
+            type: string
+            enum:
+            - POS
+            - INTERNAL_BOOKING
+            - WEB
+            - MARKETPLACE_APP
+            - KIOSK
+            description: The type of the sales channel
+        required:
+        - name
+        - status
+        - type
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

@@ -1,0 +1,790 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists stats API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: stats
+paths:
+  /api/stats/avgcart:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: eventId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: timezone
+        required: false
+        schema:
+          type: string
+          default: UTC
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - stats
+      description: Get Transaction avg Cart
+      deprecated: true
+      operationId: get_transaction_avg_cart
+  /api/stats/charges:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: start
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: eventId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: sellerId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: timezone
+        required: false
+        schema:
+          type: string
+          default: UTC
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - stats
+      description: Get Charges per time scope
+      operationId: get_charges_per_time_scope
+  /api/stats/customers:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: start
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: timezone
+        required: false
+        schema:
+          type: string
+          default: UTC
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - stats
+      description: Get Customers per time scope
+      deprecated: true
+      operationId: get_customers_per_time_scope
+  /api/stats/dayhours:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: eventId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: timezone
+        required: false
+        schema:
+          type: string
+          default: UTC
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - stats
+      description: Get Transaction Day Hours
+      deprecated: true
+      operationId: get_transaction_day_hours
+  /api/stats/discounts:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: start
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: eventId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: posId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - stats
+      description: Get applied Discounts
+      operationId: get_applied_discounts
+  /api/stats/discountsusage:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: eventId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: timezone
+        required: false
+        schema:
+          type: string
+          default: UTC
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - stats
+      description: Get discount usage
+      operationId: get_discount_usage
+  /api/stats/money:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: start
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: eventId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: timezone
+        required: false
+        schema:
+          type: string
+          default: UTC
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - stats
+      description: Get Money per time scope
+      operationId: get_money_per_time_scope
+  /api/stats/paymentmethod:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: start
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: eventId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: timezone
+        required: false
+        schema:
+          type: string
+          default: UTC
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - stats
+      description: Get Transaction Payment Method
+      deprecated: true
+      operationId: get_transaction_payment_method
+  /api/stats/posdiscounts:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: start
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: eventId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: posId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - stats
+      description: Get applied POS Discounts
+      operationId: get_applied_pos_discounts
+  /api/stats/posdiscountsusage:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: eventId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: timezone
+        required: false
+        schema:
+          type: string
+          default: UTC
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - stats
+      description: Get applied pos discount
+      operationId: get_applied_pos_discount
+  /api/stats/status:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: start
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: eventId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: timezone
+        required: false
+        schema:
+          type: string
+          default: UTC
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - stats
+      description: Get Transaction States
+      operationId: get_transaction_states
+  /api/stats/tickets:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: start
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: eventId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: timezone
+        required: false
+        schema:
+          type: string
+          default: UTC
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - stats
+      description: Get Tickets per time scope
+      operationId: get_tickets_per_time_scope
+  /api/stats/checkouts/countByStatus:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: start
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: eventId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: timezone
+        required: false
+        schema:
+          type: string
+          default: UTC
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - stats
+      description: Aggregate checkouts by status
+      deprecated: true
+      operationId: aggregate_checkouts_by_status
+  /api/stats/transaction/reports:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: pos
+        required: false
+        schema:
+          type: boolean
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+      tags:
+      - stats
+      description: Get Transaction reports
+      operationId: get_transaction_reports
+  /api/stats/transactions/extra-fields:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: start
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: eventId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: field
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - stats
+      description: Get Transaction Extra Fields
+      operationId: get_transaction_extra_fields
+  /api/stats/transactions/location:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: start
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: eventId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - stats
+      description: Get Transaction Locations
+      operationId: get_transaction_locations
+  /api/stats/events/{id}/status:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: start
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: posId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - stats
+      description: Get Event Status
+      deprecated: true
+      operationId: get_event_status
+components:
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

@@ -1,0 +1,430 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists event-series API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: event-series
+paths:
+  /api/event-series:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: skip
+        required: false
+        schema:
+          type: number
+          format: float
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: top
+        required: false
+        schema:
+          type: number
+          format: float
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: name
+        required: false
+        schema:
+          type: string
+          description: The name of the event series to filter for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Event-series_GetAllEventSeries_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - event-series
+      description: Get all event series
+      operationId: event-series/list
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POST_Event-series_CreateAnEventSeries_201_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Event-series_CreateAnEventSeries'
+      tags:
+      - event-series
+      description: Create an event series
+      operationId: event-series/create
+  /api/event-series/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Event-series_GetAnEventSeries_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - event-series
+      description: Get an event series
+      operationId: event-series/get
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PUT_Event-series_UpdateAnEventSeries_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Event-series_UpdateAnEventSeries'
+      tags:
+      - event-series
+      description: Update an event series
+      operationId: event-series/update
+    delete:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DELETE_Event-series_DeleteAnEventSeries_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - event-series
+      description: Delete an event series
+      operationId: event-series/delete
+components:
+  schemas:
+    GET_Event-series_GetAnEventSeries_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the event series
+        name:
+          type: string
+          description: The name of the event series
+        eventIds:
+          type: array
+          items:
+            type: string
+          description: An array of events that are included in this event series
+        sellerId:
+          type: string
+          description: The ID of the seller of the event series
+        restrictions:
+          type: object
+          properties:
+            maxTicketsPerCustomer:
+              type: number
+              format: float
+              nullable: true
+              description: The amount of ticket a customer can buy for this series
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the event series was las updated
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the event series was created
+      required:
+      - _id
+      - name
+      - sellerId
+    PUT_Event-series_UpdateAnEventSeries:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the event series
+        restrictions:
+          type: object
+          properties:
+            maxTicketsPerCustomer:
+              type: number
+              format: float
+              nullable: true
+              description: The amount of ticket a customer can buy for this series
+        eventIds:
+          type: array
+          items:
+            type: string
+          description: An array of events that are included in this event series
+    POST_Event-series_CreateAnEventSeries_201_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the event series
+        name:
+          type: string
+          description: The name of the event series
+        eventIds:
+          type: array
+          items:
+            type: string
+          description: An array of events that are included in this event series
+        sellerId:
+          type: string
+          description: The ID of the seller of the event series
+        restrictions:
+          type: object
+          properties:
+            maxTicketsPerCustomer:
+              type: number
+              format: float
+              nullable: true
+              description: The amount of ticket a customer can buy for this series
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the event series was las updated
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the event series was created
+      required:
+      - _id
+      - name
+      - sellerId
+    GET_Event-series_GetAllEventSeries_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the event series
+              name:
+                type: string
+                description: The name of the event series
+              eventIds:
+                type: array
+                items:
+                  type: string
+                description: An array of events that are included in this event series
+              sellerId:
+                type: string
+                description: The ID of the seller of the event series
+              restrictions:
+                type: object
+                properties:
+                  maxTicketsPerCustomer:
+                    type: number
+                    format: float
+                    nullable: true
+                    description: The amount of ticket a customer can buy for this series
+              updatedAt:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the event series was las updated
+              createdAt:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the event series was created
+            required:
+            - _id
+            - name
+            - sellerId
+        total:
+          type: integer
+    DELETE_Event-series_DeleteAnEventSeries_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the event series
+        name:
+          type: string
+          description: The name of the event series
+        eventIds:
+          type: array
+          items:
+            type: string
+          description: An array of events that are included in this event series
+        sellerId:
+          type: string
+          description: The ID of the seller of the event series
+        restrictions:
+          type: object
+          properties:
+            maxTicketsPerCustomer:
+              type: number
+              format: float
+              nullable: true
+              description: The amount of ticket a customer can buy for this series
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the event series was las updated
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the event series was created
+      required:
+      - _id
+      - name
+      - sellerId
+    POST_Event-series_CreateAnEventSeries:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the event series
+        restrictions:
+          type: object
+          properties:
+            maxTicketsPerCustomer:
+              type: number
+              format: float
+              nullable: true
+              description: The amount of ticket a customer can buy for this series
+        eventIds:
+          type: array
+          items:
+            type: string
+          description: An array of events that are included in this event series
+      required:
+      - name
+    PUT_Event-series_UpdateAnEventSeries_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the event series
+        name:
+          type: string
+          description: The name of the event series
+        eventIds:
+          type: array
+          items:
+            type: string
+          description: An array of events that are included in this event series
+        sellerId:
+          type: string
+          description: The ID of the seller of the event series
+        restrictions:
+          type: object
+          properties:
+            maxTicketsPerCustomer:
+              type: number
+              format: float
+              nullable: true
+              description: The amount of ticket a customer can buy for this series
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the event series was las updated
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the event series was created
+      required:
+      - _id
+      - name
+      - sellerId
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

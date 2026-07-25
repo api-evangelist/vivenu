@@ -1,0 +1,209 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists disputes API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: disputes
+paths:
+  /api/disputes:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: top
+        schema:
+          default: 25
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          type: integer
+          minimum: 1
+          maximum: 1000
+        description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+        in: query
+        required: true
+        style: form
+        explode: true
+      - name: skip
+        schema:
+          default: 0
+          description: The number of objects to skip for the requested result
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        description: The number of objects to skip for the requested result
+        in: query
+        required: true
+        style: form
+        explode: true
+      - name: sellerId
+        schema:
+          type: string
+        in: query
+        required: false
+        style: form
+        explode: true
+      - name: reference
+        schema:
+          type: string
+        in: query
+        required: false
+        style: form
+        explode: true
+      - name: paymentId
+        schema:
+          type: string
+        in: query
+        required: false
+        style: form
+        explode: true
+      - name: paymentGatewayId
+        schema:
+          type: string
+        in: query
+        required: false
+        style: form
+        explode: true
+      - name: createdAt
+        schema:
+          type: object
+          properties:
+            $gt:
+              description: value is greater than
+              type: string
+              format: date-time
+            $gte:
+              description: value is greater than or equal
+              type: string
+              format: date-time
+            $lt:
+              description: value is less than
+              type: string
+              format: date-time
+            $lte:
+              description: value is less than or equal
+              type: string
+              format: date-time
+            $eq:
+              description: value is equal
+              type: string
+              format: date-time
+            $ne:
+              description: value is not equal
+              type: string
+              format: date-time
+          additionalProperties: false
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  docs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                        status:
+                          type: string
+                        reference:
+                          type: string
+                        amount:
+                          type: number
+                        currency:
+                          type: string
+                        paymentId:
+                          type: string
+                        paymentGatewayId:
+                          type: string
+                        sellerId:
+                          type: string
+                        deadline:
+                          type: string
+                          format: date-time
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                      required:
+                      - _id
+                      - status
+                      - reference
+                      - amount
+                      - currency
+                      - paymentId
+                      - paymentGatewayId
+                      - sellerId
+                      - createdAt
+                      - updatedAt
+                      additionalProperties: false
+                  total:
+                    type: number
+                required:
+                - docs
+                - total
+                additionalProperties: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - disputes
+      description: Get disputes
+      operationId: get_disputes
+  /api/disputes/{id}/stop-automation:
+    post:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+      tags:
+      - disputes
+      description: Stop dispute automation
+      operationId: stop_dispute_automation
+components:
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

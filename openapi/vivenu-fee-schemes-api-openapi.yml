@@ -1,0 +1,399 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists fee-schemes API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: fee-schemes
+paths:
+  /api/fee-schemes:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: skip
+        required: false
+        schema:
+          type: number
+          format: float
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: top
+        required: false
+        schema:
+          type: number
+          format: float
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: name
+        required: false
+        schema:
+          type: string
+          description: The name of the fee scheme to filter for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Fee-schemes_GetAllFeeSchemes_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - fee-schemes
+      description: Get all fee schemes
+      operationId: get_all_fee_schemes
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeeSchemeResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Fee-schemes_CreateAFeeScheme'
+      tags:
+      - fee-schemes
+      description: Create a fee scheme
+      operationId: create_a_fee_scheme
+  /api/fee-schemes/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the fee scheme
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeeSchemeResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - fee-schemes
+      description: Get a fee scheme
+      operationId: get_a_fee_scheme
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the fee scheme
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeeSchemeResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Fee-schemes_UpdateAFeeScheme'
+      tags:
+      - fee-schemes
+      description: Update a fee scheme
+      operationId: update_a_fee_scheme
+components:
+  schemas:
+    POST_Fee-schemes_CreateAFeeScheme:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of this fee scheme.
+        fees:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the Fee Scheme fee
+              enabled:
+                type: boolean
+                description: Whether this item will be applied
+                default: true
+              exposed:
+                type: boolean
+                description: Whether this fee will be exposed to the ticket buyer
+              name:
+                type: string
+                description: The name of the fee that can appear in reports.
+              type:
+                type: string
+                enum:
+                - onTicket
+                - onHardTicket
+                - onCart
+                description: Type of application for the fee.
+              included:
+                type: boolean
+              discountable:
+                type: boolean
+              asNet:
+                type: boolean
+              calculationBase:
+                type: string
+              rules:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    min:
+                      type: number
+                      format: float
+                      description: Minimum price to apply this fee.
+                    max:
+                      type: number
+                      format: float
+                      nullable: true
+                      description: Maximum price to apply this fee
+                    fix:
+                      type: number
+                      format: float
+                      description: The fix value of fee to be applied.
+                    var:
+                      type: number
+                      format: float
+                      description: The percentage value of the fee to be applied.
+              taxServiceTypeId:
+                type: string
+                nullable: true
+                description: The ID of the tax service of the fee
+            required:
+            - name
+            - type
+      required:
+      - name
+    PUT_Fee-schemes_UpdateAFeeScheme:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of this fee scheme.
+        fees:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the Fee Scheme fee
+              enabled:
+                type: boolean
+                description: Whether this item will be applied
+                default: true
+              exposed:
+                type: boolean
+                description: Whether this fee will be exposed to the ticket buyer
+              name:
+                type: string
+                description: The name of the fee that can appear in reports.
+              type:
+                type: string
+                enum:
+                - onTicket
+                - onHardTicket
+                - onCart
+                description: Type of application for the fee.
+              included:
+                type: boolean
+              discountable:
+                type: boolean
+              asNet:
+                type: boolean
+              calculationBase:
+                type: string
+              rules:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    min:
+                      type: number
+                      format: float
+                      description: Minimum price to apply this fee.
+                    max:
+                      type: number
+                      format: float
+                      nullable: true
+                      description: Maximum price to apply this fee
+                    fix:
+                      type: number
+                      format: float
+                      description: The fix value of fee to be applied.
+                    var:
+                      type: number
+                      format: float
+                      description: The percentage value of the fee to be applied.
+              taxServiceTypeId:
+                type: string
+                nullable: true
+                description: The ID of the tax service of the fee
+            required:
+            - name
+            - type
+    GET_Fee-schemes_GetAllFeeSchemes_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeeSchemeResource'
+        total:
+          type: integer
+    FeeSchemeResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the Fee Scheme
+        sellerId:
+          type: string
+          description: The ID of the seller of the fee scheme
+        name:
+          type: string
+          description: The name of this fee scheme.
+        fees:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the Fee Scheme fee
+              enabled:
+                type: boolean
+                description: Whether this item will be applied
+                default: true
+              exposed:
+                type: boolean
+                description: Whether this fee will be exposed to the ticket buyer
+              name:
+                type: string
+                description: The name of the fee that can appear in reports.
+              type:
+                type: string
+                enum:
+                - onTicket
+                - onHardTicket
+                - onCart
+                description: Type of application for the fee.
+              included:
+                type: boolean
+              discountable:
+                type: boolean
+              asNet:
+                type: boolean
+              calculationBase:
+                type: string
+              rules:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    min:
+                      type: number
+                      format: float
+                      description: Minimum price to apply this fee.
+                    max:
+                      type: number
+                      format: float
+                      nullable: true
+                      description: Maximum price to apply this fee
+                    fix:
+                      type: number
+                      format: float
+                      description: The fix value of fee to be applied.
+                    var:
+                      type: number
+                      format: float
+                      description: The percentage value of the fee to be applied.
+              taxServiceTypeId:
+                type: string
+                nullable: true
+                description: The ID of the tax service of the fee
+            required:
+            - name
+            - type
+      required:
+      - sellerId
+      - name
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

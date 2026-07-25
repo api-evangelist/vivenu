@@ -1,0 +1,2787 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists resell-offers API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: resell-offers
+paths:
+  /api/resell/offers:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: eventId
+        schema:
+          type: string
+        in: query
+        required: false
+        style: form
+        explode: true
+      - name: customerId
+        schema:
+          type: string
+        in: query
+        required: false
+        style: form
+        explode: true
+      - name: status
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - ACTIVE
+            - SOLD
+            - CANCELED
+        in: query
+        required: false
+        style: form
+        explode: true
+      - name: listingIds
+        schema:
+          type: array
+          items:
+            type: string
+        in: query
+        required: false
+        style: form
+        explode: true
+      - name: createdAt
+        schema:
+          type: object
+          properties:
+            $gt:
+              description: value is greater than
+              type: string
+              format: date-time
+            $gte:
+              description: value is greater than or equal
+              type: string
+              format: date-time
+            $lt:
+              description: value is less than
+              type: string
+              format: date-time
+            $lte:
+              description: value is less than or equal
+              type: string
+              format: date-time
+            $eq:
+              description: value is equal
+              type: string
+              format: date-time
+            $ne:
+              description: value is not equal
+              type: string
+              format: date-time
+          additionalProperties: false
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+      - name: top
+        schema:
+          default: 25
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          type: integer
+          minimum: 1
+          maximum: 1000
+        description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+        in: query
+        required: false
+        style: form
+        explode: true
+      - name: skip
+        schema:
+          default: 0
+          description: The number of objects to skip for the requested result
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        description: The number of objects to skip for the requested result
+        in: query
+        required: false
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Resell-offers_ListOffers_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - resell-offers
+      description: List offers
+      operationId: list_offers
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POST_Resell-offers_CreateAnOffer_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Resell-offers_CreateAnOffer'
+      tags:
+      - resell-offers
+      description: Create an offer
+      operationId: create_an_offer
+  /api/public/resell/listings:
+    get:
+      parameters:
+      - name: eventId
+        schema:
+          type: string
+          description: The ID of the event
+        description: The ID of the event
+        in: query
+        required: true
+        style: form
+        explode: true
+      - name: sellerId
+        schema:
+          type: string
+          description: The ID of the seller
+        description: The ID of the seller
+        in: query
+        required: true
+        style: form
+        explode: true
+      - name: top
+        schema:
+          default: 25
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          type: integer
+          minimum: 1
+          maximum: 1000
+        description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+        in: query
+        required: true
+        style: form
+        explode: true
+      - name: skip
+        schema:
+          default: 0
+          description: The number of objects to skip for the requested result
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        description: The number of objects to skip for the requested result
+        in: query
+        required: true
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Resell-offers_GetPublicResellListings_200_response'
+        '400':
+          description: Bad Request
+      tags:
+      - resell-offers
+      description: Get public resell listings
+      operationId: get_public_resell_listings
+  /api/resell/offers/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+          pattern: ^[a-z]+_.*$
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Resell-offers_GetOfferById_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - resell-offers
+      description: Get offer by id
+      operationId: get_offer_by_id
+  /api/resell/offers/{id}/listing:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+          pattern: ^[a-z]+_.*$
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Resell-offers_GetListingOfOffer_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - resell-offers
+      description: Get listing of offer
+      operationId: get_listing_of_offer
+  /api/resell/ticket/{id}/status:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: customerId
+        schema:
+          type: string
+          pattern: ^[a-fA-F0-9]{24}$
+        in: query
+        required: false
+        style: form
+        explode: true
+      - name: id
+        schema:
+          type: string
+          pattern: ^[a-fA-F0-9]{24}$
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Resell-offers_GetInternalTicketResellStatus_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - resell-offers
+      description: Get internal ticket resell status
+      operationId: get_internal_ticket_resell_status
+  /api/public/resell/ticket/{id}/status:
+    get:
+      parameters:
+      - name: sellerId
+        schema:
+          type: string
+          description: The ID of the seller
+        description: The ID of the seller
+        in: query
+        required: true
+        style: form
+        explode: true
+      - name: secret
+        schema:
+          type: string
+          description: The secret of the ticket
+        description: The secret of the ticket
+        in: query
+        required: true
+        style: form
+        explode: true
+      - name: id
+        schema:
+          type: string
+          pattern: ^[a-fA-F0-9]{24}$
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Resell-offers_GetPublicTicketResellStatus_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - resell-offers
+      description: Get public ticket resell status
+      operationId: get_public_ticket_resell_status
+  /api/public/resell/offers:
+    post:
+      security:
+      - customer-jwt: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POST_Resell-offers_CreateAnOfferAsACustomer_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Resell-offers_CreateAnOfferAsACustomer'
+      tags:
+      - resell-offers
+      description: Create an offer as a customer
+      operationId: create_an_offer_as_a_customer
+  /api/resell/offers/preview:
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POST_Resell-offers_PreviewOffer_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                eventIds:
+                  type: array
+                  items:
+                    type: string
+                  description: The IDs of the events
+                ticketIds:
+                  type: array
+                  items:
+                    type: string
+                  description: The IDs of the tickets
+                customerId:
+                  type: string
+                  description: The ID of the customer
+              required:
+              - eventIds
+              - ticketIds
+              - customerId
+              additionalProperties: false
+      tags:
+      - resell-offers
+      description: Preview offer
+      operationId: preview_offer
+  /api/public/resell/offers/preview:
+    post:
+      security:
+      - customer-jwt: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POST_Resell-offers_PreviewAnOfferAsACustomer_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                eventIds:
+                  type: array
+                  items:
+                    type: string
+                  description: The IDs of the events
+                ticketIds:
+                  type: array
+                  items:
+                    type: string
+                  description: The IDs of the tickets
+              required:
+              - eventIds
+              - ticketIds
+              additionalProperties: false
+      tags:
+      - resell-offers
+      description: Preview an offer as a customer
+      operationId: preview_an_offer_as_a_customer
+  /api/resell/offers/{id}/cancel:
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POST_Resell-offers_CancelAnOffer_200_response'
+        '401':
+          description: Unauthorized
+      tags:
+      - resell-offers
+      description: Cancel an offer
+      operationId: cancel_an_offer
+  /api/public/resell/offers/{id}/cancel:
+    post:
+      security:
+      - customer-jwt: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POST_Resell-offers_PublicCancelAnOffer_200_response'
+        '401':
+          description: Unauthorized
+      tags:
+      - resell-offers
+      description: Public cancel an offer
+      operationId: public_cancel_an_offer
+components:
+  schemas:
+    POST_Resell-offers_CreateAnOfferAsACustomer_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the offer
+        customerId:
+          type: string
+          description: The ID of the customer of this offer
+        sellerId:
+          type: string
+          description: The ID of the seller of this offer
+        eventId:
+          type: string
+          description: The ID of the event of this offer
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              ticketId:
+                type: string
+                description: The ID of the ticket
+              ticketTypeId:
+                type: string
+                description: The ID of the ticket type of the ticket
+              ticketName:
+                type: string
+                description: The name of the ticket type of the ticket
+              categoryRef:
+                type: string
+                description: The category of the ticket
+              seatingInfo:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The ID of the seating object.
+                    _type:
+                      type: number
+                      format: float
+                      enum:
+                      - 6
+                      - 7
+                      description: Indicates the type of seating object. Seat = 6, General Admission = 7.
+                    categoryId:
+                      type: string
+                      description: The ID of the category containing the seating object.
+                    statusId:
+                      type: string
+                      description: The ID of a container holding information about the seating status of the seating object.
+                    name:
+                      type: string
+                      nullable: true
+                      description: If _type == 7. The name of the general admission.
+                    seatType:
+                      type: string
+                      nullable: true
+                      enum:
+                      - handicapped
+                      - limitedView
+                      - foldable
+                      description: If _type == 6. The type of the seat. null = normal.
+                    sectionName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The name of the section where the seat is located.
+                    groupName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The name of the row group where the seat is located.
+                    rowName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The name of the row where the seat is located.
+                    seatName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The seat name.
+                    gate:
+                      type: string
+                      nullable: true
+                      description: The entry gate associated with the seating object.
+                  required:
+                  - _type
+                  - statusId
+                  description: The associated seating object.
+                description: The seating info for this ticket
+              price:
+                type: number
+                format: float
+                description: The price of this item
+              resellFee:
+                type: number
+                format: float
+                description: The fee for reselling this item
+            required:
+            - ticketId
+            - ticketTypeId
+            - categoryRef
+            - price
+            - resellFee
+          description: The items of this offer
+        status:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+          enum:
+          - ACTIVE
+          - SOLD
+          - CANCELED
+          description: The status of this offer
+        cpmId:
+          type: string
+          description: The customer payment method where the proceeds of this offer will be paid
+        currency:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: The currency used for this offer
+        history:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - resell.offer.created
+                - resell.offer.canceled
+                - resell.offer.expired
+                - resell.offer.sold
+                description: The type of the history item.
+              date:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating the date of the history item.
+              userId:
+                type: string
+                nullable: true
+                description: The user ID of the history item.
+              data:
+                type: object
+                description: The data of the history item
+          default: []
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the offer was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the offer was updated.
+      required:
+      - _id
+      - customerId
+      - sellerId
+      - eventId
+      - items
+      - status
+      - cpmId
+      - currency
+      - createdAt
+      - updatedAt
+    POST_Resell-offers_CreateAnOfferAsACustomer:
+      type: object
+      properties:
+        eventId:
+          type: string
+          description: The ID of the event of this offer
+        sellerId:
+          type: string
+          description: The ID of the seller of this offer
+        cpmId:
+          type: string
+          description: The customer payment method where the proceeds of this offer will be paid
+        ticketIds:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          maxItems: 1
+          description: The IDs of the tickets offered
+      required:
+      - eventId
+      - sellerId
+      - cpmId
+      - ticketIds
+    POST_Resell-offers_CreateAnOffer:
+      type: object
+      properties:
+        eventId:
+          type: string
+          description: The ID of the event of this offer
+        sellerId:
+          type: string
+          description: The ID of the seller of this offer
+        cpmId:
+          type: string
+          description: The customer payment method where the proceeds of this offer will be paid
+        ticketIds:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          maxItems: 1
+          description: The IDs of the tickets offered
+        customerId:
+          type: string
+          description: The ID of the customer
+      required:
+      - eventId
+      - sellerId
+      - cpmId
+      - ticketIds
+      - customerId
+    GET_Resell-offers_GetOfferById_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the offer
+        customerId:
+          type: string
+          description: The ID of the customer of this offer
+        sellerId:
+          type: string
+          description: The ID of the seller of this offer
+        eventId:
+          type: string
+          description: The ID of the event of this offer
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              ticketId:
+                type: string
+                description: The ID of the ticket
+              ticketTypeId:
+                type: string
+                description: The ID of the ticket type of the ticket
+              ticketName:
+                type: string
+                description: The name of the ticket type of the ticket
+              categoryRef:
+                type: string
+                description: The category of the ticket
+              seatingInfo:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The ID of the seating object.
+                    _type:
+                      type: number
+                      format: float
+                      enum:
+                      - 6
+                      - 7
+                      description: Indicates the type of seating object. Seat = 6, General Admission = 7.
+                    categoryId:
+                      type: string
+                      description: The ID of the category containing the seating object.
+                    statusId:
+                      type: string
+                      description: The ID of a container holding information about the seating status of the seating object.
+                    name:
+                      type: string
+                      nullable: true
+                      description: If _type == 7. The name of the general admission.
+                    seatType:
+                      type: string
+                      nullable: true
+                      enum:
+                      - handicapped
+                      - limitedView
+                      - foldable
+                      description: If _type == 6. The type of the seat. null = normal.
+                    sectionName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The name of the section where the seat is located.
+                    groupName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The name of the row group where the seat is located.
+                    rowName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The name of the row where the seat is located.
+                    seatName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The seat name.
+                    gate:
+                      type: string
+                      nullable: true
+                      description: The entry gate associated with the seating object.
+                  required:
+                  - _type
+                  - statusId
+                  description: The associated seating object.
+                description: The seating info for this ticket
+              price:
+                type: number
+                format: float
+                description: The price of this item
+              resellFee:
+                type: number
+                format: float
+                description: The fee for reselling this item
+            required:
+            - ticketId
+            - ticketTypeId
+            - categoryRef
+            - price
+            - resellFee
+          description: The items of this offer
+        status:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+          enum:
+          - ACTIVE
+          - SOLD
+          - CANCELED
+          description: The status of this offer
+        cpmId:
+          type: string
+          description: The customer payment method where the proceeds of this offer will be paid
+        currency:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: The currency used for this offer
+        history:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - resell.offer.created
+                - resell.offer.canceled
+                - resell.offer.expired
+                - resell.offer.sold
+                description: The type of the history item.
+              date:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating the date of the history item.
+              userId:
+                type: string
+                nullable: true
+                description: The user ID of the history item.
+              data:
+                type: object
+                description: The data of the history item
+          default: []
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the offer was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the offer was updated.
+      required:
+      - _id
+      - customerId
+      - sellerId
+      - eventId
+      - items
+      - status
+      - cpmId
+      - currency
+      - createdAt
+      - updatedAt
+    POST_Resell-offers_PreviewOffer_200_response:
+      type: object
+      properties:
+        resellAble:
+          type: boolean
+          description: If the requested offer is valid
+        resellFee:
+          type: number
+          format: float
+          description: The fee deducted from the price, before proceeds are payed out to the customer
+        proceeds:
+          type: number
+          format: float
+          description: The proceeds payed out to the customer when the offer is sold.
+      required:
+      - resellAble
+      - resellFee
+      - proceeds
+    POST_Resell-offers_CreateAnOffer_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the offer
+        customerId:
+          type: string
+          description: The ID of the customer of this offer
+        sellerId:
+          type: string
+          description: The ID of the seller of this offer
+        eventId:
+          type: string
+          description: The ID of the event of this offer
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              ticketId:
+                type: string
+                description: The ID of the ticket
+              ticketTypeId:
+                type: string
+                description: The ID of the ticket type of the ticket
+              ticketName:
+                type: string
+                description: The name of the ticket type of the ticket
+              categoryRef:
+                type: string
+                description: The category of the ticket
+              seatingInfo:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The ID of the seating object.
+                    _type:
+                      type: number
+                      format: float
+                      enum:
+                      - 6
+                      - 7
+                      description: Indicates the type of seating object. Seat = 6, General Admission = 7.
+                    categoryId:
+                      type: string
+                      description: The ID of the category containing the seating object.
+                    statusId:
+                      type: string
+                      description: The ID of a container holding information about the seating status of the seating object.
+                    name:
+                      type: string
+                      nullable: true
+                      description: If _type == 7. The name of the general admission.
+                    seatType:
+                      type: string
+                      nullable: true
+                      enum:
+                      - handicapped
+                      - limitedView
+                      - foldable
+                      description: If _type == 6. The type of the seat. null = normal.
+                    sectionName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The name of the section where the seat is located.
+                    groupName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The name of the row group where the seat is located.
+                    rowName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The name of the row where the seat is located.
+                    seatName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The seat name.
+                    gate:
+                      type: string
+                      nullable: true
+                      description: The entry gate associated with the seating object.
+                  required:
+                  - _type
+                  - statusId
+                  description: The associated seating object.
+                description: The seating info for this ticket
+              price:
+                type: number
+                format: float
+                description: The price of this item
+              resellFee:
+                type: number
+                format: float
+                description: The fee for reselling this item
+            required:
+            - ticketId
+            - ticketTypeId
+            - categoryRef
+            - price
+            - resellFee
+          description: The items of this offer
+        status:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+          enum:
+          - ACTIVE
+          - SOLD
+          - CANCELED
+          description: The status of this offer
+        cpmId:
+          type: string
+          description: The customer payment method where the proceeds of this offer will be paid
+        currency:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: The currency used for this offer
+        history:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - resell.offer.created
+                - resell.offer.canceled
+                - resell.offer.expired
+                - resell.offer.sold
+                description: The type of the history item.
+              date:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating the date of the history item.
+              userId:
+                type: string
+                nullable: true
+                description: The user ID of the history item.
+              data:
+                type: object
+                description: The data of the history item
+          default: []
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the offer was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the offer was updated.
+      required:
+      - _id
+      - customerId
+      - sellerId
+      - eventId
+      - items
+      - status
+      - cpmId
+      - currency
+      - createdAt
+      - updatedAt
+    GET_Resell-offers_GetInternalTicketResellStatus_200_response:
+      type: array
+      items:
+        type: object
+        properties:
+          eventId:
+            type: string
+            description: The ID of the event
+          offerAble:
+            type: boolean
+            description: If this ticket can be offered on the secondary market.
+          hasActiveOffer:
+            type: boolean
+            description: Whether this ticket is currently offered on the secondary market or not.
+          activeOffer:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the offer
+              customerId:
+                type: string
+                description: The ID of the customer of this offer
+              sellerId:
+                type: string
+                description: The ID of the seller of this offer
+              eventId:
+                type: string
+                description: The ID of the event of this offer
+              items:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    ticketId:
+                      type: string
+                      description: The ID of the ticket
+                    ticketTypeId:
+                      type: string
+                      description: The ID of the ticket type of the ticket
+                    ticketName:
+                      type: string
+                      description: The name of the ticket type of the ticket
+                    categoryRef:
+                      type: string
+                      description: The category of the ticket
+                    seatingInfo:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                            description: The ID of the seating object.
+                          _type:
+                            type: number
+                            format: float
+                            enum:
+                            - 6
+                            - 7
+                            description: Indicates the type of seating object. Seat = 6, General Admission = 7.
+                          categoryId:
+                            type: string
+                            description: The ID of the category containing the seating object.
+                          statusId:
+                            type: string
+                            description: The ID of a container holding information about the seating status of the seating object.
+                          name:
+                            type: string
+                            nullable: true
+                            description: If _type == 7. The name of the general admission.
+                          seatType:
+                            type: string
+                            nullable: true
+                            enum:
+                            - handicapped
+                            - limitedView
+                            - foldable
+                            description: If _type == 6. The type of the seat. null = normal.
+                          sectionName:
+                            type: string
+                            nullable: true
+                            description: If _type == 6. The name of the section where the seat is located.
+                          groupName:
+                            type: string
+                            nullable: true
+                            description: If _type == 6. The name of the row group where the seat is located.
+                          rowName:
+                            type: string
+                            nullable: true
+                            description: If _type == 6. The name of the row where the seat is located.
+                          seatName:
+                            type: string
+                            nullable: true
+                            description: If _type == 6. The seat name.
+                          gate:
+                            type: string
+                            nullable: true
+                            description: The entry gate associated with the seating object.
+                        required:
+                        - _type
+                        - statusId
+                        description: The associated seating object.
+                      description: The seating info for this ticket
+                    price:
+                      type: number
+                      format: float
+                      description: The price of this item
+                    resellFee:
+                      type: number
+                      format: float
+                      description: The fee for reselling this item
+                  required:
+                  - ticketId
+                  - ticketTypeId
+                  - categoryRef
+                  - price
+                  - resellFee
+                description: The items of this offer
+              status:
+                oneOf:
+                - type: array
+                - type: boolean
+                - type: number
+                - type: object
+                - type: string
+                enum:
+                - ACTIVE
+                - SOLD
+                - CANCELED
+                description: The status of this offer
+              cpmId:
+                type: string
+                description: The customer payment method where the proceeds of this offer will be paid
+              currency:
+                oneOf:
+                - type: array
+                - type: boolean
+                - type: number
+                - type: object
+                - type: string
+                enum:
+                - EUR
+                - USD
+                - GBP
+                - AUD
+                - CHF
+                - THB
+                - ILS
+                - COP
+                - MXN
+                - DKK
+                - NOK
+                - SEK
+                - QAR
+                - CAD
+                - ISK
+                - GTQ
+                - INR
+                - DOP
+                - SGD
+                - PLN
+                - SAR
+                - TTD
+                - ZAR
+                - KYD
+                - HKD
+                - CZK
+                - KRW
+                - JPY
+                - NZD
+                - AED
+                - MAD
+                - TWD
+                - BRL
+                - BWP
+                - NAD
+                - KES
+                - SCR
+                - TRY
+                - SZL
+                - LSL
+                - TZS
+                - UGX
+                - ZMW
+                - ZWG
+                - GHS
+                - NGN
+                - SLE
+                - LRD
+                - XOF
+                - XAF
+                - GEL
+                - IDR
+                - ARS
+                - CRC
+                - HUF
+                - EGP
+                - MYR
+                - VND
+                - PHP
+                description: The currency used for this offer
+              history:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - resell.offer.created
+                      - resell.offer.canceled
+                      - resell.offer.expired
+                      - resell.offer.sold
+                      description: The type of the history item.
+                    date:
+                      type: string
+                      format: date-time
+                      description: An ISO timestamp indicating the date of the history item.
+                    userId:
+                      type: string
+                      nullable: true
+                      description: The user ID of the history item.
+                    data:
+                      type: object
+                      description: The data of the history item
+                default: []
+              createdAt:
+                type: string
+                format: date-time
+                description: An ISO Timestamp indicating when the offer was created.
+              updatedAt:
+                type: string
+                format: date-time
+                description: An ISO Timestamp indicating when the offer was updated.
+            required:
+            - _id
+            - customerId
+            - sellerId
+            - eventId
+            - items
+            - status
+            - cpmId
+            - currency
+            - createdAt
+            - updatedAt
+            description: The active offer, if the ticket is currently offered on the secondary market.
+          violations:
+            type: string
+            enum:
+            - SEASON_EVENT_OFFER_DISABLED
+            - EVENT_OFFER_DISABLED
+            - TICKET_OFFER_DISABLED
+            - NO_TRANSACTION
+            - TICKET_TYPE_NOT_MAPPED
+            - VALUE_SHARE_MISSING
+            - EVENT_EXCLUDED
+            - NO_SEATING_INFO
+            - TICKET_LOCKED
+            - TICKET_INVALID
+            - FEE_EXCEEDS_PRICE
+            - HAS_TICKET_TRANSFER
+            - HAS_SCANS
+            - HAS_ACTIVE_OFFER
+            - TRANSACTION_DISCOUNTED
+            - CART_AUTOMATION
+            - BUNDLE
+            - PAYMENT_PLAN_INCOMPLETE
+            - CUSTOMER_NOT_VERIFIED
+            description: The violated resell rules
+        required:
+        - eventId
+        - offerAble
+        - hasActiveOffer
+    GET_Resell-offers_GetPublicResellListings_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the listing
+              items:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The ID of the listing item
+                    ticketTypeId:
+                      type: string
+                      description: The ID of the ticket type of this item
+                    categoryRef:
+                      type: string
+                      description: The category of this item
+                    seatingInfo:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          description: The ID of the seating object.
+                        _type:
+                          type: number
+                          format: float
+                          enum:
+                          - 6
+                          - 7
+                          description: Indicates the type of seating object. Seat = 6, General Admission = 7.
+                        categoryId:
+                          type: string
+                          description: The ID of the category containing the seating object.
+                        statusId:
+                          type: string
+                          description: The ID of a container holding information about the seating status of the seating object.
+                        name:
+                          type: string
+                          nullable: true
+                          description: If _type == 7. The name of the general admission.
+                        seatType:
+                          type: string
+                          nullable: true
+                          enum:
+                          - handicapped
+                          - limitedView
+                          - foldable
+                          description: If _type == 6. The type of the seat. null = normal.
+                        sectionName:
+                          type: string
+                          nullable: true
+                          description: If _type == 6. The name of the section where the seat is located.
+                        groupName:
+                          type: string
+                          nullable: true
+                          description: If _type == 6. The name of the row group where the seat is located.
+                        rowName:
+                          type: string
+                          nullable: true
+                          description: If _type == 6. The name of the row where the seat is located.
+                        seatName:
+                          type: string
+                          nullable: true
+                          description: If _type == 6. The seat name.
+                        gate:
+                          type: string
+                          nullable: true
+                          description: The entry gate associated with the seating object.
+                      required:
+                      - _type
+                      - statusId
+                      description: The associated seating object.
+                  required:
+                  - _id
+                  - ticketTypeId
+                  - categoryRef
+                description: The items associated with this listing
+            required:
+            - _id
+        total:
+          type: integer
+    POST_Resell-offers_PreviewAnOfferAsACustomer_200_response:
+      type: object
+      properties:
+        resellAble:
+          type: boolean
+          description: If the requested offer is valid
+        resellFee:
+          type: number
+          format: float
+          description: The fee deducted from the price, before proceeds are payed out to the customer
+        proceeds:
+          type: number
+          format: float
+          description: The proceeds payed out to the customer when the offer is sold.
+      required:
+      - resellAble
+      - resellFee
+      - proceeds
+    GET_Resell-offers_ListOffers_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the offer
+              customerId:
+                type: string
+                description: The ID of the customer of this offer
+              sellerId:
+                type: string
+                description: The ID of the seller of this offer
+              eventId:
+                type: string
+                description: The ID of the event of this offer
+              items:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    ticketId:
+                      type: string
+                      description: The ID of the ticket
+                    ticketTypeId:
+                      type: string
+                      description: The ID of the ticket type of the ticket
+                    ticketName:
+                      type: string
+                      description: The name of the ticket type of the ticket
+                    categoryRef:
+                      type: string
+                      description: The category of the ticket
+                    seatingInfo:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                            description: The ID of the seating object.
+                          _type:
+                            type: number
+                            format: float
+                            enum:
+                            - 6
+                            - 7
+                            description: Indicates the type of seating object. Seat = 6, General Admission = 7.
+                          categoryId:
+                            type: string
+                            description: The ID of the category containing the seating object.
+                          statusId:
+                            type: string
+                            description: The ID of a container holding information about the seating status of the seating object.
+                          name:
+                            type: string
+                            nullable: true
+                            description: If _type == 7. The name of the general admission.
+                          seatType:
+                            type: string
+                            nullable: true
+                            enum:
+                            - handicapped
+                            - limitedView
+                            - foldable
+                            description: If _type == 6. The type of the seat. null = normal.
+                          sectionName:
+                            type: string
+                            nullable: true
+                            description: If _type == 6. The name of the section where the seat is located.
+                          groupName:
+                            type: string
+                            nullable: true
+                            description: If _type == 6. The name of the row group where the seat is located.
+                          rowName:
+                            type: string
+                            nullable: true
+                            description: If _type == 6. The name of the row where the seat is located.
+                          seatName:
+                            type: string
+                            nullable: true
+                            description: If _type == 6. The seat name.
+                          gate:
+                            type: string
+                            nullable: true
+                            description: The entry gate associated with the seating object.
+                        required:
+                        - _type
+                        - statusId
+                        description: The associated seating object.
+                      description: The seating info for this ticket
+                    price:
+                      type: number
+                      format: float
+                      description: The price of this item
+                    resellFee:
+                      type: number
+                      format: float
+                      description: The fee for reselling this item
+                  required:
+                  - ticketId
+                  - ticketTypeId
+                  - categoryRef
+                  - price
+                  - resellFee
+                description: The items of this offer
+              status:
+                oneOf:
+                - type: array
+                - type: boolean
+                - type: number
+                - type: object
+                - type: string
+                enum:
+                - ACTIVE
+                - SOLD
+                - CANCELED
+                description: The status of this offer
+              cpmId:
+                type: string
+                description: The customer payment method where the proceeds of this offer will be paid
+              currency:
+                oneOf:
+                - type: array
+                - type: boolean
+                - type: number
+                - type: object
+                - type: string
+                enum:
+                - EUR
+                - USD
+                - GBP
+                - AUD
+                - CHF
+                - THB
+                - ILS
+                - COP
+                - MXN
+                - DKK
+                - NOK
+                - SEK
+                - QAR
+                - CAD
+                - ISK
+                - GTQ
+                - INR
+                - DOP
+                - SGD
+                - PLN
+                - SAR
+                - TTD
+                - ZAR
+                - KYD
+                - HKD
+                - CZK
+                - KRW
+                - JPY
+                - NZD
+                - AED
+                - MAD
+                - TWD
+                - BRL
+                - BWP
+                - NAD
+                - KES
+                - SCR
+                - TRY
+                - SZL
+                - LSL
+                - TZS
+                - UGX
+                - ZMW
+                - ZWG
+                - GHS
+                - NGN
+                - SLE
+                - LRD
+                - XOF
+                - XAF
+                - GEL
+                - IDR
+                - ARS
+                - CRC
+                - HUF
+                - EGP
+                - MYR
+                - VND
+                - PHP
+                description: The currency used for this offer
+              history:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - resell.offer.created
+                      - resell.offer.canceled
+                      - resell.offer.expired
+                      - resell.offer.sold
+                      description: The type of the history item.
+                    date:
+                      type: string
+                      format: date-time
+                      description: An ISO timestamp indicating the date of the history item.
+                    userId:
+                      type: string
+                      nullable: true
+                      description: The user ID of the history item.
+                    data:
+                      type: object
+                      description: The data of the history item
+                default: []
+              createdAt:
+                type: string
+                format: date-time
+                description: An ISO Timestamp indicating when the offer was created.
+              updatedAt:
+                type: string
+                format: date-time
+                description: An ISO Timestamp indicating when the offer was updated.
+            required:
+            - _id
+            - customerId
+            - sellerId
+            - eventId
+            - items
+            - status
+            - cpmId
+            - currency
+            - createdAt
+            - updatedAt
+        total:
+          type: integer
+    POST_Resell-offers_CancelAnOffer_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the offer
+        customerId:
+          type: string
+          description: The ID of the customer of this offer
+        sellerId:
+          type: string
+          description: The ID of the seller of this offer
+        eventId:
+          type: string
+          description: The ID of the event of this offer
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              ticketId:
+                type: string
+                description: The ID of the ticket
+              ticketTypeId:
+                type: string
+                description: The ID of the ticket type of the ticket
+              ticketName:
+                type: string
+                description: The name of the ticket type of the ticket
+              categoryRef:
+                type: string
+                description: The category of the ticket
+              seatingInfo:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The ID of the seating object.
+                    _type:
+                      type: number
+                      format: float
+                      enum:
+                      - 6
+                      - 7
+                      description: Indicates the type of seating object. Seat = 6, General Admission = 7.
+                    categoryId:
+                      type: string
+                      description: The ID of the category containing the seating object.
+                    statusId:
+                      type: string
+                      description: The ID of a container holding information about the seating status of the seating object.
+                    name:
+                      type: string
+                      nullable: true
+                      description: If _type == 7. The name of the general admission.
+                    seatType:
+                      type: string
+                      nullable: true
+                      enum:
+                      - handicapped
+                      - limitedView
+                      - foldable
+                      description: If _type == 6. The type of the seat. null = normal.
+                    sectionName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The name of the section where the seat is located.
+                    groupName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The name of the row group where the seat is located.
+                    rowName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The name of the row where the seat is located.
+                    seatName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The seat name.
+                    gate:
+                      type: string
+                      nullable: true
+                      description: The entry gate associated with the seating object.
+                  required:
+                  - _type
+                  - statusId
+                  description: The associated seating object.
+                description: The seating info for this ticket
+              price:
+                type: number
+                format: float
+                description: The price of this item
+              resellFee:
+                type: number
+                format: float
+                description: The fee for reselling this item
+            required:
+            - ticketId
+            - ticketTypeId
+            - categoryRef
+            - price
+            - resellFee
+          description: The items of this offer
+        status:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+          enum:
+          - ACTIVE
+          - SOLD
+          - CANCELED
+          description: The status of this offer
+        cpmId:
+          type: string
+          description: The customer payment method where the proceeds of this offer will be paid
+        currency:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: The currency used for this offer
+        history:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - resell.offer.created
+                - resell.offer.canceled
+                - resell.offer.expired
+                - resell.offer.sold
+                description: The type of the history item.
+              date:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating the date of the history item.
+              userId:
+                type: string
+                nullable: true
+                description: The user ID of the history item.
+              data:
+                type: object
+                description: The data of the history item
+          default: []
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the offer was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the offer was updated.
+      required:
+      - _id
+      - customerId
+      - sellerId
+      - eventId
+      - items
+      - status
+      - cpmId
+      - currency
+      - createdAt
+      - updatedAt
+    GET_Resell-offers_GetListingOfOffer_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the listing
+        sellerId:
+          type: string
+          description: The ID of the seller of this listing
+        eventId:
+          type: string
+          description: The ID of the event of this listing
+        offerId:
+          type: string
+          description: The ID of the offer of this listing
+        status:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+          enum:
+          - ACTIVE
+          - SOLD
+          description: The status of this listing
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of this listing item
+              ticketId:
+                type: string
+                description: The ID of the listed ticket
+              ticketTypeId:
+                type: string
+                description: The ticket type of the listed ticket
+              categoryRef:
+                type: string
+                description: The category of the listed ticket
+              seatingInfo:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The ID of the seating object.
+                    _type:
+                      type: number
+                      format: float
+                      enum:
+                      - 6
+                      - 7
+                      description: Indicates the type of seating object. Seat = 6, General Admission = 7.
+                    categoryId:
+                      type: string
+                      description: The ID of the category containing the seating object.
+                    statusId:
+                      type: string
+                      description: The ID of a container holding information about the seating status of the seating object.
+                    name:
+                      type: string
+                      nullable: true
+                      description: If _type == 7. The name of the general admission.
+                    seatType:
+                      type: string
+                      nullable: true
+                      enum:
+                      - handicapped
+                      - limitedView
+                      - foldable
+                      description: If _type == 6. The type of the seat. null = normal.
+                    sectionName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The name of the section where the seat is located.
+                    groupName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The name of the row group where the seat is located.
+                    rowName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The name of the row where the seat is located.
+                    seatName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The seat name.
+                    gate:
+                      type: string
+                      nullable: true
+                      description: The entry gate associated with the seating object.
+                  required:
+                  - _type
+                  - statusId
+                  description: The associated seating object.
+                description: The seating info for this ticket
+            required:
+            - _id
+            - ticketId
+            - ticketTypeId
+            - categoryRef
+            - seatingInfo
+          description: The items of this listing
+        _hold:
+          type: object
+          properties:
+            holdId:
+              type: string
+            checkoutId:
+              type: string
+          description: Hold information of this listing
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the listing was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the listing was updated.
+      required:
+      - _id
+      - sellerId
+      - eventId
+      - offerId
+      - status
+      - items
+      - createdAt
+      - updatedAt
+    POST_Resell-offers_PublicCancelAnOffer_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the offer
+        customerId:
+          type: string
+          description: The ID of the customer of this offer
+        sellerId:
+          type: string
+          description: The ID of the seller of this offer
+        eventId:
+          type: string
+          description: The ID of the event of this offer
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              ticketId:
+                type: string
+                description: The ID of the ticket
+              ticketTypeId:
+                type: string
+                description: The ID of the ticket type of the ticket
+              ticketName:
+                type: string
+                description: The name of the ticket type of the ticket
+              categoryRef:
+                type: string
+                description: The category of the ticket
+              seatingInfo:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The ID of the seating object.
+                    _type:
+                      type: number
+                      format: float
+                      enum:
+                      - 6
+                      - 7
+                      description: Indicates the type of seating object. Seat = 6, General Admission = 7.
+                    categoryId:
+                      type: string
+                      description: The ID of the category containing the seating object.
+                    statusId:
+                      type: string
+                      description: The ID of a container holding information about the seating status of the seating object.
+                    name:
+                      type: string
+                      nullable: true
+                      description: If _type == 7. The name of the general admission.
+                    seatType:
+                      type: string
+                      nullable: true
+                      enum:
+                      - handicapped
+                      - limitedView
+                      - foldable
+                      description: If _type == 6. The type of the seat. null = normal.
+                    sectionName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The name of the section where the seat is located.
+                    groupName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The name of the row group where the seat is located.
+                    rowName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The name of the row where the seat is located.
+                    seatName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The seat name.
+                    gate:
+                      type: string
+                      nullable: true
+                      description: The entry gate associated with the seating object.
+                  required:
+                  - _type
+                  - statusId
+                  description: The associated seating object.
+                description: The seating info for this ticket
+              price:
+                type: number
+                format: float
+                description: The price of this item
+              resellFee:
+                type: number
+                format: float
+                description: The fee for reselling this item
+            required:
+            - ticketId
+            - ticketTypeId
+            - categoryRef
+            - price
+            - resellFee
+          description: The items of this offer
+        status:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+          enum:
+          - ACTIVE
+          - SOLD
+          - CANCELED
+          description: The status of this offer
+        cpmId:
+          type: string
+          description: The customer payment method where the proceeds of this offer will be paid
+        currency:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: The currency used for this offer
+        history:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - resell.offer.created
+                - resell.offer.canceled
+                - resell.offer.expired
+                - resell.offer.sold
+                description: The type of the history item.
+              date:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating the date of the history item.
+              userId:
+                type: string
+                nullable: true
+                description: The user ID of the history item.
+              data:
+                type: object
+                description: The data of the history item
+          default: []
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the offer was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the offer was updated.
+      required:
+      - _id
+      - customerId
+      - sellerId
+      - eventId
+      - items
+      - status
+      - cpmId
+      - currency
+      - createdAt
+      - updatedAt
+    GET_Resell-offers_GetPublicTicketResellStatus_200_response:
+      type: array
+      items:
+        type: object
+        properties:
+          eventId:
+            type: string
+            description: The ID of the event
+          offerAble:
+            type: boolean
+            description: If this ticket can be offered on the secondary market.
+          hasActiveOffer:
+            type: boolean
+            description: Whether this ticket is currently offered on the secondary market or not.
+          activeOffer:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the offer
+              customerId:
+                type: string
+                description: The ID of the customer of this offer
+              sellerId:
+                type: string
+                description: The ID of the seller of this offer
+              eventId:
+                type: string
+                description: The ID of the event of this offer
+              items:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    ticketId:
+                      type: string
+                      description: The ID of the ticket
+                    ticketTypeId:
+                      type: string
+                      description: The ID of the ticket type of the ticket
+                    ticketName:
+                      type: string
+                      description: The name of the ticket type of the ticket
+                    categoryRef:
+                      type: string
+                      description: The category of the ticket
+                    seatingInfo:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                            description: The ID of the seating object.
+                          _type:
+                            type: number
+                            format: float
+                            enum:
+                            - 6
+                            - 7
+                            description: Indicates the type of seating object. Seat = 6, General Admission = 7.
+                          categoryId:
+                            type: string
+                            description: The ID of the category containing the seating object.
+                          statusId:
+                            type: string
+                            description: The ID of a container holding information about the seating status of the seating object.
+                          name:
+                            type: string
+                            nullable: true
+                            description: If _type == 7. The name of the general admission.
+                          seatType:
+                            type: string
+                            nullable: true
+                            enum:
+                            - handicapped
+                            - limitedView
+                            - foldable
+                            description: If _type == 6. The type of the seat. null = normal.
+                          sectionName:
+                            type: string
+                            nullable: true
+                            description: If _type == 6. The name of the section where the seat is located.
+                          groupName:
+                            type: string
+                            nullable: true
+                            description: If _type == 6. The name of the row group where the seat is located.
+                          rowName:
+                            type: string
+                            nullable: true
+                            description: If _type == 6. The name of the row where the seat is located.
+                          seatName:
+                            type: string
+                            nullable: true
+                            description: If _type == 6. The seat name.
+                          gate:
+                            type: string
+                            nullable: true
+                            description: The entry gate associated with the seating object.
+                        required:
+                        - _type
+                        - statusId
+                        description: The associated seating object.
+                      description: The seating info for this ticket
+                    price:
+                      type: number
+                      format: float
+                      description: The price of this item
+                    resellFee:
+                      type: number
+                      format: float
+                      description: The fee for reselling this item
+                  required:
+                  - ticketId
+                  - ticketTypeId
+                  - categoryRef
+                  - price
+                  - resellFee
+                description: The items of this offer
+              status:
+                oneOf:
+                - type: array
+                - type: boolean
+                - type: number
+                - type: object
+                - type: string
+                enum:
+                - ACTIVE
+                - SOLD
+                - CANCELED
+                description: The status of this offer
+              cpmId:
+                type: string
+                description: The customer payment method where the proceeds of this offer will be paid
+              currency:
+                oneOf:
+                - type: array
+                - type: boolean
+                - type: number
+                - type: object
+                - type: string
+                enum:
+                - EUR
+                - USD
+                - GBP
+                - AUD
+                - CHF
+                - THB
+                - ILS
+                - COP
+                - MXN
+                - DKK
+                - NOK
+                - SEK
+                - QAR
+                - CAD
+                - ISK
+                - GTQ
+                - INR
+                - DOP
+                - SGD
+                - PLN
+                - SAR
+                - TTD
+                - ZAR
+                - KYD
+                - HKD
+                - CZK
+                - KRW
+                - JPY
+                - NZD
+                - AED
+                - MAD
+                - TWD
+                - BRL
+                - BWP
+                - NAD
+                - KES
+                - SCR
+                - TRY
+                - SZL
+                - LSL
+                - TZS
+                - UGX
+                - ZMW
+                - ZWG
+                - GHS
+                - NGN
+                - SLE
+                - LRD
+                - XOF
+                - XAF
+                - GEL
+                - IDR
+                - ARS
+                - CRC
+                - HUF
+                - EGP
+                - MYR
+                - VND
+                - PHP
+                description: The currency used for this offer
+              history:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - resell.offer.created
+                      - resell.offer.canceled
+                      - resell.offer.expired
+                      - resell.offer.sold
+                      description: The type of the history item.
+                    date:
+                      type: string
+                      format: date-time
+                      description: An ISO timestamp indicating the date of the history item.
+                    userId:
+                      type: string
+                      nullable: true
+                      description: The user ID of the history item.
+                    data:
+                      type: object
+                      description: The data of the history item
+                default: []
+              createdAt:
+                type: string
+                format: date-time
+                description: An ISO Timestamp indicating when the offer was created.
+              updatedAt:
+                type: string
+                format: date-time
+                description: An ISO Timestamp indicating when the offer was updated.
+            required:
+            - _id
+            - customerId
+            - sellerId
+            - eventId
+            - items
+            - status
+            - cpmId
+            - currency
+            - createdAt
+            - updatedAt
+            description: The active offer, if the ticket is currently offered on the secondary market.
+          violations:
+            type: string
+            enum:
+            - SEASON_EVENT_OFFER_DISABLED
+            - EVENT_OFFER_DISABLED
+            - TICKET_OFFER_DISABLED
+            - NO_TRANSACTION
+            - TICKET_TYPE_NOT_MAPPED
+            - VALUE_SHARE_MISSING
+            - EVENT_EXCLUDED
+            - NO_SEATING_INFO
+            - TICKET_LOCKED
+            - TICKET_INVALID
+            - FEE_EXCEEDS_PRICE
+            - HAS_TICKET_TRANSFER
+            - HAS_SCANS
+            - HAS_ACTIVE_OFFER
+            - TRANSACTION_DISCOUNTED
+            - CART_AUTOMATION
+            - BUNDLE
+            - PAYMENT_PLAN_INCOMPLETE
+            - CUSTOMER_NOT_VERIFIED
+            description: The violated resell rules
+        required:
+        - eventId
+        - offerAble
+        - hasActiveOffer
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

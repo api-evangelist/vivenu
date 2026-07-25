@@ -1,0 +1,283 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists chargebacks API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: chargebacks
+paths:
+  /api/payments/chargebacks:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: skip
+        required: false
+        schema:
+          type: number
+          format: float
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: top
+        required: false
+        schema:
+          type: number
+          format: float
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: gateway
+        required: false
+        schema:
+          type: string
+          description: The payment gateway type to filter for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: gatewayId
+        required: false
+        schema:
+          type: string
+          description: The payment gateway id to filter for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: createdAt
+        required: false
+        schema:
+          type: object
+          properties:
+            $gt:
+              type: string
+              format: date-time
+              description: value is greater than
+              metas: {}
+            $gte:
+              type: string
+              format: date-time
+              description: value is greater than or equal
+              metas: {}
+            $lt:
+              type: string
+              format: date-time
+              description: value is less than
+              metas: {}
+            $lte:
+              type: string
+              format: date-time
+              description: value is less than or equal
+              metas: {}
+            $eq:
+              type: string
+              format: date-time
+              description: value is equal
+              metas: {}
+            $ne:
+              type: string
+              format: date-time
+              description: value is not equal
+              metas: {}
+          description: Range of dates to filter by when the chargeback was created in ISO format.
+          metas: {}
+        in: query
+        style: deepObject
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Chargebacks_GetAllChargebacks_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - chargebacks
+      description: Get all chargebacks
+      operationId: get_all_chargebacks
+  /api/payments/chargebacks/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargebackResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - chargebacks
+      description: Get a chargeback
+      operationId: get_a_chargeback
+components:
+  schemas:
+    ChargebackResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the chargeback
+        transactionId:
+          type: string
+          description: The ID of the transaction which the chargeback belongs to
+        eventId:
+          type: string
+          description: The ID of the event which the chargeback belongs to
+        sellerId:
+          type: string
+          description: The ID of the seller which the chargeback belongs to
+        pspRef:
+          type: string
+          description: The ID of the payment service provider reference object
+        gateway:
+          type: string
+          enum:
+          - managed
+          - external
+          - local
+          description: The gateway payment type of the chargeback
+          default: managed
+        fee:
+          type: number
+          format: float
+          description: The fee of the chargeback
+        amount:
+          type: number
+          format: float
+          description: The amount of the chargeback
+        currency:
+          type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: An ISO 4217 3-character code of the currency
+          default: EUR
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the chargeback was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the chargeback was updated.
+      required:
+      - _id
+      - createdAt
+      - updatedAt
+    GET_Chargebacks_GetAllChargebacks_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargebackResource'
+        total:
+          type: integer
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

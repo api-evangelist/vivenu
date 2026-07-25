@@ -1,0 +1,2867 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists document-templates API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: document-templates
+paths:
+  /api/document-templates:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: skip
+        required: false
+        schema:
+          type: number
+          format: float
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: top
+        required: false
+        schema:
+          type: number
+          format: float
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: type
+        required: false
+        schema:
+          oneOf:
+          - type: string
+            enum:
+            - ticket
+            - invoice
+            - voucher
+            - member-card
+            - header-card
+            description: The type of a document template to filter for
+            metas: {}
+          - type: array
+            items:
+              type: string
+              enum:
+              - ticket
+              - invoice
+              - voucher
+              - member-card
+              - header-card
+              metas: {}
+            description: An array of types of a document template to filter for
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: targets
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - thermal
+            - digital
+            - wallet
+            metas: {}
+          description: The targets of a document template to filter for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: formats
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - A4
+            - LETTER
+            - LEGAL
+            - BOARDING-PASS
+            - PLASTIC-CARD
+            - CARD
+            - LABEL
+            - CUSTOM
+            - APPLE
+            - GOOGLE
+            metas: {}
+          description: The formats of a document template to filter for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: title
+        required: false
+        schema:
+          type: string
+          description: The title of a document template to filter for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Document-templates_GetAllDocumentTemplates_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - document-templates
+      description: Get all Document Templates
+      operationId: document-templates/list
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POST_Document-templates_CreateADocumentTemplate_201_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Document-templates_CreateADocumentTemplate'
+      tags:
+      - document-templates
+      description: Create a Document Template
+      operationId: document-templates/create
+  /api/document-templates/print:
+    get:
+      parameters:
+      - name: eventId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: childEventId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: ticketTypeId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: productId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: sellerId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: target
+        required: true
+        schema:
+          type: string
+          enum:
+          - thermal
+          - digital
+          - wallet
+          description: The target of a document template to filter for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: type
+        required: true
+        schema:
+          type: string
+          enum:
+          - ticket
+          - invoice
+          - voucher
+          - member-card
+          - header-card
+          description: The type of a document template to filter for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: format
+        required: true
+        schema:
+          type: string
+          enum:
+          - A4
+          - LETTER
+          - LEGAL
+          - BOARDING-PASS
+          - PLASTIC-CARD
+          - CARD
+          - LABEL
+          - CUSTOM
+          - APPLE
+          - GOOGLE
+          description: The format of a document template to filter for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: locale
+        required: false
+        schema:
+          type: string
+          enum:
+          - de
+          - de-CH
+          - en
+          - en-GB
+          - en-AU
+          - fr
+          - es
+          - es-MX
+          - is
+          - it
+          - ru
+          - pt
+          - tr
+          - nb
+          - nl
+          - pl
+          - sv
+          - sl
+          - da
+          - cs
+          - lv
+          - he
+          - ar
+          - th
+          - ko
+          - ja
+          - zh-TW
+          description: Get the document template for a specific language
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Document-templates_GetDocumentTemplates_200_response'
+        '400':
+          description: Bad Request
+      tags:
+      - document-templates
+      description: Get Document Templates
+      operationId: document-templates/resolve
+  /api/document-templates/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Document-templates_GetADocumentTemplate_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - document-templates
+      description: Get a Document Template
+      operationId: document-templates/get
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PUT_Document-templates_UpdateADocumentTemplate_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Document-templates_UpdateADocumentTemplate'
+      tags:
+      - document-templates
+      description: Update a Document Template
+      operationId: document-templates/update
+    delete:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DELETE_Document-templates_DeleteADocumentTemplate_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - document-templates
+      description: Delete a Document Template
+      operationId: delete_a_document_template
+  /api/public/document-templates/{id}:
+    get:
+      parameters:
+      - name: sellerId
+        required: true
+        schema:
+          type: string
+          description: The seller id of the document template
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The id of the document template
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Document-templates_GetThePublicDocumentTemplate_200_response'
+        '400':
+          description: Bad Request
+      tags:
+      - document-templates
+      description: Get the public Document Template
+      operationId: document-templates/getPublic
+components:
+  schemas:
+    PUT_Document-templates_UpdateADocumentTemplate_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the document template
+        sellerId:
+          type: string
+          description: The ID of the seller of the document template
+        title:
+          type: string
+          description: The title of the document template
+        type:
+          type: string
+          enum:
+          - ticket
+          - invoice
+          - voucher
+          - member-card
+          - header-card
+          description: The type of document template for which document it should be used. ticket = The document template will be used on tickets. invoice = The document template will be used on invoices.
+        target:
+          type: string
+          enum:
+          - thermal
+          - digital
+          - wallet
+          description: The target of document template for which targets it should be used.
+        template:
+          type: object
+          properties:
+            svg:
+              type: string
+              description: An SVG string representing the design of the document template
+            json:
+              type: object
+              description: A JSON object representing the exact design of the document template
+            wallet:
+              oneOf:
+              - type: object
+                properties:
+                  logo:
+                    type: string
+                    nullable: true
+                    description: The Logo of the Apple Wallet Template
+                  backgroundColor:
+                    type: string
+                    nullable: true
+                    description: The background color of the Apple Wallet Template
+                  foregroundColor:
+                    type: string
+                    nullable: true
+                    description: The foreground color of the Apple Wallet Template
+                  labelColor:
+                    type: string
+                    nullable: true
+                    description: The label color of the Apple Wallet Template
+                  codeType:
+                    type: string
+                    enum:
+                    - Code128
+                    - QR
+                    description: The type of the code which appears on the Apple Wallet Ticket
+                  backFields:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        label:
+                          type: string
+                          description: The label of the back field
+                        value:
+                          type: string
+                          description: The value of the back field
+                        fieldType:
+                          type: string
+                          enum:
+                          - text
+                          - phone
+                          - link
+                          description: The type of the back field
+                      required:
+                      - label
+                      - value
+                      - fieldType
+                    description: The back fields of the template
+                  genericFields:
+                    type: object
+                    properties:
+                      auxiliaryStoreIdentifiers:
+                        type: array
+                        items:
+                          type: number
+                          format: float
+                        description: The auxiliary store identifiers
+                      bagPolicyUrl:
+                        type: string
+                        description: The bag policy URL
+                      transitInformationUrl:
+                        type: string
+                        description: The transit information URL
+                      parkingInformationUrl:
+                        type: string
+                        description: The parking information URL
+                      purchaseParkingUrl:
+                        type: string
+                        description: The purchase parking URL
+                      directionsInformationUrl:
+                        type: string
+                        description: The directions information URL
+                      orderFoodUrl:
+                        type: string
+                        description: The order food URL
+                      merchandiseUrl:
+                        type: string
+                        description: The merchandise URL
+                      accessibilityUrl:
+                        type: string
+                        description: The accessibility URL
+                      footerBackgroundColor:
+                        type: string
+                        nullable: true
+                        description: The footer background color
+                    description: The root fields of the template
+                  semanticFields:
+                    type: object
+                    properties:
+                      playlistIds:
+                        type: array
+                        items:
+                          type: string
+                        description: The playlist identifiers
+                    description: The semantic fields of the template
+                  frontFields:
+                    type: object
+                    properties:
+                      section:
+                        type: string
+                        enum:
+                        - section_or_block
+                        - block
+                        - section_and_block
+                        default: section_or_block
+                  ticketTypeLabel:
+                    type: string
+                    nullable: true
+                    description: The custom ticket type label of the Apple Wallet Template
+                  stripImage:
+                    type: string
+                    nullable: true
+                    description: The strip image of the Apple Wallet Template
+                  artworkImage:
+                    type: string
+                    nullable: true
+                    description: The artwork image of the Apple Wallet Template
+                  logoArea:
+                    type: string
+                    enum:
+                    - event_name
+                    description: Whether Event Name as Logo Text is enabled
+                description: The apple wallet settings of the document template
+              - type: object
+                properties:
+                  logo:
+                    type: string
+                    nullable: true
+                    description: The Logo of the Google Wallet Template
+                  backgroundColor:
+                    type: string
+                    nullable: true
+                    description: The background color of the Google Wallet Template
+                  codeType:
+                    type: string
+                    enum:
+                    - Code128
+                    - QR
+                    description: The type of the code which appears on the Google Wallet Ticket
+                  backFields:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        label:
+                          type: string
+                          description: The label of the back field
+                        value:
+                          type: string
+                          description: The value of the back field
+                        fieldType:
+                          type: string
+                          enum:
+                          - text
+                          - phone
+                          - link
+                          description: The type of the back field
+                      required:
+                      - label
+                      - value
+                      - fieldType
+                    description: The back fields of the template
+                  stripImage:
+                    type: string
+                    nullable: true
+                    description: The strip image of the Google Wallet Template
+                description: The google wallet settings of the document template
+              description: The wallet settings of the template
+        dimension:
+          type: object
+          properties:
+            width:
+              type: number
+              format: float
+              description: The width in pt of the document template
+            height:
+              type: number
+              format: float
+              description: The height in pt of the document template
+          required:
+          - width
+          - height
+          description: An object indicating the dimensions of the document template
+        format:
+          type: string
+          enum:
+          - A4
+          - LETTER
+          - LEGAL
+          - BOARDING-PASS
+          - PLASTIC-CARD
+          - CARD
+          - LABEL
+          - CUSTOM
+          - APPLE
+          - GOOGLE
+          description: The format of document template for the dimensions.
+        localization:
+          type: object
+          description: Localization of the document template for multiple languages
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the document template was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the document template was updated
+      required:
+      - _id
+      - sellerId
+      - title
+      - type
+      - target
+      - format
+    GET_Document-templates_GetDocumentTemplates_200_response:
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+            description: The ID of the document template
+          sellerId:
+            type: string
+            description: The ID of the seller of the document template
+          title:
+            type: string
+            description: The title of the document template
+          type:
+            type: string
+            enum:
+            - ticket
+            - invoice
+            - voucher
+            - member-card
+            - header-card
+            description: The type of document template for which document it should be used. ticket = The document template will be used on tickets. invoice = The document template will be used on invoices.
+          target:
+            type: string
+            enum:
+            - thermal
+            - digital
+            - wallet
+            description: The target of document template for which targets it should be used.
+          template:
+            type: object
+            properties:
+              svg:
+                type: string
+                description: An SVG string representing the design of the document template
+              json:
+                type: object
+                description: A JSON object representing the exact design of the document template
+              wallet:
+                oneOf:
+                - type: object
+                  properties:
+                    logo:
+                      type: string
+                      nullable: true
+                      description: The Logo of the Apple Wallet Template
+                    backgroundColor:
+                      type: string
+                      nullable: true
+                      description: The background color of the Apple Wallet Template
+                    foregroundColor:
+                      type: string
+                      nullable: true
+                      description: The foreground color of the Apple Wallet Template
+                    labelColor:
+                      type: string
+                      nullable: true
+                      description: The label color of the Apple Wallet Template
+                    codeType:
+                      type: string
+                      enum:
+                      - Code128
+                      - QR
+                      description: The type of the code which appears on the Apple Wallet Ticket
+                    backFields:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          label:
+                            type: string
+                            description: The label of the back field
+                          value:
+                            type: string
+                            description: The value of the back field
+                          fieldType:
+                            type: string
+                            enum:
+                            - text
+                            - phone
+                            - link
+                            description: The type of the back field
+                        required:
+                        - label
+                        - value
+                        - fieldType
+                      description: The back fields of the template
+                    genericFields:
+                      type: object
+                      properties:
+                        auxiliaryStoreIdentifiers:
+                          type: array
+                          items:
+                            type: number
+                            format: float
+                          description: The auxiliary store identifiers
+                        bagPolicyUrl:
+                          type: string
+                          description: The bag policy URL
+                        transitInformationUrl:
+                          type: string
+                          description: The transit information URL
+                        parkingInformationUrl:
+                          type: string
+                          description: The parking information URL
+                        purchaseParkingUrl:
+                          type: string
+                          description: The purchase parking URL
+                        directionsInformationUrl:
+                          type: string
+                          description: The directions information URL
+                        orderFoodUrl:
+                          type: string
+                          description: The order food URL
+                        merchandiseUrl:
+                          type: string
+                          description: The merchandise URL
+                        accessibilityUrl:
+                          type: string
+                          description: The accessibility URL
+                        footerBackgroundColor:
+                          type: string
+                          nullable: true
+                          description: The footer background color
+                      description: The root fields of the template
+                    semanticFields:
+                      type: object
+                      properties:
+                        playlistIds:
+                          type: array
+                          items:
+                            type: string
+                          description: The playlist identifiers
+                      description: The semantic fields of the template
+                    frontFields:
+                      type: object
+                      properties:
+                        section:
+                          type: string
+                          enum:
+                          - section_or_block
+                          - block
+                          - section_and_block
+                          default: section_or_block
+                    ticketTypeLabel:
+                      type: string
+                      nullable: true
+                      description: The custom ticket type label of the Apple Wallet Template
+                    stripImage:
+                      type: string
+                      nullable: true
+                      description: The strip image of the Apple Wallet Template
+                    artworkImage:
+                      type: string
+                      nullable: true
+                      description: The artwork image of the Apple Wallet Template
+                    logoArea:
+                      type: string
+                      enum:
+                      - event_name
+                      description: Whether Event Name as Logo Text is enabled
+                  description: The apple wallet settings of the document template
+                - type: object
+                  properties:
+                    logo:
+                      type: string
+                      nullable: true
+                      description: The Logo of the Google Wallet Template
+                    backgroundColor:
+                      type: string
+                      nullable: true
+                      description: The background color of the Google Wallet Template
+                    codeType:
+                      type: string
+                      enum:
+                      - Code128
+                      - QR
+                      description: The type of the code which appears on the Google Wallet Ticket
+                    backFields:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          label:
+                            type: string
+                            description: The label of the back field
+                          value:
+                            type: string
+                            description: The value of the back field
+                          fieldType:
+                            type: string
+                            enum:
+                            - text
+                            - phone
+                            - link
+                            description: The type of the back field
+                        required:
+                        - label
+                        - value
+                        - fieldType
+                      description: The back fields of the template
+                    stripImage:
+                      type: string
+                      nullable: true
+                      description: The strip image of the Google Wallet Template
+                  description: The google wallet settings of the document template
+                description: The wallet settings of the template
+          dimension:
+            type: object
+            properties:
+              width:
+                type: number
+                format: float
+                description: The width in pt of the document template
+              height:
+                type: number
+                format: float
+                description: The height in pt of the document template
+            required:
+            - width
+            - height
+            description: An object indicating the dimensions of the document template
+          format:
+            type: string
+            enum:
+            - A4
+            - LETTER
+            - LEGAL
+            - BOARDING-PASS
+            - PLASTIC-CARD
+            - CARD
+            - LABEL
+            - CUSTOM
+            - APPLE
+            - GOOGLE
+            description: The format of document template for the dimensions.
+          localization:
+            type: object
+            description: Localization of the document template for multiple languages
+          createdAt:
+            type: string
+            format: date-time
+            description: An ISO timestamp indicating when the document template was created
+          updatedAt:
+            type: string
+            format: date-time
+            description: An ISO timestamp indicating when the document template was updated
+        required:
+        - _id
+        - sellerId
+        - title
+        - type
+        - target
+        - format
+    POST_Document-templates_CreateADocumentTemplate_201_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the document template
+        sellerId:
+          type: string
+          description: The ID of the seller of the document template
+        title:
+          type: string
+          description: The title of the document template
+        type:
+          type: string
+          enum:
+          - ticket
+          - invoice
+          - voucher
+          - member-card
+          - header-card
+          description: The type of document template for which document it should be used. ticket = The document template will be used on tickets. invoice = The document template will be used on invoices.
+        target:
+          type: string
+          enum:
+          - thermal
+          - digital
+          - wallet
+          description: The target of document template for which targets it should be used.
+        template:
+          type: object
+          properties:
+            svg:
+              type: string
+              description: An SVG string representing the design of the document template
+            json:
+              type: object
+              description: A JSON object representing the exact design of the document template
+            wallet:
+              oneOf:
+              - type: object
+                properties:
+                  logo:
+                    type: string
+                    nullable: true
+                    description: The Logo of the Apple Wallet Template
+                  backgroundColor:
+                    type: string
+                    nullable: true
+                    description: The background color of the Apple Wallet Template
+                  foregroundColor:
+                    type: string
+                    nullable: true
+                    description: The foreground color of the Apple Wallet Template
+                  labelColor:
+                    type: string
+                    nullable: true
+                    description: The label color of the Apple Wallet Template
+                  codeType:
+                    type: string
+                    enum:
+                    - Code128
+                    - QR
+                    description: The type of the code which appears on the Apple Wallet Ticket
+                  backFields:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        label:
+                          type: string
+                          description: The label of the back field
+                        value:
+                          type: string
+                          description: The value of the back field
+                        fieldType:
+                          type: string
+                          enum:
+                          - text
+                          - phone
+                          - link
+                          description: The type of the back field
+                      required:
+                      - label
+                      - value
+                      - fieldType
+                    description: The back fields of the template
+                  genericFields:
+                    type: object
+                    properties:
+                      auxiliaryStoreIdentifiers:
+                        type: array
+                        items:
+                          type: number
+                          format: float
+                        description: The auxiliary store identifiers
+                      bagPolicyUrl:
+                        type: string
+                        description: The bag policy URL
+                      transitInformationUrl:
+                        type: string
+                        description: The transit information URL
+                      parkingInformationUrl:
+                        type: string
+                        description: The parking information URL
+                      purchaseParkingUrl:
+                        type: string
+                        description: The purchase parking URL
+                      directionsInformationUrl:
+                        type: string
+                        description: The directions information URL
+                      orderFoodUrl:
+                        type: string
+                        description: The order food URL
+                      merchandiseUrl:
+                        type: string
+                        description: The merchandise URL
+                      accessibilityUrl:
+                        type: string
+                        description: The accessibility URL
+                      footerBackgroundColor:
+                        type: string
+                        nullable: true
+                        description: The footer background color
+                    description: The root fields of the template
+                  semanticFields:
+                    type: object
+                    properties:
+                      playlistIds:
+                        type: array
+                        items:
+                          type: string
+                        description: The playlist identifiers
+                    description: The semantic fields of the template
+                  frontFields:
+                    type: object
+                    properties:
+                      section:
+                        type: string
+                        enum:
+                        - section_or_block
+                        - block
+                        - section_and_block
+                        default: section_or_block
+                  ticketTypeLabel:
+                    type: string
+                    nullable: true
+                    description: The custom ticket type label of the Apple Wallet Template
+                  stripImage:
+                    type: string
+                    nullable: true
+                    description: The strip image of the Apple Wallet Template
+                  artworkImage:
+                    type: string
+                    nullable: true
+                    description: The artwork image of the Apple Wallet Template
+                  logoArea:
+                    type: string
+                    enum:
+                    - event_name
+                    description: Whether Event Name as Logo Text is enabled
+                description: The apple wallet settings of the document template
+              - type: object
+                properties:
+                  logo:
+                    type: string
+                    nullable: true
+                    description: The Logo of the Google Wallet Template
+                  backgroundColor:
+                    type: string
+                    nullable: true
+                    description: The background color of the Google Wallet Template
+                  codeType:
+                    type: string
+                    enum:
+                    - Code128
+                    - QR
+                    description: The type of the code which appears on the Google Wallet Ticket
+                  backFields:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        label:
+                          type: string
+                          description: The label of the back field
+                        value:
+                          type: string
+                          description: The value of the back field
+                        fieldType:
+                          type: string
+                          enum:
+                          - text
+                          - phone
+                          - link
+                          description: The type of the back field
+                      required:
+                      - label
+                      - value
+                      - fieldType
+                    description: The back fields of the template
+                  stripImage:
+                    type: string
+                    nullable: true
+                    description: The strip image of the Google Wallet Template
+                description: The google wallet settings of the document template
+              description: The wallet settings of the template
+        dimension:
+          type: object
+          properties:
+            width:
+              type: number
+              format: float
+              description: The width in pt of the document template
+            height:
+              type: number
+              format: float
+              description: The height in pt of the document template
+          required:
+          - width
+          - height
+          description: An object indicating the dimensions of the document template
+        format:
+          type: string
+          enum:
+          - A4
+          - LETTER
+          - LEGAL
+          - BOARDING-PASS
+          - PLASTIC-CARD
+          - CARD
+          - LABEL
+          - CUSTOM
+          - APPLE
+          - GOOGLE
+          description: The format of document template for the dimensions.
+        localization:
+          type: object
+          description: Localization of the document template for multiple languages
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the document template was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the document template was updated
+      required:
+      - _id
+      - sellerId
+      - title
+      - type
+      - target
+      - format
+    GET_Document-templates_GetThePublicDocumentTemplate_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the document template
+        sellerId:
+          type: string
+          description: The ID of the seller of the document template
+        title:
+          type: string
+          description: The title of the document template
+        type:
+          type: string
+          enum:
+          - ticket
+          - invoice
+          - voucher
+          - member-card
+          - header-card
+          description: The type of document template for which document it should be used. ticket = The document template will be used on tickets. invoice = The document template will be used on invoices.
+        target:
+          type: string
+          enum:
+          - thermal
+          - digital
+          - wallet
+          description: The target of document template for which targets it should be used.
+        template:
+          type: object
+          properties:
+            svg:
+              type: string
+              description: An SVG string representing the design of the document template
+            json:
+              type: object
+              description: A JSON object representing the exact design of the document template
+            wallet:
+              oneOf:
+              - type: object
+                properties:
+                  logo:
+                    type: string
+                    nullable: true
+                    description: The Logo of the Apple Wallet Template
+                  backgroundColor:
+                    type: string
+                    nullable: true
+                    description: The background color of the Apple Wallet Template
+                  foregroundColor:
+                    type: string
+                    nullable: true
+                    description: The foreground color of the Apple Wallet Template
+                  labelColor:
+                    type: string
+                    nullable: true
+                    description: The label color of the Apple Wallet Template
+                  codeType:
+                    type: string
+                    enum:
+                    - Code128
+                    - QR
+                    description: The type of the code which appears on the Apple Wallet Ticket
+                  backFields:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        label:
+                          type: string
+                          description: The label of the back field
+                        value:
+                          type: string
+                          description: The value of the back field
+                        fieldType:
+                          type: string
+                          enum:
+                          - text
+                          - phone
+                          - link
+                          description: The type of the back field
+                      required:
+                      - label
+                      - value
+                      - fieldType
+                    description: The back fields of the template
+                  genericFields:
+                    type: object
+                    properties:
+                      auxiliaryStoreIdentifiers:
+                        type: array
+                        items:
+                          type: number
+                          format: float
+                        description: The auxiliary store identifiers
+                      bagPolicyUrl:
+                        type: string
+                        description: The bag policy URL
+                      transitInformationUrl:
+                        type: string
+                        description: The transit information URL
+                      parkingInformationUrl:
+                        type: string
+                        description: The parking information URL
+                      purchaseParkingUrl:
+                        type: string
+                        description: The purchase parking URL
+                      directionsInformationUrl:
+                        type: string
+                        description: The directions information URL
+                      orderFoodUrl:
+                        type: string
+                        description: The order food URL
+                      merchandiseUrl:
+                        type: string
+                        description: The merchandise URL
+                      accessibilityUrl:
+                        type: string
+                        description: The accessibility URL
+                      footerBackgroundColor:
+                        type: string
+                        nullable: true
+                        description: The footer background color
+                    description: The root fields of the template
+                  semanticFields:
+                    type: object
+                    properties:
+                      playlistIds:
+                        type: array
+                        items:
+                          type: string
+                        description: The playlist identifiers
+                    description: The semantic fields of the template
+                  frontFields:
+                    type: object
+                    properties:
+                      section:
+                        type: string
+                        enum:
+                        - section_or_block
+                        - block
+                        - section_and_block
+                        default: section_or_block
+                  ticketTypeLabel:
+                    type: string
+                    nullable: true
+                    description: The custom ticket type label of the Apple Wallet Template
+                  stripImage:
+                    type: string
+                    nullable: true
+                    description: The strip image of the Apple Wallet Template
+                  artworkImage:
+                    type: string
+                    nullable: true
+                    description: The artwork image of the Apple Wallet Template
+                  logoArea:
+                    type: string
+                    enum:
+                    - event_name
+                    description: Whether Event Name as Logo Text is enabled
+                description: The apple wallet settings of the document template
+              - type: object
+                properties:
+                  logo:
+                    type: string
+                    nullable: true
+                    description: The Logo of the Google Wallet Template
+                  backgroundColor:
+                    type: string
+                    nullable: true
+                    description: The background color of the Google Wallet Template
+                  codeType:
+                    type: string
+                    enum:
+                    - Code128
+                    - QR
+                    description: The type of the code which appears on the Google Wallet Ticket
+                  backFields:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        label:
+                          type: string
+                          description: The label of the back field
+                        value:
+                          type: string
+                          description: The value of the back field
+                        fieldType:
+                          type: string
+                          enum:
+                          - text
+                          - phone
+                          - link
+                          description: The type of the back field
+                      required:
+                      - label
+                      - value
+                      - fieldType
+                    description: The back fields of the template
+                  stripImage:
+                    type: string
+                    nullable: true
+                    description: The strip image of the Google Wallet Template
+                description: The google wallet settings of the document template
+              description: The wallet settings of the template
+        dimension:
+          type: object
+          properties:
+            width:
+              type: number
+              format: float
+              description: The width in pt of the document template
+            height:
+              type: number
+              format: float
+              description: The height in pt of the document template
+          required:
+          - width
+          - height
+          description: An object indicating the dimensions of the document template
+        format:
+          type: string
+          enum:
+          - A4
+          - LETTER
+          - LEGAL
+          - BOARDING-PASS
+          - PLASTIC-CARD
+          - CARD
+          - LABEL
+          - CUSTOM
+          - APPLE
+          - GOOGLE
+          description: The format of document template for the dimensions.
+        localization:
+          type: object
+          description: Localization of the document template for multiple languages
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the document template was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the document template was updated
+      required:
+      - _id
+      - sellerId
+      - title
+      - type
+      - target
+      - format
+    PUT_Document-templates_UpdateADocumentTemplate:
+      type: object
+      properties:
+        title:
+          type: string
+        type:
+          type: string
+          enum:
+          - ticket
+          - invoice
+          - voucher
+          - member-card
+          - header-card
+        target:
+          type: string
+          enum:
+          - thermal
+          - digital
+          - wallet
+        template:
+          type: object
+          properties:
+            svg:
+              type: string
+              description: An SVG string representing the design of the document template
+            json:
+              type: object
+              description: A JSON object representing the exact design of the document template
+            wallet:
+              oneOf:
+              - type: object
+                properties:
+                  logo:
+                    type: string
+                    nullable: true
+                    description: The Logo of the Apple Wallet Template
+                  backgroundColor:
+                    type: string
+                    nullable: true
+                    description: The background color of the Apple Wallet Template
+                  foregroundColor:
+                    type: string
+                    nullable: true
+                    description: The foreground color of the Apple Wallet Template
+                  labelColor:
+                    type: string
+                    nullable: true
+                    description: The label color of the Apple Wallet Template
+                  codeType:
+                    type: string
+                    enum:
+                    - Code128
+                    - QR
+                    description: The type of the code which appears on the Apple Wallet Ticket
+                  backFields:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        label:
+                          type: string
+                          description: The label of the back field
+                        value:
+                          type: string
+                          description: The value of the back field
+                        fieldType:
+                          type: string
+                          enum:
+                          - text
+                          - phone
+                          - link
+                          description: The type of the back field
+                      required:
+                      - label
+                      - value
+                      - fieldType
+                    description: The back fields of the template
+                  genericFields:
+                    type: object
+                    properties:
+                      auxiliaryStoreIdentifiers:
+                        type: array
+                        items:
+                          type: number
+                          format: float
+                        description: The auxiliary store identifiers
+                      bagPolicyUrl:
+                        type: string
+                        description: The bag policy URL
+                      transitInformationUrl:
+                        type: string
+                        description: The transit information URL
+                      parkingInformationUrl:
+                        type: string
+                        description: The parking information URL
+                      purchaseParkingUrl:
+                        type: string
+                        description: The purchase parking URL
+                      directionsInformationUrl:
+                        type: string
+                        description: The directions information URL
+                      orderFoodUrl:
+                        type: string
+                        description: The order food URL
+                      merchandiseUrl:
+                        type: string
+                        description: The merchandise URL
+                      accessibilityUrl:
+                        type: string
+                        description: The accessibility URL
+                      footerBackgroundColor:
+                        type: string
+                        nullable: true
+                        description: The footer background color
+                    description: The root fields of the template
+                  semanticFields:
+                    type: object
+                    properties:
+                      playlistIds:
+                        type: array
+                        items:
+                          type: string
+                        description: The playlist identifiers
+                    description: The semantic fields of the template
+                  frontFields:
+                    type: object
+                    properties:
+                      section:
+                        type: string
+                        enum:
+                        - section_or_block
+                        - block
+                        - section_and_block
+                        default: section_or_block
+                  ticketTypeLabel:
+                    type: string
+                    nullable: true
+                    description: The custom ticket type label of the Apple Wallet Template
+                  stripImage:
+                    type: string
+                    nullable: true
+                    description: The strip image of the Apple Wallet Template
+                  artworkImage:
+                    type: string
+                    nullable: true
+                    description: The artwork image of the Apple Wallet Template
+                  logoArea:
+                    type: string
+                    enum:
+                    - event_name
+                    description: Whether Event Name as Logo Text is enabled
+                description: The apple wallet settings of the document template
+              - type: object
+                properties:
+                  logo:
+                    type: string
+                    nullable: true
+                    description: The Logo of the Google Wallet Template
+                  backgroundColor:
+                    type: string
+                    nullable: true
+                    description: The background color of the Google Wallet Template
+                  codeType:
+                    type: string
+                    enum:
+                    - Code128
+                    - QR
+                    description: The type of the code which appears on the Google Wallet Ticket
+                  backFields:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        label:
+                          type: string
+                          description: The label of the back field
+                        value:
+                          type: string
+                          description: The value of the back field
+                        fieldType:
+                          type: string
+                          enum:
+                          - text
+                          - phone
+                          - link
+                          description: The type of the back field
+                      required:
+                      - label
+                      - value
+                      - fieldType
+                    description: The back fields of the template
+                  stripImage:
+                    type: string
+                    nullable: true
+                    description: The strip image of the Google Wallet Template
+                description: The google wallet settings of the document template
+              description: The wallet settings of the document template
+        localization:
+          type: object
+          description: Localization of the document template for multiple languages
+    POST_Document-templates_CreateADocumentTemplate:
+      oneOf:
+      - type: object
+        properties:
+          title:
+            type: string
+            description: The title of the document template
+          type:
+            type: string
+            enum:
+            - ticket
+            - invoice
+            - voucher
+            - member-card
+            - header-card
+            description: The type of document template for which document it should be used. ticket = The document template will be used on tickets. invoice = The document template will be used on invoices.
+          target:
+            type: string
+            enum:
+            - thermal
+            - digital
+            - wallet
+            description: The target of document template for which targets it should be used.
+          template:
+            type: object
+            properties:
+              svg:
+                type: string
+                description: An SVG string representing the design of the document template
+              json:
+                type: object
+                description: A JSON object representing the exact design of the document template
+              wallet:
+                oneOf:
+                - type: object
+                  properties:
+                    logo:
+                      type: string
+                      nullable: true
+                      description: The Logo of the Apple Wallet Template
+                    backgroundColor:
+                      type: string
+                      nullable: true
+                      description: The background color of the Apple Wallet Template
+                    foregroundColor:
+                      type: string
+                      nullable: true
+                      description: The foreground color of the Apple Wallet Template
+                    labelColor:
+                      type: string
+                      nullable: true
+                      description: The label color of the Apple Wallet Template
+                    codeType:
+                      type: string
+                      enum:
+                      - Code128
+                      - QR
+                      description: The type of the code which appears on the Apple Wallet Ticket
+                    backFields:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          label:
+                            type: string
+                            description: The label of the back field
+                          value:
+                            type: string
+                            description: The value of the back field
+                          fieldType:
+                            type: string
+                            enum:
+                            - text
+                            - phone
+                            - link
+                            description: The type of the back field
+                        required:
+                        - label
+                        - value
+                        - fieldType
+                      description: The back fields of the template
+                    genericFields:
+                      type: object
+                      properties:
+                        auxiliaryStoreIdentifiers:
+                          type: array
+                          items:
+                            type: number
+                            format: float
+                          description: The auxiliary store identifiers
+                        bagPolicyUrl:
+                          type: string
+                          description: The bag policy URL
+                        transitInformationUrl:
+                          type: string
+                          description: The transit information URL
+                        parkingInformationUrl:
+                          type: string
+                          description: The parking information URL
+                        purchaseParkingUrl:
+                          type: string
+                          description: The purchase parking URL
+                        directionsInformationUrl:
+                          type: string
+                          description: The directions information URL
+                        orderFoodUrl:
+                          type: string
+                          description: The order food URL
+                        merchandiseUrl:
+                          type: string
+                          description: The merchandise URL
+                        accessibilityUrl:
+                          type: string
+                          description: The accessibility URL
+                        footerBackgroundColor:
+                          type: string
+                          nullable: true
+                          description: The footer background color
+                      description: The root fields of the template
+                    semanticFields:
+                      type: object
+                      properties:
+                        playlistIds:
+                          type: array
+                          items:
+                            type: string
+                          description: The playlist identifiers
+                      description: The semantic fields of the template
+                    frontFields:
+                      type: object
+                      properties:
+                        section:
+                          type: string
+                          enum:
+                          - section_or_block
+                          - block
+                          - section_and_block
+                          default: section_or_block
+                    ticketTypeLabel:
+                      type: string
+                      nullable: true
+                      description: The custom ticket type label of the Apple Wallet Template
+                    stripImage:
+                      type: string
+                      nullable: true
+                      description: The strip image of the Apple Wallet Template
+                    artworkImage:
+                      type: string
+                      nullable: true
+                      description: The artwork image of the Apple Wallet Template
+                    logoArea:
+                      type: string
+                      enum:
+                      - event_name
+                      description: Whether Event Name as Logo Text is enabled
+                  description: The apple wallet settings of the document template
+                - type: object
+                  properties:
+                    logo:
+                      type: string
+                      nullable: true
+                      description: The Logo of the Google Wallet Template
+                    backgroundColor:
+                      type: string
+                      nullable: true
+                      description: The background color of the Google Wallet Template
+                    codeType:
+                      type: string
+                      enum:
+                      - Code128
+                      - QR
+                      description: The type of the code which appears on the Google Wallet Ticket
+                    backFields:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          label:
+                            type: string
+                            description: The label of the back field
+                          value:
+                            type: string
+                            description: The value of the back field
+                          fieldType:
+                            type: string
+                            enum:
+                            - text
+                            - phone
+                            - link
+                            description: The type of the back field
+                        required:
+                        - label
+                        - value
+                        - fieldType
+                      description: The back fields of the template
+                    stripImage:
+                      type: string
+                      nullable: true
+                      description: The strip image of the Google Wallet Template
+                  description: The google wallet settings of the document template
+                description: The wallet settings of the template
+          format:
+            type: string
+            enum:
+            - CUSTOM
+          localization:
+            type: object
+            description: Localization of the document template for multiple languages
+          dimension:
+            type: object
+            properties:
+              width:
+                type: number
+                format: float
+                description: The width in pt of the document template
+              height:
+                type: number
+                format: float
+                description: The height in pt of the document template
+            required:
+            - width
+            - height
+        required:
+        - title
+        - type
+        - target
+        - format
+        - dimension
+      - type: object
+        properties:
+          title:
+            type: string
+            description: The title of the document template
+          type:
+            type: string
+            enum:
+            - ticket
+            - invoice
+            - voucher
+            - member-card
+            - header-card
+            description: The type of document template for which document it should be used. ticket = The document template will be used on tickets. invoice = The document template will be used on invoices.
+          target:
+            type: string
+            enum:
+            - thermal
+            - digital
+            - wallet
+            description: The target of document template for which targets it should be used.
+          template:
+            type: object
+            properties:
+              svg:
+                type: string
+                description: An SVG string representing the design of the document template
+              json:
+                type: object
+                description: A JSON object representing the exact design of the document template
+              wallet:
+                oneOf:
+                - type: object
+                  properties:
+                    logo:
+                      type: string
+                      nullable: true
+                      description: The Logo of the Apple Wallet Template
+                    backgroundColor:
+                      type: string
+                      nullable: true
+                      description: The background color of the Apple Wallet Template
+                    foregroundColor:
+                      type: string
+                      nullable: true
+                      description: The foreground color of the Apple Wallet Template
+                    labelColor:
+                      type: string
+                      nullable: true
+                      description: The label color of the Apple Wallet Template
+                    codeType:
+                      type: string
+                      enum:
+                      - Code128
+                      - QR
+                      description: The type of the code which appears on the Apple Wallet Ticket
+                    backFields:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          label:
+                            type: string
+                            description: The label of the back field
+                          value:
+                            type: string
+                            description: The value of the back field
+                          fieldType:
+                            type: string
+                            enum:
+                            - text
+                            - phone
+                            - link
+                            description: The type of the back field
+                        required:
+                        - label
+                        - value
+                        - fieldType
+                      description: The back fields of the template
+                    genericFields:
+                      type: object
+                      properties:
+                        auxiliaryStoreIdentifiers:
+                          type: array
+                          items:
+                            type: number
+                            format: float
+                          description: The auxiliary store identifiers
+                        bagPolicyUrl:
+                          type: string
+                          description: The bag policy URL
+                        transitInformationUrl:
+                          type: string
+                          description: The transit information URL
+                        parkingInformationUrl:
+                          type: string
+                          description: The parking information URL
+                        purchaseParkingUrl:
+                          type: string
+                          description: The purchase parking URL
+                        directionsInformationUrl:
+                          type: string
+                          description: The directions information URL
+                        orderFoodUrl:
+                          type: string
+                          description: The order food URL
+                        merchandiseUrl:
+                          type: string
+                          description: The merchandise URL
+                        accessibilityUrl:
+                          type: string
+                          description: The accessibility URL
+                        footerBackgroundColor:
+                          type: string
+                          nullable: true
+                          description: The footer background color
+                      description: The root fields of the template
+                    semanticFields:
+                      type: object
+                      properties:
+                        playlistIds:
+                          type: array
+                          items:
+                            type: string
+                          description: The playlist identifiers
+                      description: The semantic fields of the template
+                    frontFields:
+                      type: object
+                      properties:
+                        section:
+                          type: string
+                          enum:
+                          - section_or_block
+                          - block
+                          - section_and_block
+                          default: section_or_block
+                    ticketTypeLabel:
+                      type: string
+                      nullable: true
+                      description: The custom ticket type label of the Apple Wallet Template
+                    stripImage:
+                      type: string
+                      nullable: true
+                      description: The strip image of the Apple Wallet Template
+                    artworkImage:
+                      type: string
+                      nullable: true
+                      description: The artwork image of the Apple Wallet Template
+                    logoArea:
+                      type: string
+                      enum:
+                      - event_name
+                      description: Whether Event Name as Logo Text is enabled
+                  description: The apple wallet settings of the document template
+                - type: object
+                  properties:
+                    logo:
+                      type: string
+                      nullable: true
+                      description: The Logo of the Google Wallet Template
+                    backgroundColor:
+                      type: string
+                      nullable: true
+                      description: The background color of the Google Wallet Template
+                    codeType:
+                      type: string
+                      enum:
+                      - Code128
+                      - QR
+                      description: The type of the code which appears on the Google Wallet Ticket
+                    backFields:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          label:
+                            type: string
+                            description: The label of the back field
+                          value:
+                            type: string
+                            description: The value of the back field
+                          fieldType:
+                            type: string
+                            enum:
+                            - text
+                            - phone
+                            - link
+                            description: The type of the back field
+                        required:
+                        - label
+                        - value
+                        - fieldType
+                      description: The back fields of the template
+                    stripImage:
+                      type: string
+                      nullable: true
+                      description: The strip image of the Google Wallet Template
+                  description: The google wallet settings of the document template
+                description: The wallet settings of the template
+          localization:
+            type: object
+            description: Localization of the document template for multiple languages
+          format:
+            type: string
+            enum:
+            - A4
+            - LETTER
+            - LEGAL
+            - BOARDING-PASS
+            - PLASTIC-CARD
+            - CARD
+            - LABEL
+            - APPLE
+            - GOOGLE
+            description: The format of document template for the dimensions.
+        required:
+        - title
+        - type
+        - target
+        - format
+    DELETE_Document-templates_DeleteADocumentTemplate_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the document template
+        sellerId:
+          type: string
+          description: The ID of the seller of the document template
+        title:
+          type: string
+          description: The title of the document template
+        type:
+          type: string
+          enum:
+          - ticket
+          - invoice
+          - voucher
+          - member-card
+          - header-card
+          description: The type of document template for which document it should be used. ticket = The document template will be used on tickets. invoice = The document template will be used on invoices.
+        target:
+          type: string
+          enum:
+          - thermal
+          - digital
+          - wallet
+          description: The target of document template for which targets it should be used.
+        template:
+          type: object
+          properties:
+            svg:
+              type: string
+              description: An SVG string representing the design of the document template
+            json:
+              type: object
+              description: A JSON object representing the exact design of the document template
+            wallet:
+              oneOf:
+              - type: object
+                properties:
+                  logo:
+                    type: string
+                    nullable: true
+                    description: The Logo of the Apple Wallet Template
+                  backgroundColor:
+                    type: string
+                    nullable: true
+                    description: The background color of the Apple Wallet Template
+                  foregroundColor:
+                    type: string
+                    nullable: true
+                    description: The foreground color of the Apple Wallet Template
+                  labelColor:
+                    type: string
+                    nullable: true
+                    description: The label color of the Apple Wallet Template
+                  codeType:
+                    type: string
+                    enum:
+                    - Code128
+                    - QR
+                    description: The type of the code which appears on the Apple Wallet Ticket
+                  backFields:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        label:
+                          type: string
+                          description: The label of the back field
+                        value:
+                          type: string
+                          description: The value of the back field
+                        fieldType:
+                          type: string
+                          enum:
+                          - text
+                          - phone
+                          - link
+                          description: The type of the back field
+                      required:
+                      - label
+                      - value
+                      - fieldType
+                    description: The back fields of the template
+                  genericFields:
+                    type: object
+                    properties:
+                      auxiliaryStoreIdentifiers:
+                        type: array
+                        items:
+                          type: number
+                          format: float
+                        description: The auxiliary store identifiers
+                      bagPolicyUrl:
+                        type: string
+                        description: The bag policy URL
+                      transitInformationUrl:
+                        type: string
+                        description: The transit information URL
+                      parkingInformationUrl:
+                        type: string
+                        description: The parking information URL
+                      purchaseParkingUrl:
+                        type: string
+                        description: The purchase parking URL
+                      directionsInformationUrl:
+                        type: string
+                        description: The directions information URL
+                      orderFoodUrl:
+                        type: string
+                        description: The order food URL
+                      merchandiseUrl:
+                        type: string
+                        description: The merchandise URL
+                      accessibilityUrl:
+                        type: string
+                        description: The accessibility URL
+                      footerBackgroundColor:
+                        type: string
+                        nullable: true
+                        description: The footer background color
+                    description: The root fields of the template
+                  semanticFields:
+                    type: object
+                    properties:
+                      playlistIds:
+                        type: array
+                        items:
+                          type: string
+                        description: The playlist identifiers
+                    description: The semantic fields of the template
+                  frontFields:
+                    type: object
+                    properties:
+                      section:
+                        type: string
+                        enum:
+                        - section_or_block
+                        - block
+                        - section_and_block
+                        default: section_or_block
+                  ticketTypeLabel:
+                    type: string
+                    nullable: true
+                    description: The custom ticket type label of the Apple Wallet Template
+                  stripImage:
+                    type: string
+                    nullable: true
+                    description: The strip image of the Apple Wallet Template
+                  artworkImage:
+                    type: string
+                    nullable: true
+                    description: The artwork image of the Apple Wallet Template
+                  logoArea:
+                    type: string
+                    enum:
+                    - event_name
+                    description: Whether Event Name as Logo Text is enabled
+                description: The apple wallet settings of the document template
+              - type: object
+                properties:
+                  logo:
+                    type: string
+                    nullable: true
+                    description: The Logo of the Google Wallet Template
+                  backgroundColor:
+                    type: string
+                    nullable: true
+                    description: The background color of the Google Wallet Template
+                  codeType:
+                    type: string
+                    enum:
+                    - Code128
+                    - QR
+                    description: The type of the code which appears on the Google Wallet Ticket
+                  backFields:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        label:
+                          type: string
+                          description: The label of the back field
+                        value:
+                          type: string
+                          description: The value of the back field
+                        fieldType:
+                          type: string
+                          enum:
+                          - text
+                          - phone
+                          - link
+                          description: The type of the back field
+                      required:
+                      - label
+                      - value
+                      - fieldType
+                    description: The back fields of the template
+                  stripImage:
+                    type: string
+                    nullable: true
+                    description: The strip image of the Google Wallet Template
+                description: The google wallet settings of the document template
+              description: The wallet settings of the template
+        dimension:
+          type: object
+          properties:
+            width:
+              type: number
+              format: float
+              description: The width in pt of the document template
+            height:
+              type: number
+              format: float
+              description: The height in pt of the document template
+          required:
+          - width
+          - height
+          description: An object indicating the dimensions of the document template
+        format:
+          type: string
+          enum:
+          - A4
+          - LETTER
+          - LEGAL
+          - BOARDING-PASS
+          - PLASTIC-CARD
+          - CARD
+          - LABEL
+          - CUSTOM
+          - APPLE
+          - GOOGLE
+          description: The format of document template for the dimensions.
+        localization:
+          type: object
+          description: Localization of the document template for multiple languages
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the document template was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the document template was updated
+      required:
+      - _id
+      - sellerId
+      - title
+      - type
+      - target
+      - format
+    GET_Document-templates_GetADocumentTemplate_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the document template
+        sellerId:
+          type: string
+          description: The ID of the seller of the document template
+        title:
+          type: string
+          description: The title of the document template
+        type:
+          type: string
+          enum:
+          - ticket
+          - invoice
+          - voucher
+          - member-card
+          - header-card
+          description: The type of document template for which document it should be used. ticket = The document template will be used on tickets. invoice = The document template will be used on invoices.
+        target:
+          type: string
+          enum:
+          - thermal
+          - digital
+          - wallet
+          description: The target of document template for which targets it should be used.
+        template:
+          type: object
+          properties:
+            svg:
+              type: string
+              description: An SVG string representing the design of the document template
+            json:
+              type: object
+              description: A JSON object representing the exact design of the document template
+            wallet:
+              oneOf:
+              - type: object
+                properties:
+                  logo:
+                    type: string
+                    nullable: true
+                    description: The Logo of the Apple Wallet Template
+                  backgroundColor:
+                    type: string
+                    nullable: true
+                    description: The background color of the Apple Wallet Template
+                  foregroundColor:
+                    type: string
+                    nullable: true
+                    description: The foreground color of the Apple Wallet Template
+                  labelColor:
+                    type: string
+                    nullable: true
+                    description: The label color of the Apple Wallet Template
+                  codeType:
+                    type: string
+                    enum:
+                    - Code128
+                    - QR
+                    description: The type of the code which appears on the Apple Wallet Ticket
+                  backFields:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        label:
+                          type: string
+                          description: The label of the back field
+                        value:
+                          type: string
+                          description: The value of the back field
+                        fieldType:
+                          type: string
+                          enum:
+                          - text
+                          - phone
+                          - link
+                          description: The type of the back field
+                      required:
+                      - label
+                      - value
+                      - fieldType
+                    description: The back fields of the template
+                  genericFields:
+                    type: object
+                    properties:
+                      auxiliaryStoreIdentifiers:
+                        type: array
+                        items:
+                          type: number
+                          format: float
+                        description: The auxiliary store identifiers
+                      bagPolicyUrl:
+                        type: string
+                        description: The bag policy URL
+                      transitInformationUrl:
+                        type: string
+                        description: The transit information URL
+                      parkingInformationUrl:
+                        type: string
+                        description: The parking information URL
+                      purchaseParkingUrl:
+                        type: string
+                        description: The purchase parking URL
+                      directionsInformationUrl:
+                        type: string
+                        description: The directions information URL
+                      orderFoodUrl:
+                        type: string
+                        description: The order food URL
+                      merchandiseUrl:
+                        type: string
+                        description: The merchandise URL
+                      accessibilityUrl:
+                        type: string
+                        description: The accessibility URL
+                      footerBackgroundColor:
+                        type: string
+                        nullable: true
+                        description: The footer background color
+                    description: The root fields of the template
+                  semanticFields:
+                    type: object
+                    properties:
+                      playlistIds:
+                        type: array
+                        items:
+                          type: string
+                        description: The playlist identifiers
+                    description: The semantic fields of the template
+                  frontFields:
+                    type: object
+                    properties:
+                      section:
+                        type: string
+                        enum:
+                        - section_or_block
+                        - block
+                        - section_and_block
+                        default: section_or_block
+                  ticketTypeLabel:
+                    type: string
+                    nullable: true
+                    description: The custom ticket type label of the Apple Wallet Template
+                  stripImage:
+                    type: string
+                    nullable: true
+                    description: The strip image of the Apple Wallet Template
+                  artworkImage:
+                    type: string
+                    nullable: true
+                    description: The artwork image of the Apple Wallet Template
+                  logoArea:
+                    type: string
+                    enum:
+                    - event_name
+                    description: Whether Event Name as Logo Text is enabled
+                description: The apple wallet settings of the document template
+              - type: object
+                properties:
+                  logo:
+                    type: string
+                    nullable: true
+                    description: The Logo of the Google Wallet Template
+                  backgroundColor:
+                    type: string
+                    nullable: true
+                    description: The background color of the Google Wallet Template
+                  codeType:
+                    type: string
+                    enum:
+                    - Code128
+                    - QR
+                    description: The type of the code which appears on the Google Wallet Ticket
+                  backFields:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        label:
+                          type: string
+                          description: The label of the back field
+                        value:
+                          type: string
+                          description: The value of the back field
+                        fieldType:
+                          type: string
+                          enum:
+                          - text
+                          - phone
+                          - link
+                          description: The type of the back field
+                      required:
+                      - label
+                      - value
+                      - fieldType
+                    description: The back fields of the template
+                  stripImage:
+                    type: string
+                    nullable: true
+                    description: The strip image of the Google Wallet Template
+                description: The google wallet settings of the document template
+              description: The wallet settings of the template
+        dimension:
+          type: object
+          properties:
+            width:
+              type: number
+              format: float
+              description: The width in pt of the document template
+            height:
+              type: number
+              format: float
+              description: The height in pt of the document template
+          required:
+          - width
+          - height
+          description: An object indicating the dimensions of the document template
+        format:
+          type: string
+          enum:
+          - A4
+          - LETTER
+          - LEGAL
+          - BOARDING-PASS
+          - PLASTIC-CARD
+          - CARD
+          - LABEL
+          - CUSTOM
+          - APPLE
+          - GOOGLE
+          description: The format of document template for the dimensions.
+        localization:
+          type: object
+          description: Localization of the document template for multiple languages
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the document template was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the document template was updated
+      required:
+      - _id
+      - sellerId
+      - title
+      - type
+      - target
+      - format
+    GET_Document-templates_GetAllDocumentTemplates_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the document template
+              sellerId:
+                type: string
+                description: The ID of the seller of the document template
+              title:
+                type: string
+                description: The title of the document template
+              type:
+                type: string
+                enum:
+                - ticket
+                - invoice
+                - voucher
+                - member-card
+                - header-card
+                description: The type of document template for which document it should be used. ticket = The document template will be used on tickets. invoice = The document template will be used on invoices.
+              target:
+                type: string
+                enum:
+                - thermal
+                - digital
+                - wallet
+                description: The target of document template for which targets it should be used.
+              template:
+                type: object
+                properties:
+                  svg:
+                    type: string
+                    description: An SVG string representing the design of the document template
+                  json:
+                    type: object
+                    description: A JSON object representing the exact design of the document template
+                  wallet:
+                    oneOf:
+                    - type: object
+                      properties:
+                        logo:
+                          type: string
+                          nullable: true
+                          description: The Logo of the Apple Wallet Template
+                        backgroundColor:
+                          type: string
+                          nullable: true
+                          description: The background color of the Apple Wallet Template
+                        foregroundColor:
+                          type: string
+                          nullable: true
+                          description: The foreground color of the Apple Wallet Template
+                        labelColor:
+                          type: string
+                          nullable: true
+                          description: The label color of the Apple Wallet Template
+                        codeType:
+                          type: string
+                          enum:
+                          - Code128
+                          - QR
+                          description: The type of the code which appears on the Apple Wallet Ticket
+                        backFields:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              label:
+                                type: string
+                                description: The label of the back field
+                              value:
+                                type: string
+                                description: The value of the back field
+                              fieldType:
+                                type: string
+                                enum:
+                                - text
+                                - phone
+                                - link
+                                description: The type of the back field
+                            required:
+                            - label
+                            - value
+                            - fieldType
+                          description: The back fields of the template
+                        genericFields:
+                          type: object
+                          properties:
+                            auxiliaryStoreIdentifiers:
+                              type: array
+                              items:
+                                type: number
+                                format: float
+                              description: The auxiliary store identifiers
+                            bagPolicyUrl:
+                              type: string
+                              description: The bag policy URL
+                            transitInformationUrl:
+                              type: string
+                              description: The transit information URL
+                            parkingInformationUrl:
+                              type: string
+                              description: The parking information URL
+                            purchaseParkingUrl:
+                              type: string
+                              description: The purchase parking URL
+                            directionsInformationUrl:
+                              type: string
+                              description: The directions information URL
+                            orderFoodUrl:
+                              type: string
+                              description: The order food URL
+                            merchandiseUrl:
+                              type: string
+                              description: The merchandise URL
+                            accessibilityUrl:
+                              type: string
+                              description: The accessibility URL
+                            footerBackgroundColor:
+                              type: string
+                              nullable: true
+                              description: The footer background color
+                          description: The root fields of the template
+                        semanticFields:
+                          type: object
+                          properties:
+                            playlistIds:
+                              type: array
+                              items:
+                                type: string
+                              description: The playlist identifiers
+                          description: The semantic fields of the template
+                        frontFields:
+                          type: object
+                          properties:
+                            section:
+                              type: string
+                              enum:
+                              - section_or_block
+                              - block
+                              - section_and_block
+                              default: section_or_block
+                        ticketTypeLabel:
+                          type: string
+                          nullable: true
+                          description: The custom ticket type label of the Apple Wallet Template
+                        stripImage:
+                          type: string
+                          nullable: true
+                          description: The strip image of the Apple Wallet Template
+                        artworkImage:
+                          type: string
+                          nullable: true
+                          description: The artwork image of the Apple Wallet Template
+                        logoArea:
+                          type: string
+                          enum:
+                          - event_name
+                          description: Whether Event Name as Logo Text is enabled
+                      description: The apple wallet settings of the document template
+                    - type: object
+                      properties:
+                        logo:
+                          type: string
+                          nullable: true
+                          description: The Logo of the Google Wallet Template
+                        backgroundColor:
+                          type: string
+                          nullable: true
+                          description: The background color of the Google Wallet Template
+                        codeType:
+                          type: string
+                          enum:
+                          - Code128
+                          - QR
+                          description: The type of the code which appears on the Google Wallet Ticket
+                        backFields:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              label:
+                                type: string
+                                description: The label of the back field
+                              value:
+                                type: string
+                                description: The value of the back field
+                              fieldType:
+                                type: string
+                                enum:
+                                - text
+                                - phone
+                                - link
+                                description: The type of the back field
+                            required:
+                            - label
+                            - value
+                            - fieldType
+                          description: The back fields of the template
+                        stripImage:
+                          type: string
+                          nullable: true
+                          description: The strip image of the Google Wallet Template
+                      description: The google wallet settings of the document template
+                    description: The wallet settings of the template
+              dimension:
+                type: object
+                properties:
+                  width:
+                    type: number
+                    format: float
+                    description: The width in pt of the document template
+                  height:
+                    type: number
+                    format: float
+                    description: The height in pt of the document template
+                required:
+                - width
+                - height
+                description: An object indicating the dimensions of the document template
+              format:
+                type: string
+                enum:
+                - A4
+                - LETTER
+                - LEGAL
+                - BOARDING-PASS
+                - PLASTIC-CARD
+                - CARD
+                - LABEL
+                - CUSTOM
+                - APPLE
+                - GOOGLE
+                description: The format of document template for the dimensions.
+              localization:
+                type: object
+                description: Localization of the document template for multiple languages
+              createdAt:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the document template was created
+              updatedAt:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the document template was updated
+            required:
+            - _id
+            - sellerId
+            - title
+            - type
+            - target
+            - format
+        total:
+          type: integer
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

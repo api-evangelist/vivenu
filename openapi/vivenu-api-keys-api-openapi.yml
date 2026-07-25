@@ -1,0 +1,352 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists api_keys API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: api_keys
+paths:
+  /api/keys:
+    get:
+      security:
+      - jwt: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Api_keys_GetAllApiKeys_200_response'
+        '401':
+          description: Unauthorized
+      tags:
+      - api_keys
+      description: Get All API Keys
+      operationId: api-keys/list
+    post:
+      security:
+      - jwt: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIKeyResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Api_keys_CreateAnApiKey'
+      tags:
+      - api_keys
+      description: Create an API Key
+      operationId: api-keys/create
+  /api/keys/info:
+    get:
+      security:
+      - apikey: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIKeyResource'
+        '401':
+          description: Unauthorized
+      tags:
+      - api_keys
+      description: Get Information about the used API Key
+      operationId: api-keys/getInfo
+  /api/keys/{id}:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the API key.
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RedactedAPIKeyResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - api_keys
+      description: Get an API Key
+      operationId: api-keys/get
+    put:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the API key.
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RedactedAPIKeyResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Api_keys_UpdateAnApiKey'
+      tags:
+      - api_keys
+      description: Update an API Key
+      operationId: api-keys/update
+  /api/keys/default:
+    post:
+      security:
+      - jwt: []
+      - orgApiKey: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIKeyResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Api_keys_GetOrCreateADefaultApiKey'
+      tags:
+      - api_keys
+      description: Get or Create a Default API Key
+      operationId: get_or_create_a_default_api_key
+components:
+  schemas:
+    PUT_Api_keys_UpdateAnApiKey:
+      type: object
+      properties:
+        active:
+          type: boolean
+          description: Whether the API key can be used to authenticate against the API.
+          default: true
+        name:
+          type: string
+          description: An internal name to identify the API key.
+        expiresAt:
+          oneOf:
+          - oneOf:
+            - type: array
+            - type: boolean
+            - type: number
+            - type: object
+            - type: string
+            nullable: true
+          - type: string
+            format: date-time
+          description: Optional expiry; send null to clear automatic expiry.
+    GET_Api_keys_GetAllApiKeys_200_response:
+      type: array
+      items:
+        $ref: '#/components/schemas/RedactedAPIKeyResource'
+    RedactedAPIKeyResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the API key.
+        active:
+          type: boolean
+          description: Whether the API key can be used to authenticate against the API.
+          default: true
+        name:
+          type: string
+          maxLength: 200
+          description: An internal name to identify the API key.
+        sellerId:
+          type: string
+          description: The ID of the seller that owns the API key.
+        orgId:
+          type: string
+          description: The ID of the organisation that owns the API key.
+        createdBy:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - USER
+              - APP
+              - API_KEY
+              - SYSTEM
+              description: The type of the entity
+            id:
+              type: string
+              description: The ID of the entity
+          required:
+          - type
+          - id
+          description: The entity that created the API key.
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the API Key was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the API Key was last updated.
+        expiresAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: Optional ISO instant after which the key no longer authenticates; omit or null for no automatic expiry.
+      required:
+      - _id
+      - name
+      - createdAt
+      - updatedAt
+    POST_Api_keys_GetOrCreateADefaultApiKey:
+      type: object
+      properties:
+        sellerId:
+          type: string
+          description: The seller ID to get or create the API key for.
+      required:
+      - sellerId
+    APIKeyResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the API key.
+        active:
+          type: boolean
+          description: Whether the API key can be used to authenticate against the API.
+          default: true
+        name:
+          type: string
+          maxLength: 200
+          description: An internal name to identify the API key.
+        sellerId:
+          type: string
+          description: The ID of the seller that owns the API key.
+        orgId:
+          type: string
+          description: The ID of the organisation that owns the API key.
+        key:
+          type: string
+          description: The secret key to be used to authenticate against the API.
+          example: key_somerandomcombinationofnumbersandletters
+        createdBy:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - USER
+              - APP
+              - API_KEY
+              - SYSTEM
+              description: The type of the entity
+            id:
+              type: string
+              description: The ID of the entity
+          required:
+          - type
+          - id
+          description: The entity that created the API key.
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the API Key was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the API Key was last updated.
+        expiresAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: Optional ISO instant after which the key no longer authenticates; omit or null for no automatic expiry.
+      required:
+      - _id
+      - name
+      - key
+      - createdAt
+      - updatedAt
+    POST_Api_keys_CreateAnApiKey:
+      type: object
+      properties:
+        name:
+          type: string
+          description: An internal name to identify the API key.
+        orgId:
+          type: string
+          description: The organization ID for which to create the API key.
+        expiresAt:
+          type: string
+          format: date-time
+          description: Optional expiry time (strictly future, at most one year); omit for keys that do not auto-expire.
+      required:
+      - name
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

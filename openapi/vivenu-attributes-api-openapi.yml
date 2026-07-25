@@ -1,0 +1,488 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists attributes API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: attributes
+paths:
+  /api/attributes:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: top
+        schema:
+          default: 25
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          type: integer
+          minimum: 1
+          maximum: 1000
+        description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+        in: query
+        required: true
+        style: form
+        explode: true
+      - name: skip
+        schema:
+          default: 0
+          description: The number of objects to skip for the requested result
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        description: The number of objects to skip for the requested result
+        in: query
+        required: true
+        style: form
+        explode: true
+      - name: resourceTypes
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - event
+            - subscription
+        in: query
+        required: false
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  docs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                        sellerId:
+                          type: string
+                        slug:
+                          type: string
+                        name:
+                          type: string
+                        resourceTypes:
+                          type: array
+                          items:
+                            type: string
+                            enum:
+                            - event
+                            - subscription
+                        type:
+                          type: string
+                          enum:
+                          - select
+                        options:
+                          type: array
+                          items:
+                            type: string
+                        isArchived:
+                          default: false
+                          type: boolean
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                      required:
+                      - _id
+                      - sellerId
+                      - slug
+                      - name
+                      - resourceTypes
+                      - type
+                      - isArchived
+                      - createdAt
+                      - updatedAt
+                      additionalProperties: false
+                  total:
+                    type: number
+                required:
+                - docs
+                - total
+                additionalProperties: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - attributes
+      description: Get All Attributes
+      operationId: attributes/list
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                  sellerId:
+                    type: string
+                  slug:
+                    type: string
+                  name:
+                    type: string
+                  resourceTypes:
+                    type: array
+                    items:
+                      type: string
+                      enum:
+                      - event
+                      - subscription
+                  type:
+                    type: string
+                    enum:
+                    - select
+                  options:
+                    type: array
+                    items:
+                      type: string
+                  isArchived:
+                    default: false
+                    type: boolean
+                  createdAt:
+                    type: string
+                    format: date-time
+                  updatedAt:
+                    type: string
+                    format: date-time
+                required:
+                - _id
+                - sellerId
+                - slug
+                - name
+                - resourceTypes
+                - type
+                - isArchived
+                - createdAt
+                - updatedAt
+                additionalProperties: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                resourceTypes:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                    - event
+                    - subscription
+                type:
+                  type: string
+                  enum:
+                  - select
+                options:
+                  type: array
+                  items:
+                    type: string
+              required:
+              - name
+              - resourceTypes
+              - type
+              additionalProperties: false
+      tags:
+      - attributes
+      description: Create an Attribute
+      operationId: attributes/create
+  /api/attributes/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^[a-fA-F0-9]{24}$
+          - type: string
+            pattern: ^[a-z]+_.*$
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                  sellerId:
+                    type: string
+                  slug:
+                    type: string
+                  name:
+                    type: string
+                  resourceTypes:
+                    type: array
+                    items:
+                      type: string
+                      enum:
+                      - event
+                      - subscription
+                  type:
+                    type: string
+                    enum:
+                    - select
+                  options:
+                    type: array
+                    items:
+                      type: string
+                  isArchived:
+                    default: false
+                    type: boolean
+                  createdAt:
+                    type: string
+                    format: date-time
+                  updatedAt:
+                    type: string
+                    format: date-time
+                required:
+                - _id
+                - sellerId
+                - slug
+                - name
+                - resourceTypes
+                - type
+                - isArchived
+                - createdAt
+                - updatedAt
+                additionalProperties: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - attributes
+      description: Get an Attribute
+      operationId: attributes/get
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^[a-fA-F0-9]{24}$
+          - type: string
+            pattern: ^[a-z]+_.*$
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                  sellerId:
+                    type: string
+                  slug:
+                    type: string
+                  name:
+                    type: string
+                  resourceTypes:
+                    type: array
+                    items:
+                      type: string
+                      enum:
+                      - event
+                      - subscription
+                  type:
+                    type: string
+                    enum:
+                    - select
+                  options:
+                    type: array
+                    items:
+                      type: string
+                  isArchived:
+                    default: false
+                    type: boolean
+                  createdAt:
+                    type: string
+                    format: date-time
+                  updatedAt:
+                    type: string
+                    format: date-time
+                required:
+                - _id
+                - sellerId
+                - slug
+                - name
+                - resourceTypes
+                - type
+                - isArchived
+                - createdAt
+                - updatedAt
+                additionalProperties: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                resourceTypes:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                    - event
+                    - subscription
+                type:
+                  type: string
+                  enum:
+                  - select
+                options:
+                  type: array
+                  items:
+                    type: string
+              additionalProperties: false
+      tags:
+      - attributes
+      description: Update an Attribute
+      operationId: attributes/update
+    delete:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^[a-fA-F0-9]{24}$
+          - type: string
+            pattern: ^[a-z]+_.*$
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                  sellerId:
+                    type: string
+                  slug:
+                    type: string
+                  name:
+                    type: string
+                  resourceTypes:
+                    type: array
+                    items:
+                      type: string
+                      enum:
+                      - event
+                      - subscription
+                  type:
+                    type: string
+                    enum:
+                    - select
+                  options:
+                    type: array
+                    items:
+                      type: string
+                  isArchived:
+                    default: false
+                    type: boolean
+                  createdAt:
+                    type: string
+                    format: date-time
+                  updatedAt:
+                    type: string
+                    format: date-time
+                required:
+                - _id
+                - sellerId
+                - slug
+                - name
+                - resourceTypes
+                - type
+                - isArchived
+                - createdAt
+                - updatedAt
+                additionalProperties: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - attributes
+      description: Delete an Attribute
+      operationId: attributes/delete
+components:
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

@@ -1,0 +1,809 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists scan-groups API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: scan-groups
+paths:
+  /api/scan-groups:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: top
+        schema:
+          default: 25
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          type: integer
+          minimum: 1
+          maximum: 1000
+        description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+        in: query
+        required: false
+        style: form
+        explode: true
+      - name: skip
+        schema:
+          default: 0
+          description: The number of objects to skip for the requested result
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        description: The number of objects to skip for the requested result
+        in: query
+        required: false
+        style: form
+        explode: true
+      - name: name
+        schema:
+          description: The filter by name.
+          type: string
+        description: The filter by name.
+        in: query
+        required: false
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  docs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ScanGroupResource'
+                  total:
+                    type: number
+                required:
+                - docs
+                - total
+                additionalProperties: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - scan-groups
+      description: Get All Scan Groups
+      operationId: get_all_scan_groups
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScanGroupResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  description: The name of the scan group.
+                scanConfig:
+                  type: object
+                  properties:
+                    mode:
+                      type: string
+                      enum:
+                      - lock
+                      - default
+                      description: The mode of the scan config.
+                    events:
+                      description: The events settings of the scan config.
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          eventId:
+                            type: string
+                            description: The ID of the event.
+                          allowAllTicketTypes:
+                            description: Whether an all ticket type available or not.
+                            default: false
+                            type: boolean
+                          allowedTicketTypeIds:
+                            description: The array of the allowed ticket type IDs.
+                            type: array
+                            items:
+                              type: string
+                          timeslotSettings:
+                            type: object
+                            properties:
+                              beforeMinutes:
+                                description: Minutes before a timeslot when tickets become valid for this event.
+                                default: 0
+                                type: number
+                                minimum: 0
+                              afterMinutes:
+                                description: Minutes after a timeslot when tickets remain valid for this event.
+                                default: 0
+                                type: number
+                                minimum: 0
+                            additionalProperties: false
+                        required:
+                        - eventId
+                        additionalProperties: false
+                    scanZoneId:
+                      description: The ID of the scan zone.
+                      type: string
+                    scanTypes:
+                      oneOf:
+                      - type: object
+                        properties:
+                          checkin:
+                            type: boolean
+                            enum:
+                            - true
+                            description: Whether check-in scanning is enabled.
+                          checkout:
+                            type: boolean
+                            description: Whether check-out scanning is enabled.
+                        required:
+                        - checkin
+                        - checkout
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          checkin:
+                            type: boolean
+                            enum:
+                            - false
+                            description: Whether check-in scanning is enabled.
+                          checkout:
+                            type: boolean
+                            enum:
+                            - true
+                            description: Whether check-out scanning is enabled.
+                        required:
+                        - checkin
+                        - checkout
+                        additionalProperties: false
+                      description: The scan types enabled on the device. At least one of checkin or checkout must be true.
+                      type: object
+                    enableMultiCheckin:
+                      description: Whether a ticket is allowed to be checked in more than once, given the corresponding count of checkouts were created.
+                      type: boolean
+                    checkTimeslots:
+                      description: Whether to validate the ticket's timeslot against the current time.
+                      type: boolean
+                    tapAndGo:
+                      description: The tap and go configuration of the scan group.
+                      type: object
+                      properties:
+                        enabled:
+                          type: boolean
+                          description: Whether tap and go is enabled.
+                        eventIds:
+                          description: The IDs of events available for tap and go selection.
+                          type: array
+                          items:
+                            type: string
+                      required:
+                      - enabled
+                      additionalProperties: false
+                  required:
+                  - mode
+                  additionalProperties: false
+                  description: The scan configuration of the scan group.
+                deviceSettings:
+                  type: object
+                  properties:
+                    colorSettings:
+                      description: The color overrides for each scan feedback type.
+                      type: object
+                      properties:
+                        success:
+                          description: The color shown for a success scan result. Fixed to green and cannot be overridden.
+                          type: string
+                          enum:
+                          - green
+                        declined:
+                          description: The color shown for a declined scan result. Fixed to red and cannot be overridden.
+                          type: string
+                          enum:
+                          - red
+                        repeated:
+                          description: The color shown for a repeated scan result.
+                          type: string
+                          enum:
+                          - green
+                          - orange
+                          - red
+                          - blue
+                          - pink
+                        highlighted:
+                          description: The color shown for a highlighted scan result.
+                          type: string
+                          enum:
+                          - green
+                          - orange
+                          - red
+                          - blue
+                          - pink
+                        actionRequired:
+                          description: The color shown for a actionRequired scan result.
+                          type: string
+                          enum:
+                          - green
+                          - orange
+                          - red
+                          - blue
+                          - pink
+                      additionalProperties: false
+                    enableSoundFeedback:
+                      description: Whether scan sound feedback is enabled.
+                      type: boolean
+                    enableHapticFeedback:
+                      description: Whether haptic feedback is enabled.
+                      type: boolean
+                    scanRevealInterval:
+                      description: The scan result display duration in seconds.
+                      type: number
+                      enum:
+                      - 1
+                      - 3
+                      - 5
+                      - 10
+                      - 15
+                      - 30
+                    ticketSyncInterval:
+                      description: The ticket data synchronization interval in seconds.
+                      type: number
+                      enum:
+                      - 5
+                      - 15
+                      - 30
+                      - 60
+                      - 300
+                      - 600
+                      - 900
+                  additionalProperties: false
+                  description: The device behaviour settings of the scan group.
+              required:
+              - name
+              - scanConfig
+              additionalProperties: false
+      tags:
+      - scan-groups
+      description: Create a Scan Group
+      operationId: create_a_scan_group
+  /api/scan-groups/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^[a-fA-F0-9]{24}$
+          - type: string
+            pattern: ^[a-z]+_.*$
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScanGroupResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - scan-groups
+      description: Get a Scan Group
+      operationId: get_a_scan_group
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^[a-fA-F0-9]{24}$
+          - type: string
+            pattern: ^[a-z]+_.*$
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScanGroupResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  description: The name of the scan group.
+                scanConfig:
+                  type: object
+                  properties:
+                    mode:
+                      type: string
+                      enum:
+                      - lock
+                      - default
+                      description: The mode of the scan config.
+                    events:
+                      description: The events settings of the scan config.
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          eventId:
+                            type: string
+                            description: The ID of the event.
+                          allowAllTicketTypes:
+                            description: Whether an all ticket type available or not.
+                            default: false
+                            type: boolean
+                          allowedTicketTypeIds:
+                            description: The array of the allowed ticket type IDs.
+                            type: array
+                            items:
+                              type: string
+                          timeslotSettings:
+                            type: object
+                            properties:
+                              beforeMinutes:
+                                description: Minutes before a timeslot when tickets become valid for this event.
+                                default: 0
+                                type: number
+                                minimum: 0
+                              afterMinutes:
+                                description: Minutes after a timeslot when tickets remain valid for this event.
+                                default: 0
+                                type: number
+                                minimum: 0
+                            additionalProperties: false
+                        required:
+                        - eventId
+                        additionalProperties: false
+                    scanZoneId:
+                      description: The ID of the scan zone.
+                      type: string
+                    scanTypes:
+                      oneOf:
+                      - type: object
+                        properties:
+                          checkin:
+                            type: boolean
+                            enum:
+                            - true
+                            description: Whether check-in scanning is enabled.
+                          checkout:
+                            type: boolean
+                            description: Whether check-out scanning is enabled.
+                        required:
+                        - checkin
+                        - checkout
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          checkin:
+                            type: boolean
+                            enum:
+                            - false
+                            description: Whether check-in scanning is enabled.
+                          checkout:
+                            type: boolean
+                            enum:
+                            - true
+                            description: Whether check-out scanning is enabled.
+                        required:
+                        - checkin
+                        - checkout
+                        additionalProperties: false
+                      description: The scan types enabled on the device. At least one of checkin or checkout must be true.
+                      type: object
+                    enableMultiCheckin:
+                      description: Whether a ticket is allowed to be checked in more than once, given the corresponding count of checkouts were created.
+                      type: boolean
+                    checkTimeslots:
+                      description: Whether to validate the ticket's timeslot against the current time.
+                      type: boolean
+                    tapAndGo:
+                      description: The tap and go configuration of the scan group.
+                      type: object
+                      properties:
+                        enabled:
+                          type: boolean
+                          description: Whether tap and go is enabled.
+                        eventIds:
+                          description: The IDs of events available for tap and go selection.
+                          type: array
+                          items:
+                            type: string
+                      required:
+                      - enabled
+                      additionalProperties: false
+                  required:
+                  - mode
+                  additionalProperties: false
+                  description: The scan configuration of the scan group.
+                deviceSettings:
+                  type: object
+                  properties:
+                    colorSettings:
+                      description: The color overrides for each scan feedback type.
+                      type: object
+                      properties:
+                        success:
+                          description: The color shown for a success scan result. Fixed to green and cannot be overridden.
+                          type: string
+                          enum:
+                          - green
+                        declined:
+                          description: The color shown for a declined scan result. Fixed to red and cannot be overridden.
+                          type: string
+                          enum:
+                          - red
+                        repeated:
+                          description: The color shown for a repeated scan result.
+                          type: string
+                          enum:
+                          - green
+                          - orange
+                          - red
+                          - blue
+                          - pink
+                        highlighted:
+                          description: The color shown for a highlighted scan result.
+                          type: string
+                          enum:
+                          - green
+                          - orange
+                          - red
+                          - blue
+                          - pink
+                        actionRequired:
+                          description: The color shown for a actionRequired scan result.
+                          type: string
+                          enum:
+                          - green
+                          - orange
+                          - red
+                          - blue
+                          - pink
+                      additionalProperties: false
+                    enableSoundFeedback:
+                      description: Whether scan sound feedback is enabled.
+                      type: boolean
+                    enableHapticFeedback:
+                      description: Whether haptic feedback is enabled.
+                      type: boolean
+                    scanRevealInterval:
+                      description: The scan result display duration in seconds.
+                      type: number
+                      enum:
+                      - 1
+                      - 3
+                      - 5
+                      - 10
+                      - 15
+                      - 30
+                    ticketSyncInterval:
+                      description: The ticket data synchronization interval in seconds.
+                      type: number
+                      enum:
+                      - 5
+                      - 15
+                      - 30
+                      - 60
+                      - 300
+                      - 600
+                      - 900
+                  additionalProperties: false
+                  description: The device behaviour settings of the scan group.
+              required:
+              - name
+              additionalProperties: false
+      tags:
+      - scan-groups
+      description: Update a Scan Group
+      operationId: update_a_scan_group
+    delete:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^[a-fA-F0-9]{24}$
+          - type: string
+            pattern: ^[a-z]+_.*$
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScanGroupResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - scan-groups
+      description: Delete a Scan Group
+      operationId: delete_a_scan_group
+components:
+  schemas:
+    ScanGroupResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the scan group.
+        name:
+          type: string
+          minLength: 1
+          description: The name of the scan group.
+        sellerId:
+          type: string
+          description: The ID of the seller of the scan group.
+        scanConfig:
+          type: object
+          properties:
+            mode:
+              type: string
+              enum:
+              - lock
+              - default
+              description: The mode of the scan config.
+            events:
+              description: The events settings of the scan config.
+              type: array
+              items:
+                type: object
+                properties:
+                  eventId:
+                    type: string
+                    description: The ID of the event.
+                  allowAllTicketTypes:
+                    description: Whether an all ticket type available or not.
+                    default: false
+                    type: boolean
+                  allowedTicketTypeIds:
+                    description: The array of the allowed ticket type IDs.
+                    type: array
+                    items:
+                      type: string
+                  timeslotSettings:
+                    type: object
+                    properties:
+                      beforeMinutes:
+                        description: Minutes before a timeslot when tickets become valid for this event.
+                        default: 0
+                        type: number
+                        minimum: 0
+                      afterMinutes:
+                        description: Minutes after a timeslot when tickets remain valid for this event.
+                        default: 0
+                        type: number
+                        minimum: 0
+                    additionalProperties: false
+                required:
+                - eventId
+                additionalProperties: false
+            scanZoneId:
+              description: The ID of the scan zone.
+              type: string
+            scanTypes:
+              oneOf:
+              - type: object
+                properties:
+                  checkin:
+                    type: boolean
+                    enum:
+                    - true
+                    description: Whether check-in scanning is enabled.
+                  checkout:
+                    type: boolean
+                    description: Whether check-out scanning is enabled.
+                required:
+                - checkin
+                - checkout
+                additionalProperties: false
+              - type: object
+                properties:
+                  checkin:
+                    type: boolean
+                    enum:
+                    - false
+                    description: Whether check-in scanning is enabled.
+                  checkout:
+                    type: boolean
+                    enum:
+                    - true
+                    description: Whether check-out scanning is enabled.
+                required:
+                - checkin
+                - checkout
+                additionalProperties: false
+              description: The scan types enabled on the device. At least one of checkin or checkout must be true.
+              type: object
+            enableMultiCheckin:
+              description: Whether a ticket is allowed to be checked in more than once, given the corresponding count of checkouts were created.
+              type: boolean
+            checkTimeslots:
+              description: Whether to validate the ticket's timeslot against the current time.
+              type: boolean
+            tapAndGo:
+              description: The tap and go configuration of the scan group.
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+                  description: Whether tap and go is enabled.
+                eventIds:
+                  description: The IDs of events available for tap and go selection.
+                  type: array
+                  items:
+                    type: string
+              required:
+              - enabled
+              additionalProperties: false
+          required:
+          - mode
+          additionalProperties: false
+          description: The scan configuration of the scan group.
+        deviceSettings:
+          type: object
+          properties:
+            colorSettings:
+              description: The color overrides for each scan feedback type.
+              type: object
+              properties:
+                success:
+                  description: The color shown for a success scan result. Fixed to green and cannot be overridden.
+                  type: string
+                  enum:
+                  - green
+                declined:
+                  description: The color shown for a declined scan result. Fixed to red and cannot be overridden.
+                  type: string
+                  enum:
+                  - red
+                repeated:
+                  description: The color shown for a repeated scan result.
+                  type: string
+                  enum:
+                  - green
+                  - orange
+                  - red
+                  - blue
+                  - pink
+                highlighted:
+                  description: The color shown for a highlighted scan result.
+                  type: string
+                  enum:
+                  - green
+                  - orange
+                  - red
+                  - blue
+                  - pink
+                actionRequired:
+                  description: The color shown for a actionRequired scan result.
+                  type: string
+                  enum:
+                  - green
+                  - orange
+                  - red
+                  - blue
+                  - pink
+              additionalProperties: false
+            enableSoundFeedback:
+              description: Whether scan sound feedback is enabled.
+              type: boolean
+            enableHapticFeedback:
+              description: Whether haptic feedback is enabled.
+              type: boolean
+            scanRevealInterval:
+              description: The scan result display duration in seconds.
+              type: number
+              enum:
+              - 1
+              - 3
+              - 5
+              - 10
+              - 15
+              - 30
+            ticketSyncInterval:
+              description: The ticket data synchronization interval in seconds.
+              type: number
+              enum:
+              - 5
+              - 15
+              - 30
+              - 60
+              - 300
+              - 600
+              - 900
+          additionalProperties: false
+          description: The device behaviour settings of the scan group.
+        createdAt:
+          description: An ISO Timestamp indicating when the resource was created.
+          type: string
+          format: date-time
+        updatedAt:
+          description: An ISO Timestamp indicating when the resource was updated.
+          type: string
+          format: date-time
+      required:
+      - _id
+      - name
+      - sellerId
+      - createdAt
+      - updatedAt
+      additionalProperties: false
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

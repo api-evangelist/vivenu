@@ -1,0 +1,790 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists transfers API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: transfers
+paths:
+  /api/customers/transfers:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: top
+        schema:
+          default: 25
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          type: integer
+          minimum: 1
+          maximum: 1000
+        description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+        in: query
+        required: true
+        style: form
+        explode: true
+      - name: skip
+        schema:
+          default: 0
+          description: The number of objects to skip for the requested result
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        description: The number of objects to skip for the requested result
+        in: query
+        required: true
+        style: form
+        explode: true
+      - name: createdAt
+        schema:
+          type: object
+          properties:
+            $gt:
+              description: value is greater than
+              type: string
+              format: date-time
+            $gte:
+              description: value is greater than or equal
+              type: string
+              format: date-time
+            $lt:
+              description: value is less than
+              type: string
+              format: date-time
+            $lte:
+              description: value is less than or equal
+              type: string
+              format: date-time
+            $eq:
+              description: value is equal
+              type: string
+              format: date-time
+            $ne:
+              description: value is not equal
+              type: string
+              format: date-time
+          additionalProperties: false
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+      - name: updatedAt
+        schema:
+          type: object
+          properties:
+            $gt:
+              description: value is greater than
+              type: string
+              format: date-time
+            $gte:
+              description: value is greater than or equal
+              type: string
+              format: date-time
+            $lt:
+              description: value is less than
+              type: string
+              format: date-time
+            $lte:
+              description: value is less than or equal
+              type: string
+              format: date-time
+            $eq:
+              description: value is equal
+              type: string
+              format: date-time
+            $ne:
+              description: value is not equal
+              type: string
+              format: date-time
+          additionalProperties: false
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+      - name: status
+        schema:
+          anyOf:
+          - type: string
+            enum:
+            - PENDING
+            - PROCESSING
+            - SUCCEEDED
+            - FAILED
+          - minItems: 1
+            type: array
+            items:
+              type: string
+              enum:
+              - PENDING
+              - PROCESSING
+              - SUCCEEDED
+              - FAILED
+        in: query
+        required: false
+        style: form
+        explode: true
+      - name: references
+        schema:
+          description: The IDs or references of the transfers
+          maxItems: 100
+          type: array
+          items:
+            anyOf:
+            - type: string
+              pattern: ^[a-z]+_.*$
+            - type: string
+              minLength: 10
+              maxLength: 10
+            description: The ID or the reference of the transfer
+        description: The IDs or references of the transfers
+        in: query
+        required: false
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  docs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                        sellerId:
+                          type: string
+                        customerId:
+                          type: string
+                        reference:
+                          type: string
+                        amount:
+                          type: number
+                        currency:
+                          type: string
+                          enum:
+                          - EUR
+                          - USD
+                          - GBP
+                          - AUD
+                          - CHF
+                          - THB
+                          - ILS
+                          - COP
+                          - MXN
+                          - DKK
+                          - NOK
+                          - SEK
+                          - QAR
+                          - CAD
+                          - ISK
+                          - GTQ
+                          - INR
+                          - DOP
+                          - SGD
+                          - PLN
+                          - SAR
+                          - TTD
+                          - ZAR
+                          - KYD
+                          - HKD
+                          - CZK
+                          - KRW
+                          - JPY
+                          - NZD
+                          - AED
+                          - MAD
+                          - TWD
+                          - BRL
+                          - BWP
+                          - NAD
+                          - KES
+                          - SCR
+                          - TRY
+                          - SZL
+                          - LSL
+                          - TZS
+                          - UGX
+                          - ZMW
+                          - ZWG
+                          - GHS
+                          - NGN
+                          - SLE
+                          - LRD
+                          - XOF
+                          - XAF
+                          - GEL
+                          - IDR
+                          - ARS
+                          - CRC
+                          - HUF
+                          - EGP
+                          - MYR
+                          - VND
+                          - PHP
+                        method:
+                          type: object
+                          properties:
+                            type:
+                              type: string
+                              enum:
+                              - cpm
+                            cpmId:
+                              type: string
+                          required:
+                          - type
+                          - cpmId
+                          additionalProperties: false
+                        status:
+                          type: string
+                          enum:
+                          - PENDING
+                          - PROCESSING
+                          - SUCCEEDED
+                          - FAILED
+                        source:
+                          type: object
+                          properties:
+                            type:
+                              type: string
+                              enum:
+                              - resell_offer
+                            offerId:
+                              type: string
+                          required:
+                          - type
+                          - offerId
+                          additionalProperties: false
+                        history:
+                          default: []
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              type:
+                                type: string
+                                enum:
+                                - transfer.created
+                                - transfer.processing
+                                - transfer.succeeded
+                                - transfer.failed
+                                description: The type of the history entry.
+                              date:
+                                description: An ISO timestamp indicating the date of the history entry.
+                                type: string
+                                format: date-time
+                              userId:
+                                nullable: true
+                                description: The user ID of the history entry.
+                                type: string
+                              data:
+                                description: The data of the history entry.
+                            required:
+                            - type
+                            - date
+                            additionalProperties: false
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                      required:
+                      - _id
+                      - sellerId
+                      - customerId
+                      - amount
+                      - currency
+                      - method
+                      - status
+                      - source
+                      - history
+                      - createdAt
+                      - updatedAt
+                      additionalProperties: false
+                  total:
+                    type: number
+                required:
+                - docs
+                - total
+                additionalProperties: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - transfers
+      description: Get All Transfers
+      operationId: get_all_transfers
+  /api/customers/transfers/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^[a-z]+_.*$
+          - type: string
+            minLength: 10
+            maxLength: 10
+          description: The ID or the reference of the transfer
+        description: The ID or the reference of the transfer
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                  sellerId:
+                    type: string
+                  customerId:
+                    type: string
+                  reference:
+                    type: string
+                  amount:
+                    type: number
+                  currency:
+                    type: string
+                    enum:
+                    - EUR
+                    - USD
+                    - GBP
+                    - AUD
+                    - CHF
+                    - THB
+                    - ILS
+                    - COP
+                    - MXN
+                    - DKK
+                    - NOK
+                    - SEK
+                    - QAR
+                    - CAD
+                    - ISK
+                    - GTQ
+                    - INR
+                    - DOP
+                    - SGD
+                    - PLN
+                    - SAR
+                    - TTD
+                    - ZAR
+                    - KYD
+                    - HKD
+                    - CZK
+                    - KRW
+                    - JPY
+                    - NZD
+                    - AED
+                    - MAD
+                    - TWD
+                    - BRL
+                    - BWP
+                    - NAD
+                    - KES
+                    - SCR
+                    - TRY
+                    - SZL
+                    - LSL
+                    - TZS
+                    - UGX
+                    - ZMW
+                    - ZWG
+                    - GHS
+                    - NGN
+                    - SLE
+                    - LRD
+                    - XOF
+                    - XAF
+                    - GEL
+                    - IDR
+                    - ARS
+                    - CRC
+                    - HUF
+                    - EGP
+                    - MYR
+                    - VND
+                    - PHP
+                  method:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - cpm
+                      cpmId:
+                        type: string
+                    required:
+                    - type
+                    - cpmId
+                    additionalProperties: false
+                  status:
+                    type: string
+                    enum:
+                    - PENDING
+                    - PROCESSING
+                    - SUCCEEDED
+                    - FAILED
+                  source:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - resell_offer
+                      offerId:
+                        type: string
+                    required:
+                    - type
+                    - offerId
+                    additionalProperties: false
+                  history:
+                    default: []
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          enum:
+                          - transfer.created
+                          - transfer.processing
+                          - transfer.succeeded
+                          - transfer.failed
+                          description: The type of the history entry.
+                        date:
+                          description: An ISO timestamp indicating the date of the history entry.
+                          type: string
+                          format: date-time
+                        userId:
+                          nullable: true
+                          description: The user ID of the history entry.
+                          type: string
+                        data:
+                          description: The data of the history entry.
+                      required:
+                      - type
+                      - date
+                      additionalProperties: false
+                  createdAt:
+                    type: string
+                    format: date-time
+                  updatedAt:
+                    type: string
+                    format: date-time
+                required:
+                - _id
+                - sellerId
+                - customerId
+                - amount
+                - currency
+                - method
+                - status
+                - source
+                - history
+                - createdAt
+                - updatedAt
+                additionalProperties: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - transfers
+      description: Get Transfer
+      operationId: get_transfer
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                  sellerId:
+                    type: string
+                  customerId:
+                    type: string
+                  reference:
+                    type: string
+                  amount:
+                    type: number
+                  currency:
+                    type: string
+                    enum:
+                    - EUR
+                    - USD
+                    - GBP
+                    - AUD
+                    - CHF
+                    - THB
+                    - ILS
+                    - COP
+                    - MXN
+                    - DKK
+                    - NOK
+                    - SEK
+                    - QAR
+                    - CAD
+                    - ISK
+                    - GTQ
+                    - INR
+                    - DOP
+                    - SGD
+                    - PLN
+                    - SAR
+                    - TTD
+                    - ZAR
+                    - KYD
+                    - HKD
+                    - CZK
+                    - KRW
+                    - JPY
+                    - NZD
+                    - AED
+                    - MAD
+                    - TWD
+                    - BRL
+                    - BWP
+                    - NAD
+                    - KES
+                    - SCR
+                    - TRY
+                    - SZL
+                    - LSL
+                    - TZS
+                    - UGX
+                    - ZMW
+                    - ZWG
+                    - GHS
+                    - NGN
+                    - SLE
+                    - LRD
+                    - XOF
+                    - XAF
+                    - GEL
+                    - IDR
+                    - ARS
+                    - CRC
+                    - HUF
+                    - EGP
+                    - MYR
+                    - VND
+                    - PHP
+                  method:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - cpm
+                      cpmId:
+                        type: string
+                    required:
+                    - type
+                    - cpmId
+                    additionalProperties: false
+                  status:
+                    type: string
+                    enum:
+                    - PENDING
+                    - PROCESSING
+                    - SUCCEEDED
+                    - FAILED
+                  source:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - resell_offer
+                      offerId:
+                        type: string
+                    required:
+                    - type
+                    - offerId
+                    additionalProperties: false
+                  history:
+                    default: []
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          enum:
+                          - transfer.created
+                          - transfer.processing
+                          - transfer.succeeded
+                          - transfer.failed
+                          description: The type of the history entry.
+                        date:
+                          description: An ISO timestamp indicating the date of the history entry.
+                          type: string
+                          format: date-time
+                        userId:
+                          nullable: true
+                          description: The user ID of the history entry.
+                          type: string
+                        data:
+                          description: The data of the history entry.
+                      required:
+                      - type
+                      - date
+                      additionalProperties: false
+                  createdAt:
+                    type: string
+                    format: date-time
+                  updatedAt:
+                    type: string
+                    format: date-time
+                required:
+                - _id
+                - sellerId
+                - customerId
+                - amount
+                - currency
+                - method
+                - status
+                - source
+                - history
+                - createdAt
+                - updatedAt
+                additionalProperties: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                  - PENDING
+                  - PROCESSING
+                  - SUCCEEDED
+                  - FAILED
+              required:
+              - status
+              additionalProperties: false
+      tags:
+      - transfers
+      description: Update a Transfer
+      operationId: update_a_transfer
+  /api/customers/transfers/bulk:
+    patch:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                - message
+                additionalProperties: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  items:
+                    type: string
+                    pattern: ^[a-z]+_.*$
+                  description: Ids of transfers that should be updated
+                status:
+                  type: string
+                  enum:
+                  - PENDING
+                  - PROCESSING
+                  - SUCCEEDED
+                  - FAILED
+                  description: The new status for the transfer
+              required:
+              - ids
+              - status
+              additionalProperties: false
+      tags:
+      - transfers
+      description: Update Status of Transfers
+      operationId: update_status_of_transfers
+components:
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

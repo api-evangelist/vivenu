@@ -1,0 +1,382 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists product-categories API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: product-categories
+paths:
+  /api/products/categories:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: top
+        schema:
+          default: 25
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          type: integer
+          minimum: 1
+          maximum: 1000
+        description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+        in: query
+        required: true
+        style: form
+        explode: true
+      - name: skip
+        schema:
+          default: 0
+          description: The number of objects to skip for the requested result
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        description: The number of objects to skip for the requested result
+        in: query
+        required: true
+        style: form
+        explode: true
+      - name: name
+        schema:
+          description: The name of the product category
+          type: string
+        description: The name of the product category
+        in: query
+        required: false
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  docs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                        name:
+                          type: string
+                          description: The name of the product category
+                        description:
+                          description: A description of the product category
+                          type: string
+                        color:
+                          description: The color of the product category
+                          type: string
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        sellerId:
+                          type: string
+                        localization:
+                          type: object
+                          additionalProperties:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              description:
+                                type: string
+                            additionalProperties: false
+                      required:
+                      - _id
+                      - name
+                      - createdAt
+                      - updatedAt
+                      - sellerId
+                      additionalProperties: false
+                  total:
+                    type: number
+                required:
+                - docs
+                - total
+                additionalProperties: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - product-categories
+      description: Get all Product Categories
+      operationId: product-categories/list
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                  name:
+                    type: string
+                    description: The name of the product category
+                  description:
+                    description: A description of the product category
+                    type: string
+                  color:
+                    description: The color of the product category
+                    type: string
+                  createdAt:
+                    type: string
+                    format: date-time
+                  updatedAt:
+                    type: string
+                    format: date-time
+                  sellerId:
+                    type: string
+                  localization:
+                    type: object
+                    additionalProperties:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        description:
+                          type: string
+                      additionalProperties: false
+                required:
+                - _id
+                - name
+                - createdAt
+                - updatedAt
+                - sellerId
+                additionalProperties: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the product category
+                description:
+                  description: A description of the product category
+                  type: string
+                color:
+                  description: The color of the product category
+                  type: string
+                localization:
+                  type: object
+                  additionalProperties:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      description:
+                        type: string
+                    additionalProperties: false
+              required:
+              - name
+              additionalProperties: false
+      tags:
+      - product-categories
+      description: Create a Product Category
+      operationId: product-categories/create
+  /api/products/categories/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+          pattern: ^[a-z]+_.*$
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                  name:
+                    type: string
+                    description: The name of the product category
+                  description:
+                    description: A description of the product category
+                    type: string
+                  color:
+                    description: The color of the product category
+                    type: string
+                  createdAt:
+                    type: string
+                    format: date-time
+                  updatedAt:
+                    type: string
+                    format: date-time
+                  sellerId:
+                    type: string
+                  localization:
+                    type: object
+                    additionalProperties:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        description:
+                          type: string
+                      additionalProperties: false
+                required:
+                - _id
+                - name
+                - createdAt
+                - updatedAt
+                - sellerId
+                additionalProperties: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - product-categories
+      description: Get a Product Category
+      operationId: product-categories/get
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+          pattern: ^[a-z]+_.*$
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                  name:
+                    type: string
+                    description: The name of the product category
+                  description:
+                    description: A description of the product category
+                    type: string
+                  color:
+                    description: The color of the product category
+                    type: string
+                  createdAt:
+                    type: string
+                    format: date-time
+                  updatedAt:
+                    type: string
+                    format: date-time
+                  sellerId:
+                    type: string
+                  localization:
+                    type: object
+                    additionalProperties:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        description:
+                          type: string
+                      additionalProperties: false
+                required:
+                - _id
+                - name
+                - createdAt
+                - updatedAt
+                - sellerId
+                additionalProperties: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: The name of the product category
+                  type: string
+                description:
+                  description: A description of the product category
+                  type: string
+                color:
+                  description: The color of the product category
+                  type: string
+                localization:
+                  type: object
+                  additionalProperties:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      description:
+                        type: string
+                    additionalProperties: false
+              additionalProperties: false
+      tags:
+      - product-categories
+      description: Update a Product Category
+      operationId: product-categories/update
+components:
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

@@ -1,0 +1,742 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists Payments API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: Payments
+paths:
+  /api/payments/gateways/{id}/notification:
+    get:
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+      operationId: ''
+      tags:
+      - Payments
+    post:
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+      operationId: ''
+      tags:
+      - Payments
+  /api/payments:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: top
+        required: false
+        schema:
+          type: string
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: paymentRequestId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: checkoutId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: reference
+        required: false
+        schema:
+          type: string
+          description: The reference to filter for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: gatewayId
+        required: false
+        schema:
+          type: string
+          description: The payment gateway id to filter for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: createdAt
+        required: false
+        schema:
+          type: object
+          properties:
+            $gt:
+              type: string
+              format: date-time
+              description: value is greater than
+              metas: {}
+            $gte:
+              type: string
+              format: date-time
+              description: value is greater than or equal
+              metas: {}
+            $lt:
+              type: string
+              format: date-time
+              description: value is less than
+              metas: {}
+            $lte:
+              type: string
+              format: date-time
+              description: value is less than or equal
+              metas: {}
+            $eq:
+              type: string
+              format: date-time
+              description: value is equal
+              metas: {}
+            $ne:
+              type: string
+              format: date-time
+              description: value is not equal
+              metas: {}
+          description: Range of dates to filter by when the payment was created in ISO format.
+          metas: {}
+        in: query
+        style: deepObject
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Payments_GetPayments_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - Payments
+      description: Get Payments
+      operationId: get_payments
+  /api/payments/{id}:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+          description: The ID of the payment
+        description: The ID of the payment
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - Payments
+      description: Get a Payment
+      operationId: get_a_payment
+  /api/public/sellers/{id}/payment-methods:
+    get:
+      parameters:
+      - name: channel
+        required: false
+        schema:
+          type: string
+          enum:
+          - online
+          - subscription
+          description: Channel of the payment
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        required: true
+        schema:
+          oneOf:
+          - type: string
+            length: 24
+            metas: {}
+          - type: string
+            pattern: ^[a-z]+_.*$
+            metas: {}
+          description: Id of the seller
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Methods_GetSellersPaymentMethods_200_response'
+        '400':
+          description: Bad Request
+      tags:
+      - Payments
+      description: Get Sellers Payment Methods
+      operationId: get_sellers_payment_methods
+components:
+  schemas:
+    GET_Payments_GetPayments_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentRequestResource'
+        total:
+          type: integer
+    PaymentRequestProcessorResource:
+      type: object
+      properties:
+        paymentGatewayType:
+          type: string
+          enum:
+          - stripe
+          - paypal
+          - adyen
+          - custom
+          - cardconnect
+          - worldline
+          - shift4
+          - authorizenet
+          - wallee
+          - square
+          - payfast
+          - touchnet
+          - transact
+          - unzer
+          - monext
+          - vivenuPayments
+          - ebanx
+          - rapyd
+          - additional-payment-method
+        paymentGatewayId:
+          type: string
+        reference:
+          type: string
+        redirectUrl:
+          type: string
+        data:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the payment request processor was created
+      required:
+      - paymentGatewayType
+      - createdAt
+    PaymentMethodDetailsResource:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - visa
+          - mc
+          - sepadirectdebit
+          - amex
+          - sofort
+          - klarna
+          - ideal
+          - giropay
+          - paypal
+          - local
+          - discover
+          - custom
+          - twint
+          - postfinance
+          - blik
+          - p24
+          - affirm
+          - dankort
+          - eps
+          - mobilepay
+          - payconiq
+          - bancontact
+          - payfast
+          - distributor
+          - marketplace
+          - cartebancaire
+          - paymentplan
+          - bizum
+          - afterpay
+          - zip
+          - ach
+          - paybybank
+          - link
+          - alipay
+          - wechatpay
+          - pix
+          - eftpos
+          - revolutpay
+          - wero
+          - scalapay
+          - vipps
+          - cashapppay
+          - crypto
+          - unknown
+          - none
+          description: The type of the payment method
+        variant:
+          description: The variant of the payment method
+          type: string
+          enum:
+          - applepay
+          - googlepay
+        attributes:
+          description: The attributes of the payment method
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              applicable:
+                type: boolean
+            required:
+            - applicable
+            additionalProperties: false
+      required:
+      - type
+      additionalProperties: false
+    PaymentResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the payment
+        amount:
+          type: number
+          description: The amount of the payment
+        currency:
+          type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: An ISO 4217 3-character code of the currency
+        status:
+          type: string
+          enum:
+          - SCHEDULED
+          - PENDING
+          - SUCCEEDED
+          - FAILED
+          - REFUNDED
+          description: The status of the payment
+        checkoutId:
+          description: The ID of the checkout the payment belongs to
+          type: string
+        transactionId:
+          description: The ID of the transaction the payment belongs to
+          type: string
+        paymentRequestId:
+          type: string
+          description: The ID of the payment request the payment belongs to
+        paymentGatewayId:
+          description: The ID of the payment gateway responsible for the payment
+          type: string
+        paymentMethodDetails:
+          $ref: '#/components/schemas/PaymentMethodDetailsResource'
+        reference:
+          description: The reference of the payment
+          type: string
+        sellerId:
+          type: string
+          description: The ID of the seller owning the payment
+        customerId:
+          description: The ID of the customer of the payment
+          type: string
+        createdAt:
+          description: An ISO timestamp indicating when the payment was created
+          type: string
+          format: date-time
+        updatedAt:
+          description: An ISO timestamp indicating when the payment was last updated
+          type: string
+          format: date-time
+      required:
+      - _id
+      - amount
+      - currency
+      - status
+      - paymentRequestId
+      - sellerId
+      - createdAt
+      - updatedAt
+      additionalProperties: false
+    GET_Methods_GetSellersPaymentMethods_200_response:
+      type: array
+      items:
+        type: object
+        properties:
+          paypal:
+            type: boolean
+            deprecated: true
+          klarna:
+            type: boolean
+            deprecated: true
+          ideal:
+            type: boolean
+            deprecated: true
+          sepa:
+            type: boolean
+            deprecated: true
+          creditcard:
+            type: boolean
+            deprecated: true
+          mobilepay:
+            type: boolean
+            deprecated: true
+          gateways:
+            type: array
+            items:
+              type: object
+              properties:
+                _id:
+                  type: string
+                name:
+                  type: string
+                type:
+                  type: string
+                  enum:
+                  - stripe
+                  - paypal
+                  - adyen
+                  - custom
+                  - cardconnect
+                  - worldline
+                  - shift4
+                  - authorizenet
+                  - wallee
+                  - square
+                  - payfast
+                  - touchnet
+                  - transact
+                  - unzer
+                  - monext
+                  - vivenuPayments
+                  - ebanx
+                  - rapyd
+                  - additional-payment-method
+                  example: stripe
+                data:
+                  type: object
+              required:
+              - _id
+              - name
+              - type
+        required:
+        - paypal
+        - klarna
+        - ideal
+        - sepa
+        - creditcard
+        - mobilepay
+    PaymentRequestResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the payment request
+        secret:
+          type: string
+          description: The secret token of the payment request
+        amount:
+          type: number
+          format: float
+          description: The amount which needs to be paid
+        currency:
+          type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: An ISO 4217 3-character code of the currency
+        checkoutId:
+          type: string
+          description: The ID of the checkout that request belongs to
+        subscriptionId:
+          type: string
+          description: The ID of the subscription that request belongs to
+        paymentPlanId:
+          type: string
+          description: The ID of the payment plan that request belongs to
+        paymentGatewayId:
+          type: string
+          description: The ID of the payment gateway responsible for the payment
+        reference:
+          type: string
+        processors:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentRequestProcessorResource'
+        status:
+          type: string
+          enum:
+          - NEW
+          - SUCCEEDED
+          - CANCELED
+          default: NEW
+        history:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - payment_request.created
+                - payment_request.details_submitted
+                - payment_request.verified
+                - payment_request.confirmed
+                - payment_request.succeeded
+                - payment_request.canceled
+              date:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the history entry was added
+              data:
+                oneOf:
+                - type: array
+                - type: boolean
+                - type: number
+                - type: object
+                - type: string
+            required:
+            - type
+            - date
+        applications:
+          type: array
+          items:
+            type: object
+            properties:
+              amount:
+                type: number
+                format: float
+                description: The amount of the application
+              method:
+                type: string
+                enum:
+                - deposit
+                description: The method of the application
+            required:
+            - amount
+            - method
+        customer:
+          type: object
+          properties:
+            customerId:
+              type: string
+              description: The ID of the customer of the payment request
+            email:
+              type: string
+              format: email
+              description: The email of the user of the payment request
+            country:
+              type: string
+              description: The country of the user of the payment request
+        sellerId:
+          type: string
+        expiresAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the payment request will expire and a new one will be created if requested
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the payment request was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the payment request was last updated
+      required:
+      - _id
+      - secret
+      - status
+      - sellerId
+      - createdAt
+      - updatedAt
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

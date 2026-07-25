@@ -1,0 +1,4216 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists checkout API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: checkout
+paths:
+  /api/checkout/{id}:
+    get:
+      parameters:
+      - name: secret
+        required: true
+        schema:
+          type: string
+          description: The secret token of the checkout
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutResource'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+      tags:
+      - checkout
+      description: Get a Checkout
+      operationId: get_a_checkout
+    put:
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of an existing checkout
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Checkout_UpdateACheckout'
+      tags:
+      - checkout
+      description: Update a checkout
+      operationId: checkouts/update
+  /api/checkout/transaction/{id}:
+    get:
+      parameters:
+      - name: secret
+        required: true
+        schema:
+          type: string
+          description: The secret token of the transaction
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the transaction
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Checkout_GetATransaction_200_response'
+      tags:
+      - checkout
+      description: Get a Transaction
+      deprecated: true
+      operationId: get_a_transaction
+  /api/checkout/{id}/tickets:
+    get:
+      parameters:
+      - name: secret
+        required: true
+        schema:
+          type: string
+          description: The secret token of the checkout
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of an existing checkout
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Checkout_GetAllTicketsForACheckout_200_response'
+        '400':
+          description: Bad Request
+      tags:
+      - checkout
+      description: Get all tickets for a checkout
+      operationId: get_all_tickets_for_a_checkout
+  /api/checkout/{id}/detailsform:
+    get:
+      parameters:
+      - name: secret
+        required: true
+        schema:
+          type: string
+          description: The secret token of the checkout
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: locale
+        required: false
+        schema:
+          type: string
+          description: Get the info for a specific language
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Checkout_GetDetailsForm_200_response'
+        '400':
+          description: Bad Request
+      tags:
+      - checkout
+      description: Get details form
+      operationId: get_details_form
+  /api/transaction/{id}/checkout:
+    get:
+      parameters:
+      - name: secret
+        required: true
+        schema:
+          type: string
+          description: The secret token of the transaction
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutResource'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+      tags:
+      - checkout
+      description: Get transactions checkout
+      operationId: get_transactions_checkout
+  /api/checkout:
+    post:
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Checkout_CreateACheckout'
+      tags:
+      - checkout
+      description: Create a Checkout
+      operationId: checkouts/create
+  /api/insurance/offers:
+    post:
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    description: The request ID will be used to identify the request during booking process
+                  title:
+                    description: The title will be shown to the user in the checkout
+                    type: string
+                  description:
+                    description: The description will be shown to the user in the checkout
+                    type: string
+                  disclaimer:
+                    description: The disclaimer will be shown to the user in the checkout
+                    type: string
+                  logo:
+                    description: 'The URL of a logo of the insurance provider. Recommended size: 256x256'
+                    type: string
+                    format: uri
+                  events:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          description: The ID of the event
+                        optOut:
+                          type: object
+                          properties:
+                            title:
+                              description: The opt-out text will be shown to the user in the checkout
+                              type: string
+                          additionalProperties: false
+                        offers:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              _id:
+                                type: string
+                                description: The ID will be used to identify the insurance offer during booking process
+                              title:
+                                type: string
+                                description: The title will be shown to the user in the checkout
+                              productName:
+                                description: The product name will be shown to the user in the cart
+                                type: string
+                              productId:
+                                type: string
+                                description: The product ID will be used to identify the insurance product during booking process. The product ID will be used to identify the insurance product during booking process.
+                              netPrice:
+                                type: number
+                                minimum: 0
+                                description: The net price of the offer
+                              badgeLabel:
+                                description: The badge label will be shown to the user in the checkout within a badge box (e.g. 'recommended')
+                                type: string
+                              included:
+                                description: The array of included services (e.g. 'Medical Expenses', 'Accident Protection') will be shown to the user in the checkout
+                                type: array
+                                items:
+                                  type: string
+                              excluded:
+                                description: The array of excluded services (e.g. 'Cancellation', 'Lost Luggage') will be shown to the user in the checkout
+                                type: array
+                                items:
+                                  type: string
+                              termsAndConditionsUrl:
+                                type: string
+                                format: uri
+                                description: The URL of the terms and conditions will be shown to the user in the checkout
+                              taxServiceTypeId:
+                                description: The tax service type ID will be used to calculate taxes & gross price of the insurance product
+                                type: string
+                              price:
+                                type: number
+                                description: The price of the offer including taxes
+                              taxRate:
+                                type: number
+                                description: The tax rate of the offer
+                              taxInfo:
+                                type: object
+                                properties:
+                                  serviceTypeId:
+                                    description: The tax service type ID
+                                    type: string
+                                  exceptionId:
+                                    description: The tax exception ID
+                                    type: string
+                                  proceedsAccountId:
+                                    description: The proceeds account ID
+                                    type: string
+                                  proceedsAccountCode:
+                                    description: The proceeds account code
+                                    type: string
+                                  taxItems:
+                                    description: An array of tax items
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        name:
+                                          description: The name of the tax item
+                                          type: string
+                                        taxTypeId:
+                                          description: The tax type ID
+                                          type: string
+                                        rate:
+                                          type: number
+                                          description: The rate of the tax item
+                                        perUnit:
+                                          type: number
+                                          description: The per unit amount of the tax item
+                                        total:
+                                          type: number
+                                          description: The total amount of the tax item
+                                        netTotal:
+                                          description: The net total amount of the tax item
+                                          type: number
+                                        netPerUnit:
+                                          description: The net per unit amount of the tax item
+                                          type: number
+                                        taxPayableAccountId:
+                                          description: The tax payable account ID
+                                          type: string
+                                        taxPayableAccountCode:
+                                          description: The tax payable account code
+                                          type: string
+                                      required:
+                                      - rate
+                                      - perUnit
+                                      - total
+                                      additionalProperties: false
+                                additionalProperties: false
+                                description: The tax information of the offer
+                            required:
+                            - _id
+                            - title
+                            - productId
+                            - netPrice
+                            - termsAndConditionsUrl
+                            - price
+                            - taxRate
+                            - taxInfo
+                            additionalProperties: false
+                      required:
+                      - _id
+                      - optOut
+                      - offers
+                      additionalProperties: false
+                required:
+                - requestId
+                - events
+                additionalProperties: false
+        '400':
+          description: Bad Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                checkoutId:
+                  type: string
+                  description: The ID of the checkout for which to get offers
+                secret:
+                  type: string
+                  description: The secret of the checkout for which to get offers
+                sellerId:
+                  type: string
+                  description: The ID of the seller for which to get offers
+              required:
+              - checkoutId
+              - secret
+              - sellerId
+              additionalProperties: false
+      tags:
+      - checkout
+      description: Get insurance offers for a Checkout
+      operationId: get_insurance_offers_for_a_checkout
+  /api/checkout/{id}/confirmation-sms:
+    post:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the checkout.
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Checkout_SendAConfirmationSmsForACheckout'
+      tags:
+      - checkout
+      description: Send a confirmation SMS for a checkout
+      operationId: send_a_confirmation_sms_for_a_checkout
+  /api/checkout/{id}/internal:
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the checkout.
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Checkout_CompleteAnInternalCheckout'
+      tags:
+      - checkout
+      description: Complete an Internal Checkout
+      operationId: complete_an_internal_checkout
+  /api/checkout/{id}/confirmation-mail:
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of an existing checkout
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Checkout_ResendConfirmationMail'
+      tags:
+      - checkout
+      description: Resend confirmation mail
+      operationId: resend_confirmation_mail
+  /api/checkout/{id}/items:
+    post:
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of an existing checkout
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Checkout_UpdateCheckoutItems'
+      tags:
+      - checkout
+      description: Update checkout items
+      operationId: update_checkout_items
+  /api/checkout/{id}/confirm-payment-plan:
+    post:
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Checkout_ConfirmAPaymentPlan'
+      tags:
+      - checkout
+      description: Confirm a payment plan
+      operationId: confirm_a_payment_plan
+  /api/checkout/{id}/confirm-subscription:
+    post:
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Checkout_ConfirmASubscription'
+      tags:
+      - checkout
+      description: Confirm a subscription
+      operationId: confirm_a_subscription
+  /api/checkout/{id}/reserve:
+    post:
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutResource'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Checkout_ReserveACheckout'
+      tags:
+      - checkout
+      description: Reserve a checkout
+      operationId: reserve_a_checkout
+  /api/checkout/{id}/confirm-cpm:
+    post:
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Checkout_ConfirmACheckoutViaCpm'
+      tags:
+      - checkout
+      description: Confirm a checkout via CPM
+      operationId: confirm_a_checkout_via_cpm
+  /api/checkout/{id}/abort:
+    post:
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutResource'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Checkout_AbortACheckout'
+      tags:
+      - checkout
+      description: Abort a checkout
+      operationId: abort_a_checkout
+  /api/checkout/{id}/details:
+    post:
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Checkout_PostCheckoutDetails'
+      tags:
+      - checkout
+      description: Post checkout details
+      operationId: post_checkout_details
+  /api/checkout/{id}/reserved-invitation-mail:
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of an existing checkout
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Checkout_ResendInvitationMail'
+      tags:
+      - checkout
+      description: Resend invitation mail
+      operationId: resend_invitation_mail
+components:
+  schemas:
+    GET_Checkout_GetDetailsForm_200_response:
+      type: object
+      properties:
+        skipAddressInfo:
+          type: boolean
+          description: Whether not to ask for the address of the ticket buyer.
+        extraFields:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              description:
+                type: string
+              required:
+                type: boolean
+              deleted:
+                type: boolean
+              onlyForCertainTicketsTypes:
+                type: boolean
+              allowedTicketTypes:
+                type: array
+                items:
+                  type: string
+              printable:
+                type: boolean
+              applyToCustomer:
+                type: boolean
+            required:
+            - name
+            - description
+            - required
+          description: Extra fields
+        enforceCompany:
+          type: boolean
+          description: Whether the company of the ticket buyer is a required field.
+        ticketExtraFields:
+          type: object
+        enforceAddress:
+          type: boolean
+          description: Whether the address is required or not.
+        identificationConfig:
+          type: array
+          items:
+            type: array
+            items:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - spain_tax_id
+                  - origin_country_id
+                  description: The required document type.
+                requireAddress:
+                  type: boolean
+                  description: Whether an address is required for this identification type.
+                identificationThreshold:
+                  type: number
+                  format: float
+                  description: The threshold for identification from when the identification is required.
+              required:
+              - type
+          description: An object describing the legal identification requirements for the checkout.
+    POST_Checkout_AbortACheckout:
+      type: object
+      properties:
+        secret:
+          type: string
+          description: The secret token of the checkout
+      required:
+      - secret
+    GET_Checkout_GetATransaction_200_response:
+      type: object
+      properties:
+        tid:
+          type: string
+          description: The ID of the transaction
+        secret:
+          type: string
+          description: The secret token of the transaction
+        tickets:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - ticket
+                description: The type of the cart item.
+                default: ticket
+              _id:
+                type: string
+                description: Unique identifier for the cart item. If omitted, the system will automatically generate one.
+              name:
+                type: string
+                nullable: true
+                description: The name of the cart item.
+              amount:
+                type: integer
+                minimum: 1
+                description: The amount of the cart item.
+              netPrice:
+                type: number
+                format: float
+                description: The single piece net price of the cart item.
+              price:
+                type: number
+                format: float
+                description: The single piece price of the cart item.
+              taxRate:
+                type: number
+                format: float
+                nullable: true
+                description: The tax rate to be applied to this cart item. If not present the tax rate of the transaction is taken.
+              triggeredBy:
+                oneOf:
+                - type: string
+                  description: An ID of another cart item which triggered the buy action of the cart item.
+                - type: array
+                  items:
+                    type: string
+                  description: An array of IDs of other cart items which triggered the buy action of the cart item.
+                nullable: true
+                description: An ID or an array of IDs of other cart items which triggered the buy action of the cart item.
+              bundleInfo:
+                type: object
+                properties:
+                  bundleId:
+                    type: string
+                  componentId:
+                    type: string
+                  optionId:
+                    type: string
+                nullable: true
+              ticketTypeId:
+                type: string
+                description: The ID of the ticket type of the cart item.
+              categoryRef:
+                type: string
+                description: The category reference of the ticket type.
+              seatingInfo:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: The ID of the seating object.
+                  _type:
+                    type: number
+                    format: float
+                    enum:
+                    - 6
+                    - 7
+                    description: Indicates the type of seating object. Seat = 6, General Admission = 7.
+                  categoryId:
+                    type: string
+                    description: The ID of the category containing the seating object.
+                  statusId:
+                    type: string
+                    description: The ID of a container holding information about the seating status of the seating object.
+                  name:
+                    type: string
+                    nullable: true
+                    description: If _type == 7. The name of the general admission.
+                  seatType:
+                    type: string
+                    nullable: true
+                    enum:
+                    - handicapped
+                    - limitedView
+                    - foldable
+                    description: If _type == 6. The type of the seat. null = normal.
+                  sectionName:
+                    type: string
+                    nullable: true
+                    description: If _type == 6. The name of the section where the seat is located.
+                  groupName:
+                    type: string
+                    nullable: true
+                    description: If _type == 6. The name of the row group where the seat is located.
+                  rowName:
+                    type: string
+                    nullable: true
+                    description: If _type == 6. The name of the row where the seat is located.
+                  seatName:
+                    type: string
+                    nullable: true
+                    description: If _type == 6. The seat name.
+                  gate:
+                    type: string
+                    nullable: true
+                    description: The entry gate associated with the seating object.
+                required:
+                - _type
+                - statusId
+                nullable: true
+                description: The associated seating object.
+              slotInfo:
+                type: object
+                properties:
+                  slotId:
+                    type: string
+                    description: The ID of the time slot.
+                  slotStartTime:
+                    type: string
+                    description: The start time of the time slot.
+                required:
+                - slotId
+                - slotStartTime
+                nullable: true
+                description: The associated time slot object.
+              asHardTicket:
+                type: boolean
+                nullable: true
+                description: Whether this ticket is a hard ticket.
+              listingId:
+                type: string
+                nullable: true
+                description: Listing in secondary market.
+              listingItemId:
+                type: string
+                nullable: true
+                description: The ID of the listing item in the secondary market.
+              triggeredAutomations:
+                type: boolean
+                nullable: true
+                description: Whether the cart item triggered automations.
+              meta:
+                type: object
+                nullable: true
+                description: Meta data which is propagated to the ticket.
+              addOns:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    productId:
+                      type: string
+                    productVariantId:
+                      type: string
+                    name:
+                      type: string
+                  required:
+                  - productId
+                  - productVariantId
+                  - name
+                description: A list of Add-Ons of the ticket.
+              capabilities:
+                type: array
+                items:
+                  oneOf:
+                  - type: object
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - self_service_return
+                      settings:
+                        type: object
+                        properties:
+                          returnRelatedItems:
+                            type: boolean
+                            default: true
+                          phases:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                condition:
+                                  type: object
+                                  properties:
+                                    target:
+                                      type: string
+                                      nullable: true
+                                      description: The target of the relative date
+                                    unit:
+                                      type: string
+                                      enum:
+                                      - hours
+                                      - days
+                                      - weeks
+                                      - months
+                                      - years
+                                      description: The unit in which the offset is specified
+                                    offset:
+                                      type: integer
+                                      description: The offset to the date
+                                  required:
+                                  - unit
+                                  - offset
+                                refundPercentage:
+                                  type: number
+                                  format: float
+                                  minimum: 0
+                                  maximum: 1
+                              required:
+                              - condition
+                              - refundPercentage
+                        required:
+                        - phases
+                    required:
+                    - type
+                    - settings
+                  - type: object
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - repersonalization
+                      settings:
+                        type: object
+                        properties:
+                          inherit:
+                            type: boolean
+                          repersonalizationDeadline:
+                            type: object
+                            properties:
+                              target:
+                                type: string
+                                nullable: true
+                                description: The target of the relative date
+                              unit:
+                                type: string
+                                enum:
+                                - hours
+                                - days
+                                - weeks
+                                - months
+                                - years
+                                description: The unit in which the offset is specified
+                              offset:
+                                type: integer
+                                description: The offset to the date
+                            required:
+                            - unit
+                            - offset
+                          repersonalizationsLimit:
+                            type: number
+                            format: float
+                            nullable: true
+                          repersonalizationFee:
+                            type: number
+                            format: float
+                            nullable: true
+                          limitOnlyNameChanges:
+                            type: boolean
+                        required:
+                        - repersonalizationDeadline
+                    required:
+                    - type
+                    - settings
+                nullable: true
+                description: The capabilities of the ticket.
+              taxInfo:
+                type: object
+                properties:
+                  serviceTypeId:
+                    type: string
+                    description: The ID of the service type.
+                  exceptionId:
+                    type: string
+                    description: The ID of the exception.
+                  proceedsAccountId:
+                    type: string
+                    description: The ID of the proceeds account.
+                  proceedsAccountCode:
+                    type: string
+                    description: The code of the proceeds account.
+                  taxItems:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          nullable: true
+                        taxTypeId:
+                          type: string
+                          nullable: true
+                        rate:
+                          type: number
+                          format: float
+                        perUnit:
+                          type: number
+                          format: float
+                        total:
+                          type: number
+                          format: float
+                        netTotal:
+                          type: number
+                          format: float
+                          nullable: true
+                        netPerUnit:
+                          type: number
+                          format: float
+                          nullable: true
+                        taxPayableAccountId:
+                          type: string
+                          nullable: true
+                        taxPayableAccountCode:
+                          type: string
+                          nullable: true
+                      required:
+                      - rate
+                      - perUnit
+                      - total
+                    description: The array of tax items.
+                description: The tax info details.
+            required:
+            - amount
+            - price
+            - ticketTypeId
+          description: An array of cart ticket items of the transaction
+          default: []
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - product
+                description: The type of the cart item.
+              _id:
+                type: string
+                description: Unique identifier for the cart item. If omitted, the system will automatically generate one.
+              name:
+                type: string
+                nullable: true
+                description: The name of the cart item.
+              amount:
+                type: integer
+                minimum: 1
+                description: The amount of the cart item.
+              netPrice:
+                type: number
+                format: float
+                description: The single piece net price of the cart item.
+              price:
+                type: number
+                format: float
+                description: The single piece price of the cart item.
+              taxRate:
+                type: number
+                format: float
+                nullable: true
+                description: The tax rate to be applied to this cart item. If not present the tax rate of the transaction is taken.
+              triggeredBy:
+                oneOf:
+                - type: string
+                  description: An ID of another cart item which triggered the buy action of the cart item.
+                - type: array
+                  items:
+                    type: string
+                  description: An array of IDs of other cart items which triggered the buy action of the cart item.
+                nullable: true
+                description: An ID or an array of IDs of other cart items which triggered the buy action of the cart item.
+              bundleInfo:
+                type: object
+                properties:
+                  bundleId:
+                    type: string
+                  componentId:
+                    type: string
+                  optionId:
+                    type: string
+                nullable: true
+              productVariantId:
+                type: string
+                description: The ID of the product variant.
+              isFulfillable:
+                type: boolean
+                description: Whether the product can be delivered
+              taxInfo:
+                type: object
+                properties:
+                  serviceTypeId:
+                    type: string
+                    description: The ID of the service type.
+                  exceptionId:
+                    type: string
+                    description: The ID of the exception.
+                  proceedsAccountId:
+                    type: string
+                    description: The ID of the proceeds account.
+                  proceedsAccountCode:
+                    type: string
+                    description: The code of the proceeds account.
+                  taxItems:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          nullable: true
+                        taxTypeId:
+                          type: string
+                          nullable: true
+                        rate:
+                          type: number
+                          format: float
+                        perUnit:
+                          type: number
+                          format: float
+                        total:
+                          type: number
+                          format: float
+                        netTotal:
+                          type: number
+                          format: float
+                          nullable: true
+                        netPerUnit:
+                          type: number
+                          format: float
+                          nullable: true
+                        taxPayableAccountId:
+                          type: string
+                          nullable: true
+                        taxPayableAccountCode:
+                          type: string
+                          nullable: true
+                      required:
+                      - rate
+                      - perUnit
+                      - total
+                    description: The array of tax items.
+                description: The tax info details.
+            required:
+            - type
+            - amount
+            - price
+            - productVariantId
+          description: An array of cart product items of the transaction
+          default: []
+        realPrice:
+          type: number
+          format: float
+          description: The calculated real price of the transaction
+        currency:
+          type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: An ISO 4217 3-character code of the currency
+          default: EUR
+        vouchers:
+          type: array
+          items:
+            type: string
+          description: An array of voucher codes applied to this transaction
+        redeemedVouchers:
+          type: object
+          properties:
+            totalRedeemedAmount:
+              type: number
+              format: float
+              description: The sum of all vouchers applied.
+            vouchers:
+              type: array
+              items:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: The ID of the voucher.
+                  code:
+                    type: string
+                    description: The Code of the voucher.
+                  redeemedAmount:
+                    type: number
+                    format: float
+                    description: The applied value of the voucher.
+                required:
+                - code
+                - redeemedAmount
+              description: An array of all redeemed vouchers.
+          required:
+          - totalRedeemedAmount
+          description: An array of voucher codes redeemed for this transaction
+        email:
+          type: string
+          format: email
+          description: The email of the user of the transaction
+        status:
+          type: string
+          enum:
+          - NEW
+          - RESERVED-BY-SYSTEM
+          - ABORTED
+          - COMPLETE
+          - CANCELED
+          description: The status of the transaction.
+        company:
+          type: string
+          description: The company name of the user of the transaction
+        name:
+          type: string
+          description: The name of the user of the transaction
+        prename:
+          type: string
+          description: The firstname of the user of the transaction
+        lastname:
+          type: string
+          description: The lastname of the user of the transaction
+        street:
+          type: string
+          description: The street of the user of the transaction
+        line2:
+          type: string
+          description: The additional address field of the user of the transaction.
+        postal:
+          type: string
+          description: The postal of the user of the transaction
+        city:
+          type: string
+          description: The city of the user of the transaction
+        state:
+          type: string
+          description: The state of the user of the transaction
+        country:
+          type: string
+          description: The country of the user of the transaction
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the transaction was created
+        eventId:
+          type: string
+          description: The ID of the event containing this transaction
+        paymentStatus:
+          type: string
+          enum:
+          - AWAITING
+          - PENDING
+          - RECEIVED
+          - REFUND
+          - CANCELED
+          - FAILED
+          - DISPUTE
+          - CHARGEBACK
+          - POS-RECEIVED
+          - POS-CANCELED
+          - LOCAL-PENDING
+          - LOCAL-AWAITING
+          - LOCAL-RECEIVED
+          - EXTERNAL
+          description: The payment status of the transaction.
+          default: AWAITING
+        outerCharge:
+          type: number
+          format: float
+          description: The outer charge of the transaction
+        paymentMethod:
+          type: string
+          enum:
+          - paypal
+          - stripe
+          - local
+          - external
+          - vivenu-payments
+          description: The payment method of the transaction.
+        preferredLanguage:
+          type: string
+          enum:
+          - de
+          - de-CH
+          - en
+          - en-GB
+          - en-AU
+          - fr
+          - es
+          - es-MX
+          - is
+          - it
+          - ru
+          - pt
+          - tr
+          - nb
+          - nl
+          - pl
+          - sv
+          - sl
+          - da
+          - cs
+          - lv
+          - he
+          - ar
+          - th
+          - ko
+          - ja
+          - zh-TW
+          description: The preferred language of the transaction. It is determined automatically
+          default: de
+        extraFields:
+          type: object
+          description: The extra fields of the transaction
+        underShop:
+          type: string
+          description: The under shop of the transaction
+        paymentInfoMethod:
+          type: string
+          description: The method of the payment
+        coupons:
+          type: array
+          items:
+            type: string
+          description: An array of coupon codes applied
+      required:
+      - tid
+      - secret
+      - realPrice
+      - status
+      - eventId
+    POST_Checkout_ResendConfirmationMail:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: The email to send the confirmation to
+      nullable: true
+    LanguageResource:
+      type: string
+      nullable: true
+      enum:
+      - de
+      - de-CH
+      - en
+      - en-GB
+      - en-AU
+      - fr
+      - es
+      - es-MX
+      - is
+      - it
+      - ru
+      - pt
+      - tr
+      - nb
+      - nl
+      - pl
+      - sv
+      - sl
+      - da
+      - cs
+      - lv
+      - he
+      - ar
+      - th
+      - ko
+      - ja
+      - zh-TW
+      description: The preferred language of the package checkout
+    POST_Checkout_ConfirmACheckoutViaCpm:
+      type: object
+      properties:
+        secret:
+          type: string
+          description: The secret token of the checkout
+        customerPaymentMethodId:
+          type: string
+          description: The ID of the customer payment method
+      required:
+      - secret
+      - customerPaymentMethodId
+    PUT_Checkout_UpdateACheckout:
+      type: object
+      properties:
+        vouchers:
+          type: array
+          items:
+            type: string
+            description: The code of the voucher
+          description: An array of vouchers to be redeemed
+        secret:
+          type: string
+          description: The secret token of the checkout
+      required:
+      - secret
+    POST_Checkout_ResendInvitationMail:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          nullable: true
+          description: The email to send the invitation to
+      nullable: true
+    POST_Checkout_CreateACheckout:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - transaction
+          - upgrade
+          - rebooking
+          - purchaseintent
+          - subscription
+          description: The type of the checkout.
+        eventId:
+          type: string
+          description: The ID of the event to create the checkout item for.
+        coupons:
+          type: array
+          items:
+            type: string
+          description: An array of coupon codes to apply to the checkout item.
+        vouchers:
+          type: array
+          items:
+            type: string
+          description: An array of voucher codes to be redeemed through the checkout.
+        shopId:
+          type: string
+          description: The ID of the secret shop to create the checkout item for.
+        items:
+          type: array
+          items:
+            oneOf:
+            - type: object
+              properties:
+                _id:
+                  type: string
+                  description: Unique identifier for the cart item. If omitted, the system will automatically generate one.
+                type:
+                  type: string
+                  enum:
+                  - ticket
+                  description: The type of the cart item.
+                  default: ticket
+                amount:
+                  type: integer
+                  minimum: 1
+                  description: The amount of the cart item.
+                ticketTypeId:
+                  type: string
+                  description: The ID of the ticket type of the cart item.
+                seatingInfo:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The ID of the seating object.
+                    _type:
+                      type: number
+                      format: float
+                      enum:
+                      - 6
+                      - 7
+                      description: Indicates the type of seating object. Seat = 6, General Admission = 7.
+                    categoryId:
+                      type: string
+                      description: The ID of the category containing the seating object.
+                    statusId:
+                      type: string
+                      description: The ID of a container holding information about the seating status of the seating object.
+                    name:
+                      type: string
+                      nullable: true
+                      description: If _type == 7. The name of the general admission.
+                    seatType:
+                      type: string
+                      nullable: true
+                      enum:
+                      - handicapped
+                      - limitedView
+                      - foldable
+                      description: If _type == 6. The type of the seat. null = normal.
+                    sectionName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The name of the section where the seat is located.
+                    groupName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The name of the row group where the seat is located.
+                    rowName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The name of the row where the seat is located.
+                    seatName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The seat name.
+                    gate:
+                      type: string
+                      nullable: true
+                      description: The entry gate associated with the seating object.
+                  required:
+                  - _type
+                  - statusId
+                  nullable: true
+                  description: The associated seating object.
+                slotInfo:
+                  type: object
+                  properties:
+                    slotId:
+                      type: string
+                      description: The ID of the time slot.
+                    slotStartTime:
+                      type: string
+                      description: The start time of the time slot.
+                  required:
+                  - slotId
+                  - slotStartTime
+                  nullable: true
+                  description: The associated time slot object.
+                asHardTicket:
+                  type: boolean
+                  nullable: true
+                  description: Whether this ticket is a hard ticket.
+                listingId:
+                  type: string
+                  nullable: true
+                  description: Listing in secondary market.
+                triggeredBy:
+                  oneOf:
+                  - type: string
+                    description: An ID of another cart item which triggered the buy action of the cart item.
+                  - type: array
+                    items:
+                      type: string
+                    description: An array of IDs of other cart items which triggered the buy action of the cart item.
+                  nullable: true
+                  description: An ID or an array of IDs of other cart items which triggered the buy action of the cart item.
+                triggeredAutomations:
+                  type: boolean
+                  nullable: true
+                  description: Whether the cart item triggered automations.
+                meta:
+                  type: object
+                  nullable: true
+                  description: Meta data which is propagated to the ticket.
+                bundleInfo:
+                  type: object
+                  properties:
+                    bundleId:
+                      type: string
+                    componentId:
+                      type: string
+                    optionId:
+                      type: string
+                  nullable: true
+              required:
+              - amount
+              - ticketTypeId
+            - type: object
+              properties:
+                _id:
+                  type: string
+                  description: Unique identifier for the cart item. If omitted, the system will automatically generate one.
+                type:
+                  type: string
+                  enum:
+                  - product
+                  description: The type of the cart item.
+                amount:
+                  type: integer
+                  minimum: 1
+                  description: The amount of the cart item.
+                productVariantId:
+                  type: string
+                  description: The ID of the product variant.
+                isFulfillable:
+                  type: boolean
+                  description: Whether the product can be delivered
+                triggeredBy:
+                  oneOf:
+                  - type: string
+                    description: An ID of another cart item which triggered the buy action of the cart item.
+                  - type: array
+                    items:
+                      type: string
+                    description: An array of IDs of other cart items which triggered the buy action of the cart item.
+                  nullable: true
+                  description: An ID or an array of IDs of other cart items which triggered the buy action of the cart item.
+                bundleInfo:
+                  type: object
+                  properties:
+                    bundleId:
+                      type: string
+                    componentId:
+                      type: string
+                    optionId:
+                      type: string
+                  nullable: true
+                price:
+                  type: number
+                  format: float
+                  description: The single piece price of the cart item.
+              required:
+              - type
+              - amount
+              - productVariantId
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - bundle
+                  - additionalFee
+                  - fulfillmentType
+                  - insurance
+                  description: The type of the cart item.
+                _id:
+                  type: string
+                  description: Unique identifier for the cart item. If omitted, the system will automatically generate one.
+                name:
+                  type: string
+                  nullable: true
+                  description: The name of the cart item.
+                amount:
+                  type: integer
+                  minimum: 1
+                  description: The amount of the cart item.
+                netPrice:
+                  type: number
+                  format: float
+                  description: The single piece net price of the cart item.
+                price:
+                  type: number
+                  format: float
+                  description: The single piece price of the cart item.
+                taxRate:
+                  type: number
+                  format: float
+                  nullable: true
+                  description: The tax rate to be applied to this cart item. If not present the tax rate of the transaction is taken.
+                triggeredBy:
+                  oneOf:
+                  - type: string
+                    description: An ID of another cart item which triggered the buy action of the cart item.
+                  - type: array
+                    items:
+                      type: string
+                    description: An array of IDs of other cart items which triggered the buy action of the cart item.
+                  nullable: true
+                  description: An ID or an array of IDs of other cart items which triggered the buy action of the cart item.
+                bundleInfo:
+                  type: object
+                  properties:
+                    bundleId:
+                      type: string
+                    componentId:
+                      type: string
+                    optionId:
+                      type: string
+                  nullable: true
+                data:
+                  type: object
+              required:
+              - type
+              - amount
+              - price
+          description: An array of all cart items.
+        seatingReservationToken:
+          type: string
+          description: The reservation token of the selected seats.
+        channelId:
+          type: string
+          description: The ID of the channel to create the checkout item for.
+        salesChannelId:
+          type: string
+          description: The ID of the sales channel to create the checkout item for.
+        preferredLanguage:
+          $ref: '#/components/schemas/LanguageResource'
+        meta:
+          type: object
+          description: Custom key-value data. Metadata is useful for storing additional, structured information on an object.
+      required:
+      - type
+      - eventId
+      - items
+    POST_Checkout_ConfirmAPaymentPlan:
+      type: object
+      properties:
+        secret:
+          type: string
+          description: The secret token of the checkout
+        customerPaymentMethodId:
+          type: string
+          description: The ID of the customer payment method
+        paymentStrategyId:
+          type: string
+          description: The ID of the payment strategy
+        paymentOptionId:
+          type: string
+          description: The ID of the payment option
+      required:
+      - secret
+      - customerPaymentMethodId
+      - paymentStrategyId
+      - paymentOptionId
+    POST_Checkout_ReserveACheckout:
+      type: object
+      properties:
+        secret:
+          type: string
+          description: The secret token of the checkout
+      required:
+      - secret
+    POST_Checkout_UpdateCheckoutItems:
+      type: object
+      properties:
+        secret:
+          type: string
+          description: The secret token of the checkout
+        eventId:
+          type: string
+          description: The ID of the event to create the transaction for
+        coupons:
+          type: array
+          items:
+            type: string
+          description: An array of coupon code to apply to this transaction
+        shopId:
+          type: string
+          description: The ID of the secret shop to create the transaction for
+        items:
+          type: array
+          items:
+            oneOf:
+            - type: object
+              properties:
+                _id:
+                  type: string
+                  description: Unique identifier for the cart item. If omitted, the system will automatically generate one.
+                type:
+                  type: string
+                  enum:
+                  - ticket
+                  description: The type of the cart item.
+                  default: ticket
+                amount:
+                  type: integer
+                  minimum: 1
+                  description: The amount of the cart item.
+                ticketTypeId:
+                  type: string
+                  description: The ID of the ticket type of the cart item.
+                seatingInfo:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The ID of the seating object.
+                    _type:
+                      type: number
+                      format: float
+                      enum:
+                      - 6
+                      - 7
+                      description: Indicates the type of seating object. Seat = 6, General Admission = 7.
+                    categoryId:
+                      type: string
+                      description: The ID of the category containing the seating object.
+                    statusId:
+                      type: string
+                      description: The ID of a container holding information about the seating status of the seating object.
+                    name:
+                      type: string
+                      nullable: true
+                      description: If _type == 7. The name of the general admission.
+                    seatType:
+                      type: string
+                      nullable: true
+                      enum:
+                      - handicapped
+                      - limitedView
+                      - foldable
+                      description: If _type == 6. The type of the seat. null = normal.
+                    sectionName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The name of the section where the seat is located.
+                    groupName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The name of the row group where the seat is located.
+                    rowName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The name of the row where the seat is located.
+                    seatName:
+                      type: string
+                      nullable: true
+                      description: If _type == 6. The seat name.
+                    gate:
+                      type: string
+                      nullable: true
+                      description: The entry gate associated with the seating object.
+                  required:
+                  - _type
+                  - statusId
+                  nullable: true
+                  description: The associated seating object.
+                slotInfo:
+                  type: object
+                  properties:
+                    slotId:
+                      type: string
+                      description: The ID of the time slot.
+                    slotStartTime:
+                      type: string
+                      description: The start time of the time slot.
+                  required:
+                  - slotId
+                  - slotStartTime
+                  nullable: true
+                  description: The associated time slot object.
+                asHardTicket:
+                  type: boolean
+                  nullable: true
+                  description: Whether this ticket is a hard ticket.
+                listingId:
+                  type: string
+                  nullable: true
+                  description: Listing in secondary market.
+                triggeredBy:
+                  oneOf:
+                  - type: string
+                    description: An ID of another cart item which triggered the buy action of the cart item.
+                  - type: array
+                    items:
+                      type: string
+                    description: An array of IDs of other cart items which triggered the buy action of the cart item.
+                  nullable: true
+                  description: An ID or an array of IDs of other cart items which triggered the buy action of the cart item.
+                triggeredAutomations:
+                  type: boolean
+                  nullable: true
+                  description: Whether the cart item triggered automations.
+                meta:
+                  type: object
+                  nullable: true
+                  description: Meta data which is propagated to the ticket.
+                bundleInfo:
+                  type: object
+                  properties:
+                    bundleId:
+                      type: string
+                    componentId:
+                      type: string
+                    optionId:
+                      type: string
+                  nullable: true
+              required:
+              - amount
+              - ticketTypeId
+            - type: object
+              properties:
+                _id:
+                  type: string
+                  description: Unique identifier for the cart item. If omitted, the system will automatically generate one.
+                type:
+                  type: string
+                  enum:
+                  - product
+                  description: The type of the cart item.
+                amount:
+                  type: integer
+                  minimum: 1
+                  description: The amount of the cart item.
+                productVariantId:
+                  type: string
+                  description: The ID of the product variant.
+                isFulfillable:
+                  type: boolean
+                  description: Whether the product can be delivered
+                triggeredBy:
+                  oneOf:
+                  - type: string
+                    description: An ID of another cart item which triggered the buy action of the cart item.
+                  - type: array
+                    items:
+                      type: string
+                    description: An array of IDs of other cart items which triggered the buy action of the cart item.
+                  nullable: true
+                  description: An ID or an array of IDs of other cart items which triggered the buy action of the cart item.
+                bundleInfo:
+                  type: object
+                  properties:
+                    bundleId:
+                      type: string
+                    componentId:
+                      type: string
+                    optionId:
+                      type: string
+                  nullable: true
+                price:
+                  type: number
+                  format: float
+                  description: The single piece price of the cart item.
+              required:
+              - type
+              - amount
+              - productVariantId
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - bundle
+                  - additionalFee
+                  - fulfillmentType
+                  - insurance
+                  description: The type of the cart item.
+                _id:
+                  type: string
+                  description: Unique identifier for the cart item. If omitted, the system will automatically generate one.
+                name:
+                  type: string
+                  nullable: true
+                  description: The name of the cart item.
+                amount:
+                  type: integer
+                  minimum: 1
+                  description: The amount of the cart item.
+                netPrice:
+                  type: number
+                  format: float
+                  description: The single piece net price of the cart item.
+                price:
+                  type: number
+                  format: float
+                  description: The single piece price of the cart item.
+                taxRate:
+                  type: number
+                  format: float
+                  nullable: true
+                  description: The tax rate to be applied to this cart item. If not present the tax rate of the transaction is taken.
+                triggeredBy:
+                  oneOf:
+                  - type: string
+                    description: An ID of another cart item which triggered the buy action of the cart item.
+                  - type: array
+                    items:
+                      type: string
+                    description: An array of IDs of other cart items which triggered the buy action of the cart item.
+                  nullable: true
+                  description: An ID or an array of IDs of other cart items which triggered the buy action of the cart item.
+                bundleInfo:
+                  type: object
+                  properties:
+                    bundleId:
+                      type: string
+                    componentId:
+                      type: string
+                    optionId:
+                      type: string
+                  nullable: true
+                data:
+                  type: object
+              required:
+              - type
+              - amount
+              - price
+          description: An array of all cart items
+        seatingReservationToken:
+          type: string
+          description: The reservation token of the selected seats
+        channelId:
+          type: string
+          description: The ID of the channel to create the transaction for
+      required:
+      - secret
+      - eventId
+      - items
+    GET_Checkout_GetAllTicketsForACheckout_200_response:
+      type: object
+      properties:
+        tickets:
+          type: array
+          items:
+            type: object
+            properties:
+              sellerId:
+                type: string
+                description: The ID of the seller that ticket belongs to.
+              name:
+                type: string
+                description: The name of the ticket owner
+              firstname:
+                type: string
+                description: The first name of the ticket owner
+              lastname:
+                type: string
+                description: The last name of the ticket owner
+              email:
+                type: string
+              street:
+                type: string
+              line2:
+                type: string
+                description: The additional address field of the user of the ticket
+              city:
+                type: string
+              postal:
+                type: string
+              state:
+                type: string
+                description: The state of the user of the ticket
+              country:
+                type: string
+                description: The country of the user of the ticket
+              eventId:
+                type: string
+                description: The ID of the event the ticket belongs to
+              categoryRef:
+                type: string
+                description: A UUID of the category the ticket belongs to.
+              ticketTypeId:
+                type: string
+                description: The ID of the ticket type this ticket inherits from
+              ticketName:
+                type: string
+                description: The name of the ticket type this ticket inherits from
+              categoryName:
+                type: string
+                description: The name of the category the ticket belongs to.
+              regularPrice:
+                type: number
+                format: float
+                description: The original non discounted price for the ticket
+              realPrice:
+                type: number
+                format: float
+                description: The real price for the ticket
+              completed:
+                type: boolean
+                description: Whether all steps for validating the ticket has been made
+              createdAt:
+                type: string
+                format: date-time
+                description: An ISO Timestamp indicating when the ticket was created.
+              updatedAt:
+                type: string
+                format: date-time
+                description: An ISO Timestamp indicating when the ticket was updated.
+              status:
+                type: string
+                enum:
+                - VALID
+                - INVALID
+                - RESERVED
+                - DETAILSREQUIRED
+                - BLANK
+                description: The status of the ticket
+              secret:
+                type: string
+                description: The secret token of the ticket
+              barcode:
+                type: string
+                minLength: 8
+                description: The barcode of the ticket
+              seat:
+                type: string
+              seatingInfo:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: The ID of the seating object.
+                  _type:
+                    type: number
+                    format: float
+                    enum:
+                    - 6
+                    - 7
+                    description: Indicates the type of seating object. Seat = 6, General Admission = 7.
+                  categoryId:
+                    type: string
+                    description: The ID of the category containing the seating object.
+                  statusId:
+                    type: string
+                    description: The ID of a container holding information about the seating status of the seating object.
+                  name:
+                    type: string
+                    nullable: true
+                    description: If _type == 7. The name of the general admission.
+                  seatType:
+                    type: string
+                    nullable: true
+                    enum:
+                    - handicapped
+                    - limitedView
+                    - foldable
+                    description: If _type == 6. The type of the seat. null = normal.
+                  sectionName:
+                    type: string
+                    nullable: true
+                    description: If _type == 6. The name of the section where the seat is located.
+                  groupName:
+                    type: string
+                    nullable: true
+                    description: If _type == 6. The name of the row group where the seat is located.
+                  rowName:
+                    type: string
+                    nullable: true
+                    description: If _type == 6. The name of the row where the seat is located.
+                  seatName:
+                    type: string
+                    nullable: true
+                    description: If _type == 6. The seat name.
+                  gate:
+                    type: string
+                    nullable: true
+                    description: The entry gate associated with the seating object.
+                required:
+                - _type
+                - statusId
+                description: The associated seating object.
+              type:
+                type: string
+                enum:
+                - SINGLE
+                - MULTI
+                description: The type of the ticket
+              origin:
+                type: string
+                enum:
+                - yourticket
+                - pos
+                - rebooking
+                - upgrade
+                - subscription
+                - transfer
+              extraFields:
+                type: object
+                description: A hashmap of extra fields for the ticket
+              deliveryType:
+                type: string
+                enum:
+                - HARD
+                - VIRTUAL
+                description: The delivery type of the ticket
+              transactionId:
+                type: string
+                description: The transaction the ticket originated from
+              batchCounter:
+                type: number
+                format: float
+                description: A counter indicating the order of the ticket in the batch
+              slotId:
+                type: string
+                description: The ID of the time slot this ticket belongs to, if exists
+              slotStartTime:
+                type: string
+                description: The start time of the time slot this ticket belongs to, if exists.
+              personalized:
+                type: boolean
+              _locks:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    by:
+                      type: string
+                    at:
+                      type: string
+                      format: date-time
+                    eventId:
+                      type: string
+                    type:
+                      oneOf:
+                      - type: array
+                      - type: boolean
+                      - type: number
+                      - type: object
+                      - type: string
+                      enum:
+                      - resell
+                  required:
+                  - by
+                  - at
+                description: List of locks on this ticket
+              barcodeRevealed:
+                type: boolean
+                description: Whether the ticket barcode revealed.
+              barcodeRevealDate:
+                type: string
+                format: date-time
+                description: The date on which the ticket barcode will be revealed.
+            required:
+            - sellerId
+            - eventId
+            - ticketTypeId
+            - ticketName
+            - createdAt
+            - updatedAt
+            - status
+            - secret
+            - barcode
+    POST_Checkout_SendAConfirmationSmsForACheckout:
+      type: object
+      properties:
+        phone:
+          type: string
+          nullable: true
+          description: The target phone number where the SMS should be sent to
+      nullable: true
+    LegalIdentificationDocumentResource:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - spain_tax_id
+          identifier:
+            type: string
+        required:
+        - type
+        - identifier
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - origin_country_id
+            description: The type of the identification document.
+        required:
+        - type
+    POST_Checkout_ConfirmASubscription:
+      type: object
+      properties:
+        secret:
+          type: string
+          description: The secret token of the checkout
+        customerPaymentMethodId:
+          type: string
+          description: The ID of the customer payment method
+      required:
+      - secret
+      - customerPaymentMethodId
+    CheckoutResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the checkout.
+        secret:
+          type: string
+          description: The secret token of the checkout.
+        status:
+          type: string
+          enum:
+          - NEW
+          - ABORTED
+          - COMPLETE
+          description: The status of the checkout.
+        type:
+          type: string
+          enum:
+          - transaction
+          - upgrade
+          - rebooking
+          - purchaseintent
+          - subscription
+          description: The type of the checkout.
+          example: transaction
+        company:
+          type: string
+          description: The company name of the checkout's customer.
+        firstname:
+          type: string
+          description: The first name of the checkout's customer.
+        lastname:
+          type: string
+          description: The last name of the checkout's customer.
+        name:
+          type: string
+          description: The full name of the checkout's customer.
+        email:
+          type: string
+          format: email
+          description: The email of the checkout's customer.
+        phone:
+          type: string
+          description: The phone number of the checkout's customer.
+        customerId:
+          type: string
+          description: The ID of the customer.
+        address:
+          type: object
+          properties:
+            fullAddress:
+              type: string
+              nullable: true
+              description: Optional full address
+            street:
+              type: string
+              nullable: true
+              description: The street of the address. Street name including number.
+            line2:
+              type: string
+              nullable: true
+              description: The additional field of the address.
+            postal:
+              type: string
+              nullable: true
+              description: The postal code of the address.
+            city:
+              type: string
+              nullable: true
+              description: The city of the address.
+            country:
+              type: string
+              nullable: true
+              description: The country of the address. An ISO 3166 country code.
+            state:
+              type: string
+              nullable: true
+              description: The state of the address. If applicable
+          description: The address of the checkout.
+        deliveryAddress:
+          type: object
+          properties:
+            fullAddress:
+              type: string
+              nullable: true
+              description: Optional full address
+            street:
+              type: string
+              nullable: true
+              description: The street of the address. Street name including number.
+            line2:
+              type: string
+              nullable: true
+              description: The additional field of the address.
+            postal:
+              type: string
+              nullable: true
+              description: The postal code of the address.
+            city:
+              type: string
+              nullable: true
+              description: The city of the address.
+            country:
+              type: string
+              nullable: true
+              description: The country of the address. An ISO 3166 country code.
+            state:
+              type: string
+              nullable: true
+              description: The state of the address. If applicable
+            name:
+              type: string
+              description: The name of the person receiving delivery.
+          description: The delivery address of the checkout.
+        identification:
+          type: array
+          items:
+            $ref: '#/components/schemas/LegalIdentificationDocumentResource'
+          description: An array of identification items
+        sellerId:
+          type: string
+          description: The ID of the seller of the checkout.
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the checkout item.
+              eventId:
+                type: string
+                description: The ID of the event containing the item.
+              shopId:
+                type: string
+                description: The ID of the under shop this item originated from.
+              channelId:
+                type: string
+                description: The ID of the channel this item originated from.
+              redeemedVouchers:
+                type: object
+                properties:
+                  totalRedeemedAmount:
+                    type: number
+                    format: float
+                    description: The sum of all vouchers applied.
+                  vouchers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          description: The ID of the voucher.
+                        code:
+                          type: string
+                          description: The Code of the voucher.
+                        redeemedAmount:
+                          type: number
+                          format: float
+                          description: The applied value of the voucher.
+                      required:
+                      - code
+                      - redeemedAmount
+                    description: An array of all redeemed vouchers of the checkout item.
+                required:
+                - totalRedeemedAmount
+                description: An object including information on all redeemed vouchers within the checkout item.
+              appliedCoupons:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The ID of the applied coupon.
+                    code:
+                      type: string
+                      description: The code of the applied coupon.
+                description: An array including information on all applied coupons within the checkout item.
+              appliedDiscountInfo:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          description: The ID of the applied discount info item.
+                        itemId:
+                          type: string
+                          description: The ID of the item on which the discount is applied.
+                        amount:
+                          type: number
+                          format: float
+                          description: The amount of applied discounts.
+                        regularPrice:
+                          type: number
+                          format: float
+                          description: The regular price before applying the discount.
+                        price:
+                          type: number
+                          format: float
+                          description: The price after applying the discount.
+                        varDiscounts:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              _id:
+                                type: string
+                                description: The ID of the discount info.
+                              discountId:
+                                type: string
+                                description: The ID of the discount of the discount info.
+                              category:
+                                type: string
+                                enum:
+                                - coupon
+                                - groupDiscount
+                                - posDiscount
+                                - voucher
+                                - system
+                                - modifier
+                                description: The category of the discount.
+                              name:
+                                type: string
+                                description: The name of the discount.
+                              type:
+                                type: string
+                                enum:
+                                - fix
+                                - var
+                                - fixPerItem
+                                - waiveFees
+                                description: The type of the discount.
+                              value:
+                                type: number
+                                format: float
+                                description: The value of the discount.
+                              allowedItems:
+                                type: array
+                                items:
+                                  type: string
+                                description: An array of the IDs of allowed items of the discount.
+                            required:
+                            - _id
+                            - type
+                          description: An array of var discounts of the applied discount info item.
+                        fixDiscounts:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              _id:
+                                type: string
+                                description: The ID of the discount info.
+                              discountId:
+                                type: string
+                                description: The ID of the discount of the discount info.
+                              category:
+                                type: string
+                                enum:
+                                - coupon
+                                - groupDiscount
+                                - posDiscount
+                                - voucher
+                                - system
+                                - modifier
+                                description: The category of the discount.
+                              name:
+                                type: string
+                                description: The name of the discount.
+                              type:
+                                type: string
+                                enum:
+                                - fix
+                                - var
+                                - fixPerItem
+                                - waiveFees
+                                description: The type of the discount.
+                              value:
+                                type: number
+                                format: float
+                                description: The value of the discount.
+                              allowedItems:
+                                type: array
+                                items:
+                                  type: string
+                                description: An array of the IDs of allowed items of the discount.
+                            required:
+                            - _id
+                            - type
+                          description: An array of fix discounts of the applied discount info item.
+                      required:
+                      - _id
+                    description: An array of applied discount info items.
+                  discounts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          description: The ID of the discount info.
+                        discountId:
+                          type: string
+                          description: The ID of the discount of the discount info.
+                        category:
+                          type: string
+                          enum:
+                          - coupon
+                          - groupDiscount
+                          - posDiscount
+                          - voucher
+                          - system
+                          - modifier
+                          description: The category of the discount.
+                        name:
+                          type: string
+                          description: The name of the discount.
+                        type:
+                          type: string
+                          enum:
+                          - fix
+                          - var
+                          - fixPerItem
+                          - waiveFees
+                          description: The type of the discount.
+                        value:
+                          type: number
+                          format: float
+                          description: The value of the discount.
+                        allowedItems:
+                          type: array
+                          items:
+                            type: string
+                          description: An array of the IDs of allowed items of the discount.
+                        maxItemsInCart:
+                          type: number
+                          format: float
+                          description: The maximum amount of items the discount will be applied towards.
+                        maxAbsoluteValue:
+                          type: number
+                          format: float
+                          description: The maximum absolute value of the discount.
+                        absoluteDiscountValue:
+                          type: number
+                          format: float
+                          description: The absolute value of the discount.
+                      required:
+                      - _id
+                      - type
+                    description: An array of extended discount info items.
+                description: Applied discountInfo of the checkout item.
+              regularPrice:
+                type: number
+                format: float
+                description: The regular price of the checkout item.
+              realPrice:
+                type: number
+                format: float
+                description: The calculated price of the checkout item.
+              innerFeeComponents:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: The ID of the fee composition.
+                  fix:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          description: The ID of the fee component.
+                        amount:
+                          type: number
+                          format: float
+                          description: The fee amount.
+                        value:
+                          type: number
+                          format: float
+                          description: The fee value.
+                        total:
+                          type: number
+                          format: float
+                          description: The fee total. Calculated with amount and value.
+                        type:
+                          type: string
+                          enum:
+                          - onTicket
+                          - onHardTicket
+                          - onCart
+                          description: The fee type of the fee component.
+                        name:
+                          type: string
+                          nullable: true
+                          description: The name of the fee.
+                        publicName:
+                          type: string
+                          description: The public name of the fee component.
+                        exposed:
+                          type: boolean
+                          description: Whether this fee will be exposed to the ticket buyer.
+                        scheme:
+                          type: object
+                          properties:
+                            schemeId:
+                              type: string
+                              description: The ID of the fee scheme.
+                            feeId:
+                              type: string
+                              description: The ID of the fee scheme fee.
+                          description: The fee scheme of the fee component.
+                      required:
+                      - _id
+                    description: An array of fee components for the fix fee.
+                  var:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          description: The ID of the fee component.
+                        amount:
+                          type: number
+                          format: float
+                          description: The fee amount.
+                        value:
+                          type: number
+                          format: float
+                          description: The fee value.
+                        total:
+                          type: number
+                          format: float
+                          description: The fee total. Calculated with amount and value.
+                        type:
+                          type: string
+                          enum:
+                          - onTicket
+                          - onHardTicket
+                          - onCart
+                          description: The fee type of the fee component.
+                        name:
+                          type: string
+                          nullable: true
+                          description: The name of the fee.
+                        publicName:
+                          type: string
+                          description: The public name of the fee component.
+                        exposed:
+                          type: boolean
+                          description: Whether this fee will be exposed to the ticket buyer.
+                        scheme:
+                          type: object
+                          properties:
+                            schemeId:
+                              type: string
+                              description: The ID of the fee scheme.
+                            feeId:
+                              type: string
+                              description: The ID of the fee scheme fee.
+                          description: The fee scheme of the fee component.
+                      required:
+                      - _id
+                    description: An array of fee components for the var fee.
+                required:
+                - _id
+                description: The inner fee of the transaction as a result of the checkout item including fix and var fees.
+              innerCharge:
+                type: number
+                format: float
+                description: The inner charge of the checkout item.
+              outerFeeComponents:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: The ID of the fee composition.
+                  fix:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          description: The ID of the fee component.
+                        amount:
+                          type: number
+                          format: float
+                          description: The fee amount.
+                        value:
+                          type: number
+                          format: float
+                          description: The fee value.
+                        total:
+                          type: number
+                          format: float
+                          description: The fee total. Calculated with amount and value.
+                        type:
+                          type: string
+                          enum:
+                          - onTicket
+                          - onHardTicket
+                          - onCart
+                          description: The fee type of the fee component.
+                        name:
+                          type: string
+                          nullable: true
+                          description: The name of the fee.
+                        publicName:
+                          type: string
+                          description: The public name of the fee component.
+                        exposed:
+                          type: boolean
+                          description: Whether this fee will be exposed to the ticket buyer.
+                        scheme:
+                          type: object
+                          properties:
+                            schemeId:
+                              type: string
+                              description: The ID of the fee scheme.
+                            feeId:
+                              type: string
+                              description: The ID of the fee scheme fee.
+                          description: The fee scheme of the fee component.
+                      required:
+                      - _id
+                    description: An array of fee components for the fix fee.
+                  var:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          description: The ID of the fee component.
+                        amount:
+                          type: number
+                          format: float
+                          description: The fee amount.
+                        value:
+                          type: number
+                          format: float
+                          description: The fee value.
+                        total:
+                          type: number
+                          format: float
+                          description: The fee total. Calculated with amount and value.
+                        type:
+                          type: string
+                          enum:
+                          - onTicket
+                          - onHardTicket
+                          - onCart
+                          description: The fee type of the fee component.
+                        name:
+                          type: string
+                          nullable: true
+                          description: The name of the fee.
+                        publicName:
+                          type: string
+                          description: The public name of the fee component.
+                        exposed:
+                          type: boolean
+                          description: Whether this fee will be exposed to the ticket buyer.
+                        scheme:
+                          type: object
+                          properties:
+                            schemeId:
+                              type: string
+                              description: The ID of the fee scheme.
+                            feeId:
+                              type: string
+                              description: The ID of the fee scheme fee.
+                          description: The fee scheme of the fee component.
+                      required:
+                      - _id
+                    description: An array of fee components for the var fee.
+                required:
+                - _id
+                description: The outer fee of the transaction as a result of the checkout item including fix and var fees.
+              outerCharge:
+                type: number
+                format: float
+                description: The outer charge of the checkout item.
+              tickets:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - ticket
+                      description: The type of the cart item.
+                      default: ticket
+                    _id:
+                      type: string
+                      description: Unique identifier for the cart item. If omitted, the system will automatically generate one.
+                    name:
+                      type: string
+                      nullable: true
+                      description: The name of the cart item.
+                    amount:
+                      type: integer
+                      minimum: 1
+                      description: The amount of the cart item.
+                    netPrice:
+                      type: number
+                      format: float
+                      description: The single piece net price of the cart item.
+                    price:
+                      type: number
+                      format: float
+                      description: The single piece price of the cart item.
+                    taxRate:
+                      type: number
+                      format: float
+                      nullable: true
+                      description: The tax rate to be applied to this cart item. If not present the tax rate of the transaction is taken.
+                    triggeredBy:
+                      oneOf:
+                      - type: string
+                        description: An ID of another cart item which triggered the buy action of the cart item.
+                      - type: array
+                        items:
+                          type: string
+                        description: An array of IDs of other cart items which triggered the buy action of the cart item.
+                      nullable: true
+                      description: An ID or an array of IDs of other cart items which triggered the buy action of the cart item.
+                    bundleInfo:
+                      type: object
+                      properties:
+                        bundleId:
+                          type: string
+                        componentId:
+                          type: string
+                        optionId:
+                          type: string
+                      nullable: true
+                    ticketTypeId:
+                      type: string
+                      description: The ID of the ticket type of the cart item.
+                    categoryRef:
+                      type: string
+                      description: The category reference of the ticket type.
+                    seatingInfo:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          description: The ID of the seating object.
+                        _type:
+                          type: number
+                          format: float
+                          enum:
+                          - 6
+                          - 7
+                          description: Indicates the type of seating object. Seat = 6, General Admission = 7.
+                        categoryId:
+                          type: string
+                          description: The ID of the category containing the seating object.
+                        statusId:
+                          type: string
+                          description: The ID of a container holding information about the seating status of the seating object.
+                        name:
+                          type: string
+                          nullable: true
+                          description: If _type == 7. The name of the general admission.
+                        seatType:
+                          type: string
+                          nullable: true
+                          enum:
+                          - handicapped
+                          - limitedView
+                          - foldable
+                          description: If _type == 6. The type of the seat. null = normal.
+                        sectionName:
+                          type: string
+                          nullable: true
+                          description: If _type == 6. The name of the section where the seat is located.
+                        groupName:
+                          type: string
+                          nullable: true
+                          description: If _type == 6. The name of the row group where the seat is located.
+                        rowName:
+                          type: string
+                          nullable: true
+                          description: If _type == 6. The name of the row where the seat is located.
+                        seatName:
+                          type: string
+                          nullable: true
+                          description: If _type == 6. The seat name.
+                        gate:
+                          type: string
+                          nullable: true
+                          description: The entry gate associated with the seating object.
+                      required:
+                      - _type
+                      - statusId
+                      nullable: true
+                      description: The associated seating object.
+                    slotInfo:
+                      type: object
+                      properties:
+                        slotId:
+                          type: string
+                          description: The ID of the time slot.
+                        slotStartTime:
+                          type: string
+                          description: The start time of the time slot.
+                      required:
+                      - slotId
+                      - slotStartTime
+                      nullable: true
+                      description: The associated time slot object.
+                    asHardTicket:
+                      type: boolean
+                      nullable: true
+                      description: Whether this ticket is a hard ticket.
+                    listingId:
+                      type: string
+                      nullable: true
+                      description: Listing in secondary market.
+                    listingItemId:
+                      type: string
+                      nullable: true
+                      description: The ID of the listing item in the secondary market.
+                    triggeredAutomations:
+                      type: boolean
+                      nullable: true
+                      description: Whether the cart item triggered automations.
+                    meta:
+                      type: object
+                      nullable: true
+                      description: Meta data which is propagated to the ticket.
+                    addOns:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          productId:
+                            type: string
+                          productVariantId:
+                            type: string
+                          name:
+                            type: string
+                        required:
+                        - productId
+                        - productVariantId
+                        - name
+                      description: A list of Add-Ons of the ticket.
+                    capabilities:
+                      type: array
+                      items:
+                        oneOf:
+                        - type: object
+                          properties:
+                            type:
+                              type: string
+                              enum:
+                              - self_service_return
+                            settings:
+                              type: object
+                              properties:
+                                returnRelatedItems:
+                                  type: boolean
+                                  default: true
+                                phases:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      condition:
+                                        type: object
+                                        properties:
+                                          target:
+                                            type: string
+                                            nullable: true
+                                            description: The target of the relative date
+                                          unit:
+                                            type: string
+                                            enum:
+                                            - hours
+                                            - days
+                                            - weeks
+                                            - months
+                                            - years
+                                            description: The unit in which the offset is specified
+                                          offset:
+                                            type: integer
+                                            description: The offset to the date
+                                        required:
+                                        - unit
+                                        - offset
+                                      refundPercentage:
+                                        type: number
+                                        format: float
+                                        minimum: 0
+                                        maximum: 1
+                                    required:
+                                    - condition
+                                    - refundPercentage
+                              required:
+                              - phases
+                          required:
+                          - type
+                          - settings
+                        - type: object
+                          properties:
+                            type:
+                              type: string
+                              enum:
+                              - repersonalization
+                            settings:
+                              type: object
+                              properties:
+                                inherit:
+                                  type: boolean
+                                repersonalizationDeadline:
+                                  type: object
+                                  properties:
+                                    target:
+                                      type: string
+                                      nullable: true
+                                      description: The target of the relative date
+                                    unit:
+                                      type: string
+                                      enum:
+                                      - hours
+                                      - days
+                                      - weeks
+                                      - months
+                                      - years
+                                      description: The unit in which the offset is specified
+                                    offset:
+                                      type: integer
+                                      description: The offset to the date
+                                  required:
+                                  - unit
+                                  - offset
+                                repersonalizationsLimit:
+                                  type: number
+                                  format: float
+                                  nullable: true
+                                repersonalizationFee:
+                                  type: number
+                                  format: float
+                                  nullable: true
+                                limitOnlyNameChanges:
+                                  type: boolean
+                              required:
+                              - repersonalizationDeadline
+                          required:
+                          - type
+                          - settings
+                      nullable: true
+                      description: The capabilities of the ticket.
+                    taxInfo:
+                      type: object
+                      properties:
+                        serviceTypeId:
+                          type: string
+                          description: The ID of the service type.
+                        exceptionId:
+                          type: string
+                          description: The ID of the exception.
+                        proceedsAccountId:
+                          type: string
+                          description: The ID of the proceeds account.
+                        proceedsAccountCode:
+                          type: string
+                          description: The code of the proceeds account.
+                        taxItems:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                                nullable: true
+                              taxTypeId:
+                                type: string
+                                nullable: true
+                              rate:
+                                type: number
+                                format: float
+                              perUnit:
+                                type: number
+                                format: float
+                              total:
+                                type: number
+                                format: float
+                              netTotal:
+                                type: number
+                                format: float
+                                nullable: true
+                              netPerUnit:
+                                type: number
+                                format: float
+                                nullable: true
+                              taxPayableAccountId:
+                                type: string
+                                nullable: true
+                              taxPayableAccountCode:
+                                type: string
+                                nullable: true
+                            required:
+                            - rate
+                            - perUnit
+                            - total
+                          description: The array of tax items.
+                      description: The tax info details.
+                  required:
+                  - amount
+                  - price
+                  - ticketTypeId
+                description: An array containing all ticket cart items.
+              products:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - product
+                      description: The type of the cart item.
+                    _id:
+                      type: string
+                      description: Unique identifier for the cart item. If omitted, the system will automatically generate one.
+                    name:
+                      type: string
+                      nullable: true
+                      description: The name of the cart item.
+                    amount:
+                      type: integer
+                      minimum: 1
+                      description: The amount of the cart item.
+                    netPrice:
+                      type: number
+                      format: float
+                      description: The single piece net price of the cart item.
+                    price:
+                      type: number
+                      format: float
+                      description: The single piece price of the cart item.
+                    taxRate:
+                      type: number
+                      format: float
+                      nullable: true
+                      description: The tax rate to be applied to this cart item. If not present the tax rate of the transaction is taken.
+                    triggeredBy:
+                      oneOf:
+                      - type: string
+                        description: An ID of another cart item which triggered the buy action of the cart item.
+                      - type: array
+                        items:
+                          type: string
+                        description: An array of IDs of other cart items which triggered the buy action of the cart item.
+                      nullable: true
+                      description: An ID or an array of IDs of other cart items which triggered the buy action of the cart item.
+                    bundleInfo:
+                      type: object
+                      properties:
+                        bundleId:
+                          type: string
+                        componentId:
+                          type: string
+                        optionId:
+                          type: string
+                      nullable: true
+                    productVariantId:
+                      type: string
+                      description: The ID of the product variant.
+                    isFulfillable:
+                      type: boolean
+                      description: Whether the product can be delivered
+                    taxInfo:
+                      type: object
+                      properties:
+                        serviceTypeId:
+                          type: string
+                          description: The ID of the service type.
+                        exceptionId:
+                          type: string
+                          description: The ID of the exception.
+                        proceedsAccountId:
+                          type: string
+                          description: The ID of the proceeds account.
+                        proceedsAccountCode:
+                          type: string
+                          description: The code of the proceeds account.
+                        taxItems:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                                nullable: true
+                              taxTypeId:
+                                type: string
+                                nullable: true
+                              rate:
+                                type: number
+                                format: float
+                              perUnit:
+                                type: number
+                                format: float
+                              total:
+                                type: number
+                                format: float
+                              netTotal:
+                                type: number
+                                format: float
+                                nullable: true
+                              netPerUnit:
+                                type: number
+                                format: float
+                                nullable: true
+                              taxPayableAccountId:
+                                type: string
+                                nullable: true
+                              taxPayableAccountCode:
+                                type: string
+                                nullable: true
+                            required:
+                            - rate
+                            - perUnit
+                            - total
+                          description: The array of tax items.
+                      description: The tax info details.
+                  required:
+                  - type
+                  - amount
+                  - price
+                  - productVariantId
+                description: An array containing all product cart items.
+              additionalItems:
+                type: array
+                items:
+                  oneOf:
+                  - type: object
+                    properties:
+                      itemId:
+                        type: string
+                        description: The ID of the item.
+                      type:
+                        type: string
+                        enum:
+                        - bundle
+                        description: The type of the additional item.
+                      netPrice:
+                        type: number
+                        format: float
+                        description: The single piece net price of the additional item.
+                      price:
+                        type: number
+                        format: float
+                        description: The single piece price of the additional item.
+                      taxRate:
+                        type: number
+                        format: float
+                        nullable: true
+                        description: The tax rate to be applied to this additional item.
+                      taxInfo:
+                        type: object
+                        properties:
+                          serviceTypeId:
+                            type: string
+                            description: The ID of the service type.
+                          exceptionId:
+                            type: string
+                            description: The ID of the exception.
+                          proceedsAccountId:
+                            type: string
+                            description: The ID of the proceeds account.
+                          proceedsAccountCode:
+                            type: string
+                            description: The code of the proceeds account.
+                          taxItems:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                  nullable: true
+                                taxTypeId:
+                                  type: string
+                                  nullable: true
+                                rate:
+                                  type: number
+                                  format: float
+                                perUnit:
+                                  type: number
+                                  format: float
+                                total:
+                                  type: number
+                                  format: float
+                                netTotal:
+                                  type: number
+                                  format: float
+                                  nullable: true
+                                netPerUnit:
+                                  type: number
+                                  format: float
+                                  nullable: true
+                                taxPayableAccountId:
+                                  type: string
+                                  nullable: true
+                                taxPayableAccountCode:
+                                  type: string
+                                  nullable: true
+                              required:
+                              - rate
+                              - perUnit
+                              - total
+                            description: The array of tax items.
+                        description: The tax info details.
+                      data:
+                        type: object
+                        properties:
+                          bundleId:
+                            type: string
+                            description: The ID of the bundle.
+                        required:
+                        - bundleId
+                    required:
+                    - itemId
+                    - type
+                    - netPrice
+                    - price
+                    - taxRate
+                  - type: object
+                    properties:
+                      itemId:
+                        type: string
+                        description: The ID of the item.
+                      type:
+                        type: string
+                        enum:
+                        - fulfillmentType
+                        description: The type of the additional item.
+                      netPrice:
+                        type: number
+                        format: float
+                        description: The single piece net price of the additional item.
+                      price:
+                        type: number
+                        format: float
+                        description: The single piece price of the additional item.
+                      taxRate:
+                        type: number
+                        format: float
+                        nullable: true
+                        description: The tax rate to be applied to this additional item.
+                      taxInfo:
+                        type: object
+                        properties:
+                          serviceTypeId:
+                            type: string
+                            description: The ID of the service type.
+                          exceptionId:
+                            type: string
+                            description: The ID of the exception.
+                          proceedsAccountId:
+                            type: string
+                            description: The ID of the proceeds account.
+                          proceedsAccountCode:
+                            type: string
+                            description: The code of the proceeds account.
+                          taxItems:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                  nullable: true
+                                taxTypeId:
+                                  type: string
+                                  nullable: true
+                                rate:
+                                  type: number
+                                  format: float
+                                perUnit:
+                                  type: number
+                                  format: float
+                                total:
+                                  type: number
+                                  format: float
+                                netTotal:
+                                  type: number
+                                  format: float
+                                  nullable: true
+                                netPerUnit:
+                                  type: number
+                                  format: float
+                                  nullable: true
+                                taxPayableAccountId:
+                                  type: string
+                                  nullable: true
+                                taxPayableAccountCode:
+                                  type: string
+                                  nullable: true
+                              required:
+                              - rate
+                              - perUnit
+                              - total
+                            description: The array of tax items.
+                        description: The tax info details.
+                      data:
+                        type: object
+                        properties:
+                          fulfillmentTypeId:
+                            type: string
+                            description: The ID of the fulfillment type.
+                          cartItemIds:
+                            type: array
+                            items:
+                              type: string
+                            description: The array of the related cart items IDs.
+                        required:
+                        - fulfillmentTypeId
+                    required:
+                    - itemId
+                    - type
+                    - netPrice
+                    - price
+                    - taxRate
+                description: An array of additional price items of the checkout itemt.
+                default: []
+              seatingReservationToken:
+                type: string
+                description: The reservation token of the selected seats.
+              subscriptionId:
+                type: string
+                description: The ID of the subscription if this item triggered one.
+            required:
+            - _id
+            - eventId
+            - regularPrice
+            - realPrice
+            - outerCharge
+          description: An array of checkout items each representing the 'bag' of one shop.
+        realPrice:
+          type: number
+          format: float
+          description: The calculated real price of the checkout.
+        currency:
+          type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: An ISO 4217 3-character code of the currency.
+        redeemedVouchers:
+          type: object
+          properties:
+            totalRedeemedAmount:
+              type: number
+              format: float
+              description: The sum of all vouchers applied.
+            vouchers:
+              type: array
+              items:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: The ID of the voucher.
+                  code:
+                    type: string
+                    description: The Code of the voucher.
+                  redeemedAmount:
+                    type: number
+                    format: float
+                    description: The applied value of the voucher.
+                required:
+                - code
+                - redeemedAmount
+              description: An array of all redeemed vouchers of the checkout.
+          required:
+          - totalRedeemedAmount
+          description: An object including information on all redeemed vouchers of the checkout.
+        preferredLanguage:
+          type: string
+          enum:
+          - de
+          - de-CH
+          - en
+          - en-GB
+          - en-AU
+          - fr
+          - es
+          - es-MX
+          - is
+          - it
+          - ru
+          - pt
+          - tr
+          - nb
+          - nl
+          - pl
+          - sv
+          - sl
+          - da
+          - cs
+          - lv
+          - he
+          - ar
+          - th
+          - ko
+          - ja
+          - zh-TW
+          description: The prefered language of the checkout.
+        origin:
+          type: string
+          enum:
+          - yourticket
+          - pos
+          - rebooking
+          - upgrade
+          - subscription
+          description: The origin of the checkout.
+        channel:
+          type: string
+          enum:
+          - online
+          - internal
+          - pos
+          description: The channel of the checkout.
+        salesChannelId:
+          type: string
+          description: The ID of the sales channel of the checkout.
+        posId:
+          type: string
+          description: The ID of the POS which created the checkout.
+        userId:
+          type: string
+          description: The ID of the user who created the checkout.
+        extraFields:
+          type: object
+          description: An object containing key-value information.
+        expiresAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the checkout will expire.
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the checkout was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the checkout was last updated.
+      required:
+      - _id
+      - secret
+      - status
+      - type
+      - sellerId
+      - items
+      - realPrice
+      description: The associated checkout
+    POST_Checkout_CompleteAnInternalCheckout:
+      type: object
+      properties:
+        customerId:
+          type: string
+          description: The ID of the customer
+        fulfillmentTypes:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - fulfillmentType
+                description: The type of the cart item.
+              _id:
+                type: string
+                description: Unique identifier for the cart item. If omitted, the system will automatically generate one.
+              name:
+                type: string
+                nullable: true
+                description: The name of the cart item.
+              amount:
+                type: integer
+                minimum: 1
+                description: The amount of the cart item.
+              netPrice:
+                type: number
+                format: float
+                description: The single piece net price of the cart item.
+              price:
+                type: number
+                format: float
+                description: The single piece price of the cart item.
+              taxRate:
+                type: number
+                format: float
+                nullable: true
+                description: The tax rate to be applied to this cart item. If not present the tax rate of the transaction is taken.
+              triggeredBy:
+                oneOf:
+                - type: string
+                  description: An ID of another cart item which triggered the buy action of the cart item.
+                - type: array
+                  items:
+                    type: string
+                  description: An array of IDs of other cart items which triggered the buy action of the cart item.
+                nullable: true
+                description: An ID or an array of IDs of other cart items which triggered the buy action of the cart item.
+              bundleInfo:
+                type: object
+                properties:
+                  bundleId:
+                    type: string
+                  componentId:
+                    type: string
+                  optionId:
+                    type: string
+                nullable: true
+              data:
+                type: object
+                properties:
+                  fulfillmentTypeId:
+                    type: string
+                    description: The ID of the fulfillment type.
+                  cartItemIds:
+                    type: array
+                    items:
+                      type: string
+                    description: The array of the related cart items IDs.
+                  discountable:
+                    type: boolean
+                    description: Whether the fulfillment type is discountable.
+                required:
+                - fulfillmentTypeId
+            required:
+            - type
+            - amount
+            - price
+        status:
+          type: string
+          enum:
+          - NEW
+          - COMPLETE
+          description: The status of the checkout
+        paymentMethodId:
+          type: string
+          description: The ID of the payment method. Only used when status == "COMPLETE." Can only submit one payment method (this or CPM). If no payment method is submitted, a local payment is assumed
+        customerPaymentMethodId:
+          type: string
+          description: The ID of the customer payment method. Only used when status == "COMPLETE"
+        sendMail:
+          type: boolean
+          description: Whether to send checkout confirmation mail
+        sendTicketMail:
+          type: boolean
+          description: Whether to send ticket email on checkout completion. Only used when status == "COMPLETE" and checkout.type === "transaction"
+          default: true
+        reference:
+          type: string
+          description: The reference of the local payment
+        paymentStrategyId:
+          type: string
+          description: The ID of the payment strategy
+        paymentOptionId:
+          type: string
+          description: The ID of the payment option
+        extraFields:
+          type: object
+          description: The extra fields of the checkout
+        identification:
+          type: array
+          items:
+            $ref: '#/components/schemas/LegalIdentificationDocumentResource'
+          description: An array of identification items
+      required:
+      - customerId
+      - status
+    POST_Checkout_PostCheckoutDetails:
+      type: object
+      properties:
+        secret:
+          type: string
+          description: The secret token of the checkout
+        company:
+          type: string
+          nullable: true
+          description: The company name for this checkout
+        prename:
+          type: string
+          description: The first name for this checkout
+        lastname:
+          type: string
+          description: The last name for this checkout
+        street:
+          type: string
+          nullable: true
+        postal:
+          type: string
+          nullable: true
+        city:
+          type: string
+          nullable: true
+        country:
+          type: string
+          nullable: true
+        state:
+          type: string
+          nullable: true
+        deliveryAddress:
+          type: object
+          properties:
+            fullAddress:
+              type: string
+              nullable: true
+              description: Optional full address
+            street:
+              type: string
+              nullable: true
+              description: The street of the address. Street name including number.
+            line2:
+              type: string
+              nullable: true
+              description: The additional field of the address.
+            postal:
+              type: string
+              nullable: true
+              description: The postal code of the address.
+            city:
+              type: string
+              nullable: true
+              description: The city of the address.
+            country:
+              type: string
+              nullable: true
+              description: The country of the address. An ISO 3166 country code.
+            state:
+              type: string
+              nullable: true
+              description: The state of the address. If applicable
+            name:
+              type: string
+              description: The name of the person receiving delivery.
+        email:
+          type: string
+          format: email
+          description: The email for this checkout
+        emailRepeat:
+          type: string
+          format: email
+        phone:
+          type: string
+          nullable: true
+          description: The phone number for this checkout
+        password:
+          type: string
+          minLength: 9
+          nullable: true
+          description: If createAccount = true. The password to create the account with
+        passwordRepeat:
+          type: string
+          nullable: true
+          description: deprecated, unused
+          deprecated: true
+        createAccount:
+          type: boolean
+          description: Whether to create an account with the provided data
+        extraFields:
+          type: object
+        fulfillmentTypes:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - fulfillmentType
+                description: The type of the cart item.
+              _id:
+                type: string
+                description: Unique identifier for the cart item. If omitted, the system will automatically generate one.
+              name:
+                type: string
+                nullable: true
+                description: The name of the cart item.
+              amount:
+                type: integer
+                minimum: 1
+                description: The amount of the cart item.
+              netPrice:
+                type: number
+                format: float
+                description: The single piece net price of the cart item.
+              price:
+                type: number
+                format: float
+                description: The single piece price of the cart item.
+              taxRate:
+                type: number
+                format: float
+                nullable: true
+                description: The tax rate to be applied to this cart item. If not present the tax rate of the transaction is taken.
+              triggeredBy:
+                oneOf:
+                - type: string
+                  description: An ID of another cart item which triggered the buy action of the cart item.
+                - type: array
+                  items:
+                    type: string
+                  description: An array of IDs of other cart items which triggered the buy action of the cart item.
+                nullable: true
+                description: An ID or an array of IDs of other cart items which triggered the buy action of the cart item.
+              bundleInfo:
+                type: object
+                properties:
+                  bundleId:
+                    type: string
+                  componentId:
+                    type: string
+                  optionId:
+                    type: string
+                nullable: true
+              data:
+                type: object
+                properties:
+                  fulfillmentTypeId:
+                    type: string
+                    description: The ID of the fulfillment type.
+                  cartItemIds:
+                    type: array
+                    items:
+                      type: string
+                    description: The array of the related cart items IDs.
+                  discountable:
+                    type: boolean
+                    description: Whether the fulfillment type is discountable.
+                required:
+                - fulfillmentTypeId
+            required:
+            - type
+            - amount
+            - price
+          description: An array of fulfillment types to be used in the checkout.
+        itemConsents:
+          type: object
+          description: A map of item IDs and their lists of consents
+        consents:
+          type: array
+          items:
+            type: object
+            properties:
+              consentId:
+                type: string
+              status:
+                type: string
+                enum:
+                - granted
+                - denied
+            required:
+            - consentId
+            - status
+        identification:
+          type: array
+          items:
+            $ref: '#/components/schemas/LegalIdentificationDocumentResource'
+          description: An array of identification items
+      required:
+      - secret
+      - prename
+      - lastname
+      - email
+      - emailRepeat
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

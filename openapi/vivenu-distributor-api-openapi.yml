@@ -1,0 +1,122 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists distributor API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: distributor
+paths:
+  /api/distributors:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: salesChannelId
+        required: false
+        schema:
+          type: string
+          description: The ID of the sales channel.
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Distributor_GetDistributorForSalesChannel_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - distributor
+      description: Get distributor for sales channel
+      operationId: get_distributor_for_sales_channel
+  /api/distributors/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DistributorResource'
+        '401':
+          description: Unauthorized
+      tags:
+      - distributor
+      description: Get a distributor
+      operationId: get_a_distributor
+components:
+  schemas:
+    GET_Distributor_GetDistributorForSalesChannel_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/DistributorResource'
+        total:
+          type: integer
+    DistributorResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the distributor
+        salesChannelId:
+          type: string
+          description: The ID of the sales channel
+        createdAt:
+          type: string
+          format: date-time
+          description: The ISO timestamp when the distributor was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: The ISO timestamp when the distributor was updated
+      required:
+      - _id
+      - salesChannelId
+      - createdAt
+      - updatedAt
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

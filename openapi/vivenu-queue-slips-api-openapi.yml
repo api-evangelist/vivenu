@@ -1,0 +1,1503 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists queue-slips API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: queue-slips
+paths:
+  /api/third/queue-slips/checkouts:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: top
+        required: false
+        schema:
+          type: integer
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: integer
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: checkoutId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: deliveryType
+        required: false
+        schema:
+          oneOf:
+          - type: array
+            items:
+              oneOf:
+              - type: string
+                enum:
+                - HARD
+                metas: {}
+              - type: string
+                enum:
+                - VIRTUAL
+                metas: {}
+              metas: {}
+            metas: {}
+          - type: string
+            description: Filter by a comma(,) separated list of deliveryTypes
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: fulfillmentTypeId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: printStatus
+        required: false
+        schema:
+          oneOf:
+          - type: array
+            items:
+              oneOf:
+              - type: string
+                enum:
+                - SUCCEEDED
+                metas: {}
+              - type: string
+                enum:
+                - ABORTED
+                metas: {}
+              - type: string
+                enum:
+                - FAILED
+                metas: {}
+              - type: string
+                enum:
+                - PENDING
+                metas: {}
+              - type: string
+                enum:
+                - REPRINT
+                metas: {}
+              metas: {}
+            metas: {}
+          - type: string
+            description: Filter by a comma(,) separated list of print statuses
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: paymentStatus
+        required: false
+        schema:
+          oneOf:
+          - type: array
+            items:
+              oneOf:
+              - type: string
+                enum:
+                - AWAITING
+                metas: {}
+              - type: string
+                enum:
+                - PENDING
+                metas: {}
+              - type: string
+                enum:
+                - RECEIVED
+                metas: {}
+              - type: string
+                enum:
+                - REFUND
+                metas: {}
+              - type: string
+                enum:
+                - CANCELED
+                metas: {}
+              - type: string
+                enum:
+                - FAILED
+                metas: {}
+              - type: string
+                enum:
+                - DISPUTE
+                metas: {}
+              - type: string
+                enum:
+                - CHARGEBACK
+                metas: {}
+              - type: string
+                enum:
+                - POS-RECEIVED
+                metas: {}
+              - type: string
+                enum:
+                - POS-CANCELED
+                metas: {}
+              - type: string
+                enum:
+                - LOCAL-PENDING
+                metas: {}
+              - type: string
+                enum:
+                - LOCAL-AWAITING
+                metas: {}
+              - type: string
+                enum:
+                - LOCAL-RECEIVED
+                metas: {}
+              - type: string
+                enum:
+                - EXTERNAL
+                metas: {}
+              metas: {}
+            metas: {}
+          - type: string
+            description: Filter by a comma(,) separated list of payment statuses
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: status
+        required: false
+        schema:
+          oneOf:
+          - type: array
+            items:
+              oneOf:
+              - type: string
+                enum:
+                - NEW
+                metas: {}
+              - type: string
+                enum:
+                - ABORTED
+                metas: {}
+              - type: string
+                enum:
+                - COMPLETE
+                metas: {}
+              metas: {}
+            metas: {}
+          - type: string
+            description: Filter by a comma(,) separated list of statuses
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: name
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: email
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: seller
+        required: false
+        schema:
+          oneOf:
+          - type: array
+            items:
+              type: string
+              metas: {}
+            metas: {}
+          - type: string
+            description: Filter by a comma(,) separated list of sellers
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: customer
+        required: false
+        schema:
+          oneOf:
+          - type: array
+            items:
+              type: string
+              metas: {}
+            metas: {}
+          - type: string
+            description: Filter by a comma(,) separated list of customers
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: start
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - queue-slips
+      description: Preview the checkout filter
+      operationId: preview_the_checkout_filter
+    post:
+      security:
+      - jwt: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Queue-slips_CreateCheckoutQueueSlipPopulatorJob'
+      tags:
+      - queue-slips
+      description: Create checkout queue slip populator job
+      operationId: create_checkout_queue_slip_populator_job
+  /api/third/queue-slips/tickets:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: top
+        required: false
+        schema:
+          type: integer
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: integer
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: _id
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: name
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: aggregations
+        required: false
+        schema:
+          oneOf:
+          - type: array
+            items:
+              oneOf:
+              - type: string
+                enum:
+                - checkouts
+                metas: {}
+              - type: string
+                enum:
+                - batch
+                metas: {}
+              - type: string
+                enum:
+                - customer
+                metas: {}
+              - type: string
+                enum:
+                - unbound
+                metas: {}
+              metas: {}
+            metas: {}
+          - type: string
+            description: Filter by a comma(,) seperated list of aggregations
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: transactionId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: purchaseIntentId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: fulfillmentTypeId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: barcode
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: start
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: status
+        required: false
+        schema:
+          oneOf:
+          - type: array
+            items:
+              oneOf:
+              - type: string
+                enum:
+                - VALID
+                metas: {}
+              - type: string
+                enum:
+                - INVALID
+                metas: {}
+              - type: string
+                enum:
+                - RESERVED
+                metas: {}
+              - type: string
+                enum:
+                - DETAILSREQUIRED
+                metas: {}
+              - type: string
+                enum:
+                - BLANK
+                metas: {}
+              metas: {}
+            metas: {}
+          - type: string
+            description: Filter by a comma(,) separated list of statuses
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: printStatus
+        required: false
+        schema:
+          oneOf:
+          - type: array
+            items:
+              oneOf:
+              - type: string
+                enum:
+                - SUCCEEDED
+                metas: {}
+              - type: string
+                enum:
+                - ABORTED
+                metas: {}
+              - type: string
+                enum:
+                - FAILED
+                metas: {}
+              - type: string
+                enum:
+                - PENDING
+                metas: {}
+              - type: string
+                enum:
+                - REPRINT
+                metas: {}
+              metas: {}
+            metas: {}
+          - type: string
+            description: Filter by a comma(,) separated list of print statuses
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: deliveryType
+        required: false
+        schema:
+          oneOf:
+          - type: array
+            items:
+              oneOf:
+              - type: string
+                enum:
+                - HARD
+                metas: {}
+              - type: string
+                enum:
+                - VIRTUAL
+                metas: {}
+              metas: {}
+            metas: {}
+          - type: string
+            description: Filter by a comma(,) separated list of deliveryTypes
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: event
+        required: false
+        schema:
+          oneOf:
+          - type: array
+            items:
+              type: string
+              metas: {}
+            metas: {}
+          - type: string
+            description: Filter by a comma(,) separated list of events
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: ticketType
+        required: false
+        schema:
+          oneOf:
+          - type: array
+            items:
+              type: string
+              metas: {}
+            metas: {}
+          - type: string
+            description: Filter by a comma(,) separated list of ticketTypes
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: seller
+        required: false
+        schema:
+          oneOf:
+          - type: array
+            items:
+              type: string
+              metas: {}
+            metas: {}
+          - type: string
+            description: Filter by a comma(,) separated list of sellers
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: customer
+        required: false
+        schema:
+          oneOf:
+          - type: array
+            items:
+              type: string
+              metas: {}
+            metas: {}
+          - type: string
+            description: Filter by a comma(,) separated list of customers
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: statusId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: gaName
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: sectionName
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: groupName
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: rowName
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: seatName
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: excludedOrigins
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - yourticket
+            - pos
+            - rebooking
+            - upgrade
+            - subscription
+            - transfer
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - queue-slips
+      description: Preview the ticket filter
+      operationId: preview_the_ticket_filter
+    post:
+      security:
+      - jwt: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Queue-slips_CreateTicketQueueSlipPopulatorJob'
+      tags:
+      - queue-slips
+      description: Create ticket queue slip populator job
+      operationId: create_ticket_queue_slip_populator_job
+  /api/third/queue-slips/vouchers:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: top
+        required: false
+        schema:
+          type: integer
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: integer
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: transactionId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: fulfillmentTypeId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: aggregations
+        required: false
+        schema:
+          oneOf:
+          - type: array
+            items:
+              type: string
+              enum:
+              - checkouts
+              metas: {}
+            metas: {}
+          - type: string
+            description: Filter by a comma(,) seperated list of aggregations
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: printStatus
+        required: false
+        schema:
+          oneOf:
+          - type: array
+            items:
+              oneOf:
+              - type: string
+                enum:
+                - SUCCEEDED
+                metas: {}
+              - type: string
+                enum:
+                - ABORTED
+                metas: {}
+              - type: string
+                enum:
+                - FAILED
+                metas: {}
+              - type: string
+                enum:
+                - PENDING
+                metas: {}
+              - type: string
+                enum:
+                - REPRINT
+                metas: {}
+              metas: {}
+            metas: {}
+          - type: string
+            description: Filter by a comma(,) separated list of print statuses
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: code
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: seller
+        required: false
+        schema:
+          oneOf:
+          - type: array
+            items:
+              type: string
+              metas: {}
+            metas: {}
+          - type: string
+            description: Filter by a comma(,) separated list of sellers
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: customer
+        required: false
+        schema:
+          oneOf:
+          - type: array
+            items:
+              type: string
+              metas: {}
+            metas: {}
+          - type: string
+            description: Filter by a comma(,) separated list of customers
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: start
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: false
+        schema:
+          type: string
+          format: date-time
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - queue-slips
+      description: Preview the voucher filter
+      operationId: preview_the_voucher_filter
+    post:
+      security:
+      - jwt: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Queue-slips_CreateVoucherQueueSlipPopulatorJob'
+      tags:
+      - queue-slips
+      description: Create voucher queue slip populator job
+      operationId: create_voucher_queue_slip_populator_job
+  /api/third/queue-slips:
+    delete:
+      security:
+      - jwt: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DELETE_Queue-slips_DeleteQueueSlips'
+      tags:
+      - queue-slips
+      description: Delete queue slips
+      operationId: delete_queue_slips
+components:
+  schemas:
+    POST_Queue-slips_CreateVoucherQueueSlipPopulatorJob:
+      type: object
+      properties:
+        queueId:
+          type: string
+        printTickets:
+          type: boolean
+        printTicketsFormat:
+          type: string
+          enum:
+          - A4
+          - LETTER
+          - LEGAL
+          - BOARDING-PASS
+          - PLASTIC-CARD
+          - CARD
+          - LABEL
+          - CUSTOM
+          - APPLE
+          - GOOGLE
+          description: The format of a document template to filter for
+        printDeliveryNote:
+          type: boolean
+        customDeliveryNote:
+          type: object
+          properties:
+            name:
+              type: string
+            company:
+              type: string
+            address:
+              type: object
+              properties:
+                fullAddress:
+                  type: string
+                  nullable: true
+                  description: Optional full address
+                street:
+                  type: string
+                  nullable: true
+                  description: The street of the address. Street name including number.
+                line2:
+                  type: string
+                  nullable: true
+                  description: The additional field of the address.
+                postal:
+                  type: string
+                  nullable: true
+                  description: The postal code of the address.
+                city:
+                  type: string
+                  nullable: true
+                  description: The city of the address.
+                country:
+                  type: string
+                  nullable: true
+                  description: The country of the address. An ISO 3166 country code.
+                state:
+                  type: string
+                  nullable: true
+                  description: The state of the address. If applicable
+        printInvoice:
+          type: boolean
+        printReceipt:
+          type: boolean
+        splitSeasonTickets:
+          type: boolean
+        splitSeasonTicketsEventIds:
+          type: array
+          items:
+            type: string
+        printVoucher:
+          type: boolean
+        printVouchersFormat:
+          type: string
+          enum:
+          - A4
+          - LETTER
+          - LEGAL
+          - BOARDING-PASS
+          - PLASTIC-CARD
+          - CARD
+          - LABEL
+          - CUSTOM
+          - APPLE
+          - GOOGLE
+          description: The format of a document template to filter for
+        filter:
+          type: object
+          properties:
+            transactionId:
+              type: string
+            fulfillmentTypeId:
+              type: string
+            aggregations:
+              type: array
+              items:
+                type: string
+                enum:
+                - checkouts
+            printStatus:
+              type: array
+              items:
+                oneOf:
+                - type: string
+                  enum:
+                  - SUCCEEDED
+                - type: string
+                  enum:
+                  - ABORTED
+                - type: string
+                  enum:
+                  - FAILED
+                - type: string
+                  enum:
+                  - PENDING
+                - type: string
+                  enum:
+                  - REPRINT
+            code:
+              type: string
+            seller:
+              type: array
+              items:
+                type: string
+            customer:
+              type: array
+              items:
+                type: string
+            start:
+              type: string
+              format: date-time
+            end:
+              type: string
+              format: date-time
+      required:
+      - queueId
+      - filter
+    POST_Queue-slips_CreateCheckoutQueueSlipPopulatorJob:
+      type: object
+      properties:
+        queueId:
+          type: string
+        printTickets:
+          type: boolean
+        printTicketsFormat:
+          type: string
+          enum:
+          - A4
+          - LETTER
+          - LEGAL
+          - BOARDING-PASS
+          - PLASTIC-CARD
+          - CARD
+          - LABEL
+          - CUSTOM
+          - APPLE
+          - GOOGLE
+          description: The format of a document template to filter for
+        printDeliveryNote:
+          type: boolean
+        customDeliveryNote:
+          type: object
+          properties:
+            name:
+              type: string
+            company:
+              type: string
+            address:
+              type: object
+              properties:
+                fullAddress:
+                  type: string
+                  nullable: true
+                  description: Optional full address
+                street:
+                  type: string
+                  nullable: true
+                  description: The street of the address. Street name including number.
+                line2:
+                  type: string
+                  nullable: true
+                  description: The additional field of the address.
+                postal:
+                  type: string
+                  nullable: true
+                  description: The postal code of the address.
+                city:
+                  type: string
+                  nullable: true
+                  description: The city of the address.
+                country:
+                  type: string
+                  nullable: true
+                  description: The country of the address. An ISO 3166 country code.
+                state:
+                  type: string
+                  nullable: true
+                  description: The state of the address. If applicable
+        printInvoice:
+          type: boolean
+        printReceipt:
+          type: boolean
+        splitSeasonTickets:
+          type: boolean
+        splitSeasonTicketsEventIds:
+          type: array
+          items:
+            type: string
+        printVoucher:
+          type: boolean
+        printVouchersFormat:
+          type: string
+          enum:
+          - A4
+          - LETTER
+          - LEGAL
+          - BOARDING-PASS
+          - PLASTIC-CARD
+          - CARD
+          - LABEL
+          - CUSTOM
+          - APPLE
+          - GOOGLE
+          description: The format of a document template to filter for
+        filter:
+          type: object
+          properties:
+            checkoutId:
+              type: string
+            deliveryType:
+              type: array
+              items:
+                oneOf:
+                - type: string
+                  enum:
+                  - HARD
+                - type: string
+                  enum:
+                  - VIRTUAL
+            fulfillmentTypeId:
+              type: string
+            printStatus:
+              type: array
+              items:
+                oneOf:
+                - type: string
+                  enum:
+                  - SUCCEEDED
+                - type: string
+                  enum:
+                  - ABORTED
+                - type: string
+                  enum:
+                  - FAILED
+                - type: string
+                  enum:
+                  - PENDING
+                - type: string
+                  enum:
+                  - REPRINT
+            paymentStatus:
+              type: array
+              items:
+                oneOf:
+                - type: string
+                  enum:
+                  - AWAITING
+                - type: string
+                  enum:
+                  - PENDING
+                - type: string
+                  enum:
+                  - RECEIVED
+                - type: string
+                  enum:
+                  - REFUND
+                - type: string
+                  enum:
+                  - CANCELED
+                - type: string
+                  enum:
+                  - FAILED
+                - type: string
+                  enum:
+                  - DISPUTE
+                - type: string
+                  enum:
+                  - CHARGEBACK
+                - type: string
+                  enum:
+                  - POS-RECEIVED
+                - type: string
+                  enum:
+                  - POS-CANCELED
+                - type: string
+                  enum:
+                  - LOCAL-PENDING
+                - type: string
+                  enum:
+                  - LOCAL-AWAITING
+                - type: string
+                  enum:
+                  - LOCAL-RECEIVED
+                - type: string
+                  enum:
+                  - EXTERNAL
+            status:
+              type: array
+              items:
+                oneOf:
+                - type: string
+                  enum:
+                  - NEW
+                - type: string
+                  enum:
+                  - ABORTED
+                - type: string
+                  enum:
+                  - COMPLETE
+            name:
+              type: string
+            email:
+              type: string
+            seller:
+              type: array
+              items:
+                type: string
+            customer:
+              type: array
+              items:
+                type: string
+            start:
+              type: string
+              format: date-time
+            end:
+              type: string
+              format: date-time
+      required:
+      - queueId
+      - filter
+    DELETE_Queue-slips_DeleteQueueSlips:
+      type: object
+      properties:
+        queueId:
+          type: string
+        status:
+          type: string
+          enum:
+          - queued
+          - scheduled
+          - received
+          - succeeded
+          - confirmed
+          - errored
+        printStatus:
+          type: string
+          nullable: true
+          enum:
+          - SUCCEEDED
+          - ABORTED
+          - FAILED
+          - PENDING
+          - REPRINT
+      required:
+      - queueId
+      - status
+      - printStatus
+    POST_Queue-slips_CreateTicketQueueSlipPopulatorJob:
+      type: object
+      properties:
+        queueId:
+          type: string
+        printTickets:
+          type: boolean
+        printTicketsFormat:
+          type: string
+          enum:
+          - A4
+          - LETTER
+          - LEGAL
+          - BOARDING-PASS
+          - PLASTIC-CARD
+          - CARD
+          - LABEL
+          - CUSTOM
+          - APPLE
+          - GOOGLE
+          description: The format of a document template to filter for
+        printDeliveryNote:
+          type: boolean
+        customDeliveryNote:
+          type: object
+          properties:
+            name:
+              type: string
+            company:
+              type: string
+            address:
+              type: object
+              properties:
+                fullAddress:
+                  type: string
+                  nullable: true
+                  description: Optional full address
+                street:
+                  type: string
+                  nullable: true
+                  description: The street of the address. Street name including number.
+                line2:
+                  type: string
+                  nullable: true
+                  description: The additional field of the address.
+                postal:
+                  type: string
+                  nullable: true
+                  description: The postal code of the address.
+                city:
+                  type: string
+                  nullable: true
+                  description: The city of the address.
+                country:
+                  type: string
+                  nullable: true
+                  description: The country of the address. An ISO 3166 country code.
+                state:
+                  type: string
+                  nullable: true
+                  description: The state of the address. If applicable
+        printInvoice:
+          type: boolean
+        printReceipt:
+          type: boolean
+        splitSeasonTickets:
+          type: boolean
+        splitSeasonTicketsEventIds:
+          type: array
+          items:
+            type: string
+        printVoucher:
+          type: boolean
+        printVouchersFormat:
+          type: string
+          enum:
+          - A4
+          - LETTER
+          - LEGAL
+          - BOARDING-PASS
+          - PLASTIC-CARD
+          - CARD
+          - LABEL
+          - CUSTOM
+          - APPLE
+          - GOOGLE
+          description: The format of a document template to filter for
+        filter:
+          type: object
+          properties:
+            _id:
+              type: string
+            name:
+              type: string
+            aggregations:
+              type: array
+              items:
+                oneOf:
+                - type: string
+                  enum:
+                  - checkouts
+                - type: string
+                  enum:
+                  - batch
+                - type: string
+                  enum:
+                  - customer
+                - type: string
+                  enum:
+                  - unbound
+            transactionId:
+              type: string
+            purchaseIntentId:
+              type: string
+            fulfillmentTypeId:
+              type: string
+            barcode:
+              type: string
+            start:
+              type: string
+              format: date-time
+            end:
+              type: string
+              format: date-time
+            status:
+              type: array
+              items:
+                oneOf:
+                - type: string
+                  enum:
+                  - VALID
+                - type: string
+                  enum:
+                  - INVALID
+                - type: string
+                  enum:
+                  - RESERVED
+                - type: string
+                  enum:
+                  - DETAILSREQUIRED
+                - type: string
+                  enum:
+                  - BLANK
+            printStatus:
+              type: array
+              items:
+                oneOf:
+                - type: string
+                  enum:
+                  - SUCCEEDED
+                - type: string
+                  enum:
+                  - ABORTED
+                - type: string
+                  enum:
+                  - FAILED
+                - type: string
+                  enum:
+                  - PENDING
+                - type: string
+                  enum:
+                  - REPRINT
+            deliveryType:
+              type: array
+              items:
+                oneOf:
+                - type: string
+                  enum:
+                  - HARD
+                - type: string
+                  enum:
+                  - VIRTUAL
+            event:
+              type: array
+              items:
+                type: string
+            ticketType:
+              type: array
+              items:
+                type: string
+            seller:
+              type: array
+              items:
+                type: string
+            customer:
+              type: array
+              items:
+                type: string
+            statusId:
+              type: string
+            gaName:
+              type: string
+            sectionName:
+              type: string
+            groupName:
+              type: string
+            rowName:
+              type: string
+            seatName:
+              type: string
+            excludedOrigins:
+              type: array
+              items:
+                type: string
+                enum:
+                - yourticket
+                - pos
+                - rebooking
+                - upgrade
+                - subscription
+                - transfer
+      required:
+      - queueId
+      - filter
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

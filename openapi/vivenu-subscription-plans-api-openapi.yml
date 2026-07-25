@@ -1,0 +1,713 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists subscription-plans API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: subscription-plans
+paths:
+  /api/subscriptions/plans:
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionPlanResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Subscription-plans_CreateASubscriptionPlan'
+      tags:
+      - subscription-plans
+      description: Create a subscription Plan
+      operationId: create_a_subscription_plan
+  /api/subscriptions/plans/{id}:
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionPlanResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Subscription-plans_UpdateASubscriptionPlan'
+      tags:
+      - subscription-plans
+      description: Update a subscription Plan
+      operationId: update_a_subscription_plan
+components:
+  schemas:
+    SubscriptionPlanResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the subscription plan
+        name:
+          type: string
+          description: The name of the subscription plan
+        pricingPolicy:
+          type: string
+          enum:
+          - fixed
+          - inherited
+          description: The pricing policy of the subscription plan
+        variants:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the plan variant
+              name:
+                type: string
+                description: The name of the plan variant
+              canChangeVariant:
+                type: boolean
+                description: Whether the variant is changeable or not
+              allowedVariants:
+                type: array
+                items:
+                  type: string
+                description: Allowed variants to change of the variant
+            required:
+            - _id
+            - name
+          description: An array of variants of the subscription plan
+          default: []
+        billingCycle:
+          type: object
+          properties:
+            scheme:
+              type: string
+              enum:
+              - one-off
+              - recurring
+              - interactive_recurring
+              description: The scheme of the billing cycle
+              default: one-off
+            interval:
+              type: string
+              enum:
+              - DAY
+              - WEEK
+              - MONTH
+              description: The interval of the billing cycle
+            every:
+              type: number
+              format: float
+              description: The recurrence of the billing cycle
+            minimumIntervals:
+              type: number
+              format: float
+              nullable: true
+            renewalOptions:
+              type: object
+              properties:
+                periodStart:
+                  type: object
+                  properties:
+                    target:
+                      type: string
+                      nullable: true
+                      description: The target of the relative date
+                    unit:
+                      type: string
+                      enum:
+                      - hours
+                      - days
+                      - weeks
+                      - months
+                      - years
+                      description: The unit in which the offset is specified
+                    offset:
+                      type: integer
+                      description: The offset to the date
+                  required:
+                  - unit
+                  - offset
+                  description: When the renewal window opens, relative to the current cycle end
+              required:
+              - periodStart
+              description: Renewal options for interactive recurring billing
+          required:
+          - scheme
+          description: The billing plan of the subscription plan
+          default: {}
+        paymentSchedules:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              scheme:
+                type: string
+                enum:
+                - one-off
+                - installments
+                description: The scheme of the payment
+                default: one-off
+              interval:
+                type: string
+                enum:
+                - DAY
+                - WEEK
+                - MONTH
+                description: The interval of the payment
+              numberOfInstallments:
+                type: number
+                format: float
+                description: The number of installments of the payment
+            required:
+            - _id
+          description: An array of payment plans of the subscription plan
+          default:
+          - {}
+        renewalPolicy:
+          type: object
+          properties:
+            changesPeriodStart:
+              type: string
+              format: date-time
+              description: An ISO timestamp indicating when the changes period starts
+            changesPeriodEnd:
+              type: string
+              format: date-time
+              description: An ISO timestamp indicating when the changes period ends
+            allowedChanges:
+              type: object
+              properties:
+                ticketType:
+                  type: boolean
+                  description: Whether changes of ticketTypes are allowed or not
+                seat:
+                  type: boolean
+                  description: Whether changes of seats are allowed or not
+              description: Allowed Changes settings of the renewal policy
+              default: {}
+            confirmationPeriodStart:
+              type: string
+              format: date-time
+              description: An ISO timestamp indicating when the confirmation period starts
+            confirmationPeriodEnd:
+              type: string
+              format: date-time
+              description: An ISO timestamp indicating when the confirmation period ends
+          description: The renewal policy of the subscription plan
+        paymentPolicy:
+          type: object
+          properties:
+            interaction:
+              type: string
+              enum:
+              - payNowOnly
+              - customerPaymentMethod
+              description: The interaction type of the payment policy
+              default: customerPaymentMethod
+            allowedPaymentGateways:
+              type: array
+              items:
+                type: string
+              description: Allowed payment gateways
+              default: []
+            changePaymentMethodPolicy:
+              type: string
+              enum:
+              - always
+              - never
+              - onDraft
+              description: Change payment method policy
+              default: always
+            allowedChangePaymentMethodGateways:
+              type: array
+              items:
+                type: string
+              description: Allowed change payment method gateways
+              default: []
+          description: The payment policy of the subscription plan
+        requestedConsents:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - autorenewal
+              description:
+                type: string
+              default:
+                type: boolean
+          description: The subscription consent types requested during checkout
+        sellerId:
+          type: string
+          description: The ID of the seller of the subscription plan
+      required:
+      - _id
+      - name
+      - sellerId
+    POST_Subscription-plans_CreateASubscriptionPlan:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the subscription plan
+        pricingPolicy:
+          type: string
+          enum:
+          - fixed
+          - inherited
+          description: The pricing policy of the subscription plan
+        variants:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the plan variant
+              name:
+                type: string
+                description: The name of the plan variant
+              canChangeVariant:
+                type: boolean
+                description: Whether the variant is changeable or not
+              allowedVariants:
+                type: array
+                items:
+                  type: string
+                description: Allowed variants to change of the variant
+            required:
+            - _id
+            - name
+          description: An array of variants of the subscription plan
+          default: []
+        paymentSchedules:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              scheme:
+                type: string
+                enum:
+                - one-off
+                - installments
+                description: The scheme of the payment
+                default: one-off
+              interval:
+                type: string
+                enum:
+                - DAY
+                - WEEK
+                - MONTH
+                description: The interval of the payment
+              numberOfInstallments:
+                type: number
+                format: float
+                description: The number of installments of the payment
+            required:
+            - _id
+          description: An array of payment plans of the subscription plan
+          default:
+          - {}
+        billingCycle:
+          type: object
+          properties:
+            scheme:
+              type: string
+              enum:
+              - one-off
+              - recurring
+              - interactive_recurring
+              description: The scheme of the billing cycle
+              default: one-off
+            interval:
+              type: string
+              enum:
+              - DAY
+              - WEEK
+              - MONTH
+              description: The interval of the billing cycle
+            every:
+              type: number
+              format: float
+              description: The recurrence of the billing cycle
+            minimumIntervals:
+              type: number
+              format: float
+              nullable: true
+            renewalOptions:
+              type: object
+              properties:
+                periodStart:
+                  type: object
+                  properties:
+                    target:
+                      type: string
+                      nullable: true
+                      description: The target of the relative date
+                    unit:
+                      type: string
+                      enum:
+                      - hours
+                      - days
+                      - weeks
+                      - months
+                      - years
+                      description: The unit in which the offset is specified
+                    offset:
+                      type: integer
+                      description: The offset to the date
+                  required:
+                  - unit
+                  - offset
+                  description: When the renewal window opens, relative to the current cycle end
+              required:
+              - periodStart
+              description: Renewal options for interactive recurring billing
+          required:
+          - scheme
+          description: The billing plan of the subscription plan
+          default: {}
+        renewalPolicy:
+          type: object
+          properties:
+            changesPeriodStart:
+              type: string
+              format: date-time
+              description: An ISO timestamp indicating when the changes period starts
+            changesPeriodEnd:
+              type: string
+              format: date-time
+              description: An ISO timestamp indicating when the changes period ends
+            allowedChanges:
+              type: object
+              properties:
+                ticketType:
+                  type: boolean
+                  description: Whether changes of ticketTypes are allowed or not
+                seat:
+                  type: boolean
+                  description: Whether changes of seats are allowed or not
+              description: Allowed Changes settings of the renewal policy
+              default: {}
+            confirmationPeriodStart:
+              type: string
+              format: date-time
+              description: An ISO timestamp indicating when the confirmation period starts
+            confirmationPeriodEnd:
+              type: string
+              format: date-time
+              description: An ISO timestamp indicating when the confirmation period ends
+          description: The renewal policy of the subscription plan
+        paymentPolicy:
+          type: object
+          properties:
+            interaction:
+              type: string
+              enum:
+              - payNowOnly
+              - customerPaymentMethod
+              description: The interaction type of the payment policy
+              default: customerPaymentMethod
+            allowedPaymentGateways:
+              type: array
+              items:
+                type: string
+              description: Allowed payment gateways
+              default: []
+            changePaymentMethodPolicy:
+              type: string
+              enum:
+              - always
+              - never
+              - onDraft
+              description: Change payment method policy
+              default: always
+            allowedChangePaymentMethodGateways:
+              type: array
+              items:
+                type: string
+              description: Allowed change payment method gateways
+              default: []
+          description: The payment policy of the subscription plan
+        requestedConsents:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - autorenewal
+              description:
+                type: string
+              default:
+                type: boolean
+          description: The subscription consent types requested during checkout
+      required:
+      - name
+    PUT_Subscription-plans_UpdateASubscriptionPlan:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the subscription plan
+        pricingPolicy:
+          type: string
+          enum:
+          - fixed
+          - inherited
+          description: The pricing policy of the subscription plan
+        variants:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the plan variant
+              name:
+                type: string
+                description: The name of the plan variant
+              canChangeVariant:
+                type: boolean
+                description: Whether the variant is changeable or not
+              allowedVariants:
+                type: array
+                items:
+                  type: string
+                description: Allowed variants to change of the variant
+            required:
+            - _id
+            - name
+          description: An array of variants of the subscription plan
+          default: []
+        paymentSchedules:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              scheme:
+                type: string
+                enum:
+                - one-off
+                - installments
+                description: The scheme of the payment
+                default: one-off
+              interval:
+                type: string
+                enum:
+                - DAY
+                - WEEK
+                - MONTH
+                description: The interval of the payment
+              numberOfInstallments:
+                type: number
+                format: float
+                description: The number of installments of the payment
+            required:
+            - _id
+          description: An array of payment plans of the subscription plan
+          default:
+          - {}
+        billingCycle:
+          type: object
+          properties:
+            scheme:
+              type: string
+              enum:
+              - one-off
+              - recurring
+              - interactive_recurring
+              description: The scheme of the billing cycle
+              default: one-off
+            interval:
+              type: string
+              enum:
+              - DAY
+              - WEEK
+              - MONTH
+              description: The interval of the billing cycle
+            every:
+              type: number
+              format: float
+              description: The recurrence of the billing cycle
+            minimumIntervals:
+              type: number
+              format: float
+              nullable: true
+            renewalOptions:
+              type: object
+              properties:
+                periodStart:
+                  type: object
+                  properties:
+                    target:
+                      type: string
+                      nullable: true
+                      description: The target of the relative date
+                    unit:
+                      type: string
+                      enum:
+                      - hours
+                      - days
+                      - weeks
+                      - months
+                      - years
+                      description: The unit in which the offset is specified
+                    offset:
+                      type: integer
+                      description: The offset to the date
+                  required:
+                  - unit
+                  - offset
+                  description: When the renewal window opens, relative to the current cycle end
+              required:
+              - periodStart
+              description: Renewal options for interactive recurring billing
+          required:
+          - scheme
+          description: The billing plan of the subscription plan
+          default: {}
+        renewalPolicy:
+          type: object
+          properties:
+            changesPeriodStart:
+              type: string
+              format: date-time
+              description: An ISO timestamp indicating when the changes period starts
+            changesPeriodEnd:
+              type: string
+              format: date-time
+              description: An ISO timestamp indicating when the changes period ends
+            allowedChanges:
+              type: object
+              properties:
+                ticketType:
+                  type: boolean
+                  description: Whether changes of ticketTypes are allowed or not
+                seat:
+                  type: boolean
+                  description: Whether changes of seats are allowed or not
+              description: Allowed Changes settings of the renewal policy
+              default: {}
+            confirmationPeriodStart:
+              type: string
+              format: date-time
+              description: An ISO timestamp indicating when the confirmation period starts
+            confirmationPeriodEnd:
+              type: string
+              format: date-time
+              description: An ISO timestamp indicating when the confirmation period ends
+          description: The renewal policy of the subscription plan
+        paymentPolicy:
+          type: object
+          properties:
+            interaction:
+              type: string
+              enum:
+              - payNowOnly
+              - customerPaymentMethod
+              description: The interaction type of the payment policy
+              default: customerPaymentMethod
+            allowedPaymentGateways:
+              type: array
+              items:
+                type: string
+              description: Allowed payment gateways
+              default: []
+            changePaymentMethodPolicy:
+              type: string
+              enum:
+              - always
+              - never
+              - onDraft
+              description: Change payment method policy
+              default: always
+            allowedChangePaymentMethodGateways:
+              type: array
+              items:
+                type: string
+              description: Allowed change payment method gateways
+              default: []
+          description: The payment policy of the subscription plan
+        requestedConsents:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - autorenewal
+              description:
+                type: string
+              default:
+                type: boolean
+          description: The subscription consent types requested during checkout
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

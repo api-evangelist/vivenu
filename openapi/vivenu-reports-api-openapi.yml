@@ -1,0 +1,141 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists reports API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: reports
+paths:
+  /api/reports:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: type
+        required: true
+        schema:
+          type: string
+          enum:
+          - sales_over_time
+          - sales_by_product
+          - avg_transaction_value_over_time
+          - tickets_by_tickettype
+          - tickets_over_time
+          - tickets_by_channel
+          - new_customers_over_time
+          - new_customers_by_country
+          - returning_customers
+          - customers
+          - item_sales
+          - event_fee_revenue
+          - fee_revenue
+          - transactions
+          - transactionsDiscounts
+          - transactionsCancellations
+          - event_revenue
+          - revenue
+          - vouchers
+          - fundraise
+          - balancingsCashflow
+          - subscriptionsCashflow
+          - paymentPlansCashflow
+          - accountingTransactions
+          - accountingTransactionsTaxes
+          - accountingTransactionsSales
+          - revenueReconciliation
+          - orders
+          - marketingAttributions
+          - completionRate
+          - orgTickets
+          - scans
+          - ticket_transfers
+          - ticketAddOns
+          - ticket_inventory
+          - tickets
+          - ticket_total_issued
+          - ticketsDiscounted
+          - eventsOverview
+          - eventsContingents
+          - composer
+          - composerGbor
+          - composerWith
+          - composerGlsr
+          description: The type of report
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: eventIds
+        required: false
+        schema:
+          oneOf:
+          - type: array
+            items:
+              type: string
+              metas: {}
+            description: An array of event IDs to filter for
+            metas: {}
+          - type: string
+            description: A single event ID as a string to filter for
+            metas: {}
+          description: An array of event IDs or a single event ID as a string to filter for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: timezone
+        required: false
+        schema:
+          type: string
+          default: UTC
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: Report created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Reports_GetReport_200_response'
+      tags:
+      - reports
+      description: Get Report
+      operationId: get_report
+components:
+  schemas:
+    GET_Reports_GetReport_200_response:
+      type: object
+      properties:
+        data:
+          type: object
+        config:
+          type: object
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

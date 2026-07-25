@@ -1,0 +1,411 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists price-tables API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: price-tables
+paths:
+  /api/price-tables:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: name
+        required: false
+        schema:
+          type: string
+          description: The name of the price table to filter for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: top
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: integer
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Price-tables_GetAllPriceTables_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - price-tables
+      description: Get all Price Tables
+      operationId: get_all_price_tables
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceTableResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Price-tables_CreateAPriceTable'
+      tags:
+      - price-tables
+      description: Create a Price Table
+      operationId: create_a_price_table
+  /api/price-tables/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the price table
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceTableResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - price-tables
+      description: Get a Price Table
+      operationId: get_a_price_table
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the price table
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceTableResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Price-tables_UpdateAPriceTable'
+      tags:
+      - price-tables
+      description: Update a Price Table
+      operationId: update_a_price_table
+components:
+  schemas:
+    POST_Price-tables_CreateAPriceTable:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the price table. Is used for identification
+        categories:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the price category
+              name:
+                type: string
+                description: The name of the price category. Is used for identification
+            required:
+            - name
+          description: An array of price categories
+        types:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the price type
+              name:
+                type: string
+                description: The name of the price type. Is used for identification
+              categoryId:
+                type: string
+                description: The ID of the price category
+              price:
+                type: number
+                format: float
+                description: The default price for the type, can be overridden per price tier
+            required:
+            - name
+            - categoryId
+            - price
+          description: An array of price types
+        tiers:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              name:
+                type: string
+                description: The name of the price tier. Is used for identification
+              prices:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    priceTypeId:
+                      type: string
+                      description: The ID of the price type
+                    price:
+                      type: number
+                      format: float
+                      nullable: true
+                      description: The price for the associated price type
+                  required:
+                  - priceTypeId
+                  - price
+            required:
+            - name
+          description: An array of price tiers
+      required:
+      - name
+    PriceTableResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the price table
+        sellerId:
+          type: string
+          description: The ID of the seller of the price table
+        name:
+          type: string
+          description: The name of the price table. Is used for identification
+        categories:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the price category
+              name:
+                type: string
+                description: The name of the price category. Is used for identification
+            required:
+            - name
+          description: An array of price categories
+        types:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the price type
+              name:
+                type: string
+                description: The name of the price type. Is used for identification
+              categoryId:
+                type: string
+                description: The ID of the price category
+              price:
+                type: number
+                format: float
+                description: The default price for the type, can be overridden per price tier
+            required:
+            - name
+            - categoryId
+            - price
+          description: An array of price types
+        tiers:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              name:
+                type: string
+                description: The name of the price tier. Is used for identification
+              prices:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    priceTypeId:
+                      type: string
+                      description: The ID of the price type
+                    price:
+                      type: number
+                      format: float
+                      nullable: true
+                      description: The price for the associated price type
+                  required:
+                  - priceTypeId
+                  - price
+            required:
+            - name
+          description: An array of price tiers
+      required:
+      - _id
+      - sellerId
+      - name
+    PUT_Price-tables_UpdateAPriceTable:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the price table. Is used for identification
+        categories:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the price category
+              name:
+                type: string
+                description: The name of the price category. Is used for identification
+            required:
+            - name
+          description: An array of price categories
+        types:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the price type
+              name:
+                type: string
+                description: The name of the price type. Is used for identification
+              categoryId:
+                type: string
+                description: The ID of the price category
+              price:
+                type: number
+                format: float
+                description: The default price for the type, can be overridden per price tier
+            required:
+            - name
+            - categoryId
+            - price
+          description: An array of price types
+        tiers:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              name:
+                type: string
+                description: The name of the price tier. Is used for identification
+              prices:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    priceTypeId:
+                      type: string
+                      description: The ID of the price type
+                    price:
+                      type: number
+                      format: float
+                      nullable: true
+                      description: The price for the associated price type
+                  required:
+                  - priceTypeId
+                  - price
+            required:
+            - name
+          description: An array of price tiers
+    GET_Price-tables_GetAllPriceTables_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceTableResource'
+        total:
+          type: integer
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

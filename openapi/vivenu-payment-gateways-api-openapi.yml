@@ -1,0 +1,344 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists payment-gateways API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: payment-gateways
+paths:
+  /api/payments/gateways:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: orgId
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^[a-fA-F0-9]{24}$
+          - type: string
+            pattern: ^[a-z]+_.*$
+        in: query
+        required: false
+        style: form
+        explode: true
+      - name: sellerId
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^[a-fA-F0-9]{24}$
+          - type: string
+            pattern: ^[a-z]+_.*$
+        in: query
+        required: false
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Payment-gateways_GetAllPaymentGateways_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - payment-gateways
+      description: Get all Payment Gateways
+      operationId: get_all_payment_gateways
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentGatewayResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Payment-gateways_CreateAPaymentGateway'
+      tags:
+      - payment-gateways
+      description: Create a Payment Gateway
+      operationId: create_a_payment_gateway
+  /api/payments/gateways/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentGatewayResource'
+        '401':
+          description: Unauthorized
+      tags:
+      - payment-gateways
+      description: Get a Payment Gateway
+      operationId: get_a_payment_gateway
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentGatewayResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Payment-gateways_UpdateAPaymentGateway'
+      tags:
+      - payment-gateways
+      description: Update a Payment Gateway
+      operationId: update_a_payment_gateway
+components:
+  schemas:
+    GET_Payment-gateways_GetAllPaymentGateways_200_response:
+      type: array
+      items:
+        $ref: '#/components/schemas/PaymentGatewayResource'
+    POST_Payment-gateways_CreateAPaymentGateway:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of the gateway
+          default: custom
+        name:
+          type: string
+          description: The display name of the payment gateway
+        redirectUrl:
+          type: string
+          format: uri
+          nullable: true
+          description: The URL to which the customer gets redirected
+        data:
+          type: object
+          description: Any additional data required for the integration to work
+        orgId:
+          type: string
+          description: The ID of the organization to create this payment gateway for
+      required:
+      - name
+    PUT_Payment-gateways_UpdateAPaymentGateway:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The display name of the payment gateway
+        active:
+          type: boolean
+          description: Whether the payment gateway is active
+        redirectUrl:
+          type: string
+          format: uri
+          nullable: true
+          description: The URL to which the customer gets redirected
+        channels:
+          type: array
+          items:
+            type: string
+          description: An array of channels the payment gateway is used for
+          default:
+          - online
+        data:
+          type: object
+          description: Any additional data required for the integration to work
+        entitlements:
+          type: object
+          properties:
+            target:
+              type: string
+              enum:
+              - all
+              - selection
+              description: The target of the entitlement
+            sellerIds:
+              type: array
+              items:
+                type: string
+              description: An array of seller ids for which the gateway is active
+          required:
+          - target
+        capabilities:
+          type: object
+          properties:
+            refunds:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+                  description: Whether refunds are enabled
+                endpointUrl:
+                  type: string
+                  format: uri
+                  nullable: true
+                  description: The endpoint URL to call in order to request a refund
+        icon:
+          type: string
+          nullable: true
+          description: The URL of the icon of the payment gateway
+        description:
+          type: string
+          description: A description of the payment gateway for the user
+      required:
+      - name
+    PaymentGatewayResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the payment gateway
+        type:
+          type: string
+          description: The type of the gateway
+          default: custom
+        name:
+          type: string
+          description: The display name of the payment gateway
+        data:
+          type: object
+          description: Any additional data required for the integration to work
+        orgId:
+          type: string
+          description: The ID of the organization to create this payment gateway for
+        active:
+          type: boolean
+          description: Whether the payment gateway is active
+        secret:
+          type: string
+          description: The secret of the payment gateway
+        sellerId:
+          type: string
+          description: The ID of the seller that gateway belongs to
+        redirectUrl:
+          type: string
+          format: uri
+          nullable: true
+          description: The URL to which the customer gets redirected
+        channels:
+          type: array
+          items:
+            type: string
+          description: An array of channels the payment gateway is used for
+          default:
+          - online
+        entitlements:
+          type: object
+          properties:
+            target:
+              type: string
+              enum:
+              - all
+              - selection
+              description: The target of the entitlement
+            sellerIds:
+              type: array
+              items:
+                type: string
+              description: An array of seller ids for which the gateway is active
+          required:
+          - target
+        capabilities:
+          type: object
+          properties:
+            refunds:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+                  description: Whether refunds are enabled
+                endpointUrl:
+                  type: string
+                  format: uri
+                  nullable: true
+                  description: The endpoint URL to call in order to request a refund
+        icon:
+          type: string
+          nullable: true
+          description: The URL of the icon of the payment gateway
+        description:
+          type: string
+          description: A description of the payment gateway for the user
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the gateway was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the gateway was last updated
+      required:
+      - _id
+      - name
+      - secret
+      - sellerId
+      - createdAt
+      - updatedAt
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

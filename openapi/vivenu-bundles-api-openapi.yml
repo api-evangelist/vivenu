@@ -1,0 +1,1027 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists bundles API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: bundles
+paths:
+  /api/bundles:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: name
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: top
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: integer
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Bundles_GetAllBundles_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - bundles
+      description: Get all Bundles
+      operationId: bundles/list
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POST_Bundles_CreateABundle_201_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Bundles_CreateABundle'
+      tags:
+      - bundles
+      description: Create a Bundle
+      operationId: bundles/create
+  /api/bundles/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          oneOf:
+          - type: string
+            length: 24
+            metas: {}
+          - type: string
+            pattern: ^[a-z]+_.*$
+            metas: {}
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Bundles_GetABundle_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - bundles
+      description: Get a Bundle
+      operationId: bundles/get
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          oneOf:
+          - type: string
+            length: 24
+            metas: {}
+          - type: string
+            pattern: ^[a-z]+_.*$
+            metas: {}
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PUT_Bundles_UpdateABundle_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Bundles_UpdateABundle'
+      tags:
+      - bundles
+      description: Update a Bundle
+      operationId: bundles/update
+components:
+  schemas:
+    POST_Bundles_CreateABundle_201_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the bundle
+        active:
+          type: boolean
+          description: Whether the bundle is active
+        name:
+          type: string
+          description: The name of the bundle
+        description:
+          type: string
+          description: The description of the bundle
+        image:
+          type: string
+          nullable: true
+          description: The image of the bundle
+        components:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the bundle component
+              name:
+                type: string
+                description: The ID of the bundle component
+              options:
+                type: array
+                items:
+                  oneOf:
+                  - type: object
+                    properties:
+                      _id:
+                        type: string
+                        description: The ID of the option
+                      type:
+                        type: string
+                        enum:
+                        - pricetype
+                      price:
+                        type: number
+                        format: float
+                        nullable: true
+                        description: The price of the bundle component option
+                      priceType:
+                        type: object
+                        properties:
+                          priceTableId:
+                            type: string
+                            description: The ID of the price table of the bundle component option
+                          priceTypeId:
+                            type: string
+                            description: The ID of the price type of the bundle component option
+                        required:
+                        - priceTableId
+                        - priceTypeId
+                    required:
+                    - type
+                    - priceType
+                  - type: object
+                    properties:
+                      _id:
+                        type: string
+                        description: The ID of the option
+                      price:
+                        type: number
+                        format: float
+                        nullable: true
+                        description: The price of the bundle component option
+                      type:
+                        type: string
+                        enum:
+                        - product
+                        - tickettype
+                    required:
+                    - type
+                description: Options for the bundle component
+              minQuantity:
+                type: number
+                format: float
+                description: Minimum quantity of the bundle component
+              maxQuantity:
+                type: number
+                format: float
+                description: Maximum quantity of the bundle component
+              localization:
+                type: object
+                description: Localization of the bundle component for multiple languages
+            required:
+            - name
+            - options
+            - minQuantity
+            - maxQuantity
+          description: The components of the bundle
+        triggers:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the bundle component
+              type:
+                type: string
+              target:
+                type: object
+                properties:
+                  componentId:
+                    type: string
+                    description: The component which should trigger the bundle
+                required:
+                - componentId
+          description: The triggers of the bundle
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was updated
+        sellerId:
+          type: string
+          description: The ID of the seller of the bundle
+        showOnlyTotalPrice:
+          type: boolean
+          description: Whether to show the total only
+        localization:
+          type: object
+          description: Localization of the bundle for multiple languages
+      required:
+      - _id
+      - active
+      - name
+      - description
+      - components
+      - triggers
+      - sellerId
+      - showOnlyTotalPrice
+    POST_Bundles_CreateABundle:
+      type: object
+      properties:
+        active:
+          type: boolean
+          description: Whether the bundle is active
+        name:
+          type: string
+          description: The name of the bundle
+        description:
+          type: string
+          description: The description of the bundle
+        image:
+          type: string
+          nullable: true
+          description: The image of the bundle
+        components:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the bundle component
+              name:
+                type: string
+                description: The ID of the bundle component
+              options:
+                type: array
+                items:
+                  oneOf:
+                  - type: object
+                    properties:
+                      _id:
+                        type: string
+                        description: The ID of the option
+                      type:
+                        type: string
+                        enum:
+                        - pricetype
+                      price:
+                        type: number
+                        format: float
+                        nullable: true
+                        description: The price of the bundle component option
+                      priceType:
+                        type: object
+                        properties:
+                          priceTableId:
+                            type: string
+                            description: The ID of the price table of the bundle component option
+                          priceTypeId:
+                            type: string
+                            description: The ID of the price type of the bundle component option
+                        required:
+                        - priceTableId
+                        - priceTypeId
+                    required:
+                    - type
+                    - priceType
+                  - type: object
+                    properties:
+                      _id:
+                        type: string
+                        description: The ID of the option
+                      price:
+                        type: number
+                        format: float
+                        nullable: true
+                        description: The price of the bundle component option
+                      type:
+                        type: string
+                        enum:
+                        - product
+                        - tickettype
+                    required:
+                    - type
+                description: Options for the bundle component
+              minQuantity:
+                type: number
+                format: float
+                description: Minimum quantity of the bundle component
+              maxQuantity:
+                type: number
+                format: float
+                description: Maximum quantity of the bundle component
+              localization:
+                type: object
+                description: Localization of the bundle component for multiple languages
+            required:
+            - name
+            - options
+            - minQuantity
+            - maxQuantity
+          description: The components of the bundle
+        triggers:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the bundle component
+              type:
+                type: string
+              target:
+                type: object
+                properties:
+                  componentId:
+                    type: string
+                    description: The component which should trigger the bundle
+                required:
+                - componentId
+          description: The triggers of the bundle
+        showOnlyTotalPrice:
+          type: boolean
+          description: Whether to show the total only
+        localization:
+          type: object
+          description: Localization of the bundle for multiple languages
+      required:
+      - active
+      - name
+      - description
+      - components
+      - triggers
+      - showOnlyTotalPrice
+    PUT_Bundles_UpdateABundle:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the bundle
+        active:
+          type: boolean
+          description: Whether the bundle is active
+        name:
+          type: string
+          description: The name of the bundle
+        description:
+          type: string
+          description: The description of the bundle
+        image:
+          type: string
+          nullable: true
+          description: The image of the bundle
+        components:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the bundle component
+              name:
+                type: string
+                description: The ID of the bundle component
+              options:
+                type: array
+                items:
+                  oneOf:
+                  - type: object
+                    properties:
+                      _id:
+                        type: string
+                        description: The ID of the option
+                      type:
+                        type: string
+                        enum:
+                        - pricetype
+                      price:
+                        type: number
+                        format: float
+                        nullable: true
+                        description: The price of the bundle component option
+                      priceType:
+                        type: object
+                        properties:
+                          priceTableId:
+                            type: string
+                            description: The ID of the price table of the bundle component option
+                          priceTypeId:
+                            type: string
+                            description: The ID of the price type of the bundle component option
+                        required:
+                        - priceTableId
+                        - priceTypeId
+                    required:
+                    - type
+                    - priceType
+                  - type: object
+                    properties:
+                      _id:
+                        type: string
+                        description: The ID of the option
+                      price:
+                        type: number
+                        format: float
+                        nullable: true
+                        description: The price of the bundle component option
+                      type:
+                        type: string
+                        enum:
+                        - product
+                        - tickettype
+                    required:
+                    - type
+                description: Options for the bundle component
+              minQuantity:
+                type: number
+                format: float
+                description: Minimum quantity of the bundle component
+              maxQuantity:
+                type: number
+                format: float
+                description: Maximum quantity of the bundle component
+              localization:
+                type: object
+                description: Localization of the bundle component for multiple languages
+            required:
+            - name
+            - options
+            - minQuantity
+            - maxQuantity
+          description: The components of the bundle
+        triggers:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the bundle component
+              type:
+                type: string
+              target:
+                type: object
+                properties:
+                  componentId:
+                    type: string
+                    description: The component which should trigger the bundle
+                required:
+                - componentId
+          description: The triggers of the bundle
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was updated
+        sellerId:
+          type: string
+          description: The ID of the seller of the bundle
+        showOnlyTotalPrice:
+          type: boolean
+          description: Whether to show the total only
+        localization:
+          type: object
+          description: Localization of the bundle for multiple languages
+    PUT_Bundles_UpdateABundle_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the bundle
+        active:
+          type: boolean
+          description: Whether the bundle is active
+        name:
+          type: string
+          description: The name of the bundle
+        description:
+          type: string
+          description: The description of the bundle
+        image:
+          type: string
+          nullable: true
+          description: The image of the bundle
+        components:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the bundle component
+              name:
+                type: string
+                description: The ID of the bundle component
+              options:
+                type: array
+                items:
+                  oneOf:
+                  - type: object
+                    properties:
+                      _id:
+                        type: string
+                        description: The ID of the option
+                      type:
+                        type: string
+                        enum:
+                        - pricetype
+                      price:
+                        type: number
+                        format: float
+                        nullable: true
+                        description: The price of the bundle component option
+                      priceType:
+                        type: object
+                        properties:
+                          priceTableId:
+                            type: string
+                            description: The ID of the price table of the bundle component option
+                          priceTypeId:
+                            type: string
+                            description: The ID of the price type of the bundle component option
+                        required:
+                        - priceTableId
+                        - priceTypeId
+                    required:
+                    - type
+                    - priceType
+                  - type: object
+                    properties:
+                      _id:
+                        type: string
+                        description: The ID of the option
+                      price:
+                        type: number
+                        format: float
+                        nullable: true
+                        description: The price of the bundle component option
+                      type:
+                        type: string
+                        enum:
+                        - product
+                        - tickettype
+                    required:
+                    - type
+                description: Options for the bundle component
+              minQuantity:
+                type: number
+                format: float
+                description: Minimum quantity of the bundle component
+              maxQuantity:
+                type: number
+                format: float
+                description: Maximum quantity of the bundle component
+              localization:
+                type: object
+                description: Localization of the bundle component for multiple languages
+            required:
+            - name
+            - options
+            - minQuantity
+            - maxQuantity
+          description: The components of the bundle
+        triggers:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the bundle component
+              type:
+                type: string
+              target:
+                type: object
+                properties:
+                  componentId:
+                    type: string
+                    description: The component which should trigger the bundle
+                required:
+                - componentId
+          description: The triggers of the bundle
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was updated
+        sellerId:
+          type: string
+          description: The ID of the seller of the bundle
+        showOnlyTotalPrice:
+          type: boolean
+          description: Whether to show the total only
+        localization:
+          type: object
+          description: Localization of the bundle for multiple languages
+      required:
+      - _id
+      - active
+      - name
+      - description
+      - components
+      - triggers
+      - sellerId
+      - showOnlyTotalPrice
+    GET_Bundles_GetABundle_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the bundle
+        active:
+          type: boolean
+          description: Whether the bundle is active
+        name:
+          type: string
+          description: The name of the bundle
+        description:
+          type: string
+          description: The description of the bundle
+        image:
+          type: string
+          nullable: true
+          description: The image of the bundle
+        components:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the bundle component
+              name:
+                type: string
+                description: The ID of the bundle component
+              options:
+                type: array
+                items:
+                  oneOf:
+                  - type: object
+                    properties:
+                      _id:
+                        type: string
+                        description: The ID of the option
+                      type:
+                        type: string
+                        enum:
+                        - pricetype
+                      price:
+                        type: number
+                        format: float
+                        nullable: true
+                        description: The price of the bundle component option
+                      priceType:
+                        type: object
+                        properties:
+                          priceTableId:
+                            type: string
+                            description: The ID of the price table of the bundle component option
+                          priceTypeId:
+                            type: string
+                            description: The ID of the price type of the bundle component option
+                        required:
+                        - priceTableId
+                        - priceTypeId
+                    required:
+                    - type
+                    - priceType
+                  - type: object
+                    properties:
+                      _id:
+                        type: string
+                        description: The ID of the option
+                      price:
+                        type: number
+                        format: float
+                        nullable: true
+                        description: The price of the bundle component option
+                      type:
+                        type: string
+                        enum:
+                        - product
+                        - tickettype
+                    required:
+                    - type
+                description: Options for the bundle component
+              minQuantity:
+                type: number
+                format: float
+                description: Minimum quantity of the bundle component
+              maxQuantity:
+                type: number
+                format: float
+                description: Maximum quantity of the bundle component
+              localization:
+                type: object
+                description: Localization of the bundle component for multiple languages
+            required:
+            - name
+            - options
+            - minQuantity
+            - maxQuantity
+          description: The components of the bundle
+        triggers:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the bundle component
+              type:
+                type: string
+              target:
+                type: object
+                properties:
+                  componentId:
+                    type: string
+                    description: The component which should trigger the bundle
+                required:
+                - componentId
+          description: The triggers of the bundle
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was updated
+        sellerId:
+          type: string
+          description: The ID of the seller of the bundle
+        showOnlyTotalPrice:
+          type: boolean
+          description: Whether to show the total only
+        localization:
+          type: object
+          description: Localization of the bundle for multiple languages
+      required:
+      - _id
+      - active
+      - name
+      - description
+      - components
+      - triggers
+      - sellerId
+      - showOnlyTotalPrice
+    GET_Bundles_GetAllBundles_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the bundle
+              active:
+                type: boolean
+                description: Whether the bundle is active
+              name:
+                type: string
+                description: The name of the bundle
+              description:
+                type: string
+                description: The description of the bundle
+              image:
+                type: string
+                nullable: true
+                description: The image of the bundle
+              components:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The ID of the bundle component
+                    name:
+                      type: string
+                      description: The ID of the bundle component
+                    options:
+                      type: array
+                      items:
+                        oneOf:
+                        - type: object
+                          properties:
+                            _id:
+                              type: string
+                              description: The ID of the option
+                            type:
+                              type: string
+                              enum:
+                              - pricetype
+                            price:
+                              type: number
+                              format: float
+                              nullable: true
+                              description: The price of the bundle component option
+                            priceType:
+                              type: object
+                              properties:
+                                priceTableId:
+                                  type: string
+                                  description: The ID of the price table of the bundle component option
+                                priceTypeId:
+                                  type: string
+                                  description: The ID of the price type of the bundle component option
+                              required:
+                              - priceTableId
+                              - priceTypeId
+                          required:
+                          - type
+                          - priceType
+                        - type: object
+                          properties:
+                            _id:
+                              type: string
+                              description: The ID of the option
+                            price:
+                              type: number
+                              format: float
+                              nullable: true
+                              description: The price of the bundle component option
+                            type:
+                              type: string
+                              enum:
+                              - product
+                              - tickettype
+                          required:
+                          - type
+                      description: Options for the bundle component
+                    minQuantity:
+                      type: number
+                      format: float
+                      description: Minimum quantity of the bundle component
+                    maxQuantity:
+                      type: number
+                      format: float
+                      description: Maximum quantity of the bundle component
+                    localization:
+                      type: object
+                      description: Localization of the bundle component for multiple languages
+                  required:
+                  - name
+                  - options
+                  - minQuantity
+                  - maxQuantity
+                description: The components of the bundle
+              triggers:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The ID of the bundle component
+                    type:
+                      type: string
+                    target:
+                      type: object
+                      properties:
+                        componentId:
+                          type: string
+                          description: The component which should trigger the bundle
+                      required:
+                      - componentId
+                description: The triggers of the bundle
+              createdAt:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the product was created
+              updatedAt:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the product was updated
+              sellerId:
+                type: string
+                description: The ID of the seller of the bundle
+              showOnlyTotalPrice:
+                type: boolean
+                description: Whether to show the total only
+              localization:
+                type: object
+                description: Localization of the bundle for multiple languages
+            required:
+            - _id
+            - active
+            - name
+            - description
+            - components
+            - triggers
+            - sellerId
+            - showOnlyTotalPrice
+        total:
+          type: integer
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

@@ -1,0 +1,1318 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists distribution-api API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: distribution-api
+paths:
+  /api/distribution/events:
+    get:
+      parameters:
+      - name: distributorId
+        required: true
+        schema:
+          type: string
+          description: The seller to get events for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: start
+        required: false
+        schema:
+          type: string
+          description: The start date for the events
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: false
+        schema:
+          type: string
+          description: The end date for the events
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: top
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          description: The maximum amount of events to return
+          default: 100
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          description: The amount of events to skip
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Distribution-api_GetAllEventsForASeller_200_response'
+        '400':
+          description: Bad Request
+      tags:
+      - distribution-api
+      description: Get all events for a seller.
+      operationId: get_all_events_for_a_seller
+  /api/distribution/sellers:
+    get:
+      parameters:
+      - name: type
+        required: false
+        schema:
+          type: string
+          enum:
+          - Redeam
+          - GetYourGuide
+          - Logitix
+          - EventDynamic
+          - StubHub
+          - TicketmasterFrance
+          - ProjectAdmission
+          - Tiqets
+          - TripCom
+          - ANI
+          - TicketNetwork
+          - KorusTicket
+          - ComeToParis
+          - Experticket
+          - Prioticket
+          - RevPro
+          - Automatiq
+          description: The type of the distributor
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: number
+          format: float
+          description: The amount of sellers to skip
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: top
+        required: false
+        schema:
+          type: number
+          format: float
+          description: The maximum amount of sellers to return
+          default: 100
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: sellerId
+        required: false
+        schema:
+          type: string
+          description: The ID of the seller
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Distribution-api_GetAllSellers_200_response'
+        '400':
+          description: Bad Request
+      tags:
+      - distribution-api
+      description: Get all sellers.
+      operationId: get_all_sellers
+  /api/distribution/checkout/{id}:
+    get:
+      parameters:
+      - name: distributorId
+        required: true
+        schema:
+          type: string
+          description: The distributor to fetch the checkout for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The checkout to fetch
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DistributionCheckoutResource'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+      tags:
+      - distribution-api
+      description: Get a checkout.
+      operationId: get_a_checkout
+  /api/distribution/events/{id}:
+    get:
+      parameters:
+      - name: distributorId
+        required: true
+        schema:
+          type: string
+          description: The seller to get events for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The event to fetch
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DistributionEventResource'
+        '400':
+          description: Bad Request
+      tags:
+      - distribution-api
+      description: Get an event for a seller.
+      operationId: get_an_event_for_a_seller
+  /api/distribution/events/{id}/availabilities:
+    get:
+      parameters:
+      - name: distributorId
+        required: true
+        schema:
+          type: string
+          description: The seller to get events for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: start
+        required: false
+        schema:
+          type: string
+          description: The start date for the events
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: end
+        required: false
+        schema:
+          type: string
+          description: The end date for the events
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: top
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          description: The maximum amount of events to return
+          default: 100
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          description: The amount of events to skip
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The event to fetch
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Distribution-api_GetTheAvailabilitiesForAnEvent_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - distribution-api
+      description: Get the availabilities for an event.
+      operationId: get_the_availabilities_for_an_event
+  /api/distribution/events/{eventId}/availabilities/{availabilityId}/seating-groups:
+    get:
+      parameters:
+      - name: distributorId
+        required: true
+        schema:
+          type: string
+          description: The seller to get events for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: eventId
+        required: true
+        schema:
+          type: string
+          description: The event to fetch seating groups for
+          metas: {}
+        in: path
+      - name: availabilityId
+        required: true
+        schema:
+          type: string
+          description: The availability to fetch seating groups for
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Distribution-api_GetSeatingGroupsForAnEvent_200_response'
+        '400':
+          description: Bad Request
+      tags:
+      - distribution-api
+      description: Get seating groups for an event.
+      operationId: get_seating_groups_for_an_event
+  /api/distribution/events/{eventId}/availabilities/{availabilityId}/seating-groups/{groupId}:
+    get:
+      parameters:
+      - name: distributorId
+        required: true
+        schema:
+          type: string
+          description: The seller to get events for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: eventId
+        required: true
+        schema:
+          type: string
+          description: The event to fetch seating tuples for
+          metas: {}
+        in: path
+      - name: groupId
+        required: true
+        schema:
+          type: string
+          description: The seating group to fetch seating tuples for
+          metas: {}
+        in: path
+      - name: availabilityId
+        required: true
+        schema:
+          type: string
+          description: The availability to fetch seating tuples for
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DistributionSeatingGroupResource'
+        '400':
+          description: Bad Request
+      tags:
+      - distribution-api
+      description: Get the state for a seating group.
+      operationId: get_the_state_for_a_seating_group
+  /api/distribution/checkout:
+    post:
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DistributionCheckoutResource'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Distribution-api_CreateACheckout'
+      tags:
+      - distribution-api
+      description: Create a checkout.
+      operationId: create_a_checkout
+  /api/distribution/checkout/{id}/extend:
+    post:
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The checkout to extend
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DistributionCheckoutResource'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Distribution-api_ExtendTheExpiryTimeOfACheckoutByOneHour'
+      tags:
+      - distribution-api
+      description: Extend the expiry time of a checkout by one hour.
+      operationId: extend_the_expiry_time_of_a_checkout_by_one_hour
+  /api/distribution/checkout/{id}/complete:
+    post:
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DistributionCheckoutResource'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Distribution-api_CompleteACheckout'
+      tags:
+      - distribution-api
+      description: Complete a checkout.
+      operationId: complete_a_checkout
+  /api/distribution/checkout/{id}/abort:
+    post:
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The checkout to abort
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DistributionCheckoutResource'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Distribution-api_AbortACheckout'
+      tags:
+      - distribution-api
+      description: Abort a checkout.
+      operationId: abort_a_checkout
+  /api/distribution/transaction/{id}/cancel:
+    post:
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The transaction to cancel
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DistributionTransactionResource'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Distribution-api_CancelATransaction'
+      tags:
+      - distribution-api
+      description: Cancel a transaction.
+      operationId: cancel_a_transaction
+components:
+  schemas:
+    DistributionSellerResource:
+      type: object
+      properties:
+        sellerId:
+          type: string
+          description: The unique seller id for the seller
+        distributorId:
+          type: string
+          description: The unique distributor id for the seller
+        name:
+          type: string
+          description: The name of the seller
+        location:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The name of the location
+            street:
+              type: string
+              description: The street of the location
+            city:
+              type: string
+              description: The city of the location
+            postalCode:
+              type: string
+              description: The postal code of the location
+            country:
+              type: string
+              description: The country of the location
+          required:
+          - name
+          - street
+          - city
+          - postalCode
+          - country
+          description: The location of the seller
+      required:
+      - sellerId
+      - distributorId
+      - name
+    GET_Distribution-api_GetSeatingGroupsForAnEvent_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/DistributionSeatingGroupResource'
+        total:
+          type: integer
+    POST_Distribution-api_CancelATransaction:
+      type: object
+      properties:
+        distributorId:
+          type: string
+          description: The distributor to cancel a checkout for
+      required:
+      - distributorId
+    POST_Distribution-api_CompleteACheckout:
+      type: object
+      properties:
+        distributorId:
+          type: string
+          description: The distributor to create a checkout for
+        customer:
+          type: object
+          properties:
+            firstName:
+              type: string
+              description: The first name of the customer
+            lastName:
+              type: string
+              description: The last name of the customer
+            email:
+              type: string
+              format: email
+              description: The email of the customer
+            company:
+              type: string
+              description: The company of the customer
+            phone:
+              type: string
+              description: The phone of the customer
+            address:
+              type: object
+              properties:
+                lineOne:
+                  type: string
+                  description: The first line of the address
+                lineTwo:
+                  type: string
+                  description: The second line of the address
+                city:
+                  type: string
+                  description: The city of the address
+                postal:
+                  type: string
+                  description: The postal code of the address
+                state:
+                  type: string
+                  description: The state of the address
+                country:
+                  type: string
+                  description: The country of the address
+              required:
+              - lineOne
+              - city
+              - postal
+              - country
+              description: The address of the customer
+          required:
+          - firstName
+          - lastName
+          - email
+          description: The customer to create a checkout for
+      required:
+      - distributorId
+      - customer
+    DistributionCheckoutResource:
+      type: object
+      properties:
+        checkoutId:
+          type: string
+          description: The ID of the checkout
+        transactionId:
+          type: string
+          description: The ID of the transaction
+        status:
+          type: string
+          enum:
+          - NEW
+          - ABORTED
+          - COMPLETE
+          description: The status of the checkout
+        distributorId:
+          type: string
+          description: The ID of the distributor
+        expiresAt:
+          type: string
+          format: date-time
+          description: The ISO timestamp when the checkout expires
+        externalReferenceId:
+          type: string
+          description: The external reference id for the checkout
+        tickets:
+          type: array
+          items:
+            type: object
+            properties:
+              ticketId:
+                type: string
+                description: The ID of the ticket
+              offerId:
+                type: string
+                description: The ID of the ticket's offer
+              barcode:
+                type: string
+                description: The barcode of the ticket
+              url:
+                type: string
+                description: The URL of the ticket
+              eventId:
+                type: string
+                description: The ID of the ticket's event
+              availabilityId:
+                type: string
+                description: The ID of the ticket's availability
+              timeSlotId:
+                type: string
+                description: The ID of the ticket's time slot
+              seatingInfo:
+                oneOf:
+                - type: object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - Seats
+                    gate:
+                      type: string
+                      description: The gate for the seat
+                    name:
+                      type: string
+                      description: The name of the section if the ticket is for a GeneralAdmission section
+                    seatId:
+                      type: string
+                    sectionName:
+                      type: string
+                      description: The section name for the seat
+                    rowName:
+                      type: string
+                      description: The row name for the seat
+                    seatName:
+                      type: string
+                      description: The seat name for the seat
+                  required:
+                  - type
+                  - seatId
+                  - sectionName
+                  - rowName
+                  - seatName
+                - type: object
+                  properties:
+                    gate:
+                      type: string
+                      description: The gate for the seat
+                    name:
+                      type: string
+                      description: The name of the section if the ticket is for a GeneralAdmission section
+                    seatId:
+                      type: string
+                    type:
+                      type: string
+                      enum:
+                      - GeneralAdmission
+                      description: The type of the seating group this seat belongs to
+                  required:
+                  - type
+                description: The seating info of the ticket
+            required:
+            - ticketId
+            - offerId
+            - barcode
+            - url
+            - eventId
+            - availabilityId
+          description: The created tickets in the checkout when the checkout is completed
+      required:
+      - checkoutId
+      - status
+      - distributorId
+    GET_Distribution-api_GetAllSellers_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/DistributionSellerResource'
+        total:
+          type: integer
+    DistributionAvailabilityResource:
+      type: object
+      properties:
+        eventId:
+          type: string
+          description: The unique id for the event
+        availibilityId:
+          type: string
+          description: The unique id for the availibility
+        name:
+          type: string
+          description: The name of the event
+        start:
+          type: string
+          description: The event start date & time
+        end:
+          type: string
+          description: The event end date & time
+        timezone:
+          type: string
+          description: The timezone of the event
+        salesStart:
+          type: string
+          format: date-time
+          description: When sales start for the event
+        salesEnd:
+          type: string
+          format: date-time
+          description: When sales end for the event
+        currency:
+          type: string
+          format: date-time
+          description: The currency prices for this event are in
+        offers:
+          type: array
+          items:
+            type: object
+            properties:
+              offerId:
+                type: string
+                description: The unique id for the offer
+              name:
+                type: string
+                description: The name of the offer
+              price:
+                type: number
+                format: float
+                description: The price for the offer
+              available:
+                type: integer
+                description: The amount of tickets available for this offer
+              meta:
+                type: object
+                description: Additional meta data for this offer
+            required:
+            - offerId
+            - name
+            - price
+            - available
+          description: The available offers for this event
+        timeSlots:
+          type: array
+          items:
+            type: object
+            properties:
+              startTime:
+                type: object
+                properties:
+                  hour:
+                    type: number
+                    format: float
+                    minimum: 0
+                    maximum: 23
+                    description: The start time hour
+                  minute:
+                    type: number
+                    format: float
+                    minimum: 0
+                    maximum: 59
+                    description: The start time minute
+                required:
+                - hour
+                - minute
+                description: The start time of the time slot on the availabilities date
+              timeSlotId:
+                type: string
+                description: The unique id for the time slot
+              offers:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    offerId:
+                      type: string
+                      description: The offer id
+                    available:
+                      type: integer
+                      description: The amount of tickets available for this time slot. Only set if the event uses time slots
+                  required:
+                  - offerId
+                description: The offers available for the time slot
+            required:
+            - startTime
+            - timeSlotId
+            - offers
+          description: The available time slots
+      required:
+      - eventId
+      - availibilityId
+      - name
+      - start
+      - timezone
+      - salesStart
+      - salesEnd
+      - currency
+      - offers
+    POST_Distribution-api_AbortACheckout:
+      type: object
+      properties:
+        distributorId:
+          type: string
+          description: The distributor to abort a checkout for
+      required:
+      - distributorId
+    GET_Distribution-api_GetTheAvailabilitiesForAnEvent_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/DistributionAvailabilityResource'
+        total:
+          type: integer
+    GET_Distribution-api_GetAllEventsForASeller_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/DistributionEventResource'
+        total:
+          type: integer
+    DistributionTransactionResource:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: The ID of the transaction
+        distributorId:
+          type: string
+          description: The ID of the distributor
+        status:
+          type: string
+          enum:
+          - NEW
+          - RESERVED-BY-SYSTEM
+          - ABORTED
+          - COMPLETE
+          - CANCELED
+          description: The status of the transaction
+        tickets:
+          type: array
+          items:
+            type: object
+            properties:
+              ticketId:
+                type: string
+                description: The ID of the ticket
+              offerId:
+                type: string
+                description: The ID of the ticket's offer
+              barcode:
+                type: string
+                description: The barcode of the ticket
+              url:
+                type: string
+                description: The URL of the ticket
+              eventId:
+                type: string
+                description: The ID of the ticket's event
+              availabilityId:
+                type: string
+                description: The ID of the ticket's availability
+              timeSlotId:
+                type: string
+                description: The ID of the ticket's time slot
+              seatingInfo:
+                oneOf:
+                - type: object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - Seats
+                    gate:
+                      type: string
+                      description: The gate for the seat
+                    name:
+                      type: string
+                      description: The name of the section if the ticket is for a GeneralAdmission section
+                    seatId:
+                      type: string
+                    sectionName:
+                      type: string
+                      description: The section name for the seat
+                    rowName:
+                      type: string
+                      description: The row name for the seat
+                    seatName:
+                      type: string
+                      description: The seat name for the seat
+                  required:
+                  - type
+                  - seatId
+                  - sectionName
+                  - rowName
+                  - seatName
+                - type: object
+                  properties:
+                    gate:
+                      type: string
+                      description: The gate for the seat
+                    name:
+                      type: string
+                      description: The name of the section if the ticket is for a GeneralAdmission section
+                    seatId:
+                      type: string
+                    type:
+                      type: string
+                      enum:
+                      - GeneralAdmission
+                      description: The type of the seating group this seat belongs to
+                  required:
+                  - type
+                description: The seating info of the ticket
+            required:
+            - ticketId
+            - offerId
+            - barcode
+            - url
+            - eventId
+            - availabilityId
+          description: The tickets associated to the transaction
+      required:
+      - transactionId
+      - distributorId
+      - status
+    POST_Distribution-api_CreateACheckout:
+      type: object
+      properties:
+        externalReferenceId:
+          type: string
+          maxLength: 100
+          description: The external reference of the checkout
+        distributorId:
+          type: string
+          description: The distributor to create a checkout for
+        tickets:
+          type: array
+          items:
+            type: object
+            properties:
+              offerId:
+                type: string
+                description: The offer to create a checkout for
+              eventId:
+                type: string
+                description: The event to create a checkout for
+              availabilityId:
+                type: string
+                description: The event to create a tickets for
+              price:
+                type: number
+                format: float
+                description: The price of the ticket
+              seatId:
+                type: string
+                description: The seat id for the ticket
+              timeSlotId:
+                type: string
+                description: The time slot id for the ticket
+            required:
+            - offerId
+            - eventId
+            - availabilityId
+            - price
+          description: The tickets to create a checkout for
+      required:
+      - distributorId
+      - tickets
+    POST_Distribution-api_ExtendTheExpiryTimeOfACheckoutByOneHour:
+      type: object
+      properties:
+        distributorId:
+          type: string
+          description: The distributor to extend a checkout for
+      required:
+      - distributorId
+    DistributionEventResource:
+      type: object
+      properties:
+        eventId:
+          type: string
+          description: The unique id for the event
+        name:
+          type: string
+          description: The name of the event
+        location:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The name of the location
+            line1:
+              type: string
+              description: The first line of the address
+            line2:
+              type: string
+              description: The second line of the address
+            city:
+              type: string
+              description: The city of the address
+            postalCode:
+              type: string
+              description: The postal code of the address
+            state:
+              type: string
+              description: The state of the address
+            country:
+              type: string
+              description: The country of the address
+          description: The location of the event
+        information:
+          type: object
+          properties:
+            category:
+              type: string
+              description: The category of the event
+            subCategory:
+              type: string
+              description: The sub category of the event
+          required:
+          - category
+          - subCategory
+          description: The information about the event
+        start:
+          type: string
+          description: The event start date & time
+        end:
+          type: string
+          description: The event end date & time
+        currency:
+          type: string
+          format: date-time
+          description: The currency the prices for this event are in
+        language:
+          type: string
+          description: The language to use for the event
+        timezone:
+          type: string
+          description: The timezone of the event
+        isRecurring:
+          type: boolean
+          description: Whether the event is recurring
+        usesTimeSlots:
+          type: boolean
+          description: Whether the event uses time slots
+        seatingType:
+          type: string
+          enum:
+          - None
+          - Groups
+          description: The type of seating for this event
+        offers:
+          type: array
+          items:
+            type: object
+            properties:
+              offerId:
+                type: string
+                description: The unique id for the offer
+              name:
+                type: string
+                description: The name of the offer
+              meta:
+                type: object
+                description: Additional meta data for this offer
+              price:
+                type: number
+                format: float
+                description: The price for the offer
+            required:
+            - offerId
+            - name
+            - price
+          description: The available offers for this event
+        timeSlots:
+          type: array
+          items:
+            type: object
+            properties:
+              startTime:
+                type: object
+                properties:
+                  hour:
+                    type: number
+                    format: float
+                    minimum: 0
+                    maximum: 23
+                    description: The start time hour
+                  minute:
+                    type: number
+                    format: float
+                    minimum: 0
+                    maximum: 59
+                    description: The start time minute
+                required:
+                - hour
+                - minute
+                description: The start time of the time slot on the availabilities date
+              timeSlotId:
+                type: string
+                description: The unique id for the time slot
+              offers:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    offerId:
+                      type: string
+                      description: The offer id
+                    available:
+                      type: integer
+                      description: The amount of tickets available for this time slot. Only set if the event uses time slots
+                  required:
+                  - offerId
+                description: The offers available for the time slot
+            required:
+            - startTime
+            - timeSlotId
+            - offers
+          description: The time slots for this event
+      required:
+      - eventId
+      - name
+      - start
+      - currency
+      - language
+      - timezone
+      - isRecurring
+      - usesTimeSlots
+      - seatingType
+      - offers
+    DistributionSeatingGroupResource:
+      type: object
+      properties:
+        eventId:
+          type: string
+          description: The event of the seating tuples
+        availabityId:
+          type: string
+          description: The availibility of the seating tuples
+        groupId:
+          type: string
+          description: The seating group of the seating tuples
+        type:
+          type: string
+          enum:
+          - Seats
+          - GeneralAdmission
+          description: The type of seating group
+        tuples:
+          type: array
+          items:
+            type: object
+            properties:
+              tupleId:
+                type: string
+                description: The unique id for the tuple
+              seats:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    seatId:
+                      type: string
+                      description: The unique id for the seat
+                    sectionName:
+                      type: string
+                      description: The section name for the seat
+                    rowName:
+                      type: string
+                      description: The row name for the seat
+                    seatName:
+                      type: string
+                      description: The seat name for the seat
+                    offers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          offerId:
+                            type: string
+                            description: The offer id the seat is available for
+                        required:
+                        - offerId
+                      description: The offer ids the seat is available for
+                  required:
+                  - seatId
+                  - sectionName
+                  - rowName
+                  - seatName
+                  - offers
+                description: The seats for the tuple
+            required:
+            - tupleId
+          description: The available seating tuples. Only set for type == Seats. Will be empty if there are no seats available in the group.
+        availability:
+          type: integer
+          description: The amount of seats available. Only set for type == GeneralAdmission
+        statusId:
+          type: string
+          description: The status id of the seating group. Only set for type == GeneralAdmission and availability > 0
+        name:
+          type: string
+          description: The name of the seating group. Only set for type == GeneralAdmission
+        gate:
+          type: string
+          description: The gate of the seating group. Only set for type == GeneralAdmission and if the event has gates
+      required:
+      - eventId
+      - availabityId
+      - groupId
+      - type
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

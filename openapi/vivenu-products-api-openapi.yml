@@ -1,0 +1,2747 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists products API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: products
+paths:
+  /api/products:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: top
+        required: false
+        schema:
+          type: number
+          format: float
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: number
+          format: float
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: name
+        required: false
+        schema:
+          type: string
+          description: The name of the product
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: variantIds
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            metas: {}
+          description: An arrray of product variants to filter by
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: type
+        required: false
+        schema:
+          type: string
+          enum:
+          - voucher
+          - product
+          - donation
+          - membership
+          - addOn
+          description: The type of the product
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: active
+        required: false
+        schema:
+          type: boolean
+          description: The active status of the product
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Products_GetAllProducts_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - products
+      description: Get all Products
+      operationId: products/list
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POST_Products_CreateAProduct_201_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Products_CreateAProduct'
+      tags:
+      - products
+      description: Create a Product
+      operationId: products/create
+  /api/products/rich:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: top
+        required: false
+        schema:
+          type: number
+          format: float
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: number
+          format: float
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: name
+        required: false
+        schema:
+          type: string
+          description: The name of the product
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: type
+        required: false
+        schema:
+          type: string
+          enum:
+          - voucher
+          - product
+          - donation
+          - membership
+          - addOn
+          description: The type of the product
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: active
+        required: false
+        schema:
+          type: boolean
+          description: The active status of the product
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Products_GetAllProducts_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - products
+      description: Get all Products
+      operationId: get_all_products
+  /api/products/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the product to update
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Products_GetAProduct_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - products
+      description: Get a Product
+      operationId: products/get
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the product to update
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PUT_Products_UpdateAProduct_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Products_UpdateAProduct'
+      tags:
+      - products
+      description: Update a Product
+      operationId: products/update
+    delete:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the product to update
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DELETE_Products_DeleteAProduct_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - products
+      description: Delete a Product
+      operationId: products/delete
+  /api/products/streams/rich:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: top
+        required: false
+        schema:
+          type: number
+          format: float
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: number
+          format: float
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: name
+        required: false
+        schema:
+          type: string
+          description: The name of the product stream
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Products_GetAllProductStreams_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - products
+      description: Get all Product Streams
+      operationId: get_all_product_streams
+  /api/products/streams/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the product stream
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Products_GetAProductStream_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - products
+      description: Get a Product Stream
+      operationId: get_a_product_stream
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PUT_Products_UpdateAProductStream_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Products_UpdateAProductStream'
+      tags:
+      - products
+      description: Update a Product Stream
+      operationId: update_a_product_stream
+    delete:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the product stream
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DELETE_Products_DeleteAProductStream_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - products
+      description: Delete a Product Stream
+      operationId: delete_a_product_stream
+  /api/public/products/{id}:
+    get:
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Products_GetAPublicProduct_200_response'
+        '404':
+          description: Not Found
+      tags:
+      - products
+      description: Get a Public Product
+      operationId: get_a_public_product
+  /api/products/streams/{id}/products:
+    get:
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the product stream
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Products_GetAProductStreamsProducts_200_response'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+      tags:
+      - products
+      description: Get a Product Stream's Products
+      operationId: get_a_product_streams_products
+  /api/products/streams:
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POST_Products_CreateAProductStream_201_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Products_CreateAProductStream'
+      tags:
+      - products
+      description: Create a Product Stream
+      operationId: create_a_product_stream
+components:
+  schemas:
+    PUT_Products_UpdateAProductStream:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the product stream.
+        active:
+          type: boolean
+          description: Whether the product stream is active or not.
+        products:
+          type: array
+          items:
+            type: string
+          description: The products in the product stream.
+          default: []
+      required:
+      - name
+    PUT_Products_UpdateAProduct:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the product
+        description:
+          type: string
+          nullable: true
+          description: The description of the product
+        image:
+          type: string
+          nullable: true
+          description: The image of the product
+        type:
+          type: string
+          enum:
+          - voucher
+          - product
+          - donation
+          - membership
+          - addOn
+          description: The type of the product
+        variants:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the product variant of the product
+              name:
+                type: string
+                nullable: true
+                description: The Name of the product variant, defaults to product name if not specified
+              description:
+                type: string
+                nullable: true
+                description: A description of the variant
+              price:
+                type: number
+                format: float
+                nullable: true
+                description: The price of the product
+              priceType:
+                type: string
+                enum:
+                - fixed
+                - range
+                default: fixed
+              priceRange:
+                type: object
+                properties:
+                  min:
+                    type: number
+                    format: float
+                    minimum: 0
+                    nullable: true
+                    description: The minimum price of the product
+                  max:
+                    type: number
+                    format: float
+                    minimum: 0
+                    nullable: true
+                    description: The maximum price of the product
+              taxable:
+                type: boolean
+                description: Whether the product is taxable or not
+              taxRate:
+                type: number
+                format: float
+                description: The tax rate of the product
+              compareAtPrice:
+                type: number
+                format: float
+                nullable: true
+                description: The recommended retail price to compare with the actual price.
+              taxServiceTypeId:
+                type: string
+                nullable: true
+                description: The ID of the tax service of the product
+              gtin:
+                type: string
+                pattern: ^\d+$
+              localization:
+                type: object
+                description: Localization of the product for multiple languages
+            required:
+            - _id
+            - taxable
+        categoryIds:
+          type: array
+          items:
+            type: string
+          description: An array of categories to which the product belongs
+        voucherSettings:
+          type: object
+          properties:
+            limitedValidityPeriod:
+              type: boolean
+              description: Whether the voucher should expire
+            validityConfig:
+              type: object
+              properties:
+                amount:
+                  type: number
+                  format: float
+                  minimum: 1
+                type:
+                  type: number
+                  format: float
+                untilEndOfPeriod:
+                  type: boolean
+            pdfImage:
+              type: string
+              description: A marketing image printed onto voucher pdf
+            disclaimer:
+              type: string
+              nullable: true
+              description: A disclaimer text printed onto voucher pdf
+            documentTemplateSettings:
+              type: object
+              properties:
+                templates:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      templateId:
+                        type: string
+                        description: The ID of the document template
+                      format:
+                        type: string
+                        enum:
+                        - A4
+                        - LETTER
+                        - LEGAL
+                        - BOARDING-PASS
+                        - PLASTIC-CARD
+                        - CARD
+                        - LABEL
+                        - CUSTOM
+                        - APPLE
+                        - GOOGLE
+                        description: The format of document template for the dimensions.
+                      target:
+                        type: string
+                        enum:
+                        - thermal
+                        - digital
+                        - wallet
+                        description: The target of document template for which targets it should be used.
+                      type:
+                        type: string
+                        enum:
+                        - ticket
+                        - invoice
+                        - voucher
+                        - member-card
+                        - header-card
+                        description: The type of document template for which document it should be used. ticket = The document template will be used on tickets. invoice = The document template will be used on invoices.
+                    required:
+                    - templateId
+                    - format
+                    - target
+                    - type
+          nullable: true
+          description: If the product is of type voucher
+        addOnSettings:
+          type: object
+          properties:
+            optOutDescription:
+              type: string
+              nullable: true
+              description: The description that is shown to the user if he decides to not buy the addOn
+            localization:
+              type: object
+              description: Localization of the addOnSettings for multiple languages
+          nullable: true
+        donationSettings:
+          type: object
+          properties:
+            campaignId:
+              type: string
+              description: The ID of the fundraise campaign
+            fundId:
+              type: string
+              description: The ID of the donation fund
+          required:
+          - campaignId
+          - fundId
+          nullable: true
+          description: Settings for donation products
+        active:
+          type: boolean
+          description: Whether the product is active and can be distributed
+          default: true
+        meta:
+          type: object
+          description: Custom key-value data. Metadata is useful for storing additional, structured information on an object.
+        isFulfillable:
+          type: boolean
+          description: Whether the product can be delivered
+        localization:
+          type: object
+          description: Localization of the product for multiple languages
+      required:
+      - name
+      - type
+    POST_Products_CreateAProduct:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the product
+        description:
+          type: string
+          nullable: true
+          description: The description of the product
+        image:
+          type: string
+          nullable: true
+          description: The image of the product
+        type:
+          type: string
+          enum:
+          - voucher
+          - product
+          - donation
+          - membership
+          - addOn
+          description: The type of the product
+        variants:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                nullable: true
+                description: The Name of the product variant, defaults to product name if not specified
+              description:
+                type: string
+                nullable: true
+                description: A description of the variant
+              price:
+                type: number
+                format: float
+                nullable: true
+                description: The price of the product
+              priceType:
+                type: string
+                enum:
+                - fixed
+                - range
+                default: fixed
+              priceRange:
+                type: object
+                properties:
+                  min:
+                    type: number
+                    format: float
+                    minimum: 0
+                    nullable: true
+                    description: The minimum price of the product
+                  max:
+                    type: number
+                    format: float
+                    minimum: 0
+                    nullable: true
+                    description: The maximum price of the product
+              taxable:
+                type: boolean
+                description: Whether the product is taxable or not
+              taxRate:
+                type: number
+                format: float
+                description: The tax rate of the product
+              compareAtPrice:
+                type: number
+                format: float
+                nullable: true
+                description: The recommended retail price to compare with the actual price.
+              taxServiceTypeId:
+                type: string
+                nullable: true
+                description: The ID of the tax service of the product
+              gtin:
+                type: string
+                pattern: ^\d+$
+              localization:
+                type: object
+                description: Localization of the product for multiple languages
+            required:
+            - taxable
+        categoryIds:
+          type: array
+          items:
+            type: string
+          description: An array of categories to which the product belongs
+        voucherSettings:
+          type: object
+          properties:
+            limitedValidityPeriod:
+              type: boolean
+              description: Whether the voucher should expire
+            validityConfig:
+              type: object
+              properties:
+                amount:
+                  type: number
+                  format: float
+                  minimum: 1
+                type:
+                  type: number
+                  format: float
+                untilEndOfPeriod:
+                  type: boolean
+            pdfImage:
+              type: string
+              description: A marketing image printed onto voucher pdf
+            disclaimer:
+              type: string
+              nullable: true
+              description: A disclaimer text printed onto voucher pdf
+            documentTemplateSettings:
+              type: object
+              properties:
+                templates:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      templateId:
+                        type: string
+                        description: The ID of the document template
+                      format:
+                        type: string
+                        enum:
+                        - A4
+                        - LETTER
+                        - LEGAL
+                        - BOARDING-PASS
+                        - PLASTIC-CARD
+                        - CARD
+                        - LABEL
+                        - CUSTOM
+                        - APPLE
+                        - GOOGLE
+                        description: The format of document template for the dimensions.
+                      target:
+                        type: string
+                        enum:
+                        - thermal
+                        - digital
+                        - wallet
+                        description: The target of document template for which targets it should be used.
+                      type:
+                        type: string
+                        enum:
+                        - ticket
+                        - invoice
+                        - voucher
+                        - member-card
+                        - header-card
+                        description: The type of document template for which document it should be used. ticket = The document template will be used on tickets. invoice = The document template will be used on invoices.
+                    required:
+                    - templateId
+                    - format
+                    - target
+                    - type
+          nullable: true
+          description: If the product is of type voucher
+        addOnSettings:
+          type: object
+          properties:
+            optOutDescription:
+              type: string
+              nullable: true
+              description: The description that is shown to the user if he decides to not buy the addOn
+            localization:
+              type: object
+              description: Localization of the addOnSettings for multiple languages
+          nullable: true
+        donationSettings:
+          type: object
+          properties:
+            campaignId:
+              type: string
+              description: The ID of the fundraise campaign
+            fundId:
+              type: string
+              description: The ID of the donation fund
+          required:
+          - campaignId
+          - fundId
+          nullable: true
+          description: Settings for donation products
+        active:
+          type: boolean
+          description: Whether the product is active and can be distributed
+          default: true
+        meta:
+          type: object
+          description: Custom key-value data. Metadata is useful for storing additional, structured information on an object.
+        isFulfillable:
+          type: boolean
+          description: Whether the product can be delivered
+        localization:
+          type: object
+          description: Localization of the product for multiple languages
+      required:
+      - name
+      - type
+    POST_Products_CreateAProductStream:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the product stream.
+        active:
+          type: boolean
+          description: Whether the product stream is active or not.
+        products:
+          type: array
+          items:
+            type: string
+          description: The products in the product stream.
+          default: []
+      required:
+      - name
+    DELETE_Products_DeleteAProduct_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the product
+        name:
+          type: string
+          description: The name of the product
+        active:
+          type: boolean
+          description: Whether the product is active and can be distributed
+          default: true
+        isFulfillable:
+          type: boolean
+          description: Whether the product can be delivered
+        type:
+          type: string
+          enum:
+          - voucher
+          - product
+          - donation
+          - membership
+          - addOn
+          description: The type of the product
+        image:
+          type: string
+          nullable: true
+          description: The image of the product
+        description:
+          type: string
+          nullable: true
+          description: The description of the product
+        variants:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the product variant of the product
+              name:
+                type: string
+                nullable: true
+                description: The Name of the product variant, defaults to product name if not specified
+              description:
+                type: string
+                nullable: true
+                description: A description of the variant
+              priceType:
+                type: string
+                enum:
+                - fixed
+                - range
+                default: fixed
+              price:
+                type: number
+                format: float
+                nullable: true
+                description: The price of the product
+              priceRange:
+                type: object
+                properties:
+                  min:
+                    type: number
+                    format: float
+                    minimum: 0
+                    nullable: true
+                    description: The minimum price of the product
+                  max:
+                    type: number
+                    format: float
+                    minimum: 0
+                    nullable: true
+                    description: The maximum price of the product
+              taxable:
+                type: boolean
+                description: Whether the product is taxable or not
+              taxRate:
+                type: number
+                format: float
+                description: The tax rate of the product
+              compareAtPrice:
+                type: number
+                format: float
+                nullable: true
+                description: The recommended retail price to compare with the actual price.
+              taxServiceTypeId:
+                type: string
+                nullable: true
+                description: The ID of the tax service of the product
+              gtin:
+                type: string
+                pattern: ^\d+$
+              localization:
+                type: object
+                description: Localization of the product for multiple languages
+            required:
+            - _id
+            - taxable
+          description: An array of variants of the product
+        categoryIds:
+          type: array
+          items:
+            type: string
+          description: An array of categories to which the product belongs
+        voucherSettings:
+          type: object
+          properties:
+            limitedValidityPeriod:
+              type: boolean
+              description: Whether the voucher should expire
+            validityConfig:
+              type: object
+              properties:
+                amount:
+                  type: number
+                  format: float
+                  minimum: 1
+                type:
+                  type: number
+                  format: float
+                untilEndOfPeriod:
+                  type: boolean
+            pdfImage:
+              type: string
+              description: A marketing image printed onto voucher pdf
+            disclaimer:
+              type: string
+              nullable: true
+              description: A disclaimer text printed onto voucher pdf
+            documentTemplateSettings:
+              type: object
+              properties:
+                templates:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      templateId:
+                        type: string
+                        description: The ID of the document template
+                      format:
+                        type: string
+                        enum:
+                        - A4
+                        - LETTER
+                        - LEGAL
+                        - BOARDING-PASS
+                        - PLASTIC-CARD
+                        - CARD
+                        - LABEL
+                        - CUSTOM
+                        - APPLE
+                        - GOOGLE
+                        description: The format of document template for the dimensions.
+                      target:
+                        type: string
+                        enum:
+                        - thermal
+                        - digital
+                        - wallet
+                        description: The target of document template for which targets it should be used.
+                      type:
+                        type: string
+                        enum:
+                        - ticket
+                        - invoice
+                        - voucher
+                        - member-card
+                        - header-card
+                        description: The type of document template for which document it should be used. ticket = The document template will be used on tickets. invoice = The document template will be used on invoices.
+                    required:
+                    - templateId
+                    - format
+                    - target
+                    - type
+          nullable: true
+          description: If the product is of type voucher
+        addOnSettings:
+          type: object
+          properties:
+            optOutDescription:
+              type: string
+              nullable: true
+              description: The description that is shown to the user if he decides to not buy the addOn
+            localization:
+              type: object
+              description: Localization of the addOnSettings for multiple languages
+          nullable: true
+        donationSettings:
+          type: object
+          properties:
+            campaignId:
+              type: string
+              description: The ID of the fundraise campaign
+            fundId:
+              type: string
+              description: The ID of the donation fund
+          required:
+          - campaignId
+          - fundId
+          nullable: true
+          description: Settings for donation products
+        sellerId:
+          type: string
+          description: The ID of the seller of the product
+        meta:
+          type: object
+          description: Custom key-value data. Metadata is useful for storing additional, structured information on an object.
+        localization:
+          type: object
+          description: Localization of the product for multiple languages
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was updated
+      required:
+      - _id
+      - name
+      - type
+      - sellerId
+    GET_Products_GetAllProducts_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the product
+              name:
+                type: string
+                description: The name of the product
+              active:
+                type: boolean
+                description: Whether the product is active and can be distributed
+                default: true
+              isFulfillable:
+                type: boolean
+                description: Whether the product can be delivered
+              type:
+                type: string
+                enum:
+                - voucher
+                - product
+                - donation
+                - membership
+                - addOn
+                description: The type of the product
+              image:
+                type: string
+                nullable: true
+                description: The image of the product
+              description:
+                type: string
+                nullable: true
+                description: The description of the product
+              variants:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The ID of the product variant of the product
+                    name:
+                      type: string
+                      nullable: true
+                      description: The Name of the product variant, defaults to product name if not specified
+                    description:
+                      type: string
+                      nullable: true
+                      description: A description of the variant
+                    priceType:
+                      type: string
+                      enum:
+                      - fixed
+                      - range
+                      default: fixed
+                    price:
+                      type: number
+                      format: float
+                      nullable: true
+                      description: The price of the product
+                    priceRange:
+                      type: object
+                      properties:
+                        min:
+                          type: number
+                          format: float
+                          minimum: 0
+                          nullable: true
+                          description: The minimum price of the product
+                        max:
+                          type: number
+                          format: float
+                          minimum: 0
+                          nullable: true
+                          description: The maximum price of the product
+                    taxable:
+                      type: boolean
+                      description: Whether the product is taxable or not
+                    taxRate:
+                      type: number
+                      format: float
+                      description: The tax rate of the product
+                    compareAtPrice:
+                      type: number
+                      format: float
+                      nullable: true
+                      description: The recommended retail price to compare with the actual price.
+                    taxServiceTypeId:
+                      type: string
+                      nullable: true
+                      description: The ID of the tax service of the product
+                    gtin:
+                      type: string
+                      pattern: ^\d+$
+                    localization:
+                      type: object
+                      description: Localization of the product for multiple languages
+                  required:
+                  - _id
+                  - taxable
+                description: An array of variants of the product
+              categoryIds:
+                type: array
+                items:
+                  type: string
+                description: An array of categories to which the product belongs
+              voucherSettings:
+                type: object
+                properties:
+                  limitedValidityPeriod:
+                    type: boolean
+                    description: Whether the voucher should expire
+                  validityConfig:
+                    type: object
+                    properties:
+                      amount:
+                        type: number
+                        format: float
+                        minimum: 1
+                      type:
+                        type: number
+                        format: float
+                      untilEndOfPeriod:
+                        type: boolean
+                  pdfImage:
+                    type: string
+                    description: A marketing image printed onto voucher pdf
+                  disclaimer:
+                    type: string
+                    nullable: true
+                    description: A disclaimer text printed onto voucher pdf
+                  documentTemplateSettings:
+                    type: object
+                    properties:
+                      templates:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            templateId:
+                              type: string
+                              description: The ID of the document template
+                            format:
+                              type: string
+                              enum:
+                              - A4
+                              - LETTER
+                              - LEGAL
+                              - BOARDING-PASS
+                              - PLASTIC-CARD
+                              - CARD
+                              - LABEL
+                              - CUSTOM
+                              - APPLE
+                              - GOOGLE
+                              description: The format of document template for the dimensions.
+                            target:
+                              type: string
+                              enum:
+                              - thermal
+                              - digital
+                              - wallet
+                              description: The target of document template for which targets it should be used.
+                            type:
+                              type: string
+                              enum:
+                              - ticket
+                              - invoice
+                              - voucher
+                              - member-card
+                              - header-card
+                              description: The type of document template for which document it should be used. ticket = The document template will be used on tickets. invoice = The document template will be used on invoices.
+                          required:
+                          - templateId
+                          - format
+                          - target
+                          - type
+                nullable: true
+                description: If the product is of type voucher
+              addOnSettings:
+                type: object
+                properties:
+                  optOutDescription:
+                    type: string
+                    nullable: true
+                    description: The description that is shown to the user if he decides to not buy the addOn
+                  localization:
+                    type: object
+                    description: Localization of the addOnSettings for multiple languages
+                nullable: true
+              donationSettings:
+                type: object
+                properties:
+                  campaignId:
+                    type: string
+                    description: The ID of the fundraise campaign
+                  fundId:
+                    type: string
+                    description: The ID of the donation fund
+                required:
+                - campaignId
+                - fundId
+                nullable: true
+                description: Settings for donation products
+              sellerId:
+                type: string
+                description: The ID of the seller of the product
+              meta:
+                type: object
+                description: Custom key-value data. Metadata is useful for storing additional, structured information on an object.
+              localization:
+                type: object
+                description: Localization of the product for multiple languages
+              createdAt:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the product was created
+              updatedAt:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the product was updated
+            required:
+            - _id
+            - name
+            - type
+            - sellerId
+        total:
+          type: integer
+    GET_Products_GetAProductStream_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the product stream.
+        name:
+          type: string
+          description: The name of the product stream.
+        sellerId:
+          type: string
+          description: The seller ID of the product stream.
+        products:
+          type: array
+          items:
+            type: string
+          description: The products in the product stream.
+          default: []
+        active:
+          type: boolean
+          description: Whether the product stream is active or not.
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was last updated.
+      required:
+      - _id
+      - name
+      - sellerId
+    GET_Products_GetAProduct_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the product
+        name:
+          type: string
+          description: The name of the product
+        active:
+          type: boolean
+          description: Whether the product is active and can be distributed
+          default: true
+        isFulfillable:
+          type: boolean
+          description: Whether the product can be delivered
+        type:
+          type: string
+          enum:
+          - voucher
+          - product
+          - donation
+          - membership
+          - addOn
+          description: The type of the product
+        image:
+          type: string
+          nullable: true
+          description: The image of the product
+        description:
+          type: string
+          nullable: true
+          description: The description of the product
+        variants:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the product variant of the product
+              name:
+                type: string
+                nullable: true
+                description: The Name of the product variant, defaults to product name if not specified
+              description:
+                type: string
+                nullable: true
+                description: A description of the variant
+              priceType:
+                type: string
+                enum:
+                - fixed
+                - range
+                default: fixed
+              price:
+                type: number
+                format: float
+                nullable: true
+                description: The price of the product
+              priceRange:
+                type: object
+                properties:
+                  min:
+                    type: number
+                    format: float
+                    minimum: 0
+                    nullable: true
+                    description: The minimum price of the product
+                  max:
+                    type: number
+                    format: float
+                    minimum: 0
+                    nullable: true
+                    description: The maximum price of the product
+              taxable:
+                type: boolean
+                description: Whether the product is taxable or not
+              taxRate:
+                type: number
+                format: float
+                description: The tax rate of the product
+              compareAtPrice:
+                type: number
+                format: float
+                nullable: true
+                description: The recommended retail price to compare with the actual price.
+              taxServiceTypeId:
+                type: string
+                nullable: true
+                description: The ID of the tax service of the product
+              gtin:
+                type: string
+                pattern: ^\d+$
+              localization:
+                type: object
+                description: Localization of the product for multiple languages
+            required:
+            - _id
+            - taxable
+          description: An array of variants of the product
+        categoryIds:
+          type: array
+          items:
+            type: string
+          description: An array of categories to which the product belongs
+        voucherSettings:
+          type: object
+          properties:
+            limitedValidityPeriod:
+              type: boolean
+              description: Whether the voucher should expire
+            validityConfig:
+              type: object
+              properties:
+                amount:
+                  type: number
+                  format: float
+                  minimum: 1
+                type:
+                  type: number
+                  format: float
+                untilEndOfPeriod:
+                  type: boolean
+            pdfImage:
+              type: string
+              description: A marketing image printed onto voucher pdf
+            disclaimer:
+              type: string
+              nullable: true
+              description: A disclaimer text printed onto voucher pdf
+            documentTemplateSettings:
+              type: object
+              properties:
+                templates:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      templateId:
+                        type: string
+                        description: The ID of the document template
+                      format:
+                        type: string
+                        enum:
+                        - A4
+                        - LETTER
+                        - LEGAL
+                        - BOARDING-PASS
+                        - PLASTIC-CARD
+                        - CARD
+                        - LABEL
+                        - CUSTOM
+                        - APPLE
+                        - GOOGLE
+                        description: The format of document template for the dimensions.
+                      target:
+                        type: string
+                        enum:
+                        - thermal
+                        - digital
+                        - wallet
+                        description: The target of document template for which targets it should be used.
+                      type:
+                        type: string
+                        enum:
+                        - ticket
+                        - invoice
+                        - voucher
+                        - member-card
+                        - header-card
+                        description: The type of document template for which document it should be used. ticket = The document template will be used on tickets. invoice = The document template will be used on invoices.
+                    required:
+                    - templateId
+                    - format
+                    - target
+                    - type
+          nullable: true
+          description: If the product is of type voucher
+        addOnSettings:
+          type: object
+          properties:
+            optOutDescription:
+              type: string
+              nullable: true
+              description: The description that is shown to the user if he decides to not buy the addOn
+            localization:
+              type: object
+              description: Localization of the addOnSettings for multiple languages
+          nullable: true
+        donationSettings:
+          type: object
+          properties:
+            campaignId:
+              type: string
+              description: The ID of the fundraise campaign
+            fundId:
+              type: string
+              description: The ID of the donation fund
+          required:
+          - campaignId
+          - fundId
+          nullable: true
+          description: Settings for donation products
+        sellerId:
+          type: string
+          description: The ID of the seller of the product
+        meta:
+          type: object
+          description: Custom key-value data. Metadata is useful for storing additional, structured information on an object.
+        localization:
+          type: object
+          description: Localization of the product for multiple languages
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was updated
+      required:
+      - _id
+      - name
+      - type
+      - sellerId
+    PUT_Products_UpdateAProduct_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the product
+        name:
+          type: string
+          description: The name of the product
+        active:
+          type: boolean
+          description: Whether the product is active and can be distributed
+          default: true
+        isFulfillable:
+          type: boolean
+          description: Whether the product can be delivered
+        type:
+          type: string
+          enum:
+          - voucher
+          - product
+          - donation
+          - membership
+          - addOn
+          description: The type of the product
+        image:
+          type: string
+          nullable: true
+          description: The image of the product
+        description:
+          type: string
+          nullable: true
+          description: The description of the product
+        variants:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the product variant of the product
+              name:
+                type: string
+                nullable: true
+                description: The Name of the product variant, defaults to product name if not specified
+              description:
+                type: string
+                nullable: true
+                description: A description of the variant
+              priceType:
+                type: string
+                enum:
+                - fixed
+                - range
+                default: fixed
+              price:
+                type: number
+                format: float
+                nullable: true
+                description: The price of the product
+              priceRange:
+                type: object
+                properties:
+                  min:
+                    type: number
+                    format: float
+                    minimum: 0
+                    nullable: true
+                    description: The minimum price of the product
+                  max:
+                    type: number
+                    format: float
+                    minimum: 0
+                    nullable: true
+                    description: The maximum price of the product
+              taxable:
+                type: boolean
+                description: Whether the product is taxable or not
+              taxRate:
+                type: number
+                format: float
+                description: The tax rate of the product
+              compareAtPrice:
+                type: number
+                format: float
+                nullable: true
+                description: The recommended retail price to compare with the actual price.
+              taxServiceTypeId:
+                type: string
+                nullable: true
+                description: The ID of the tax service of the product
+              gtin:
+                type: string
+                pattern: ^\d+$
+              localization:
+                type: object
+                description: Localization of the product for multiple languages
+            required:
+            - _id
+            - taxable
+          description: An array of variants of the product
+        categoryIds:
+          type: array
+          items:
+            type: string
+          description: An array of categories to which the product belongs
+        voucherSettings:
+          type: object
+          properties:
+            limitedValidityPeriod:
+              type: boolean
+              description: Whether the voucher should expire
+            validityConfig:
+              type: object
+              properties:
+                amount:
+                  type: number
+                  format: float
+                  minimum: 1
+                type:
+                  type: number
+                  format: float
+                untilEndOfPeriod:
+                  type: boolean
+            pdfImage:
+              type: string
+              description: A marketing image printed onto voucher pdf
+            disclaimer:
+              type: string
+              nullable: true
+              description: A disclaimer text printed onto voucher pdf
+            documentTemplateSettings:
+              type: object
+              properties:
+                templates:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      templateId:
+                        type: string
+                        description: The ID of the document template
+                      format:
+                        type: string
+                        enum:
+                        - A4
+                        - LETTER
+                        - LEGAL
+                        - BOARDING-PASS
+                        - PLASTIC-CARD
+                        - CARD
+                        - LABEL
+                        - CUSTOM
+                        - APPLE
+                        - GOOGLE
+                        description: The format of document template for the dimensions.
+                      target:
+                        type: string
+                        enum:
+                        - thermal
+                        - digital
+                        - wallet
+                        description: The target of document template for which targets it should be used.
+                      type:
+                        type: string
+                        enum:
+                        - ticket
+                        - invoice
+                        - voucher
+                        - member-card
+                        - header-card
+                        description: The type of document template for which document it should be used. ticket = The document template will be used on tickets. invoice = The document template will be used on invoices.
+                    required:
+                    - templateId
+                    - format
+                    - target
+                    - type
+          nullable: true
+          description: If the product is of type voucher
+        addOnSettings:
+          type: object
+          properties:
+            optOutDescription:
+              type: string
+              nullable: true
+              description: The description that is shown to the user if he decides to not buy the addOn
+            localization:
+              type: object
+              description: Localization of the addOnSettings for multiple languages
+          nullable: true
+        donationSettings:
+          type: object
+          properties:
+            campaignId:
+              type: string
+              description: The ID of the fundraise campaign
+            fundId:
+              type: string
+              description: The ID of the donation fund
+          required:
+          - campaignId
+          - fundId
+          nullable: true
+          description: Settings for donation products
+        sellerId:
+          type: string
+          description: The ID of the seller of the product
+        meta:
+          type: object
+          description: Custom key-value data. Metadata is useful for storing additional, structured information on an object.
+        localization:
+          type: object
+          description: Localization of the product for multiple languages
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was updated
+      required:
+      - _id
+      - name
+      - type
+      - sellerId
+    GET_Products_GetAProductStreamsProducts_200_response:
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+            description: The ID of the product
+          name:
+            type: string
+            description: The name of the product
+          active:
+            type: boolean
+            description: Whether the product is active and can be distributed
+            default: true
+          isFulfillable:
+            type: boolean
+            description: Whether the product can be delivered
+          type:
+            type: string
+            enum:
+            - voucher
+            - product
+            - donation
+            - membership
+            - addOn
+            description: The type of the product
+          image:
+            type: string
+            nullable: true
+            description: The image of the product
+          description:
+            type: string
+            nullable: true
+            description: The description of the product
+          variants:
+            type: array
+            items:
+              type: object
+              properties:
+                _id:
+                  type: string
+                  description: The ID of the product variant of the product
+                name:
+                  type: string
+                  nullable: true
+                  description: The Name of the product variant, defaults to product name if not specified
+                description:
+                  type: string
+                  nullable: true
+                  description: A description of the variant
+                priceType:
+                  type: string
+                  enum:
+                  - fixed
+                  - range
+                  default: fixed
+                price:
+                  type: number
+                  format: float
+                  nullable: true
+                  description: The price of the product
+                priceRange:
+                  type: object
+                  properties:
+                    min:
+                      type: number
+                      format: float
+                      minimum: 0
+                      nullable: true
+                      description: The minimum price of the product
+                    max:
+                      type: number
+                      format: float
+                      minimum: 0
+                      nullable: true
+                      description: The maximum price of the product
+                taxable:
+                  type: boolean
+                  description: Whether the product is taxable or not
+                taxRate:
+                  type: number
+                  format: float
+                  description: The tax rate of the product
+                compareAtPrice:
+                  type: number
+                  format: float
+                  nullable: true
+                  description: The recommended retail price to compare with the actual price.
+                taxServiceTypeId:
+                  type: string
+                  nullable: true
+                  description: The ID of the tax service of the product
+                gtin:
+                  type: string
+                  pattern: ^\d+$
+                localization:
+                  type: object
+                  description: Localization of the product for multiple languages
+              required:
+              - _id
+              - taxable
+            description: An array of variants of the product
+          categoryIds:
+            type: array
+            items:
+              type: string
+            description: An array of categories to which the product belongs
+          voucherSettings:
+            type: object
+            properties:
+              limitedValidityPeriod:
+                type: boolean
+                description: Whether the voucher should expire
+              validityConfig:
+                type: object
+                properties:
+                  amount:
+                    type: number
+                    format: float
+                    minimum: 1
+                  type:
+                    type: number
+                    format: float
+                  untilEndOfPeriod:
+                    type: boolean
+              pdfImage:
+                type: string
+                description: A marketing image printed onto voucher pdf
+              disclaimer:
+                type: string
+                nullable: true
+                description: A disclaimer text printed onto voucher pdf
+              documentTemplateSettings:
+                type: object
+                properties:
+                  templates:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        templateId:
+                          type: string
+                          description: The ID of the document template
+                        format:
+                          type: string
+                          enum:
+                          - A4
+                          - LETTER
+                          - LEGAL
+                          - BOARDING-PASS
+                          - PLASTIC-CARD
+                          - CARD
+                          - LABEL
+                          - CUSTOM
+                          - APPLE
+                          - GOOGLE
+                          description: The format of document template for the dimensions.
+                        target:
+                          type: string
+                          enum:
+                          - thermal
+                          - digital
+                          - wallet
+                          description: The target of document template for which targets it should be used.
+                        type:
+                          type: string
+                          enum:
+                          - ticket
+                          - invoice
+                          - voucher
+                          - member-card
+                          - header-card
+                          description: The type of document template for which document it should be used. ticket = The document template will be used on tickets. invoice = The document template will be used on invoices.
+                      required:
+                      - templateId
+                      - format
+                      - target
+                      - type
+            nullable: true
+            description: If the product is of type voucher
+          addOnSettings:
+            type: object
+            properties:
+              optOutDescription:
+                type: string
+                nullable: true
+                description: The description that is shown to the user if he decides to not buy the addOn
+              localization:
+                type: object
+                description: Localization of the addOnSettings for multiple languages
+            nullable: true
+          donationSettings:
+            type: object
+            properties:
+              campaignId:
+                type: string
+                description: The ID of the fundraise campaign
+              fundId:
+                type: string
+                description: The ID of the donation fund
+            required:
+            - campaignId
+            - fundId
+            nullable: true
+            description: Settings for donation products
+          sellerId:
+            type: string
+            description: The ID of the seller of the product
+          meta:
+            type: object
+            description: Custom key-value data. Metadata is useful for storing additional, structured information on an object.
+          localization:
+            type: object
+            description: Localization of the product for multiple languages
+          createdAt:
+            type: string
+            format: date-time
+            description: An ISO timestamp indicating when the product was created
+          updatedAt:
+            type: string
+            format: date-time
+            description: An ISO timestamp indicating when the product was updated
+        required:
+        - _id
+        - name
+        - type
+        - sellerId
+    GET_Products_GetAPublicProduct_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the product
+        name:
+          type: string
+          description: The name of the product
+        active:
+          type: boolean
+          description: Whether the product is active and can be distributed
+          default: true
+        isFulfillable:
+          type: boolean
+          description: Whether the product can be delivered
+        type:
+          type: string
+          enum:
+          - voucher
+          - product
+          - donation
+          - membership
+          - addOn
+          description: The type of the product
+        image:
+          type: string
+          nullable: true
+          description: The image of the product
+        description:
+          type: string
+          nullable: true
+          description: The description of the product
+        variants:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the product variant of the product
+              name:
+                type: string
+                nullable: true
+                description: The Name of the product variant, defaults to product name if not specified
+              description:
+                type: string
+                nullable: true
+                description: A description of the variant
+              priceType:
+                type: string
+                enum:
+                - fixed
+                - range
+                default: fixed
+              price:
+                type: number
+                format: float
+                nullable: true
+                description: The price of the product
+              priceRange:
+                type: object
+                properties:
+                  min:
+                    type: number
+                    format: float
+                    minimum: 0
+                    nullable: true
+                    description: The minimum price of the product
+                  max:
+                    type: number
+                    format: float
+                    minimum: 0
+                    nullable: true
+                    description: The maximum price of the product
+              taxable:
+                type: boolean
+                description: Whether the product is taxable or not
+              taxRate:
+                type: number
+                format: float
+                description: The tax rate of the product
+              compareAtPrice:
+                type: number
+                format: float
+                nullable: true
+                description: The recommended retail price to compare with the actual price.
+              taxServiceTypeId:
+                type: string
+                nullable: true
+                description: The ID of the tax service of the product
+              gtin:
+                type: string
+                pattern: ^\d+$
+              localization:
+                type: object
+                description: Localization of the product for multiple languages
+            required:
+            - _id
+            - taxable
+          description: An array of variants of the product
+        categoryIds:
+          type: array
+          items:
+            type: string
+          description: An array of categories to which the product belongs
+        voucherSettings:
+          type: object
+          properties:
+            limitedValidityPeriod:
+              type: boolean
+              description: Whether the voucher should expire
+            validityConfig:
+              type: object
+              properties:
+                amount:
+                  type: number
+                  format: float
+                  minimum: 1
+                type:
+                  type: number
+                  format: float
+                untilEndOfPeriod:
+                  type: boolean
+            pdfImage:
+              type: string
+              description: A marketing image printed onto voucher pdf
+            disclaimer:
+              type: string
+              nullable: true
+              description: A disclaimer text printed onto voucher pdf
+            documentTemplateSettings:
+              type: object
+              properties:
+                templates:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      templateId:
+                        type: string
+                        description: The ID of the document template
+                      format:
+                        type: string
+                        enum:
+                        - A4
+                        - LETTER
+                        - LEGAL
+                        - BOARDING-PASS
+                        - PLASTIC-CARD
+                        - CARD
+                        - LABEL
+                        - CUSTOM
+                        - APPLE
+                        - GOOGLE
+                        description: The format of document template for the dimensions.
+                      target:
+                        type: string
+                        enum:
+                        - thermal
+                        - digital
+                        - wallet
+                        description: The target of document template for which targets it should be used.
+                      type:
+                        type: string
+                        enum:
+                        - ticket
+                        - invoice
+                        - voucher
+                        - member-card
+                        - header-card
+                        description: The type of document template for which document it should be used. ticket = The document template will be used on tickets. invoice = The document template will be used on invoices.
+                    required:
+                    - templateId
+                    - format
+                    - target
+                    - type
+          nullable: true
+          description: If the product is of type voucher
+        addOnSettings:
+          type: object
+          properties:
+            optOutDescription:
+              type: string
+              nullable: true
+              description: The description that is shown to the user if he decides to not buy the addOn
+            localization:
+              type: object
+              description: Localization of the addOnSettings for multiple languages
+          nullable: true
+        donationSettings:
+          type: object
+          properties:
+            campaignId:
+              type: string
+              description: The ID of the fundraise campaign
+            fundId:
+              type: string
+              description: The ID of the donation fund
+          required:
+          - campaignId
+          - fundId
+          nullable: true
+          description: Settings for donation products
+        sellerId:
+          type: string
+          description: The ID of the seller of the product
+        meta:
+          type: object
+          description: Custom key-value data. Metadata is useful for storing additional, structured information on an object.
+        localization:
+          type: object
+          description: Localization of the product for multiple languages
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was updated
+      required:
+      - _id
+      - name
+      - type
+      - sellerId
+    PUT_Products_UpdateAProductStream_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the product stream.
+        name:
+          type: string
+          description: The name of the product stream.
+        sellerId:
+          type: string
+          description: The seller ID of the product stream.
+        products:
+          type: array
+          items:
+            type: string
+          description: The products in the product stream.
+          default: []
+        active:
+          type: boolean
+          description: Whether the product stream is active or not.
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was last updated.
+      required:
+      - _id
+      - name
+      - sellerId
+    DELETE_Products_DeleteAProductStream_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the product stream.
+        name:
+          type: string
+          description: The name of the product stream.
+        sellerId:
+          type: string
+          description: The seller ID of the product stream.
+        products:
+          type: array
+          items:
+            type: string
+          description: The products in the product stream.
+          default: []
+        active:
+          type: boolean
+          description: Whether the product stream is active or not.
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was last updated.
+      required:
+      - _id
+      - name
+      - sellerId
+    GET_Products_GetAllProductStreams_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the product stream.
+              name:
+                type: string
+                description: The name of the product stream.
+              sellerId:
+                type: string
+                description: The seller ID of the product stream.
+              products:
+                type: array
+                items:
+                  type: string
+                description: The products in the product stream.
+                default: []
+              active:
+                type: boolean
+                description: Whether the product stream is active or not.
+              createdAt:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the product was created.
+              updatedAt:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the product was last updated.
+            required:
+            - _id
+            - name
+            - sellerId
+        total:
+          type: integer
+    POST_Products_CreateAProduct_201_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the product
+        name:
+          type: string
+          description: The name of the product
+        active:
+          type: boolean
+          description: Whether the product is active and can be distributed
+          default: true
+        isFulfillable:
+          type: boolean
+          description: Whether the product can be delivered
+        type:
+          type: string
+          enum:
+          - voucher
+          - product
+          - donation
+          - membership
+          - addOn
+          description: The type of the product
+        image:
+          type: string
+          nullable: true
+          description: The image of the product
+        description:
+          type: string
+          nullable: true
+          description: The description of the product
+        variants:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the product variant of the product
+              name:
+                type: string
+                nullable: true
+                description: The Name of the product variant, defaults to product name if not specified
+              description:
+                type: string
+                nullable: true
+                description: A description of the variant
+              priceType:
+                type: string
+                enum:
+                - fixed
+                - range
+                default: fixed
+              price:
+                type: number
+                format: float
+                nullable: true
+                description: The price of the product
+              priceRange:
+                type: object
+                properties:
+                  min:
+                    type: number
+                    format: float
+                    minimum: 0
+                    nullable: true
+                    description: The minimum price of the product
+                  max:
+                    type: number
+                    format: float
+                    minimum: 0
+                    nullable: true
+                    description: The maximum price of the product
+              taxable:
+                type: boolean
+                description: Whether the product is taxable or not
+              taxRate:
+                type: number
+                format: float
+                description: The tax rate of the product
+              compareAtPrice:
+                type: number
+                format: float
+                nullable: true
+                description: The recommended retail price to compare with the actual price.
+              taxServiceTypeId:
+                type: string
+                nullable: true
+                description: The ID of the tax service of the product
+              gtin:
+                type: string
+                pattern: ^\d+$
+              localization:
+                type: object
+                description: Localization of the product for multiple languages
+            required:
+            - _id
+            - taxable
+          description: An array of variants of the product
+        categoryIds:
+          type: array
+          items:
+            type: string
+          description: An array of categories to which the product belongs
+        voucherSettings:
+          type: object
+          properties:
+            limitedValidityPeriod:
+              type: boolean
+              description: Whether the voucher should expire
+            validityConfig:
+              type: object
+              properties:
+                amount:
+                  type: number
+                  format: float
+                  minimum: 1
+                type:
+                  type: number
+                  format: float
+                untilEndOfPeriod:
+                  type: boolean
+            pdfImage:
+              type: string
+              description: A marketing image printed onto voucher pdf
+            disclaimer:
+              type: string
+              nullable: true
+              description: A disclaimer text printed onto voucher pdf
+            documentTemplateSettings:
+              type: object
+              properties:
+                templates:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      templateId:
+                        type: string
+                        description: The ID of the document template
+                      format:
+                        type: string
+                        enum:
+                        - A4
+                        - LETTER
+                        - LEGAL
+                        - BOARDING-PASS
+                        - PLASTIC-CARD
+                        - CARD
+                        - LABEL
+                        - CUSTOM
+                        - APPLE
+                        - GOOGLE
+                        description: The format of document template for the dimensions.
+                      target:
+                        type: string
+                        enum:
+                        - thermal
+                        - digital
+                        - wallet
+                        description: The target of document template for which targets it should be used.
+                      type:
+                        type: string
+                        enum:
+                        - ticket
+                        - invoice
+                        - voucher
+                        - member-card
+                        - header-card
+                        description: The type of document template for which document it should be used. ticket = The document template will be used on tickets. invoice = The document template will be used on invoices.
+                    required:
+                    - templateId
+                    - format
+                    - target
+                    - type
+          nullable: true
+          description: If the product is of type voucher
+        addOnSettings:
+          type: object
+          properties:
+            optOutDescription:
+              type: string
+              nullable: true
+              description: The description that is shown to the user if he decides to not buy the addOn
+            localization:
+              type: object
+              description: Localization of the addOnSettings for multiple languages
+          nullable: true
+        donationSettings:
+          type: object
+          properties:
+            campaignId:
+              type: string
+              description: The ID of the fundraise campaign
+            fundId:
+              type: string
+              description: The ID of the donation fund
+          required:
+          - campaignId
+          - fundId
+          nullable: true
+          description: Settings for donation products
+        sellerId:
+          type: string
+          description: The ID of the seller of the product
+        meta:
+          type: object
+          description: Custom key-value data. Metadata is useful for storing additional, structured information on an object.
+        localization:
+          type: object
+          description: Localization of the product for multiple languages
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was updated
+      required:
+      - _id
+      - name
+      - type
+      - sellerId
+    POST_Products_CreateAProductStream_201_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the product stream.
+        name:
+          type: string
+          description: The name of the product stream.
+        sellerId:
+          type: string
+          description: The seller ID of the product stream.
+        products:
+          type: array
+          items:
+            type: string
+          description: The products in the product stream.
+          default: []
+        active:
+          type: boolean
+          description: Whether the product stream is active or not.
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the product was last updated.
+      required:
+      - _id
+      - name
+      - sellerId
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

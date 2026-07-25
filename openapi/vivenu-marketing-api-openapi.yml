@@ -1,0 +1,297 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists marketing API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: marketing
+paths:
+  /api/marketing/campaigns:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: top
+        schema:
+          default: 25
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          type: integer
+          minimum: 1
+          maximum: 1000
+        description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+        in: query
+        required: true
+        style: form
+        explode: true
+      - name: skip
+        schema:
+          default: 0
+          description: The number of objects to skip for the requested result
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        description: The number of objects to skip for the requested result
+        in: query
+        required: true
+        style: form
+        explode: true
+      - name: name
+        schema:
+          type: string
+        in: query
+        required: false
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  docs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CampaignResource'
+                  total:
+                    type: number
+                required:
+                - docs
+                - total
+                additionalProperties: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - marketing
+      description: Get All Marketing Campaigns
+      operationId: marketing-campaigns/list
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampaignResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 3
+                  description: The name of the marketing campaign
+                code:
+                  anyOf:
+                  - type: string
+                    maxLength: 128
+                  - type: string
+                    enum:
+                    - ''
+                  description: The code of the marketing campaign
+              required:
+              - name
+              additionalProperties: false
+      tags:
+      - marketing
+      description: Create a Marketing Campaign
+      operationId: marketing-campaigns/create
+  /api/marketing/campaigns/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+          maxLength: 128
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampaignResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - marketing
+      description: Get a Marketing Campaign
+      operationId: marketing-campaigns/get
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^[a-fA-F0-9]{24}$
+          - type: string
+            pattern: ^[a-z]+_.*$
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampaignResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 3
+                  description: The name of the marketing campaign
+              additionalProperties: false
+      tags:
+      - marketing
+      description: Update a Marketing Campaign
+      operationId: marketing-campaigns/update
+    delete:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^[a-fA-F0-9]{24}$
+          - type: string
+            pattern: ^[a-z]+_.*$
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampaignResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - marketing
+      description: Delete a Marketing Campaign
+      operationId: marketing-campaigns/delete
+components:
+  schemas:
+    CampaignResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the marketing campaign
+        name:
+          type: string
+          minLength: 3
+          description: The name of the marketing campaign
+        code:
+          type: string
+          maxLength: 128
+          description: The code of the marketing campaign
+        createdBy:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - USER
+              - APP
+              - API_KEY
+              - SYSTEM
+              description: The type of the entity
+            id:
+              type: string
+              description: The ID of the entity
+          required:
+          - type
+          - id
+          additionalProperties: false
+          description: The entity that created this marketing campaign
+        sellerId:
+          type: string
+          description: The ID of the seller owning the marketing campaign
+        isArchived:
+          default: false
+          description: Whether the marketing campaign is archived or not.
+          type: boolean
+        createdAt:
+          description: An ISO timestamp indicating when the marketing campaign was created.
+          type: string
+          format: date-time
+        updatedAt:
+          description: An ISO timestamp indicating when the marketing campaign was updated.
+          type: string
+          format: date-time
+      required:
+      - _id
+      - name
+      - code
+      - createdBy
+      - sellerId
+      - isArchived
+      - createdAt
+      - updatedAt
+      additionalProperties: false
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

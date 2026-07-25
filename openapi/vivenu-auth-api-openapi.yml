@@ -1,0 +1,177 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists auth API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: auth
+paths:
+  /api/auth/sso/{ssoId}/authorize:
+    get:
+      parameters:
+      - name: redirect_uri
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: login_hint
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: sellerId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: ssoId
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '302':
+          description: Found
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+      tags:
+      - auth
+      description: Get redirected to SSO provider
+      operationId: get_redirected_to_sso_provider
+  /api/auth/exchange-token:
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POST_Auth_CreateAnExchangeToken_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Auth_CreateAnExchangeToken'
+      tags:
+      - auth
+      description: Create an exchange token
+      operationId: create_an_exchange_token
+  /api/auth/token:
+    post:
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POST_Auth_ExchangeAToken_200_response'
+        '400':
+          description: Bad Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Auth_ExchangeAToken'
+      tags:
+      - auth
+      description: Exchange a token
+      operationId: exchange_a_token
+components:
+  schemas:
+    POST_Auth_ExchangeAToken_200_response:
+      type: object
+      properties:
+        token:
+          type: string
+        expiresIn:
+          type: number
+          format: float
+          example: 3600
+      required:
+      - token
+      - expiresIn
+    POST_Auth_CreateAnExchangeToken:
+      oneOf:
+      - type: object
+        properties:
+          resourceType:
+            type: string
+            enum:
+            - customer
+            description: The type of the resource to create an exchange token for
+          customerId:
+            type: string
+            description: The id of the customer to create an exchange token for
+        required:
+        - resourceType
+        - customerId
+    POST_Auth_ExchangeAToken:
+      type: object
+      properties:
+        exchangeToken:
+          type: string
+          description: The token to be exchanged for an access token
+      required:
+      - exchangeToken
+    POST_Auth_CreateAnExchangeToken_200_response:
+      type: object
+      properties:
+        exchangeToken:
+          type: string
+        expiresIn:
+          type: number
+          format: float
+          example: 900
+      required:
+      - exchangeToken
+      - expiresIn
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

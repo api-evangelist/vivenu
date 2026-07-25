@@ -1,0 +1,1192 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists accessusers API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: accessusers
+paths:
+  /api/accessusers:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Accessusers_GetAllAccessUsers_200_response'
+        '401':
+          description: Unauthorized
+      tags:
+      - accessusers
+      description: Get all Access Users
+      operationId: accessusers/list
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessUserResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Accessusers_CreateAnAccessUser'
+      tags:
+      - accessusers
+      description: Create an Access User
+      operationId: accessusers/create
+  /api/accessusers/events:
+    get:
+      parameters:
+      - name: includeRootEvents
+        required: false
+        schema:
+          type: boolean
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: token
+        required: true
+        schema:
+          type: string
+          description: The token to authenticate against the access-control endpoints.
+          metas: {}
+        in: header
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Accessusers_GetAllAccessibleEvents_200_response'
+        '400':
+          description: Bad Request
+      tags:
+      - accessusers
+      description: Get all accessible Events
+      operationId: get_all_accessible_events
+  /api/accessusers/me:
+    get:
+      parameters:
+      - name: token
+        required: true
+        schema:
+          type: string
+          description: The token to authenticate against the access-control endpoints.
+          metas: {}
+        in: header
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessUserInfoResource'
+        '404':
+          description: Not Found
+      tags:
+      - accessusers
+      description: Get associated AccessUser info
+      operationId: get_associated_access_user_info
+  /api/accessusers/seller:
+    get:
+      parameters:
+      - name: token
+        required: true
+        schema:
+          type: string
+          description: The token to authenticate against the access-control endpoints.
+          metas: {}
+        in: header
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Accessusers_GetAssociatedSellerId_200_response'
+        '404':
+          description: Not Found
+      tags:
+      - accessusers
+      description: Get associated Seller Id
+      operationId: get_associated_seller_id
+  /api/accessusers/tickets/{barcode}:
+    get:
+      parameters:
+      - name: eventId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: barcode
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      - name: token
+        required: true
+        schema:
+          type: string
+          description: The token to authenticate against the access-control endpoints.
+          metas: {}
+        in: header
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Accessusers_GetTicketWithBarcode_200_response'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+      tags:
+      - accessusers
+      description: Get Ticket with barcode
+      operationId: get_ticket_with_barcode
+  /api/accessusers/{eventId}/tickets:
+    get:
+      parameters:
+      - name: top
+        required: false
+        schema:
+          type: number
+          format: float
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: number
+          format: float
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: from
+        required: false
+        schema:
+          type: string
+          format: date-time
+          description: An ISO Timestamp to filter tickets where created_at | updated >= $from
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: until
+        required: false
+        schema:
+          type: string
+          format: date-time
+          description: An ISO Timestamp to filter tickets where created_at | updated < $from
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: eventId
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      - name: token
+        required: true
+        schema:
+          type: string
+          description: The token to authenticate against the access-control endpoints.
+          metas: {}
+        in: header
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Accessusers_GetTicketsForAnEvent_200_response'
+        '400':
+          description: Bad Request
+      tags:
+      - accessusers
+      description: Get Tickets for an Event
+      operationId: get_tickets_for_an_event
+  /api/accessusers/tickets/v2/{eventId}:
+    get:
+      parameters:
+      - name: top
+        required: false
+        schema:
+          type: number
+          format: float
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: number
+          format: float
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: from
+        required: false
+        schema:
+          type: string
+          format: date-time
+          description: An ISO Timestamp to filter tickets where created_at | updated >= $from
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: until
+        required: false
+        schema:
+          type: string
+          format: date-time
+          description: An ISO Timestamp to filter tickets where created_at | updated < $from
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: eventId
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      - name: token
+        required: true
+        schema:
+          type: string
+          description: The token to authenticate against the access-control endpoints.
+          metas: {}
+        in: header
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Accessusers_GetTicketsForAnEventV2_200_response'
+        '400':
+          description: Bad Request
+      tags:
+      - accessusers
+      description: Get Tickets for an Event v2
+      operationId: get_tickets_for_an_event_v_2
+  /api/accessusers/scans/{eventId}:
+    post:
+      parameters:
+      - name: eventId
+        required: true
+        schema:
+          type: string
+          description: The ID of the event to post scans.
+          metas: {}
+        in: path
+      - name: token
+        required: true
+        schema:
+          type: string
+          description: The token to authenticate against the access-control endpoints.
+          metas: {}
+        in: header
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POST_Accessusers_CreateScans_200_response'
+        '400':
+          description: Bad Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Accessusers_CreateScans'
+      tags:
+      - accessusers
+      description: Create scans
+      operationId: create_scans
+  /api/accessusers/tickets/{barcode}/scan:
+    post:
+      parameters:
+      - name: barcode
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      - name: token
+        required: true
+        schema:
+          type: string
+          description: The token to authenticate against the access-control endpoints.
+          metas: {}
+        in: header
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POST_Accessusers_ScanTicketWithBarcode_200_response'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+      tags:
+      - accessusers
+      description: Scan Ticket with barcode
+      operationId: scan_ticket_with_barcode
+  /api/accessusers/{id}:
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessUserResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Accessusers_UpdateAnAccessUser'
+      tags:
+      - accessusers
+      description: Update an Access User
+      operationId: accessusers/update
+    delete:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The id of the access user to be deleted
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessUserResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - accessusers
+      description: Delete an Access User
+      operationId: accessusers/delete
+components:
+  schemas:
+    GET_Accessusers_GetAllAccessibleEvents_200_response:
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+            description: The ID of the event
+          name:
+            type: string
+            description: The name of the event
+        required:
+        - _id
+        - name
+      description: An array of all events the access user has access to.
+    GET_Accessusers_GetAssociatedSellerId_200_response:
+      type: object
+      properties:
+        sellerId:
+          type: string
+          description: The ID of the seller that owns the access user.
+      required:
+      - sellerId
+    POST_Accessusers_ScanTicketWithBarcode_200_response:
+      type: object
+      properties:
+        access:
+          type: string
+          enum:
+          - GRANTED
+          - DENIED
+        ticket:
+          type: object
+          properties:
+            _id:
+              type: string
+            barcode:
+              type: string
+              minLength: 8
+              description: The barcode of the ticket
+            name:
+              type: string
+              description: The name of the ticket owner
+            status:
+              type: string
+              enum:
+              - VALID
+              - INVALID
+              - RESERVED
+              - DETAILSREQUIRED
+              - BLANK
+              description: The status of the ticket
+            ticketTypeId:
+              type: string
+              description: The ID of the ticket type this ticket inherits from
+            ticketName:
+              type: string
+              description: The name of the ticket type this ticket inherits from
+            categoryRef:
+              type: string
+              description: A UUID of the category the ticket belongs to.
+            eventId:
+              type: string
+              description: The ID of the event the ticket belongs to
+            sellerId:
+              type: string
+              description: The ID of the seller that ticket belongs to.
+            createdAt:
+              type: string
+              format: date-time
+              description: An ISO Timestamp indicating when the ticket was created.
+            updatedAt:
+              type: string
+              format: date-time
+              description: An ISO Timestamp indicating when the ticket was updated.
+          required:
+          - _id
+          - barcode
+          - status
+          - ticketTypeId
+          - ticketName
+          - eventId
+          - sellerId
+          - createdAt
+          - updatedAt
+    POST_Accessusers_CreateScans_200_response:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - OK
+    PUT_Accessusers_UpdateAnAccessUser:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+          description: An internal name to identify the access user
+        events:
+          type: array
+          items:
+            type: string
+          description: An array of events the access user can access. Only if accessAllEvents=false.
+        expires:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the access user should expire
+        active:
+          type: boolean
+          description: Whether the access user is active or not.
+          default: true
+        accessAllEvents:
+          type: boolean
+          description: Whether the access user can access all events of his seller
+        lastRequest:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the access user made the last request.
+        integration:
+          type: string
+          enum:
+          - simplyX
+          - axess
+          - skidata
+          description: The type of integration belongs to this access user
+        deviceSettings:
+          type: object
+          properties:
+            accessMode:
+              type: string
+              enum:
+              - full
+              - restricted
+              description: '''restricted'' mode limits access-user visibility while keeping assigned access-control capabilities available.'
+              default: full
+            scanGroupId:
+              type: string
+              nullable: true
+              description: The ID of the scan group to which the access user assigned.
+          description: An object of settings which will be used on the device
+          default: {}
+      required:
+      - name
+      - accessAllEvents
+    GET_Accessusers_GetTicketsForAnEventV2_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              barcode:
+                type: string
+                minLength: 8
+                description: The barcode of the ticket
+              name:
+                type: string
+                description: The name of the ticket owner
+              ticketTypeId:
+                type: string
+                description: The ID of the ticket type this ticket inherits from
+              ticketName:
+                type: string
+                description: The name of the ticket type this ticket inherits from
+              priceCategoryId:
+                type: string
+              eventId:
+                type: string
+                description: The ID of the event the ticket belongs to
+              sellerId:
+                type: string
+                description: The ID of the seller that ticket belongs to.
+              createdAt:
+                type: string
+                format: date-time
+                description: An ISO Timestamp indicating when the ticket was created.
+              updatedAt:
+                type: string
+                format: date-time
+                description: An ISO Timestamp indicating when the ticket was updated.
+              categoryRef:
+                type: string
+                description: A UUID of the category the ticket belongs to.
+              priceCategory:
+                type: object
+                properties:
+                  categoryId:
+                    type: string
+                  description:
+                    type: string
+              status:
+                type: string
+                enum:
+                - VALID
+                - INVALID
+                - DETAILSREQUIRED
+                default: VALID
+              area:
+                type: string
+                description: If the ticket has a seat. The area where the seat is located
+              row:
+                type: string
+                description: If the ticket has a seat. The row where the seat is located
+              seat:
+                type: string
+                description: If the ticket has a seat. The seat number
+              discountId:
+                type: string
+                description: If the ticket has a special price category. The id of the price category
+              discount:
+                type: string
+                description: If the ticket has a special price category. The description of the price category
+              entry:
+                type: array
+                items:
+                  type: string
+                  description: The id of the entry
+                description: If the ticket has entry permissions. An array of entry-ids where the ticket has access
+            required:
+            - _id
+            - barcode
+            - ticketTypeId
+            - ticketName
+            - eventId
+            - sellerId
+            - createdAt
+            - updatedAt
+        total:
+          type: integer
+    AccessUserResource:
+      type: object
+      properties:
+        _id:
+          type: string
+        sellerId:
+          type: string
+          description: The ID of the seller that owns the access user.
+        active:
+          type: boolean
+          description: Whether the access user is active or not.
+          default: true
+        name:
+          type: string
+          maxLength: 200
+          description: An internal name to identify the access user
+        token:
+          type: string
+          description: The token to authenticate against the access-control endpoints.
+        accessAllEvents:
+          type: boolean
+          description: Whether the access user can access all events of his seller
+        events:
+          type: array
+          items:
+            type: string
+          description: An array of events the access user can access. Only if accessAllEvents=false.
+        lastRequest:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the access user made the last request.
+        expires:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the access user should expire
+        isIntegration:
+          type: boolean
+          description: Whether an integration belongs to the access user
+        integration:
+          type: string
+          enum:
+          - simplyX
+          - axess
+          - skidata
+          description: The type of integration belongs to this access user
+        deviceSettings:
+          type: object
+          properties:
+            accessMode:
+              type: string
+              enum:
+              - full
+              - restricted
+              description: '''restricted'' mode limits access-user visibility while keeping assigned access-control capabilities available.'
+              default: full
+            scanGroupId:
+              type: string
+              nullable: true
+              description: The ID of the scan group to which the access user assigned.
+          description: An object of settings which will be used on the device
+          default: {}
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the access user was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the access user was updated.
+        __v:
+          type: integer
+      required:
+      - sellerId
+      - name
+      - token
+      - accessAllEvents
+      - createdAt
+      - updatedAt
+    GET_Accessusers_GetTicketWithBarcode_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+        barcode:
+          type: string
+          minLength: 8
+          description: The barcode of the ticket
+        name:
+          type: string
+          description: The name of the ticket owner
+        ticketTypeId:
+          type: string
+          description: The ID of the ticket type this ticket inherits from
+        ticketName:
+          type: string
+          description: The name of the ticket type this ticket inherits from
+        categoryRef:
+          type: string
+          description: A UUID of the category the ticket belongs to.
+        priceCategoryId:
+          type: string
+        eventId:
+          type: string
+          description: The ID of the event the ticket belongs to
+        sellerId:
+          type: string
+          description: The ID of the seller that ticket belongs to.
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the ticket was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the ticket was updated.
+        priceCategory:
+          type: object
+          properties:
+            categoryId:
+              type: string
+            description:
+              type: string
+        status:
+          type: string
+          enum:
+          - VALID
+          - INVALID
+          default: VALID
+      required:
+      - _id
+      - barcode
+      - ticketTypeId
+      - ticketName
+      - eventId
+      - sellerId
+      - createdAt
+      - updatedAt
+    GET_Accessusers_GetAllAccessUsers_200_response:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccessUserResource'
+    POST_Accessusers_CreateScans:
+      type: array
+      items:
+        type: object
+        properties:
+          ticketId:
+            type: string
+          barcode:
+            type: string
+            minLength: 8
+            description: The barcode of the ticket
+          scanned_at:
+            type: string
+            format: date-time
+            description: An ISO Timestamp indicating when the ticket was scanned.
+          type:
+            type: string
+            enum:
+            - OK
+            - FAIL
+            description: Whether the scan succeeded or failed
+          direction:
+            type: string
+            enum:
+            - IN
+            - OUT
+            description: Indicates in which direction the scan was.
+        required:
+        - barcode
+        - scanned_at
+        - type
+        - direction
+    GET_Accessusers_GetTicketsForAnEvent_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              barcode:
+                type: string
+                minLength: 8
+                description: The barcode of the ticket
+              name:
+                type: string
+                description: The name of the ticket owner
+              ticketTypeId:
+                type: string
+                description: The ID of the ticket type this ticket inherits from
+              ticketName:
+                type: string
+                description: The name of the ticket type this ticket inherits from
+              priceCategoryId:
+                type: string
+              eventId:
+                type: string
+                description: The ID of the event the ticket belongs to
+              sellerId:
+                type: string
+                description: The ID of the seller that ticket belongs to.
+              createdAt:
+                type: string
+                format: date-time
+                description: An ISO Timestamp indicating when the ticket was created.
+              updatedAt:
+                type: string
+                format: date-time
+                description: An ISO Timestamp indicating when the ticket was updated.
+              priceCategory:
+                type: object
+                properties:
+                  categoryId:
+                    type: string
+                  description:
+                    type: string
+              parentEventId:
+                type: string
+              status:
+                type: string
+                enum:
+                - VALID
+                - INVALID
+                - DETAILSREQUIRED
+                default: VALID
+              area:
+                type: string
+                description: If the ticket has a seat. The area where the seat is located
+              row:
+                type: string
+                description: If the ticket has a seat. The row where the seat is located
+              seat:
+                type: string
+                description: If the ticket has a seat. The seat number
+              discountId:
+                type: string
+                description: If the ticket has a special price category. The id of the price category
+              discount:
+                type: string
+                description: If the ticket has a special price category. The description of the price category
+              entry:
+                type: array
+                items:
+                  type: string
+                  description: The id of the entry
+                description: If the ticket has entry permissions. An array of entry-ids where the ticket has access
+            required:
+            - _id
+            - barcode
+            - ticketTypeId
+            - ticketName
+            - eventId
+            - sellerId
+            - createdAt
+            - updatedAt
+        total:
+          type: integer
+    POST_Accessusers_CreateAnAccessUser:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+          description: An internal name to identify the access user
+        isIntegration:
+          type: boolean
+          description: Whether an integration belongs to the access user
+      required:
+      - name
+    AccessUserInfoResource:
+      type: object
+      properties:
+        sellerId:
+          type: string
+          description: The ID of the seller that owns the access user.
+        _id:
+          type: string
+        name:
+          type: string
+          minLength: 1
+          maxLength: 200
+          description: An internal name to identify the access user
+        deviceSettings:
+          default: {}
+          description: An object of settings which will be used on the device
+          type: object
+          properties:
+            accessMode:
+              description: '''restricted'' mode limits access-user visibility while keeping assigned access-control capabilities available.'
+              type: string
+              enum:
+              - full
+              - restricted
+            scanGroupId:
+              description: The ID of the scan group to which the access user assigned.
+              nullable: true
+              type: string
+            scanConfig:
+              type: object
+              properties:
+                mode:
+                  type: string
+                  enum:
+                  - lock
+                  - default
+                  description: The mode of the scan config.
+                events:
+                  description: The events settings of the scan config.
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      eventId:
+                        type: string
+                        description: The ID of the event.
+                      allowAllTicketTypes:
+                        description: Whether an all ticket type available or not.
+                        default: false
+                        type: boolean
+                      allowedTicketTypeIds:
+                        description: The array of the allowed ticket type IDs.
+                        type: array
+                        items:
+                          type: string
+                      timeslotSettings:
+                        type: object
+                        properties:
+                          beforeMinutes:
+                            description: Minutes before a timeslot when tickets become valid for this event.
+                            default: 0
+                            type: number
+                            minimum: 0
+                          afterMinutes:
+                            description: Minutes after a timeslot when tickets remain valid for this event.
+                            default: 0
+                            type: number
+                            minimum: 0
+                        additionalProperties: false
+                    required:
+                    - eventId
+                    additionalProperties: false
+                scanZoneId:
+                  description: The ID of the scan zone.
+                  type: string
+                scanTypes:
+                  oneOf:
+                  - type: object
+                    properties:
+                      checkin:
+                        type: boolean
+                        enum:
+                        - true
+                        description: Whether check-in scanning is enabled.
+                      checkout:
+                        type: boolean
+                        description: Whether check-out scanning is enabled.
+                    required:
+                    - checkin
+                    - checkout
+                    additionalProperties: false
+                  - type: object
+                    properties:
+                      checkin:
+                        type: boolean
+                        enum:
+                        - false
+                        description: Whether check-in scanning is enabled.
+                      checkout:
+                        type: boolean
+                        enum:
+                        - true
+                        description: Whether check-out scanning is enabled.
+                    required:
+                    - checkin
+                    - checkout
+                    additionalProperties: false
+                  description: The scan types enabled on the device. At least one of checkin or checkout must be true.
+                  type: object
+                enableMultiCheckin:
+                  description: Whether a ticket is allowed to be checked in more than once, given the corresponding count of checkouts were created.
+                  type: boolean
+                checkTimeslots:
+                  description: Whether to validate the ticket's timeslot against the current time.
+                  type: boolean
+                tapAndGo:
+                  description: The tap and go configuration of the scan group.
+                  type: object
+                  properties:
+                    enabled:
+                      type: boolean
+                      description: Whether tap and go is enabled.
+                    eventIds:
+                      description: The IDs of events available for tap and go selection.
+                      type: array
+                      items:
+                        type: string
+                  required:
+                  - enabled
+                  additionalProperties: false
+              required:
+              - mode
+              additionalProperties: false
+              description: The scan configuration of the scan group.
+            colorSettings:
+              description: The color overrides for each scan feedback type.
+              type: object
+              properties:
+                success:
+                  description: The color shown for a success scan result. Fixed to green and cannot be overridden.
+                  type: string
+                  enum:
+                  - green
+                declined:
+                  description: The color shown for a declined scan result. Fixed to red and cannot be overridden.
+                  type: string
+                  enum:
+                  - red
+                repeated:
+                  description: The color shown for a repeated scan result.
+                  type: string
+                  enum:
+                  - green
+                  - orange
+                  - red
+                  - blue
+                  - pink
+                highlighted:
+                  description: The color shown for a highlighted scan result.
+                  type: string
+                  enum:
+                  - green
+                  - orange
+                  - red
+                  - blue
+                  - pink
+                actionRequired:
+                  description: The color shown for a actionRequired scan result.
+                  type: string
+                  enum:
+                  - green
+                  - orange
+                  - red
+                  - blue
+                  - pink
+              additionalProperties: false
+            enableSoundFeedback:
+              description: Whether scan sound feedback is enabled.
+              type: boolean
+            enableHapticFeedback:
+              description: Whether haptic feedback is enabled.
+              type: boolean
+            scanRevealInterval:
+              description: The scan result display duration in seconds.
+              type: number
+              enum:
+              - 1
+              - 3
+              - 5
+              - 10
+              - 15
+              - 30
+            ticketSyncInterval:
+              description: The ticket data synchronization interval in seconds.
+              type: number
+              enum:
+              - 5
+              - 15
+              - 30
+              - 60
+              - 300
+              - 600
+              - 900
+          additionalProperties: false
+        accessControlSettings:
+          type: object
+          properties:
+            includeDetailsRequiredTickets:
+              type: boolean
+          required:
+          - includeDetailsRequiredTickets
+          additionalProperties: false
+      required:
+      - sellerId
+      - name
+      - deviceSettings
+      - accessControlSettings
+      additionalProperties: false
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

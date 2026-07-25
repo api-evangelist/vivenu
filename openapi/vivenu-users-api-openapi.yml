@@ -1,0 +1,1539 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists users API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: users
+paths:
+  /api/users:
+    get:
+      security:
+      - jwt: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+      tags:
+      - users
+      description: Get all Users
+      operationId: get_all_users
+  /api/users/info:
+    get:
+      security:
+      - jwt: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+      tags:
+      - users
+      description: Get my User info
+      operationId: get_my_user_info
+  /api/users/rich:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: skip
+        required: false
+        schema:
+          type: number
+          format: float
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: top
+        required: false
+        schema:
+          type: number
+          format: float
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: name
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: email
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: sellerAccess
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: organizationAccess
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: isAdmin
+        required: false
+        schema:
+          type: boolean
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - users
+      description: Get Users rich
+      operationId: get_users_rich
+  /api/users/sellers:
+    get:
+      security:
+      - jwt: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+      tags:
+      - users
+      description: Get all Sellers of a User
+      operationId: get_all_sellers_of_a_user
+  /api/users/info/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+      tags:
+      - users
+      description: Get User info
+      operationId: get_user_info
+  /api/users/password-reset/{token}:
+    get:
+      parameters:
+      - name: token
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+      tags:
+      - users
+      description: Check if password reset exists
+      operationId: check_if_password_reset_exists
+    put:
+      parameters:
+      - name: token
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  minLength: 10
+              required:
+              - password
+              additionalProperties: false
+      tags:
+      - users
+      description: Set password after reset
+      operationId: set_password_after_reset
+  /api/users/{userId}/devices:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: userId
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - users
+      description: Get user devices
+      operationId: get_user_devices
+  /api/users/access-seller:
+    post:
+      security:
+      - jwt: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Users_ChangeSellerOnUser'
+      tags:
+      - users
+      description: Change Seller on User
+      operationId: change_seller_on_user
+  /api/users/invite:
+    post:
+      security:
+      - jwt: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  pattern: ^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$
+                name:
+                  type: string
+                password:
+                  type: string
+                origin:
+                  type: string
+                  format: uri
+                suppressEmail:
+                  type: boolean
+                hasIdentityProvider:
+                  type: boolean
+                roles:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - global/super_admin
+                        - global/admin
+                        - global/finance_manager
+                        - global/seller_manager
+                        - global/support_manager
+                        - seller/admin
+                        - seller/analyst
+                        - seller/support_specialist
+                        - seller/event_manager
+                        - seller/sales_manager
+                        - seller/attendee_manager
+                        - seller/billing_manager
+                        - seller/view_only
+                        - seller/it_manager
+                        - seller/marketing_manager
+                        - seller/marketing_specialist
+                        - seller/fundraising_manager
+                        - seller/developer
+                        - pos/user
+                      scope:
+                        type: string
+                    required:
+                    - type
+                    - scope
+                    additionalProperties: false
+                permissions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - global:seller_access
+                        - global:transaction_access
+                        - org:access
+                        - pos:access
+                        - roles:update
+                        - roles:assignGlobal
+                        - feeinvoices:create
+                        - feeinvoices:list
+                        - feeinvoices:export
+                        - sellers:admin
+                        - events:list
+                        - events:create
+                        - events:update
+                        - eventSeries:list
+                        - eventSeries:create
+                        - eventSeries:update
+                        - tickets:list
+                        - tickets:create
+                        - tickets:update
+                        - tickets:export
+                        - scans:list
+                        - scans:create
+                        - transactions:list
+                        - transactions:create
+                        - transactions:update
+                        - transactions:export
+                        - purchaseIntents:list
+                        - purchaseIntents:create
+                        - purchaseIntents:update
+                        - purchaseIntents:export
+                        - purchaseIntentsStrategies:list
+                        - purchaseIntentsStrategies:create
+                        - purchaseIntentsStrategies:update
+                        - customers:list
+                        - customers:create
+                        - customers:update
+                        - customers:export
+                        - customerPaymentMethods:list
+                        - customerPaymentMethods:create
+                        - customerPaymentMethods:update
+                        - webhooks:list
+                        - webhooks:create
+                        - webhooks:update
+                        - paymentGateways:list
+                        - paymentGateways:create
+                        - paymentGateways:update
+                        - apikeys:list
+                        - apikeys:create
+                        - apikeys:update
+                        - coupons:list
+                        - coupons:create
+                        - coupons:update
+                        - coupons:export
+                        - couponSeries:list
+                        - couponSeries:create
+                        - couponSeries:update
+                        - vouchers:list
+                        - vouchers:create
+                        - vouchers:update
+                        - vouchers:export
+                        - products:list
+                        - products:create
+                        - products:update
+                        - bundles:list
+                        - bundles:create
+                        - bundles:update
+                        - apps:list
+                        - apps:create
+                        - apps:update
+                        - appsManagement:list
+                        - appsManagement:install
+                        - search
+                        - printing
+                        - settings:update
+                        - aggregations
+                        - statistics:aggregations
+                        - bookkeeping
+                        - disputes:list
+                        - disputes:update
+                        - supports:admin
+                        - supports:list
+                        - supports:update
+                        - invoices:list
+                        - invoices:create
+                        - invoices:update
+                        - invoices:export
+                        - fulfillmentJobs:list
+                        - fulfillmentJobs:update
+                        - subscriptions:list
+                        - subscriptions:create
+                        - subscriptions:update
+                        - subscriptions:export
+                        - subscriptionCycles:list
+                        - subscriptionCycles:create
+                        - subscriptionCycles:update
+                        - subscriptionPlans:list
+                        - subscriptionPlans:create
+                        - subscriptionPlans:update
+                        - packages:list
+                        - packageConfigs:list
+                        - packageConfigs:create
+                        - packageConfigs:update
+                        - payouts:create
+                        - securityConfig:list
+                        - securityConfig:create
+                        - securityConfig:update
+                        - salesChannels:list
+                        - salesChannels:create
+                        - salesChannels:update
+                        - salesChannels:access
+                        - salesChannels:defaultAccessOnSeller
+                        - salesChannelGroups:list
+                        - salesChannelGroups:create
+                        - salesChannelGroups:update
+                        - distributors:list
+                        - rebookingStrategies:list
+                        - rebookingStrategies:create
+                        - rebookingStrategies:update
+                        - paymentStrategies:list
+                        - paymentStrategies:create
+                        - paymentStrategies:update
+                        - paymentPlans:list
+                        - paymentPlans:update
+                        - paymentPlans:export
+                        - auditLogs:list
+                        - users:list
+                        - users:create
+                        - users:update
+                        - posDevices:list
+                        - posDevices:create
+                        - posDevices:update
+                        - posDevices:export
+                        - fundraise:funds:list
+                        - fundraise:funds:create
+                        - fundraise:funds:update
+                        - fundraise:campaigns:list
+                        - fundraise:campaigns:create
+                        - fundraise:campaigns:update
+                        - fundraise:pledges:list
+                        - fundraise:pledges:create
+                        - fundraise:donations:list
+                        - fundraise:donations:create
+                        - resellOffers:list
+                        - resellOffers:create
+                        - resellOffers:update
+                        - transfers:list
+                        - transfers:update
+                        - marketing:campaigns:list
+                        - marketing:campaigns:create
+                        - marketing:campaigns:update
+                        - entitlements:list
+                        - entitlements:create
+                        - entitlements:update
+                        - emailCampaigns:list
+                        - emailCampaigns:create
+                        - emailCampaigns:update
+                        - pages:list
+                        - pages:create
+                        - pages:update
+                        - pages:publish
+                        - perks:list
+                        - perks:create
+                        - perks:update
+                        - documentTemplates:list
+                        - documentTemplates:create
+                        - documentTemplates:update
+                        - seatMaps:list
+                        - seatMaps:create
+                        - seatMaps:update
+                        - seatMaps:export
+                        - domains:list
+                        - domains:create
+                        - domains:update
+                        - dataFields:create
+                        - dataFields:update
+                        - attributes:create
+                        - attributes:update
+                        - scanZones:list
+                        - scanZones:create
+                        - scanZones:update
+                        - scanGroups:list
+                        - scanGroups:create
+                        - scanGroups:update
+                        - accessLists:list
+                        - accessLists:create
+                        - accessLists:update
+                        - accessUsers:list
+                        - accessUsers:create
+                        - accessUsers:update
+                        - consents:list
+                        - consents:create
+                        - consents:update
+                        - feeSchemes:list
+                        - feeSchemes:create
+                        - feeSchemes:update
+                        - priceTables:list
+                        - priceTables:create
+                        - priceTables:update
+                        - checkouts:list
+                      scope:
+                        type: string
+                    required:
+                    - type
+                    - scope
+                    additionalProperties: false
+                hasSellerAccess:
+                  default: true
+                  type: boolean
+              required:
+              - email
+              - name
+              - hasSellerAccess
+              additionalProperties: false
+      tags:
+      - users
+      description: Invite a User
+      operationId: invite_a_user
+  /api/users/login:
+    post:
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    format: jwt
+                additionalProperties: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  pattern: ^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$
+                password:
+                  type: string
+                otp:
+                  type: string
+                  minLength: 6
+                  maxLength: 6
+                sendOtpMail:
+                  type: boolean
+              required:
+              - email
+              - password
+              additionalProperties: false
+      tags:
+      - users
+      description: Login a User
+      operationId: login_a_user
+  /api/users/password-reset:
+    post:
+      parameters: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Users_RequestAPasswordResetMail'
+      tags:
+      - users
+      description: Request a password reset mail
+      operationId: request_a_password_reset_mail
+  /api/users/refresh:
+    post:
+      security:
+      - jwt: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Users_RefreshAuthenticationToken'
+      tags:
+      - users
+      description: Refresh authentication token
+      operationId: refresh_authentication_token
+  /api/users/notifications/deviceinfo:
+    post:
+      security:
+      - jwt: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Users_GetNotificationDeviceInfo'
+      tags:
+      - users
+      description: Get notification device info
+      operationId: get_notification_device_info
+  /api/users/notifications/subscribe:
+    post:
+      security:
+      - jwt: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Users_SubscribeNotificationType'
+      tags:
+      - users
+      description: Subscribe notification type
+      operationId: subscribe_notification_type
+  /api/users/notifications/unsubscribe:
+    post:
+      security:
+      - jwt: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Users_UnsubscribeNotificationType'
+      tags:
+      - users
+      description: Unsubscribe notification type
+      operationId: unsubscribe_notification_type
+  /api/users/{id}/roles:
+    post:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - global/super_admin
+                    - global/admin
+                    - global/finance_manager
+                    - global/seller_manager
+                    - global/support_manager
+                    - seller/admin
+                    - seller/analyst
+                    - seller/support_specialist
+                    - seller/event_manager
+                    - seller/sales_manager
+                    - seller/attendee_manager
+                    - seller/billing_manager
+                    - seller/view_only
+                    - seller/it_manager
+                    - seller/marketing_manager
+                    - seller/marketing_specialist
+                    - seller/fundraising_manager
+                    - seller/developer
+                    - pos/user
+                  scope:
+                    type: string
+                required:
+                - type
+                - scope
+                additionalProperties: false
+      tags:
+      - users
+      description: Add User roles
+      operationId: add_user_roles
+    delete:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - global/super_admin
+                    - global/admin
+                    - global/finance_manager
+                    - global/seller_manager
+                    - global/support_manager
+                    - seller/admin
+                    - seller/analyst
+                    - seller/support_specialist
+                    - seller/event_manager
+                    - seller/sales_manager
+                    - seller/attendee_manager
+                    - seller/billing_manager
+                    - seller/view_only
+                    - seller/it_manager
+                    - seller/marketing_manager
+                    - seller/marketing_specialist
+                    - seller/fundraising_manager
+                    - seller/developer
+                    - pos/user
+                  scope:
+                    type: string
+                required:
+                - type
+                - scope
+                additionalProperties: false
+      tags:
+      - users
+      description: Remove User roles
+      operationId: remove_user_roles
+  /api/users/{id}/permissions:
+    post:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - global:seller_access
+                    - global:transaction_access
+                    - org:access
+                    - pos:access
+                    - roles:update
+                    - roles:assignGlobal
+                    - feeinvoices:create
+                    - feeinvoices:list
+                    - feeinvoices:export
+                    - sellers:admin
+                    - events:list
+                    - events:create
+                    - events:update
+                    - eventSeries:list
+                    - eventSeries:create
+                    - eventSeries:update
+                    - tickets:list
+                    - tickets:create
+                    - tickets:update
+                    - tickets:export
+                    - scans:list
+                    - scans:create
+                    - transactions:list
+                    - transactions:create
+                    - transactions:update
+                    - transactions:export
+                    - purchaseIntents:list
+                    - purchaseIntents:create
+                    - purchaseIntents:update
+                    - purchaseIntents:export
+                    - purchaseIntentsStrategies:list
+                    - purchaseIntentsStrategies:create
+                    - purchaseIntentsStrategies:update
+                    - customers:list
+                    - customers:create
+                    - customers:update
+                    - customers:export
+                    - customerPaymentMethods:list
+                    - customerPaymentMethods:create
+                    - customerPaymentMethods:update
+                    - webhooks:list
+                    - webhooks:create
+                    - webhooks:update
+                    - paymentGateways:list
+                    - paymentGateways:create
+                    - paymentGateways:update
+                    - apikeys:list
+                    - apikeys:create
+                    - apikeys:update
+                    - coupons:list
+                    - coupons:create
+                    - coupons:update
+                    - coupons:export
+                    - couponSeries:list
+                    - couponSeries:create
+                    - couponSeries:update
+                    - vouchers:list
+                    - vouchers:create
+                    - vouchers:update
+                    - vouchers:export
+                    - products:list
+                    - products:create
+                    - products:update
+                    - bundles:list
+                    - bundles:create
+                    - bundles:update
+                    - apps:list
+                    - apps:create
+                    - apps:update
+                    - appsManagement:list
+                    - appsManagement:install
+                    - search
+                    - printing
+                    - settings:update
+                    - aggregations
+                    - statistics:aggregations
+                    - bookkeeping
+                    - disputes:list
+                    - disputes:update
+                    - supports:admin
+                    - supports:list
+                    - supports:update
+                    - invoices:list
+                    - invoices:create
+                    - invoices:update
+                    - invoices:export
+                    - fulfillmentJobs:list
+                    - fulfillmentJobs:update
+                    - subscriptions:list
+                    - subscriptions:create
+                    - subscriptions:update
+                    - subscriptions:export
+                    - subscriptionCycles:list
+                    - subscriptionCycles:create
+                    - subscriptionCycles:update
+                    - subscriptionPlans:list
+                    - subscriptionPlans:create
+                    - subscriptionPlans:update
+                    - packages:list
+                    - packageConfigs:list
+                    - packageConfigs:create
+                    - packageConfigs:update
+                    - payouts:create
+                    - securityConfig:list
+                    - securityConfig:create
+                    - securityConfig:update
+                    - salesChannels:list
+                    - salesChannels:create
+                    - salesChannels:update
+                    - salesChannels:access
+                    - salesChannels:defaultAccessOnSeller
+                    - salesChannelGroups:list
+                    - salesChannelGroups:create
+                    - salesChannelGroups:update
+                    - distributors:list
+                    - rebookingStrategies:list
+                    - rebookingStrategies:create
+                    - rebookingStrategies:update
+                    - paymentStrategies:list
+                    - paymentStrategies:create
+                    - paymentStrategies:update
+                    - paymentPlans:list
+                    - paymentPlans:update
+                    - paymentPlans:export
+                    - auditLogs:list
+                    - users:list
+                    - users:create
+                    - users:update
+                    - posDevices:list
+                    - posDevices:create
+                    - posDevices:update
+                    - posDevices:export
+                    - fundraise:funds:list
+                    - fundraise:funds:create
+                    - fundraise:funds:update
+                    - fundraise:campaigns:list
+                    - fundraise:campaigns:create
+                    - fundraise:campaigns:update
+                    - fundraise:pledges:list
+                    - fundraise:pledges:create
+                    - fundraise:donations:list
+                    - fundraise:donations:create
+                    - resellOffers:list
+                    - resellOffers:create
+                    - resellOffers:update
+                    - transfers:list
+                    - transfers:update
+                    - marketing:campaigns:list
+                    - marketing:campaigns:create
+                    - marketing:campaigns:update
+                    - entitlements:list
+                    - entitlements:create
+                    - entitlements:update
+                    - emailCampaigns:list
+                    - emailCampaigns:create
+                    - emailCampaigns:update
+                    - pages:list
+                    - pages:create
+                    - pages:update
+                    - pages:publish
+                    - perks:list
+                    - perks:create
+                    - perks:update
+                    - documentTemplates:list
+                    - documentTemplates:create
+                    - documentTemplates:update
+                    - seatMaps:list
+                    - seatMaps:create
+                    - seatMaps:update
+                    - seatMaps:export
+                    - domains:list
+                    - domains:create
+                    - domains:update
+                    - dataFields:create
+                    - dataFields:update
+                    - attributes:create
+                    - attributes:update
+                    - scanZones:list
+                    - scanZones:create
+                    - scanZones:update
+                    - scanGroups:list
+                    - scanGroups:create
+                    - scanGroups:update
+                    - accessLists:list
+                    - accessLists:create
+                    - accessLists:update
+                    - accessUsers:list
+                    - accessUsers:create
+                    - accessUsers:update
+                    - consents:list
+                    - consents:create
+                    - consents:update
+                    - feeSchemes:list
+                    - feeSchemes:create
+                    - feeSchemes:update
+                    - priceTables:list
+                    - priceTables:create
+                    - priceTables:update
+                    - checkouts:list
+                  scope:
+                    type: string
+                required:
+                - type
+                - scope
+                additionalProperties: false
+      tags:
+      - users
+      description: Add User permissions
+      operationId: add_user_permissions
+    delete:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - global:seller_access
+                    - global:transaction_access
+                    - org:access
+                    - pos:access
+                    - roles:update
+                    - roles:assignGlobal
+                    - feeinvoices:create
+                    - feeinvoices:list
+                    - feeinvoices:export
+                    - sellers:admin
+                    - events:list
+                    - events:create
+                    - events:update
+                    - eventSeries:list
+                    - eventSeries:create
+                    - eventSeries:update
+                    - tickets:list
+                    - tickets:create
+                    - tickets:update
+                    - tickets:export
+                    - scans:list
+                    - scans:create
+                    - transactions:list
+                    - transactions:create
+                    - transactions:update
+                    - transactions:export
+                    - purchaseIntents:list
+                    - purchaseIntents:create
+                    - purchaseIntents:update
+                    - purchaseIntents:export
+                    - purchaseIntentsStrategies:list
+                    - purchaseIntentsStrategies:create
+                    - purchaseIntentsStrategies:update
+                    - customers:list
+                    - customers:create
+                    - customers:update
+                    - customers:export
+                    - customerPaymentMethods:list
+                    - customerPaymentMethods:create
+                    - customerPaymentMethods:update
+                    - webhooks:list
+                    - webhooks:create
+                    - webhooks:update
+                    - paymentGateways:list
+                    - paymentGateways:create
+                    - paymentGateways:update
+                    - apikeys:list
+                    - apikeys:create
+                    - apikeys:update
+                    - coupons:list
+                    - coupons:create
+                    - coupons:update
+                    - coupons:export
+                    - couponSeries:list
+                    - couponSeries:create
+                    - couponSeries:update
+                    - vouchers:list
+                    - vouchers:create
+                    - vouchers:update
+                    - vouchers:export
+                    - products:list
+                    - products:create
+                    - products:update
+                    - bundles:list
+                    - bundles:create
+                    - bundles:update
+                    - apps:list
+                    - apps:create
+                    - apps:update
+                    - appsManagement:list
+                    - appsManagement:install
+                    - search
+                    - printing
+                    - settings:update
+                    - aggregations
+                    - statistics:aggregations
+                    - bookkeeping
+                    - disputes:list
+                    - disputes:update
+                    - supports:admin
+                    - supports:list
+                    - supports:update
+                    - invoices:list
+                    - invoices:create
+                    - invoices:update
+                    - invoices:export
+                    - fulfillmentJobs:list
+                    - fulfillmentJobs:update
+                    - subscriptions:list
+                    - subscriptions:create
+                    - subscriptions:update
+                    - subscriptions:export
+                    - subscriptionCycles:list
+                    - subscriptionCycles:create
+                    - subscriptionCycles:update
+                    - subscriptionPlans:list
+                    - subscriptionPlans:create
+                    - subscriptionPlans:update
+                    - packages:list
+                    - packageConfigs:list
+                    - packageConfigs:create
+                    - packageConfigs:update
+                    - payouts:create
+                    - securityConfig:list
+                    - securityConfig:create
+                    - securityConfig:update
+                    - salesChannels:list
+                    - salesChannels:create
+                    - salesChannels:update
+                    - salesChannels:access
+                    - salesChannels:defaultAccessOnSeller
+                    - salesChannelGroups:list
+                    - salesChannelGroups:create
+                    - salesChannelGroups:update
+                    - distributors:list
+                    - rebookingStrategies:list
+                    - rebookingStrategies:create
+                    - rebookingStrategies:update
+                    - paymentStrategies:list
+                    - paymentStrategies:create
+                    - paymentStrategies:update
+                    - paymentPlans:list
+                    - paymentPlans:update
+                    - paymentPlans:export
+                    - auditLogs:list
+                    - users:list
+                    - users:create
+                    - users:update
+                    - posDevices:list
+                    - posDevices:create
+                    - posDevices:update
+                    - posDevices:export
+                    - fundraise:funds:list
+                    - fundraise:funds:create
+                    - fundraise:funds:update
+                    - fundraise:campaigns:list
+                    - fundraise:campaigns:create
+                    - fundraise:campaigns:update
+                    - fundraise:pledges:list
+                    - fundraise:pledges:create
+                    - fundraise:donations:list
+                    - fundraise:donations:create
+                    - resellOffers:list
+                    - resellOffers:create
+                    - resellOffers:update
+                    - transfers:list
+                    - transfers:update
+                    - marketing:campaigns:list
+                    - marketing:campaigns:create
+                    - marketing:campaigns:update
+                    - entitlements:list
+                    - entitlements:create
+                    - entitlements:update
+                    - emailCampaigns:list
+                    - emailCampaigns:create
+                    - emailCampaigns:update
+                    - pages:list
+                    - pages:create
+                    - pages:update
+                    - pages:publish
+                    - perks:list
+                    - perks:create
+                    - perks:update
+                    - documentTemplates:list
+                    - documentTemplates:create
+                    - documentTemplates:update
+                    - seatMaps:list
+                    - seatMaps:create
+                    - seatMaps:update
+                    - seatMaps:export
+                    - domains:list
+                    - domains:create
+                    - domains:update
+                    - dataFields:create
+                    - dataFields:update
+                    - attributes:create
+                    - attributes:update
+                    - scanZones:list
+                    - scanZones:create
+                    - scanZones:update
+                    - scanGroups:list
+                    - scanGroups:create
+                    - scanGroups:update
+                    - accessLists:list
+                    - accessLists:create
+                    - accessLists:update
+                    - accessUsers:list
+                    - accessUsers:create
+                    - accessUsers:update
+                    - consents:list
+                    - consents:create
+                    - consents:update
+                    - feeSchemes:list
+                    - feeSchemes:create
+                    - feeSchemes:update
+                    - priceTables:list
+                    - priceTables:create
+                    - priceTables:update
+                    - checkouts:list
+                  scope:
+                    type: string
+                required:
+                - type
+                - scope
+                additionalProperties: false
+      tags:
+      - users
+      description: Remove User permissions
+      operationId: remove_user_permissions
+  /api/users/{id}:
+    put:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Users_UpdateUserInfo'
+      tags:
+      - users
+      description: Update User info
+      operationId: update_user_info
+    delete:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+      tags:
+      - users
+      description: Delete a User
+      operationId: delete_a_user
+  /api/users/{id}/logintype:
+    put:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                loginType:
+                  type: string
+                  enum:
+                  - password
+                  - identityprovider
+              required:
+              - loginType
+              additionalProperties: false
+      tags:
+      - users
+      description: Update User Login Type
+      operationId: update_user_login_type
+  /api/users/{userId}/sellers/add:
+    put:
+      security:
+      - jwt: []
+      parameters:
+      - name: userId
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Users_AddSellerToAUser'
+      tags:
+      - users
+      description: Add Seller to a User
+      operationId: add_seller_to_a_user
+  /api/users/{userId}/sellers/remove:
+    delete:
+      security:
+      - jwt: []
+      parameters:
+      - name: userId
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DELETE_Users_RemoveASellerOfAUser'
+      tags:
+      - users
+      description: Remove a Seller of a User
+      operationId: remove_a_seller_of_a_user
+components:
+  schemas:
+    PUT_Users_AddSellerToAUser:
+      type: object
+      properties:
+        sellerId:
+          type: string
+        roleTypes:
+          type: array
+          items:
+            type: string
+            enum:
+            - global/super_admin
+            - global/admin
+            - global/finance_manager
+            - global/seller_manager
+            - global/support_manager
+            - seller/admin
+            - seller/analyst
+            - seller/support_specialist
+            - seller/event_manager
+            - seller/sales_manager
+            - seller/attendee_manager
+            - seller/billing_manager
+            - seller/view_only
+            - seller/it_manager
+            - seller/marketing_manager
+            - seller/marketing_specialist
+            - seller/fundraising_manager
+            - seller/developer
+            - pos/user
+          default: []
+      required:
+      - sellerId
+    POST_Users_ChangeSellerOnUser:
+      type: object
+      properties:
+        sellerId:
+          oneOf:
+          - type: string
+            length: 24
+          - type: string
+            pattern: ^[a-z]+_.*$
+      required:
+      - sellerId
+    POST_Users_UnsubscribeNotificationType:
+      type: object
+      properties:
+        eventType:
+          type: string
+        deviceId:
+          type: string
+      required:
+      - eventType
+      - deviceId
+    DELETE_Users_RemoveASellerOfAUser:
+      type: object
+      properties:
+        sellerId:
+          type: string
+      required:
+      - sellerId
+    POST_Users_RefreshAuthenticationToken:
+      type: object
+      properties:
+        posId:
+          type: string
+      nullable: true
+    POST_Users_GetNotificationDeviceInfo:
+      type: object
+      properties:
+        deviceId:
+          type: string
+      required:
+      - deviceId
+    PUT_Users_UpdateUserInfo:
+      type: object
+      properties:
+        name:
+          type: string
+      required:
+      - name
+    POST_Users_SubscribeNotificationType:
+      type: object
+      properties:
+        eventType:
+          type: string
+        deviceName:
+          type: string
+        deviceId:
+          type: string
+        token:
+          type: string
+      required:
+      - eventType
+      - deviceName
+      - deviceId
+      - token
+    POST_Users_RequestAPasswordResetMail:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

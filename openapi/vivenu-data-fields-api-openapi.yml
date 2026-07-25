@@ -1,0 +1,570 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists data-fields API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: data-fields
+paths:
+  /api/data-fields:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Data-fields_GetAllDataFields_200_response'
+        '401':
+          description: Unauthorized
+      tags:
+      - data-fields
+      description: Get all Data Fields
+      operationId: data-fields/list
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataFieldResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Data-fields_CreateADataField'
+      tags:
+      - data-fields
+      description: Create a Data Field
+      operationId: data-fields/create
+  /api/data-fields/resolve:
+    get:
+      parameters:
+      - name: eventId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: shopId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: ticketTypeId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: sellerId
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: checkoutId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: scope
+        required: true
+        schema:
+          type: string
+          enum:
+          - CUSTOMER
+          - TICKET
+          - TRANSACTION
+          - CHECKOUT
+          description: The scope of the data-fields.
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: locale
+        required: false
+        schema:
+          type: string
+          description: Resolve the data-fields for a specific language
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Data-fields_GetAllDataFieldsByReference_200_response'
+        '400':
+          description: Bad Request
+      tags:
+      - data-fields
+      description: Get all Data Fields by reference
+      operationId: data-fields/resolve
+  /api/data-fields/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataFieldResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - data-fields
+      description: Get a Data Field
+      operationId: data-fields/get
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataFieldResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Data-fields_UpdateADataField'
+      tags:
+      - data-fields
+      description: Update a Data Field
+      operationId: data-fields/update
+components:
+  schemas:
+    GET_Data-fields_GetAllDataFields_200_response:
+      type: array
+      items:
+        $ref: '#/components/schemas/DataFieldResource'
+    POST_Data-fields_CreateADataField:
+      type: object
+      properties:
+        title:
+          type: string
+          nullable: true
+          description: The default title of the data field
+        description:
+          type: string
+          nullable: true
+          description: The default description of the data field
+        isPersonalData:
+          type: boolean
+          description: Whether the data field is personal data
+        type:
+          type: string
+          enum:
+          - text
+          - number
+          - select
+          - checkbox
+          - tel
+          - country
+          - email
+          - date
+          - documentUpload
+          - signature
+          - address
+          description: The type of data field
+        options:
+          type: array
+          items:
+            type: string
+          description: An array of options when type is select
+        minLength:
+          type: number
+          format: float
+          minimum: 1
+          nullable: true
+          description: Minimum length for a text input
+        maxLength:
+          type: number
+          format: float
+          minimum: 1
+          nullable: true
+          description: Maximum length for a text input
+        settings:
+          oneOf:
+          - type: object
+            properties:
+              allowedMimeTypes:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - application/pdf
+                  - image/jpeg
+                  - image/png
+                description: An array of allowed mime types
+            description: The settings of the upload document data field
+          - type: object
+            properties:
+              document:
+                type: object
+                properties:
+                  url:
+                    type: string
+                    format: uri
+                  fileName:
+                    type: string
+                  mimeType:
+                    type: string
+                    enum:
+                    - application/pdf
+                required:
+                - url
+                - fileName
+                - mimeType
+              documentName:
+                type: string
+              requireScrollthrough:
+                type: boolean
+            description: The settings of the signature data field
+          - type: object
+            properties:
+              variant:
+                type: string
+                enum:
+                - date
+                - birthdate
+              minimumAge:
+                type: number
+                format: float
+                nullable: true
+              maximumAge:
+                type: number
+                format: float
+                nullable: true
+            required:
+            - variant
+        name:
+          type: string
+          maxLength: 80
+      required:
+      - type
+      - name
+    GET_Data-fields_GetAllDataFieldsByReference_200_response:
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+          name:
+            type: string
+          type:
+            type: string
+            enum:
+            - text
+            - number
+            - select
+            - checkbox
+            - tel
+            - country
+            - email
+            - date
+            - documentUpload
+            - signature
+            - address
+            - string
+            - boolean
+          options:
+            type: array
+            items:
+              type: string
+          slug:
+            type: string
+          description:
+            type: string
+        required:
+        - _id
+        - name
+        - type
+        - slug
+    DataFieldResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the data field
+        sellerId:
+          type: string
+          description: The ID of the seller of the data field
+        name:
+          type: string
+          description: The name of the data field
+        title:
+          type: string
+          nullable: true
+          description: The default title of the data field
+        isPersonalData:
+          type: boolean
+          description: Whether the data field is personal data
+        description:
+          type: string
+          nullable: true
+          description: The default description of the data field
+        type:
+          type: string
+          enum:
+          - text
+          - number
+          - select
+          - checkbox
+          - tel
+          - country
+          - email
+          - date
+          - documentUpload
+          - signature
+          - address
+          description: The type of data field
+        slug:
+          type: string
+          description: The slug generated out of name
+        options:
+          type: array
+          items:
+            type: string
+          description: An array of options when type is select
+        minLength:
+          type: number
+          format: float
+          minimum: 1
+          nullable: true
+          description: Minimum length for a text input
+        maxLength:
+          type: number
+          format: float
+          minimum: 1
+          nullable: true
+          description: Maximum length for a text input
+        settings:
+          oneOf:
+          - type: object
+            properties:
+              allowedMimeTypes:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - application/pdf
+                  - image/jpeg
+                  - image/png
+                description: An array of allowed mime types
+            description: The settings of the upload document data field
+          - type: object
+            properties:
+              document:
+                type: object
+                properties:
+                  url:
+                    type: string
+                    format: uri
+                  fileName:
+                    type: string
+                  mimeType:
+                    type: string
+                    enum:
+                    - application/pdf
+                required:
+                - url
+                - fileName
+                - mimeType
+              documentName:
+                type: string
+              requireScrollthrough:
+                type: boolean
+            description: The settings of the signature data field
+          - type: object
+            properties:
+              variant:
+                type: string
+                enum:
+                - date
+                - birthdate
+              minimumAge:
+                type: number
+                format: float
+                nullable: true
+              maximumAge:
+                type: number
+                format: float
+                nullable: true
+            required:
+            - variant
+      required:
+      - _id
+      - sellerId
+      - name
+      - type
+      - slug
+    PUT_Data-fields_UpdateADataField:
+      type: object
+      properties:
+        title:
+          type: string
+          nullable: true
+          description: The default title of the data field
+        description:
+          type: string
+          nullable: true
+          description: The default description of the data field
+        isPersonalData:
+          type: boolean
+          description: Whether the data field is personal data
+        options:
+          type: array
+          items:
+            type: string
+          description: An array of options when type is select
+        minLength:
+          type: number
+          format: float
+          minimum: 1
+          nullable: true
+          description: Minimum length for a text input
+        maxLength:
+          type: number
+          format: float
+          minimum: 1
+          nullable: true
+          description: Maximum length for a text input
+        settings:
+          oneOf:
+          - type: object
+            properties:
+              allowedMimeTypes:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - application/pdf
+                  - image/jpeg
+                  - image/png
+                description: An array of allowed mime types
+            description: The settings of the upload document data field
+          - type: object
+            properties:
+              document:
+                type: object
+                properties:
+                  url:
+                    type: string
+                    format: uri
+                  fileName:
+                    type: string
+                  mimeType:
+                    type: string
+                    enum:
+                    - application/pdf
+                required:
+                - url
+                - fileName
+                - mimeType
+              documentName:
+                type: string
+              requireScrollthrough:
+                type: boolean
+            description: The settings of the signature data field
+          - type: object
+            properties:
+              variant:
+                type: string
+                enum:
+                - date
+                - birthdate
+              minimumAge:
+                type: number
+                format: float
+                nullable: true
+              maximumAge:
+                type: number
+                format: float
+                nullable: true
+            required:
+            - variant
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

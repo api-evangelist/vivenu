@@ -1,0 +1,413 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists notifications API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: notifications
+paths:
+  /api/notifications:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: top
+        required: false
+        schema:
+          type: number
+          format: float
+          default: 100
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: number
+          format: float
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: methods
+        required: false
+        schema:
+          type: string
+          description: The notification methods to filter for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - notifications
+      description: Get all notifications
+      operationId: get_all_notifications
+  /api/notifications/preferences:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: locale
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Notifications_GetNotificationSettingsForTheAuthenticatedUser_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - notifications
+      description: Get notification settings for the authenticated user
+      operationId: get_notification_settings_for_the_authenticated_user
+    patch:
+      security:
+      - jwt: []
+      parameters:
+      - name: locale
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PATCH_Notifications_UpdateNotificationSettingsForTheAuthenticatedUser_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PATCH_Notifications_UpdateNotificationSettingsForTheAuthenticatedUser'
+      tags:
+      - notifications
+      description: Update notification settings for the authenticated user
+      operationId: update_notification_settings_for_the_authenticated_user
+  /api/action-notification/{type}/{id}:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: type
+        required: true
+        schema:
+          type: string
+          enum:
+          - ticket.checkin
+          metas: {}
+        in: path
+      - name: id
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - notifications
+      description: Get Action Notification Subscription
+      operationId: get_action_notification_subscription
+    post:
+      security:
+      - jwt: []
+      parameters:
+      - name: type
+        required: true
+        schema:
+          type: string
+          enum:
+          - ticket.checkin
+          metas: {}
+        in: path
+      - name: id
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Notifications_UpdateActionNotificationSubscription'
+      tags:
+      - notifications
+      description: Update Action Notification Subscription
+      operationId: update_action_notification_subscription
+components:
+  schemas:
+    PATCH_Notifications_UpdateNotificationSettingsForTheAuthenticatedUser_200_response:
+      type: object
+      properties:
+        triggers:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - job.completed
+                - transaction.completed
+                - purchaseIntent.created
+                - fulfillmentJob.created
+                - customer.created
+                - support.supportAssignedToSeller
+                - ticket.checked-in
+                - security.new-device
+                - security.password-reset
+                - security.apiKey.created
+                - payments.chargeback.created
+                - payments.failed
+                - payments.paymentPlans.installment.failed
+                - payments.paymentPlans.completed
+                - vivenuPayments.account.restrictedSoon
+                - vivenuPayments.account.restricted
+                - subscriptions.payments.schedules.maxRetriesReached
+                - pos.opened
+                - pos.closed
+                - accounting.payout.initiated
+                - invoice.fiscalization.failed
+                description: The notification trigger type
+              methods:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - push
+                  - email
+                  - dashboard
+                description: Selected notification methods
+              defaultMethods:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - push
+                  - email
+                  - dashboard
+                description: Default notification methods
+              requiredMethods:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - push
+                  - email
+                  - dashboard
+                description: Required notification methods that cannot be disabled
+              defaultLevel:
+                type: string
+                enum:
+                - critical
+                - high
+                - medium
+                - low
+                - none
+                description: Default notification level
+            required:
+            - type
+            - methods
+            - defaultMethods
+            - defaultLevel
+          description: All notification triggers with their settings
+      required:
+      - triggers
+    POST_Notifications_UpdateActionNotificationSubscription:
+      type: object
+      properties:
+        subscribed:
+          type: boolean
+          default: true
+    PATCH_Notifications_UpdateNotificationSettingsForTheAuthenticatedUser:
+      type: object
+      properties:
+        preferences:
+          type: array
+          items:
+            type: object
+            properties:
+              trigger:
+                type: string
+                enum:
+                - job.completed
+                - transaction.completed
+                - purchaseIntent.created
+                - fulfillmentJob.created
+                - customer.created
+                - support.supportAssignedToSeller
+                - ticket.checked-in
+                - security.new-device
+                - security.password-reset
+                - security.apiKey.created
+                - payments.chargeback.created
+                - payments.failed
+                - payments.paymentPlans.installment.failed
+                - payments.paymentPlans.completed
+                - vivenuPayments.account.restrictedSoon
+                - vivenuPayments.account.restricted
+                - subscriptions.payments.schedules.maxRetriesReached
+                - pos.opened
+                - pos.closed
+                - accounting.payout.initiated
+                - invoice.fiscalization.failed
+              methods:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - push
+                  - email
+                  - dashboard
+            required:
+            - trigger
+            - methods
+          minItems: 1
+      required:
+      - preferences
+    GET_Notifications_GetNotificationSettingsForTheAuthenticatedUser_200_response:
+      type: object
+      properties:
+        triggers:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - job.completed
+                - transaction.completed
+                - purchaseIntent.created
+                - fulfillmentJob.created
+                - customer.created
+                - support.supportAssignedToSeller
+                - ticket.checked-in
+                - security.new-device
+                - security.password-reset
+                - security.apiKey.created
+                - payments.chargeback.created
+                - payments.failed
+                - payments.paymentPlans.installment.failed
+                - payments.paymentPlans.completed
+                - vivenuPayments.account.restrictedSoon
+                - vivenuPayments.account.restricted
+                - subscriptions.payments.schedules.maxRetriesReached
+                - pos.opened
+                - pos.closed
+                - accounting.payout.initiated
+                - invoice.fiscalization.failed
+                description: The notification trigger type
+              methods:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - push
+                  - email
+                  - dashboard
+                description: Selected notification methods
+              defaultMethods:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - push
+                  - email
+                  - dashboard
+                description: Default notification methods
+              requiredMethods:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - push
+                  - email
+                  - dashboard
+                description: Required notification methods that cannot be disabled
+              defaultLevel:
+                type: string
+                enum:
+                - critical
+                - high
+                - medium
+                - low
+                - none
+                description: Default notification level
+            required:
+            - type
+            - methods
+            - defaultMethods
+            - defaultLevel
+          description: All notification triggers with their settings
+      required:
+      - triggers
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

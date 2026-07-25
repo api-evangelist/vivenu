@@ -1,0 +1,146 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists methods API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: methods
+paths:
+  /api/public/sellers/{id}/payment-methods:
+    get:
+      parameters:
+      - name: channel
+        required: false
+        schema:
+          type: string
+          enum:
+          - online
+          - subscription
+          description: Channel of the payment
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        required: true
+        schema:
+          oneOf:
+          - type: string
+            length: 24
+            metas: {}
+          - type: string
+            pattern: ^[a-z]+_.*$
+            metas: {}
+          description: Id of the seller
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Methods_GetSellersPaymentMethods_200_response'
+        '400':
+          description: Bad Request
+      tags:
+      - methods
+      description: Get Sellers Payment Methods
+      operationId: get_sellers_payment_methods
+components:
+  schemas:
+    GET_Methods_GetSellersPaymentMethods_200_response:
+      type: array
+      items:
+        type: object
+        properties:
+          paypal:
+            type: boolean
+            deprecated: true
+          klarna:
+            type: boolean
+            deprecated: true
+          ideal:
+            type: boolean
+            deprecated: true
+          sepa:
+            type: boolean
+            deprecated: true
+          creditcard:
+            type: boolean
+            deprecated: true
+          mobilepay:
+            type: boolean
+            deprecated: true
+          gateways:
+            type: array
+            items:
+              type: object
+              properties:
+                _id:
+                  type: string
+                name:
+                  type: string
+                type:
+                  type: string
+                  enum:
+                  - stripe
+                  - paypal
+                  - adyen
+                  - custom
+                  - cardconnect
+                  - worldline
+                  - shift4
+                  - authorizenet
+                  - wallee
+                  - square
+                  - payfast
+                  - touchnet
+                  - transact
+                  - unzer
+                  - monext
+                  - vivenuPayments
+                  - ebanx
+                  - rapyd
+                  - additional-payment-method
+                  example: stripe
+                data:
+                  type: object
+              required:
+              - _id
+              - name
+              - type
+        required:
+        - paypal
+        - klarna
+        - ideal
+        - sepa
+        - creditcard
+        - mobilepay
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

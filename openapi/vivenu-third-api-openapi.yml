@@ -1,0 +1,2940 @@
+openapi: 3.0.3
+info:
+  title: vivenu access-lists third API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: third
+paths:
+  /api/third/exchange/validate:
+    get:
+      parameters:
+      - name: barcode
+        required: false
+        schema:
+          type: string
+          description: The barcode of the ticket to be validated
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: ticketId
+        required: false
+        schema:
+          type: string
+          description: The ID of the ticket to be validated
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: eventId
+        required: false
+        schema:
+          type: string
+          description: The ID of the event that the ticket is for
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Third_ValidateATicketByItsBarcode_200_response'
+        '400':
+          description: Bad Request
+      tags:
+      - third
+      description: Validate a ticket by its barcode
+      operationId: validate_a_ticket_by_its_barcode
+  /api/third/exchange/validate/tickets:
+    get:
+      parameters:
+      - name: eventId
+        required: true
+        schema:
+          type: string
+          description: The ID of the event
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: ticketIds
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+            metas: {}
+          description: The IDs of the tickets
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Third_ReceiveTheTicketExchangePayloadForMultipleTickets_200_response'
+        '400':
+          description: Bad Request
+      tags:
+      - third
+      description: Receive the ticket exchange payload for multiple tickets
+      operationId: receive_the_ticket_exchange_payload_for_multiple_tickets
+  /api/third/exchange/listings/{id}/validate:
+    get:
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the listing
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Third_ValidatesTheActiveListingForMultipleTickets_200_response'
+        '400':
+          description: Bad Request
+      tags:
+      - third
+      description: Validates the active listing for multiple tickets
+      operationId: validates_the_active_listing_for_multiple_tickets
+  /api/third/exchange/listings:
+    post:
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POST_Third_NotifiesTheSystemThatATicketHasBeenListedOnAThirdPartyPlatform_200_response'
+        '400':
+          description: Bad Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Third_NotifiesTheSystemThatATicketHasBeenListedOnAThirdPartyPlatform'
+      tags:
+      - third
+      description: Notifies the system that a ticket has been listed on a third party platform
+      operationId: notifies_the_system_that_a_ticket_has_been_listed_on_a_third_party_platform
+  /api/third/exchange/swap:
+    post:
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POST_Third_SwapATicketWithBarcodeAndNewCustomerInformation_200_response'
+        '400':
+          description: Bad Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Third_SwapATicketWithBarcodeAndNewCustomerInformation'
+      tags:
+      - third
+      description: Swap a ticket with barcode and new customer information
+      operationId: swap_a_ticket_with_barcode_and_new_customer_information
+  /api/third/exchange/swap/tickets:
+    post:
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POST_Third_SwapMultipleTicketsWithNewCustomerInformation_200_response'
+        '400':
+          description: Bad Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Third_SwapMultipleTicketsWithNewCustomerInformation'
+      tags:
+      - third
+      description: Swap multiple tickets with new customer information
+      operationId: swap_multiple_tickets_with_new_customer_information
+  /api/third/exchange/listings/{id}/cancel:
+    post:
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the listing
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POST_Third_NotifiesTheSystemThatAListingsHasBeenCanceledOnAThirdPartyPlatform_200_response'
+        '400':
+          description: Bad Request
+      tags:
+      - third
+      description: Notifies the system that a listings has been canceled on a third party platform
+      operationId: notifies_the_system_that_a_listings_has_been_canceled_on_a_third_party_platform
+components:
+  schemas:
+    GET_Third_ReceiveTheTicketExchangePayloadForMultipleTickets_200_response:
+      type: object
+      properties:
+        customer:
+          type: object
+          properties:
+            _id:
+              type: string
+              description: The ID of the customer
+            firstName:
+              type: string
+              description: The first of the customer
+            lastName:
+              type: string
+              description: The lastname of the customer
+            email:
+              type: string
+              description: The email of the customer
+            country:
+              type: string
+              description: The country of the customer
+          required:
+          - _id
+          - firstName
+          - lastName
+          - email
+          - country
+        event:
+          type: object
+          properties:
+            _id:
+              type: string
+              description: The ID of the event
+          required:
+          - _id
+        tickets:
+          type: array
+          items:
+            oneOf:
+            - type: string
+            - type: number
+            - type: boolean
+            - type: integer
+            - type: object
+          enum:
+          - type: object
+            $_root:
+              _types: {}
+              version: 18.2.1
+              cache: {}
+            $_temp:
+              ruleset: false
+              whens: {}
+            _ids:
+              _byId: {}
+              _byKey: {}
+              _schemaChain: false
+            _preferences:
+              messages:
+                phone.invalid:
+                  source: Phone number is invalid
+                  rendered: Phone number is invalid
+                  _template: null
+                iban.invalid:
+                  source: IBAN is invalid
+                  rendered: IBAN is invalid
+                  _template: null
+                bic.invalid:
+                  source: BIC is invalid
+                  rendered: BIC is invalid
+                  _template: null
+                country.invalid:
+                  source: Country is invalid
+                  rendered: Country is invalid
+                  _template: null
+                id.invalid:
+                  source: Id is invalid
+                  rendered: Id is invalid
+                  _template: null
+            _valids: null
+            _invalids: null
+            _rules: []
+            _singleRules: {}
+            _refs:
+              refs: []
+            _flags: {}
+            _cache: null
+            $_terms:
+              alterations: null
+              examples: null
+              externals: null
+              notes: []
+              shared: null
+              tags: []
+              whens: null
+              dependencies: null
+              keys:
+              - key: _id
+                schema:
+                  type: string
+                  $_root:
+                    _types: {}
+                    version: 18.2.1
+                    cache: {}
+                  $_temp:
+                    ruleset: false
+                    whens: {}
+                  _ids:
+                    _byId: {}
+                    _byKey: {}
+                    _schemaChain: false
+                  _preferences:
+                    messages:
+                      phone.invalid:
+                        source: Phone number is invalid
+                        rendered: Phone number is invalid
+                        _template: null
+                      iban.invalid:
+                        source: IBAN is invalid
+                        rendered: IBAN is invalid
+                        _template: null
+                      bic.invalid:
+                        source: BIC is invalid
+                        rendered: BIC is invalid
+                        _template: null
+                      country.invalid:
+                        source: Country is invalid
+                        rendered: Country is invalid
+                        _template: null
+                      id.invalid:
+                        source: Id is invalid
+                        rendered: Id is invalid
+                        _template: null
+                  _valids: null
+                  _invalids: null
+                  _rules: []
+                  _singleRules: {}
+                  _refs:
+                    refs: []
+                  _flags:
+                    presence: required
+                    description: The ID of the ticket
+                  _cache: null
+                  $_terms:
+                    alterations: null
+                    examples: null
+                    externals: null
+                    notes: []
+                    shared: null
+                    tags: []
+                    whens: null
+                    replacements: null
+                  $_super: {}
+              - key: section
+                schema:
+                  type: string
+                  $_root:
+                    _types: {}
+                    version: 18.2.1
+                    cache: {}
+                  $_temp:
+                    ruleset: false
+                    whens: {}
+                  _ids:
+                    _byId: {}
+                    _byKey: {}
+                    _schemaChain: false
+                  _preferences:
+                    messages:
+                      phone.invalid:
+                        source: Phone number is invalid
+                        rendered: Phone number is invalid
+                        _template: null
+                      iban.invalid:
+                        source: IBAN is invalid
+                        rendered: IBAN is invalid
+                        _template: null
+                      bic.invalid:
+                        source: BIC is invalid
+                        rendered: BIC is invalid
+                        _template: null
+                      country.invalid:
+                        source: Country is invalid
+                        rendered: Country is invalid
+                        _template: null
+                      id.invalid:
+                        source: Id is invalid
+                        rendered: Id is invalid
+                        _template: null
+                  _valids: null
+                  _invalids: null
+                  _rules: []
+                  _singleRules: {}
+                  _refs:
+                    refs: []
+                  _flags:
+                    presence: optional
+                    description: The section of the ticket
+                  _cache: null
+                  $_terms:
+                    alterations: null
+                    examples: null
+                    externals: null
+                    notes: []
+                    shared: null
+                    tags: []
+                    whens: null
+                    replacements: null
+                  $_super: {}
+              - key: group
+                schema:
+                  type: string
+                  $_root:
+                    _types: {}
+                    version: 18.2.1
+                    cache: {}
+                  $_temp:
+                    ruleset: false
+                    whens: {}
+                  _ids:
+                    _byId: {}
+                    _byKey: {}
+                    _schemaChain: false
+                  _preferences:
+                    messages:
+                      phone.invalid:
+                        source: Phone number is invalid
+                        rendered: Phone number is invalid
+                        _template: null
+                      iban.invalid:
+                        source: IBAN is invalid
+                        rendered: IBAN is invalid
+                        _template: null
+                      bic.invalid:
+                        source: BIC is invalid
+                        rendered: BIC is invalid
+                        _template: null
+                      country.invalid:
+                        source: Country is invalid
+                        rendered: Country is invalid
+                        _template: null
+                      id.invalid:
+                        source: Id is invalid
+                        rendered: Id is invalid
+                        _template: null
+                  _valids: null
+                  _invalids: null
+                  _rules: []
+                  _singleRules: {}
+                  _refs:
+                    refs: []
+                  _flags:
+                    presence: optional
+                    description: The group of the ticket
+                  _cache: null
+                  $_terms:
+                    alterations: null
+                    examples: null
+                    externals: null
+                    notes: []
+                    shared: null
+                    tags: []
+                    whens: null
+                    replacements: null
+                  $_super: {}
+              - key: row
+                schema:
+                  type: string
+                  $_root:
+                    _types: {}
+                    version: 18.2.1
+                    cache: {}
+                  $_temp:
+                    ruleset: false
+                    whens: {}
+                  _ids:
+                    _byId: {}
+                    _byKey: {}
+                    _schemaChain: false
+                  _preferences:
+                    messages:
+                      phone.invalid:
+                        source: Phone number is invalid
+                        rendered: Phone number is invalid
+                        _template: null
+                      iban.invalid:
+                        source: IBAN is invalid
+                        rendered: IBAN is invalid
+                        _template: null
+                      bic.invalid:
+                        source: BIC is invalid
+                        rendered: BIC is invalid
+                        _template: null
+                      country.invalid:
+                        source: Country is invalid
+                        rendered: Country is invalid
+                        _template: null
+                      id.invalid:
+                        source: Id is invalid
+                        rendered: Id is invalid
+                        _template: null
+                  _valids: null
+                  _invalids: null
+                  _rules: []
+                  _singleRules: {}
+                  _refs:
+                    refs: []
+                  _flags:
+                    presence: optional
+                    description: The row of the ticket
+                  _cache: null
+                  $_terms:
+                    alterations: null
+                    examples: null
+                    externals: null
+                    notes: []
+                    shared: null
+                    tags: []
+                    whens: null
+                    replacements: null
+                  $_super: {}
+              - key: seat
+                schema:
+                  type: string
+                  $_root:
+                    _types: {}
+                    version: 18.2.1
+                    cache: {}
+                  $_temp:
+                    ruleset: false
+                    whens: {}
+                  _ids:
+                    _byId: {}
+                    _byKey: {}
+                    _schemaChain: false
+                  _preferences:
+                    messages:
+                      phone.invalid:
+                        source: Phone number is invalid
+                        rendered: Phone number is invalid
+                        _template: null
+                      iban.invalid:
+                        source: IBAN is invalid
+                        rendered: IBAN is invalid
+                        _template: null
+                      bic.invalid:
+                        source: BIC is invalid
+                        rendered: BIC is invalid
+                        _template: null
+                      country.invalid:
+                        source: Country is invalid
+                        rendered: Country is invalid
+                        _template: null
+                      id.invalid:
+                        source: Id is invalid
+                        rendered: Id is invalid
+                        _template: null
+                  _valids: null
+                  _invalids: null
+                  _rules: []
+                  _singleRules: {}
+                  _refs:
+                    refs: []
+                  _flags:
+                    presence: optional
+                    description: The seat of the ticket
+                  _cache: null
+                  $_terms:
+                    alterations: null
+                    examples: null
+                    externals: null
+                    notes: []
+                    shared: null
+                    tags: []
+                    whens: null
+                    replacements: null
+                  $_super: {}
+              - key: ga
+                schema:
+                  type: string
+                  $_root:
+                    _types: {}
+                    version: 18.2.1
+                    cache: {}
+                  $_temp:
+                    ruleset: false
+                    whens: {}
+                  _ids:
+                    _byId: {}
+                    _byKey: {}
+                    _schemaChain: false
+                  _preferences:
+                    messages:
+                      phone.invalid:
+                        source: Phone number is invalid
+                        rendered: Phone number is invalid
+                        _template: null
+                      iban.invalid:
+                        source: IBAN is invalid
+                        rendered: IBAN is invalid
+                        _template: null
+                      bic.invalid:
+                        source: BIC is invalid
+                        rendered: BIC is invalid
+                        _template: null
+                      country.invalid:
+                        source: Country is invalid
+                        rendered: Country is invalid
+                        _template: null
+                      id.invalid:
+                        source: Id is invalid
+                        rendered: Id is invalid
+                        _template: null
+                  _valids: null
+                  _invalids: null
+                  _rules: []
+                  _singleRules: {}
+                  _refs:
+                    refs: []
+                  _flags:
+                    presence: optional
+                    description: The name of the general admission section
+                  _cache: null
+                  $_terms:
+                    alterations: null
+                    examples: null
+                    externals: null
+                    notes: []
+                    shared: null
+                    tags: []
+                    whens: null
+                    replacements: null
+                  $_super: {}
+              patterns: null
+              renames: null
+            $_super: {}
+          description: The tickets to be swapped
+      required:
+      - tickets
+    POST_Third_SwapMultipleTicketsWithNewCustomerInformation:
+      type: object
+      properties:
+        ticketIds:
+          type: array
+          items:
+            type: string
+          description: The IDs of the tickets to be swapped
+        eventId:
+          type: string
+          description: The ID of the event
+        customer:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The name of the customer
+            prename:
+              type: string
+              description: The prename of the customer
+            lastname:
+              type: string
+              description: The lastname of the customer
+            email:
+              type: string
+              description: The email of the customer
+          required:
+          - email
+        listingId:
+          type: string
+          description: The ID of the listing
+      required:
+      - ticketIds
+      - eventId
+      - customer
+    GET_Third_ValidatesTheActiveListingForMultipleTickets_200_response:
+      type: object
+      properties:
+        customer:
+          type: object
+          properties:
+            _id:
+              type: string
+              description: The ID of the customer
+            firstName:
+              type: string
+              description: The first of the customer
+            lastName:
+              type: string
+              description: The lastname of the customer
+            email:
+              type: string
+              description: The email of the customer
+            country:
+              type: string
+              description: The country of the customer
+          required:
+          - _id
+          - firstName
+          - lastName
+          - email
+          - country
+        event:
+          type: object
+          properties:
+            _id:
+              type: string
+              description: The ID of the event
+          required:
+          - _id
+        tickets:
+          type: array
+          items:
+            oneOf:
+            - type: string
+            - type: number
+            - type: boolean
+            - type: integer
+            - type: object
+          enum:
+          - type: object
+            $_root:
+              _types: {}
+              version: 18.2.1
+              cache: {}
+            $_temp:
+              ruleset: false
+              whens: {}
+            _ids:
+              _byId: {}
+              _byKey: {}
+              _schemaChain: false
+            _preferences:
+              messages:
+                phone.invalid:
+                  source: Phone number is invalid
+                  rendered: Phone number is invalid
+                  _template: null
+                iban.invalid:
+                  source: IBAN is invalid
+                  rendered: IBAN is invalid
+                  _template: null
+                bic.invalid:
+                  source: BIC is invalid
+                  rendered: BIC is invalid
+                  _template: null
+                country.invalid:
+                  source: Country is invalid
+                  rendered: Country is invalid
+                  _template: null
+                id.invalid:
+                  source: Id is invalid
+                  rendered: Id is invalid
+                  _template: null
+            _valids: null
+            _invalids: null
+            _rules: []
+            _singleRules: {}
+            _refs:
+              refs: []
+            _flags: {}
+            _cache: null
+            $_terms:
+              alterations: null
+              examples: null
+              externals: null
+              notes: []
+              shared: null
+              tags: []
+              whens: null
+              dependencies: null
+              keys:
+              - key: _id
+                schema:
+                  type: string
+                  $_root:
+                    _types: {}
+                    version: 18.2.1
+                    cache: {}
+                  $_temp:
+                    ruleset: false
+                    whens: {}
+                  _ids:
+                    _byId: {}
+                    _byKey: {}
+                    _schemaChain: false
+                  _preferences:
+                    messages:
+                      phone.invalid:
+                        source: Phone number is invalid
+                        rendered: Phone number is invalid
+                        _template: null
+                      iban.invalid:
+                        source: IBAN is invalid
+                        rendered: IBAN is invalid
+                        _template: null
+                      bic.invalid:
+                        source: BIC is invalid
+                        rendered: BIC is invalid
+                        _template: null
+                      country.invalid:
+                        source: Country is invalid
+                        rendered: Country is invalid
+                        _template: null
+                      id.invalid:
+                        source: Id is invalid
+                        rendered: Id is invalid
+                        _template: null
+                  _valids: null
+                  _invalids: null
+                  _rules: []
+                  _singleRules: {}
+                  _refs:
+                    refs: []
+                  _flags:
+                    presence: required
+                    description: The ID of the ticket
+                  _cache: null
+                  $_terms:
+                    alterations: null
+                    examples: null
+                    externals: null
+                    notes: []
+                    shared: null
+                    tags: []
+                    whens: null
+                    replacements: null
+                  $_super: {}
+              - key: section
+                schema:
+                  type: string
+                  $_root:
+                    _types: {}
+                    version: 18.2.1
+                    cache: {}
+                  $_temp:
+                    ruleset: false
+                    whens: {}
+                  _ids:
+                    _byId: {}
+                    _byKey: {}
+                    _schemaChain: false
+                  _preferences:
+                    messages:
+                      phone.invalid:
+                        source: Phone number is invalid
+                        rendered: Phone number is invalid
+                        _template: null
+                      iban.invalid:
+                        source: IBAN is invalid
+                        rendered: IBAN is invalid
+                        _template: null
+                      bic.invalid:
+                        source: BIC is invalid
+                        rendered: BIC is invalid
+                        _template: null
+                      country.invalid:
+                        source: Country is invalid
+                        rendered: Country is invalid
+                        _template: null
+                      id.invalid:
+                        source: Id is invalid
+                        rendered: Id is invalid
+                        _template: null
+                  _valids: null
+                  _invalids: null
+                  _rules: []
+                  _singleRules: {}
+                  _refs:
+                    refs: []
+                  _flags:
+                    presence: optional
+                    description: The section of the ticket
+                  _cache: null
+                  $_terms:
+                    alterations: null
+                    examples: null
+                    externals: null
+                    notes: []
+                    shared: null
+                    tags: []
+                    whens: null
+                    replacements: null
+                  $_super: {}
+              - key: group
+                schema:
+                  type: string
+                  $_root:
+                    _types: {}
+                    version: 18.2.1
+                    cache: {}
+                  $_temp:
+                    ruleset: false
+                    whens: {}
+                  _ids:
+                    _byId: {}
+                    _byKey: {}
+                    _schemaChain: false
+                  _preferences:
+                    messages:
+                      phone.invalid:
+                        source: Phone number is invalid
+                        rendered: Phone number is invalid
+                        _template: null
+                      iban.invalid:
+                        source: IBAN is invalid
+                        rendered: IBAN is invalid
+                        _template: null
+                      bic.invalid:
+                        source: BIC is invalid
+                        rendered: BIC is invalid
+                        _template: null
+                      country.invalid:
+                        source: Country is invalid
+                        rendered: Country is invalid
+                        _template: null
+                      id.invalid:
+                        source: Id is invalid
+                        rendered: Id is invalid
+                        _template: null
+                  _valids: null
+                  _invalids: null
+                  _rules: []
+                  _singleRules: {}
+                  _refs:
+                    refs: []
+                  _flags:
+                    presence: optional
+                    description: The group of the ticket
+                  _cache: null
+                  $_terms:
+                    alterations: null
+                    examples: null
+                    externals: null
+                    notes: []
+                    shared: null
+                    tags: []
+                    whens: null
+                    replacements: null
+                  $_super: {}
+              - key: row
+                schema:
+                  type: string
+                  $_root:
+                    _types: {}
+                    version: 18.2.1
+                    cache: {}
+                  $_temp:
+                    ruleset: false
+                    whens: {}
+                  _ids:
+                    _byId: {}
+                    _byKey: {}
+                    _schemaChain: false
+                  _preferences:
+                    messages:
+                      phone.invalid:
+                        source: Phone number is invalid
+                        rendered: Phone number is invalid
+                        _template: null
+                      iban.invalid:
+                        source: IBAN is invalid
+                        rendered: IBAN is invalid
+                        _template: null
+                      bic.invalid:
+                        source: BIC is invalid
+                        rendered: BIC is invalid
+                        _template: null
+                      country.invalid:
+                        source: Country is invalid
+                        rendered: Country is invalid
+                        _template: null
+                      id.invalid:
+                        source: Id is invalid
+                        rendered: Id is invalid
+                        _template: null
+                  _valids: null
+                  _invalids: null
+                  _rules: []
+                  _singleRules: {}
+                  _refs:
+                    refs: []
+                  _flags:
+                    presence: optional
+                    description: The row of the ticket
+                  _cache: null
+                  $_terms:
+                    alterations: null
+                    examples: null
+                    externals: null
+                    notes: []
+                    shared: null
+                    tags: []
+                    whens: null
+                    replacements: null
+                  $_super: {}
+              - key: seat
+                schema:
+                  type: string
+                  $_root:
+                    _types: {}
+                    version: 18.2.1
+                    cache: {}
+                  $_temp:
+                    ruleset: false
+                    whens: {}
+                  _ids:
+                    _byId: {}
+                    _byKey: {}
+                    _schemaChain: false
+                  _preferences:
+                    messages:
+                      phone.invalid:
+                        source: Phone number is invalid
+                        rendered: Phone number is invalid
+                        _template: null
+                      iban.invalid:
+                        source: IBAN is invalid
+                        rendered: IBAN is invalid
+                        _template: null
+                      bic.invalid:
+                        source: BIC is invalid
+                        rendered: BIC is invalid
+                        _template: null
+                      country.invalid:
+                        source: Country is invalid
+                        rendered: Country is invalid
+                        _template: null
+                      id.invalid:
+                        source: Id is invalid
+                        rendered: Id is invalid
+                        _template: null
+                  _valids: null
+                  _invalids: null
+                  _rules: []
+                  _singleRules: {}
+                  _refs:
+                    refs: []
+                  _flags:
+                    presence: optional
+                    description: The seat of the ticket
+                  _cache: null
+                  $_terms:
+                    alterations: null
+                    examples: null
+                    externals: null
+                    notes: []
+                    shared: null
+                    tags: []
+                    whens: null
+                    replacements: null
+                  $_super: {}
+              - key: ga
+                schema:
+                  type: string
+                  $_root:
+                    _types: {}
+                    version: 18.2.1
+                    cache: {}
+                  $_temp:
+                    ruleset: false
+                    whens: {}
+                  _ids:
+                    _byId: {}
+                    _byKey: {}
+                    _schemaChain: false
+                  _preferences:
+                    messages:
+                      phone.invalid:
+                        source: Phone number is invalid
+                        rendered: Phone number is invalid
+                        _template: null
+                      iban.invalid:
+                        source: IBAN is invalid
+                        rendered: IBAN is invalid
+                        _template: null
+                      bic.invalid:
+                        source: BIC is invalid
+                        rendered: BIC is invalid
+                        _template: null
+                      country.invalid:
+                        source: Country is invalid
+                        rendered: Country is invalid
+                        _template: null
+                      id.invalid:
+                        source: Id is invalid
+                        rendered: Id is invalid
+                        _template: null
+                  _valids: null
+                  _invalids: null
+                  _rules: []
+                  _singleRules: {}
+                  _refs:
+                    refs: []
+                  _flags:
+                    presence: optional
+                    description: The name of the general admission section
+                  _cache: null
+                  $_terms:
+                    alterations: null
+                    examples: null
+                    externals: null
+                    notes: []
+                    shared: null
+                    tags: []
+                    whens: null
+                    replacements: null
+                  $_super: {}
+              patterns: null
+              renames: null
+            $_super: {}
+          description: The tickets to be swapped
+      required:
+      - tickets
+    POST_Third_SwapATicketWithBarcodeAndNewCustomerInformation:
+      type: object
+      properties:
+        ticket:
+          oneOf:
+          - type: object
+            properties:
+              barcode:
+                type: string
+                description: The barcode of the ticket to be swapped
+            required:
+            - barcode
+          - type: object
+            properties:
+              id:
+                type: string
+                description: The ID of the ticket to be swapped
+            required:
+            - id
+        customer:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The name of the customer
+            email:
+              type: string
+              description: The email of the customer
+          required:
+          - name
+          - email
+      required:
+      - customer
+    POST_Third_SwapATicketWithBarcodeAndNewCustomerInformation_200_response:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the ticket
+        _id:
+          type: string
+          description: The ID of the ticket
+        barcode:
+          type: string
+          description: The barcode of the ticket
+        swappable:
+          type: boolean
+          description: If the ticket is swappable or not
+        valid:
+          type: boolean
+          description: If the ticket is valid or not
+        event:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The ID of the event
+            name:
+              type: string
+              description: The name of the event
+            start:
+              type: string
+              format: date-time
+              description: The end date of the event
+            end:
+              type: string
+              format: date-time
+              description: The start date of the event
+            eventUrl:
+              type: string
+              format: uri
+              description: The URL to the ticketshop
+          required:
+          - id
+          - name
+          - start
+          - end
+          description: The corresponding event to the ticket
+        type:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The ID of the tickettype
+            name:
+              type: string
+              description: The name of the tickettype
+            price:
+              type: number
+              format: float
+              description: The base price of the tickettype
+            fee:
+              type: number
+              format: float
+              description: The service fee on top of the base price
+            currency:
+              type: string
+              enum:
+              - EUR
+              - USD
+              - GBP
+              - AUD
+              - CHF
+              - THB
+              - ILS
+              - COP
+              - MXN
+              - DKK
+              - NOK
+              - SEK
+              - QAR
+              - CAD
+              - ISK
+              - GTQ
+              - INR
+              - DOP
+              - SGD
+              - PLN
+              - SAR
+              - TTD
+              - ZAR
+              - KYD
+              - HKD
+              - CZK
+              - KRW
+              - JPY
+              - NZD
+              - AED
+              - MAD
+              - TWD
+              - BRL
+              - BWP
+              - NAD
+              - KES
+              - SCR
+              - TRY
+              - SZL
+              - LSL
+              - TZS
+              - UGX
+              - ZMW
+              - ZWG
+              - GHS
+              - NGN
+              - SLE
+              - LRD
+              - XOF
+              - XAF
+              - GEL
+              - IDR
+              - ARS
+              - CRC
+              - HUF
+              - EGP
+              - MYR
+              - VND
+              - PHP
+              description: The currency for the prices
+          required:
+          - id
+          - name
+          - price
+          - fee
+          description: Tickettype of the found ticket
+      required:
+      - id
+      - _id
+      - barcode
+      - swappable
+      - valid
+    POST_Third_SwapMultipleTicketsWithNewCustomerInformation_200_response:
+      type: array
+      items:
+        oneOf:
+        - type: string
+        - type: number
+        - type: boolean
+        - type: integer
+        - type: object
+      enum:
+      - type: object
+        $_root:
+          _types: {}
+          version: 18.2.1
+          cache: {}
+        $_temp:
+          ruleset: false
+          whens: {}
+        _ids:
+          _byId: {}
+          _byKey: {}
+          _schemaChain: false
+        _preferences:
+          messages:
+            phone.invalid:
+              source: Phone number is invalid
+              rendered: Phone number is invalid
+              _template: null
+            iban.invalid:
+              source: IBAN is invalid
+              rendered: IBAN is invalid
+              _template: null
+            bic.invalid:
+              source: BIC is invalid
+              rendered: BIC is invalid
+              _template: null
+            country.invalid:
+              source: Country is invalid
+              rendered: Country is invalid
+              _template: null
+            id.invalid:
+              source: Id is invalid
+              rendered: Id is invalid
+              _template: null
+        _valids: null
+        _invalids: null
+        _rules: []
+        _singleRules: {}
+        _refs:
+          refs: []
+        _flags: {}
+        _cache: null
+        $_terms:
+          alterations: null
+          examples: null
+          externals: null
+          notes: []
+          shared: null
+          tags: []
+          whens: null
+          dependencies: null
+          keys:
+          - key: id
+            schema:
+              type: string
+              $_root:
+                _types: {}
+                version: 18.2.1
+                cache: {}
+              $_temp:
+                ruleset: false
+                whens: {}
+              _ids:
+                _byId: {}
+                _byKey: {}
+                _schemaChain: false
+              _preferences:
+                messages:
+                  phone.invalid:
+                    source: Phone number is invalid
+                    rendered: Phone number is invalid
+                    _template: null
+                  iban.invalid:
+                    source: IBAN is invalid
+                    rendered: IBAN is invalid
+                    _template: null
+                  bic.invalid:
+                    source: BIC is invalid
+                    rendered: BIC is invalid
+                    _template: null
+                  country.invalid:
+                    source: Country is invalid
+                    rendered: Country is invalid
+                    _template: null
+                  id.invalid:
+                    source: Id is invalid
+                    rendered: Id is invalid
+                    _template: null
+              _valids: null
+              _invalids: null
+              _rules: []
+              _singleRules: {}
+              _refs:
+                refs: []
+              _flags:
+                presence: required
+                description: The ID of the ticket
+              _cache: null
+              $_terms:
+                alterations: null
+                examples: null
+                externals: null
+                notes: []
+                shared: null
+                tags: []
+                whens: null
+                replacements: null
+              $_super: {}
+          - key: _id
+            schema:
+              type: string
+              $_root:
+                _types: {}
+                version: 18.2.1
+                cache: {}
+              $_temp:
+                ruleset: false
+                whens: {}
+              _ids:
+                _byId: {}
+                _byKey: {}
+                _schemaChain: false
+              _preferences:
+                messages:
+                  phone.invalid:
+                    source: Phone number is invalid
+                    rendered: Phone number is invalid
+                    _template: null
+                  iban.invalid:
+                    source: IBAN is invalid
+                    rendered: IBAN is invalid
+                    _template: null
+                  bic.invalid:
+                    source: BIC is invalid
+                    rendered: BIC is invalid
+                    _template: null
+                  country.invalid:
+                    source: Country is invalid
+                    rendered: Country is invalid
+                    _template: null
+                  id.invalid:
+                    source: Id is invalid
+                    rendered: Id is invalid
+                    _template: null
+              _valids: null
+              _invalids: null
+              _rules: []
+              _singleRules: {}
+              _refs:
+                refs: []
+              _flags:
+                presence: required
+                description: The ID of the ticket
+              _cache: null
+              $_terms:
+                alterations: null
+                examples: null
+                externals: null
+                notes: []
+                shared: null
+                tags: []
+                whens: null
+                replacements: null
+              $_super: {}
+          - key: barcode
+            schema:
+              type: string
+              $_root:
+                _types: {}
+                version: 18.2.1
+                cache: {}
+              $_temp:
+                ruleset: false
+                whens: {}
+              _ids:
+                _byId: {}
+                _byKey: {}
+                _schemaChain: false
+              _preferences:
+                messages:
+                  phone.invalid:
+                    source: Phone number is invalid
+                    rendered: Phone number is invalid
+                    _template: null
+                  iban.invalid:
+                    source: IBAN is invalid
+                    rendered: IBAN is invalid
+                    _template: null
+                  bic.invalid:
+                    source: BIC is invalid
+                    rendered: BIC is invalid
+                    _template: null
+                  country.invalid:
+                    source: Country is invalid
+                    rendered: Country is invalid
+                    _template: null
+                  id.invalid:
+                    source: Id is invalid
+                    rendered: Id is invalid
+                    _template: null
+              _valids: null
+              _invalids: null
+              _rules: []
+              _singleRules: {}
+              _refs:
+                refs: []
+              _flags:
+                presence: required
+                description: The barcode of the ticket
+              _cache: null
+              $_terms:
+                alterations: null
+                examples: null
+                externals: null
+                notes: []
+                shared: null
+                tags: []
+                whens: null
+                replacements: null
+              $_super: {}
+          - key: swappable
+            schema:
+              type: boolean
+              $_root:
+                _types: {}
+                version: 18.2.1
+                cache: {}
+              $_temp:
+                ruleset: false
+                whens: {}
+              _ids:
+                _byId: {}
+                _byKey: {}
+                _schemaChain: false
+              _preferences:
+                messages:
+                  phone.invalid:
+                    source: Phone number is invalid
+                    rendered: Phone number is invalid
+                    _template: null
+                  iban.invalid:
+                    source: IBAN is invalid
+                    rendered: IBAN is invalid
+                    _template: null
+                  bic.invalid:
+                    source: BIC is invalid
+                    rendered: BIC is invalid
+                    _template: null
+                  country.invalid:
+                    source: Country is invalid
+                    rendered: Country is invalid
+                    _template: null
+                  id.invalid:
+                    source: Id is invalid
+                    rendered: Id is invalid
+                    _template: null
+              _valids: null
+              _invalids: null
+              _rules: []
+              _singleRules: {}
+              _refs:
+                refs: []
+              _flags:
+                presence: required
+                description: If the ticket is swappable or not
+              _cache: null
+              $_terms:
+                alterations: null
+                examples: null
+                externals: null
+                notes: []
+                shared: null
+                tags: []
+                whens: null
+                falsy: null
+                truthy: null
+              $_super: {}
+          - key: valid
+            schema:
+              type: boolean
+              $_root:
+                _types: {}
+                version: 18.2.1
+                cache: {}
+              $_temp:
+                ruleset: false
+                whens: {}
+              _ids:
+                _byId: {}
+                _byKey: {}
+                _schemaChain: false
+              _preferences:
+                messages:
+                  phone.invalid:
+                    source: Phone number is invalid
+                    rendered: Phone number is invalid
+                    _template: null
+                  iban.invalid:
+                    source: IBAN is invalid
+                    rendered: IBAN is invalid
+                    _template: null
+                  bic.invalid:
+                    source: BIC is invalid
+                    rendered: BIC is invalid
+                    _template: null
+                  country.invalid:
+                    source: Country is invalid
+                    rendered: Country is invalid
+                    _template: null
+                  id.invalid:
+                    source: Id is invalid
+                    rendered: Id is invalid
+                    _template: null
+              _valids: null
+              _invalids: null
+              _rules: []
+              _singleRules: {}
+              _refs:
+                refs: []
+              _flags:
+                presence: required
+                description: If the ticket is valid or not
+              _cache: null
+              $_terms:
+                alterations: null
+                examples: null
+                externals: null
+                notes: []
+                shared: null
+                tags: []
+                whens: null
+                falsy: null
+                truthy: null
+              $_super: {}
+          - key: event
+            schema:
+              type: object
+              $_root:
+                _types: {}
+                version: 18.2.1
+                cache: {}
+              $_temp:
+                ruleset: false
+                whens: {}
+              _ids:
+                _byId: {}
+                _byKey: {}
+                _schemaChain: false
+              _preferences:
+                messages:
+                  phone.invalid:
+                    source: Phone number is invalid
+                    rendered: Phone number is invalid
+                    _template: null
+                  iban.invalid:
+                    source: IBAN is invalid
+                    rendered: IBAN is invalid
+                    _template: null
+                  bic.invalid:
+                    source: BIC is invalid
+                    rendered: BIC is invalid
+                    _template: null
+                  country.invalid:
+                    source: Country is invalid
+                    rendered: Country is invalid
+                    _template: null
+                  id.invalid:
+                    source: Id is invalid
+                    rendered: Id is invalid
+                    _template: null
+              _valids: null
+              _invalids: null
+              _rules: []
+              _singleRules: {}
+              _refs:
+                refs: []
+              _flags:
+                presence: optional
+                description: The corresponding event to the ticket
+              _cache: null
+              $_terms:
+                alterations: null
+                examples: null
+                externals: null
+                notes: []
+                shared: null
+                tags: []
+                whens: null
+                dependencies: null
+                keys:
+                - key: id
+                  schema:
+                    type: string
+                    $_root:
+                      _types: {}
+                      version: 18.2.1
+                      cache: {}
+                    $_temp:
+                      ruleset: false
+                      whens: {}
+                    _ids:
+                      _byId: {}
+                      _byKey: {}
+                      _schemaChain: false
+                    _preferences:
+                      messages:
+                        phone.invalid:
+                          source: Phone number is invalid
+                          rendered: Phone number is invalid
+                          _template: null
+                        iban.invalid:
+                          source: IBAN is invalid
+                          rendered: IBAN is invalid
+                          _template: null
+                        bic.invalid:
+                          source: BIC is invalid
+                          rendered: BIC is invalid
+                          _template: null
+                        country.invalid:
+                          source: Country is invalid
+                          rendered: Country is invalid
+                          _template: null
+                        id.invalid:
+                          source: Id is invalid
+                          rendered: Id is invalid
+                          _template: null
+                    _valids: null
+                    _invalids: null
+                    _rules: []
+                    _singleRules: {}
+                    _refs:
+                      refs: []
+                    _flags:
+                      presence: required
+                      description: The ID of the event
+                    _cache: null
+                    $_terms:
+                      alterations: null
+                      examples: null
+                      externals: null
+                      notes: []
+                      shared: null
+                      tags: []
+                      whens: null
+                      replacements: null
+                    $_super: {}
+                - key: name
+                  schema:
+                    type: string
+                    $_root:
+                      _types: {}
+                      version: 18.2.1
+                      cache: {}
+                    $_temp:
+                      ruleset: false
+                      whens: {}
+                    _ids:
+                      _byId: {}
+                      _byKey: {}
+                      _schemaChain: false
+                    _preferences:
+                      messages:
+                        phone.invalid:
+                          source: Phone number is invalid
+                          rendered: Phone number is invalid
+                          _template: null
+                        iban.invalid:
+                          source: IBAN is invalid
+                          rendered: IBAN is invalid
+                          _template: null
+                        bic.invalid:
+                          source: BIC is invalid
+                          rendered: BIC is invalid
+                          _template: null
+                        country.invalid:
+                          source: Country is invalid
+                          rendered: Country is invalid
+                          _template: null
+                        id.invalid:
+                          source: Id is invalid
+                          rendered: Id is invalid
+                          _template: null
+                    _valids: null
+                    _invalids: null
+                    _rules: []
+                    _singleRules: {}
+                    _refs:
+                      refs: []
+                    _flags:
+                      presence: required
+                      description: The name of the event
+                    _cache: null
+                    $_terms:
+                      alterations: null
+                      examples: null
+                      externals: null
+                      notes: []
+                      shared: null
+                      tags: []
+                      whens: null
+                      replacements: null
+                    $_super: {}
+                - key: start
+                  schema:
+                    type: date
+                    $_root:
+                      _types: {}
+                      version: 18.2.1
+                      cache: {}
+                    $_temp:
+                      ruleset: false
+                      whens: {}
+                    _ids:
+                      _byId: {}
+                      _byKey: {}
+                      _schemaChain: false
+                    _preferences:
+                      messages:
+                        phone.invalid:
+                          source: Phone number is invalid
+                          rendered: Phone number is invalid
+                          _template: null
+                        iban.invalid:
+                          source: IBAN is invalid
+                          rendered: IBAN is invalid
+                          _template: null
+                        bic.invalid:
+                          source: BIC is invalid
+                          rendered: BIC is invalid
+                          _template: null
+                        country.invalid:
+                          source: Country is invalid
+                          rendered: Country is invalid
+                          _template: null
+                        id.invalid:
+                          source: Id is invalid
+                          rendered: Id is invalid
+                          _template: null
+                    _valids: null
+                    _invalids: null
+                    _rules: []
+                    _singleRules: {}
+                    _refs:
+                      refs: []
+                    _flags:
+                      format: iso
+                      presence: required
+                      description: The end date of the event
+                    _cache: null
+                    $_terms:
+                      alterations: null
+                      examples: null
+                      externals: null
+                      notes: []
+                      shared: null
+                      tags: []
+                      whens: null
+                    $_super: {}
+                - key: end
+                  schema:
+                    type: date
+                    $_root:
+                      _types: {}
+                      version: 18.2.1
+                      cache: {}
+                    $_temp:
+                      ruleset: false
+                      whens: {}
+                    _ids:
+                      _byId: {}
+                      _byKey: {}
+                      _schemaChain: false
+                    _preferences:
+                      messages:
+                        phone.invalid:
+                          source: Phone number is invalid
+                          rendered: Phone number is invalid
+                          _template: null
+                        iban.invalid:
+                          source: IBAN is invalid
+                          rendered: IBAN is invalid
+                          _template: null
+                        bic.invalid:
+                          source: BIC is invalid
+                          rendered: BIC is invalid
+                          _template: null
+                        country.invalid:
+                          source: Country is invalid
+                          rendered: Country is invalid
+                          _template: null
+                        id.invalid:
+                          source: Id is invalid
+                          rendered: Id is invalid
+                          _template: null
+                    _valids: null
+                    _invalids: null
+                    _rules: []
+                    _singleRules: {}
+                    _refs:
+                      refs: []
+                    _flags:
+                      format: iso
+                      presence: required
+                      description: The start date of the event
+                    _cache: null
+                    $_terms:
+                      alterations: null
+                      examples: null
+                      externals: null
+                      notes: []
+                      shared: null
+                      tags: []
+                      whens: null
+                    $_super: {}
+                - key: eventUrl
+                  schema:
+                    type: string
+                    $_root:
+                      _types: {}
+                      version: 18.2.1
+                      cache: {}
+                    $_temp:
+                      ruleset: false
+                      whens: {}
+                    _ids:
+                      _byId: {}
+                      _byKey: {}
+                      _schemaChain: false
+                    _preferences:
+                      messages:
+                        phone.invalid:
+                          source: Phone number is invalid
+                          rendered: Phone number is invalid
+                          _template: null
+                        iban.invalid:
+                          source: IBAN is invalid
+                          rendered: IBAN is invalid
+                          _template: null
+                        bic.invalid:
+                          source: BIC is invalid
+                          rendered: BIC is invalid
+                          _template: null
+                        country.invalid:
+                          source: Country is invalid
+                          rendered: Country is invalid
+                          _template: null
+                        id.invalid:
+                          source: Id is invalid
+                          rendered: Id is invalid
+                          _template: null
+                    _valids: null
+                    _invalids: null
+                    _rules:
+                    - name: uri
+                      args:
+                        options: {}
+                      regex: {}
+                      domain: null
+                      scheme: ''
+                      _resolve: []
+                      method: uri
+                    _singleRules: {}
+                    _refs:
+                      refs: []
+                    _flags:
+                      description: The URL to the ticketshop
+                    _cache: null
+                    $_terms:
+                      alterations: null
+                      examples: null
+                      externals: null
+                      notes: []
+                      shared: null
+                      tags: []
+                      whens: null
+                      replacements: null
+                    $_super: {}
+                patterns: null
+                renames: null
+              $_super: {}
+          - key: type
+            schema:
+              type: object
+              $_root:
+                _types: {}
+                version: 18.2.1
+                cache: {}
+              $_temp:
+                ruleset: false
+                whens: {}
+              _ids:
+                _byId: {}
+                _byKey: {}
+                _schemaChain: false
+              _preferences:
+                messages:
+                  phone.invalid:
+                    source: Phone number is invalid
+                    rendered: Phone number is invalid
+                    _template: null
+                  iban.invalid:
+                    source: IBAN is invalid
+                    rendered: IBAN is invalid
+                    _template: null
+                  bic.invalid:
+                    source: BIC is invalid
+                    rendered: BIC is invalid
+                    _template: null
+                  country.invalid:
+                    source: Country is invalid
+                    rendered: Country is invalid
+                    _template: null
+                  id.invalid:
+                    source: Id is invalid
+                    rendered: Id is invalid
+                    _template: null
+              _valids: null
+              _invalids: null
+              _rules: []
+              _singleRules: {}
+              _refs:
+                refs: []
+              _flags:
+                presence: optional
+                description: Tickettype of the found ticket
+              _cache: null
+              $_terms:
+                alterations: null
+                examples: null
+                externals: null
+                notes: []
+                shared: null
+                tags: []
+                whens: null
+                dependencies: null
+                keys:
+                - key: id
+                  schema:
+                    type: string
+                    $_root:
+                      _types: {}
+                      version: 18.2.1
+                      cache: {}
+                    $_temp:
+                      ruleset: false
+                      whens: {}
+                    _ids:
+                      _byId: {}
+                      _byKey: {}
+                      _schemaChain: false
+                    _preferences:
+                      messages:
+                        phone.invalid:
+                          source: Phone number is invalid
+                          rendered: Phone number is invalid
+                          _template: null
+                        iban.invalid:
+                          source: IBAN is invalid
+                          rendered: IBAN is invalid
+                          _template: null
+                        bic.invalid:
+                          source: BIC is invalid
+                          rendered: BIC is invalid
+                          _template: null
+                        country.invalid:
+                          source: Country is invalid
+                          rendered: Country is invalid
+                          _template: null
+                        id.invalid:
+                          source: Id is invalid
+                          rendered: Id is invalid
+                          _template: null
+                    _valids: null
+                    _invalids: null
+                    _rules: []
+                    _singleRules: {}
+                    _refs:
+                      refs: []
+                    _flags:
+                      presence: required
+                      description: The ID of the tickettype
+                    _cache: null
+                    $_terms:
+                      alterations: null
+                      examples: null
+                      externals: null
+                      notes: []
+                      shared: null
+                      tags: []
+                      whens: null
+                      replacements: null
+                    $_super: {}
+                - key: name
+                  schema:
+                    type: string
+                    $_root:
+                      _types: {}
+                      version: 18.2.1
+                      cache: {}
+                    $_temp:
+                      ruleset: false
+                      whens: {}
+                    _ids:
+                      _byId: {}
+                      _byKey: {}
+                      _schemaChain: false
+                    _preferences:
+                      messages:
+                        phone.invalid:
+                          source: Phone number is invalid
+                          rendered: Phone number is invalid
+                          _template: null
+                        iban.invalid:
+                          source: IBAN is invalid
+                          rendered: IBAN is invalid
+                          _template: null
+                        bic.invalid:
+                          source: BIC is invalid
+                          rendered: BIC is invalid
+                          _template: null
+                        country.invalid:
+                          source: Country is invalid
+                          rendered: Country is invalid
+                          _template: null
+                        id.invalid:
+                          source: Id is invalid
+                          rendered: Id is invalid
+                          _template: null
+                    _valids: null
+                    _invalids: null
+                    _rules: []
+                    _singleRules: {}
+                    _refs:
+                      refs: []
+                    _flags:
+                      presence: required
+                      description: The name of the tickettype
+                    _cache: null
+                    $_terms:
+                      alterations: null
+                      examples: null
+                      externals: null
+                      notes: []
+                      shared: null
+                      tags: []
+                      whens: null
+                      replacements: null
+                    $_super: {}
+                - key: price
+                  schema:
+                    type: number
+                    $_root:
+                      _types: {}
+                      version: 18.2.1
+                      cache: {}
+                    $_temp:
+                      ruleset: false
+                      whens: {}
+                    _ids:
+                      _byId: {}
+                      _byKey: {}
+                      _schemaChain: false
+                    _preferences:
+                      messages:
+                        phone.invalid:
+                          source: Phone number is invalid
+                          rendered: Phone number is invalid
+                          _template: null
+                        iban.invalid:
+                          source: IBAN is invalid
+                          rendered: IBAN is invalid
+                          _template: null
+                        bic.invalid:
+                          source: BIC is invalid
+                          rendered: BIC is invalid
+                          _template: null
+                        country.invalid:
+                          source: Country is invalid
+                          rendered: Country is invalid
+                          _template: null
+                        id.invalid:
+                          source: Id is invalid
+                          rendered: Id is invalid
+                          _template: null
+                    _valids: null
+                    _invalids: null
+                    _rules: []
+                    _singleRules: {}
+                    _refs:
+                      refs: []
+                    _flags:
+                      presence: required
+                      description: The base price of the tickettype
+                    _cache: null
+                    $_terms:
+                      alterations: null
+                      examples: null
+                      externals: null
+                      notes: []
+                      shared: null
+                      tags: []
+                      whens: null
+                    $_super: {}
+                - key: fee
+                  schema:
+                    type: number
+                    $_root:
+                      _types: {}
+                      version: 18.2.1
+                      cache: {}
+                    $_temp:
+                      ruleset: false
+                      whens: {}
+                    _ids:
+                      _byId: {}
+                      _byKey: {}
+                      _schemaChain: false
+                    _preferences:
+                      messages:
+                        phone.invalid:
+                          source: Phone number is invalid
+                          rendered: Phone number is invalid
+                          _template: null
+                        iban.invalid:
+                          source: IBAN is invalid
+                          rendered: IBAN is invalid
+                          _template: null
+                        bic.invalid:
+                          source: BIC is invalid
+                          rendered: BIC is invalid
+                          _template: null
+                        country.invalid:
+                          source: Country is invalid
+                          rendered: Country is invalid
+                          _template: null
+                        id.invalid:
+                          source: Id is invalid
+                          rendered: Id is invalid
+                          _template: null
+                    _valids: null
+                    _invalids: null
+                    _rules: []
+                    _singleRules: {}
+                    _refs:
+                      refs: []
+                    _flags:
+                      presence: required
+                      description: The service fee on top of the base price
+                    _cache: null
+                    $_terms:
+                      alterations: null
+                      examples: null
+                      externals: null
+                      notes: []
+                      shared: null
+                      tags: []
+                      whens: null
+                    $_super: {}
+                - key: currency
+                  schema:
+                    type: string
+                    $_root:
+                      _types: {}
+                      version: 18.2.1
+                      cache: {}
+                    $_temp:
+                      ruleset: false
+                      whens: {}
+                    _ids:
+                      _byId: {}
+                      _byKey: {}
+                      _schemaChain: false
+                    _preferences:
+                      messages:
+                        phone.invalid:
+                          source: Phone number is invalid
+                          rendered: Phone number is invalid
+                          _template: null
+                        iban.invalid:
+                          source: IBAN is invalid
+                          rendered: IBAN is invalid
+                          _template: null
+                        bic.invalid:
+                          source: BIC is invalid
+                          rendered: BIC is invalid
+                          _template: null
+                        country.invalid:
+                          source: Country is invalid
+                          rendered: Country is invalid
+                          _template: null
+                        id.invalid:
+                          source: Id is invalid
+                          rendered: Id is invalid
+                          _template: null
+                    _valids:
+                      _values: {}
+                      _refs: {}
+                      _lowercase: {}
+                      _override: false
+                    _invalids: null
+                    _rules: []
+                    _singleRules: {}
+                    _refs:
+                      refs: []
+                    _flags:
+                      only: true
+                      description: The currency for the prices
+                    _cache: null
+                    $_terms:
+                      alterations: null
+                      examples: null
+                      externals: null
+                      notes: []
+                      shared: null
+                      tags: []
+                      whens: null
+                      replacements: null
+                    $_super: {}
+                patterns: null
+                renames: null
+              $_super: {}
+          patterns: null
+          renames: null
+        $_super: {}
+    POST_Third_NotifiesTheSystemThatAListingsHasBeenCanceledOnAThirdPartyPlatform_200_response:
+      type: object
+      properties: {}
+    GET_Third_ValidateATicketByItsBarcode_200_response:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the ticket
+        _id:
+          type: string
+          description: The ID of the ticket
+        barcode:
+          type: string
+          description: The barcode of the ticket
+        swappable:
+          type: boolean
+          description: If the ticket is swappable or not
+        valid:
+          type: boolean
+          description: If the ticket is valid or not
+        event:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The ID of the event
+            name:
+              type: string
+              description: The name of the event
+            start:
+              type: string
+              format: date-time
+              description: The end date of the event
+            end:
+              type: string
+              format: date-time
+              description: The start date of the event
+            eventUrl:
+              type: string
+              format: uri
+              description: The URL to the ticketshop
+          required:
+          - id
+          - name
+          - start
+          - end
+          description: The corresponding event to the ticket
+        type:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The ID of the tickettype
+            name:
+              type: string
+              description: The name of the tickettype
+            price:
+              type: number
+              format: float
+              description: The base price of the tickettype
+            fee:
+              type: number
+              format: float
+              description: The service fee on top of the base price
+            currency:
+              type: string
+              enum:
+              - EUR
+              - USD
+              - GBP
+              - AUD
+              - CHF
+              - THB
+              - ILS
+              - COP
+              - MXN
+              - DKK
+              - NOK
+              - SEK
+              - QAR
+              - CAD
+              - ISK
+              - GTQ
+              - INR
+              - DOP
+              - SGD
+              - PLN
+              - SAR
+              - TTD
+              - ZAR
+              - KYD
+              - HKD
+              - CZK
+              - KRW
+              - JPY
+              - NZD
+              - AED
+              - MAD
+              - TWD
+              - BRL
+              - BWP
+              - NAD
+              - KES
+              - SCR
+              - TRY
+              - SZL
+              - LSL
+              - TZS
+              - UGX
+              - ZMW
+              - ZWG
+              - GHS
+              - NGN
+              - SLE
+              - LRD
+              - XOF
+              - XAF
+              - GEL
+              - IDR
+              - ARS
+              - CRC
+              - HUF
+              - EGP
+              - MYR
+              - VND
+              - PHP
+              description: The currency for the prices
+          required:
+          - id
+          - name
+          - price
+          - fee
+          description: Tickettype of the found ticket
+      required:
+      - id
+      - _id
+      - barcode
+      - swappable
+      - valid
+    POST_Third_NotifiesTheSystemThatATicketHasBeenListedOnAThirdPartyPlatform:
+      type: object
+      properties:
+        eventId:
+          type: string
+          description: The ID of the event
+        ticketIds:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          description: The IDs of the tickets to be listed
+      required:
+      - eventId
+      - ticketIds
+    POST_Third_NotifiesTheSystemThatATicketHasBeenListedOnAThirdPartyPlatform_200_response:
+      type: object
+      properties:
+        customer:
+          type: object
+          properties:
+            _id:
+              type: string
+              description: The ID of the customer
+            firstName:
+              type: string
+              description: The first of the customer
+            lastName:
+              type: string
+              description: The lastname of the customer
+            email:
+              type: string
+              description: The email of the customer
+            country:
+              type: string
+              description: The country of the customer
+          required:
+          - _id
+          - firstName
+          - lastName
+          - email
+          - country
+        event:
+          type: object
+          properties:
+            _id:
+              type: string
+              description: The ID of the event
+          required:
+          - _id
+        tickets:
+          type: array
+          items:
+            oneOf:
+            - type: string
+            - type: number
+            - type: boolean
+            - type: integer
+            - type: object
+          enum:
+          - type: object
+            $_root:
+              _types: {}
+              version: 18.2.1
+              cache: {}
+            $_temp:
+              ruleset: false
+              whens: {}
+            _ids:
+              _byId: {}
+              _byKey: {}
+              _schemaChain: false
+            _preferences:
+              messages:
+                phone.invalid:
+                  source: Phone number is invalid
+                  rendered: Phone number is invalid
+                  _template: null
+                iban.invalid:
+                  source: IBAN is invalid
+                  rendered: IBAN is invalid
+                  _template: null
+                bic.invalid:
+                  source: BIC is invalid
+                  rendered: BIC is invalid
+                  _template: null
+                country.invalid:
+                  source: Country is invalid
+                  rendered: Country is invalid
+                  _template: null
+                id.invalid:
+                  source: Id is invalid
+                  rendered: Id is invalid
+                  _template: null
+            _valids: null
+            _invalids: null
+            _rules: []
+            _singleRules: {}
+            _refs:
+              refs: []
+            _flags: {}
+            _cache: null
+            $_terms:
+              alterations: null
+              examples: null
+              externals: null
+              notes: []
+              shared: null
+              tags: []
+              whens: null
+              dependencies: null
+              keys:
+              - key: _id
+                schema:
+                  type: string
+                  $_root:
+                    _types: {}
+                    version: 18.2.1
+                    cache: {}
+                  $_temp:
+                    ruleset: false
+                    whens: {}
+                  _ids:
+                    _byId: {}
+                    _byKey: {}
+                    _schemaChain: false
+                  _preferences:
+                    messages:
+                      phone.invalid:
+                        source: Phone number is invalid
+                        rendered: Phone number is invalid
+                        _template: null
+                      iban.invalid:
+                        source: IBAN is invalid
+                        rendered: IBAN is invalid
+                        _template: null
+                      bic.invalid:
+                        source: BIC is invalid
+                        rendered: BIC is invalid
+                        _template: null
+                      country.invalid:
+                        source: Country is invalid
+                        rendered: Country is invalid
+                        _template: null
+                      id.invalid:
+                        source: Id is invalid
+                        rendered: Id is invalid
+                        _template: null
+                  _valids: null
+                  _invalids: null
+                  _rules: []
+                  _singleRules: {}
+                  _refs:
+                    refs: []
+                  _flags:
+                    presence: required
+                    description: The ID of the ticket
+                  _cache: null
+                  $_terms:
+                    alterations: null
+                    examples: null
+                    externals: null
+                    notes: []
+                    shared: null
+                    tags: []
+                    whens: null
+                    replacements: null
+                  $_super: {}
+              - key: section
+                schema:
+                  type: string
+                  $_root:
+                    _types: {}
+                    version: 18.2.1
+                    cache: {}
+                  $_temp:
+                    ruleset: false
+                    whens: {}
+                  _ids:
+                    _byId: {}
+                    _byKey: {}
+                    _schemaChain: false
+                  _preferences:
+                    messages:
+                      phone.invalid:
+                        source: Phone number is invalid
+                        rendered: Phone number is invalid
+                        _template: null
+                      iban.invalid:
+                        source: IBAN is invalid
+                        rendered: IBAN is invalid
+                        _template: null
+                      bic.invalid:
+                        source: BIC is invalid
+                        rendered: BIC is invalid
+                        _template: null
+                      country.invalid:
+                        source: Country is invalid
+                        rendered: Country is invalid
+                        _template: null
+                      id.invalid:
+                        source: Id is invalid
+                        rendered: Id is invalid
+                        _template: null
+                  _valids: null
+                  _invalids: null
+                  _rules: []
+                  _singleRules: {}
+                  _refs:
+                    refs: []
+                  _flags:
+                    presence: optional
+                    description: The section of the ticket
+                  _cache: null
+                  $_terms:
+                    alterations: null
+                    examples: null
+                    externals: null
+                    notes: []
+                    shared: null
+                    tags: []
+                    whens: null
+                    replacements: null
+                  $_super: {}
+              - key: group
+                schema:
+                  type: string
+                  $_root:
+                    _types: {}
+                    version: 18.2.1
+                    cache: {}
+                  $_temp:
+                    ruleset: false
+                    whens: {}
+                  _ids:
+                    _byId: {}
+                    _byKey: {}
+                    _schemaChain: false
+                  _preferences:
+                    messages:
+                      phone.invalid:
+                        source: Phone number is invalid
+                        rendered: Phone number is invalid
+                        _template: null
+                      iban.invalid:
+                        source: IBAN is invalid
+                        rendered: IBAN is invalid
+                        _template: null
+                      bic.invalid:
+                        source: BIC is invalid
+                        rendered: BIC is invalid
+                        _template: null
+                      country.invalid:
+                        source: Country is invalid
+                        rendered: Country is invalid
+                        _template: null
+                      id.invalid:
+                        source: Id is invalid
+                        rendered: Id is invalid
+                        _template: null
+                  _valids: null
+                  _invalids: null
+                  _rules: []
+                  _singleRules: {}
+                  _refs:
+                    refs: []
+                  _flags:
+                    presence: optional
+                    description: The group of the ticket
+                  _cache: null
+                  $_terms:
+                    alterations: null
+                    examples: null
+                    externals: null
+                    notes: []
+                    shared: null
+                    tags: []
+                    whens: null
+                    replacements: null
+                  $_super: {}
+              - key: row
+                schema:
+                  type: string
+                  $_root:
+                    _types: {}
+                    version: 18.2.1
+                    cache: {}
+                  $_temp:
+                    ruleset: false
+                    whens: {}
+                  _ids:
+                    _byId: {}
+                    _byKey: {}
+                    _schemaChain: false
+                  _preferences:
+                    messages:
+                      phone.invalid:
+                        source: Phone number is invalid
+                        rendered: Phone number is invalid
+                        _template: null
+                      iban.invalid:
+                        source: IBAN is invalid
+                        rendered: IBAN is invalid
+                        _template: null
+                      bic.invalid:
+                        source: BIC is invalid
+                        rendered: BIC is invalid
+                        _template: null
+                      country.invalid:
+                        source: Country is invalid
+                        rendered: Country is invalid
+                        _template: null
+                      id.invalid:
+                        source: Id is invalid
+                        rendered: Id is invalid
+                        _template: null
+                  _valids: null
+                  _invalids: null
+                  _rules: []
+                  _singleRules: {}
+                  _refs:
+                    refs: []
+                  _flags:
+                    presence: optional
+                    description: The row of the ticket
+                  _cache: null
+                  $_terms:
+                    alterations: null
+                    examples: null
+                    externals: null
+                    notes: []
+                    shared: null
+                    tags: []
+                    whens: null
+                    replacements: null
+                  $_super: {}
+              - key: seat
+                schema:
+                  type: string
+                  $_root:
+                    _types: {}
+                    version: 18.2.1
+                    cache: {}
+                  $_temp:
+                    ruleset: false
+                    whens: {}
+                  _ids:
+                    _byId: {}
+                    _byKey: {}
+                    _schemaChain: false
+                  _preferences:
+                    messages:
+                      phone.invalid:
+                        source: Phone number is invalid
+                        rendered: Phone number is invalid
+                        _template: null
+                      iban.invalid:
+                        source: IBAN is invalid
+                        rendered: IBAN is invalid
+                        _template: null
+                      bic.invalid:
+                        source: BIC is invalid
+                        rendered: BIC is invalid
+                        _template: null
+                      country.invalid:
+                        source: Country is invalid
+                        rendered: Country is invalid
+                        _template: null
+                      id.invalid:
+                        source: Id is invalid
+                        rendered: Id is invalid
+                        _template: null
+                  _valids: null
+                  _invalids: null
+                  _rules: []
+                  _singleRules: {}
+                  _refs:
+                    refs: []
+                  _flags:
+                    presence: optional
+                    description: The seat of the ticket
+                  _cache: null
+                  $_terms:
+                    alterations: null
+                    examples: null
+                    externals: null
+                    notes: []
+                    shared: null
+                    tags: []
+                    whens: null
+                    replacements: null
+                  $_super: {}
+              - key: ga
+                schema:
+                  type: string
+                  $_root:
+                    _types: {}
+                    version: 18.2.1
+                    cache: {}
+                  $_temp:
+                    ruleset: false
+                    whens: {}
+                  _ids:
+                    _byId: {}
+                    _byKey: {}
+                    _schemaChain: false
+                  _preferences:
+                    messages:
+                      phone.invalid:
+                        source: Phone number is invalid
+                        rendered: Phone number is invalid
+                        _template: null
+                      iban.invalid:
+                        source: IBAN is invalid
+                        rendered: IBAN is invalid
+                        _template: null
+                      bic.invalid:
+                        source: BIC is invalid
+                        rendered: BIC is invalid
+                        _template: null
+                      country.invalid:
+                        source: Country is invalid
+                        rendered: Country is invalid
+                        _template: null
+                      id.invalid:
+                        source: Id is invalid
+                        rendered: Id is invalid
+                        _template: null
+                  _valids: null
+                  _invalids: null
+                  _rules: []
+                  _singleRules: {}
+                  _refs:
+                    refs: []
+                  _flags:
+                    presence: optional
+                    description: The name of the general admission section
+                  _cache: null
+                  $_terms:
+                    alterations: null
+                    examples: null
+                    externals: null
+                    notes: []
+                    shared: null
+                    tags: []
+                    whens: null
+                    replacements: null
+                  $_super: {}
+              patterns: null
+              renames: null
+            $_super: {}
+          description: The tickets to be swapped
+      required:
+      - tickets
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
