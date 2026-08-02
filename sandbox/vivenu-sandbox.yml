@@ -1,0 +1,29 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/vivenu-openapi-original.json (servers[]) + https://vivenu.com/developers
+summary: >-
+  vivenu exposes a dedicated staging environment separate from production. The
+  OpenAPI declares two servers: a Production API at https://vivenu.com and a
+  Staging API at https://vivenu.dev. Integrations build and test against the
+  staging host with staging API keys before switching the base URL to
+  production. No public test-card/magic-value catalog is published by vivenu
+  (payment testing runs through the configured gateway's sandbox); no test
+  values are invented here.
+environments:
+- name: production
+  base_url: https://vivenu.com
+  api_base: https://vivenu.com/api
+- name: staging
+  base_url: https://vivenu.dev
+  api_base: https://vivenu.dev/api
+separation:
+  mechanism: separate-host
+  note: >-
+    Test vs live is separated by host (vivenu.dev vs vivenu.com), each with its
+    own API keys, rather than by key prefix or a mode flag.
+test_values:
+  published: false
+  note: >-
+    vivenu does not publish a documented list of magic test identifiers or test
+    card numbers; payment testing is delegated to the connected payment
+    gateway's own sandbox.

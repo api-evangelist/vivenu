@@ -1,0 +1,39 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/vivenu-openapi-original.json + https://status.vivenu.com/
+versioning:
+  scheme: uri-path
+  current: '1.0.0'
+  note: Resources served under /api; OpenAPI info.version 1.0.0.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: >-
+    No published deprecation policy or RFC 8594 Sunset/Deprecation header
+    support found. However 14 operations are flagged deprecated:true in the
+    OpenAPI (see deprecated_operations).
+sla:
+  url: null
+  uptime_target: null
+status_page: https://status.vivenu.com/
+status_page_host: statuspage.io
+deprecated_operation_count: 14
+deprecated_operations:
+- get_all_events_rich
+- get_transaction_avg_cart
+- get_customers_per_time_scope
+- get_transaction_day_hours
+- get_transaction_payment_method
+- get_all_transactions_rich
+- get_all_vouchers
+- get_a_transaction
+- get_event_parent
+- get_invoice_for_transaction_deprecated_use_get_invoices_with_the_transaction_id_query_parameter_instead
+- create_invoice_for_transaction_deprecated_use_post_invoices_with_query_parameter_transaction_id_instead
+- aggregate_checkouts_by_status
+- get_public_invoice_for_transaction_deprecated_use_get_public_invoices_info_with_query_parameters_transaction_id_and_secret_instead
+- get_event_status
+notes: >-
+  Status page is hosted on Atlassian Statuspage. Deprecated operations are
+  marked inline in the spec; enumerate with a grep of deprecated:true against
+  openapi/vivenu-openapi-original.json.

@@ -1,0 +1,20 @@
+generated: '2026-07-21'
+method: searched
+source: probe of https://vivenu.com/.well-known/* and https://vivenu.dev/.well-known/*
+host: https://vivenu.com
+documents:
+- path: /.well-known/security.txt
+  status: 404
+- path: /.well-known/openid-configuration
+  status: 404
+- path: /.well-known/oauth-authorization-server
+  status: 404
+- path: /.well-known/api-catalog
+  status: 404
+- path: /.well-known/ai-plugin.json
+  status: 404
+notes: >-
+  No /.well-known/ discovery documents are published on either the production
+  (vivenu.com) or staging (vivenu.dev) host. The API is authenticated with a
+  bearer API key (Authorization header), not OAuth/OIDC, so there is no
+  authorization-server metadata to advertise. Absence recorded as valid data.

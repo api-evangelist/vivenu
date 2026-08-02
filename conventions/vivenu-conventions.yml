@@ -1,0 +1,54 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/vivenu-openapi-original.json
+summary: >-
+  Cross-cutting request/response semantics for the vivenu API, derived from the
+  published OpenAPI. vivenu is a REST API served under https://vivenu.com/api
+  (staging https://vivenu.dev/api), authenticated with a bearer API key.
+authentication:
+  style: bearer
+  header: Authorization
+  formats: [api-key, jwt]
+  note: >-
+    Server-to-server integrations use an organization/seller API key sent as
+    `Authorization: Bearer <key>`. Bearer JWTs are used for user and customer
+    sessions. See authentication/vivenu-authentication.yml.
+pagination:
+  style: offset
+  params:
+    offset: skip
+    limit: top
+  note: >-
+    List endpoints page with `skip` (offset) and `top` (page size) query
+    parameters. No cursor-based pagination is used.
+idempotency:
+  supported: false
+  note: >-
+    The OpenAPI declares no Idempotency-Key header or idempotency contract on
+    write operations. No idempotency pointer is emitted for this provider.
+request_tracing:
+  request_id_header: null
+  note: No documented request-id / correlation header in the spec.
+versioning:
+  scheme: uri-path
+  current: '1.0.0'
+  note: >-
+    All resources are served under the /api path prefix. The OpenAPI info
+    version is 1.0.0. No date-based or header-based version negotiation.
+error_envelope:
+  format: custom-json
+  shape: '{ statusCode, error, message }'
+  media_type: application/json
+  note: >-
+    Errors are returned as an HttpError object with statusCode, error, and
+    message fields. Not RFC 9457 problem+json. See
+    errors/vivenu-problem-types.yml.
+rate_limiting:
+  documented: false
+  note: No rate-limit signaling headers (X-RateLimit-*, Retry-After, 429) are
+    documented in the spec.
+cross_links:
+  authentication: authentication/vivenu-authentication.yml
+  errors: errors/vivenu-problem-types.yml
+  lifecycle: lifecycle/vivenu-lifecycle.yml
+  webhooks: asyncapi/vivenu-webhooks.yml

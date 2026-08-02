@@ -1,0 +1,59 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/vivenu-openapi-original.json
+spec_type: Webhooks
+summary: >-
+  vivenu publishes a real-time webhook surface. Webhook subscriptions are
+  managed through the API (/api/webhooks GET/POST, /api/webhook/{id} PUT/DELETE)
+  and deliver event-driven notifications for transactions, checkouts, tickets,
+  purchase intents, customers, events, jobs, ticket transfers, bundles,
+  products, and subscriptions. No AsyncAPI document is published by the
+  provider; this catalog is derived from the webhook.* event payload schemas
+  defined in the OpenAPI. Never fabricated — every event below is a schema key
+  in the published spec.
+management:
+  list: openapi/vivenu-openapi-original.json#webhooks/list
+  create: openapi/vivenu-openapi-original.json#webhooks/create
+  update: openapi/vivenu-openapi-original.json#webhooks/update
+  delete: openapi/vivenu-openapi-original.json#webhooks/delete
+events:
+- webhook.transaction.complete
+- webhook.transaction.reservedBySystem
+- webhook.transaction.canceled
+- webhook.transaction.partiallyCanceled
+- webhook.checkout.completed
+- webhook.checkout.aborted
+- webhook.checkout.detailsSubmitted
+- webhook.ticket.created
+- webhook.ticket.updated
+- webhook.scan.created
+- webhook.purchaseIntent.created
+- webhook.purchaseIntent.updated
+- webhook.purchaseIntent.approved
+- webhook.purchaseIntent.rejected
+- webhook.purchaseIntent.expired
+- webhook.purchaseIntent.completed
+- webhook.purchaseIntent.cancelled
+- webhook.customer.created
+- webhook.customer.updated
+- webhook.event.created
+- webhook.event.updated
+- webhook.event.deleted
+- webhook.job.started
+- webhook.job.failed
+- webhook.job.completed
+- webhook.support.assignedToSeller
+- webhook.ticketTransfer.created
+- webhook.ticketTransfer.rejected
+- webhook.ticketTransfer.transferred
+- webhook.ticketTransfer.expired
+- webhook.bundle.created
+- webhook.bundle.updated
+- webhook.product.created
+- webhook.product.updated
+- webhook.product.deleted
+- webhook.subscription.created
+- webhook.subscription.updated
+- webhook.subscription.payment.succeeded
+- webhook.subscription.payment.failed
+event_count: 39

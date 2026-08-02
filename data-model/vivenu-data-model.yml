@@ -1,0 +1,94 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/vivenu-openapi-original.json
+summary: >-
+  Entity-relationship graph derived from the vivenu OpenAPI (504 schemas). Core
+  resources are exposed as *Resource schemas and reference each other via id
+  fields. Relationships below are read from id-reference properties on the
+  resource schemas — not fabricated.
+entities:
+- name: Event
+  schema: EventResource
+  path: /api/events
+  id_prefix: null
+- name: Ticket
+  schema: TicketResource
+  path: /api/tickets
+- name: Transaction
+  schema: TransactionResource
+  path: /api/transactions
+- name: Customer
+  schema: CustomerResource
+  path: /api/customers
+- name: Seller
+  schema: SellerResource
+  path: /api/sellers
+- name: Checkout
+  schema: CheckoutResource
+  path: /api/checkouts
+- name: PurchaseIntent
+  path: /api/purchaseintents
+- name: Webhook
+  schema: webhook
+  path: /api/webhooks
+relationships:
+- from: Event
+  to: Seller
+  type: belongs_to
+  via: sellerId
+- from: Ticket
+  to: Event
+  type: belongs_to
+  via: eventId
+- from: Ticket
+  to: Transaction
+  type: belongs_to
+  via: transactionId
+- from: Ticket
+  to: Customer
+  type: belongs_to
+  via: customerId
+- from: Ticket
+  to: Seller
+  type: belongs_to
+  via: sellerId
+- from: Ticket
+  to: Event
+  type: belongs_to
+  via: rootEventId
+- from: Ticket
+  to: Pos
+  type: belongs_to
+  via: posId
+- from: Transaction
+  to: Seller
+  type: belongs_to
+  via: sellerId
+- from: Transaction
+  to: Customer
+  type: belongs_to
+  via: customerId
+- from: Transaction
+  to: Event
+  type: belongs_to
+  via: eventId
+- from: Transaction
+  to: User
+  type: belongs_to
+  via: userId
+- from: Transaction
+  to: Pos
+  type: belongs_to
+  via: posId
+- from: Customer
+  to: Seller
+  type: belongs_to
+  via: sellerId
+- from: Transaction
+  to: Ticket
+  type: has_many
+  via: eventId+transactionId
+- from: Event
+  to: Ticket
+  type: has_many
+  via: eventId

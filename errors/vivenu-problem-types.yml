@@ -1,0 +1,34 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/vivenu-openapi-original.json
+format: custom-json
+envelope:
+  schema: HttpError
+  media_type: application/json
+  fields:
+    statusCode: HTTP status code (string)
+    error: Short error class / reason phrase
+    message: Human-readable error message
+  note: >-
+    vivenu returns errors as a flat HttpError JSON object, not RFC 9457
+    problem+json. The catalog below is derived from the HTTP status codes the
+    OpenAPI declares across its 450 paths; 400/401/404 responses in the spec do
+    not carry a per-operation body schema, so titles are the standard status
+    semantics.
+problems:
+- status: 400
+  title: Bad Request
+  meaning: Request validation failed (missing/invalid fields or query params).
+  occurrences: 531
+- status: 401
+  title: Unauthorized
+  meaning: Missing or invalid bearer API key / JWT.
+  occurrences: 458
+- status: 403
+  title: Forbidden
+  meaning: Authenticated principal lacks permission for the resource.
+  occurrences: 9
+- status: 404
+  title: Not Found
+  meaning: Referenced resource (event, ticket, transaction, etc.) does not exist.
+  occurrences: 144

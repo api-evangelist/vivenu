@@ -1,0 +1,32 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/vivenu-openapi-original.json + https://trust.vivenu.com/
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: Published OpenAPI 3.0.3 document at https://vivenu.com/api/openapi.json
+- id: apikey-auth
+  conforms: true
+  evidence: securitySchemes declare apiKey (Authorization header) bearer auth
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 securityScheme; auth is bearer API key / JWT
+- id: oidc
+  conforms: false
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use a custom HttpError envelope, not application/problem+json
+- id: webhooks
+  conforms: true
+  evidence: 39 webhook.* event types + webhook management endpoints
+- id: rfc8594-sunset-header
+  conforms: false
+- id: pci-dss
+  conforms: true
+  evidence: PCI DSS listed on https://trust.vivenu.com/
+- id: soc2
+  conforms: true
+  evidence: SOC 2 listed on https://trust.vivenu.com/
+- id: gdpr
+  conforms: true
+  evidence: GDPR listed on https://trust.vivenu.com/ (EU-based provider)

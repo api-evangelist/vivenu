@@ -1,0 +1,29 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for vivenu API
+  version: 1.0.0
+extends: openapi/vivenu-openapi-original.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-21'
+    x-apievangelist-provider: vivenu
+    x-apievangelist-category: event-ticketing
+    x-webhook-events: 39
+    x-auth-model: bearer-apikey
+- target: $.info
+  description: Note the sandbox/staging environment for safe integration testing.
+  update:
+    x-environments:
+      production: https://vivenu.com/api
+      staging: https://vivenu.dev/api
+- target: $.info
+  description: Cross-link to derived API Evangelist artifacts for this provider.
+  update:
+    x-apievangelist-artifacts:
+      authentication: authentication/vivenu-authentication.yml
+      conventions: conventions/vivenu-conventions.yml
+      errors: errors/vivenu-problem-types.yml
+      webhooks: asyncapi/vivenu-webhooks.yml
+      data-model: data-model/vivenu-data-model.yml
+      lifecycle: lifecycle/vivenu-lifecycle.yml
