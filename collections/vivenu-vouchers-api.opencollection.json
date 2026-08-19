@@ -1,0 +1,204 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "vivenu access-lists vouchers API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "vouchers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "vouchers/list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/vouchers",
+            "params": [
+              {
+                "name": "top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all Vouchers"
+        },
+        {
+          "info": {
+            "name": "vouchers/create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/vouchers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a Voucher"
+        },
+        {
+          "info": {
+            "name": "get_all_vouchers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/vouchers/rich",
+            "params": [
+              {
+                "name": "top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all Vouchers"
+        },
+        {
+          "info": {
+            "name": "get_voucher_by_id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/vouchers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Voucher by id"
+        },
+        {
+          "info": {
+            "name": "vouchers/update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://vivenu.com/api/vouchers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a Voucher"
+        },
+        {
+          "info": {
+            "name": "vouchers/getTransactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/vouchers/:id/transactions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Voucher Transactions by id"
+        },
+        {
+          "info": {
+            "name": "get_voucher_by_id_and_code",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/vouchers/:id/:code/info",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Voucher by id and code"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

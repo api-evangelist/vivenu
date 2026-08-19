@@ -1,0 +1,370 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "vivenu access-lists sellers API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "sellers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "get_all_sellers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/sellers",
+            "params": [
+              {
+                "name": "top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "createdAt",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "updatedAt",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all Sellers"
+        },
+        {
+          "info": {
+            "name": "create_a_seller",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/sellers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a Seller"
+        },
+        {
+          "info": {
+            "name": "get_seller_by_user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/sellers/me",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Seller by user"
+        },
+        {
+          "info": {
+            "name": "get_a_seller",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/sellers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a Seller"
+        },
+        {
+          "info": {
+            "name": "update_a_seller",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://vivenu.com/api/sellers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a Seller"
+        },
+        {
+          "info": {
+            "name": "get_seller_info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/sellers/info/:id",
+            "params": [
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Seller info"
+        },
+        {
+          "info": {
+            "name": "get_seller_vitals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/sellers/:id/vitals",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Seller Vitals"
+        },
+        {
+          "info": {
+            "name": "get_sellers_payment_methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/public/sellers/:id/payment-methods",
+            "params": [
+              {
+                "name": "channel",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Sellers Payment Methods"
+        },
+        {
+          "info": {
+            "name": "initialize_fiscalization_of_a_seller",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/sellers/:id/fiscalization/initialize",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Initialize Fiscalization of a Seller"
+        },
+        {
+          "info": {
+            "name": "deactivate_a_product_plan_for_a_seller",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/sellers/:id/product-plans/:planId/deactivate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Seller ID"
+              },
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path",
+                "description": "Product Plan ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deactivate a product plan for a seller"
+        },
+        {
+          "info": {
+            "name": "activate_a_product_plan_for_a_seller",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/sellers/:id/product-plans/:planId/activate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Seller ID"
+              },
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path",
+                "description": "Product Plan ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Activate a product plan for a seller"
+        },
+        {
+          "info": {
+            "name": "update_consent_information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://vivenu.com/api/sellers/:id/consents",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update consent information"
+        },
+        {
+          "info": {
+            "name": "update_modules",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://vivenu.com/api/sellers/:id/modules",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update modules"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

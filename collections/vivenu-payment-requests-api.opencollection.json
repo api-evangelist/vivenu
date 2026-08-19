@@ -1,0 +1,238 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "vivenu access-lists payment-requests API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "payment-requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "payment-requests/list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/payments/requests",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "checkoutId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "gatewayId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "origin",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "createdAt",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "top",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Payment Requests"
+        },
+        {
+          "info": {
+            "name": "payment-requests/create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/payments/requests",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Payment Request"
+        },
+        {
+          "info": {
+            "name": "payment-requests/get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/payments/requests/:id",
+            "params": [
+              {
+                "name": "secret",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a Payment Request"
+        },
+        {
+          "info": {
+            "name": "payment-requests/update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://vivenu.com/api/payments/requests/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Payment Request"
+        },
+        {
+          "info": {
+            "name": "payment-requests/createSetup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/payments/requests/setup",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Payment Request for Customer Payment Method Setup"
+        },
+        {
+          "info": {
+            "name": "payment-requests/receiveProcessor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/payments/requests/:id/processor",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Receive Processor Info"
+        },
+        {
+          "info": {
+            "name": "payment-requests/confirm",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/payments/requests/:id/confirm",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Confirm a Payment Request"
+        },
+        {
+          "info": {
+            "name": "payment-requests/changeStatus",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/payments/requests/:id/payment-status",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Change Payment Request Payment Status"
+        },
+        {
+          "info": {
+            "name": "payment-requests/verify",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/payments/requests/:id/verify",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verify a payment request"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

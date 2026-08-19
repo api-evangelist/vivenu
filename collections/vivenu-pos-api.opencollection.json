@@ -1,0 +1,702 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "vivenu access-lists pos API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "pos",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "get_all_pos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/pos",
+            "params": [
+              {
+                "name": "top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sellerId",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all POS"
+        },
+        {
+          "info": {
+            "name": "create_a_pos",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/pos",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a POS"
+        },
+        {
+          "info": {
+            "name": "get_all_pos_infos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/posinfo",
+            "params": [
+              {
+                "name": "top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "operationMode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sellerId",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all POS Infos"
+        },
+        {
+          "info": {
+            "name": "get_pos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/pos/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get POS"
+        },
+        {
+          "info": {
+            "name": "update_pos",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://vivenu.com/api/pos/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update POS"
+        },
+        {
+          "info": {
+            "name": "get_pos_info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/posinfo/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get POS Info"
+        },
+        {
+          "info": {
+            "name": "get_the_i_ds_and_the_types_of_all_active_pos_payment_gateways",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/pos/payments/gateways",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the IDs and the types of all active POS payment gateways"
+        },
+        {
+          "info": {
+            "name": "get_scannable_information_for_a_code",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/pos/:id/scannable",
+            "params": [
+              {
+                "name": "code",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get scannable information for a code"
+        },
+        {
+          "info": {
+            "name": "get_x_report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/pos/:id/xreport",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get X report"
+        },
+        {
+          "info": {
+            "name": "get_pos_status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/pos/:id/status",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get POS Status"
+        },
+        {
+          "info": {
+            "name": "get_pos_sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/pos/:id/sessions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get POS sessions"
+        },
+        {
+          "info": {
+            "name": "get_pos_fiscalization_info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/pos/:id/fiscalization-info",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get POS fiscalization info"
+        },
+        {
+          "info": {
+            "name": "get_pos_journal_logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/pos/:id/logs",
+            "params": [
+              {
+                "name": "top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "referenceId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get POS journal logs"
+        },
+        {
+          "info": {
+            "name": "get_pos_events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/pos/:id/events",
+            "params": [
+              {
+                "name": "top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startMin",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startMax",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endMin",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endMax",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sellStart",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sellEnd",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "rootId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "eventTypes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get pos events"
+        },
+        {
+          "info": {
+            "name": "export_pos_order_discounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/pos/:id/export/orderdiscounts",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Export POS order discounts"
+        },
+        {
+          "info": {
+            "name": "export_pos_orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/pos/:id/export/orders",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Export POS orders"
+        },
+        {
+          "info": {
+            "name": "export_pos_journal_logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/pos/:id/export/journallogs",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Export POS journal logs"
+        },
+        {
+          "info": {
+            "name": "get_z_report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/pos/:id/zreport/:reportId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "reportId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Z report"
+        },
+        {
+          "info": {
+            "name": "export_pos_cancellations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/pos/:id/export/cancellations",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Export POS cancellations"
+        },
+        {
+          "info": {
+            "name": "export_pos_order_items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/pos/:id/export/orderitems",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Export POS order items"
+        },
+        {
+          "info": {
+            "name": "disable_pos",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/pos/:id/disable",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Disable POS"
+        },
+        {
+          "info": {
+            "name": "close_a_pos_session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/pos/:id/close",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Close a POS session"
+        },
+        {
+          "info": {
+            "name": "open_a_pos_session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/pos/:id/open",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Open a POS session"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

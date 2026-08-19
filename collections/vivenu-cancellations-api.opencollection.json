@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "vivenu access-lists cancellations API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "cancellations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "get_all_cancellations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/cancellations",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all cancellations"
+        },
+        {
+          "info": {
+            "name": "create_invoice_for_cancellation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/cancellations/:id/invoice",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create invoice for cancellation"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

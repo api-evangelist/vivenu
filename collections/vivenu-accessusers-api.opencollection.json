@@ -1,0 +1,327 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "vivenu access-lists accessusers API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "accessusers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "accessusers/list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/accessusers",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all Access Users"
+        },
+        {
+          "info": {
+            "name": "accessusers/create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/accessusers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create an Access User"
+        },
+        {
+          "info": {
+            "name": "get_all_accessible_events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/accessusers/events",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "includeRootEvents",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get all accessible Events"
+        },
+        {
+          "info": {
+            "name": "get_associated_access_user_info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/accessusers/me",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get associated AccessUser info"
+        },
+        {
+          "info": {
+            "name": "get_associated_seller_id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/accessusers/seller",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get associated Seller Id"
+        },
+        {
+          "info": {
+            "name": "get_ticket_with_barcode",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/accessusers/tickets/:barcode",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "barcode",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Ticket with barcode"
+        },
+        {
+          "info": {
+            "name": "get_tickets_for_an_event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/accessusers/:eventId/tickets",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Tickets for an Event"
+        },
+        {
+          "info": {
+            "name": "get_tickets_for_an_event_v_2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/accessusers/tickets/v2/:eventId",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Tickets for an Event v2"
+        },
+        {
+          "info": {
+            "name": "create_scans",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/accessusers/scans/:eventId",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create scans"
+        },
+        {
+          "info": {
+            "name": "scan_ticket_with_barcode",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/accessusers/tickets/:barcode/scan",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "barcode",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Scan Ticket with barcode"
+        },
+        {
+          "info": {
+            "name": "accessusers/update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://vivenu.com/api/accessusers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an Access User"
+        },
+        {
+          "info": {
+            "name": "accessusers/delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://vivenu.com/api/accessusers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an Access User"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

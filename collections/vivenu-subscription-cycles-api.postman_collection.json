@@ -1,0 +1,1344 @@
+{
+  "item": [
+    {
+      "id": "cda1d0f7-eafa-42b0-b00f-233f14a24034",
+      "name": "subscription-cycles",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "60ec8718-1b01-4d11-b4c9-e1f65620f322",
+          "name": "get all subscription cycles",
+          "request": {
+            "name": "get all subscription cycles",
+            "description": {
+              "content": "Get all Subscription Cycles",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "subscriptions",
+                "cycles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "25"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<float>"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "planId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "planVariantIds",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "planVariantIds",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "632fb83d-60b3-4cf2-9b1d-a932e8ce7dd7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscriptions",
+                    "cycles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "planId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "planVariantIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "planVariantIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"docs\": [\n    {\n      \"_id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"DRAFT\",\n      \"action\": \"status-change\",\n      \"planId\": \"string\",\n      \"planVariantIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"eventId\": \"string\",\n      \"sellerId\": \"string\",\n      \"createdAt\": \"2026-06-29T15:07:15.642Z\",\n      \"updatedAt\": \"2017-01-06T05:28:05.015Z\",\n      \"billing\": {},\n      \"statusChange\": {\n        \"type\": \"draft-to-canceled\"\n      },\n      \"extension\": {\n        \"type\": \"transaction\",\n        \"baseEventId\": \"string\",\n        \"targetEventId\": \"string\",\n        \"ticketTypeMapping\": {},\n        \"keepSameBarcodes\": false,\n        \"issueTickets\": true\n      },\n      \"renewal\": {\n        \"type\": \"purchaseIntent\",\n        \"status\": \"string\",\n        \"baseEventId\": \"string\",\n        \"targetEventId\": \"string\",\n        \"ticketTypeMapping\": {},\n        \"keepSameBarcodes\": false,\n        \"targetSubscriptionPlanId\": \"string\",\n        \"subscriptionPlanVariantMapping\": {}\n      },\n      \"startedAt\": \"1974-12-05T08:13:47.875Z\",\n      \"finishedAt\": \"1954-07-19T07:47:56.794Z\",\n      \"subscriptionsAffected\": 5433.075553189998,\n      \"deliverySettings\": {\n        \"notifyCustomer\": true\n      },\n      \"failedActions\": [\n        {\n          \"subscriptionId\": \"string\",\n          \"error\": \"string\"\n        },\n        {\n          \"subscriptionId\": \"string\",\n          \"error\": \"string\"\n        }\n      ],\n      \"subscriptionFilter\": {}\n    },\n    {\n      \"_id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"DRAFT\",\n      \"action\": \"renewal\",\n      \"planId\": \"string\",\n      \"planVariantIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"eventId\": \"string\",\n      \"sellerId\": \"string\",\n      \"createdAt\": \"1955-01-22T15:34:57.166Z\",\n      \"updatedAt\": \"1982-09-30T07:38:19.581Z\",\n      \"billing\": {},\n      \"statusChange\": {\n        \"type\": \"draft-to-active\"\n      },\n      \"extension\": {\n        \"type\": \"purchaseIntent\",\n        \"baseEventId\": \"string\",\n        \"targetEventId\": \"string\",\n        \"ticketTypeMapping\": {},\n        \"keepSameBarcodes\": true,\n        \"issueTickets\": false\n      },\n      \"renewal\": {\n        \"type\": \"purchaseIntent\",\n        \"status\": \"string\",\n        \"baseEventId\": \"string\",\n        \"targetEventId\": \"string\",\n        \"ticketTypeMapping\": {},\n        \"keepSameBarcodes\": false,\n        \"targetSubscriptionPlanId\": \"string\",\n        \"subscriptionPlanVariantMapping\": {}\n      },\n      \"startedAt\": \"1988-04-25T02:35:19.849Z\",\n      \"finishedAt\": \"1968-08-12T21:55:15.858Z\",\n      \"subscriptionsAffected\": 9304.486766899941,\n      \"deliverySettings\": {\n        \"notifyCustomer\": true\n      },\n      \"failedActions\": [\n        {\n          \"subscriptionId\": \"string\",\n          \"error\": \"string\"\n        },\n        {\n          \"subscriptionId\": \"string\",\n          \"error\": \"string\"\n        }\n      ],\n      \"subscriptionFilter\": {}\n    }\n  ],\n  \"total\": 9327\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b90255c6-7f57-446b-97ac-864f99bd6203",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscriptions",
+                    "cycles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "planId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "planVariantIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "planVariantIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "798aae98-05b1-4eec-8d73-061619fa9281",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscriptions",
+                    "cycles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "planId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "planVariantIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "planVariantIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e826f1ff-9ad6-43b6-b072-16c20b5264d8",
+          "name": "create a subscription cycle",
+          "request": {
+            "name": "create a subscription cycle",
+            "description": {
+              "content": "Create a Subscription Cycle",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "subscriptions",
+                "cycles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"action\": \"<string>\",\n  \"planId\": \"<string>\",\n  \"planVariantIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"eventId\": \"<string>\",\n  \"billing\": {},\n  \"statusChange\": {\n    \"type\": \"<string>\"\n  },\n  \"extension\": {\n    \"type\": \"<string>\",\n    \"baseEventId\": \"<string>\",\n    \"targetEventId\": \"<string>\",\n    \"ticketTypeMapping\": \"<object>\",\n    \"keepSameBarcodes\": \"<boolean>\",\n    \"issueTickets\": \"<boolean>\"\n  },\n  \"renewal\": {\n    \"type\": \"<string>\",\n    \"status\": \"<string>\",\n    \"baseEventId\": \"<string>\",\n    \"targetEventId\": \"<string>\",\n    \"ticketTypeMapping\": \"<object>\",\n    \"keepSameBarcodes\": \"<boolean>\",\n    \"targetSubscriptionPlanId\": \"<string>\",\n    \"subscriptionPlanVariantMapping\": \"<object>\"\n  },\n  \"deliverySettings\": {\n    \"notifyCustomer\": true\n  },\n  \"subscriptionFilter\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "74cb309d-3d47-47cf-aada-29d1b45d63a3",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscriptions",
+                    "cycles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"action\": \"<string>\",\n  \"planId\": \"<string>\",\n  \"planVariantIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"eventId\": \"<string>\",\n  \"billing\": {},\n  \"statusChange\": {\n    \"type\": \"<string>\"\n  },\n  \"extension\": {\n    \"type\": \"<string>\",\n    \"baseEventId\": \"<string>\",\n    \"targetEventId\": \"<string>\",\n    \"ticketTypeMapping\": \"<object>\",\n    \"keepSameBarcodes\": \"<boolean>\",\n    \"issueTickets\": \"<boolean>\"\n  },\n  \"renewal\": {\n    \"type\": \"<string>\",\n    \"status\": \"<string>\",\n    \"baseEventId\": \"<string>\",\n    \"targetEventId\": \"<string>\",\n    \"ticketTypeMapping\": \"<object>\",\n    \"keepSameBarcodes\": \"<boolean>\",\n    \"targetSubscriptionPlanId\": \"<string>\",\n    \"subscriptionPlanVariantMapping\": \"<object>\"\n  },\n  \"deliverySettings\": {\n    \"notifyCustomer\": true\n  },\n  \"subscriptionFilter\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"DRAFT\",\n  \"action\": \"status-change\",\n  \"planId\": \"string\",\n  \"planVariantIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"eventId\": \"string\",\n  \"sellerId\": \"string\",\n  \"createdAt\": \"2016-05-26T20:26:38.198Z\",\n  \"updatedAt\": \"2022-05-10T17:59:00.640Z\",\n  \"billing\": {},\n  \"statusChange\": {\n    \"type\": \"draft-to-active\"\n  },\n  \"extension\": {\n    \"type\": \"purchaseIntent\",\n    \"baseEventId\": \"string\",\n    \"targetEventId\": \"string\",\n    \"ticketTypeMapping\": {},\n    \"keepSameBarcodes\": false,\n    \"issueTickets\": false\n  },\n  \"renewal\": {\n    \"type\": \"purchaseIntent\",\n    \"status\": \"string\",\n    \"baseEventId\": \"string\",\n    \"targetEventId\": \"string\",\n    \"ticketTypeMapping\": {},\n    \"keepSameBarcodes\": true,\n    \"targetSubscriptionPlanId\": \"string\",\n    \"subscriptionPlanVariantMapping\": {}\n  },\n  \"startedAt\": \"1964-04-27T00:03:34.123Z\",\n  \"finishedAt\": \"1959-12-14T20:02:04.871Z\",\n  \"subscriptionsAffected\": 2283.2297726169404,\n  \"deliverySettings\": {\n    \"notifyCustomer\": true\n  },\n  \"failedActions\": [\n    {\n      \"subscriptionId\": \"string\",\n      \"error\": \"string\"\n    },\n    {\n      \"subscriptionId\": \"string\",\n      \"error\": \"string\"\n    }\n  ],\n  \"subscriptionFilter\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "048b8151-6f39-4be5-a096-99843b92ab55",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscriptions",
+                    "cycles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"action\": \"<string>\",\n  \"planId\": \"<string>\",\n  \"planVariantIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"eventId\": \"<string>\",\n  \"billing\": {},\n  \"statusChange\": {\n    \"type\": \"<string>\"\n  },\n  \"extension\": {\n    \"type\": \"<string>\",\n    \"baseEventId\": \"<string>\",\n    \"targetEventId\": \"<string>\",\n    \"ticketTypeMapping\": \"<object>\",\n    \"keepSameBarcodes\": \"<boolean>\",\n    \"issueTickets\": \"<boolean>\"\n  },\n  \"renewal\": {\n    \"type\": \"<string>\",\n    \"status\": \"<string>\",\n    \"baseEventId\": \"<string>\",\n    \"targetEventId\": \"<string>\",\n    \"ticketTypeMapping\": \"<object>\",\n    \"keepSameBarcodes\": \"<boolean>\",\n    \"targetSubscriptionPlanId\": \"<string>\",\n    \"subscriptionPlanVariantMapping\": \"<object>\"\n  },\n  \"deliverySettings\": {\n    \"notifyCustomer\": true\n  },\n  \"subscriptionFilter\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "055fe1e4-5735-4321-82b3-66ee17316af6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscriptions",
+                    "cycles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"action\": \"<string>\",\n  \"planId\": \"<string>\",\n  \"planVariantIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"eventId\": \"<string>\",\n  \"billing\": {},\n  \"statusChange\": {\n    \"type\": \"<string>\"\n  },\n  \"extension\": {\n    \"type\": \"<string>\",\n    \"baseEventId\": \"<string>\",\n    \"targetEventId\": \"<string>\",\n    \"ticketTypeMapping\": \"<object>\",\n    \"keepSameBarcodes\": \"<boolean>\",\n    \"issueTickets\": \"<boolean>\"\n  },\n  \"renewal\": {\n    \"type\": \"<string>\",\n    \"status\": \"<string>\",\n    \"baseEventId\": \"<string>\",\n    \"targetEventId\": \"<string>\",\n    \"ticketTypeMapping\": \"<object>\",\n    \"keepSameBarcodes\": \"<boolean>\",\n    \"targetSubscriptionPlanId\": \"<string>\",\n    \"subscriptionPlanVariantMapping\": \"<object>\"\n  },\n  \"deliverySettings\": {\n    \"notifyCustomer\": true\n  },\n  \"subscriptionFilter\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "90523f56-410b-482f-b9bc-bf845f5cde11",
+          "name": "get a subscription cycle",
+          "request": {
+            "name": "get a subscription cycle",
+            "description": {
+              "content": "Get a Subscription Cycle",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "subscriptions",
+                "cycles",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "08356754-ba18-4d19-88c9-c77c5cdf8c69",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscriptions",
+                    "cycles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"DRAFT\",\n  \"action\": \"status-change\",\n  \"planId\": \"string\",\n  \"planVariantIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"eventId\": \"string\",\n  \"sellerId\": \"string\",\n  \"createdAt\": \"2016-05-26T20:26:38.198Z\",\n  \"updatedAt\": \"2022-05-10T17:59:00.640Z\",\n  \"billing\": {},\n  \"statusChange\": {\n    \"type\": \"draft-to-active\"\n  },\n  \"extension\": {\n    \"type\": \"purchaseIntent\",\n    \"baseEventId\": \"string\",\n    \"targetEventId\": \"string\",\n    \"ticketTypeMapping\": {},\n    \"keepSameBarcodes\": false,\n    \"issueTickets\": false\n  },\n  \"renewal\": {\n    \"type\": \"purchaseIntent\",\n    \"status\": \"string\",\n    \"baseEventId\": \"string\",\n    \"targetEventId\": \"string\",\n    \"ticketTypeMapping\": {},\n    \"keepSameBarcodes\": true,\n    \"targetSubscriptionPlanId\": \"string\",\n    \"subscriptionPlanVariantMapping\": {}\n  },\n  \"startedAt\": \"1964-04-27T00:03:34.123Z\",\n  \"finishedAt\": \"1959-12-14T20:02:04.871Z\",\n  \"subscriptionsAffected\": 2283.2297726169404,\n  \"deliverySettings\": {\n    \"notifyCustomer\": true\n  },\n  \"failedActions\": [\n    {\n      \"subscriptionId\": \"string\",\n      \"error\": \"string\"\n    },\n    {\n      \"subscriptionId\": \"string\",\n      \"error\": \"string\"\n    }\n  ],\n  \"subscriptionFilter\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "109d56a6-f3d3-43f8-a5b6-3d568cffd1e4",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscriptions",
+                    "cycles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "14437fdd-b50e-4e63-9917-bed78762ebac",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscriptions",
+                    "cycles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3be93527-0a78-4089-9407-a944b6e93b32",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscriptions",
+                    "cycles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a8fb7739-fd2d-493e-9436-681c7eb6a1fe",
+          "name": "update a subscription cycle",
+          "request": {
+            "name": "update a subscription cycle",
+            "description": {
+              "content": "Update a Subscription Cycle",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "subscriptions",
+                "cycles",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"<string>\",\n  \"planId\": \"<string>\",\n  \"planVariantIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"eventId\": \"<string>\",\n  \"billing\": {},\n  \"statusChange\": {\n    \"type\": \"<string>\"\n  },\n  \"extension\": {\n    \"type\": \"<string>\",\n    \"baseEventId\": \"<string>\",\n    \"targetEventId\": \"<string>\",\n    \"ticketTypeMapping\": \"<object>\",\n    \"keepSameBarcodes\": \"<boolean>\",\n    \"issueTickets\": \"<boolean>\"\n  },\n  \"renewal\": {\n    \"type\": \"<string>\",\n    \"status\": \"<string>\",\n    \"baseEventId\": \"<string>\",\n    \"targetEventId\": \"<string>\",\n    \"ticketTypeMapping\": \"<object>\",\n    \"keepSameBarcodes\": \"<boolean>\",\n    \"targetSubscriptionPlanId\": \"<string>\",\n    \"subscriptionPlanVariantMapping\": \"<object>\"\n  },\n  \"deliverySettings\": {\n    \"notifyCustomer\": true\n  },\n  \"subscriptionFilter\": \"<object>\",\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d67a0dbc-5291-4bb2-baf7-02f20d3d28a0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscriptions",
+                    "cycles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"planId\": \"<string>\",\n  \"planVariantIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"eventId\": \"<string>\",\n  \"billing\": {},\n  \"statusChange\": {\n    \"type\": \"<string>\"\n  },\n  \"extension\": {\n    \"type\": \"<string>\",\n    \"baseEventId\": \"<string>\",\n    \"targetEventId\": \"<string>\",\n    \"ticketTypeMapping\": \"<object>\",\n    \"keepSameBarcodes\": \"<boolean>\",\n    \"issueTickets\": \"<boolean>\"\n  },\n  \"renewal\": {\n    \"type\": \"<string>\",\n    \"status\": \"<string>\",\n    \"baseEventId\": \"<string>\",\n    \"targetEventId\": \"<string>\",\n    \"ticketTypeMapping\": \"<object>\",\n    \"keepSameBarcodes\": \"<boolean>\",\n    \"targetSubscriptionPlanId\": \"<string>\",\n    \"subscriptionPlanVariantMapping\": \"<object>\"\n  },\n  \"deliverySettings\": {\n    \"notifyCustomer\": true\n  },\n  \"subscriptionFilter\": \"<object>\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"DRAFT\",\n  \"action\": \"status-change\",\n  \"planId\": \"string\",\n  \"planVariantIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"eventId\": \"string\",\n  \"sellerId\": \"string\",\n  \"createdAt\": \"2016-05-26T20:26:38.198Z\",\n  \"updatedAt\": \"2022-05-10T17:59:00.640Z\",\n  \"billing\": {},\n  \"statusChange\": {\n    \"type\": \"draft-to-active\"\n  },\n  \"extension\": {\n    \"type\": \"purchaseIntent\",\n    \"baseEventId\": \"string\",\n    \"targetEventId\": \"string\",\n    \"ticketTypeMapping\": {},\n    \"keepSameBarcodes\": false,\n    \"issueTickets\": false\n  },\n  \"renewal\": {\n    \"type\": \"purchaseIntent\",\n    \"status\": \"string\",\n    \"baseEventId\": \"string\",\n    \"targetEventId\": \"string\",\n    \"ticketTypeMapping\": {},\n    \"keepSameBarcodes\": true,\n    \"targetSubscriptionPlanId\": \"string\",\n    \"subscriptionPlanVariantMapping\": {}\n  },\n  \"startedAt\": \"1964-04-27T00:03:34.123Z\",\n  \"finishedAt\": \"1959-12-14T20:02:04.871Z\",\n  \"subscriptionsAffected\": 2283.2297726169404,\n  \"deliverySettings\": {\n    \"notifyCustomer\": true\n  },\n  \"failedActions\": [\n    {\n      \"subscriptionId\": \"string\",\n      \"error\": \"string\"\n    },\n    {\n      \"subscriptionId\": \"string\",\n      \"error\": \"string\"\n    }\n  ],\n  \"subscriptionFilter\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b858e13e-411a-464a-898e-c99b35c8fcbb",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscriptions",
+                    "cycles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"planId\": \"<string>\",\n  \"planVariantIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"eventId\": \"<string>\",\n  \"billing\": {},\n  \"statusChange\": {\n    \"type\": \"<string>\"\n  },\n  \"extension\": {\n    \"type\": \"<string>\",\n    \"baseEventId\": \"<string>\",\n    \"targetEventId\": \"<string>\",\n    \"ticketTypeMapping\": \"<object>\",\n    \"keepSameBarcodes\": \"<boolean>\",\n    \"issueTickets\": \"<boolean>\"\n  },\n  \"renewal\": {\n    \"type\": \"<string>\",\n    \"status\": \"<string>\",\n    \"baseEventId\": \"<string>\",\n    \"targetEventId\": \"<string>\",\n    \"ticketTypeMapping\": \"<object>\",\n    \"keepSameBarcodes\": \"<boolean>\",\n    \"targetSubscriptionPlanId\": \"<string>\",\n    \"subscriptionPlanVariantMapping\": \"<object>\"\n  },\n  \"deliverySettings\": {\n    \"notifyCustomer\": true\n  },\n  \"subscriptionFilter\": \"<object>\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a6fbe170-acda-4225-af10-8b55b4567005",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscriptions",
+                    "cycles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"planId\": \"<string>\",\n  \"planVariantIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"eventId\": \"<string>\",\n  \"billing\": {},\n  \"statusChange\": {\n    \"type\": \"<string>\"\n  },\n  \"extension\": {\n    \"type\": \"<string>\",\n    \"baseEventId\": \"<string>\",\n    \"targetEventId\": \"<string>\",\n    \"ticketTypeMapping\": \"<object>\",\n    \"keepSameBarcodes\": \"<boolean>\",\n    \"issueTickets\": \"<boolean>\"\n  },\n  \"renewal\": {\n    \"type\": \"<string>\",\n    \"status\": \"<string>\",\n    \"baseEventId\": \"<string>\",\n    \"targetEventId\": \"<string>\",\n    \"ticketTypeMapping\": \"<object>\",\n    \"keepSameBarcodes\": \"<boolean>\",\n    \"targetSubscriptionPlanId\": \"<string>\",\n    \"subscriptionPlanVariantMapping\": \"<object>\"\n  },\n  \"deliverySettings\": {\n    \"notifyCustomer\": true\n  },\n  \"subscriptionFilter\": \"<object>\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0eb4f9ab-03c0-4514-8cd4-a8ab3dc95fb0",
+          "name": "activate a subscription cycle",
+          "request": {
+            "name": "activate a subscription cycle",
+            "description": {
+              "content": "Activate a Subscription Cycle",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "subscriptions",
+                "cycles",
+                ":id",
+                "active"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9c5f5c1e-a945-421d-91d2-d0c132602f66",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscriptions",
+                    "cycles",
+                    ":id",
+                    "active"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"DRAFT\",\n  \"action\": \"status-change\",\n  \"planId\": \"string\",\n  \"planVariantIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"eventId\": \"string\",\n  \"sellerId\": \"string\",\n  \"createdAt\": \"2016-05-26T20:26:38.198Z\",\n  \"updatedAt\": \"2022-05-10T17:59:00.640Z\",\n  \"billing\": {},\n  \"statusChange\": {\n    \"type\": \"draft-to-active\"\n  },\n  \"extension\": {\n    \"type\": \"purchaseIntent\",\n    \"baseEventId\": \"string\",\n    \"targetEventId\": \"string\",\n    \"ticketTypeMapping\": {},\n    \"keepSameBarcodes\": false,\n    \"issueTickets\": false\n  },\n  \"renewal\": {\n    \"type\": \"purchaseIntent\",\n    \"status\": \"string\",\n    \"baseEventId\": \"string\",\n    \"targetEventId\": \"string\",\n    \"ticketTypeMapping\": {},\n    \"keepSameBarcodes\": true,\n    \"targetSubscriptionPlanId\": \"string\",\n    \"subscriptionPlanVariantMapping\": {}\n  },\n  \"startedAt\": \"1964-04-27T00:03:34.123Z\",\n  \"finishedAt\": \"1959-12-14T20:02:04.871Z\",\n  \"subscriptionsAffected\": 2283.2297726169404,\n  \"deliverySettings\": {\n    \"notifyCustomer\": true\n  },\n  \"failedActions\": [\n    {\n      \"subscriptionId\": \"string\",\n      \"error\": \"string\"\n    },\n    {\n      \"subscriptionId\": \"string\",\n      \"error\": \"string\"\n    }\n  ],\n  \"subscriptionFilter\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "553449ca-e994-418f-a917-5ece40fa634e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscriptions",
+                    "cycles",
+                    ":id",
+                    "active"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "65f4b7cb-be3b-484f-8c83-5f9286e10309",
+          "name": "retry a subscription cycles failed actions",
+          "request": {
+            "name": "retry a subscription cycles failed actions",
+            "description": {
+              "content": "Retry a Subscription Cycles failed actions",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "subscriptions",
+                "cycles",
+                ":id",
+                "retry"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cedf22a4-1f94-4521-91b0-49b568029fee",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscriptions",
+                    "cycles",
+                    ":id",
+                    "retry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"DRAFT\",\n  \"action\": \"status-change\",\n  \"planId\": \"string\",\n  \"planVariantIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"eventId\": \"string\",\n  \"sellerId\": \"string\",\n  \"createdAt\": \"2016-05-26T20:26:38.198Z\",\n  \"updatedAt\": \"2022-05-10T17:59:00.640Z\",\n  \"billing\": {},\n  \"statusChange\": {\n    \"type\": \"draft-to-active\"\n  },\n  \"extension\": {\n    \"type\": \"purchaseIntent\",\n    \"baseEventId\": \"string\",\n    \"targetEventId\": \"string\",\n    \"ticketTypeMapping\": {},\n    \"keepSameBarcodes\": false,\n    \"issueTickets\": false\n  },\n  \"renewal\": {\n    \"type\": \"purchaseIntent\",\n    \"status\": \"string\",\n    \"baseEventId\": \"string\",\n    \"targetEventId\": \"string\",\n    \"ticketTypeMapping\": {},\n    \"keepSameBarcodes\": true,\n    \"targetSubscriptionPlanId\": \"string\",\n    \"subscriptionPlanVariantMapping\": {}\n  },\n  \"startedAt\": \"1964-04-27T00:03:34.123Z\",\n  \"finishedAt\": \"1959-12-14T20:02:04.871Z\",\n  \"subscriptionsAffected\": 2283.2297726169404,\n  \"deliverySettings\": {\n    \"notifyCustomer\": true\n  },\n  \"failedActions\": [\n    {\n      \"subscriptionId\": \"string\",\n      \"error\": \"string\"\n    },\n    {\n      \"subscriptionId\": \"string\",\n      \"error\": \"string\"\n    }\n  ],\n  \"subscriptionFilter\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2612cd49-6ce7-4e2c-bc20-e68e2ea9b380",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscriptions",
+                    "cycles",
+                    ":id",
+                    "retry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://vivenu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "cc055585-0fc6-483a-8ccb-478d0569a67a",
+    "name": "vivenu access-lists subscription-cycles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "vivenu API Documentation\n\nContact Support:\n Name: vivenu GmbH",
+      "type": "text/plain"
+    }
+  }
+}

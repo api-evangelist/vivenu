@@ -1,0 +1,937 @@
+{
+  "item": [
+    {
+      "id": "edb838e7-caa9-49a1-bf24-e34210edad66",
+      "name": "webhooks",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "728a88c6-72a7-49ed-8b3c-e75a55dbb89f",
+          "name": "webhooks/list",
+          "request": {
+            "name": "webhooks/list",
+            "description": {
+              "content": "Get all webhooks",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "webhooks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "25"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "517491df-15cb-4363-b087-562e72e11bc0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"docs\": [\n    {\n      \"_id\": \"string\",\n      \"name\": \"string\",\n      \"url\": \"http://prFWoehaNDrCJMerIsjEaRLwnsAMsGtb.quMjQQ7FBUnGSzO6asDTlYGWfzakOXTEF0mPY0Er-pzwFubiEZvIGKh5QW\",\n      \"enabled\": false,\n      \"events\": {\n        \"transaction.complete\": false,\n        \"transaction.reservedBySystem\": false,\n        \"transaction.canceled\": false,\n        \"transaction.partiallyCanceled\": false,\n        \"checkout.completed\": true,\n        \"checkout.aborted\": false,\n        \"checkout.detailsSubmitted\": true,\n        \"ticket.created\": false,\n        \"ticket.updated\": false,\n        \"purchaseIntent.created\": false,\n        \"purchaseIntent.approved\": true,\n        \"purchaseIntent.rejected\": false,\n        \"purchaseIntent.updated\": true,\n        \"purchaseIntent.expired\": true,\n        \"purchaseIntent.completed\": false,\n        \"purchaseIntent.cancelled\": true,\n        \"customer.created\": false,\n        \"customer.updated\": true,\n        \"event.created\": true,\n        \"event.updated\": true,\n        \"event.deleted\": true,\n        \"job.started\": false,\n        \"job.failed\": false,\n        \"job.completed\": true,\n        \"support.assignedToSeller\": false,\n        \"ticketTransfer.created\": true,\n        \"ticketTransfer.rejected\": false,\n        \"ticketTransfer.transferred\": false,\n        \"ticketTransfer.expired\": false,\n        \"scan.created\": false,\n        \"bundle.created\": true,\n        \"bundle.updated\": false,\n        \"product.created\": false,\n        \"product.updated\": true,\n        \"product.deleted\": false,\n        \"subscription.created\": true,\n        \"subscription.updated\": false,\n        \"subscription.payment.succeeded\": false,\n        \"subscription.payment.failed\": true,\n        \"fund.created\": false,\n        \"fund.updated\": true,\n        \"campaign.created\": false,\n        \"campaign.updated\": false,\n        \"donation.created\": true,\n        \"pledge.created\": false\n      },\n      \"hmacKey\": \"string\",\n      \"createdBy\": {\n        \"type\": \"USER\",\n        \"id\": \"string\"\n      }\n    },\n    {\n      \"_id\": \"string\",\n      \"name\": \"string\",\n      \"url\": \"http://xfJzxNtGiMHexSmsVyhcGlzf.jvGssDfd6QsTKb1kQfe+uufETYRN.y8a,EkIbXVQisZ\",\n      \"enabled\": false,\n      \"events\": {\n        \"transaction.complete\": true,\n        \"transaction.reservedBySystem\": false,\n        \"transaction.canceled\": true,\n        \"transaction.partiallyCanceled\": true,\n        \"checkout.completed\": false,\n        \"checkout.aborted\": false,\n        \"checkout.detailsSubmitted\": false,\n        \"ticket.created\": true,\n        \"ticket.updated\": false,\n        \"purchaseIntent.created\": true,\n        \"purchaseIntent.approved\": false,\n        \"purchaseIntent.rejected\": false,\n        \"purchaseIntent.updated\": true,\n        \"purchaseIntent.expired\": true,\n        \"purchaseIntent.completed\": false,\n        \"purchaseIntent.cancelled\": true,\n        \"customer.created\": true,\n        \"customer.updated\": false,\n        \"event.created\": false,\n        \"event.updated\": false,\n        \"event.deleted\": false,\n        \"job.started\": false,\n        \"job.failed\": true,\n        \"job.completed\": true,\n        \"support.assignedToSeller\": false,\n        \"ticketTransfer.created\": false,\n        \"ticketTransfer.rejected\": true,\n        \"ticketTransfer.transferred\": true,\n        \"ticketTransfer.expired\": false,\n        \"scan.created\": false,\n        \"bundle.created\": true,\n        \"bundle.updated\": true,\n        \"product.created\": false,\n        \"product.updated\": false,\n        \"product.deleted\": true,\n        \"subscription.created\": true,\n        \"subscription.updated\": true,\n        \"subscription.payment.succeeded\": false,\n        \"subscription.payment.failed\": false,\n        \"fund.created\": true,\n        \"fund.updated\": true,\n        \"campaign.created\": false,\n        \"campaign.updated\": false,\n        \"donation.created\": true,\n        \"pledge.created\": false\n      },\n      \"hmacKey\": \"string\",\n      \"createdBy\": {\n        \"type\": \"API_KEY\",\n        \"id\": \"string\"\n      }\n    }\n  ],\n  \"total\": 5333\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ffb442c2-b7be-4817-a9e3-b862024d7d74",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ecc46a6a-175f-4d4c-ada3-bf810c95dab2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a0f3d5d-65a5-4e11-87e3-0d3fe98a0bbe",
+          "name": "webhooks/create",
+          "request": {
+            "name": "webhooks/create",
+            "description": {
+              "content": "Create a new webhook",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "webhooks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"enabled\": \"<boolean>\",\n  \"events\": {\n    \"transaction.complete\": \"<boolean>\",\n    \"transaction.reservedBySystem\": \"<boolean>\",\n    \"transaction.canceled\": \"<boolean>\",\n    \"transaction.partiallyCanceled\": \"<boolean>\",\n    \"checkout.completed\": \"<boolean>\",\n    \"checkout.aborted\": \"<boolean>\",\n    \"checkout.detailsSubmitted\": \"<boolean>\",\n    \"ticket.created\": \"<boolean>\",\n    \"ticket.updated\": \"<boolean>\",\n    \"purchaseIntent.created\": \"<boolean>\",\n    \"purchaseIntent.approved\": \"<boolean>\",\n    \"purchaseIntent.rejected\": \"<boolean>\",\n    \"purchaseIntent.updated\": \"<boolean>\",\n    \"purchaseIntent.expired\": \"<boolean>\",\n    \"purchaseIntent.completed\": \"<boolean>\",\n    \"purchaseIntent.cancelled\": \"<boolean>\",\n    \"customer.created\": \"<boolean>\",\n    \"customer.updated\": \"<boolean>\",\n    \"event.created\": \"<boolean>\",\n    \"event.updated\": \"<boolean>\",\n    \"event.deleted\": \"<boolean>\",\n    \"job.started\": \"<boolean>\",\n    \"job.failed\": \"<boolean>\",\n    \"job.completed\": \"<boolean>\",\n    \"support.assignedToSeller\": \"<boolean>\",\n    \"ticketTransfer.created\": \"<boolean>\",\n    \"ticketTransfer.rejected\": \"<boolean>\",\n    \"ticketTransfer.transferred\": \"<boolean>\",\n    \"ticketTransfer.expired\": \"<boolean>\",\n    \"scan.created\": \"<boolean>\",\n    \"bundle.created\": \"<boolean>\",\n    \"bundle.updated\": \"<boolean>\",\n    \"product.created\": \"<boolean>\",\n    \"product.updated\": \"<boolean>\",\n    \"product.deleted\": \"<boolean>\",\n    \"subscription.created\": \"<boolean>\",\n    \"subscription.updated\": \"<boolean>\",\n    \"subscription.payment.succeeded\": \"<boolean>\",\n    \"subscription.payment.failed\": \"<boolean>\",\n    \"fund.created\": \"<boolean>\",\n    \"fund.updated\": \"<boolean>\",\n    \"campaign.created\": \"<boolean>\",\n    \"campaign.updated\": \"<boolean>\",\n    \"donation.created\": \"<boolean>\",\n    \"pledge.created\": \"<boolean>\"\n  },\n  \"hmacKey\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "58a2bf1c-79f4-4580-8d61-b35caecf0911",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"enabled\": \"<boolean>\",\n  \"events\": {\n    \"transaction.complete\": \"<boolean>\",\n    \"transaction.reservedBySystem\": \"<boolean>\",\n    \"transaction.canceled\": \"<boolean>\",\n    \"transaction.partiallyCanceled\": \"<boolean>\",\n    \"checkout.completed\": \"<boolean>\",\n    \"checkout.aborted\": \"<boolean>\",\n    \"checkout.detailsSubmitted\": \"<boolean>\",\n    \"ticket.created\": \"<boolean>\",\n    \"ticket.updated\": \"<boolean>\",\n    \"purchaseIntent.created\": \"<boolean>\",\n    \"purchaseIntent.approved\": \"<boolean>\",\n    \"purchaseIntent.rejected\": \"<boolean>\",\n    \"purchaseIntent.updated\": \"<boolean>\",\n    \"purchaseIntent.expired\": \"<boolean>\",\n    \"purchaseIntent.completed\": \"<boolean>\",\n    \"purchaseIntent.cancelled\": \"<boolean>\",\n    \"customer.created\": \"<boolean>\",\n    \"customer.updated\": \"<boolean>\",\n    \"event.created\": \"<boolean>\",\n    \"event.updated\": \"<boolean>\",\n    \"event.deleted\": \"<boolean>\",\n    \"job.started\": \"<boolean>\",\n    \"job.failed\": \"<boolean>\",\n    \"job.completed\": \"<boolean>\",\n    \"support.assignedToSeller\": \"<boolean>\",\n    \"ticketTransfer.created\": \"<boolean>\",\n    \"ticketTransfer.rejected\": \"<boolean>\",\n    \"ticketTransfer.transferred\": \"<boolean>\",\n    \"ticketTransfer.expired\": \"<boolean>\",\n    \"scan.created\": \"<boolean>\",\n    \"bundle.created\": \"<boolean>\",\n    \"bundle.updated\": \"<boolean>\",\n    \"product.created\": \"<boolean>\",\n    \"product.updated\": \"<boolean>\",\n    \"product.deleted\": \"<boolean>\",\n    \"subscription.created\": \"<boolean>\",\n    \"subscription.updated\": \"<boolean>\",\n    \"subscription.payment.succeeded\": \"<boolean>\",\n    \"subscription.payment.failed\": \"<boolean>\",\n    \"fund.created\": \"<boolean>\",\n    \"fund.updated\": \"<boolean>\",\n    \"campaign.created\": \"<boolean>\",\n    \"campaign.updated\": \"<boolean>\",\n    \"donation.created\": \"<boolean>\",\n    \"pledge.created\": \"<boolean>\"\n  },\n  \"hmacKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"url\": \"https://UgMlHXGC.vvgtDVpHv2E4ZESK+Cld.1Tiqy99TVPoDBEjM\",\n  \"enabled\": false,\n  \"events\": {\n    \"transaction.complete\": false,\n    \"transaction.reservedBySystem\": true,\n    \"transaction.canceled\": true,\n    \"transaction.partiallyCanceled\": true,\n    \"checkout.completed\": true,\n    \"checkout.aborted\": true,\n    \"checkout.detailsSubmitted\": false,\n    \"ticket.created\": true,\n    \"ticket.updated\": false,\n    \"purchaseIntent.created\": true,\n    \"purchaseIntent.approved\": false,\n    \"purchaseIntent.rejected\": false,\n    \"purchaseIntent.updated\": true,\n    \"purchaseIntent.expired\": false,\n    \"purchaseIntent.completed\": true,\n    \"purchaseIntent.cancelled\": false,\n    \"customer.created\": true,\n    \"customer.updated\": false,\n    \"event.created\": true,\n    \"event.updated\": true,\n    \"event.deleted\": true,\n    \"job.started\": true,\n    \"job.failed\": true,\n    \"job.completed\": false,\n    \"support.assignedToSeller\": false,\n    \"ticketTransfer.created\": true,\n    \"ticketTransfer.rejected\": false,\n    \"ticketTransfer.transferred\": true,\n    \"ticketTransfer.expired\": false,\n    \"scan.created\": true,\n    \"bundle.created\": true,\n    \"bundle.updated\": false,\n    \"product.created\": true,\n    \"product.updated\": true,\n    \"product.deleted\": false,\n    \"subscription.created\": false,\n    \"subscription.updated\": true,\n    \"subscription.payment.succeeded\": true,\n    \"subscription.payment.failed\": false,\n    \"fund.created\": true,\n    \"fund.updated\": false,\n    \"campaign.created\": true,\n    \"campaign.updated\": true,\n    \"donation.created\": true,\n    \"pledge.created\": false\n  },\n  \"hmacKey\": \"string\",\n  \"createdBy\": {\n    \"type\": \"API_KEY\",\n    \"id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f542eba-9361-4c71-964f-27c36bb8fd6f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"enabled\": \"<boolean>\",\n  \"events\": {\n    \"transaction.complete\": \"<boolean>\",\n    \"transaction.reservedBySystem\": \"<boolean>\",\n    \"transaction.canceled\": \"<boolean>\",\n    \"transaction.partiallyCanceled\": \"<boolean>\",\n    \"checkout.completed\": \"<boolean>\",\n    \"checkout.aborted\": \"<boolean>\",\n    \"checkout.detailsSubmitted\": \"<boolean>\",\n    \"ticket.created\": \"<boolean>\",\n    \"ticket.updated\": \"<boolean>\",\n    \"purchaseIntent.created\": \"<boolean>\",\n    \"purchaseIntent.approved\": \"<boolean>\",\n    \"purchaseIntent.rejected\": \"<boolean>\",\n    \"purchaseIntent.updated\": \"<boolean>\",\n    \"purchaseIntent.expired\": \"<boolean>\",\n    \"purchaseIntent.completed\": \"<boolean>\",\n    \"purchaseIntent.cancelled\": \"<boolean>\",\n    \"customer.created\": \"<boolean>\",\n    \"customer.updated\": \"<boolean>\",\n    \"event.created\": \"<boolean>\",\n    \"event.updated\": \"<boolean>\",\n    \"event.deleted\": \"<boolean>\",\n    \"job.started\": \"<boolean>\",\n    \"job.failed\": \"<boolean>\",\n    \"job.completed\": \"<boolean>\",\n    \"support.assignedToSeller\": \"<boolean>\",\n    \"ticketTransfer.created\": \"<boolean>\",\n    \"ticketTransfer.rejected\": \"<boolean>\",\n    \"ticketTransfer.transferred\": \"<boolean>\",\n    \"ticketTransfer.expired\": \"<boolean>\",\n    \"scan.created\": \"<boolean>\",\n    \"bundle.created\": \"<boolean>\",\n    \"bundle.updated\": \"<boolean>\",\n    \"product.created\": \"<boolean>\",\n    \"product.updated\": \"<boolean>\",\n    \"product.deleted\": \"<boolean>\",\n    \"subscription.created\": \"<boolean>\",\n    \"subscription.updated\": \"<boolean>\",\n    \"subscription.payment.succeeded\": \"<boolean>\",\n    \"subscription.payment.failed\": \"<boolean>\",\n    \"fund.created\": \"<boolean>\",\n    \"fund.updated\": \"<boolean>\",\n    \"campaign.created\": \"<boolean>\",\n    \"campaign.updated\": \"<boolean>\",\n    \"donation.created\": \"<boolean>\",\n    \"pledge.created\": \"<boolean>\"\n  },\n  \"hmacKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c2543f63-f2c4-43a2-a5c3-fe97ecd9b86a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"enabled\": \"<boolean>\",\n  \"events\": {\n    \"transaction.complete\": \"<boolean>\",\n    \"transaction.reservedBySystem\": \"<boolean>\",\n    \"transaction.canceled\": \"<boolean>\",\n    \"transaction.partiallyCanceled\": \"<boolean>\",\n    \"checkout.completed\": \"<boolean>\",\n    \"checkout.aborted\": \"<boolean>\",\n    \"checkout.detailsSubmitted\": \"<boolean>\",\n    \"ticket.created\": \"<boolean>\",\n    \"ticket.updated\": \"<boolean>\",\n    \"purchaseIntent.created\": \"<boolean>\",\n    \"purchaseIntent.approved\": \"<boolean>\",\n    \"purchaseIntent.rejected\": \"<boolean>\",\n    \"purchaseIntent.updated\": \"<boolean>\",\n    \"purchaseIntent.expired\": \"<boolean>\",\n    \"purchaseIntent.completed\": \"<boolean>\",\n    \"purchaseIntent.cancelled\": \"<boolean>\",\n    \"customer.created\": \"<boolean>\",\n    \"customer.updated\": \"<boolean>\",\n    \"event.created\": \"<boolean>\",\n    \"event.updated\": \"<boolean>\",\n    \"event.deleted\": \"<boolean>\",\n    \"job.started\": \"<boolean>\",\n    \"job.failed\": \"<boolean>\",\n    \"job.completed\": \"<boolean>\",\n    \"support.assignedToSeller\": \"<boolean>\",\n    \"ticketTransfer.created\": \"<boolean>\",\n    \"ticketTransfer.rejected\": \"<boolean>\",\n    \"ticketTransfer.transferred\": \"<boolean>\",\n    \"ticketTransfer.expired\": \"<boolean>\",\n    \"scan.created\": \"<boolean>\",\n    \"bundle.created\": \"<boolean>\",\n    \"bundle.updated\": \"<boolean>\",\n    \"product.created\": \"<boolean>\",\n    \"product.updated\": \"<boolean>\",\n    \"product.deleted\": \"<boolean>\",\n    \"subscription.created\": \"<boolean>\",\n    \"subscription.updated\": \"<boolean>\",\n    \"subscription.payment.succeeded\": \"<boolean>\",\n    \"subscription.payment.failed\": \"<boolean>\",\n    \"fund.created\": \"<boolean>\",\n    \"fund.updated\": \"<boolean>\",\n    \"campaign.created\": \"<boolean>\",\n    \"campaign.updated\": \"<boolean>\",\n    \"donation.created\": \"<boolean>\",\n    \"pledge.created\": \"<boolean>\"\n  },\n  \"hmacKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "43307a94-65d2-49ca-8ca2-7addad0836c7",
+          "name": "webhooks/update",
+          "request": {
+            "name": "webhooks/update",
+            "description": {
+              "content": "Update a webhook",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "webhook",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"enabled\": \"<boolean>\",\n  \"events\": {\n    \"transaction.complete\": \"<boolean>\",\n    \"transaction.reservedBySystem\": \"<boolean>\",\n    \"transaction.canceled\": \"<boolean>\",\n    \"transaction.partiallyCanceled\": \"<boolean>\",\n    \"checkout.completed\": \"<boolean>\",\n    \"checkout.aborted\": \"<boolean>\",\n    \"checkout.detailsSubmitted\": \"<boolean>\",\n    \"ticket.created\": \"<boolean>\",\n    \"ticket.updated\": \"<boolean>\",\n    \"purchaseIntent.created\": \"<boolean>\",\n    \"purchaseIntent.approved\": \"<boolean>\",\n    \"purchaseIntent.rejected\": \"<boolean>\",\n    \"purchaseIntent.updated\": \"<boolean>\",\n    \"purchaseIntent.expired\": \"<boolean>\",\n    \"purchaseIntent.completed\": \"<boolean>\",\n    \"purchaseIntent.cancelled\": \"<boolean>\",\n    \"customer.created\": \"<boolean>\",\n    \"customer.updated\": \"<boolean>\",\n    \"event.created\": \"<boolean>\",\n    \"event.updated\": \"<boolean>\",\n    \"event.deleted\": \"<boolean>\",\n    \"job.started\": \"<boolean>\",\n    \"job.failed\": \"<boolean>\",\n    \"job.completed\": \"<boolean>\",\n    \"support.assignedToSeller\": \"<boolean>\",\n    \"ticketTransfer.created\": \"<boolean>\",\n    \"ticketTransfer.rejected\": \"<boolean>\",\n    \"ticketTransfer.transferred\": \"<boolean>\",\n    \"ticketTransfer.expired\": \"<boolean>\",\n    \"scan.created\": \"<boolean>\",\n    \"bundle.created\": \"<boolean>\",\n    \"bundle.updated\": \"<boolean>\",\n    \"product.created\": \"<boolean>\",\n    \"product.updated\": \"<boolean>\",\n    \"product.deleted\": \"<boolean>\",\n    \"subscription.created\": \"<boolean>\",\n    \"subscription.updated\": \"<boolean>\",\n    \"subscription.payment.succeeded\": \"<boolean>\",\n    \"subscription.payment.failed\": \"<boolean>\",\n    \"fund.created\": \"<boolean>\",\n    \"fund.updated\": \"<boolean>\",\n    \"campaign.created\": \"<boolean>\",\n    \"campaign.updated\": \"<boolean>\",\n    \"donation.created\": \"<boolean>\",\n    \"pledge.created\": \"<boolean>\"\n  },\n  \"hmacKey\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2e17b1ff-89d9-4622-9eb3-b3ab5d13fb2d",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webhook",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"enabled\": \"<boolean>\",\n  \"events\": {\n    \"transaction.complete\": \"<boolean>\",\n    \"transaction.reservedBySystem\": \"<boolean>\",\n    \"transaction.canceled\": \"<boolean>\",\n    \"transaction.partiallyCanceled\": \"<boolean>\",\n    \"checkout.completed\": \"<boolean>\",\n    \"checkout.aborted\": \"<boolean>\",\n    \"checkout.detailsSubmitted\": \"<boolean>\",\n    \"ticket.created\": \"<boolean>\",\n    \"ticket.updated\": \"<boolean>\",\n    \"purchaseIntent.created\": \"<boolean>\",\n    \"purchaseIntent.approved\": \"<boolean>\",\n    \"purchaseIntent.rejected\": \"<boolean>\",\n    \"purchaseIntent.updated\": \"<boolean>\",\n    \"purchaseIntent.expired\": \"<boolean>\",\n    \"purchaseIntent.completed\": \"<boolean>\",\n    \"purchaseIntent.cancelled\": \"<boolean>\",\n    \"customer.created\": \"<boolean>\",\n    \"customer.updated\": \"<boolean>\",\n    \"event.created\": \"<boolean>\",\n    \"event.updated\": \"<boolean>\",\n    \"event.deleted\": \"<boolean>\",\n    \"job.started\": \"<boolean>\",\n    \"job.failed\": \"<boolean>\",\n    \"job.completed\": \"<boolean>\",\n    \"support.assignedToSeller\": \"<boolean>\",\n    \"ticketTransfer.created\": \"<boolean>\",\n    \"ticketTransfer.rejected\": \"<boolean>\",\n    \"ticketTransfer.transferred\": \"<boolean>\",\n    \"ticketTransfer.expired\": \"<boolean>\",\n    \"scan.created\": \"<boolean>\",\n    \"bundle.created\": \"<boolean>\",\n    \"bundle.updated\": \"<boolean>\",\n    \"product.created\": \"<boolean>\",\n    \"product.updated\": \"<boolean>\",\n    \"product.deleted\": \"<boolean>\",\n    \"subscription.created\": \"<boolean>\",\n    \"subscription.updated\": \"<boolean>\",\n    \"subscription.payment.succeeded\": \"<boolean>\",\n    \"subscription.payment.failed\": \"<boolean>\",\n    \"fund.created\": \"<boolean>\",\n    \"fund.updated\": \"<boolean>\",\n    \"campaign.created\": \"<boolean>\",\n    \"campaign.updated\": \"<boolean>\",\n    \"donation.created\": \"<boolean>\",\n    \"pledge.created\": \"<boolean>\"\n  },\n  \"hmacKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"url\": \"https://UgMlHXGC.vvgtDVpHv2E4ZESK+Cld.1Tiqy99TVPoDBEjM\",\n  \"enabled\": false,\n  \"events\": {\n    \"transaction.complete\": false,\n    \"transaction.reservedBySystem\": true,\n    \"transaction.canceled\": true,\n    \"transaction.partiallyCanceled\": true,\n    \"checkout.completed\": true,\n    \"checkout.aborted\": true,\n    \"checkout.detailsSubmitted\": false,\n    \"ticket.created\": true,\n    \"ticket.updated\": false,\n    \"purchaseIntent.created\": true,\n    \"purchaseIntent.approved\": false,\n    \"purchaseIntent.rejected\": false,\n    \"purchaseIntent.updated\": true,\n    \"purchaseIntent.expired\": false,\n    \"purchaseIntent.completed\": true,\n    \"purchaseIntent.cancelled\": false,\n    \"customer.created\": true,\n    \"customer.updated\": false,\n    \"event.created\": true,\n    \"event.updated\": true,\n    \"event.deleted\": true,\n    \"job.started\": true,\n    \"job.failed\": true,\n    \"job.completed\": false,\n    \"support.assignedToSeller\": false,\n    \"ticketTransfer.created\": true,\n    \"ticketTransfer.rejected\": false,\n    \"ticketTransfer.transferred\": true,\n    \"ticketTransfer.expired\": false,\n    \"scan.created\": true,\n    \"bundle.created\": true,\n    \"bundle.updated\": false,\n    \"product.created\": true,\n    \"product.updated\": true,\n    \"product.deleted\": false,\n    \"subscription.created\": false,\n    \"subscription.updated\": true,\n    \"subscription.payment.succeeded\": true,\n    \"subscription.payment.failed\": false,\n    \"fund.created\": true,\n    \"fund.updated\": false,\n    \"campaign.created\": true,\n    \"campaign.updated\": true,\n    \"donation.created\": true,\n    \"pledge.created\": false\n  },\n  \"hmacKey\": \"string\",\n  \"createdBy\": {\n    \"type\": \"API_KEY\",\n    \"id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ad40541-d482-49ed-bb22-1304983b3531",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webhook",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"enabled\": \"<boolean>\",\n  \"events\": {\n    \"transaction.complete\": \"<boolean>\",\n    \"transaction.reservedBySystem\": \"<boolean>\",\n    \"transaction.canceled\": \"<boolean>\",\n    \"transaction.partiallyCanceled\": \"<boolean>\",\n    \"checkout.completed\": \"<boolean>\",\n    \"checkout.aborted\": \"<boolean>\",\n    \"checkout.detailsSubmitted\": \"<boolean>\",\n    \"ticket.created\": \"<boolean>\",\n    \"ticket.updated\": \"<boolean>\",\n    \"purchaseIntent.created\": \"<boolean>\",\n    \"purchaseIntent.approved\": \"<boolean>\",\n    \"purchaseIntent.rejected\": \"<boolean>\",\n    \"purchaseIntent.updated\": \"<boolean>\",\n    \"purchaseIntent.expired\": \"<boolean>\",\n    \"purchaseIntent.completed\": \"<boolean>\",\n    \"purchaseIntent.cancelled\": \"<boolean>\",\n    \"customer.created\": \"<boolean>\",\n    \"customer.updated\": \"<boolean>\",\n    \"event.created\": \"<boolean>\",\n    \"event.updated\": \"<boolean>\",\n    \"event.deleted\": \"<boolean>\",\n    \"job.started\": \"<boolean>\",\n    \"job.failed\": \"<boolean>\",\n    \"job.completed\": \"<boolean>\",\n    \"support.assignedToSeller\": \"<boolean>\",\n    \"ticketTransfer.created\": \"<boolean>\",\n    \"ticketTransfer.rejected\": \"<boolean>\",\n    \"ticketTransfer.transferred\": \"<boolean>\",\n    \"ticketTransfer.expired\": \"<boolean>\",\n    \"scan.created\": \"<boolean>\",\n    \"bundle.created\": \"<boolean>\",\n    \"bundle.updated\": \"<boolean>\",\n    \"product.created\": \"<boolean>\",\n    \"product.updated\": \"<boolean>\",\n    \"product.deleted\": \"<boolean>\",\n    \"subscription.created\": \"<boolean>\",\n    \"subscription.updated\": \"<boolean>\",\n    \"subscription.payment.succeeded\": \"<boolean>\",\n    \"subscription.payment.failed\": \"<boolean>\",\n    \"fund.created\": \"<boolean>\",\n    \"fund.updated\": \"<boolean>\",\n    \"campaign.created\": \"<boolean>\",\n    \"campaign.updated\": \"<boolean>\",\n    \"donation.created\": \"<boolean>\",\n    \"pledge.created\": \"<boolean>\"\n  },\n  \"hmacKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8f365031-a68a-4615-95c4-97f452df46a8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webhook",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"enabled\": \"<boolean>\",\n  \"events\": {\n    \"transaction.complete\": \"<boolean>\",\n    \"transaction.reservedBySystem\": \"<boolean>\",\n    \"transaction.canceled\": \"<boolean>\",\n    \"transaction.partiallyCanceled\": \"<boolean>\",\n    \"checkout.completed\": \"<boolean>\",\n    \"checkout.aborted\": \"<boolean>\",\n    \"checkout.detailsSubmitted\": \"<boolean>\",\n    \"ticket.created\": \"<boolean>\",\n    \"ticket.updated\": \"<boolean>\",\n    \"purchaseIntent.created\": \"<boolean>\",\n    \"purchaseIntent.approved\": \"<boolean>\",\n    \"purchaseIntent.rejected\": \"<boolean>\",\n    \"purchaseIntent.updated\": \"<boolean>\",\n    \"purchaseIntent.expired\": \"<boolean>\",\n    \"purchaseIntent.completed\": \"<boolean>\",\n    \"purchaseIntent.cancelled\": \"<boolean>\",\n    \"customer.created\": \"<boolean>\",\n    \"customer.updated\": \"<boolean>\",\n    \"event.created\": \"<boolean>\",\n    \"event.updated\": \"<boolean>\",\n    \"event.deleted\": \"<boolean>\",\n    \"job.started\": \"<boolean>\",\n    \"job.failed\": \"<boolean>\",\n    \"job.completed\": \"<boolean>\",\n    \"support.assignedToSeller\": \"<boolean>\",\n    \"ticketTransfer.created\": \"<boolean>\",\n    \"ticketTransfer.rejected\": \"<boolean>\",\n    \"ticketTransfer.transferred\": \"<boolean>\",\n    \"ticketTransfer.expired\": \"<boolean>\",\n    \"scan.created\": \"<boolean>\",\n    \"bundle.created\": \"<boolean>\",\n    \"bundle.updated\": \"<boolean>\",\n    \"product.created\": \"<boolean>\",\n    \"product.updated\": \"<boolean>\",\n    \"product.deleted\": \"<boolean>\",\n    \"subscription.created\": \"<boolean>\",\n    \"subscription.updated\": \"<boolean>\",\n    \"subscription.payment.succeeded\": \"<boolean>\",\n    \"subscription.payment.failed\": \"<boolean>\",\n    \"fund.created\": \"<boolean>\",\n    \"fund.updated\": \"<boolean>\",\n    \"campaign.created\": \"<boolean>\",\n    \"campaign.updated\": \"<boolean>\",\n    \"donation.created\": \"<boolean>\",\n    \"pledge.created\": \"<boolean>\"\n  },\n  \"hmacKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ab0fdfa9-4d81-4387-99b9-9aa37b0e00da",
+          "name": "webhooks/delete",
+          "request": {
+            "name": "webhooks/delete",
+            "description": {
+              "content": "Delete a Webhook",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "webhook",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "da67861d-2fe3-4d18-ac99-5f8db1618584",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webhook",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"url\": \"https://UgMlHXGC.vvgtDVpHv2E4ZESK+Cld.1Tiqy99TVPoDBEjM\",\n  \"enabled\": false,\n  \"events\": {\n    \"transaction.complete\": false,\n    \"transaction.reservedBySystem\": true,\n    \"transaction.canceled\": true,\n    \"transaction.partiallyCanceled\": true,\n    \"checkout.completed\": true,\n    \"checkout.aborted\": true,\n    \"checkout.detailsSubmitted\": false,\n    \"ticket.created\": true,\n    \"ticket.updated\": false,\n    \"purchaseIntent.created\": true,\n    \"purchaseIntent.approved\": false,\n    \"purchaseIntent.rejected\": false,\n    \"purchaseIntent.updated\": true,\n    \"purchaseIntent.expired\": false,\n    \"purchaseIntent.completed\": true,\n    \"purchaseIntent.cancelled\": false,\n    \"customer.created\": true,\n    \"customer.updated\": false,\n    \"event.created\": true,\n    \"event.updated\": true,\n    \"event.deleted\": true,\n    \"job.started\": true,\n    \"job.failed\": true,\n    \"job.completed\": false,\n    \"support.assignedToSeller\": false,\n    \"ticketTransfer.created\": true,\n    \"ticketTransfer.rejected\": false,\n    \"ticketTransfer.transferred\": true,\n    \"ticketTransfer.expired\": false,\n    \"scan.created\": true,\n    \"bundle.created\": true,\n    \"bundle.updated\": false,\n    \"product.created\": true,\n    \"product.updated\": true,\n    \"product.deleted\": false,\n    \"subscription.created\": false,\n    \"subscription.updated\": true,\n    \"subscription.payment.succeeded\": true,\n    \"subscription.payment.failed\": false,\n    \"fund.created\": true,\n    \"fund.updated\": false,\n    \"campaign.created\": true,\n    \"campaign.updated\": true,\n    \"donation.created\": true,\n    \"pledge.created\": false\n  },\n  \"hmacKey\": \"string\",\n  \"createdBy\": {\n    \"type\": \"API_KEY\",\n    \"id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c277fbbc-9ed9-4a0f-980f-797b175e55d4",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webhook",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "15238a21-8b18-4d81-9b9a-57687ca7ea4f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webhook",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0a5b6df6-9956-4846-b389-a2929e510b79",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webhook",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://vivenu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5a1a1fd5-891c-4314-b54a-bef89e3bf6f1",
+    "name": "vivenu access-lists webhooks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "vivenu API Documentation\n\nContact Support:\n Name: vivenu GmbH",
+      "type": "text/plain"
+    }
+  }
+}

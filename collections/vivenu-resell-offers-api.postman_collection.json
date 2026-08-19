@@ -1,0 +1,2766 @@
+{
+  "item": [
+    {
+      "id": "6b5f881a-f326-4eb5-9863-eeccf46ae223",
+      "name": "resell-offers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "18f1e96b-d080-4ac0-a983-d4c39124d9f6",
+          "name": "list offers",
+          "request": {
+            "name": "list offers",
+            "description": {
+              "content": "List offers",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "resell",
+                "offers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "eventId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "customerId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "listingIds",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "listingIds",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$gt]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$gte]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$lt]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$lte]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$eq]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$ne]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "25",
+                  "description": "A limit on the number of objects to be returned. Can range between 1 and 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "0",
+                  "description": "The number of objects to skip for the requested result"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "14e6c62a-0b72-4797-94ff-3678f3b2ea01",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "resell",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "eventId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "listingIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "listingIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "createdAt[$gt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$eq]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$ne]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"docs\": [\n    {\n      \"_id\": \"string\",\n      \"customerId\": \"string\",\n      \"sellerId\": \"string\",\n      \"eventId\": \"string\",\n      \"items\": [\n        {\n          \"ticketId\": \"string\",\n          \"ticketTypeId\": \"string\",\n          \"categoryRef\": \"string\",\n          \"price\": 5947.213442204252,\n          \"resellFee\": 6952.715910465697,\n          \"ticketName\": \"string\",\n          \"seatingInfo\": [\n            {\n              \"_type\": 6,\n              \"statusId\": \"string\",\n              \"_id\": \"string\",\n              \"categoryId\": \"string\",\n              \"name\": \"string\",\n              \"seatType\": \"foldable\",\n              \"sectionName\": \"string\",\n              \"groupName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"gate\": \"string\"\n            },\n            {\n              \"_type\": 7,\n              \"statusId\": \"string\",\n              \"_id\": \"string\",\n              \"categoryId\": \"string\",\n              \"name\": \"string\",\n              \"seatType\": \"handicapped\",\n              \"sectionName\": \"string\",\n              \"groupName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"gate\": \"string\"\n            }\n          ]\n        },\n        {\n          \"ticketId\": \"string\",\n          \"ticketTypeId\": \"string\",\n          \"categoryRef\": \"string\",\n          \"price\": 3541.94197761994,\n          \"resellFee\": 7247.409371877643,\n          \"ticketName\": \"string\",\n          \"seatingInfo\": [\n            {\n              \"_type\": 7,\n              \"statusId\": \"string\",\n              \"_id\": \"string\",\n              \"categoryId\": \"string\",\n              \"name\": \"string\",\n              \"seatType\": \"handicapped\",\n              \"sectionName\": \"string\",\n              \"groupName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"gate\": \"string\"\n            },\n            {\n              \"_type\": 6,\n              \"statusId\": \"string\",\n              \"_id\": \"string\",\n              \"categoryId\": \"string\",\n              \"name\": \"string\",\n              \"seatType\": \"limitedView\",\n              \"sectionName\": \"string\",\n              \"groupName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"gate\": \"string\"\n            }\n          ]\n        }\n      ],\n      \"status\": [],\n      \"cpmId\": \"string\",\n      \"currency\": [],\n      \"createdAt\": \"2013-11-06T07:58:20.198Z\",\n      \"updatedAt\": \"2000-01-30T23:48:16.130Z\"\n    },\n    {\n      \"_id\": \"string\",\n      \"customerId\": \"string\",\n      \"sellerId\": \"string\",\n      \"eventId\": \"string\",\n      \"items\": [\n        {\n          \"ticketId\": \"string\",\n          \"ticketTypeId\": \"string\",\n          \"categoryRef\": \"string\",\n          \"price\": 3175.5995115164847,\n          \"resellFee\": 1872.8065020003671,\n          \"ticketName\": \"string\",\n          \"seatingInfo\": [\n            {\n              \"_type\": 7,\n              \"statusId\": \"string\",\n              \"_id\": \"string\",\n              \"categoryId\": \"string\",\n              \"name\": \"string\",\n              \"seatType\": \"limitedView\",\n              \"sectionName\": \"string\",\n              \"groupName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"gate\": \"string\"\n            },\n            {\n              \"_type\": 6,\n              \"statusId\": \"string\",\n              \"_id\": \"string\",\n              \"categoryId\": \"string\",\n              \"name\": \"string\",\n              \"seatType\": \"limitedView\",\n              \"sectionName\": \"string\",\n              \"groupName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"gate\": \"string\"\n            }\n          ]\n        },\n        {\n          \"ticketId\": \"string\",\n          \"ticketTypeId\": \"string\",\n          \"categoryRef\": \"string\",\n          \"price\": 6780.84533620311,\n          \"resellFee\": 1879.5885441716819,\n          \"ticketName\": \"string\",\n          \"seatingInfo\": [\n            {\n              \"_type\": 7,\n              \"statusId\": \"string\",\n              \"_id\": \"string\",\n              \"categoryId\": \"string\",\n              \"name\": \"string\",\n              \"seatType\": \"foldable\",\n              \"sectionName\": \"string\",\n              \"groupName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"gate\": \"string\"\n            },\n            {\n              \"_type\": 7,\n              \"statusId\": \"string\",\n              \"_id\": \"string\",\n              \"categoryId\": \"string\",\n              \"name\": \"string\",\n              \"seatType\": \"foldable\",\n              \"sectionName\": \"string\",\n              \"groupName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"gate\": \"string\"\n            }\n          ]\n        }\n      ],\n      \"status\": [],\n      \"cpmId\": \"string\",\n      \"currency\": [],\n      \"createdAt\": \"2006-01-19T22:59:14.174Z\",\n      \"updatedAt\": \"1982-08-09T06:33:19.633Z\"\n    }\n  ],\n  \"total\": 6858\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d95e959f-f0fe-4f57-8527-39bb708b9715",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "resell",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "eventId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "listingIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "listingIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "createdAt[$gt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$eq]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$ne]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8e272776-68de-411f-9556-081d6880cb0a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "resell",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "eventId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "listingIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "listingIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "createdAt[$gt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$eq]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$ne]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2d2e4749-40b7-4b22-8cf1-ccda5feb97e7",
+          "name": "create an offer",
+          "request": {
+            "name": "create an offer",
+            "description": {
+              "content": "Create an offer",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "resell",
+                "offers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventId\": \"<string>\",\n  \"sellerId\": \"<string>\",\n  \"cpmId\": \"<string>\",\n  \"ticketIds\": [\n    \"<string>\"\n  ],\n  \"customerId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7037ac33-cee8-4636-a77e-f0874cf09768",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "resell",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"eventId\": \"<string>\",\n  \"sellerId\": \"<string>\",\n  \"cpmId\": \"<string>\",\n  \"ticketIds\": [\n    \"<string>\"\n  ],\n  \"customerId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"customerId\": \"string\",\n  \"sellerId\": \"string\",\n  \"eventId\": \"string\",\n  \"items\": [\n    {\n      \"ticketId\": \"string\",\n      \"ticketTypeId\": \"string\",\n      \"categoryRef\": \"string\",\n      \"price\": 4668.205294648659,\n      \"resellFee\": 6056.0020023293555,\n      \"ticketName\": \"string\",\n      \"seatingInfo\": [\n        {\n          \"_type\": 7,\n          \"statusId\": \"string\",\n          \"_id\": \"string\",\n          \"categoryId\": \"string\",\n          \"name\": \"string\",\n          \"seatType\": \"foldable\",\n          \"sectionName\": \"string\",\n          \"groupName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"gate\": \"string\"\n        },\n        {\n          \"_type\": 7,\n          \"statusId\": \"string\",\n          \"_id\": \"string\",\n          \"categoryId\": \"string\",\n          \"name\": \"string\",\n          \"seatType\": \"limitedView\",\n          \"sectionName\": \"string\",\n          \"groupName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"gate\": \"string\"\n        }\n      ]\n    },\n    {\n      \"ticketId\": \"string\",\n      \"ticketTypeId\": \"string\",\n      \"categoryRef\": \"string\",\n      \"price\": 1608.4349742980298,\n      \"resellFee\": 7159.72509127707,\n      \"ticketName\": \"string\",\n      \"seatingInfo\": [\n        {\n          \"_type\": 7,\n          \"statusId\": \"string\",\n          \"_id\": \"string\",\n          \"categoryId\": \"string\",\n          \"name\": \"string\",\n          \"seatType\": \"foldable\",\n          \"sectionName\": \"string\",\n          \"groupName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"gate\": \"string\"\n        },\n        {\n          \"_type\": 6,\n          \"statusId\": \"string\",\n          \"_id\": \"string\",\n          \"categoryId\": \"string\",\n          \"name\": \"string\",\n          \"seatType\": \"handicapped\",\n          \"sectionName\": \"string\",\n          \"groupName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"gate\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"status\": [],\n  \"cpmId\": \"string\",\n  \"currency\": [],\n  \"createdAt\": \"1956-02-27T01:02:18.965Z\",\n  \"updatedAt\": \"1968-11-18T08:46:40.255Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "924fa3a2-5112-411a-bf74-3d50dd4a4620",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "resell",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"eventId\": \"<string>\",\n  \"sellerId\": \"<string>\",\n  \"cpmId\": \"<string>\",\n  \"ticketIds\": [\n    \"<string>\"\n  ],\n  \"customerId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "35ba4c65-a73e-4479-9cba-f04b41956cd7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "resell",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"eventId\": \"<string>\",\n  \"sellerId\": \"<string>\",\n  \"cpmId\": \"<string>\",\n  \"ticketIds\": [\n    \"<string>\"\n  ],\n  \"customerId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1c52dc36-71b0-4b07-8930-e4061907f2b5",
+          "name": "get public resell listings",
+          "request": {
+            "name": "get public resell listings",
+            "description": {
+              "content": "Get public resell listings",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "public",
+                "resell",
+                "listings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "eventId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the event"
+                },
+                {
+                  "disabled": false,
+                  "key": "sellerId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the seller"
+                },
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "25",
+                  "description": "(Required) A limit on the number of objects to be returned. Can range between 1 and 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "0",
+                  "description": "(Required) The number of objects to skip for the requested result"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c613fe7f-039c-49f4-88ec-65162e46dccd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "resell",
+                    "listings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "eventId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sellerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"docs\": [\n    {\n      \"_id\": \"string\",\n      \"items\": [\n        {\n          \"_id\": \"string\",\n          \"ticketTypeId\": \"string\",\n          \"categoryRef\": \"string\",\n          \"seatingInfo\": {\n            \"_type\": 7,\n            \"statusId\": \"string\",\n            \"_id\": \"string\",\n            \"categoryId\": \"string\",\n            \"name\": \"string\",\n            \"seatType\": \"limitedView\",\n            \"sectionName\": \"string\",\n            \"groupName\": \"string\",\n            \"rowName\": \"string\",\n            \"seatName\": \"string\",\n            \"gate\": \"string\"\n          }\n        },\n        {\n          \"_id\": \"string\",\n          \"ticketTypeId\": \"string\",\n          \"categoryRef\": \"string\",\n          \"seatingInfo\": {\n            \"_type\": 6,\n            \"statusId\": \"string\",\n            \"_id\": \"string\",\n            \"categoryId\": \"string\",\n            \"name\": \"string\",\n            \"seatType\": \"foldable\",\n            \"sectionName\": \"string\",\n            \"groupName\": \"string\",\n            \"rowName\": \"string\",\n            \"seatName\": \"string\",\n            \"gate\": \"string\"\n          }\n        }\n      ]\n    },\n    {\n      \"_id\": \"string\",\n      \"items\": [\n        {\n          \"_id\": \"string\",\n          \"ticketTypeId\": \"string\",\n          \"categoryRef\": \"string\",\n          \"seatingInfo\": {\n            \"_type\": 6,\n            \"statusId\": \"string\",\n            \"_id\": \"string\",\n            \"categoryId\": \"string\",\n            \"name\": \"string\",\n            \"seatType\": \"handicapped\",\n            \"sectionName\": \"string\",\n            \"groupName\": \"string\",\n            \"rowName\": \"string\",\n            \"seatName\": \"string\",\n            \"gate\": \"string\"\n          }\n        },\n        {\n          \"_id\": \"string\",\n          \"ticketTypeId\": \"string\",\n          \"categoryRef\": \"string\",\n          \"seatingInfo\": {\n            \"_type\": 7,\n            \"statusId\": \"string\",\n            \"_id\": \"string\",\n            \"categoryId\": \"string\",\n            \"name\": \"string\",\n            \"seatType\": \"limitedView\",\n            \"sectionName\": \"string\",\n            \"groupName\": \"string\",\n            \"rowName\": \"string\",\n            \"seatName\": \"string\",\n            \"gate\": \"string\"\n          }\n        }\n      ]\n    }\n  ],\n  \"total\": 2101\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "782f36ce-dc28-42fc-8bb5-b75654cb2dd0",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "resell",
+                    "listings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "eventId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sellerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7021b0e1-93dd-4020-876a-4edf11bbac47",
+          "name": "get offer by id",
+          "request": {
+            "name": "get offer by id",
+            "description": {
+              "content": "Get offer by id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "resell",
+                "offers",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a4814a54-98c1-472d-9b59-82669de639b0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "resell",
+                    "offers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"customerId\": \"string\",\n  \"sellerId\": \"string\",\n  \"eventId\": \"string\",\n  \"items\": [\n    {\n      \"ticketId\": \"string\",\n      \"ticketTypeId\": \"string\",\n      \"categoryRef\": \"string\",\n      \"price\": 4668.205294648659,\n      \"resellFee\": 6056.0020023293555,\n      \"ticketName\": \"string\",\n      \"seatingInfo\": [\n        {\n          \"_type\": 7,\n          \"statusId\": \"string\",\n          \"_id\": \"string\",\n          \"categoryId\": \"string\",\n          \"name\": \"string\",\n          \"seatType\": \"foldable\",\n          \"sectionName\": \"string\",\n          \"groupName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"gate\": \"string\"\n        },\n        {\n          \"_type\": 7,\n          \"statusId\": \"string\",\n          \"_id\": \"string\",\n          \"categoryId\": \"string\",\n          \"name\": \"string\",\n          \"seatType\": \"limitedView\",\n          \"sectionName\": \"string\",\n          \"groupName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"gate\": \"string\"\n        }\n      ]\n    },\n    {\n      \"ticketId\": \"string\",\n      \"ticketTypeId\": \"string\",\n      \"categoryRef\": \"string\",\n      \"price\": 1608.4349742980298,\n      \"resellFee\": 7159.72509127707,\n      \"ticketName\": \"string\",\n      \"seatingInfo\": [\n        {\n          \"_type\": 7,\n          \"statusId\": \"string\",\n          \"_id\": \"string\",\n          \"categoryId\": \"string\",\n          \"name\": \"string\",\n          \"seatType\": \"foldable\",\n          \"sectionName\": \"string\",\n          \"groupName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"gate\": \"string\"\n        },\n        {\n          \"_type\": 6,\n          \"statusId\": \"string\",\n          \"_id\": \"string\",\n          \"categoryId\": \"string\",\n          \"name\": \"string\",\n          \"seatType\": \"handicapped\",\n          \"sectionName\": \"string\",\n          \"groupName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"gate\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"status\": [],\n  \"cpmId\": \"string\",\n  \"currency\": [],\n  \"createdAt\": \"1956-02-27T01:02:18.965Z\",\n  \"updatedAt\": \"1968-11-18T08:46:40.255Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e073c431-f87e-40e5-840d-1ab7b43eba2f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "resell",
+                    "offers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3e91472a-cb0e-4c53-85bf-714181d1be52",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "resell",
+                    "offers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bf976ee6-03d2-4167-bc33-34f9217fb029",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "resell",
+                    "offers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2dc296f-3b37-4f58-bcd0-6f14874fbe58",
+          "name": "get listing of offer",
+          "request": {
+            "name": "get listing of offer",
+            "description": {
+              "content": "Get listing of offer",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "resell",
+                "offers",
+                ":id",
+                "listing"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "86589f65-1d9a-48d1-b0be-3fa2851115e9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "resell",
+                    "offers",
+                    ":id",
+                    "listing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"sellerId\": \"string\",\n  \"eventId\": \"string\",\n  \"offerId\": \"string\",\n  \"status\": [],\n  \"items\": [\n    {\n      \"_id\": \"string\",\n      \"ticketId\": \"string\",\n      \"ticketTypeId\": \"string\",\n      \"categoryRef\": \"string\",\n      \"seatingInfo\": [\n        {\n          \"_type\": 6,\n          \"statusId\": \"string\",\n          \"_id\": \"string\",\n          \"categoryId\": \"string\",\n          \"name\": \"string\",\n          \"seatType\": \"foldable\",\n          \"sectionName\": \"string\",\n          \"groupName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"gate\": \"string\"\n        },\n        {\n          \"_type\": 7,\n          \"statusId\": \"string\",\n          \"_id\": \"string\",\n          \"categoryId\": \"string\",\n          \"name\": \"string\",\n          \"seatType\": \"handicapped\",\n          \"sectionName\": \"string\",\n          \"groupName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"gate\": \"string\"\n        }\n      ]\n    },\n    {\n      \"_id\": \"string\",\n      \"ticketId\": \"string\",\n      \"ticketTypeId\": \"string\",\n      \"categoryRef\": \"string\",\n      \"seatingInfo\": [\n        {\n          \"_type\": 6,\n          \"statusId\": \"string\",\n          \"_id\": \"string\",\n          \"categoryId\": \"string\",\n          \"name\": \"string\",\n          \"seatType\": \"limitedView\",\n          \"sectionName\": \"string\",\n          \"groupName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"gate\": \"string\"\n        },\n        {\n          \"_type\": 7,\n          \"statusId\": \"string\",\n          \"_id\": \"string\",\n          \"categoryId\": \"string\",\n          \"name\": \"string\",\n          \"seatType\": \"handicapped\",\n          \"sectionName\": \"string\",\n          \"groupName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"gate\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"createdAt\": \"2007-05-04T22:44:51.565Z\",\n  \"updatedAt\": \"1983-08-30T00:33:05.556Z\",\n  \"_hold\": {\n    \"holdId\": \"string\",\n    \"checkoutId\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4091eef2-f53b-494d-98c4-29f79c753871",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "resell",
+                    "offers",
+                    ":id",
+                    "listing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "43a96fab-ea37-48cf-a7d5-4ccb4465818a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "resell",
+                    "offers",
+                    ":id",
+                    "listing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "223b4f31-460b-470c-92e9-69f68bfd4c2a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "resell",
+                    "offers",
+                    ":id",
+                    "listing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56eac819-9b59-4a5f-aab8-a7f16f3ddcf1",
+          "name": "get internal ticket resell status",
+          "request": {
+            "name": "get internal ticket resell status",
+            "description": {
+              "content": "Get internal ticket resell status",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "resell",
+                "ticket",
+                ":id",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "customerId",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cec23e38-e4a4-42b9-a690-92b34806b51e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "resell",
+                    "ticket",
+                    ":id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"eventId\": \"string\",\n    \"offerAble\": false,\n    \"hasActiveOffer\": true,\n    \"activeOffer\": {\n      \"_id\": \"string\",\n      \"customerId\": \"string\",\n      \"sellerId\": \"string\",\n      \"eventId\": \"string\",\n      \"items\": [\n        {\n          \"ticketId\": \"string\",\n          \"ticketTypeId\": \"string\",\n          \"categoryRef\": \"string\",\n          \"price\": 1386.3521485337649,\n          \"resellFee\": 2083.620310267852,\n          \"ticketName\": \"string\",\n          \"seatingInfo\": [\n            {\n              \"_type\": 7,\n              \"statusId\": \"string\",\n              \"_id\": \"string\",\n              \"categoryId\": \"string\",\n              \"name\": \"string\",\n              \"seatType\": \"handicapped\",\n              \"sectionName\": \"string\",\n              \"groupName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"gate\": \"string\"\n            },\n            {\n              \"_type\": 7,\n              \"statusId\": \"string\",\n              \"_id\": \"string\",\n              \"categoryId\": \"string\",\n              \"name\": \"string\",\n              \"seatType\": \"limitedView\",\n              \"sectionName\": \"string\",\n              \"groupName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"gate\": \"string\"\n            }\n          ]\n        },\n        {\n          \"ticketId\": \"string\",\n          \"ticketTypeId\": \"string\",\n          \"categoryRef\": \"string\",\n          \"price\": 56.42396480859069,\n          \"resellFee\": 4523.515602086344,\n          \"ticketName\": \"string\",\n          \"seatingInfo\": [\n            {\n              \"_type\": 6,\n              \"statusId\": \"string\",\n              \"_id\": \"string\",\n              \"categoryId\": \"string\",\n              \"name\": \"string\",\n              \"seatType\": \"foldable\",\n              \"sectionName\": \"string\",\n              \"groupName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"gate\": \"string\"\n            },\n            {\n              \"_type\": 7,\n              \"statusId\": \"string\",\n              \"_id\": \"string\",\n              \"categoryId\": \"string\",\n              \"name\": \"string\",\n              \"seatType\": \"handicapped\",\n              \"sectionName\": \"string\",\n              \"groupName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"gate\": \"string\"\n            }\n          ]\n        }\n      ],\n      \"status\": [],\n      \"cpmId\": \"string\",\n      \"currency\": [],\n      \"createdAt\": \"1982-01-05T05:08:24.463Z\",\n      \"updatedAt\": \"1991-09-03T10:58:37.260Z\"\n    },\n    \"violations\": \"EVENT_EXCLUDED\"\n  },\n  {\n    \"eventId\": \"string\",\n    \"offerAble\": false,\n    \"hasActiveOffer\": true,\n    \"activeOffer\": {\n      \"_id\": \"string\",\n      \"customerId\": \"string\",\n      \"sellerId\": \"string\",\n      \"eventId\": \"string\",\n      \"items\": [\n        {\n          \"ticketId\": \"string\",\n          \"ticketTypeId\": \"string\",\n          \"categoryRef\": \"string\",\n          \"price\": 6787.719379219864,\n          \"resellFee\": 9854.267682102587,\n          \"ticketName\": \"string\",\n          \"seatingInfo\": [\n            {\n              \"_type\": 6,\n              \"statusId\": \"string\",\n              \"_id\": \"string\",\n              \"categoryId\": \"string\",\n              \"name\": \"string\",\n              \"seatType\": \"handicapped\",\n              \"sectionName\": \"string\",\n              \"groupName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"gate\": \"string\"\n            },\n            {\n              \"_type\": 6,\n              \"statusId\": \"string\",\n              \"_id\": \"string\",\n              \"categoryId\": \"string\",\n              \"name\": \"string\",\n              \"seatType\": \"handicapped\",\n              \"sectionName\": \"string\",\n              \"groupName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"gate\": \"string\"\n            }\n          ]\n        },\n        {\n          \"ticketId\": \"string\",\n          \"ticketTypeId\": \"string\",\n          \"categoryRef\": \"string\",\n          \"price\": 4474.879711814422,\n          \"resellFee\": 349.2507245228238,\n          \"ticketName\": \"string\",\n          \"seatingInfo\": [\n            {\n              \"_type\": 6,\n              \"statusId\": \"string\",\n              \"_id\": \"string\",\n              \"categoryId\": \"string\",\n              \"name\": \"string\",\n              \"seatType\": \"foldable\",\n              \"sectionName\": \"string\",\n              \"groupName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"gate\": \"string\"\n            },\n            {\n              \"_type\": 7,\n              \"statusId\": \"string\",\n              \"_id\": \"string\",\n              \"categoryId\": \"string\",\n              \"name\": \"string\",\n              \"seatType\": \"handicapped\",\n              \"sectionName\": \"string\",\n              \"groupName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"gate\": \"string\"\n            }\n          ]\n        }\n      ],\n      \"status\": [],\n      \"cpmId\": \"string\",\n      \"currency\": [],\n      \"createdAt\": \"1982-08-07T17:49:37.486Z\",\n      \"updatedAt\": \"2018-06-13T20:09:35.077Z\"\n    },\n    \"violations\": \"HAS_SCANS\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4be19ef5-e914-4453-96d8-ed6b4c28ce75",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "resell",
+                    "ticket",
+                    ":id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b5596853-23e3-431a-a893-8a2ad955bfb0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "resell",
+                    "ticket",
+                    ":id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b94f81d8-9620-47c1-857e-3b6efab1ae3f",
+          "name": "get public ticket resell status",
+          "request": {
+            "name": "get public ticket resell status",
+            "description": {
+              "content": "Get public ticket resell status",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "public",
+                "resell",
+                "ticket",
+                ":id",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sellerId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the seller"
+                },
+                {
+                  "disabled": false,
+                  "key": "secret",
+                  "value": "<string>",
+                  "description": "(Required) The secret of the ticket"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eea54ffd-9918-494e-adae-47526f1f8ad7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "resell",
+                    "ticket",
+                    ":id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sellerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"eventId\": \"string\",\n    \"offerAble\": false,\n    \"hasActiveOffer\": true,\n    \"activeOffer\": {\n      \"_id\": \"string\",\n      \"customerId\": \"string\",\n      \"sellerId\": \"string\",\n      \"eventId\": \"string\",\n      \"items\": [\n        {\n          \"ticketId\": \"string\",\n          \"ticketTypeId\": \"string\",\n          \"categoryRef\": \"string\",\n          \"price\": 1386.3521485337649,\n          \"resellFee\": 2083.620310267852,\n          \"ticketName\": \"string\",\n          \"seatingInfo\": [\n            {\n              \"_type\": 7,\n              \"statusId\": \"string\",\n              \"_id\": \"string\",\n              \"categoryId\": \"string\",\n              \"name\": \"string\",\n              \"seatType\": \"handicapped\",\n              \"sectionName\": \"string\",\n              \"groupName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"gate\": \"string\"\n            },\n            {\n              \"_type\": 7,\n              \"statusId\": \"string\",\n              \"_id\": \"string\",\n              \"categoryId\": \"string\",\n              \"name\": \"string\",\n              \"seatType\": \"limitedView\",\n              \"sectionName\": \"string\",\n              \"groupName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"gate\": \"string\"\n            }\n          ]\n        },\n        {\n          \"ticketId\": \"string\",\n          \"ticketTypeId\": \"string\",\n          \"categoryRef\": \"string\",\n          \"price\": 56.42396480859069,\n          \"resellFee\": 4523.515602086344,\n          \"ticketName\": \"string\",\n          \"seatingInfo\": [\n            {\n              \"_type\": 6,\n              \"statusId\": \"string\",\n              \"_id\": \"string\",\n              \"categoryId\": \"string\",\n              \"name\": \"string\",\n              \"seatType\": \"foldable\",\n              \"sectionName\": \"string\",\n              \"groupName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"gate\": \"string\"\n            },\n            {\n              \"_type\": 7,\n              \"statusId\": \"string\",\n              \"_id\": \"string\",\n              \"categoryId\": \"string\",\n              \"name\": \"string\",\n              \"seatType\": \"handicapped\",\n              \"sectionName\": \"string\",\n              \"groupName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"gate\": \"string\"\n            }\n          ]\n        }\n      ],\n      \"status\": [],\n      \"cpmId\": \"string\",\n      \"currency\": [],\n      \"createdAt\": \"1982-01-05T05:08:24.463Z\",\n      \"updatedAt\": \"1991-09-03T10:58:37.260Z\"\n    },\n    \"violations\": \"EVENT_EXCLUDED\"\n  },\n  {\n    \"eventId\": \"string\",\n    \"offerAble\": false,\n    \"hasActiveOffer\": true,\n    \"activeOffer\": {\n      \"_id\": \"string\",\n      \"customerId\": \"string\",\n      \"sellerId\": \"string\",\n      \"eventId\": \"string\",\n      \"items\": [\n        {\n          \"ticketId\": \"string\",\n          \"ticketTypeId\": \"string\",\n          \"categoryRef\": \"string\",\n          \"price\": 6787.719379219864,\n          \"resellFee\": 9854.267682102587,\n          \"ticketName\": \"string\",\n          \"seatingInfo\": [\n            {\n              \"_type\": 6,\n              \"statusId\": \"string\",\n              \"_id\": \"string\",\n              \"categoryId\": \"string\",\n              \"name\": \"string\",\n              \"seatType\": \"handicapped\",\n              \"sectionName\": \"string\",\n              \"groupName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"gate\": \"string\"\n            },\n            {\n              \"_type\": 6,\n              \"statusId\": \"string\",\n              \"_id\": \"string\",\n              \"categoryId\": \"string\",\n              \"name\": \"string\",\n              \"seatType\": \"handicapped\",\n              \"sectionName\": \"string\",\n              \"groupName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"gate\": \"string\"\n            }\n          ]\n        },\n        {\n          \"ticketId\": \"string\",\n          \"ticketTypeId\": \"string\",\n          \"categoryRef\": \"string\",\n          \"price\": 4474.879711814422,\n          \"resellFee\": 349.2507245228238,\n          \"ticketName\": \"string\",\n          \"seatingInfo\": [\n            {\n              \"_type\": 6,\n              \"statusId\": \"string\",\n              \"_id\": \"string\",\n              \"categoryId\": \"string\",\n              \"name\": \"string\",\n              \"seatType\": \"foldable\",\n              \"sectionName\": \"string\",\n              \"groupName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"gate\": \"string\"\n            },\n            {\n              \"_type\": 7,\n              \"statusId\": \"string\",\n              \"_id\": \"string\",\n              \"categoryId\": \"string\",\n              \"name\": \"string\",\n              \"seatType\": \"handicapped\",\n              \"sectionName\": \"string\",\n              \"groupName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"gate\": \"string\"\n            }\n          ]\n        }\n      ],\n      \"status\": [],\n      \"cpmId\": \"string\",\n      \"currency\": [],\n      \"createdAt\": \"1982-08-07T17:49:37.486Z\",\n      \"updatedAt\": \"2018-06-13T20:09:35.077Z\"\n    },\n    \"violations\": \"HAS_SCANS\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5cfce54-faf3-4d37-8e00-0696208299ee",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "resell",
+                    "ticket",
+                    ":id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sellerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "02fd9236-b9dd-48de-bf11-a14c7d10b425",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "resell",
+                    "ticket",
+                    ":id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sellerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "94d63ee7-5f97-4464-beb9-aa974ea3c671",
+          "name": "create an offer as a customer",
+          "request": {
+            "name": "create an offer as a customer",
+            "description": {
+              "content": "Create an offer as a customer",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "public",
+                "resell",
+                "offers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventId\": \"<string>\",\n  \"sellerId\": \"<string>\",\n  \"cpmId\": \"<string>\",\n  \"ticketIds\": [\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "936b2a17-595e-4af2-91d7-f93523041b3a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "resell",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"eventId\": \"<string>\",\n  \"sellerId\": \"<string>\",\n  \"cpmId\": \"<string>\",\n  \"ticketIds\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"customerId\": \"string\",\n  \"sellerId\": \"string\",\n  \"eventId\": \"string\",\n  \"items\": [\n    {\n      \"ticketId\": \"string\",\n      \"ticketTypeId\": \"string\",\n      \"categoryRef\": \"string\",\n      \"price\": 4668.205294648659,\n      \"resellFee\": 6056.0020023293555,\n      \"ticketName\": \"string\",\n      \"seatingInfo\": [\n        {\n          \"_type\": 7,\n          \"statusId\": \"string\",\n          \"_id\": \"string\",\n          \"categoryId\": \"string\",\n          \"name\": \"string\",\n          \"seatType\": \"foldable\",\n          \"sectionName\": \"string\",\n          \"groupName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"gate\": \"string\"\n        },\n        {\n          \"_type\": 7,\n          \"statusId\": \"string\",\n          \"_id\": \"string\",\n          \"categoryId\": \"string\",\n          \"name\": \"string\",\n          \"seatType\": \"limitedView\",\n          \"sectionName\": \"string\",\n          \"groupName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"gate\": \"string\"\n        }\n      ]\n    },\n    {\n      \"ticketId\": \"string\",\n      \"ticketTypeId\": \"string\",\n      \"categoryRef\": \"string\",\n      \"price\": 1608.4349742980298,\n      \"resellFee\": 7159.72509127707,\n      \"ticketName\": \"string\",\n      \"seatingInfo\": [\n        {\n          \"_type\": 7,\n          \"statusId\": \"string\",\n          \"_id\": \"string\",\n          \"categoryId\": \"string\",\n          \"name\": \"string\",\n          \"seatType\": \"foldable\",\n          \"sectionName\": \"string\",\n          \"groupName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"gate\": \"string\"\n        },\n        {\n          \"_type\": 6,\n          \"statusId\": \"string\",\n          \"_id\": \"string\",\n          \"categoryId\": \"string\",\n          \"name\": \"string\",\n          \"seatType\": \"handicapped\",\n          \"sectionName\": \"string\",\n          \"groupName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"gate\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"status\": [],\n  \"cpmId\": \"string\",\n  \"currency\": [],\n  \"createdAt\": \"1956-02-27T01:02:18.965Z\",\n  \"updatedAt\": \"1968-11-18T08:46:40.255Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83685db8-7fc1-44ac-974b-2bb00cb3e8f7",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "resell",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"eventId\": \"<string>\",\n  \"sellerId\": \"<string>\",\n  \"cpmId\": \"<string>\",\n  \"ticketIds\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bec3cc9e-4893-4707-a366-831900f2b14c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "resell",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"eventId\": \"<string>\",\n  \"sellerId\": \"<string>\",\n  \"cpmId\": \"<string>\",\n  \"ticketIds\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9ce72150-aa33-4db4-849b-48afc73b9e9b",
+          "name": "preview offer",
+          "request": {
+            "name": "preview offer",
+            "description": {
+              "content": "Preview offer",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "resell",
+                "offers",
+                "preview"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ticketIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customerId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8399a3a6-ba5f-4834-916c-825d6d3c9498",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "resell",
+                    "offers",
+                    "preview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"eventIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ticketIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customerId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resellAble\": true,\n  \"resellFee\": 8049.015646252392,\n  \"proceeds\": 4346.8261136062\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d32e565-78ab-4539-a4e0-f5afd8130add",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "resell",
+                    "offers",
+                    "preview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"eventIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ticketIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customerId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "835962d1-0f2d-4685-925c-93b4bde07760",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "resell",
+                    "offers",
+                    "preview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"eventIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ticketIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customerId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aab50671-4330-4cba-a45f-c05fbaf31afc",
+          "name": "preview an offer as a customer",
+          "request": {
+            "name": "preview an offer as a customer",
+            "description": {
+              "content": "Preview an offer as a customer",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "public",
+                "resell",
+                "offers",
+                "preview"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ticketIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d763f82b-7c8c-45e3-87f8-57ec8eeaaffa",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "resell",
+                    "offers",
+                    "preview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"eventIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ticketIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resellAble\": true,\n  \"resellFee\": 8049.015646252392,\n  \"proceeds\": 4346.8261136062\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5669903-600d-404e-834f-787a13bcd463",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "resell",
+                    "offers",
+                    "preview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"eventIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ticketIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "51661127-fc59-4ffb-aded-35686519ea36",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "resell",
+                    "offers",
+                    "preview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"eventIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ticketIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b8a54618-5168-45fb-9788-dc28fa17310a",
+          "name": "cancel an offer",
+          "request": {
+            "name": "cancel an offer",
+            "description": {
+              "content": "Cancel an offer",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "resell",
+                "offers",
+                ":id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "baa1e7f6-846f-47f9-86f8-3a395b5d1bcf",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "resell",
+                    "offers",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"customerId\": \"string\",\n  \"sellerId\": \"string\",\n  \"eventId\": \"string\",\n  \"items\": [\n    {\n      \"ticketId\": \"string\",\n      \"ticketTypeId\": \"string\",\n      \"categoryRef\": \"string\",\n      \"price\": 4668.205294648659,\n      \"resellFee\": 6056.0020023293555,\n      \"ticketName\": \"string\",\n      \"seatingInfo\": [\n        {\n          \"_type\": 7,\n          \"statusId\": \"string\",\n          \"_id\": \"string\",\n          \"categoryId\": \"string\",\n          \"name\": \"string\",\n          \"seatType\": \"foldable\",\n          \"sectionName\": \"string\",\n          \"groupName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"gate\": \"string\"\n        },\n        {\n          \"_type\": 7,\n          \"statusId\": \"string\",\n          \"_id\": \"string\",\n          \"categoryId\": \"string\",\n          \"name\": \"string\",\n          \"seatType\": \"limitedView\",\n          \"sectionName\": \"string\",\n          \"groupName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"gate\": \"string\"\n        }\n      ]\n    },\n    {\n      \"ticketId\": \"string\",\n      \"ticketTypeId\": \"string\",\n      \"categoryRef\": \"string\",\n      \"price\": 1608.4349742980298,\n      \"resellFee\": 7159.72509127707,\n      \"ticketName\": \"string\",\n      \"seatingInfo\": [\n        {\n          \"_type\": 7,\n          \"statusId\": \"string\",\n          \"_id\": \"string\",\n          \"categoryId\": \"string\",\n          \"name\": \"string\",\n          \"seatType\": \"foldable\",\n          \"sectionName\": \"string\",\n          \"groupName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"gate\": \"string\"\n        },\n        {\n          \"_type\": 6,\n          \"statusId\": \"string\",\n          \"_id\": \"string\",\n          \"categoryId\": \"string\",\n          \"name\": \"string\",\n          \"seatType\": \"handicapped\",\n          \"sectionName\": \"string\",\n          \"groupName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"gate\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"status\": [],\n  \"cpmId\": \"string\",\n  \"currency\": [],\n  \"createdAt\": \"1956-02-27T01:02:18.965Z\",\n  \"updatedAt\": \"1968-11-18T08:46:40.255Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25e2236f-7c96-4d1a-bd18-ee3294bc8780",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "resell",
+                    "offers",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2f255548-e682-48d2-b79d-101a886ed983",
+          "name": "public cancel an offer",
+          "request": {
+            "name": "public cancel an offer",
+            "description": {
+              "content": "Public cancel an offer",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "public",
+                "resell",
+                "offers",
+                ":id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ed60b777-5d94-4e27-b6dc-1e689d1683a6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "resell",
+                    "offers",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"customerId\": \"string\",\n  \"sellerId\": \"string\",\n  \"eventId\": \"string\",\n  \"items\": [\n    {\n      \"ticketId\": \"string\",\n      \"ticketTypeId\": \"string\",\n      \"categoryRef\": \"string\",\n      \"price\": 4668.205294648659,\n      \"resellFee\": 6056.0020023293555,\n      \"ticketName\": \"string\",\n      \"seatingInfo\": [\n        {\n          \"_type\": 7,\n          \"statusId\": \"string\",\n          \"_id\": \"string\",\n          \"categoryId\": \"string\",\n          \"name\": \"string\",\n          \"seatType\": \"foldable\",\n          \"sectionName\": \"string\",\n          \"groupName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"gate\": \"string\"\n        },\n        {\n          \"_type\": 7,\n          \"statusId\": \"string\",\n          \"_id\": \"string\",\n          \"categoryId\": \"string\",\n          \"name\": \"string\",\n          \"seatType\": \"limitedView\",\n          \"sectionName\": \"string\",\n          \"groupName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"gate\": \"string\"\n        }\n      ]\n    },\n    {\n      \"ticketId\": \"string\",\n      \"ticketTypeId\": \"string\",\n      \"categoryRef\": \"string\",\n      \"price\": 1608.4349742980298,\n      \"resellFee\": 7159.72509127707,\n      \"ticketName\": \"string\",\n      \"seatingInfo\": [\n        {\n          \"_type\": 7,\n          \"statusId\": \"string\",\n          \"_id\": \"string\",\n          \"categoryId\": \"string\",\n          \"name\": \"string\",\n          \"seatType\": \"foldable\",\n          \"sectionName\": \"string\",\n          \"groupName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"gate\": \"string\"\n        },\n        {\n          \"_type\": 6,\n          \"statusId\": \"string\",\n          \"_id\": \"string\",\n          \"categoryId\": \"string\",\n          \"name\": \"string\",\n          \"seatType\": \"handicapped\",\n          \"sectionName\": \"string\",\n          \"groupName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"gate\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"status\": [],\n  \"cpmId\": \"string\",\n  \"currency\": [],\n  \"createdAt\": \"1956-02-27T01:02:18.965Z\",\n  \"updatedAt\": \"1968-11-18T08:46:40.255Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7720b634-4d0a-4fe0-993c-77df3003ae33",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "resell",
+                    "offers",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://vivenu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "249a8f35-ed97-4a98-ba23-962110eb0245",
+    "name": "vivenu access-lists resell-offers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "vivenu API Documentation\n\nContact Support:\n Name: vivenu GmbH",
+      "type": "text/plain"
+    }
+  }
+}

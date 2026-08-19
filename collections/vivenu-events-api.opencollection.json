@@ -1,0 +1,863 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "vivenu access-lists events API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "events/list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/events",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortDir",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "rootId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sellerId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "groupEventId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "salesChannelId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "childEvents",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "subscriptionPlanId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "updatedAt",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "createdAt",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "top",
+                "value": "",
+                "type": "query",
+                "description": "A limit on the number of objects to be returned. Can range between 1 and 1000."
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "The number of objects to skip for the requested result"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all Events"
+        },
+        {
+          "info": {
+            "name": "events/create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/events",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create an Event"
+        },
+        {
+          "info": {
+            "name": "get_all_events_rich",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/events/rich",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortDir",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "rootId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sellerId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "groupEventId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "salesChannelId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "childEvents",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "subscriptionPlanId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "updatedAt",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "createdAt",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "top",
+                "value": "",
+                "type": "query",
+                "description": "A limit on the number of objects to be returned. Can range between 1 and 1000."
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "The number of objects to skip for the requested result"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all Events Rich"
+        },
+        {
+          "info": {
+            "name": "events/get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/events/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get an Event"
+        },
+        {
+          "info": {
+            "name": "events/update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://vivenu.com/api/events/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an Event"
+        },
+        {
+          "info": {
+            "name": "events/delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://vivenu.com/api/events/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an Event"
+        },
+        {
+          "info": {
+            "name": "get_event_reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/stats/reports",
+            "params": [
+              {
+                "name": "pos",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Event Reports"
+        },
+        {
+          "info": {
+            "name": "get_event_info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/events/info/:id",
+            "params": [
+              {
+                "name": "web",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "underShop",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "posOperationMode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pos",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "channel",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Event info"
+        },
+        {
+          "info": {
+            "name": "get_public_listing_events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/events/public/listings",
+            "params": [
+              {
+                "name": "top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startMin",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startMax",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endMin",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endMax",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sectionURL",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sellerId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "rootId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "groupEventId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "eventIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "visibleInListing",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "showStartDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "eventType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "underShopId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get public listing events"
+        },
+        {
+          "info": {
+            "name": "get_event_parents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/events/:id/parents",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Event parents"
+        },
+        {
+          "info": {
+            "name": "get_event_parent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/events/:id/parent",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Event parent"
+        },
+        {
+          "info": {
+            "name": "get_more_events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/events/:eventId/recommendations",
+            "params": [
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get more Events"
+        },
+        {
+          "info": {
+            "name": "get_public_event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/public/events/:id",
+            "params": [
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Public Event"
+        },
+        {
+          "info": {
+            "name": "get_events_with_status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/stats/events/status",
+            "params": [
+              {
+                "name": "top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Events with status"
+        },
+        {
+          "info": {
+            "name": "get_public_listing_event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/events/public/listings/:id",
+            "params": [
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "underShopId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get public listing event"
+        },
+        {
+          "info": {
+            "name": "events/getOffers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/public/events/:id/offers",
+            "params": [
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get offers for an event"
+        },
+        {
+          "info": {
+            "name": "get_event_availabilities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/public/events/:id/availabilities",
+            "params": [
+              {
+                "name": "shopId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Event Availabilities"
+        },
+        {
+          "info": {
+            "name": "get_public_shop",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/public/events/:id/shop",
+            "params": [
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "shopId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "channelId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pos",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Public Shop"
+        },
+        {
+          "info": {
+            "name": "get_event_status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/stats/events/:id/status",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "posId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Event Status"
+        },
+        {
+          "info": {
+            "name": "duplicate_an_event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/events/duplicate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Duplicate an Event"
+        },
+        {
+          "info": {
+            "name": "add_recurrences",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/events/:id/recurrences",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add Recurrences"
+        },
+        {
+          "info": {
+            "name": "generate_a_read_only_seatmap_share_link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/events/:id/seatmap-share-link",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Generate a read-only seatmap share link"
+        },
+        {
+          "info": {
+            "name": "set_the_seating_event_id_of_an_event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/events/:id/seating",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Set the seating event id of an event"
+        },
+        {
+          "info": {
+            "name": "decouple_event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/events/:id/decouple",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Decouple event"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

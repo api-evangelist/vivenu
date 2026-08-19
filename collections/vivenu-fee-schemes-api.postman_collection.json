@@ -1,0 +1,905 @@
+{
+  "item": [
+    {
+      "id": "fa7edf6a-cac7-4b8d-a2bf-5c3f925a9abc",
+      "name": "fee-schemes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e59093ab-81c6-4fc5-b1f1-5d5c7626ff36",
+          "name": "get all fee schemes",
+          "request": {
+            "name": "get all fee schemes",
+            "description": {
+              "content": "Get all fee schemes",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "fee-schemes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<float>"
+                },
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "25"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1d832852-6809-4135-9547-0dbb6a022db1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "fee-schemes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"docs\": [\n    {\n      \"sellerId\": \"string\",\n      \"name\": \"string\",\n      \"_id\": \"string\",\n      \"fees\": [\n        {\n          \"name\": \"string\",\n          \"type\": \"onTicket\",\n          \"_id\": \"string\",\n          \"enabled\": true,\n          \"exposed\": true,\n          \"included\": true,\n          \"discountable\": false,\n          \"asNet\": false,\n          \"calculationBase\": \"string\",\n          \"rules\": [\n            {\n              \"min\": 3907.8238594123536,\n              \"max\": 61.89158907624503,\n              \"fix\": 3705.532070525043,\n              \"var\": 8516.961633867328\n            },\n            {\n              \"min\": 3584.1829915227986,\n              \"max\": 1537.78760361317,\n              \"fix\": 1079.1276107047843,\n              \"var\": 8653.742344231703\n            }\n          ],\n          \"taxServiceTypeId\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"type\": \"onTicket\",\n          \"_id\": \"string\",\n          \"enabled\": true,\n          \"exposed\": false,\n          \"included\": true,\n          \"discountable\": false,\n          \"asNet\": true,\n          \"calculationBase\": \"string\",\n          \"rules\": [\n            {\n              \"min\": 6249.13780256398,\n              \"max\": 8770.743653112657,\n              \"fix\": 5219.038198360583,\n              \"var\": 6199.435963652704\n            },\n            {\n              \"min\": 9416.727668362142,\n              \"max\": 127.79879742998324,\n              \"fix\": 5496.403986586706,\n              \"var\": 9231.304503918771\n            }\n          ],\n          \"taxServiceTypeId\": \"string\"\n        }\n      ]\n    },\n    {\n      \"sellerId\": \"string\",\n      \"name\": \"string\",\n      \"_id\": \"string\",\n      \"fees\": [\n        {\n          \"name\": \"string\",\n          \"type\": \"onTicket\",\n          \"_id\": \"string\",\n          \"enabled\": true,\n          \"exposed\": true,\n          \"included\": true,\n          \"discountable\": false,\n          \"asNet\": true,\n          \"calculationBase\": \"string\",\n          \"rules\": [\n            {\n              \"min\": 8460.678110863679,\n              \"max\": 4979.078401293543,\n              \"fix\": 3584.5755033697756,\n              \"var\": 6254.2481968597285\n            },\n            {\n              \"min\": 154.83602471114023,\n              \"max\": 9849.552807358854,\n              \"fix\": 2255.162537058829,\n              \"var\": 2354.9838503835817\n            }\n          ],\n          \"taxServiceTypeId\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"type\": \"onHardTicket\",\n          \"_id\": \"string\",\n          \"enabled\": true,\n          \"exposed\": true,\n          \"included\": false,\n          \"discountable\": false,\n          \"asNet\": false,\n          \"calculationBase\": \"string\",\n          \"rules\": [\n            {\n              \"min\": 8001.279238131419,\n              \"max\": 7792.505271988796,\n              \"fix\": 7587.81666226035,\n              \"var\": 3667.000765486349\n            },\n            {\n              \"min\": 3881.5470705556277,\n              \"max\": 2807.5067955412137,\n              \"fix\": 1923.5669506368004,\n              \"var\": 7812.730772560911\n            }\n          ],\n          \"taxServiceTypeId\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"total\": 176\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "104dfdb1-9249-43a9-b802-01b1b0b0e539",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "fee-schemes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8c4756f6-0493-4bb7-856e-90120928818f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "fee-schemes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "efde469d-e842-473f-939e-9399f579856e",
+          "name": "create a fee scheme",
+          "request": {
+            "name": "create a fee scheme",
+            "description": {
+              "content": "Create a fee scheme",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "fee-schemes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"fees\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"enabled\": true,\n      \"exposed\": \"<boolean>\",\n      \"included\": \"<boolean>\",\n      \"discountable\": \"<boolean>\",\n      \"asNet\": \"<boolean>\",\n      \"calculationBase\": \"<string>\",\n      \"rules\": [\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        },\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        }\n      ],\n      \"taxServiceTypeId\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"enabled\": true,\n      \"exposed\": \"<boolean>\",\n      \"included\": \"<boolean>\",\n      \"discountable\": \"<boolean>\",\n      \"asNet\": \"<boolean>\",\n      \"calculationBase\": \"<string>\",\n      \"rules\": [\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        },\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        }\n      ],\n      \"taxServiceTypeId\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "67109869-fbf3-4bfe-97fa-a58496cba250",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "fee-schemes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"fees\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"enabled\": true,\n      \"exposed\": \"<boolean>\",\n      \"included\": \"<boolean>\",\n      \"discountable\": \"<boolean>\",\n      \"asNet\": \"<boolean>\",\n      \"calculationBase\": \"<string>\",\n      \"rules\": [\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        },\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        }\n      ],\n      \"taxServiceTypeId\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"enabled\": true,\n      \"exposed\": \"<boolean>\",\n      \"included\": \"<boolean>\",\n      \"discountable\": \"<boolean>\",\n      \"asNet\": \"<boolean>\",\n      \"calculationBase\": \"<string>\",\n      \"rules\": [\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        },\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        }\n      ],\n      \"taxServiceTypeId\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sellerId\": \"string\",\n  \"name\": \"string\",\n  \"_id\": \"string\",\n  \"fees\": [\n    {\n      \"name\": \"string\",\n      \"type\": \"onTicket\",\n      \"_id\": \"string\",\n      \"enabled\": true,\n      \"exposed\": false,\n      \"included\": false,\n      \"discountable\": true,\n      \"asNet\": false,\n      \"calculationBase\": \"string\",\n      \"rules\": [\n        {\n          \"min\": 1566.9485657404957,\n          \"max\": 2168.9936453398973,\n          \"fix\": 7593.240495096396,\n          \"var\": 506.4210795359847\n        },\n        {\n          \"min\": 8869.780098015797,\n          \"max\": 2449.328840628046,\n          \"fix\": 9788.778417579231,\n          \"var\": 7860.568885143207\n        }\n      ],\n      \"taxServiceTypeId\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"type\": \"onCart\",\n      \"_id\": \"string\",\n      \"enabled\": true,\n      \"exposed\": false,\n      \"included\": true,\n      \"discountable\": true,\n      \"asNet\": false,\n      \"calculationBase\": \"string\",\n      \"rules\": [\n        {\n          \"min\": 7513.70479815699,\n          \"max\": 4371.9943414012,\n          \"fix\": 6323.371402429005,\n          \"var\": 5181.29107892531\n        },\n        {\n          \"min\": 1584.896757301475,\n          \"max\": 5213.227231386527,\n          \"fix\": 6557.5741588174715,\n          \"var\": 4406.3797530107\n        }\n      ],\n      \"taxServiceTypeId\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88050c33-e0d7-473c-af91-fc2275ac62e1",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "fee-schemes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"fees\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"enabled\": true,\n      \"exposed\": \"<boolean>\",\n      \"included\": \"<boolean>\",\n      \"discountable\": \"<boolean>\",\n      \"asNet\": \"<boolean>\",\n      \"calculationBase\": \"<string>\",\n      \"rules\": [\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        },\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        }\n      ],\n      \"taxServiceTypeId\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"enabled\": true,\n      \"exposed\": \"<boolean>\",\n      \"included\": \"<boolean>\",\n      \"discountable\": \"<boolean>\",\n      \"asNet\": \"<boolean>\",\n      \"calculationBase\": \"<string>\",\n      \"rules\": [\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        },\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        }\n      ],\n      \"taxServiceTypeId\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "83170f2d-9312-4083-8f5d-c0fa646e9dec",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "fee-schemes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"fees\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"enabled\": true,\n      \"exposed\": \"<boolean>\",\n      \"included\": \"<boolean>\",\n      \"discountable\": \"<boolean>\",\n      \"asNet\": \"<boolean>\",\n      \"calculationBase\": \"<string>\",\n      \"rules\": [\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        },\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        }\n      ],\n      \"taxServiceTypeId\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"enabled\": true,\n      \"exposed\": \"<boolean>\",\n      \"included\": \"<boolean>\",\n      \"discountable\": \"<boolean>\",\n      \"asNet\": \"<boolean>\",\n      \"calculationBase\": \"<string>\",\n      \"rules\": [\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        },\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        }\n      ],\n      \"taxServiceTypeId\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e76b2f3a-429b-4a94-a7f7-a2fa3ee2516c",
+          "name": "get a fee scheme",
+          "request": {
+            "name": "get a fee scheme",
+            "description": {
+              "content": "Get a fee scheme",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "fee-schemes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3339385b-daf1-4853-b33c-ed17f3e71340",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "fee-schemes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sellerId\": \"string\",\n  \"name\": \"string\",\n  \"_id\": \"string\",\n  \"fees\": [\n    {\n      \"name\": \"string\",\n      \"type\": \"onTicket\",\n      \"_id\": \"string\",\n      \"enabled\": true,\n      \"exposed\": false,\n      \"included\": false,\n      \"discountable\": true,\n      \"asNet\": false,\n      \"calculationBase\": \"string\",\n      \"rules\": [\n        {\n          \"min\": 1566.9485657404957,\n          \"max\": 2168.9936453398973,\n          \"fix\": 7593.240495096396,\n          \"var\": 506.4210795359847\n        },\n        {\n          \"min\": 8869.780098015797,\n          \"max\": 2449.328840628046,\n          \"fix\": 9788.778417579231,\n          \"var\": 7860.568885143207\n        }\n      ],\n      \"taxServiceTypeId\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"type\": \"onCart\",\n      \"_id\": \"string\",\n      \"enabled\": true,\n      \"exposed\": false,\n      \"included\": true,\n      \"discountable\": true,\n      \"asNet\": false,\n      \"calculationBase\": \"string\",\n      \"rules\": [\n        {\n          \"min\": 7513.70479815699,\n          \"max\": 4371.9943414012,\n          \"fix\": 6323.371402429005,\n          \"var\": 5181.29107892531\n        },\n        {\n          \"min\": 1584.896757301475,\n          \"max\": 5213.227231386527,\n          \"fix\": 6557.5741588174715,\n          \"var\": 4406.3797530107\n        }\n      ],\n      \"taxServiceTypeId\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4da5c0b6-15c0-486d-9347-76f4eef863d3",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "fee-schemes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "30c88d71-e3c6-4d23-836e-98cfd7941aa2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "fee-schemes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56e30916-c503-4a89-9721-12bb4a3cc57f",
+          "name": "update a fee scheme",
+          "request": {
+            "name": "update a fee scheme",
+            "description": {
+              "content": "Update a fee scheme",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "fee-schemes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"fees\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"enabled\": true,\n      \"exposed\": \"<boolean>\",\n      \"included\": \"<boolean>\",\n      \"discountable\": \"<boolean>\",\n      \"asNet\": \"<boolean>\",\n      \"calculationBase\": \"<string>\",\n      \"rules\": [\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        },\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        }\n      ],\n      \"taxServiceTypeId\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"enabled\": true,\n      \"exposed\": \"<boolean>\",\n      \"included\": \"<boolean>\",\n      \"discountable\": \"<boolean>\",\n      \"asNet\": \"<boolean>\",\n      \"calculationBase\": \"<string>\",\n      \"rules\": [\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        },\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        }\n      ],\n      \"taxServiceTypeId\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dd8957d7-7241-4c8d-9aa5-bee6f18f5923",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "fee-schemes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"fees\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"enabled\": true,\n      \"exposed\": \"<boolean>\",\n      \"included\": \"<boolean>\",\n      \"discountable\": \"<boolean>\",\n      \"asNet\": \"<boolean>\",\n      \"calculationBase\": \"<string>\",\n      \"rules\": [\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        },\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        }\n      ],\n      \"taxServiceTypeId\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"enabled\": true,\n      \"exposed\": \"<boolean>\",\n      \"included\": \"<boolean>\",\n      \"discountable\": \"<boolean>\",\n      \"asNet\": \"<boolean>\",\n      \"calculationBase\": \"<string>\",\n      \"rules\": [\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        },\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        }\n      ],\n      \"taxServiceTypeId\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sellerId\": \"string\",\n  \"name\": \"string\",\n  \"_id\": \"string\",\n  \"fees\": [\n    {\n      \"name\": \"string\",\n      \"type\": \"onTicket\",\n      \"_id\": \"string\",\n      \"enabled\": true,\n      \"exposed\": false,\n      \"included\": false,\n      \"discountable\": true,\n      \"asNet\": false,\n      \"calculationBase\": \"string\",\n      \"rules\": [\n        {\n          \"min\": 1566.9485657404957,\n          \"max\": 2168.9936453398973,\n          \"fix\": 7593.240495096396,\n          \"var\": 506.4210795359847\n        },\n        {\n          \"min\": 8869.780098015797,\n          \"max\": 2449.328840628046,\n          \"fix\": 9788.778417579231,\n          \"var\": 7860.568885143207\n        }\n      ],\n      \"taxServiceTypeId\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"type\": \"onCart\",\n      \"_id\": \"string\",\n      \"enabled\": true,\n      \"exposed\": false,\n      \"included\": true,\n      \"discountable\": true,\n      \"asNet\": false,\n      \"calculationBase\": \"string\",\n      \"rules\": [\n        {\n          \"min\": 7513.70479815699,\n          \"max\": 4371.9943414012,\n          \"fix\": 6323.371402429005,\n          \"var\": 5181.29107892531\n        },\n        {\n          \"min\": 1584.896757301475,\n          \"max\": 5213.227231386527,\n          \"fix\": 6557.5741588174715,\n          \"var\": 4406.3797530107\n        }\n      ],\n      \"taxServiceTypeId\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5cc0267-4116-41c7-a3ef-9d93fd2dbfcd",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "fee-schemes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"fees\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"enabled\": true,\n      \"exposed\": \"<boolean>\",\n      \"included\": \"<boolean>\",\n      \"discountable\": \"<boolean>\",\n      \"asNet\": \"<boolean>\",\n      \"calculationBase\": \"<string>\",\n      \"rules\": [\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        },\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        }\n      ],\n      \"taxServiceTypeId\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"enabled\": true,\n      \"exposed\": \"<boolean>\",\n      \"included\": \"<boolean>\",\n      \"discountable\": \"<boolean>\",\n      \"asNet\": \"<boolean>\",\n      \"calculationBase\": \"<string>\",\n      \"rules\": [\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        },\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        }\n      ],\n      \"taxServiceTypeId\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4028c823-4242-46ad-a3a2-636b2a49a9c0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "fee-schemes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"fees\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"enabled\": true,\n      \"exposed\": \"<boolean>\",\n      \"included\": \"<boolean>\",\n      \"discountable\": \"<boolean>\",\n      \"asNet\": \"<boolean>\",\n      \"calculationBase\": \"<string>\",\n      \"rules\": [\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        },\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        }\n      ],\n      \"taxServiceTypeId\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"enabled\": true,\n      \"exposed\": \"<boolean>\",\n      \"included\": \"<boolean>\",\n      \"discountable\": \"<boolean>\",\n      \"asNet\": \"<boolean>\",\n      \"calculationBase\": \"<string>\",\n      \"rules\": [\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        },\n        {\n          \"min\": \"<float>\",\n          \"max\": \"<float>\",\n          \"fix\": \"<float>\",\n          \"var\": \"<float>\"\n        }\n      ],\n      \"taxServiceTypeId\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://vivenu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5954af2f-b554-4080-8eab-00df40f913f9",
+    "name": "vivenu access-lists fee-schemes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "vivenu API Documentation\n\nContact Support:\n Name: vivenu GmbH",
+      "type": "text/plain"
+    }
+  }
+}

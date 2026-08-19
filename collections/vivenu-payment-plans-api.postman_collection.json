@@ -1,0 +1,2521 @@
+{
+  "item": [
+    {
+      "id": "b13ca82a-a183-4374-a56f-4fc1b9399b60",
+      "name": "payment-plans",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e7f0581c-17bc-4b7e-ab59-a1f541a5b3f8",
+          "name": "list payment plans",
+          "request": {
+            "name": "list payment plans",
+            "description": {
+              "content": "List Payment Plans",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payments",
+                "plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<float>"
+                },
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "25"
+                },
+                {
+                  "disabled": false,
+                  "key": "customerId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "customerPaymentMethodId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0de9b1c8-ee80-4006-8273-f192485e0cb6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customerPaymentMethodId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"docs\": [\n    {\n      \"_id\": \"string\",\n      \"sellerId\": \"string\",\n      \"status\": \"ACTIVE\",\n      \"customerId\": \"string\",\n      \"currency\": \"KYD\",\n      \"customerPaymentMethodId\": \"string\",\n      \"paymentStrategyId\": \"string\",\n      \"paymentOptionId\": \"string\",\n      \"schedules\": [\n        {\n          \"_id\": \"string\",\n          \"due\": \"1975-12-22T09:47:54.366Z\",\n          \"status\": \"PENDING\",\n          \"total\": 7328.97596394442,\n          \"paymentRequestId\": \"string\",\n          \"paymentId\": \"string\",\n          \"attempts\": [\n            {\n              \"_id\": \"string\",\n              \"date\": \"1969-10-19T08:19:55.317Z\",\n              \"status\": \"PENDING\",\n              \"paymentRequestId\": \"string\",\n              \"paymentMethodId\": \"string\"\n            },\n            {\n              \"_id\": \"string\",\n              \"date\": \"2019-03-03T23:16:38.954Z\",\n              \"status\": \"REFUNDED\",\n              \"paymentRequestId\": \"string\",\n              \"paymentMethodId\": \"string\"\n            }\n          ],\n          \"nextAttempt\": \"2012-06-15T15:01:51.209Z\"\n        },\n        {\n          \"_id\": \"string\",\n          \"due\": \"1955-02-03T07:42:56.075Z\",\n          \"status\": \"PENDING\",\n          \"total\": 3916.482059723122,\n          \"paymentRequestId\": \"string\",\n          \"paymentId\": \"string\",\n          \"attempts\": [\n            {\n              \"_id\": \"string\",\n              \"date\": \"1963-06-07T14:31:23.803Z\",\n              \"status\": \"PENDING\",\n              \"paymentRequestId\": \"string\",\n              \"paymentMethodId\": \"string\"\n            },\n            {\n              \"_id\": \"string\",\n              \"date\": \"1957-03-22T04:56:09.675Z\",\n              \"status\": \"FAILED\",\n              \"paymentRequestId\": \"string\",\n              \"paymentMethodId\": \"string\"\n            }\n          ],\n          \"nextAttempt\": \"1969-04-18T03:10:49.051Z\"\n        }\n      ],\n      \"checkoutId\": \"string\",\n      \"salesChannelId\": \"string\",\n      \"secret\": \"string\",\n      \"createdAt\": \"1970-02-23T19:22:06.413Z\",\n      \"updatedAt\": \"1951-12-04T07:17:43.920Z\",\n      \"history\": [\n        {\n          \"type\": \"paymentPlan.payoff_failed\",\n          \"date\": \"2010-12-03T06:03:45.967Z\",\n          \"data\": {},\n          \"userId\": \"string\"\n        },\n        {\n          \"type\": \"paymentPlan.schedule_retried\",\n          \"date\": \"2001-03-18T11:40:38.641Z\",\n          \"data\": {},\n          \"userId\": \"string\"\n        }\n      ],\n      \"canceledAt\": \"1967-08-07T21:40:22.035Z\"\n    },\n    {\n      \"_id\": \"string\",\n      \"sellerId\": \"string\",\n      \"status\": \"ACTIVE\",\n      \"customerId\": \"string\",\n      \"currency\": \"SZL\",\n      \"customerPaymentMethodId\": \"string\",\n      \"paymentStrategyId\": \"string\",\n      \"paymentOptionId\": \"string\",\n      \"schedules\": [\n        {\n          \"_id\": \"string\",\n          \"due\": \"1962-05-06T23:01:13.242Z\",\n          \"status\": \"FAILED\",\n          \"total\": 4552.260632711959,\n          \"paymentRequestId\": \"string\",\n          \"paymentId\": \"string\",\n          \"attempts\": [\n            {\n              \"_id\": \"string\",\n              \"date\": \"1952-01-06T01:18:48.874Z\",\n              \"status\": \"FAILED\",\n              \"paymentRequestId\": \"string\",\n              \"paymentMethodId\": \"string\"\n            },\n            {\n              \"_id\": \"string\",\n              \"date\": \"1988-03-25T02:18:30.123Z\",\n              \"status\": \"REFUNDED\",\n              \"paymentRequestId\": \"string\",\n              \"paymentMethodId\": \"string\"\n            }\n          ],\n          \"nextAttempt\": \"2017-04-13T09:08:08.827Z\"\n        },\n        {\n          \"_id\": \"string\",\n          \"due\": \"1977-07-08T03:42:23.853Z\",\n          \"status\": \"SUCCEEDED\",\n          \"total\": 5650.009820991378,\n          \"paymentRequestId\": \"string\",\n          \"paymentId\": \"string\",\n          \"attempts\": [\n            {\n              \"_id\": \"string\",\n              \"date\": \"1992-04-26T18:25:05.277Z\",\n              \"status\": \"SCHEDULED\",\n              \"paymentRequestId\": \"string\",\n              \"paymentMethodId\": \"string\"\n            },\n            {\n              \"_id\": \"string\",\n              \"date\": \"1999-07-07T00:48:09.166Z\",\n              \"status\": \"SCHEDULED\",\n              \"paymentRequestId\": \"string\",\n              \"paymentMethodId\": \"string\"\n            }\n          ],\n          \"nextAttempt\": \"1989-04-18T03:43:20.420Z\"\n        }\n      ],\n      \"checkoutId\": \"string\",\n      \"salesChannelId\": \"string\",\n      \"secret\": \"string\",\n      \"createdAt\": \"2023-07-24T07:58:08.477Z\",\n      \"updatedAt\": \"2023-07-03T11:00:08.635Z\",\n      \"history\": [\n        {\n          \"type\": \"paymentPlan.created\",\n          \"date\": \"2021-10-05T15:39:03.962Z\",\n          \"data\": {},\n          \"userId\": \"string\"\n        },\n        {\n          \"type\": \"paymentPlan.created\",\n          \"date\": \"2004-04-22T22:23:01.684Z\",\n          \"data\": {},\n          \"userId\": \"string\"\n        }\n      ],\n      \"canceledAt\": \"1974-03-09T22:03:07.285Z\"\n    }\n  ],\n  \"total\": 97\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "89a9a1cf-ac80-499d-91a6-5d1a28db72a6",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customerPaymentMethodId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a3bbc9b6-29fa-497f-91d6-bb15c0c855ca",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customerPaymentMethodId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a0742c9d-f022-420b-ba89-639d66e5f99b",
+          "name": "get a payment plan",
+          "request": {
+            "name": "get a payment plan",
+            "description": {
+              "content": "Get a Payment Plan",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payments",
+                "plans",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bca5f2f4-3aaa-433a-942d-6992e2f7418b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"sellerId\": \"string\",\n  \"status\": \"INCOMPLETE\",\n  \"customerId\": \"string\",\n  \"currency\": \"KES\",\n  \"customerPaymentMethodId\": \"string\",\n  \"paymentStrategyId\": \"string\",\n  \"paymentOptionId\": \"string\",\n  \"schedules\": [\n    {\n      \"_id\": \"string\",\n      \"due\": \"1974-10-20T16:04:52.963Z\",\n      \"status\": \"REFUNDED\",\n      \"total\": 3350.8419496466113,\n      \"paymentRequestId\": \"string\",\n      \"paymentId\": \"string\",\n      \"attempts\": [\n        {\n          \"_id\": \"string\",\n          \"date\": \"2005-10-14T06:36:59.396Z\",\n          \"status\": \"FAILED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        },\n        {\n          \"_id\": \"string\",\n          \"date\": \"1956-10-29T12:17:34.752Z\",\n          \"status\": \"FAILED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        }\n      ],\n      \"nextAttempt\": \"1967-08-20T02:52:59.741Z\"\n    },\n    {\n      \"_id\": \"string\",\n      \"due\": \"1951-07-21T17:08:25.978Z\",\n      \"status\": \"SCHEDULED\",\n      \"total\": 9364.140457010755,\n      \"paymentRequestId\": \"string\",\n      \"paymentId\": \"string\",\n      \"attempts\": [\n        {\n          \"_id\": \"string\",\n          \"date\": \"1952-02-12T21:43:44.013Z\",\n          \"status\": \"SUCCEEDED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        },\n        {\n          \"_id\": \"string\",\n          \"date\": \"1972-06-14T22:12:57.804Z\",\n          \"status\": \"SCHEDULED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        }\n      ],\n      \"nextAttempt\": \"2022-12-12T05:13:25.058Z\"\n    }\n  ],\n  \"checkoutId\": \"string\",\n  \"salesChannelId\": \"string\",\n  \"secret\": \"string\",\n  \"createdAt\": \"2014-07-10T18:59:32.905Z\",\n  \"updatedAt\": \"1969-12-10T16:33:47.471Z\",\n  \"history\": [\n    {\n      \"type\": \"paymentPlan.down_payment_failed\",\n      \"date\": \"1954-04-05T13:20:56.647Z\",\n      \"data\": {},\n      \"userId\": \"string\"\n    },\n    {\n      \"type\": \"paymentPlan.item_changed\",\n      \"date\": \"1984-03-27T05:09:18.979Z\",\n      \"data\": {},\n      \"userId\": \"string\"\n    }\n  ],\n  \"canceledAt\": \"1991-06-07T20:32:19.517Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16df01f8-c0e3-458d-a338-dfff213d514d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "65c60041-367d-4d36-97c5-57c424e30888",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b056ebaf-c215-4abf-83ec-ac835bb09a61",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8241c6d7-1bc0-471a-95cf-674bc72e504c",
+          "name": "update a payment plan",
+          "request": {
+            "name": "update a payment plan",
+            "description": {
+              "content": "Update a Payment Plan",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payments",
+                "plans",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\",\n  \"customerPaymentMethodId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "da5679f1-672d-4eb5-b788-98258c54ab27",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\",\n  \"customerPaymentMethodId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"sellerId\": \"string\",\n  \"status\": \"INCOMPLETE\",\n  \"customerId\": \"string\",\n  \"currency\": \"KES\",\n  \"customerPaymentMethodId\": \"string\",\n  \"paymentStrategyId\": \"string\",\n  \"paymentOptionId\": \"string\",\n  \"schedules\": [\n    {\n      \"_id\": \"string\",\n      \"due\": \"1974-10-20T16:04:52.963Z\",\n      \"status\": \"REFUNDED\",\n      \"total\": 3350.8419496466113,\n      \"paymentRequestId\": \"string\",\n      \"paymentId\": \"string\",\n      \"attempts\": [\n        {\n          \"_id\": \"string\",\n          \"date\": \"2005-10-14T06:36:59.396Z\",\n          \"status\": \"FAILED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        },\n        {\n          \"_id\": \"string\",\n          \"date\": \"1956-10-29T12:17:34.752Z\",\n          \"status\": \"FAILED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        }\n      ],\n      \"nextAttempt\": \"1967-08-20T02:52:59.741Z\"\n    },\n    {\n      \"_id\": \"string\",\n      \"due\": \"1951-07-21T17:08:25.978Z\",\n      \"status\": \"SCHEDULED\",\n      \"total\": 9364.140457010755,\n      \"paymentRequestId\": \"string\",\n      \"paymentId\": \"string\",\n      \"attempts\": [\n        {\n          \"_id\": \"string\",\n          \"date\": \"1952-02-12T21:43:44.013Z\",\n          \"status\": \"SUCCEEDED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        },\n        {\n          \"_id\": \"string\",\n          \"date\": \"1972-06-14T22:12:57.804Z\",\n          \"status\": \"SCHEDULED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        }\n      ],\n      \"nextAttempt\": \"2022-12-12T05:13:25.058Z\"\n    }\n  ],\n  \"checkoutId\": \"string\",\n  \"salesChannelId\": \"string\",\n  \"secret\": \"string\",\n  \"createdAt\": \"2014-07-10T18:59:32.905Z\",\n  \"updatedAt\": \"1969-12-10T16:33:47.471Z\",\n  \"history\": [\n    {\n      \"type\": \"paymentPlan.down_payment_failed\",\n      \"date\": \"1954-04-05T13:20:56.647Z\",\n      \"data\": {},\n      \"userId\": \"string\"\n    },\n    {\n      \"type\": \"paymentPlan.item_changed\",\n      \"date\": \"1984-03-27T05:09:18.979Z\",\n      \"data\": {},\n      \"userId\": \"string\"\n    }\n  ],\n  \"canceledAt\": \"1991-06-07T20:32:19.517Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a397972-660b-4c82-8c04-cbbaf53ff012",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\",\n  \"customerPaymentMethodId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4c90e45c-82d9-4436-9905-cd156acb90d5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\",\n  \"customerPaymentMethodId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "40a834f2-1efd-4a3b-9f18-c44d2054885a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\",\n  \"customerPaymentMethodId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "052fefcb-353b-4732-82e8-1ec56e083a4b",
+          "name": "get a public payment plan",
+          "request": {
+            "name": "get a public payment plan",
+            "description": {
+              "content": "Get a Public Payment Plan",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "public",
+                "payments",
+                "plans",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "secret",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "be5079b0-8651-497b-9f89-510f10ea8477",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "payments",
+                    "plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"schedules\": [\n    {\n      \"due\": \"2018-02-28T20:17:54.363Z\",\n      \"status\": \"FAILED\",\n      \"total\": 226.9834277457594,\n      \"attempts\": [\n        {\n          \"_id\": \"string\",\n          \"date\": \"1981-02-08T01:48:01.443Z\",\n          \"status\": \"REFUNDED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        },\n        {\n          \"_id\": \"string\",\n          \"date\": \"1951-06-07T18:04:37.534Z\",\n          \"status\": \"FAILED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        }\n      ],\n      \"nextAttempt\": \"1949-08-28T13:54:42.287Z\"\n    },\n    {\n      \"due\": \"1962-04-19T03:29:48.067Z\",\n      \"status\": \"SCHEDULED\",\n      \"total\": 4898.375207160874,\n      \"attempts\": [\n        {\n          \"_id\": \"string\",\n          \"date\": \"2013-04-18T00:23:16.688Z\",\n          \"status\": \"REFUNDED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        },\n        {\n          \"_id\": \"string\",\n          \"date\": \"1954-06-10T18:55:18.107Z\",\n          \"status\": \"FAILED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        }\n      ],\n      \"nextAttempt\": \"2004-05-12T02:31:54.643Z\"\n    }\n  ],\n  \"secret\": \"string\",\n  \"status\": \"DRAFT\",\n  \"currency\": \"GTQ\",\n  \"customerPaymentMethodId\": \"string\",\n  \"paymentStrategyId\": \"string\",\n  \"paymentOptionId\": \"string\",\n  \"sellerId\": \"string\",\n  \"checkoutId\": \"string\",\n  \"subscriptionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efb3acfe-efe5-4738-8580-de24ae83f5a4",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "payments",
+                    "plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8695f92c-f178-45e3-b0e1-8a5bb9f213a3",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "payments",
+                    "plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b73cb49-caa8-48be-946c-f02a4a376a56",
+          "name": "update a public payment plan",
+          "request": {
+            "name": "update a public payment plan",
+            "description": {
+              "content": "Update a Public Payment Plan",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "public",
+                "payments",
+                "plans",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"secret\": \"<string>\",\n  \"customerPaymentMethodId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d0a51322-d01c-4748-a56d-fad1c12622e5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "payments",
+                    "plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"secret\": \"<string>\",\n  \"customerPaymentMethodId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"schedules\": [\n    {\n      \"due\": \"2018-02-28T20:17:54.363Z\",\n      \"status\": \"FAILED\",\n      \"total\": 226.9834277457594,\n      \"attempts\": [\n        {\n          \"_id\": \"string\",\n          \"date\": \"1981-02-08T01:48:01.443Z\",\n          \"status\": \"REFUNDED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        },\n        {\n          \"_id\": \"string\",\n          \"date\": \"1951-06-07T18:04:37.534Z\",\n          \"status\": \"FAILED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        }\n      ],\n      \"nextAttempt\": \"1949-08-28T13:54:42.287Z\"\n    },\n    {\n      \"due\": \"1962-04-19T03:29:48.067Z\",\n      \"status\": \"SCHEDULED\",\n      \"total\": 4898.375207160874,\n      \"attempts\": [\n        {\n          \"_id\": \"string\",\n          \"date\": \"2013-04-18T00:23:16.688Z\",\n          \"status\": \"REFUNDED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        },\n        {\n          \"_id\": \"string\",\n          \"date\": \"1954-06-10T18:55:18.107Z\",\n          \"status\": \"FAILED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        }\n      ],\n      \"nextAttempt\": \"2004-05-12T02:31:54.643Z\"\n    }\n  ],\n  \"secret\": \"string\",\n  \"status\": \"DRAFT\",\n  \"currency\": \"GTQ\",\n  \"customerPaymentMethodId\": \"string\",\n  \"paymentStrategyId\": \"string\",\n  \"paymentOptionId\": \"string\",\n  \"sellerId\": \"string\",\n  \"checkoutId\": \"string\",\n  \"subscriptionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45a05039-d1c6-4f1c-bfd8-b64e9f5f6b41",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "payments",
+                    "plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"secret\": \"<string>\",\n  \"customerPaymentMethodId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a3b9d5de-0e91-40e5-8d3f-997fec95a340",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "payments",
+                    "plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"secret\": \"<string>\",\n  \"customerPaymentMethodId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a85d2a3a-450b-4067-813e-9e6a464a7b4a",
+          "name": "get a payment plans public information based on the transaction",
+          "request": {
+            "name": "get a payment plans public information based on the transaction",
+            "description": {
+              "content": "Get a payment plan's public information based on the transaction",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "public",
+                "transactions",
+                ":id",
+                "payment-plan"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "secret",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ae72698d-5677-4764-91a6-7a2b546799b5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "transactions",
+                    ":id",
+                    "payment-plan"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"schedules\": [\n    {\n      \"due\": \"2018-02-28T20:17:54.363Z\",\n      \"status\": \"FAILED\",\n      \"total\": 226.9834277457594,\n      \"attempts\": [\n        {\n          \"_id\": \"string\",\n          \"date\": \"1981-02-08T01:48:01.443Z\",\n          \"status\": \"REFUNDED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        },\n        {\n          \"_id\": \"string\",\n          \"date\": \"1951-06-07T18:04:37.534Z\",\n          \"status\": \"FAILED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        }\n      ],\n      \"nextAttempt\": \"1949-08-28T13:54:42.287Z\"\n    },\n    {\n      \"due\": \"1962-04-19T03:29:48.067Z\",\n      \"status\": \"SCHEDULED\",\n      \"total\": 4898.375207160874,\n      \"attempts\": [\n        {\n          \"_id\": \"string\",\n          \"date\": \"2013-04-18T00:23:16.688Z\",\n          \"status\": \"REFUNDED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        },\n        {\n          \"_id\": \"string\",\n          \"date\": \"1954-06-10T18:55:18.107Z\",\n          \"status\": \"FAILED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        }\n      ],\n      \"nextAttempt\": \"2004-05-12T02:31:54.643Z\"\n    }\n  ],\n  \"secret\": \"string\",\n  \"status\": \"DRAFT\",\n  \"currency\": \"GTQ\",\n  \"customerPaymentMethodId\": \"string\",\n  \"paymentStrategyId\": \"string\",\n  \"paymentOptionId\": \"string\",\n  \"sellerId\": \"string\",\n  \"checkoutId\": \"string\",\n  \"subscriptionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d24a16f5-7a06-46f9-bd25-f8477b2037cb",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "transactions",
+                    ":id",
+                    "payment-plan"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b8274d86-04cf-43b8-a87a-2d17a50242ba",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "transactions",
+                    ":id",
+                    "payment-plan"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8a5f0f03-2366-453b-9332-3115249b708f",
+          "name": "complete a payment plan",
+          "request": {
+            "name": "complete a payment plan",
+            "description": {
+              "content": "Complete a Payment Plan",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payments",
+                "plans",
+                ":id",
+                "complete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "49cc0390-c3d0-4fa8-9f66-79c83d7d69a0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "plans",
+                    ":id",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"schedules\": [\n    {\n      \"due\": \"2018-02-28T20:17:54.363Z\",\n      \"status\": \"FAILED\",\n      \"total\": 226.9834277457594,\n      \"attempts\": [\n        {\n          \"_id\": \"string\",\n          \"date\": \"1981-02-08T01:48:01.443Z\",\n          \"status\": \"REFUNDED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        },\n        {\n          \"_id\": \"string\",\n          \"date\": \"1951-06-07T18:04:37.534Z\",\n          \"status\": \"FAILED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        }\n      ],\n      \"nextAttempt\": \"1949-08-28T13:54:42.287Z\"\n    },\n    {\n      \"due\": \"1962-04-19T03:29:48.067Z\",\n      \"status\": \"SCHEDULED\",\n      \"total\": 4898.375207160874,\n      \"attempts\": [\n        {\n          \"_id\": \"string\",\n          \"date\": \"2013-04-18T00:23:16.688Z\",\n          \"status\": \"REFUNDED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        },\n        {\n          \"_id\": \"string\",\n          \"date\": \"1954-06-10T18:55:18.107Z\",\n          \"status\": \"FAILED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        }\n      ],\n      \"nextAttempt\": \"2004-05-12T02:31:54.643Z\"\n    }\n  ],\n  \"secret\": \"string\",\n  \"status\": \"DRAFT\",\n  \"currency\": \"GTQ\",\n  \"customerPaymentMethodId\": \"string\",\n  \"paymentStrategyId\": \"string\",\n  \"paymentOptionId\": \"string\",\n  \"sellerId\": \"string\",\n  \"checkoutId\": \"string\",\n  \"subscriptionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b6a3dbc-5a6d-49a9-a2d8-d91970a8bf70",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "plans",
+                    ":id",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a156981d-f6e3-4422-9187-2048dc0ca4d6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "plans",
+                    ":id",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ed24ecec-580a-4395-a9d3-02de3db57344",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "plans",
+                    ":id",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "21d2ef09-ca9b-4184-9637-2bd2597114ad",
+          "name": "complete a public payment plan",
+          "request": {
+            "name": "complete a public payment plan",
+            "description": {
+              "content": "Complete a Public Payment Plan",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "public",
+                "payments",
+                "plans",
+                ":id",
+                "complete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"secret\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f1a85633-e113-4977-b33b-f64d13a70752",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "payments",
+                    "plans",
+                    ":id",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"secret\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"schedules\": [\n    {\n      \"due\": \"2018-02-28T20:17:54.363Z\",\n      \"status\": \"FAILED\",\n      \"total\": 226.9834277457594,\n      \"attempts\": [\n        {\n          \"_id\": \"string\",\n          \"date\": \"1981-02-08T01:48:01.443Z\",\n          \"status\": \"REFUNDED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        },\n        {\n          \"_id\": \"string\",\n          \"date\": \"1951-06-07T18:04:37.534Z\",\n          \"status\": \"FAILED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        }\n      ],\n      \"nextAttempt\": \"1949-08-28T13:54:42.287Z\"\n    },\n    {\n      \"due\": \"1962-04-19T03:29:48.067Z\",\n      \"status\": \"SCHEDULED\",\n      \"total\": 4898.375207160874,\n      \"attempts\": [\n        {\n          \"_id\": \"string\",\n          \"date\": \"2013-04-18T00:23:16.688Z\",\n          \"status\": \"REFUNDED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        },\n        {\n          \"_id\": \"string\",\n          \"date\": \"1954-06-10T18:55:18.107Z\",\n          \"status\": \"FAILED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        }\n      ],\n      \"nextAttempt\": \"2004-05-12T02:31:54.643Z\"\n    }\n  ],\n  \"secret\": \"string\",\n  \"status\": \"DRAFT\",\n  \"currency\": \"GTQ\",\n  \"customerPaymentMethodId\": \"string\",\n  \"paymentStrategyId\": \"string\",\n  \"paymentOptionId\": \"string\",\n  \"sellerId\": \"string\",\n  \"checkoutId\": \"string\",\n  \"subscriptionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4881fa52-328c-402b-8029-c8d4c8f581c5",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "payments",
+                    "plans",
+                    ":id",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"secret\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0b32dc40-98f1-4588-8ada-dbe18d035ef7",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "payments",
+                    "plans",
+                    ":id",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"secret\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f302584-716b-4ea2-be60-0819024acd5a",
+          "name": "retry a payment plan schedule",
+          "request": {
+            "name": "retry a payment plan schedule",
+            "description": {
+              "content": "Retry a Payment Plan Schedule",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payments",
+                "plans",
+                ":paymentPlanId",
+                "schedules",
+                ":scheduleId",
+                "retry"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "paymentPlanId",
+                  "description": "(Required) The ID of the payment plan"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scheduleId",
+                  "description": "(Required) The ID of the payment plan schedule"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "caf6196c-b83c-4bbc-95ac-c5b98b33a106",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "plans",
+                    ":paymentPlanId",
+                    "schedules",
+                    ":scheduleId",
+                    "retry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentPlanId",
+                      "description": "(Required) The ID of the payment plan"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scheduleId",
+                      "description": "(Required) The ID of the payment plan schedule"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"sellerId\": \"string\",\n  \"status\": \"INCOMPLETE\",\n  \"customerId\": \"string\",\n  \"currency\": \"KES\",\n  \"customerPaymentMethodId\": \"string\",\n  \"paymentStrategyId\": \"string\",\n  \"paymentOptionId\": \"string\",\n  \"schedules\": [\n    {\n      \"_id\": \"string\",\n      \"due\": \"1974-10-20T16:04:52.963Z\",\n      \"status\": \"REFUNDED\",\n      \"total\": 3350.8419496466113,\n      \"paymentRequestId\": \"string\",\n      \"paymentId\": \"string\",\n      \"attempts\": [\n        {\n          \"_id\": \"string\",\n          \"date\": \"2005-10-14T06:36:59.396Z\",\n          \"status\": \"FAILED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        },\n        {\n          \"_id\": \"string\",\n          \"date\": \"1956-10-29T12:17:34.752Z\",\n          \"status\": \"FAILED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        }\n      ],\n      \"nextAttempt\": \"1967-08-20T02:52:59.741Z\"\n    },\n    {\n      \"_id\": \"string\",\n      \"due\": \"1951-07-21T17:08:25.978Z\",\n      \"status\": \"SCHEDULED\",\n      \"total\": 9364.140457010755,\n      \"paymentRequestId\": \"string\",\n      \"paymentId\": \"string\",\n      \"attempts\": [\n        {\n          \"_id\": \"string\",\n          \"date\": \"1952-02-12T21:43:44.013Z\",\n          \"status\": \"SUCCEEDED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        },\n        {\n          \"_id\": \"string\",\n          \"date\": \"1972-06-14T22:12:57.804Z\",\n          \"status\": \"SCHEDULED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        }\n      ],\n      \"nextAttempt\": \"2022-12-12T05:13:25.058Z\"\n    }\n  ],\n  \"checkoutId\": \"string\",\n  \"salesChannelId\": \"string\",\n  \"secret\": \"string\",\n  \"createdAt\": \"2014-07-10T18:59:32.905Z\",\n  \"updatedAt\": \"1969-12-10T16:33:47.471Z\",\n  \"history\": [\n    {\n      \"type\": \"paymentPlan.down_payment_failed\",\n      \"date\": \"1954-04-05T13:20:56.647Z\",\n      \"data\": {},\n      \"userId\": \"string\"\n    },\n    {\n      \"type\": \"paymentPlan.item_changed\",\n      \"date\": \"1984-03-27T05:09:18.979Z\",\n      \"data\": {},\n      \"userId\": \"string\"\n    }\n  ],\n  \"canceledAt\": \"1991-06-07T20:32:19.517Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ffe9d1c0-31c8-42b9-8354-c8187158142a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "plans",
+                    ":paymentPlanId",
+                    "schedules",
+                    ":scheduleId",
+                    "retry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentPlanId",
+                      "description": "(Required) The ID of the payment plan"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scheduleId",
+                      "description": "(Required) The ID of the payment plan schedule"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "89d3c816-0a1c-41b7-84c4-47b966b47a38",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "plans",
+                    ":paymentPlanId",
+                    "schedules",
+                    ":scheduleId",
+                    "retry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentPlanId",
+                      "description": "(Required) The ID of the payment plan"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scheduleId",
+                      "description": "(Required) The ID of the payment plan schedule"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2ecf514e-0254-44fe-abc9-1e337edc4a65",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "plans",
+                    ":paymentPlanId",
+                    "schedules",
+                    ":scheduleId",
+                    "retry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentPlanId",
+                      "description": "(Required) The ID of the payment plan"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scheduleId",
+                      "description": "(Required) The ID of the payment plan schedule"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b6314693-9035-4b8e-9bf7-bc259c440e5b",
+          "name": "retry a public payment plan schedule",
+          "request": {
+            "name": "retry a public payment plan schedule",
+            "description": {
+              "content": "Retry a Public Payment Plan Schedule",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "public",
+                "payments",
+                "plans",
+                ":paymentPlanId",
+                "schedules",
+                ":scheduleId",
+                "retry"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "paymentPlanId",
+                  "description": "(Required) The ID of the payment plan"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scheduleId",
+                  "description": "(Required) The ID of the payment plan schedule"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"secret\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "464562f8-3344-493a-8410-dbf9890ee730",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "payments",
+                    "plans",
+                    ":paymentPlanId",
+                    "schedules",
+                    ":scheduleId",
+                    "retry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentPlanId",
+                      "description": "(Required) The ID of the payment plan"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scheduleId",
+                      "description": "(Required) The ID of the payment plan schedule"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"secret\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"schedules\": [\n    {\n      \"due\": \"2018-02-28T20:17:54.363Z\",\n      \"status\": \"FAILED\",\n      \"total\": 226.9834277457594,\n      \"attempts\": [\n        {\n          \"_id\": \"string\",\n          \"date\": \"1981-02-08T01:48:01.443Z\",\n          \"status\": \"REFUNDED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        },\n        {\n          \"_id\": \"string\",\n          \"date\": \"1951-06-07T18:04:37.534Z\",\n          \"status\": \"FAILED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        }\n      ],\n      \"nextAttempt\": \"1949-08-28T13:54:42.287Z\"\n    },\n    {\n      \"due\": \"1962-04-19T03:29:48.067Z\",\n      \"status\": \"SCHEDULED\",\n      \"total\": 4898.375207160874,\n      \"attempts\": [\n        {\n          \"_id\": \"string\",\n          \"date\": \"2013-04-18T00:23:16.688Z\",\n          \"status\": \"REFUNDED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        },\n        {\n          \"_id\": \"string\",\n          \"date\": \"1954-06-10T18:55:18.107Z\",\n          \"status\": \"FAILED\",\n          \"paymentRequestId\": \"string\",\n          \"paymentMethodId\": \"string\"\n        }\n      ],\n      \"nextAttempt\": \"2004-05-12T02:31:54.643Z\"\n    }\n  ],\n  \"secret\": \"string\",\n  \"status\": \"DRAFT\",\n  \"currency\": \"GTQ\",\n  \"customerPaymentMethodId\": \"string\",\n  \"paymentStrategyId\": \"string\",\n  \"paymentOptionId\": \"string\",\n  \"sellerId\": \"string\",\n  \"checkoutId\": \"string\",\n  \"subscriptionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "89f6a2dc-106e-4209-a891-583bdab3384c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "payments",
+                    "plans",
+                    ":paymentPlanId",
+                    "schedules",
+                    ":scheduleId",
+                    "retry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentPlanId",
+                      "description": "(Required) The ID of the payment plan"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scheduleId",
+                      "description": "(Required) The ID of the payment plan schedule"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"secret\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "23a28393-d74f-4b41-9979-71deb7ac49d8",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "payments",
+                    "plans",
+                    ":paymentPlanId",
+                    "schedules",
+                    ":scheduleId",
+                    "retry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentPlanId",
+                      "description": "(Required) The ID of the payment plan"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scheduleId",
+                      "description": "(Required) The ID of the payment plan schedule"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"secret\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://vivenu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c664e5c1-08a0-4db9-b6b3-f23049672407",
+    "name": "vivenu access-lists payment-plans API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "vivenu API Documentation\n\nContact Support:\n Name: vivenu GmbH",
+      "type": "text/plain"
+    }
+  }
+}

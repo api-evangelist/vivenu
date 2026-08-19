@@ -1,0 +1,558 @@
+{
+  "item": [
+    {
+      "id": "da1b38c7-786e-4dee-9fb1-eb38177f94d6",
+      "name": "disputes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f10e8a97-75de-40a9-91ee-3d987904871d",
+          "name": "get disputes",
+          "request": {
+            "name": "get disputes",
+            "description": {
+              "content": "Get disputes",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "disputes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "25",
+                  "description": "(Required) A limit on the number of objects to be returned. Can range between 1 and 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "0",
+                  "description": "(Required) The number of objects to skip for the requested result"
+                },
+                {
+                  "disabled": false,
+                  "key": "sellerId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "reference",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "paymentId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "paymentGatewayId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$gt]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$gte]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$lt]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$lte]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$eq]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$ne]",
+                  "value": "<dateTime>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4f3af785-8c2a-47b3-8b0b-9de28f3287fd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "disputes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sellerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paymentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paymentGatewayId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "createdAt[$gt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$eq]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$ne]",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"docs\": [\n    {\n      \"_id\": \"string\",\n      \"status\": \"string\",\n      \"reference\": \"string\",\n      \"amount\": 753.4473025262745,\n      \"currency\": \"string\",\n      \"paymentId\": \"string\",\n      \"paymentGatewayId\": \"string\",\n      \"sellerId\": \"string\",\n      \"createdAt\": \"1956-01-10T18:28:44.472Z\",\n      \"updatedAt\": \"1946-12-17T09:05:31.968Z\",\n      \"deadline\": \"1948-02-19T23:48:33.759Z\"\n    },\n    {\n      \"_id\": \"string\",\n      \"status\": \"string\",\n      \"reference\": \"string\",\n      \"amount\": 6704.199513182416,\n      \"currency\": \"string\",\n      \"paymentId\": \"string\",\n      \"paymentGatewayId\": \"string\",\n      \"sellerId\": \"string\",\n      \"createdAt\": \"1981-12-31T06:22:48.660Z\",\n      \"updatedAt\": \"1965-11-28T23:45:15.841Z\",\n      \"deadline\": \"2003-07-02T18:26:12.581Z\"\n    }\n  ],\n  \"total\": 2702.990028654373\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "837701c2-8543-4ab2-b839-67a6a47ae970",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "disputes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sellerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paymentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paymentGatewayId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "createdAt[$gt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$eq]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$ne]",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "158294b2-57b1-4409-bb8d-6be6e5eac9fb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "disputes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sellerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paymentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paymentGatewayId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "createdAt[$gt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$eq]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$ne]",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f1adc91-f64d-4d97-b902-520f03c5b673",
+          "name": "stop dispute automation",
+          "request": {
+            "name": "stop dispute automation",
+            "description": {
+              "content": "Stop dispute automation",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "disputes",
+                ":id",
+                "stop-automation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ed3ff6f5-f862-4d24-8fbc-66f3fbe958cb",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "disputes",
+                    ":id",
+                    "stop-automation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1e47c060-a40e-478c-8838-9387a3d24db7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "disputes",
+                    ":id",
+                    "stop-automation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://vivenu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a481f6b2-8606-46c1-8716-a00f0ee85091",
+    "name": "vivenu access-lists disputes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "vivenu API Documentation\n\nContact Support:\n Name: vivenu GmbH",
+      "type": "text/plain"
+    }
+  }
+}

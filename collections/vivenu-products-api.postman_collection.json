@@ -1,0 +1,3160 @@
+{
+  "item": [
+    {
+      "id": "d5c5ab72-3cb0-46a1-8a6c-f52ec48df2fd",
+      "name": "products",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a5d22d77-f514-4752-8130-67ade22e3424",
+          "name": "products/list",
+          "request": {
+            "name": "products/list",
+            "description": {
+              "content": "Get all Products",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "25"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<float>"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "variantIds",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "variantIds",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "99deceda-ea5c-41a5-827a-8c7e224ad727",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "variantIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "variantIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"docs\": [\n    {\n      \"_id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"addOn\",\n      \"sellerId\": \"string\",\n      \"active\": true,\n      \"isFulfillable\": true,\n      \"image\": \"string\",\n      \"description\": \"string\",\n      \"variants\": [\n        {\n          \"_id\": \"string\",\n          \"taxable\": true,\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"priceType\": \"fixed\",\n          \"price\": 3257.448380181416,\n          \"priceRange\": {\n            \"min\": 4426.002216853609,\n            \"max\": 2628.3978709701337\n          },\n          \"taxRate\": 3267.411060402752,\n          \"compareAtPrice\": 2756.3227190243488,\n          \"taxServiceTypeId\": \"string\",\n          \"gtin\": \"9466348\",\n          \"localization\": {}\n        },\n        {\n          \"_id\": \"string\",\n          \"taxable\": false,\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"priceType\": \"fixed\",\n          \"price\": 7824.26799381618,\n          \"priceRange\": {\n            \"min\": 3304.178209917257,\n            \"max\": 7743.058297376058\n          },\n          \"taxRate\": 7314.454538135661,\n          \"compareAtPrice\": 1451.587664716425,\n          \"taxServiceTypeId\": \"string\",\n          \"gtin\": \"57700\",\n          \"localization\": {}\n        }\n      ],\n      \"categoryIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"voucherSettings\": {\n        \"limitedValidityPeriod\": true,\n        \"validityConfig\": {\n          \"amount\": 8389.0997259557,\n          \"type\": 7931.5818212372815,\n          \"untilEndOfPeriod\": false\n        },\n        \"pdfImage\": \"string\",\n        \"disclaimer\": \"string\",\n        \"documentTemplateSettings\": {\n          \"templates\": [\n            {\n              \"templateId\": \"string\",\n              \"format\": \"CARD\",\n              \"target\": \"digital\",\n              \"type\": \"invoice\"\n            },\n            {\n              \"templateId\": \"string\",\n              \"format\": \"CUSTOM\",\n              \"target\": \"wallet\",\n              \"type\": \"invoice\"\n            }\n          ]\n        }\n      },\n      \"addOnSettings\": {\n        \"optOutDescription\": \"string\",\n        \"localization\": {}\n      },\n      \"donationSettings\": {\n        \"campaignId\": \"string\",\n        \"fundId\": \"string\"\n      },\n      \"meta\": {},\n      \"localization\": {},\n      \"createdAt\": \"1985-02-03T01:38:47.557Z\",\n      \"updatedAt\": \"1997-10-10T09:18:13.153Z\"\n    },\n    {\n      \"_id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"donation\",\n      \"sellerId\": \"string\",\n      \"active\": true,\n      \"isFulfillable\": false,\n      \"image\": \"string\",\n      \"description\": \"string\",\n      \"variants\": [\n        {\n          \"_id\": \"string\",\n          \"taxable\": false,\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"priceType\": \"fixed\",\n          \"price\": 1245.266277637971,\n          \"priceRange\": {\n            \"min\": 2687.5292793930307,\n            \"max\": 619.6340652270349\n          },\n          \"taxRate\": 774.3841989074884,\n          \"compareAtPrice\": 7777.105528184173,\n          \"taxServiceTypeId\": \"string\",\n          \"gtin\": \"829\",\n          \"localization\": {}\n        },\n        {\n          \"_id\": \"string\",\n          \"taxable\": false,\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"priceType\": \"fixed\",\n          \"price\": 7753.527411100609,\n          \"priceRange\": {\n            \"min\": 5032.528088839663,\n            \"max\": 4906.585760087072\n          },\n          \"taxRate\": 4556.98968468531,\n          \"compareAtPrice\": 5223.566632121769,\n          \"taxServiceTypeId\": \"string\",\n          \"gtin\": \"2777554827\",\n          \"localization\": {}\n        }\n      ],\n      \"categoryIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"voucherSettings\": {\n        \"limitedValidityPeriod\": false,\n        \"validityConfig\": {\n          \"amount\": 8080.268515783861,\n          \"type\": 5513.070287979736,\n          \"untilEndOfPeriod\": true\n        },\n        \"pdfImage\": \"string\",\n        \"disclaimer\": \"string\",\n        \"documentTemplateSettings\": {\n          \"templates\": [\n            {\n              \"templateId\": \"string\",\n              \"format\": \"GOOGLE\",\n              \"target\": \"thermal\",\n              \"type\": \"header-card\"\n            },\n            {\n              \"templateId\": \"string\",\n              \"format\": \"LETTER\",\n              \"target\": \"digital\",\n              \"type\": \"ticket\"\n            }\n          ]\n        }\n      },\n      \"addOnSettings\": {\n        \"optOutDescription\": \"string\",\n        \"localization\": {}\n      },\n      \"donationSettings\": {\n        \"campaignId\": \"string\",\n        \"fundId\": \"string\"\n      },\n      \"meta\": {},\n      \"localization\": {},\n      \"createdAt\": \"2018-04-24T13:06:13.820Z\",\n      \"updatedAt\": \"2021-08-21T13:30:15.374Z\"\n    }\n  ],\n  \"total\": 8343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e7eb027-3992-4c9e-88d8-268c69b40b4c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "variantIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "variantIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4a2d04fd-b663-4878-b43b-196f879b04a5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "variantIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "variantIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f395354-9e14-4324-bc9f-4f06c506c0f1",
+          "name": "products/create",
+          "request": {
+            "name": "products/create",
+            "description": {
+              "content": "Create a Product",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"image\": \"<string>\",\n  \"variants\": [\n    {\n      \"taxable\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"price\": \"<float>\",\n      \"priceType\": \"fixed\",\n      \"priceRange\": {\n        \"min\": \"<float>\",\n        \"max\": \"<float>\"\n      },\n      \"taxRate\": \"<float>\",\n      \"compareAtPrice\": \"<float>\",\n      \"taxServiceTypeId\": \"<string>\",\n      \"gtin\": \"<string>\",\n      \"localization\": \"<object>\"\n    },\n    {\n      \"taxable\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"price\": \"<float>\",\n      \"priceType\": \"fixed\",\n      \"priceRange\": {\n        \"min\": \"<float>\",\n        \"max\": \"<float>\"\n      },\n      \"taxRate\": \"<float>\",\n      \"compareAtPrice\": \"<float>\",\n      \"taxServiceTypeId\": \"<string>\",\n      \"gtin\": \"<string>\",\n      \"localization\": \"<object>\"\n    }\n  ],\n  \"categoryIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"voucherSettings\": {\n    \"limitedValidityPeriod\": \"<boolean>\",\n    \"validityConfig\": {\n      \"amount\": \"<float>\",\n      \"type\": \"<float>\",\n      \"untilEndOfPeriod\": \"<boolean>\"\n    },\n    \"pdfImage\": \"<string>\",\n    \"disclaimer\": \"<string>\",\n    \"documentTemplateSettings\": {\n      \"templates\": [\n        {\n          \"templateId\": \"<string>\",\n          \"format\": \"<string>\",\n          \"target\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"templateId\": \"<string>\",\n          \"format\": \"<string>\",\n          \"target\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"addOnSettings\": {\n    \"optOutDescription\": \"<string>\",\n    \"localization\": \"<object>\"\n  },\n  \"donationSettings\": {\n    \"campaignId\": \"<string>\",\n    \"fundId\": \"<string>\"\n  },\n  \"active\": true,\n  \"meta\": \"<object>\",\n  \"isFulfillable\": \"<boolean>\",\n  \"localization\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "053cd871-1f23-4dfc-a6cc-fdddc43d508c",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"image\": \"<string>\",\n  \"variants\": [\n    {\n      \"taxable\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"price\": \"<float>\",\n      \"priceType\": \"fixed\",\n      \"priceRange\": {\n        \"min\": \"<float>\",\n        \"max\": \"<float>\"\n      },\n      \"taxRate\": \"<float>\",\n      \"compareAtPrice\": \"<float>\",\n      \"taxServiceTypeId\": \"<string>\",\n      \"gtin\": \"<string>\",\n      \"localization\": \"<object>\"\n    },\n    {\n      \"taxable\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"price\": \"<float>\",\n      \"priceType\": \"fixed\",\n      \"priceRange\": {\n        \"min\": \"<float>\",\n        \"max\": \"<float>\"\n      },\n      \"taxRate\": \"<float>\",\n      \"compareAtPrice\": \"<float>\",\n      \"taxServiceTypeId\": \"<string>\",\n      \"gtin\": \"<string>\",\n      \"localization\": \"<object>\"\n    }\n  ],\n  \"categoryIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"voucherSettings\": {\n    \"limitedValidityPeriod\": \"<boolean>\",\n    \"validityConfig\": {\n      \"amount\": \"<float>\",\n      \"type\": \"<float>\",\n      \"untilEndOfPeriod\": \"<boolean>\"\n    },\n    \"pdfImage\": \"<string>\",\n    \"disclaimer\": \"<string>\",\n    \"documentTemplateSettings\": {\n      \"templates\": [\n        {\n          \"templateId\": \"<string>\",\n          \"format\": \"<string>\",\n          \"target\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"templateId\": \"<string>\",\n          \"format\": \"<string>\",\n          \"target\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"addOnSettings\": {\n    \"optOutDescription\": \"<string>\",\n    \"localization\": \"<object>\"\n  },\n  \"donationSettings\": {\n    \"campaignId\": \"<string>\",\n    \"fundId\": \"<string>\"\n  },\n  \"active\": true,\n  \"meta\": \"<object>\",\n  \"isFulfillable\": \"<boolean>\",\n  \"localization\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"donation\",\n  \"sellerId\": \"string\",\n  \"active\": true,\n  \"isFulfillable\": true,\n  \"image\": \"string\",\n  \"description\": \"string\",\n  \"variants\": [\n    {\n      \"_id\": \"string\",\n      \"taxable\": true,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"priceType\": \"fixed\",\n      \"price\": 9009.591543994582,\n      \"priceRange\": {\n        \"min\": 8027.4558775820515,\n        \"max\": 7438.791016300333\n      },\n      \"taxRate\": 3394.5615069006362,\n      \"compareAtPrice\": 8691.951849900508,\n      \"taxServiceTypeId\": \"string\",\n      \"gtin\": \"59\",\n      \"localization\": {}\n    },\n    {\n      \"_id\": \"string\",\n      \"taxable\": false,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"priceType\": \"fixed\",\n      \"price\": 33.28793356659476,\n      \"priceRange\": {\n        \"min\": 8872.92555480564,\n        \"max\": 9600.769533721445\n      },\n      \"taxRate\": 5797.822666190864,\n      \"compareAtPrice\": 2422.3808839189587,\n      \"taxServiceTypeId\": \"string\",\n      \"gtin\": \"5\",\n      \"localization\": {}\n    }\n  ],\n  \"categoryIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"voucherSettings\": {\n    \"limitedValidityPeriod\": false,\n    \"validityConfig\": {\n      \"amount\": 4158.803837560867,\n      \"type\": 4563.678068275022,\n      \"untilEndOfPeriod\": false\n    },\n    \"pdfImage\": \"string\",\n    \"disclaimer\": \"string\",\n    \"documentTemplateSettings\": {\n      \"templates\": [\n        {\n          \"templateId\": \"string\",\n          \"format\": \"GOOGLE\",\n          \"target\": \"wallet\",\n          \"type\": \"header-card\"\n        },\n        {\n          \"templateId\": \"string\",\n          \"format\": \"A4\",\n          \"target\": \"thermal\",\n          \"type\": \"invoice\"\n        }\n      ]\n    }\n  },\n  \"addOnSettings\": {\n    \"optOutDescription\": \"string\",\n    \"localization\": {}\n  },\n  \"donationSettings\": {\n    \"campaignId\": \"string\",\n    \"fundId\": \"string\"\n  },\n  \"meta\": {},\n  \"localization\": {},\n  \"createdAt\": \"2002-12-16T04:57:59.182Z\",\n  \"updatedAt\": \"1991-06-13T14:38:46.203Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24cc76df-42e9-42d2-a35d-3483dfa6b1b1",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"image\": \"<string>\",\n  \"variants\": [\n    {\n      \"taxable\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"price\": \"<float>\",\n      \"priceType\": \"fixed\",\n      \"priceRange\": {\n        \"min\": \"<float>\",\n        \"max\": \"<float>\"\n      },\n      \"taxRate\": \"<float>\",\n      \"compareAtPrice\": \"<float>\",\n      \"taxServiceTypeId\": \"<string>\",\n      \"gtin\": \"<string>\",\n      \"localization\": \"<object>\"\n    },\n    {\n      \"taxable\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"price\": \"<float>\",\n      \"priceType\": \"fixed\",\n      \"priceRange\": {\n        \"min\": \"<float>\",\n        \"max\": \"<float>\"\n      },\n      \"taxRate\": \"<float>\",\n      \"compareAtPrice\": \"<float>\",\n      \"taxServiceTypeId\": \"<string>\",\n      \"gtin\": \"<string>\",\n      \"localization\": \"<object>\"\n    }\n  ],\n  \"categoryIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"voucherSettings\": {\n    \"limitedValidityPeriod\": \"<boolean>\",\n    \"validityConfig\": {\n      \"amount\": \"<float>\",\n      \"type\": \"<float>\",\n      \"untilEndOfPeriod\": \"<boolean>\"\n    },\n    \"pdfImage\": \"<string>\",\n    \"disclaimer\": \"<string>\",\n    \"documentTemplateSettings\": {\n      \"templates\": [\n        {\n          \"templateId\": \"<string>\",\n          \"format\": \"<string>\",\n          \"target\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"templateId\": \"<string>\",\n          \"format\": \"<string>\",\n          \"target\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"addOnSettings\": {\n    \"optOutDescription\": \"<string>\",\n    \"localization\": \"<object>\"\n  },\n  \"donationSettings\": {\n    \"campaignId\": \"<string>\",\n    \"fundId\": \"<string>\"\n  },\n  \"active\": true,\n  \"meta\": \"<object>\",\n  \"isFulfillable\": \"<boolean>\",\n  \"localization\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "869553c3-87d6-4ff0-b166-e67c2893852b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"image\": \"<string>\",\n  \"variants\": [\n    {\n      \"taxable\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"price\": \"<float>\",\n      \"priceType\": \"fixed\",\n      \"priceRange\": {\n        \"min\": \"<float>\",\n        \"max\": \"<float>\"\n      },\n      \"taxRate\": \"<float>\",\n      \"compareAtPrice\": \"<float>\",\n      \"taxServiceTypeId\": \"<string>\",\n      \"gtin\": \"<string>\",\n      \"localization\": \"<object>\"\n    },\n    {\n      \"taxable\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"price\": \"<float>\",\n      \"priceType\": \"fixed\",\n      \"priceRange\": {\n        \"min\": \"<float>\",\n        \"max\": \"<float>\"\n      },\n      \"taxRate\": \"<float>\",\n      \"compareAtPrice\": \"<float>\",\n      \"taxServiceTypeId\": \"<string>\",\n      \"gtin\": \"<string>\",\n      \"localization\": \"<object>\"\n    }\n  ],\n  \"categoryIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"voucherSettings\": {\n    \"limitedValidityPeriod\": \"<boolean>\",\n    \"validityConfig\": {\n      \"amount\": \"<float>\",\n      \"type\": \"<float>\",\n      \"untilEndOfPeriod\": \"<boolean>\"\n    },\n    \"pdfImage\": \"<string>\",\n    \"disclaimer\": \"<string>\",\n    \"documentTemplateSettings\": {\n      \"templates\": [\n        {\n          \"templateId\": \"<string>\",\n          \"format\": \"<string>\",\n          \"target\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"templateId\": \"<string>\",\n          \"format\": \"<string>\",\n          \"target\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"addOnSettings\": {\n    \"optOutDescription\": \"<string>\",\n    \"localization\": \"<object>\"\n  },\n  \"donationSettings\": {\n    \"campaignId\": \"<string>\",\n    \"fundId\": \"<string>\"\n  },\n  \"active\": true,\n  \"meta\": \"<object>\",\n  \"isFulfillable\": \"<boolean>\",\n  \"localization\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4fc10503-b1d6-46a9-be44-a1d318241b98",
+          "name": "get all products",
+          "request": {
+            "name": "get all products",
+            "description": {
+              "content": "Get all Products",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "products",
+                "rich"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "25"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<float>"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9c8e1eb3-57a0-4ad2-876a-e4dd1045ee0e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "rich"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"docs\": [\n    {\n      \"_id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"product\",\n      \"sellerId\": \"string\",\n      \"active\": true,\n      \"isFulfillable\": true,\n      \"image\": \"string\",\n      \"description\": \"string\",\n      \"variants\": [\n        {\n          \"_id\": \"string\",\n          \"taxable\": false,\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"priceType\": \"fixed\",\n          \"price\": 4032.2273898620533,\n          \"priceRange\": {\n            \"min\": 3165.4749832924913,\n            \"max\": 109.582254441003\n          },\n          \"taxRate\": 4900.3245592928115,\n          \"compareAtPrice\": 3278.6524051611086,\n          \"taxServiceTypeId\": \"string\",\n          \"gtin\": \"5201\",\n          \"localization\": {}\n        },\n        {\n          \"_id\": \"string\",\n          \"taxable\": true,\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"priceType\": \"fixed\",\n          \"price\": 5152.811070586342,\n          \"priceRange\": {\n            \"min\": 5911.036378620379,\n            \"max\": 2166.6713236592905\n          },\n          \"taxRate\": 4277.971862420491,\n          \"compareAtPrice\": 8034.958735659162,\n          \"taxServiceTypeId\": \"string\",\n          \"gtin\": \"81\",\n          \"localization\": {}\n        }\n      ],\n      \"categoryIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"voucherSettings\": {\n        \"limitedValidityPeriod\": true,\n        \"validityConfig\": {\n          \"amount\": 2874.454151192367,\n          \"type\": 290.94765812839427,\n          \"untilEndOfPeriod\": false\n        },\n        \"pdfImage\": \"string\",\n        \"disclaimer\": \"string\",\n        \"documentTemplateSettings\": {\n          \"templates\": [\n            {\n              \"templateId\": \"string\",\n              \"format\": \"LEGAL\",\n              \"target\": \"digital\",\n              \"type\": \"member-card\"\n            },\n            {\n              \"templateId\": \"string\",\n              \"format\": \"LEGAL\",\n              \"target\": \"wallet\",\n              \"type\": \"header-card\"\n            }\n          ]\n        }\n      },\n      \"addOnSettings\": {\n        \"optOutDescription\": \"string\",\n        \"localization\": {}\n      },\n      \"donationSettings\": {\n        \"campaignId\": \"string\",\n        \"fundId\": \"string\"\n      },\n      \"meta\": {},\n      \"localization\": {},\n      \"createdAt\": \"1976-07-05T22:57:20.272Z\",\n      \"updatedAt\": \"1999-05-10T21:28:01.404Z\"\n    },\n    {\n      \"_id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"voucher\",\n      \"sellerId\": \"string\",\n      \"active\": true,\n      \"isFulfillable\": true,\n      \"image\": \"string\",\n      \"description\": \"string\",\n      \"variants\": [\n        {\n          \"_id\": \"string\",\n          \"taxable\": false,\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"priceType\": \"fixed\",\n          \"price\": 3004.91655246496,\n          \"priceRange\": {\n            \"min\": 1360.1664994038142,\n            \"max\": 9732.484198602397\n          },\n          \"taxRate\": 7887.752509594069,\n          \"compareAtPrice\": 5023.619462638561,\n          \"taxServiceTypeId\": \"string\",\n          \"gtin\": \"3218003126\",\n          \"localization\": {}\n        },\n        {\n          \"_id\": \"string\",\n          \"taxable\": false,\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"priceType\": \"fixed\",\n          \"price\": 4192.224609385979,\n          \"priceRange\": {\n            \"min\": 5318.66178978893,\n            \"max\": 7517.48932345282\n          },\n          \"taxRate\": 8741.569641028647,\n          \"compareAtPrice\": 8046.446535281329,\n          \"taxServiceTypeId\": \"string\",\n          \"gtin\": \"199428\",\n          \"localization\": {}\n        }\n      ],\n      \"categoryIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"voucherSettings\": {\n        \"limitedValidityPeriod\": false,\n        \"validityConfig\": {\n          \"amount\": 9474.276692846011,\n          \"type\": 9445.705269963124,\n          \"untilEndOfPeriod\": true\n        },\n        \"pdfImage\": \"string\",\n        \"disclaimer\": \"string\",\n        \"documentTemplateSettings\": {\n          \"templates\": [\n            {\n              \"templateId\": \"string\",\n              \"format\": \"CUSTOM\",\n              \"target\": \"thermal\",\n              \"type\": \"voucher\"\n            },\n            {\n              \"templateId\": \"string\",\n              \"format\": \"GOOGLE\",\n              \"target\": \"digital\",\n              \"type\": \"invoice\"\n            }\n          ]\n        }\n      },\n      \"addOnSettings\": {\n        \"optOutDescription\": \"string\",\n        \"localization\": {}\n      },\n      \"donationSettings\": {\n        \"campaignId\": \"string\",\n        \"fundId\": \"string\"\n      },\n      \"meta\": {},\n      \"localization\": {},\n      \"createdAt\": \"1993-11-28T00:09:17.419Z\",\n      \"updatedAt\": \"2011-02-21T15:49:53.988Z\"\n    }\n  ],\n  \"total\": 1108\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81fa8939-57ea-413f-9635-cbd9e38eb25b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "rich"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8d864c2d-738a-4325-8bb7-3d008efa41d6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "rich"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a7f448b-628c-41cc-bfb0-895b5cfd0f6d",
+          "name": "products/get",
+          "request": {
+            "name": "products/get",
+            "description": {
+              "content": "Get a Product",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "products",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "beb7ae4f-b77e-4b2a-83ee-9e16fd7a1e47",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"donation\",\n  \"sellerId\": \"string\",\n  \"active\": true,\n  \"isFulfillable\": true,\n  \"image\": \"string\",\n  \"description\": \"string\",\n  \"variants\": [\n    {\n      \"_id\": \"string\",\n      \"taxable\": true,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"priceType\": \"fixed\",\n      \"price\": 9009.591543994582,\n      \"priceRange\": {\n        \"min\": 8027.4558775820515,\n        \"max\": 7438.791016300333\n      },\n      \"taxRate\": 3394.5615069006362,\n      \"compareAtPrice\": 8691.951849900508,\n      \"taxServiceTypeId\": \"string\",\n      \"gtin\": \"59\",\n      \"localization\": {}\n    },\n    {\n      \"_id\": \"string\",\n      \"taxable\": false,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"priceType\": \"fixed\",\n      \"price\": 33.28793356659476,\n      \"priceRange\": {\n        \"min\": 8872.92555480564,\n        \"max\": 9600.769533721445\n      },\n      \"taxRate\": 5797.822666190864,\n      \"compareAtPrice\": 2422.3808839189587,\n      \"taxServiceTypeId\": \"string\",\n      \"gtin\": \"5\",\n      \"localization\": {}\n    }\n  ],\n  \"categoryIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"voucherSettings\": {\n    \"limitedValidityPeriod\": false,\n    \"validityConfig\": {\n      \"amount\": 4158.803837560867,\n      \"type\": 4563.678068275022,\n      \"untilEndOfPeriod\": false\n    },\n    \"pdfImage\": \"string\",\n    \"disclaimer\": \"string\",\n    \"documentTemplateSettings\": {\n      \"templates\": [\n        {\n          \"templateId\": \"string\",\n          \"format\": \"GOOGLE\",\n          \"target\": \"wallet\",\n          \"type\": \"header-card\"\n        },\n        {\n          \"templateId\": \"string\",\n          \"format\": \"A4\",\n          \"target\": \"thermal\",\n          \"type\": \"invoice\"\n        }\n      ]\n    }\n  },\n  \"addOnSettings\": {\n    \"optOutDescription\": \"string\",\n    \"localization\": {}\n  },\n  \"donationSettings\": {\n    \"campaignId\": \"string\",\n    \"fundId\": \"string\"\n  },\n  \"meta\": {},\n  \"localization\": {},\n  \"createdAt\": \"2002-12-16T04:57:59.182Z\",\n  \"updatedAt\": \"1991-06-13T14:38:46.203Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35555160-0bd8-486f-8297-27334dc5b323",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "41ded5f1-fc3e-4b60-8dbc-8391bc2e7ecd",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d6f17194-d559-459b-aefd-38eaa82893f9",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6d120f1-26ee-4d19-8cbf-021566763f83",
+          "name": "products/update",
+          "request": {
+            "name": "products/update",
+            "description": {
+              "content": "Update a Product",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "products",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"image\": \"<string>\",\n  \"variants\": [\n    {\n      \"_id\": \"<string>\",\n      \"taxable\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"price\": \"<float>\",\n      \"priceType\": \"fixed\",\n      \"priceRange\": {\n        \"min\": \"<float>\",\n        \"max\": \"<float>\"\n      },\n      \"taxRate\": \"<float>\",\n      \"compareAtPrice\": \"<float>\",\n      \"taxServiceTypeId\": \"<string>\",\n      \"gtin\": \"<string>\",\n      \"localization\": \"<object>\"\n    },\n    {\n      \"_id\": \"<string>\",\n      \"taxable\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"price\": \"<float>\",\n      \"priceType\": \"fixed\",\n      \"priceRange\": {\n        \"min\": \"<float>\",\n        \"max\": \"<float>\"\n      },\n      \"taxRate\": \"<float>\",\n      \"compareAtPrice\": \"<float>\",\n      \"taxServiceTypeId\": \"<string>\",\n      \"gtin\": \"<string>\",\n      \"localization\": \"<object>\"\n    }\n  ],\n  \"categoryIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"voucherSettings\": {\n    \"limitedValidityPeriod\": \"<boolean>\",\n    \"validityConfig\": {\n      \"amount\": \"<float>\",\n      \"type\": \"<float>\",\n      \"untilEndOfPeriod\": \"<boolean>\"\n    },\n    \"pdfImage\": \"<string>\",\n    \"disclaimer\": \"<string>\",\n    \"documentTemplateSettings\": {\n      \"templates\": [\n        {\n          \"templateId\": \"<string>\",\n          \"format\": \"<string>\",\n          \"target\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"templateId\": \"<string>\",\n          \"format\": \"<string>\",\n          \"target\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"addOnSettings\": {\n    \"optOutDescription\": \"<string>\",\n    \"localization\": \"<object>\"\n  },\n  \"donationSettings\": {\n    \"campaignId\": \"<string>\",\n    \"fundId\": \"<string>\"\n  },\n  \"active\": true,\n  \"meta\": \"<object>\",\n  \"isFulfillable\": \"<boolean>\",\n  \"localization\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "617b7598-b587-41bb-b3f3-accb8ca24d50",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"image\": \"<string>\",\n  \"variants\": [\n    {\n      \"_id\": \"<string>\",\n      \"taxable\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"price\": \"<float>\",\n      \"priceType\": \"fixed\",\n      \"priceRange\": {\n        \"min\": \"<float>\",\n        \"max\": \"<float>\"\n      },\n      \"taxRate\": \"<float>\",\n      \"compareAtPrice\": \"<float>\",\n      \"taxServiceTypeId\": \"<string>\",\n      \"gtin\": \"<string>\",\n      \"localization\": \"<object>\"\n    },\n    {\n      \"_id\": \"<string>\",\n      \"taxable\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"price\": \"<float>\",\n      \"priceType\": \"fixed\",\n      \"priceRange\": {\n        \"min\": \"<float>\",\n        \"max\": \"<float>\"\n      },\n      \"taxRate\": \"<float>\",\n      \"compareAtPrice\": \"<float>\",\n      \"taxServiceTypeId\": \"<string>\",\n      \"gtin\": \"<string>\",\n      \"localization\": \"<object>\"\n    }\n  ],\n  \"categoryIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"voucherSettings\": {\n    \"limitedValidityPeriod\": \"<boolean>\",\n    \"validityConfig\": {\n      \"amount\": \"<float>\",\n      \"type\": \"<float>\",\n      \"untilEndOfPeriod\": \"<boolean>\"\n    },\n    \"pdfImage\": \"<string>\",\n    \"disclaimer\": \"<string>\",\n    \"documentTemplateSettings\": {\n      \"templates\": [\n        {\n          \"templateId\": \"<string>\",\n          \"format\": \"<string>\",\n          \"target\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"templateId\": \"<string>\",\n          \"format\": \"<string>\",\n          \"target\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"addOnSettings\": {\n    \"optOutDescription\": \"<string>\",\n    \"localization\": \"<object>\"\n  },\n  \"donationSettings\": {\n    \"campaignId\": \"<string>\",\n    \"fundId\": \"<string>\"\n  },\n  \"active\": true,\n  \"meta\": \"<object>\",\n  \"isFulfillable\": \"<boolean>\",\n  \"localization\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"donation\",\n  \"sellerId\": \"string\",\n  \"active\": true,\n  \"isFulfillable\": true,\n  \"image\": \"string\",\n  \"description\": \"string\",\n  \"variants\": [\n    {\n      \"_id\": \"string\",\n      \"taxable\": true,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"priceType\": \"fixed\",\n      \"price\": 9009.591543994582,\n      \"priceRange\": {\n        \"min\": 8027.4558775820515,\n        \"max\": 7438.791016300333\n      },\n      \"taxRate\": 3394.5615069006362,\n      \"compareAtPrice\": 8691.951849900508,\n      \"taxServiceTypeId\": \"string\",\n      \"gtin\": \"59\",\n      \"localization\": {}\n    },\n    {\n      \"_id\": \"string\",\n      \"taxable\": false,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"priceType\": \"fixed\",\n      \"price\": 33.28793356659476,\n      \"priceRange\": {\n        \"min\": 8872.92555480564,\n        \"max\": 9600.769533721445\n      },\n      \"taxRate\": 5797.822666190864,\n      \"compareAtPrice\": 2422.3808839189587,\n      \"taxServiceTypeId\": \"string\",\n      \"gtin\": \"5\",\n      \"localization\": {}\n    }\n  ],\n  \"categoryIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"voucherSettings\": {\n    \"limitedValidityPeriod\": false,\n    \"validityConfig\": {\n      \"amount\": 4158.803837560867,\n      \"type\": 4563.678068275022,\n      \"untilEndOfPeriod\": false\n    },\n    \"pdfImage\": \"string\",\n    \"disclaimer\": \"string\",\n    \"documentTemplateSettings\": {\n      \"templates\": [\n        {\n          \"templateId\": \"string\",\n          \"format\": \"GOOGLE\",\n          \"target\": \"wallet\",\n          \"type\": \"header-card\"\n        },\n        {\n          \"templateId\": \"string\",\n          \"format\": \"A4\",\n          \"target\": \"thermal\",\n          \"type\": \"invoice\"\n        }\n      ]\n    }\n  },\n  \"addOnSettings\": {\n    \"optOutDescription\": \"string\",\n    \"localization\": {}\n  },\n  \"donationSettings\": {\n    \"campaignId\": \"string\",\n    \"fundId\": \"string\"\n  },\n  \"meta\": {},\n  \"localization\": {},\n  \"createdAt\": \"2002-12-16T04:57:59.182Z\",\n  \"updatedAt\": \"1991-06-13T14:38:46.203Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8048ea62-5cce-4733-b781-ceefb61a19ce",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"image\": \"<string>\",\n  \"variants\": [\n    {\n      \"_id\": \"<string>\",\n      \"taxable\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"price\": \"<float>\",\n      \"priceType\": \"fixed\",\n      \"priceRange\": {\n        \"min\": \"<float>\",\n        \"max\": \"<float>\"\n      },\n      \"taxRate\": \"<float>\",\n      \"compareAtPrice\": \"<float>\",\n      \"taxServiceTypeId\": \"<string>\",\n      \"gtin\": \"<string>\",\n      \"localization\": \"<object>\"\n    },\n    {\n      \"_id\": \"<string>\",\n      \"taxable\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"price\": \"<float>\",\n      \"priceType\": \"fixed\",\n      \"priceRange\": {\n        \"min\": \"<float>\",\n        \"max\": \"<float>\"\n      },\n      \"taxRate\": \"<float>\",\n      \"compareAtPrice\": \"<float>\",\n      \"taxServiceTypeId\": \"<string>\",\n      \"gtin\": \"<string>\",\n      \"localization\": \"<object>\"\n    }\n  ],\n  \"categoryIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"voucherSettings\": {\n    \"limitedValidityPeriod\": \"<boolean>\",\n    \"validityConfig\": {\n      \"amount\": \"<float>\",\n      \"type\": \"<float>\",\n      \"untilEndOfPeriod\": \"<boolean>\"\n    },\n    \"pdfImage\": \"<string>\",\n    \"disclaimer\": \"<string>\",\n    \"documentTemplateSettings\": {\n      \"templates\": [\n        {\n          \"templateId\": \"<string>\",\n          \"format\": \"<string>\",\n          \"target\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"templateId\": \"<string>\",\n          \"format\": \"<string>\",\n          \"target\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"addOnSettings\": {\n    \"optOutDescription\": \"<string>\",\n    \"localization\": \"<object>\"\n  },\n  \"donationSettings\": {\n    \"campaignId\": \"<string>\",\n    \"fundId\": \"<string>\"\n  },\n  \"active\": true,\n  \"meta\": \"<object>\",\n  \"isFulfillable\": \"<boolean>\",\n  \"localization\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "53c9c164-5848-46a4-a4dd-1b6594843712",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"image\": \"<string>\",\n  \"variants\": [\n    {\n      \"_id\": \"<string>\",\n      \"taxable\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"price\": \"<float>\",\n      \"priceType\": \"fixed\",\n      \"priceRange\": {\n        \"min\": \"<float>\",\n        \"max\": \"<float>\"\n      },\n      \"taxRate\": \"<float>\",\n      \"compareAtPrice\": \"<float>\",\n      \"taxServiceTypeId\": \"<string>\",\n      \"gtin\": \"<string>\",\n      \"localization\": \"<object>\"\n    },\n    {\n      \"_id\": \"<string>\",\n      \"taxable\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"price\": \"<float>\",\n      \"priceType\": \"fixed\",\n      \"priceRange\": {\n        \"min\": \"<float>\",\n        \"max\": \"<float>\"\n      },\n      \"taxRate\": \"<float>\",\n      \"compareAtPrice\": \"<float>\",\n      \"taxServiceTypeId\": \"<string>\",\n      \"gtin\": \"<string>\",\n      \"localization\": \"<object>\"\n    }\n  ],\n  \"categoryIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"voucherSettings\": {\n    \"limitedValidityPeriod\": \"<boolean>\",\n    \"validityConfig\": {\n      \"amount\": \"<float>\",\n      \"type\": \"<float>\",\n      \"untilEndOfPeriod\": \"<boolean>\"\n    },\n    \"pdfImage\": \"<string>\",\n    \"disclaimer\": \"<string>\",\n    \"documentTemplateSettings\": {\n      \"templates\": [\n        {\n          \"templateId\": \"<string>\",\n          \"format\": \"<string>\",\n          \"target\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"templateId\": \"<string>\",\n          \"format\": \"<string>\",\n          \"target\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"addOnSettings\": {\n    \"optOutDescription\": \"<string>\",\n    \"localization\": \"<object>\"\n  },\n  \"donationSettings\": {\n    \"campaignId\": \"<string>\",\n    \"fundId\": \"<string>\"\n  },\n  \"active\": true,\n  \"meta\": \"<object>\",\n  \"isFulfillable\": \"<boolean>\",\n  \"localization\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "99e41b1d-a50e-4007-8031-aada9e6c620b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"image\": \"<string>\",\n  \"variants\": [\n    {\n      \"_id\": \"<string>\",\n      \"taxable\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"price\": \"<float>\",\n      \"priceType\": \"fixed\",\n      \"priceRange\": {\n        \"min\": \"<float>\",\n        \"max\": \"<float>\"\n      },\n      \"taxRate\": \"<float>\",\n      \"compareAtPrice\": \"<float>\",\n      \"taxServiceTypeId\": \"<string>\",\n      \"gtin\": \"<string>\",\n      \"localization\": \"<object>\"\n    },\n    {\n      \"_id\": \"<string>\",\n      \"taxable\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"price\": \"<float>\",\n      \"priceType\": \"fixed\",\n      \"priceRange\": {\n        \"min\": \"<float>\",\n        \"max\": \"<float>\"\n      },\n      \"taxRate\": \"<float>\",\n      \"compareAtPrice\": \"<float>\",\n      \"taxServiceTypeId\": \"<string>\",\n      \"gtin\": \"<string>\",\n      \"localization\": \"<object>\"\n    }\n  ],\n  \"categoryIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"voucherSettings\": {\n    \"limitedValidityPeriod\": \"<boolean>\",\n    \"validityConfig\": {\n      \"amount\": \"<float>\",\n      \"type\": \"<float>\",\n      \"untilEndOfPeriod\": \"<boolean>\"\n    },\n    \"pdfImage\": \"<string>\",\n    \"disclaimer\": \"<string>\",\n    \"documentTemplateSettings\": {\n      \"templates\": [\n        {\n          \"templateId\": \"<string>\",\n          \"format\": \"<string>\",\n          \"target\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"templateId\": \"<string>\",\n          \"format\": \"<string>\",\n          \"target\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"addOnSettings\": {\n    \"optOutDescription\": \"<string>\",\n    \"localization\": \"<object>\"\n  },\n  \"donationSettings\": {\n    \"campaignId\": \"<string>\",\n    \"fundId\": \"<string>\"\n  },\n  \"active\": true,\n  \"meta\": \"<object>\",\n  \"isFulfillable\": \"<boolean>\",\n  \"localization\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "de831652-bb2a-4222-8d58-3ab68b8e83f0",
+          "name": "products/delete",
+          "request": {
+            "name": "products/delete",
+            "description": {
+              "content": "Delete a Product",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "products",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7c25e26d-9c2b-4d46-b6b6-65526fa895b5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"donation\",\n  \"sellerId\": \"string\",\n  \"active\": true,\n  \"isFulfillable\": true,\n  \"image\": \"string\",\n  \"description\": \"string\",\n  \"variants\": [\n    {\n      \"_id\": \"string\",\n      \"taxable\": true,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"priceType\": \"fixed\",\n      \"price\": 9009.591543994582,\n      \"priceRange\": {\n        \"min\": 8027.4558775820515,\n        \"max\": 7438.791016300333\n      },\n      \"taxRate\": 3394.5615069006362,\n      \"compareAtPrice\": 8691.951849900508,\n      \"taxServiceTypeId\": \"string\",\n      \"gtin\": \"59\",\n      \"localization\": {}\n    },\n    {\n      \"_id\": \"string\",\n      \"taxable\": false,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"priceType\": \"fixed\",\n      \"price\": 33.28793356659476,\n      \"priceRange\": {\n        \"min\": 8872.92555480564,\n        \"max\": 9600.769533721445\n      },\n      \"taxRate\": 5797.822666190864,\n      \"compareAtPrice\": 2422.3808839189587,\n      \"taxServiceTypeId\": \"string\",\n      \"gtin\": \"5\",\n      \"localization\": {}\n    }\n  ],\n  \"categoryIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"voucherSettings\": {\n    \"limitedValidityPeriod\": false,\n    \"validityConfig\": {\n      \"amount\": 4158.803837560867,\n      \"type\": 4563.678068275022,\n      \"untilEndOfPeriod\": false\n    },\n    \"pdfImage\": \"string\",\n    \"disclaimer\": \"string\",\n    \"documentTemplateSettings\": {\n      \"templates\": [\n        {\n          \"templateId\": \"string\",\n          \"format\": \"GOOGLE\",\n          \"target\": \"wallet\",\n          \"type\": \"header-card\"\n        },\n        {\n          \"templateId\": \"string\",\n          \"format\": \"A4\",\n          \"target\": \"thermal\",\n          \"type\": \"invoice\"\n        }\n      ]\n    }\n  },\n  \"addOnSettings\": {\n    \"optOutDescription\": \"string\",\n    \"localization\": {}\n  },\n  \"donationSettings\": {\n    \"campaignId\": \"string\",\n    \"fundId\": \"string\"\n  },\n  \"meta\": {},\n  \"localization\": {},\n  \"createdAt\": \"2002-12-16T04:57:59.182Z\",\n  \"updatedAt\": \"1991-06-13T14:38:46.203Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f200017-daa3-4419-aa1c-d18a22fcfbd4",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3e48c0c1-b496-443f-89c0-8dff7ed7e1de",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "19ac2ed9-9eb1-4ab1-a945-f2eba09ff752",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "55f90f40-d6a0-4b7c-98e1-79e7f8e25381",
+          "name": "get all product streams",
+          "request": {
+            "name": "get all product streams",
+            "description": {
+              "content": "Get all Product Streams",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "products",
+                "streams",
+                "rich"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "25"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<float>"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e211d73f-7ff7-4a77-bb2b-2944f246dfce",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "streams",
+                    "rich"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"docs\": [\n    {\n      \"_id\": \"string\",\n      \"name\": \"string\",\n      \"sellerId\": \"string\",\n      \"active\": false,\n      \"createdAt\": \"1969-06-10T14:29:05.814Z\",\n      \"updatedAt\": \"2018-09-10T08:32:37.676Z\"\n    },\n    {\n      \"_id\": \"string\",\n      \"name\": \"string\",\n      \"sellerId\": \"string\",\n      \"active\": true,\n      \"createdAt\": \"1975-08-16T02:44:18.514Z\",\n      \"updatedAt\": \"1998-08-30T05:18:57.710Z\"\n    }\n  ],\n  \"total\": 4925\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a8ce016-73f1-4c53-8a16-bf8c7b2b245c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "streams",
+                    "rich"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3c4d3b52-5c00-4052-b514-5e8f21bded55",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "streams",
+                    "rich"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13eed40f-4f05-4d58-bcb5-1543f0d29b40",
+          "name": "get a product stream",
+          "request": {
+            "name": "get a product stream",
+            "description": {
+              "content": "Get a Product Stream",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "products",
+                "streams",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c1bc6b4b-e460-40e4-ace4-2e8e10bc4db9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "streams",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"sellerId\": \"string\",\n  \"active\": true,\n  \"createdAt\": \"2021-03-20T01:57:41.469Z\",\n  \"updatedAt\": \"1998-12-08T06:47:42.459Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ff24a16-828f-4d93-80ee-e2e7877a6251",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "streams",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4c7a4968-90c2-4d9b-a315-a4e6db3639c1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "streams",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "49ec0d3b-e936-4eb0-a9d3-b14145c5c687",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "streams",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f38da9f4-4c28-481f-923e-42cb3cdd4707",
+          "name": "update a product stream",
+          "request": {
+            "name": "update a product stream",
+            "description": {
+              "content": "Update a Product Stream",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "products",
+                "streams",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"active\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dc3458d3-188d-4d81-9002-cab3847fd3c6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "streams",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"sellerId\": \"string\",\n  \"active\": true,\n  \"createdAt\": \"2021-03-20T01:57:41.469Z\",\n  \"updatedAt\": \"1998-12-08T06:47:42.459Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24eecdf8-603b-483e-a6d4-c6035853f904",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "streams",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8510d61a-a9e1-47db-ad30-528e7421abdb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "streams",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "18d7b8e0-5a10-46b6-b343-f0eab91ebc55",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "streams",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b7709899-2cac-45b3-8507-7e2e0398911e",
+          "name": "delete a product stream",
+          "request": {
+            "name": "delete a product stream",
+            "description": {
+              "content": "Delete a Product Stream",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "products",
+                "streams",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c78eaa3f-3bee-4f96-8aeb-41c76fbca33f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "streams",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"sellerId\": \"string\",\n  \"active\": true,\n  \"createdAt\": \"2021-03-20T01:57:41.469Z\",\n  \"updatedAt\": \"1998-12-08T06:47:42.459Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "003190fa-b2f1-461b-af48-de52c9881f85",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "streams",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "83268209-4a46-43fb-83dc-399073a8727c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "streams",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4058ad97-3530-4abb-b8d6-e689bb035e1a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "streams",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52ec9a68-6597-4e61-8081-aab7734c42f0",
+          "name": "get a public product",
+          "request": {
+            "name": "get a public product",
+            "description": {
+              "content": "Get a Public Product",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "public",
+                "products",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2129d154-2b3c-47ab-9e0d-4a39fb5d0359",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"donation\",\n  \"sellerId\": \"string\",\n  \"active\": true,\n  \"isFulfillable\": true,\n  \"image\": \"string\",\n  \"description\": \"string\",\n  \"variants\": [\n    {\n      \"_id\": \"string\",\n      \"taxable\": true,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"priceType\": \"fixed\",\n      \"price\": 9009.591543994582,\n      \"priceRange\": {\n        \"min\": 8027.4558775820515,\n        \"max\": 7438.791016300333\n      },\n      \"taxRate\": 3394.5615069006362,\n      \"compareAtPrice\": 8691.951849900508,\n      \"taxServiceTypeId\": \"string\",\n      \"gtin\": \"59\",\n      \"localization\": {}\n    },\n    {\n      \"_id\": \"string\",\n      \"taxable\": false,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"priceType\": \"fixed\",\n      \"price\": 33.28793356659476,\n      \"priceRange\": {\n        \"min\": 8872.92555480564,\n        \"max\": 9600.769533721445\n      },\n      \"taxRate\": 5797.822666190864,\n      \"compareAtPrice\": 2422.3808839189587,\n      \"taxServiceTypeId\": \"string\",\n      \"gtin\": \"5\",\n      \"localization\": {}\n    }\n  ],\n  \"categoryIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"voucherSettings\": {\n    \"limitedValidityPeriod\": false,\n    \"validityConfig\": {\n      \"amount\": 4158.803837560867,\n      \"type\": 4563.678068275022,\n      \"untilEndOfPeriod\": false\n    },\n    \"pdfImage\": \"string\",\n    \"disclaimer\": \"string\",\n    \"documentTemplateSettings\": {\n      \"templates\": [\n        {\n          \"templateId\": \"string\",\n          \"format\": \"GOOGLE\",\n          \"target\": \"wallet\",\n          \"type\": \"header-card\"\n        },\n        {\n          \"templateId\": \"string\",\n          \"format\": \"A4\",\n          \"target\": \"thermal\",\n          \"type\": \"invoice\"\n        }\n      ]\n    }\n  },\n  \"addOnSettings\": {\n    \"optOutDescription\": \"string\",\n    \"localization\": {}\n  },\n  \"donationSettings\": {\n    \"campaignId\": \"string\",\n    \"fundId\": \"string\"\n  },\n  \"meta\": {},\n  \"localization\": {},\n  \"createdAt\": \"2002-12-16T04:57:59.182Z\",\n  \"updatedAt\": \"1991-06-13T14:38:46.203Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a756b99-0b93-4ce9-9835-80f7e661d591",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2e1af48-48e2-4ba1-a02e-03b6fb1e64db",
+          "name": "get a product streams products",
+          "request": {
+            "name": "get a product streams products",
+            "description": {
+              "content": "Get a Product Stream's Products",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "products",
+                "streams",
+                ":id",
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "328f3190-2735-4976-9083-a7e2a75cad7b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "streams",
+                    ":id",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"string\",\n    \"name\": \"string\",\n    \"type\": \"product\",\n    \"sellerId\": \"string\",\n    \"active\": true,\n    \"isFulfillable\": false,\n    \"image\": \"string\",\n    \"description\": \"string\",\n    \"variants\": [\n      {\n        \"_id\": \"string\",\n        \"taxable\": true,\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"priceType\": \"fixed\",\n        \"price\": 4516.992054739831,\n        \"priceRange\": {\n          \"min\": 8363.852013377895,\n          \"max\": 1143.2288821897662\n        },\n        \"taxRate\": 3824.1035351985242,\n        \"compareAtPrice\": 9817.630449742452,\n        \"taxServiceTypeId\": \"string\",\n        \"gtin\": \"21661\",\n        \"localization\": {}\n      },\n      {\n        \"_id\": \"string\",\n        \"taxable\": true,\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"priceType\": \"fixed\",\n        \"price\": 585.335904471822,\n        \"priceRange\": {\n          \"min\": 4114.614533923909,\n          \"max\": 9855.98304804598\n        },\n        \"taxRate\": 6561.836445227893,\n        \"compareAtPrice\": 6343.264134613153,\n        \"taxServiceTypeId\": \"string\",\n        \"gtin\": \"56572\",\n        \"localization\": {}\n      }\n    ],\n    \"categoryIds\": [\n      \"string\",\n      \"string\"\n    ],\n    \"voucherSettings\": {\n      \"limitedValidityPeriod\": true,\n      \"validityConfig\": {\n        \"amount\": 885.4382660376664,\n        \"type\": 4634.263301637056,\n        \"untilEndOfPeriod\": true\n      },\n      \"pdfImage\": \"string\",\n      \"disclaimer\": \"string\",\n      \"documentTemplateSettings\": {\n        \"templates\": [\n          {\n            \"templateId\": \"string\",\n            \"format\": \"LEGAL\",\n            \"target\": \"thermal\",\n            \"type\": \"ticket\"\n          },\n          {\n            \"templateId\": \"string\",\n            \"format\": \"LEGAL\",\n            \"target\": \"thermal\",\n            \"type\": \"header-card\"\n          }\n        ]\n      }\n    },\n    \"addOnSettings\": {\n      \"optOutDescription\": \"string\",\n      \"localization\": {}\n    },\n    \"donationSettings\": {\n      \"campaignId\": \"string\",\n      \"fundId\": \"string\"\n    },\n    \"meta\": {},\n    \"localization\": {},\n    \"createdAt\": \"1975-04-26T14:41:40.373Z\",\n    \"updatedAt\": \"1988-07-04T07:27:09.059Z\"\n  },\n  {\n    \"_id\": \"string\",\n    \"name\": \"string\",\n    \"type\": \"addOn\",\n    \"sellerId\": \"string\",\n    \"active\": true,\n    \"isFulfillable\": false,\n    \"image\": \"string\",\n    \"description\": \"string\",\n    \"variants\": [\n      {\n        \"_id\": \"string\",\n        \"taxable\": true,\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"priceType\": \"fixed\",\n        \"price\": 3007.159521170014,\n        \"priceRange\": {\n          \"min\": 6360.933303905562,\n          \"max\": 7505.472299570312\n        },\n        \"taxRate\": 3881.35780178453,\n        \"compareAtPrice\": 1927.2514900996418,\n        \"taxServiceTypeId\": \"string\",\n        \"gtin\": \"22257116\",\n        \"localization\": {}\n      },\n      {\n        \"_id\": \"string\",\n        \"taxable\": true,\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"priceType\": \"fixed\",\n        \"price\": 2550.535139864516,\n        \"priceRange\": {\n          \"min\": 7929.232697647015,\n          \"max\": 3616.497413695693\n        },\n        \"taxRate\": 7430.073458174593,\n        \"compareAtPrice\": 6907.786188386273,\n        \"taxServiceTypeId\": \"string\",\n        \"gtin\": \"030\",\n        \"localization\": {}\n      }\n    ],\n    \"categoryIds\": [\n      \"string\",\n      \"string\"\n    ],\n    \"voucherSettings\": {\n      \"limitedValidityPeriod\": true,\n      \"validityConfig\": {\n        \"amount\": 1877.3457074289915,\n        \"type\": 9360.616860259197,\n        \"untilEndOfPeriod\": false\n      },\n      \"pdfImage\": \"string\",\n      \"disclaimer\": \"string\",\n      \"documentTemplateSettings\": {\n        \"templates\": [\n          {\n            \"templateId\": \"string\",\n            \"format\": \"A4\",\n            \"target\": \"wallet\",\n            \"type\": \"voucher\"\n          },\n          {\n            \"templateId\": \"string\",\n            \"format\": \"PLASTIC-CARD\",\n            \"target\": \"wallet\",\n            \"type\": \"voucher\"\n          }\n        ]\n      }\n    },\n    \"addOnSettings\": {\n      \"optOutDescription\": \"string\",\n      \"localization\": {}\n    },\n    \"donationSettings\": {\n      \"campaignId\": \"string\",\n      \"fundId\": \"string\"\n    },\n    \"meta\": {},\n    \"localization\": {},\n    \"createdAt\": \"1972-11-27T02:59:32.897Z\",\n    \"updatedAt\": \"1967-10-03T05:18:04.077Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3baedbc-ece8-4a6e-97ae-6366d5e51d1c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "streams",
+                    ":id",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "87ab62e4-8867-4442-aa1e-6b651515fecc",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "streams",
+                    ":id",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6b041ab9-1d23-4d59-b6f9-8916bc0c033c",
+          "name": "create a product stream",
+          "request": {
+            "name": "create a product stream",
+            "description": {
+              "content": "Create a Product Stream",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "products",
+                "streams"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"active\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "59e3f9f0-7a19-4617-a367-7744fa3dd780",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "streams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"sellerId\": \"string\",\n  \"active\": true,\n  \"createdAt\": \"2021-03-20T01:57:41.469Z\",\n  \"updatedAt\": \"1998-12-08T06:47:42.459Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07e2fa4b-ae8c-4c46-91a4-96015937bf63",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "streams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3716035d-020c-4a92-86a4-063b1c21febf",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "streams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://vivenu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "01c9d073-5d0c-429d-8945-0f56f0fedcab",
+    "name": "vivenu access-lists products API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "vivenu API Documentation\n\nContact Support:\n Name: vivenu GmbH",
+      "type": "text/plain"
+    }
+  }
+}

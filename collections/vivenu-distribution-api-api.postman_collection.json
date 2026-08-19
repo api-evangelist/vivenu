@@ -1,0 +1,2382 @@
+{
+  "item": [
+    {
+      "id": "b1b3e068-82c0-40e6-a016-233fae20e087",
+      "name": "distribution-api",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dc5e925c-a8f7-4834-9e16-195ba4004946",
+          "name": "get all events for a seller",
+          "request": {
+            "name": "get all events for a seller",
+            "description": {
+              "content": "Get all events for a seller.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "distribution",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "distributorId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "12c253a1-db9a-40bb-84ba-bd78a4429120",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "distributorId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "100"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"docs\": [\n    {\n      \"eventId\": \"string\",\n      \"name\": \"string\",\n      \"start\": \"string\",\n      \"currency\": \"1998-03-11T05:48:43.076Z\",\n      \"language\": \"string\",\n      \"timezone\": \"string\",\n      \"isRecurring\": false,\n      \"usesTimeSlots\": true,\n      \"seatingType\": \"None\",\n      \"offers\": [\n        {\n          \"offerId\": \"string\",\n          \"name\": \"string\",\n          \"price\": 5225.612633968723,\n          \"meta\": {}\n        },\n        {\n          \"offerId\": \"string\",\n          \"name\": \"string\",\n          \"price\": 2243.325162989428,\n          \"meta\": {}\n        }\n      ],\n      \"location\": {\n        \"name\": \"string\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"city\": \"string\",\n        \"postalCode\": \"string\",\n        \"state\": \"string\",\n        \"country\": \"string\"\n      },\n      \"information\": {\n        \"category\": \"string\",\n        \"subCategory\": \"string\"\n      },\n      \"end\": \"string\",\n      \"timeSlots\": [\n        {\n          \"startTime\": {\n            \"hour\": 10.951107991345493,\n            \"minute\": 25.957441862932438\n          },\n          \"timeSlotId\": \"string\",\n          \"offers\": [\n            {\n              \"offerId\": \"string\",\n              \"available\": 7865\n            },\n            {\n              \"offerId\": \"string\",\n              \"available\": 9351\n            }\n          ]\n        },\n        {\n          \"startTime\": {\n            \"hour\": 1.6943360357117543,\n            \"minute\": 36.463886025668806\n          },\n          \"timeSlotId\": \"string\",\n          \"offers\": [\n            {\n              \"offerId\": \"string\",\n              \"available\": 6997\n            },\n            {\n              \"offerId\": \"string\",\n              \"available\": 5904\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"eventId\": \"string\",\n      \"name\": \"string\",\n      \"start\": \"string\",\n      \"currency\": \"1999-10-06T18:47:30.844Z\",\n      \"language\": \"string\",\n      \"timezone\": \"string\",\n      \"isRecurring\": true,\n      \"usesTimeSlots\": true,\n      \"seatingType\": \"None\",\n      \"offers\": [\n        {\n          \"offerId\": \"string\",\n          \"name\": \"string\",\n          \"price\": 4732.20482361007,\n          \"meta\": {}\n        },\n        {\n          \"offerId\": \"string\",\n          \"name\": \"string\",\n          \"price\": 982.1454230581162,\n          \"meta\": {}\n        }\n      ],\n      \"location\": {\n        \"name\": \"string\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"city\": \"string\",\n        \"postalCode\": \"string\",\n        \"state\": \"string\",\n        \"country\": \"string\"\n      },\n      \"information\": {\n        \"category\": \"string\",\n        \"subCategory\": \"string\"\n      },\n      \"end\": \"string\",\n      \"timeSlots\": [\n        {\n          \"startTime\": {\n            \"hour\": 18.32892094380422,\n            \"minute\": 5.776154624925251\n          },\n          \"timeSlotId\": \"string\",\n          \"offers\": [\n            {\n              \"offerId\": \"string\",\n              \"available\": 4173\n            },\n            {\n              \"offerId\": \"string\",\n              \"available\": 2251\n            }\n          ]\n        },\n        {\n          \"startTime\": {\n            \"hour\": 11.668634864974205,\n            \"minute\": 38.202019573020436\n          },\n          \"timeSlotId\": \"string\",\n          \"offers\": [\n            {\n              \"offerId\": \"string\",\n              \"available\": 1774\n            },\n            {\n              \"offerId\": \"string\",\n              \"available\": 424\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"total\": 1139\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e661a61-db97-42b2-a049-f9c6f7ca1920",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "distributorId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "100"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2dfa1811-e228-48c4-bf34-7e5c473680d5",
+          "name": "get all sellers",
+          "request": {
+            "name": "get all sellers",
+            "description": {
+              "content": "Get all sellers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "distribution",
+                "sellers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<float>"
+                },
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "sellerId",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c9486ccf-3aac-42ad-9def-bf519fe3f2be",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "sellers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "100"
+                    },
+                    {
+                      "key": "sellerId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"docs\": [\n    {\n      \"sellerId\": \"string\",\n      \"distributorId\": \"string\",\n      \"name\": \"string\",\n      \"location\": {\n        \"name\": \"string\",\n        \"street\": \"string\",\n        \"city\": \"string\",\n        \"postalCode\": \"string\",\n        \"country\": \"string\"\n      }\n    },\n    {\n      \"sellerId\": \"string\",\n      \"distributorId\": \"string\",\n      \"name\": \"string\",\n      \"location\": {\n        \"name\": \"string\",\n        \"street\": \"string\",\n        \"city\": \"string\",\n        \"postalCode\": \"string\",\n        \"country\": \"string\"\n      }\n    }\n  ],\n  \"total\": 2850\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd4ad3a1-385f-4c6f-a10d-7b67a17cc56b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "sellers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "100"
+                    },
+                    {
+                      "key": "sellerId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc49b2d7-790b-4361-b7d2-ae67450b6882",
+          "name": "get a checkout",
+          "request": {
+            "name": "get a checkout",
+            "description": {
+              "content": "Get a checkout.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "distribution",
+                "checkout",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "distributorId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a636387d-7526-49bc-9250-b22980b76e16",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "checkout",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "distributorId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"checkoutId\": \"string\",\n  \"status\": \"ABORTED\",\n  \"distributorId\": \"string\",\n  \"transactionId\": \"string\",\n  \"expiresAt\": \"1978-02-01T16:38:31.700Z\",\n  \"externalReferenceId\": \"string\",\n  \"tickets\": [\n    {\n      \"ticketId\": \"string\",\n      \"offerId\": \"string\",\n      \"barcode\": \"string\",\n      \"url\": \"string\",\n      \"eventId\": \"string\",\n      \"availabilityId\": \"string\",\n      \"timeSlotId\": \"string\",\n      \"seatingInfo\": {\n        \"type\": \"Seats\",\n        \"seatId\": \"string\",\n        \"sectionName\": \"string\",\n        \"rowName\": \"string\",\n        \"seatName\": \"string\",\n        \"gate\": \"string\",\n        \"name\": \"string\"\n      }\n    },\n    {\n      \"ticketId\": \"string\",\n      \"offerId\": \"string\",\n      \"barcode\": \"string\",\n      \"url\": \"string\",\n      \"eventId\": \"string\",\n      \"availabilityId\": \"string\",\n      \"timeSlotId\": \"string\",\n      \"seatingInfo\": {\n        \"type\": \"Seats\",\n        \"seatId\": \"string\",\n        \"sectionName\": \"string\",\n        \"rowName\": \"string\",\n        \"seatName\": \"string\",\n        \"gate\": \"string\",\n        \"name\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17f54fa2-61db-4336-9d9a-e60095b3134f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "checkout",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "distributorId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "50fe1605-2d1d-4fff-8014-7e51cbaaaca0",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "checkout",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "distributorId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "62cd8408-56a6-4248-82ba-741e91867547",
+          "name": "get an event for a seller",
+          "request": {
+            "name": "get an event for a seller",
+            "description": {
+              "content": "Get an event for a seller.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "distribution",
+                "events",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "distributorId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3b2f25eb-fced-4002-9646-28eefa1b3537",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "events",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "distributorId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"eventId\": \"string\",\n  \"name\": \"string\",\n  \"start\": \"string\",\n  \"currency\": \"1971-05-10T04:49:18.670Z\",\n  \"language\": \"string\",\n  \"timezone\": \"string\",\n  \"isRecurring\": true,\n  \"usesTimeSlots\": false,\n  \"seatingType\": \"None\",\n  \"offers\": [\n    {\n      \"offerId\": \"string\",\n      \"name\": \"string\",\n      \"price\": 5380.098599764032,\n      \"meta\": {}\n    },\n    {\n      \"offerId\": \"string\",\n      \"name\": \"string\",\n      \"price\": 7514.522793621403,\n      \"meta\": {}\n    }\n  ],\n  \"location\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"city\": \"string\",\n    \"postalCode\": \"string\",\n    \"state\": \"string\",\n    \"country\": \"string\"\n  },\n  \"information\": {\n    \"category\": \"string\",\n    \"subCategory\": \"string\"\n  },\n  \"end\": \"string\",\n  \"timeSlots\": [\n    {\n      \"startTime\": {\n        \"hour\": 9.870810232083674,\n        \"minute\": 33.301893175602856\n      },\n      \"timeSlotId\": \"string\",\n      \"offers\": [\n        {\n          \"offerId\": \"string\",\n          \"available\": 1573\n        },\n        {\n          \"offerId\": \"string\",\n          \"available\": 2734\n        }\n      ]\n    },\n    {\n      \"startTime\": {\n        \"hour\": 2.3191878272147823,\n        \"minute\": 31.450201938717957\n      },\n      \"timeSlotId\": \"string\",\n      \"offers\": [\n        {\n          \"offerId\": \"string\",\n          \"available\": 8648\n        },\n        {\n          \"offerId\": \"string\",\n          \"available\": 4446\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2cb36f04-df83-4148-8ceb-0994094540d2",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "events",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "distributorId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "43416060-c8e7-4584-9db0-a49ba657a5a2",
+          "name": "get the availabilities for an event",
+          "request": {
+            "name": "get the availabilities for an event",
+            "description": {
+              "content": "Get the availabilities for an event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "distribution",
+                "events",
+                ":id",
+                "availabilities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "distributorId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "92b453ba-c959-423e-9ff6-8e36b69c7098",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "events",
+                    ":id",
+                    "availabilities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "distributorId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "100"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"docs\": [\n    {\n      \"eventId\": \"string\",\n      \"availibilityId\": \"string\",\n      \"name\": \"string\",\n      \"start\": \"string\",\n      \"timezone\": \"string\",\n      \"salesStart\": \"2025-09-28T06:42:41.423Z\",\n      \"salesEnd\": \"1980-03-25T11:04:16.786Z\",\n      \"currency\": \"1984-10-01T09:34:09.001Z\",\n      \"offers\": [\n        {\n          \"offerId\": \"string\",\n          \"name\": \"string\",\n          \"price\": 1821.5945042010417,\n          \"available\": 4750,\n          \"meta\": {}\n        },\n        {\n          \"offerId\": \"string\",\n          \"name\": \"string\",\n          \"price\": 6825.217610886678,\n          \"available\": 1678,\n          \"meta\": {}\n        }\n      ],\n      \"end\": \"string\",\n      \"timeSlots\": [\n        {\n          \"startTime\": {\n            \"hour\": 8.984734102430158,\n            \"minute\": 31.501052208265186\n          },\n          \"timeSlotId\": \"string\",\n          \"offers\": [\n            {\n              \"offerId\": \"string\",\n              \"available\": 8940\n            },\n            {\n              \"offerId\": \"string\",\n              \"available\": 670\n            }\n          ]\n        },\n        {\n          \"startTime\": {\n            \"hour\": 18.15439219051749,\n            \"minute\": 33.48555942722648\n          },\n          \"timeSlotId\": \"string\",\n          \"offers\": [\n            {\n              \"offerId\": \"string\",\n              \"available\": 710\n            },\n            {\n              \"offerId\": \"string\",\n              \"available\": 3521\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"eventId\": \"string\",\n      \"availibilityId\": \"string\",\n      \"name\": \"string\",\n      \"start\": \"string\",\n      \"timezone\": \"string\",\n      \"salesStart\": \"2009-08-06T01:02:58.355Z\",\n      \"salesEnd\": \"1984-07-25T10:45:20.720Z\",\n      \"currency\": \"2006-07-12T10:42:30.410Z\",\n      \"offers\": [\n        {\n          \"offerId\": \"string\",\n          \"name\": \"string\",\n          \"price\": 8522.068823870415,\n          \"available\": 4027,\n          \"meta\": {}\n        },\n        {\n          \"offerId\": \"string\",\n          \"name\": \"string\",\n          \"price\": 6609.521340132962,\n          \"available\": 968,\n          \"meta\": {}\n        }\n      ],\n      \"end\": \"string\",\n      \"timeSlots\": [\n        {\n          \"startTime\": {\n            \"hour\": 1.3478985068697007,\n            \"minute\": 58.346808065036626\n          },\n          \"timeSlotId\": \"string\",\n          \"offers\": [\n            {\n              \"offerId\": \"string\",\n              \"available\": 7083\n            },\n            {\n              \"offerId\": \"string\",\n              \"available\": 8613\n            }\n          ]\n        },\n        {\n          \"startTime\": {\n            \"hour\": 0.10520086571187359,\n            \"minute\": 46.58230378071087\n          },\n          \"timeSlotId\": \"string\",\n          \"offers\": [\n            {\n              \"offerId\": \"string\",\n              \"available\": 4651\n            },\n            {\n              \"offerId\": \"string\",\n              \"available\": 9705\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"total\": 1331\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52222300-8966-433d-b0b5-314c1ad84c3c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "events",
+                    ":id",
+                    "availabilities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "distributorId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "100"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "77d4cb79-2860-4155-a289-5ed74f4324c4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "events",
+                    ":id",
+                    "availabilities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "distributorId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "100"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "661b7c1d-cc8c-437b-878f-c8180926aea0",
+          "name": "get seating groups for an event",
+          "request": {
+            "name": "get seating groups for an event",
+            "description": {
+              "content": "Get seating groups for an event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "distribution",
+                "events",
+                ":eventId",
+                "availabilities",
+                ":availabilityId",
+                "seating-groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "distributorId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eventId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "availabilityId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "40bf4bad-0a7d-4acb-a609-5661e8fd698c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "events",
+                    ":eventId",
+                    "availabilities",
+                    ":availabilityId",
+                    "seating-groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "distributorId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "availabilityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"docs\": [\n    {\n      \"eventId\": \"string\",\n      \"availabityId\": \"string\",\n      \"groupId\": \"string\",\n      \"type\": \"Seats\",\n      \"tuples\": [\n        {\n          \"tupleId\": \"string\",\n          \"seats\": [\n            {\n              \"seatId\": \"string\",\n              \"sectionName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"offers\": [\n                {\n                  \"offerId\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                },\n                {\n                  \"offerId\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                }\n              ]\n            },\n            {\n              \"seatId\": \"string\",\n              \"sectionName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"offers\": [\n                {\n                  \"offerId\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                },\n                {\n                  \"offerId\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                }\n              ]\n            }\n          ]\n        },\n        {\n          \"tupleId\": \"string\",\n          \"seats\": [\n            {\n              \"seatId\": \"string\",\n              \"sectionName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"offers\": [\n                {\n                  \"offerId\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                },\n                {\n                  \"offerId\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                }\n              ]\n            },\n            {\n              \"seatId\": \"string\",\n              \"sectionName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"offers\": [\n                {\n                  \"offerId\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                },\n                {\n                  \"offerId\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                }\n              ]\n            }\n          ]\n        }\n      ],\n      \"availability\": 5350,\n      \"statusId\": \"string\",\n      \"name\": \"string\",\n      \"gate\": \"string\"\n    },\n    {\n      \"eventId\": \"string\",\n      \"availabityId\": \"string\",\n      \"groupId\": \"string\",\n      \"type\": \"Seats\",\n      \"tuples\": [\n        {\n          \"tupleId\": \"string\",\n          \"seats\": [\n            {\n              \"seatId\": \"string\",\n              \"sectionName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"offers\": [\n                {\n                  \"offerId\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                },\n                {\n                  \"offerId\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                }\n              ]\n            },\n            {\n              \"seatId\": \"string\",\n              \"sectionName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"offers\": [\n                {\n                  \"offerId\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                },\n                {\n                  \"offerId\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                }\n              ]\n            }\n          ]\n        },\n        {\n          \"tupleId\": \"string\",\n          \"seats\": [\n            {\n              \"seatId\": \"string\",\n              \"sectionName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"offers\": [\n                {\n                  \"offerId\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                },\n                {\n                  \"offerId\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                }\n              ]\n            },\n            {\n              \"seatId\": \"string\",\n              \"sectionName\": \"string\",\n              \"rowName\": \"string\",\n              \"seatName\": \"string\",\n              \"offers\": [\n                {\n                  \"offerId\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                },\n                {\n                  \"offerId\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                }\n              ]\n            }\n          ]\n        }\n      ],\n      \"availability\": 2404,\n      \"statusId\": \"string\",\n      \"name\": \"string\",\n      \"gate\": \"string\"\n    }\n  ],\n  \"total\": 9854\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efe77440-9fa0-4ee5-8fa9-d37a3d988f65",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "events",
+                    ":eventId",
+                    "availabilities",
+                    ":availabilityId",
+                    "seating-groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "distributorId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "availabilityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84e78155-b316-4b80-bb00-e0bccddc2a9a",
+          "name": "get the state for a seating group",
+          "request": {
+            "name": "get the state for a seating group",
+            "description": {
+              "content": "Get the state for a seating group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "distribution",
+                "events",
+                ":eventId",
+                "availabilities",
+                ":availabilityId",
+                "seating-groups",
+                ":groupId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "distributorId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eventId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "groupId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "availabilityId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f2fbba65-d29c-42d5-9852-0bb5473bc080",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "events",
+                    ":eventId",
+                    "availabilities",
+                    ":availabilityId",
+                    "seating-groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "distributorId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "availabilityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"eventId\": \"string\",\n  \"availabityId\": \"string\",\n  \"groupId\": \"string\",\n  \"type\": \"Seats\",\n  \"tuples\": [\n    {\n      \"tupleId\": \"string\",\n      \"seats\": [\n        {\n          \"seatId\": \"string\",\n          \"sectionName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"offers\": [\n            {\n              \"offerId\": \"string\"\n            },\n            {\n              \"offerId\": \"string\"\n            }\n          ]\n        },\n        {\n          \"seatId\": \"string\",\n          \"sectionName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"offers\": [\n            {\n              \"offerId\": \"string\"\n            },\n            {\n              \"offerId\": \"string\"\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"tupleId\": \"string\",\n      \"seats\": [\n        {\n          \"seatId\": \"string\",\n          \"sectionName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"offers\": [\n            {\n              \"offerId\": \"string\"\n            },\n            {\n              \"offerId\": \"string\"\n            }\n          ]\n        },\n        {\n          \"seatId\": \"string\",\n          \"sectionName\": \"string\",\n          \"rowName\": \"string\",\n          \"seatName\": \"string\",\n          \"offers\": [\n            {\n              \"offerId\": \"string\"\n            },\n            {\n              \"offerId\": \"string\"\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"availability\": 4078,\n  \"statusId\": \"string\",\n  \"name\": \"string\",\n  \"gate\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39712d6d-7349-4637-9282-3d847a160ca5",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "events",
+                    ":eventId",
+                    "availabilities",
+                    ":availabilityId",
+                    "seating-groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "distributorId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "availabilityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b2cd74d4-b006-4418-acf7-927f07d017d5",
+          "name": "create a checkout",
+          "request": {
+            "name": "create a checkout",
+            "description": {
+              "content": "Create a checkout.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "distribution",
+                "checkout"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"distributorId\": \"<string>\",\n  \"tickets\": [\n    {\n      \"offerId\": \"<string>\",\n      \"eventId\": \"<string>\",\n      \"availabilityId\": \"<string>\",\n      \"price\": \"<float>\",\n      \"seatId\": \"<string>\",\n      \"timeSlotId\": \"<string>\"\n    },\n    {\n      \"offerId\": \"<string>\",\n      \"eventId\": \"<string>\",\n      \"availabilityId\": \"<string>\",\n      \"price\": \"<float>\",\n      \"seatId\": \"<string>\",\n      \"timeSlotId\": \"<string>\"\n    }\n  ],\n  \"externalReferenceId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1fa3da2a-7026-412f-9749-42f9c744f5d6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"distributorId\": \"<string>\",\n  \"tickets\": [\n    {\n      \"offerId\": \"<string>\",\n      \"eventId\": \"<string>\",\n      \"availabilityId\": \"<string>\",\n      \"price\": \"<float>\",\n      \"seatId\": \"<string>\",\n      \"timeSlotId\": \"<string>\"\n    },\n    {\n      \"offerId\": \"<string>\",\n      \"eventId\": \"<string>\",\n      \"availabilityId\": \"<string>\",\n      \"price\": \"<float>\",\n      \"seatId\": \"<string>\",\n      \"timeSlotId\": \"<string>\"\n    }\n  ],\n  \"externalReferenceId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"checkoutId\": \"string\",\n  \"status\": \"COMPLETE\",\n  \"distributorId\": \"string\",\n  \"transactionId\": \"string\",\n  \"expiresAt\": \"2009-08-10T13:42:50.133Z\",\n  \"externalReferenceId\": \"string\",\n  \"tickets\": [\n    {\n      \"ticketId\": \"string\",\n      \"offerId\": \"string\",\n      \"barcode\": \"string\",\n      \"url\": \"string\",\n      \"eventId\": \"string\",\n      \"availabilityId\": \"string\",\n      \"timeSlotId\": \"string\",\n      \"seatingInfo\": {\n        \"type\": \"Seats\",\n        \"seatId\": \"string\",\n        \"sectionName\": \"string\",\n        \"rowName\": \"string\",\n        \"seatName\": \"string\",\n        \"gate\": \"string\",\n        \"name\": \"string\"\n      }\n    },\n    {\n      \"ticketId\": \"string\",\n      \"offerId\": \"string\",\n      \"barcode\": \"string\",\n      \"url\": \"string\",\n      \"eventId\": \"string\",\n      \"availabilityId\": \"string\",\n      \"timeSlotId\": \"string\",\n      \"seatingInfo\": {\n        \"type\": \"Seats\",\n        \"seatId\": \"string\",\n        \"sectionName\": \"string\",\n        \"rowName\": \"string\",\n        \"seatName\": \"string\",\n        \"gate\": \"string\",\n        \"name\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc3aec1e-cb1c-400f-8916-d9063da7897c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"distributorId\": \"<string>\",\n  \"tickets\": [\n    {\n      \"offerId\": \"<string>\",\n      \"eventId\": \"<string>\",\n      \"availabilityId\": \"<string>\",\n      \"price\": \"<float>\",\n      \"seatId\": \"<string>\",\n      \"timeSlotId\": \"<string>\"\n    },\n    {\n      \"offerId\": \"<string>\",\n      \"eventId\": \"<string>\",\n      \"availabilityId\": \"<string>\",\n      \"price\": \"<float>\",\n      \"seatId\": \"<string>\",\n      \"timeSlotId\": \"<string>\"\n    }\n  ],\n  \"externalReferenceId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eb9a1a84-916d-4e21-8db3-c17570bfa476",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"distributorId\": \"<string>\",\n  \"tickets\": [\n    {\n      \"offerId\": \"<string>\",\n      \"eventId\": \"<string>\",\n      \"availabilityId\": \"<string>\",\n      \"price\": \"<float>\",\n      \"seatId\": \"<string>\",\n      \"timeSlotId\": \"<string>\"\n    },\n    {\n      \"offerId\": \"<string>\",\n      \"eventId\": \"<string>\",\n      \"availabilityId\": \"<string>\",\n      \"price\": \"<float>\",\n      \"seatId\": \"<string>\",\n      \"timeSlotId\": \"<string>\"\n    }\n  ],\n  \"externalReferenceId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f85c33d0-393f-4469-b942-bb2f3759c684",
+          "name": "extend the expiry time of a checkout by one hour",
+          "request": {
+            "name": "extend the expiry time of a checkout by one hour",
+            "description": {
+              "content": "Extend the expiry time of a checkout by one hour.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "distribution",
+                "checkout",
+                ":id",
+                "extend"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"distributorId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1fbd2cab-9af5-4779-a154-4868add974d5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "checkout",
+                    ":id",
+                    "extend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"distributorId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"checkoutId\": \"string\",\n  \"status\": \"COMPLETE\",\n  \"distributorId\": \"string\",\n  \"transactionId\": \"string\",\n  \"expiresAt\": \"2009-08-10T13:42:50.133Z\",\n  \"externalReferenceId\": \"string\",\n  \"tickets\": [\n    {\n      \"ticketId\": \"string\",\n      \"offerId\": \"string\",\n      \"barcode\": \"string\",\n      \"url\": \"string\",\n      \"eventId\": \"string\",\n      \"availabilityId\": \"string\",\n      \"timeSlotId\": \"string\",\n      \"seatingInfo\": {\n        \"type\": \"Seats\",\n        \"seatId\": \"string\",\n        \"sectionName\": \"string\",\n        \"rowName\": \"string\",\n        \"seatName\": \"string\",\n        \"gate\": \"string\",\n        \"name\": \"string\"\n      }\n    },\n    {\n      \"ticketId\": \"string\",\n      \"offerId\": \"string\",\n      \"barcode\": \"string\",\n      \"url\": \"string\",\n      \"eventId\": \"string\",\n      \"availabilityId\": \"string\",\n      \"timeSlotId\": \"string\",\n      \"seatingInfo\": {\n        \"type\": \"Seats\",\n        \"seatId\": \"string\",\n        \"sectionName\": \"string\",\n        \"rowName\": \"string\",\n        \"seatName\": \"string\",\n        \"gate\": \"string\",\n        \"name\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74e83072-5799-47c5-b5cf-d463c109f5bc",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "checkout",
+                    ":id",
+                    "extend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"distributorId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "19b69b39-66b9-4ed5-85dc-bfdf29886106",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "checkout",
+                    ":id",
+                    "extend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"distributorId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "acafec01-2e00-4904-941b-de656612d411",
+          "name": "complete a checkout",
+          "request": {
+            "name": "complete a checkout",
+            "description": {
+              "content": "Complete a checkout.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "distribution",
+                "checkout",
+                ":id",
+                "complete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"distributorId\": \"<string>\",\n  \"customer\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"company\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"address\": {\n      \"lineOne\": \"<string>\",\n      \"city\": \"<string>\",\n      \"postal\": \"<string>\",\n      \"country\": \"<string>\",\n      \"lineTwo\": \"<string>\",\n      \"state\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "336cbaca-3d7c-4610-a8c6-675c78672565",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "checkout",
+                    ":id",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"distributorId\": \"<string>\",\n  \"customer\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"company\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"address\": {\n      \"lineOne\": \"<string>\",\n      \"city\": \"<string>\",\n      \"postal\": \"<string>\",\n      \"country\": \"<string>\",\n      \"lineTwo\": \"<string>\",\n      \"state\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"checkoutId\": \"string\",\n  \"status\": \"COMPLETE\",\n  \"distributorId\": \"string\",\n  \"transactionId\": \"string\",\n  \"expiresAt\": \"2009-08-10T13:42:50.133Z\",\n  \"externalReferenceId\": \"string\",\n  \"tickets\": [\n    {\n      \"ticketId\": \"string\",\n      \"offerId\": \"string\",\n      \"barcode\": \"string\",\n      \"url\": \"string\",\n      \"eventId\": \"string\",\n      \"availabilityId\": \"string\",\n      \"timeSlotId\": \"string\",\n      \"seatingInfo\": {\n        \"type\": \"Seats\",\n        \"seatId\": \"string\",\n        \"sectionName\": \"string\",\n        \"rowName\": \"string\",\n        \"seatName\": \"string\",\n        \"gate\": \"string\",\n        \"name\": \"string\"\n      }\n    },\n    {\n      \"ticketId\": \"string\",\n      \"offerId\": \"string\",\n      \"barcode\": \"string\",\n      \"url\": \"string\",\n      \"eventId\": \"string\",\n      \"availabilityId\": \"string\",\n      \"timeSlotId\": \"string\",\n      \"seatingInfo\": {\n        \"type\": \"Seats\",\n        \"seatId\": \"string\",\n        \"sectionName\": \"string\",\n        \"rowName\": \"string\",\n        \"seatName\": \"string\",\n        \"gate\": \"string\",\n        \"name\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd24bd86-1a57-44e7-a010-a24675c5bd98",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "checkout",
+                    ":id",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"distributorId\": \"<string>\",\n  \"customer\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"company\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"address\": {\n      \"lineOne\": \"<string>\",\n      \"city\": \"<string>\",\n      \"postal\": \"<string>\",\n      \"country\": \"<string>\",\n      \"lineTwo\": \"<string>\",\n      \"state\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cbc8de56-1e61-408c-aa88-6cc13852f005",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "checkout",
+                    ":id",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"distributorId\": \"<string>\",\n  \"customer\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"company\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"address\": {\n      \"lineOne\": \"<string>\",\n      \"city\": \"<string>\",\n      \"postal\": \"<string>\",\n      \"country\": \"<string>\",\n      \"lineTwo\": \"<string>\",\n      \"state\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b278385-6a61-4653-89df-069d6b684e9d",
+          "name": "abort a checkout",
+          "request": {
+            "name": "abort a checkout",
+            "description": {
+              "content": "Abort a checkout.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "distribution",
+                "checkout",
+                ":id",
+                "abort"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"distributorId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a9e62ce6-47cf-4cb8-8d30-1cd5b2829735",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "checkout",
+                    ":id",
+                    "abort"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"distributorId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"checkoutId\": \"string\",\n  \"status\": \"COMPLETE\",\n  \"distributorId\": \"string\",\n  \"transactionId\": \"string\",\n  \"expiresAt\": \"2009-08-10T13:42:50.133Z\",\n  \"externalReferenceId\": \"string\",\n  \"tickets\": [\n    {\n      \"ticketId\": \"string\",\n      \"offerId\": \"string\",\n      \"barcode\": \"string\",\n      \"url\": \"string\",\n      \"eventId\": \"string\",\n      \"availabilityId\": \"string\",\n      \"timeSlotId\": \"string\",\n      \"seatingInfo\": {\n        \"type\": \"Seats\",\n        \"seatId\": \"string\",\n        \"sectionName\": \"string\",\n        \"rowName\": \"string\",\n        \"seatName\": \"string\",\n        \"gate\": \"string\",\n        \"name\": \"string\"\n      }\n    },\n    {\n      \"ticketId\": \"string\",\n      \"offerId\": \"string\",\n      \"barcode\": \"string\",\n      \"url\": \"string\",\n      \"eventId\": \"string\",\n      \"availabilityId\": \"string\",\n      \"timeSlotId\": \"string\",\n      \"seatingInfo\": {\n        \"type\": \"Seats\",\n        \"seatId\": \"string\",\n        \"sectionName\": \"string\",\n        \"rowName\": \"string\",\n        \"seatName\": \"string\",\n        \"gate\": \"string\",\n        \"name\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a4da048-39a4-421a-a8fb-bb1ce7251727",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "checkout",
+                    ":id",
+                    "abort"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"distributorId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5ea8d761-ae5e-4900-9b07-9057832a2566",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "checkout",
+                    ":id",
+                    "abort"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"distributorId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc6d7170-25da-4048-870d-d3c49c16d1d6",
+          "name": "cancel a transaction",
+          "request": {
+            "name": "cancel a transaction",
+            "description": {
+              "content": "Cancel a transaction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "distribution",
+                "transaction",
+                ":id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"distributorId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1dc450db-ac76-4ab5-b6ee-785d65ad0006",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "transaction",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"distributorId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"distributorId\": \"string\",\n  \"status\": \"ABORTED\",\n  \"tickets\": [\n    {\n      \"ticketId\": \"string\",\n      \"offerId\": \"string\",\n      \"barcode\": \"string\",\n      \"url\": \"string\",\n      \"eventId\": \"string\",\n      \"availabilityId\": \"string\",\n      \"timeSlotId\": \"string\",\n      \"seatingInfo\": {\n        \"type\": \"Seats\",\n        \"seatId\": \"string\",\n        \"sectionName\": \"string\",\n        \"rowName\": \"string\",\n        \"seatName\": \"string\",\n        \"gate\": \"string\",\n        \"name\": \"string\"\n      }\n    },\n    {\n      \"ticketId\": \"string\",\n      \"offerId\": \"string\",\n      \"barcode\": \"string\",\n      \"url\": \"string\",\n      \"eventId\": \"string\",\n      \"availabilityId\": \"string\",\n      \"timeSlotId\": \"string\",\n      \"seatingInfo\": {\n        \"type\": \"Seats\",\n        \"seatId\": \"string\",\n        \"sectionName\": \"string\",\n        \"rowName\": \"string\",\n        \"seatName\": \"string\",\n        \"gate\": \"string\",\n        \"name\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1d2ed78-8ae6-4ced-b788-b52b20875aef",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "transaction",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"distributorId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "47bd184c-dbea-4b84-a4ed-d6fce51cec3f",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distribution",
+                    "transaction",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"distributorId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://vivenu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "992d8f9d-0bef-4bfd-9497-d7e981907c99",
+    "name": "vivenu access-lists distribution-api API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "vivenu API Documentation\n\nContact Support:\n Name: vivenu GmbH",
+      "type": "text/plain"
+    }
+  }
+}

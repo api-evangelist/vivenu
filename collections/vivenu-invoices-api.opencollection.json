@@ -1,0 +1,250 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "vivenu access-lists invoices API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "get_all_invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/invoices",
+            "params": [
+              {
+                "name": "top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "no",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "createdAt",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get All Invoices"
+        },
+        {
+          "info": {
+            "name": "create_invoice_for_transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/invoices",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Invoice for Transaction"
+        },
+        {
+          "info": {
+            "name": "get_an_invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/invoices/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get an Invoice"
+        },
+        {
+          "info": {
+            "name": "update_an_invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://vivenu.com/api/invoices/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an Invoice"
+        },
+        {
+          "info": {
+            "name": "get_invoice_for_transaction_deprecated_use_get_invoices_with_the_transaction_id_query_parameter_instead",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/invoices/trans/:transactionId",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Invoice for Transaction (deprecated - use GET /invoices with the transactionId query parameter instead)"
+        },
+        {
+          "info": {
+            "name": "create_invoice_for_transaction_deprecated_use_post_invoices_with_query_parameter_transaction_id_instead",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/invoices/trans/:transactionId",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Invoice for Transaction (deprecated - use POST /invoices with query parameter transactionId instead)"
+        },
+        {
+          "info": {
+            "name": "get_public_invoice_for_transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/public/invoices/info",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "secret",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "latest",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Public Invoice for Transaction"
+        },
+        {
+          "info": {
+            "name": "get_public_invoice_for_transaction_deprecated_use_get_public_invoices_info_with_query_parameters_transaction_id_and_secret_instead",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/invoices/:transactionId/info/:secret",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "secret",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Public Invoice for Transaction (deprecated - use GET /public/invoices/info with query parameters transactionId and secret instead)"
+        },
+        {
+          "info": {
+            "name": "get_public_invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/public/invoices/:id/info",
+            "params": [
+              {
+                "name": "secret",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Public Invoice"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1028 @@
+{
+  "item": [
+    {
+      "id": "ac88ffff-ec7b-4020-ab77-c8da54655e35",
+      "name": "third",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b904e5fa-ee88-4502-b342-eef6fb510f82",
+          "name": "validate a ticket by its barcode",
+          "request": {
+            "name": "validate a ticket by its barcode",
+            "description": {
+              "content": "Validate a ticket by its barcode",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "third",
+                "exchange",
+                "validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "barcode",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "ticketId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "eventId",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bed38525-1aee-42e8-95dc-e238777f637c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "third",
+                    "exchange",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "barcode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ticketId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"_id\": \"string\",\n  \"barcode\": \"string\",\n  \"swappable\": false,\n  \"valid\": true,\n  \"event\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"start\": \"1982-06-01T16:04:51.157Z\",\n    \"end\": \"2008-02-17T06:57:49.679Z\",\n    \"eventUrl\": \"https://JzbDL.mfoS5f0vr-weRzzSnVEtM1Qoj2DjYEPt+rh8aNbuqLvukhFBaK-gyxY22d0tiDOH\"\n  },\n  \"type\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"price\": 8177.625483326455,\n    \"fee\": 4840.275815051771,\n    \"currency\": \"GEL\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6c2f1d9-4677-4f8b-af11-0bdccd06367c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "third",
+                    "exchange",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "barcode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ticketId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a06c8c4d-a597-4d91-87d5-5436c88bdba0",
+          "name": "receive the ticket exchange payload for multiple tickets",
+          "request": {
+            "name": "receive the ticket exchange payload for multiple tickets",
+            "description": {
+              "content": "Receive the ticket exchange payload for multiple tickets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "third",
+                "exchange",
+                "validate",
+                "tickets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "eventId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "ticketIds",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "ticketIds",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5c9acf4a-e409-479b-a660-8d6ee9e8a8dd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "third",
+                    "exchange",
+                    "validate",
+                    "tickets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "eventId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ticketIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ticketIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tickets\": {\n    \"type\": \"object\",\n    \"$_root\": {\n      \"_types\": {},\n      \"version\": \"18.2.1\",\n      \"cache\": {}\n    },\n    \"$_temp\": {\n      \"ruleset\": false,\n      \"whens\": {}\n    },\n    \"_ids\": {\n      \"_byId\": {},\n      \"_byKey\": {},\n      \"_schemaChain\": false\n    },\n    \"_preferences\": {\n      \"messages\": {\n        \"phone.invalid\": {\n          \"source\": \"Phone number is invalid\",\n          \"rendered\": \"Phone number is invalid\",\n          \"_template\": null\n        },\n        \"iban.invalid\": {\n          \"source\": \"IBAN is invalid\",\n          \"rendered\": \"IBAN is invalid\",\n          \"_template\": null\n        },\n        \"bic.invalid\": {\n          \"source\": \"BIC is invalid\",\n          \"rendered\": \"BIC is invalid\",\n          \"_template\": null\n        },\n        \"country.invalid\": {\n          \"source\": \"Country is invalid\",\n          \"rendered\": \"Country is invalid\",\n          \"_template\": null\n        },\n        \"id.invalid\": {\n          \"source\": \"Id is invalid\",\n          \"rendered\": \"Id is invalid\",\n          \"_template\": null\n        }\n      }\n    },\n    \"_valids\": null,\n    \"_invalids\": null,\n    \"_singleRules\": {},\n    \"_refs\": {\n      \"refs\": []\n    },\n    \"_flags\": {},\n    \"_cache\": null,\n    \"$_terms\": {\n      \"alterations\": null,\n      \"examples\": null,\n      \"externals\": null,\n      \"notes\": [],\n      \"shared\": null,\n      \"tags\": [],\n      \"whens\": null,\n      \"dependencies\": null,\n      \"keys\": [\n        {\n          \"key\": \"_id\",\n          \"schema\": {\n            \"type\": \"string\",\n            \"$_root\": {\n              \"_types\": {},\n              \"version\": \"18.2.1\",\n              \"cache\": {}\n            },\n            \"$_temp\": {\n              \"ruleset\": false,\n              \"whens\": {}\n            },\n            \"_ids\": {\n              \"_byId\": {},\n              \"_byKey\": {},\n              \"_schemaChain\": false\n            },\n            \"_preferences\": {\n              \"messages\": {\n                \"phone.invalid\": {\n                  \"source\": \"Phone number is invalid\",\n                  \"rendered\": \"Phone number is invalid\",\n                  \"_template\": null\n                },\n                \"iban.invalid\": {\n                  \"source\": \"IBAN is invalid\",\n                  \"rendered\": \"IBAN is invalid\",\n                  \"_template\": null\n                },\n                \"bic.invalid\": {\n                  \"source\": \"BIC is invalid\",\n                  \"rendered\": \"BIC is invalid\",\n                  \"_template\": null\n                },\n                \"country.invalid\": {\n                  \"source\": \"Country is invalid\",\n                  \"rendered\": \"Country is invalid\",\n                  \"_template\": null\n                },\n                \"id.invalid\": {\n                  \"source\": \"Id is invalid\",\n                  \"rendered\": \"Id is invalid\",\n                  \"_template\": null\n                }\n              }\n            },\n            \"_valids\": null,\n            \"_invalids\": null,\n            \"_rules\": [],\n            \"_singleRules\": {},\n            \"_refs\": {\n              \"refs\": []\n            },\n            \"_flags\": {\n              \"presence\": \"required\",\n              \"description\": \"The ID of the ticket\"\n            },\n            \"_cache\": null,\n            \"$_terms\": {\n              \"alterations\": null,\n              \"examples\": null,\n              \"externals\": null,\n              \"notes\": [],\n              \"shared\": null,\n              \"tags\": [],\n              \"whens\": null,\n              \"replacements\": null\n            },\n            \"$_super\": {}\n          }\n        },\n        {\n          \"key\": \"section\",\n          \"schema\": {\n            \"type\": \"string\",\n            \"$_root\": {\n              \"_types\": {},\n              \"version\": \"18.2.1\",\n              \"cache\": {}\n            },\n            \"$_temp\": {\n              \"ruleset\": false,\n              \"whens\": {}\n            },\n            \"_ids\": {\n              \"_byId\": {},\n              \"_byKey\": {},\n              \"_schemaChain\": false\n            },\n            \"_preferences\": {\n              \"messages\": {\n                \"phone.invalid\": {\n                  \"source\": \"Phone number is invalid\",\n                  \"rendered\": \"Phone number is invalid\",\n                  \"_template\": null\n                },\n                \"iban.invalid\": {\n                  \"source\": \"IBAN is invalid\",\n                  \"rendered\": \"IBAN is invalid\",\n                  \"_template\": null\n                },\n                \"bic.invalid\": {\n                  \"source\": \"BIC is invalid\",\n                  \"rendered\": \"BIC is invalid\",\n                  \"_template\": null\n                },\n                \"country.invalid\": {\n                  \"source\": \"Country is invalid\",\n                  \"rendered\": \"Country is invalid\",\n                  \"_template\": null\n                },\n                \"id.invalid\": {\n                  \"source\": \"Id is invalid\",\n                  \"rendered\": \"Id is invalid\",\n                  \"_template\": null\n                }\n              }\n            },\n            \"_valids\": null,\n            \"_invalids\": null,\n            \"_rules\": [],\n            \"_singleRules\": {},\n            \"_refs\": {\n              \"refs\": []\n            },\n            \"_flags\": {\n              \"presence\": \"optional\",\n              \"description\": \"The section of the ticket\"\n            },\n            \"_cache\": null,\n            \"$_terms\": {\n              \"alterations\": null,\n              \"examples\": null,\n              \"externals\": null,\n              \"notes\": [],\n              \"shared\": null,\n              \"tags\": [],\n              \"whens\": null,\n              \"replacements\": null\n            },\n            \"$_super\": {}\n          }\n        },\n        {\n          \"key\": \"group\",\n          \"schema\": {\n            \"type\": \"string\",\n            \"$_root\": {\n              \"_types\": {},\n              \"version\": \"18.2.1\",\n              \"cache\": {}\n            },\n            \"$_temp\": {\n              \"ruleset\": false,\n              \"whens\": {}\n            },\n            \"_ids\": {\n              \"_byId\": {},\n              \"_byKey\": {},\n              \"_schemaChain\": false\n            },\n            \"_preferences\": {\n              \"messages\": {\n                \"phone.invalid\": {\n                  \"source\": \"Phone number is invalid\",\n                  \"rendered\": \"Phone number is invalid\",\n                  \"_template\": null\n                },\n                \"iban.invalid\": {\n                  \"source\": \"IBAN is invalid\",\n                  \"rendered\": \"IBAN is invalid\",\n                  \"_template\": null\n                },\n                \"bic.invalid\": {\n                  \"source\": \"BIC is invalid\",\n                  \"rendered\": \"BIC is invalid\",\n                  \"_template\": null\n                },\n                \"country.invalid\": {\n                  \"source\": \"Country is invalid\",\n                  \"rendered\": \"Country is invalid\",\n                  \"_template\": null\n                },\n                \"id.invalid\": {\n                  \"source\": \"Id is invalid\",\n                  \"rendered\": \"Id is invalid\",\n                  \"_template\": null\n                }\n              }\n            },\n            \"_valids\": null,\n            \"_invalids\": null,\n            \"_rules\": [],\n            \"_singleRules\": {},\n            \"_refs\": {\n              \"refs\": []\n            },\n            \"_flags\": {\n              \"presence\": \"optional\",\n              \"description\": \"The group of the ticket\"\n            },\n            \"_cache\": null,\n            \"$_terms\": {\n              \"alterations\": null,\n              \"examples\": null,\n              \"externals\": null,\n              \"notes\": [],\n              \"shared\": null,\n              \"tags\": [],\n              \"whens\": null,\n              \"replacements\": null\n            },\n            \"$_super\": {}\n          }\n        },\n        {\n          \"key\": \"row\",\n          \"schema\": {\n            \"type\": \"string\",\n            \"$_root\": {\n              \"_types\": {},\n              \"version\": \"18.2.1\",\n              \"cache\": {}\n            },\n            \"$_temp\": {\n              \"ruleset\": false,\n              \"whens\": {}\n            },\n            \"_ids\": {\n              \"_byId\": {},\n              \"_byKey\": {},\n              \"_schemaChain\": false\n            },\n            \"_preferences\": {\n              \"messages\": {\n                \"phone.invalid\": {\n                  \"source\": \"Phone number is invalid\",\n                  \"rendered\": \"Phone number is invalid\",\n                  \"_template\": null\n                },\n                \"iban.invalid\": {\n                  \"source\": \"IBAN is invalid\",\n                  \"rendered\": \"IBAN is invalid\",\n                  \"_template\": null\n                },\n                \"bic.invalid\": {\n                  \"source\": \"BIC is invalid\",\n                  \"rendered\": \"BIC is invalid\",\n                  \"_template\": null\n                },\n                \"country.invalid\": {\n                  \"source\": \"Country is invalid\",\n                  \"rendered\": \"Country is invalid\",\n                  \"_template\": null\n                },\n                \"id.invalid\": {\n                  \"source\": \"Id is invalid\",\n                  \"rendered\": \"Id is invalid\",\n                  \"_template\": null\n                }\n              }\n            },\n            \"_valids\": null,\n            \"_invalids\": null,\n            \"_rules\": [],\n            \"_singleRules\": {},\n            \"_refs\": {\n              \"refs\": []\n            },\n            \"_flags\": {\n              \"presence\": \"optional\",\n              \"description\": \"The row of the ticket\"\n            },\n            \"_cache\": null,\n            \"$_terms\": {\n              \"alterations\": null,\n              \"examples\": null,\n              \"externals\": null,\n              \"notes\": [],\n              \"shared\": null,\n              \"tags\": [],\n              \"whens\": null,\n              \"replacements\": null\n            },\n            \"$_super\": {}\n          }\n        },\n        {\n          \"key\": \"seat\",\n          \"schema\": {\n            \"type\": \"string\",\n            \"$_root\": {\n              \"_types\": {},\n              \"version\": \"18.2.1\",\n              \"cache\": {}\n            },\n            \"$_temp\": {\n              \"ruleset\": false,\n              \"whens\": {}\n            },\n            \"_ids\": {\n              \"_byId\": {},\n              \"_byKey\": {},\n              \"_schemaChain\": false\n            },\n            \"_preferences\": {\n              \"messages\": {\n                \"phone.invalid\": {\n                  \"source\": \"Phone number is invalid\",\n                  \"rendered\": \"Phone number is invalid\",\n                  \"_template\": null\n                },\n                \"iban.invalid\": {\n                  \"source\": \"IBAN is invalid\",\n                  \"rendered\": \"IBAN is invalid\",\n                  \"_template\": null\n                },\n                \"bic.invalid\": {\n                  \"source\": \"BIC is invalid\",\n                  \"rendered\": \"BIC is invalid\",\n                  \"_template\": null\n                },\n                \"country.invalid\": {\n                  \"source\": \"Country is invalid\",\n                  \"rendered\": \"Country is invalid\",\n                  \"_template\": null\n                },\n                \"id.invalid\": {\n                  \"source\": \"Id is invalid\",\n                  \"rendered\": \"Id is invalid\",\n                  \"_template\": null\n                }\n              }\n            },\n            \"_valids\": null,\n            \"_invalids\": null,\n            \"_rules\": [],\n            \"_singleRules\": {},\n            \"_refs\": {\n              \"refs\": []\n            },\n            \"_flags\": {\n              \"presence\": \"optional\",\n              \"description\": \"The seat of the ticket\"\n            },\n            \"_cache\": null,\n            \"$_terms\": {\n              \"alterations\": null,\n              \"examples\": null,\n              \"externals\": null,\n              \"notes\": [],\n              \"shared\": null,\n              \"tags\": [],\n              \"whens\": null,\n              \"replacements\": null\n            },\n            \"$_super\": {}\n          }\n        },\n        {\n          \"key\": \"ga\",\n          \"schema\": {\n            \"type\": \"string\",\n            \"$_root\": {\n              \"_types\": {},\n              \"version\": \"18.2.1\",\n              \"cache\": {}\n            },\n            \"$_temp\": {\n              \"ruleset\": false,\n              \"whens\": {}\n            },\n            \"_ids\": {\n              \"_byId\": {},\n              \"_byKey\": {},\n              \"_schemaChain\": false\n            },\n            \"_preferences\": {\n              \"messages\": {\n                \"phone.invalid\": {\n                  \"source\": \"Phone number is invalid\",\n                  \"rendered\": \"Phone number is invalid\",\n                  \"_template\": null\n                },\n                \"iban.invalid\": {\n                  \"source\": \"IBAN is invalid\",\n                  \"rendered\": \"IBAN is invalid\",\n                  \"_template\": null\n                },\n                \"bic.invalid\": {\n                  \"source\": \"BIC is invalid\",\n                  \"rendered\": \"BIC is invalid\",\n                  \"_template\": null\n                },\n                \"country.invalid\": {\n                  \"source\": \"Country is invalid\",\n                  \"rendered\": \"Country is invalid\",\n                  \"_template\": null\n                },\n                \"id.invalid\": {\n                  \"source\": \"Id is invalid\",\n                  \"rendered\": \"Id is invalid\",\n                  \"_template\": null\n                }\n              }\n            },\n            \"_valids\": null,\n            \"_invalids\": null,\n            \"_rules\": [],\n            \"_singleRules\": {},\n            \"_refs\": {\n              \"refs\": []\n            },\n            \"_flags\": {\n              \"presence\": \"optional\",\n              \"description\": \"The name of the general admission section\"\n            },\n            \"_cache\": null,\n            \"$_terms\": {\n              \"alterations\": null,\n              \"examples\": null,\n              \"externals\": null,\n              \"notes\": [],\n              \"shared\": null,\n              \"tags\": [],\n              \"whens\": null,\n              \"replacements\": null\n            },\n            \"$_super\": {}\n          }\n        }\n      ],\n      \"patterns\": null,\n      \"renames\": null\n    },\n    \"$_super\": {}\n  },\n  \"customer\": {\n    \"_id\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"string\",\n    \"country\": \"string\"\n  },\n  \"event\": {\n    \"_id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3ed0115-21b6-42b1-8036-997eb9fe3a1e",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "third",
+                    "exchange",
+                    "validate",
+                    "tickets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "eventId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ticketIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ticketIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fb2af08e-a2cc-4805-b132-d145f93cbfc7",
+          "name": "validates the active listing for multiple tickets",
+          "request": {
+            "name": "validates the active listing for multiple tickets",
+            "description": {
+              "content": "Validates the active listing for multiple tickets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "third",
+                "exchange",
+                "listings",
+                ":id",
+                "validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "39cbc13c-0bba-46f0-b22f-a13ecceb7fa3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "third",
+                    "exchange",
+                    "listings",
+                    ":id",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tickets\": {\n    \"type\": \"object\",\n    \"$_root\": {\n      \"_types\": {},\n      \"version\": \"18.2.1\",\n      \"cache\": {}\n    },\n    \"$_temp\": {\n      \"ruleset\": false,\n      \"whens\": {}\n    },\n    \"_ids\": {\n      \"_byId\": {},\n      \"_byKey\": {},\n      \"_schemaChain\": false\n    },\n    \"_preferences\": {\n      \"messages\": {\n        \"phone.invalid\": {\n          \"source\": \"Phone number is invalid\",\n          \"rendered\": \"Phone number is invalid\",\n          \"_template\": null\n        },\n        \"iban.invalid\": {\n          \"source\": \"IBAN is invalid\",\n          \"rendered\": \"IBAN is invalid\",\n          \"_template\": null\n        },\n        \"bic.invalid\": {\n          \"source\": \"BIC is invalid\",\n          \"rendered\": \"BIC is invalid\",\n          \"_template\": null\n        },\n        \"country.invalid\": {\n          \"source\": \"Country is invalid\",\n          \"rendered\": \"Country is invalid\",\n          \"_template\": null\n        },\n        \"id.invalid\": {\n          \"source\": \"Id is invalid\",\n          \"rendered\": \"Id is invalid\",\n          \"_template\": null\n        }\n      }\n    },\n    \"_valids\": null,\n    \"_invalids\": null,\n    \"_singleRules\": {},\n    \"_refs\": {\n      \"refs\": []\n    },\n    \"_flags\": {},\n    \"_cache\": null,\n    \"$_terms\": {\n      \"alterations\": null,\n      \"examples\": null,\n      \"externals\": null,\n      \"notes\": [],\n      \"shared\": null,\n      \"tags\": [],\n      \"whens\": null,\n      \"dependencies\": null,\n      \"keys\": [\n        {\n          \"key\": \"_id\",\n          \"schema\": {\n            \"type\": \"string\",\n            \"$_root\": {\n              \"_types\": {},\n              \"version\": \"18.2.1\",\n              \"cache\": {}\n            },\n            \"$_temp\": {\n              \"ruleset\": false,\n              \"whens\": {}\n            },\n            \"_ids\": {\n              \"_byId\": {},\n              \"_byKey\": {},\n              \"_schemaChain\": false\n            },\n            \"_preferences\": {\n              \"messages\": {\n                \"phone.invalid\": {\n                  \"source\": \"Phone number is invalid\",\n                  \"rendered\": \"Phone number is invalid\",\n                  \"_template\": null\n                },\n                \"iban.invalid\": {\n                  \"source\": \"IBAN is invalid\",\n                  \"rendered\": \"IBAN is invalid\",\n                  \"_template\": null\n                },\n                \"bic.invalid\": {\n                  \"source\": \"BIC is invalid\",\n                  \"rendered\": \"BIC is invalid\",\n                  \"_template\": null\n                },\n                \"country.invalid\": {\n                  \"source\": \"Country is invalid\",\n                  \"rendered\": \"Country is invalid\",\n                  \"_template\": null\n                },\n                \"id.invalid\": {\n                  \"source\": \"Id is invalid\",\n                  \"rendered\": \"Id is invalid\",\n                  \"_template\": null\n                }\n              }\n            },\n            \"_valids\": null,\n            \"_invalids\": null,\n            \"_rules\": [],\n            \"_singleRules\": {},\n            \"_refs\": {\n              \"refs\": []\n            },\n            \"_flags\": {\n              \"presence\": \"required\",\n              \"description\": \"The ID of the ticket\"\n            },\n            \"_cache\": null,\n            \"$_terms\": {\n              \"alterations\": null,\n              \"examples\": null,\n              \"externals\": null,\n              \"notes\": [],\n              \"shared\": null,\n              \"tags\": [],\n              \"whens\": null,\n              \"replacements\": null\n            },\n            \"$_super\": {}\n          }\n        },\n        {\n          \"key\": \"section\",\n          \"schema\": {\n            \"type\": \"string\",\n            \"$_root\": {\n              \"_types\": {},\n              \"version\": \"18.2.1\",\n              \"cache\": {}\n            },\n            \"$_temp\": {\n              \"ruleset\": false,\n              \"whens\": {}\n            },\n            \"_ids\": {\n              \"_byId\": {},\n              \"_byKey\": {},\n              \"_schemaChain\": false\n            },\n            \"_preferences\": {\n              \"messages\": {\n                \"phone.invalid\": {\n                  \"source\": \"Phone number is invalid\",\n                  \"rendered\": \"Phone number is invalid\",\n                  \"_template\": null\n                },\n                \"iban.invalid\": {\n                  \"source\": \"IBAN is invalid\",\n                  \"rendered\": \"IBAN is invalid\",\n                  \"_template\": null\n                },\n                \"bic.invalid\": {\n                  \"source\": \"BIC is invalid\",\n                  \"rendered\": \"BIC is invalid\",\n                  \"_template\": null\n                },\n                \"country.invalid\": {\n                  \"source\": \"Country is invalid\",\n                  \"rendered\": \"Country is invalid\",\n                  \"_template\": null\n                },\n                \"id.invalid\": {\n                  \"source\": \"Id is invalid\",\n                  \"rendered\": \"Id is invalid\",\n                  \"_template\": null\n                }\n              }\n            },\n            \"_valids\": null,\n            \"_invalids\": null,\n            \"_rules\": [],\n            \"_singleRules\": {},\n            \"_refs\": {\n              \"refs\": []\n            },\n            \"_flags\": {\n              \"presence\": \"optional\",\n              \"description\": \"The section of the ticket\"\n            },\n            \"_cache\": null,\n            \"$_terms\": {\n              \"alterations\": null,\n              \"examples\": null,\n              \"externals\": null,\n              \"notes\": [],\n              \"shared\": null,\n              \"tags\": [],\n              \"whens\": null,\n              \"replacements\": null\n            },\n            \"$_super\": {}\n          }\n        },\n        {\n          \"key\": \"group\",\n          \"schema\": {\n            \"type\": \"string\",\n            \"$_root\": {\n              \"_types\": {},\n              \"version\": \"18.2.1\",\n              \"cache\": {}\n            },\n            \"$_temp\": {\n              \"ruleset\": false,\n              \"whens\": {}\n            },\n            \"_ids\": {\n              \"_byId\": {},\n              \"_byKey\": {},\n              \"_schemaChain\": false\n            },\n            \"_preferences\": {\n              \"messages\": {\n                \"phone.invalid\": {\n                  \"source\": \"Phone number is invalid\",\n                  \"rendered\": \"Phone number is invalid\",\n                  \"_template\": null\n                },\n                \"iban.invalid\": {\n                  \"source\": \"IBAN is invalid\",\n                  \"rendered\": \"IBAN is invalid\",\n                  \"_template\": null\n                },\n                \"bic.invalid\": {\n                  \"source\": \"BIC is invalid\",\n                  \"rendered\": \"BIC is invalid\",\n                  \"_template\": null\n                },\n                \"country.invalid\": {\n                  \"source\": \"Country is invalid\",\n                  \"rendered\": \"Country is invalid\",\n                  \"_template\": null\n                },\n                \"id.invalid\": {\n                  \"source\": \"Id is invalid\",\n                  \"rendered\": \"Id is invalid\",\n                  \"_template\": null\n                }\n              }\n            },\n            \"_valids\": null,\n            \"_invalids\": null,\n            \"_rules\": [],\n            \"_singleRules\": {},\n            \"_refs\": {\n              \"refs\": []\n            },\n            \"_flags\": {\n              \"presence\": \"optional\",\n              \"description\": \"The group of the ticket\"\n            },\n            \"_cache\": null,\n            \"$_terms\": {\n              \"alterations\": null,\n              \"examples\": null,\n              \"externals\": null,\n              \"notes\": [],\n              \"shared\": null,\n              \"tags\": [],\n              \"whens\": null,\n              \"replacements\": null\n            },\n            \"$_super\": {}\n          }\n        },\n        {\n          \"key\": \"row\",\n          \"schema\": {\n            \"type\": \"string\",\n            \"$_root\": {\n              \"_types\": {},\n              \"version\": \"18.2.1\",\n              \"cache\": {}\n            },\n            \"$_temp\": {\n              \"ruleset\": false,\n              \"whens\": {}\n            },\n            \"_ids\": {\n              \"_byId\": {},\n              \"_byKey\": {},\n              \"_schemaChain\": false\n            },\n            \"_preferences\": {\n              \"messages\": {\n                \"phone.invalid\": {\n                  \"source\": \"Phone number is invalid\",\n                  \"rendered\": \"Phone number is invalid\",\n                  \"_template\": null\n                },\n                \"iban.invalid\": {\n                  \"source\": \"IBAN is invalid\",\n                  \"rendered\": \"IBAN is invalid\",\n                  \"_template\": null\n                },\n                \"bic.invalid\": {\n                  \"source\": \"BIC is invalid\",\n                  \"rendered\": \"BIC is invalid\",\n                  \"_template\": null\n                },\n                \"country.invalid\": {\n                  \"source\": \"Country is invalid\",\n                  \"rendered\": \"Country is invalid\",\n                  \"_template\": null\n                },\n                \"id.invalid\": {\n                  \"source\": \"Id is invalid\",\n                  \"rendered\": \"Id is invalid\",\n                  \"_template\": null\n                }\n              }\n            },\n            \"_valids\": null,\n            \"_invalids\": null,\n            \"_rules\": [],\n            \"_singleRules\": {},\n            \"_refs\": {\n              \"refs\": []\n            },\n            \"_flags\": {\n              \"presence\": \"optional\",\n              \"description\": \"The row of the ticket\"\n            },\n            \"_cache\": null,\n            \"$_terms\": {\n              \"alterations\": null,\n              \"examples\": null,\n              \"externals\": null,\n              \"notes\": [],\n              \"shared\": null,\n              \"tags\": [],\n              \"whens\": null,\n              \"replacements\": null\n            },\n            \"$_super\": {}\n          }\n        },\n        {\n          \"key\": \"seat\",\n          \"schema\": {\n            \"type\": \"string\",\n            \"$_root\": {\n              \"_types\": {},\n              \"version\": \"18.2.1\",\n              \"cache\": {}\n            },\n            \"$_temp\": {\n              \"ruleset\": false,\n              \"whens\": {}\n            },\n            \"_ids\": {\n              \"_byId\": {},\n              \"_byKey\": {},\n              \"_schemaChain\": false\n            },\n            \"_preferences\": {\n              \"messages\": {\n                \"phone.invalid\": {\n                  \"source\": \"Phone number is invalid\",\n                  \"rendered\": \"Phone number is invalid\",\n                  \"_template\": null\n                },\n                \"iban.invalid\": {\n                  \"source\": \"IBAN is invalid\",\n                  \"rendered\": \"IBAN is invalid\",\n                  \"_template\": null\n                },\n                \"bic.invalid\": {\n                  \"source\": \"BIC is invalid\",\n                  \"rendered\": \"BIC is invalid\",\n                  \"_template\": null\n                },\n                \"country.invalid\": {\n                  \"source\": \"Country is invalid\",\n                  \"rendered\": \"Country is invalid\",\n                  \"_template\": null\n                },\n                \"id.invalid\": {\n                  \"source\": \"Id is invalid\",\n                  \"rendered\": \"Id is invalid\",\n                  \"_template\": null\n                }\n              }\n            },\n            \"_valids\": null,\n            \"_invalids\": null,\n            \"_rules\": [],\n            \"_singleRules\": {},\n            \"_refs\": {\n              \"refs\": []\n            },\n            \"_flags\": {\n              \"presence\": \"optional\",\n              \"description\": \"The seat of the ticket\"\n            },\n            \"_cache\": null,\n            \"$_terms\": {\n              \"alterations\": null,\n              \"examples\": null,\n              \"externals\": null,\n              \"notes\": [],\n              \"shared\": null,\n              \"tags\": [],\n              \"whens\": null,\n              \"replacements\": null\n            },\n            \"$_super\": {}\n          }\n        },\n        {\n          \"key\": \"ga\",\n          \"schema\": {\n            \"type\": \"string\",\n            \"$_root\": {\n              \"_types\": {},\n              \"version\": \"18.2.1\",\n              \"cache\": {}\n            },\n            \"$_temp\": {\n              \"ruleset\": false,\n              \"whens\": {}\n            },\n            \"_ids\": {\n              \"_byId\": {},\n              \"_byKey\": {},\n              \"_schemaChain\": false\n            },\n            \"_preferences\": {\n              \"messages\": {\n                \"phone.invalid\": {\n                  \"source\": \"Phone number is invalid\",\n                  \"rendered\": \"Phone number is invalid\",\n                  \"_template\": null\n                },\n                \"iban.invalid\": {\n                  \"source\": \"IBAN is invalid\",\n                  \"rendered\": \"IBAN is invalid\",\n                  \"_template\": null\n                },\n                \"bic.invalid\": {\n                  \"source\": \"BIC is invalid\",\n                  \"rendered\": \"BIC is invalid\",\n                  \"_template\": null\n                },\n                \"country.invalid\": {\n                  \"source\": \"Country is invalid\",\n                  \"rendered\": \"Country is invalid\",\n                  \"_template\": null\n                },\n                \"id.invalid\": {\n                  \"source\": \"Id is invalid\",\n                  \"rendered\": \"Id is invalid\",\n                  \"_template\": null\n                }\n              }\n            },\n            \"_valids\": null,\n            \"_invalids\": null,\n            \"_rules\": [],\n            \"_singleRules\": {},\n            \"_refs\": {\n              \"refs\": []\n            },\n            \"_flags\": {\n              \"presence\": \"optional\",\n              \"description\": \"The name of the general admission section\"\n            },\n            \"_cache\": null,\n            \"$_terms\": {\n              \"alterations\": null,\n              \"examples\": null,\n              \"externals\": null,\n              \"notes\": [],\n              \"shared\": null,\n              \"tags\": [],\n              \"whens\": null,\n              \"replacements\": null\n            },\n            \"$_super\": {}\n          }\n        }\n      ],\n      \"patterns\": null,\n      \"renames\": null\n    },\n    \"$_super\": {}\n  },\n  \"customer\": {\n    \"_id\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"string\",\n    \"country\": \"string\"\n  },\n  \"event\": {\n    \"_id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ac6ab8e-0424-4a01-8386-b46cd9784bcf",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "third",
+                    "exchange",
+                    "listings",
+                    ":id",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1c68e959-90e4-44ea-ab50-13f9a6dd87df",
+          "name": "notifies the system that a ticket has been listed on a third party platform",
+          "request": {
+            "name": "notifies the system that a ticket has been listed on a third party platform",
+            "description": {
+              "content": "Notifies the system that a ticket has been listed on a third party platform",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "third",
+                "exchange",
+                "listings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventId\": \"<string>\",\n  \"ticketIds\": [\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ae65f9b0-103e-4718-8210-c9d913a82c76",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "third",
+                    "exchange",
+                    "listings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"eventId\": \"<string>\",\n  \"ticketIds\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tickets\": {\n    \"type\": \"object\",\n    \"$_root\": {\n      \"_types\": {},\n      \"version\": \"18.2.1\",\n      \"cache\": {}\n    },\n    \"$_temp\": {\n      \"ruleset\": false,\n      \"whens\": {}\n    },\n    \"_ids\": {\n      \"_byId\": {},\n      \"_byKey\": {},\n      \"_schemaChain\": false\n    },\n    \"_preferences\": {\n      \"messages\": {\n        \"phone.invalid\": {\n          \"source\": \"Phone number is invalid\",\n          \"rendered\": \"Phone number is invalid\",\n          \"_template\": null\n        },\n        \"iban.invalid\": {\n          \"source\": \"IBAN is invalid\",\n          \"rendered\": \"IBAN is invalid\",\n          \"_template\": null\n        },\n        \"bic.invalid\": {\n          \"source\": \"BIC is invalid\",\n          \"rendered\": \"BIC is invalid\",\n          \"_template\": null\n        },\n        \"country.invalid\": {\n          \"source\": \"Country is invalid\",\n          \"rendered\": \"Country is invalid\",\n          \"_template\": null\n        },\n        \"id.invalid\": {\n          \"source\": \"Id is invalid\",\n          \"rendered\": \"Id is invalid\",\n          \"_template\": null\n        }\n      }\n    },\n    \"_valids\": null,\n    \"_invalids\": null,\n    \"_singleRules\": {},\n    \"_refs\": {\n      \"refs\": []\n    },\n    \"_flags\": {},\n    \"_cache\": null,\n    \"$_terms\": {\n      \"alterations\": null,\n      \"examples\": null,\n      \"externals\": null,\n      \"notes\": [],\n      \"shared\": null,\n      \"tags\": [],\n      \"whens\": null,\n      \"dependencies\": null,\n      \"keys\": [\n        {\n          \"key\": \"_id\",\n          \"schema\": {\n            \"type\": \"string\",\n            \"$_root\": {\n              \"_types\": {},\n              \"version\": \"18.2.1\",\n              \"cache\": {}\n            },\n            \"$_temp\": {\n              \"ruleset\": false,\n              \"whens\": {}\n            },\n            \"_ids\": {\n              \"_byId\": {},\n              \"_byKey\": {},\n              \"_schemaChain\": false\n            },\n            \"_preferences\": {\n              \"messages\": {\n                \"phone.invalid\": {\n                  \"source\": \"Phone number is invalid\",\n                  \"rendered\": \"Phone number is invalid\",\n                  \"_template\": null\n                },\n                \"iban.invalid\": {\n                  \"source\": \"IBAN is invalid\",\n                  \"rendered\": \"IBAN is invalid\",\n                  \"_template\": null\n                },\n                \"bic.invalid\": {\n                  \"source\": \"BIC is invalid\",\n                  \"rendered\": \"BIC is invalid\",\n                  \"_template\": null\n                },\n                \"country.invalid\": {\n                  \"source\": \"Country is invalid\",\n                  \"rendered\": \"Country is invalid\",\n                  \"_template\": null\n                },\n                \"id.invalid\": {\n                  \"source\": \"Id is invalid\",\n                  \"rendered\": \"Id is invalid\",\n                  \"_template\": null\n                }\n              }\n            },\n            \"_valids\": null,\n            \"_invalids\": null,\n            \"_rules\": [],\n            \"_singleRules\": {},\n            \"_refs\": {\n              \"refs\": []\n            },\n            \"_flags\": {\n              \"presence\": \"required\",\n              \"description\": \"The ID of the ticket\"\n            },\n            \"_cache\": null,\n            \"$_terms\": {\n              \"alterations\": null,\n              \"examples\": null,\n              \"externals\": null,\n              \"notes\": [],\n              \"shared\": null,\n              \"tags\": [],\n              \"whens\": null,\n              \"replacements\": null\n            },\n            \"$_super\": {}\n          }\n        },\n        {\n          \"key\": \"section\",\n          \"schema\": {\n            \"type\": \"string\",\n            \"$_root\": {\n              \"_types\": {},\n              \"version\": \"18.2.1\",\n              \"cache\": {}\n            },\n            \"$_temp\": {\n              \"ruleset\": false,\n              \"whens\": {}\n            },\n            \"_ids\": {\n              \"_byId\": {},\n              \"_byKey\": {},\n              \"_schemaChain\": false\n            },\n            \"_preferences\": {\n              \"messages\": {\n                \"phone.invalid\": {\n                  \"source\": \"Phone number is invalid\",\n                  \"rendered\": \"Phone number is invalid\",\n                  \"_template\": null\n                },\n                \"iban.invalid\": {\n                  \"source\": \"IBAN is invalid\",\n                  \"rendered\": \"IBAN is invalid\",\n                  \"_template\": null\n                },\n                \"bic.invalid\": {\n                  \"source\": \"BIC is invalid\",\n                  \"rendered\": \"BIC is invalid\",\n                  \"_template\": null\n                },\n                \"country.invalid\": {\n                  \"source\": \"Country is invalid\",\n                  \"rendered\": \"Country is invalid\",\n                  \"_template\": null\n                },\n                \"id.invalid\": {\n                  \"source\": \"Id is invalid\",\n                  \"rendered\": \"Id is invalid\",\n                  \"_template\": null\n                }\n              }\n            },\n            \"_valids\": null,\n            \"_invalids\": null,\n            \"_rules\": [],\n            \"_singleRules\": {},\n            \"_refs\": {\n              \"refs\": []\n            },\n            \"_flags\": {\n              \"presence\": \"optional\",\n              \"description\": \"The section of the ticket\"\n            },\n            \"_cache\": null,\n            \"$_terms\": {\n              \"alterations\": null,\n              \"examples\": null,\n              \"externals\": null,\n              \"notes\": [],\n              \"shared\": null,\n              \"tags\": [],\n              \"whens\": null,\n              \"replacements\": null\n            },\n            \"$_super\": {}\n          }\n        },\n        {\n          \"key\": \"group\",\n          \"schema\": {\n            \"type\": \"string\",\n            \"$_root\": {\n              \"_types\": {},\n              \"version\": \"18.2.1\",\n              \"cache\": {}\n            },\n            \"$_temp\": {\n              \"ruleset\": false,\n              \"whens\": {}\n            },\n            \"_ids\": {\n              \"_byId\": {},\n              \"_byKey\": {},\n              \"_schemaChain\": false\n            },\n            \"_preferences\": {\n              \"messages\": {\n                \"phone.invalid\": {\n                  \"source\": \"Phone number is invalid\",\n                  \"rendered\": \"Phone number is invalid\",\n                  \"_template\": null\n                },\n                \"iban.invalid\": {\n                  \"source\": \"IBAN is invalid\",\n                  \"rendered\": \"IBAN is invalid\",\n                  \"_template\": null\n                },\n                \"bic.invalid\": {\n                  \"source\": \"BIC is invalid\",\n                  \"rendered\": \"BIC is invalid\",\n                  \"_template\": null\n                },\n                \"country.invalid\": {\n                  \"source\": \"Country is invalid\",\n                  \"rendered\": \"Country is invalid\",\n                  \"_template\": null\n                },\n                \"id.invalid\": {\n                  \"source\": \"Id is invalid\",\n                  \"rendered\": \"Id is invalid\",\n                  \"_template\": null\n                }\n              }\n            },\n            \"_valids\": null,\n            \"_invalids\": null,\n            \"_rules\": [],\n            \"_singleRules\": {},\n            \"_refs\": {\n              \"refs\": []\n            },\n            \"_flags\": {\n              \"presence\": \"optional\",\n              \"description\": \"The group of the ticket\"\n            },\n            \"_cache\": null,\n            \"$_terms\": {\n              \"alterations\": null,\n              \"examples\": null,\n              \"externals\": null,\n              \"notes\": [],\n              \"shared\": null,\n              \"tags\": [],\n              \"whens\": null,\n              \"replacements\": null\n            },\n            \"$_super\": {}\n          }\n        },\n        {\n          \"key\": \"row\",\n          \"schema\": {\n            \"type\": \"string\",\n            \"$_root\": {\n              \"_types\": {},\n              \"version\": \"18.2.1\",\n              \"cache\": {}\n            },\n            \"$_temp\": {\n              \"ruleset\": false,\n              \"whens\": {}\n            },\n            \"_ids\": {\n              \"_byId\": {},\n              \"_byKey\": {},\n              \"_schemaChain\": false\n            },\n            \"_preferences\": {\n              \"messages\": {\n                \"phone.invalid\": {\n                  \"source\": \"Phone number is invalid\",\n                  \"rendered\": \"Phone number is invalid\",\n                  \"_template\": null\n                },\n                \"iban.invalid\": {\n                  \"source\": \"IBAN is invalid\",\n                  \"rendered\": \"IBAN is invalid\",\n                  \"_template\": null\n                },\n                \"bic.invalid\": {\n                  \"source\": \"BIC is invalid\",\n                  \"rendered\": \"BIC is invalid\",\n                  \"_template\": null\n                },\n                \"country.invalid\": {\n                  \"source\": \"Country is invalid\",\n                  \"rendered\": \"Country is invalid\",\n                  \"_template\": null\n                },\n                \"id.invalid\": {\n                  \"source\": \"Id is invalid\",\n                  \"rendered\": \"Id is invalid\",\n                  \"_template\": null\n                }\n              }\n            },\n            \"_valids\": null,\n            \"_invalids\": null,\n            \"_rules\": [],\n            \"_singleRules\": {},\n            \"_refs\": {\n              \"refs\": []\n            },\n            \"_flags\": {\n              \"presence\": \"optional\",\n              \"description\": \"The row of the ticket\"\n            },\n            \"_cache\": null,\n            \"$_terms\": {\n              \"alterations\": null,\n              \"examples\": null,\n              \"externals\": null,\n              \"notes\": [],\n              \"shared\": null,\n              \"tags\": [],\n              \"whens\": null,\n              \"replacements\": null\n            },\n            \"$_super\": {}\n          }\n        },\n        {\n          \"key\": \"seat\",\n          \"schema\": {\n            \"type\": \"string\",\n            \"$_root\": {\n              \"_types\": {},\n              \"version\": \"18.2.1\",\n              \"cache\": {}\n            },\n            \"$_temp\": {\n              \"ruleset\": false,\n              \"whens\": {}\n            },\n            \"_ids\": {\n              \"_byId\": {},\n              \"_byKey\": {},\n              \"_schemaChain\": false\n            },\n            \"_preferences\": {\n              \"messages\": {\n                \"phone.invalid\": {\n                  \"source\": \"Phone number is invalid\",\n                  \"rendered\": \"Phone number is invalid\",\n                  \"_template\": null\n                },\n                \"iban.invalid\": {\n                  \"source\": \"IBAN is invalid\",\n                  \"rendered\": \"IBAN is invalid\",\n                  \"_template\": null\n                },\n                \"bic.invalid\": {\n                  \"source\": \"BIC is invalid\",\n                  \"rendered\": \"BIC is invalid\",\n                  \"_template\": null\n                },\n                \"country.invalid\": {\n                  \"source\": \"Country is invalid\",\n                  \"rendered\": \"Country is invalid\",\n                  \"_template\": null\n                },\n                \"id.invalid\": {\n                  \"source\": \"Id is invalid\",\n                  \"rendered\": \"Id is invalid\",\n                  \"_template\": null\n                }\n              }\n            },\n            \"_valids\": null,\n            \"_invalids\": null,\n            \"_rules\": [],\n            \"_singleRules\": {},\n            \"_refs\": {\n              \"refs\": []\n            },\n            \"_flags\": {\n              \"presence\": \"optional\",\n              \"description\": \"The seat of the ticket\"\n            },\n            \"_cache\": null,\n            \"$_terms\": {\n              \"alterations\": null,\n              \"examples\": null,\n              \"externals\": null,\n              \"notes\": [],\n              \"shared\": null,\n              \"tags\": [],\n              \"whens\": null,\n              \"replacements\": null\n            },\n            \"$_super\": {}\n          }\n        },\n        {\n          \"key\": \"ga\",\n          \"schema\": {\n            \"type\": \"string\",\n            \"$_root\": {\n              \"_types\": {},\n              \"version\": \"18.2.1\",\n              \"cache\": {}\n            },\n            \"$_temp\": {\n              \"ruleset\": false,\n              \"whens\": {}\n            },\n            \"_ids\": {\n              \"_byId\": {},\n              \"_byKey\": {},\n              \"_schemaChain\": false\n            },\n            \"_preferences\": {\n              \"messages\": {\n                \"phone.invalid\": {\n                  \"source\": \"Phone number is invalid\",\n                  \"rendered\": \"Phone number is invalid\",\n                  \"_template\": null\n                },\n                \"iban.invalid\": {\n                  \"source\": \"IBAN is invalid\",\n                  \"rendered\": \"IBAN is invalid\",\n                  \"_template\": null\n                },\n                \"bic.invalid\": {\n                  \"source\": \"BIC is invalid\",\n                  \"rendered\": \"BIC is invalid\",\n                  \"_template\": null\n                },\n                \"country.invalid\": {\n                  \"source\": \"Country is invalid\",\n                  \"rendered\": \"Country is invalid\",\n                  \"_template\": null\n                },\n                \"id.invalid\": {\n                  \"source\": \"Id is invalid\",\n                  \"rendered\": \"Id is invalid\",\n                  \"_template\": null\n                }\n              }\n            },\n            \"_valids\": null,\n            \"_invalids\": null,\n            \"_rules\": [],\n            \"_singleRules\": {},\n            \"_refs\": {\n              \"refs\": []\n            },\n            \"_flags\": {\n              \"presence\": \"optional\",\n              \"description\": \"The name of the general admission section\"\n            },\n            \"_cache\": null,\n            \"$_terms\": {\n              \"alterations\": null,\n              \"examples\": null,\n              \"externals\": null,\n              \"notes\": [],\n              \"shared\": null,\n              \"tags\": [],\n              \"whens\": null,\n              \"replacements\": null\n            },\n            \"$_super\": {}\n          }\n        }\n      ],\n      \"patterns\": null,\n      \"renames\": null\n    },\n    \"$_super\": {}\n  },\n  \"customer\": {\n    \"_id\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"string\",\n    \"country\": \"string\"\n  },\n  \"event\": {\n    \"_id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11a1a698-dbf4-44c0-991d-d8daa1d5a1e4",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "third",
+                    "exchange",
+                    "listings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"eventId\": \"<string>\",\n  \"ticketIds\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3451bea1-9d4d-460d-81cf-1d425f6fda33",
+          "name": "swap a ticket with barcode and new customer information",
+          "request": {
+            "name": "swap a ticket with barcode and new customer information",
+            "description": {
+              "content": "Swap a ticket with barcode and new customer information",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "third",
+                "exchange",
+                "swap"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer\": {\n    \"name\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  \"ticket\": {\n    \"barcode\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "06121b49-9880-4b43-9ff5-beb2e6714510",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "third",
+                    "exchange",
+                    "swap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer\": {\n    \"name\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  \"ticket\": {\n    \"barcode\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"_id\": \"string\",\n  \"barcode\": \"string\",\n  \"swappable\": false,\n  \"valid\": true,\n  \"event\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"start\": \"1982-06-01T16:04:51.157Z\",\n    \"end\": \"2008-02-17T06:57:49.679Z\",\n    \"eventUrl\": \"https://JzbDL.mfoS5f0vr-weRzzSnVEtM1Qoj2DjYEPt+rh8aNbuqLvukhFBaK-gyxY22d0tiDOH\"\n  },\n  \"type\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"price\": 8177.625483326455,\n    \"fee\": 4840.275815051771,\n    \"currency\": \"GEL\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f366f60-e0e8-4670-a778-e906fa163443",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "third",
+                    "exchange",
+                    "swap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer\": {\n    \"name\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  \"ticket\": {\n    \"barcode\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e8fe0de-75bb-4e4e-bc4c-29549ed7f53b",
+          "name": "swap multiple tickets with new customer information",
+          "request": {
+            "name": "swap multiple tickets with new customer information",
+            "description": {
+              "content": "Swap multiple tickets with new customer information",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "third",
+                "exchange",
+                "swap",
+                "tickets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticketIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"eventId\": \"<string>\",\n  \"customer\": {\n    \"email\": \"<string>\",\n    \"name\": \"<string>\",\n    \"prename\": \"<string>\",\n    \"lastname\": \"<string>\"\n  },\n  \"listingId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "682554db-7f2e-46ee-96f2-156470d7d599",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "third",
+                    "exchange",
+                    "swap",
+                    "tickets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ticketIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"eventId\": \"<string>\",\n  \"customer\": {\n    \"email\": \"<string>\",\n    \"name\": \"<string>\",\n    \"prename\": \"<string>\",\n    \"lastname\": \"<string>\"\n  },\n  \"listingId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"object\",\n  \"$_root\": {\n    \"_types\": {},\n    \"version\": \"18.2.1\",\n    \"cache\": {}\n  },\n  \"$_temp\": {\n    \"ruleset\": false,\n    \"whens\": {}\n  },\n  \"_ids\": {\n    \"_byId\": {},\n    \"_byKey\": {},\n    \"_schemaChain\": false\n  },\n  \"_preferences\": {\n    \"messages\": {\n      \"phone.invalid\": {\n        \"source\": \"Phone number is invalid\",\n        \"rendered\": \"Phone number is invalid\",\n        \"_template\": null\n      },\n      \"iban.invalid\": {\n        \"source\": \"IBAN is invalid\",\n        \"rendered\": \"IBAN is invalid\",\n        \"_template\": null\n      },\n      \"bic.invalid\": {\n        \"source\": \"BIC is invalid\",\n        \"rendered\": \"BIC is invalid\",\n        \"_template\": null\n      },\n      \"country.invalid\": {\n        \"source\": \"Country is invalid\",\n        \"rendered\": \"Country is invalid\",\n        \"_template\": null\n      },\n      \"id.invalid\": {\n        \"source\": \"Id is invalid\",\n        \"rendered\": \"Id is invalid\",\n        \"_template\": null\n      }\n    }\n  },\n  \"_valids\": null,\n  \"_invalids\": null,\n  \"_rules\": [],\n  \"_singleRules\": {},\n  \"_refs\": {\n    \"refs\": []\n  },\n  \"_flags\": {},\n  \"_cache\": null,\n  \"$_terms\": {\n    \"alterations\": null,\n    \"examples\": null,\n    \"externals\": null,\n    \"notes\": [],\n    \"shared\": null,\n    \"tags\": [],\n    \"whens\": null,\n    \"dependencies\": null,\n    \"keys\": [\n      {\n        \"key\": \"id\",\n        \"schema\": {\n          \"type\": \"string\",\n          \"$_root\": {\n            \"_types\": {},\n            \"version\": \"18.2.1\",\n            \"cache\": {}\n          },\n          \"$_temp\": {\n            \"ruleset\": false,\n            \"whens\": {}\n          },\n          \"_ids\": {\n            \"_byId\": {},\n            \"_byKey\": {},\n            \"_schemaChain\": false\n          },\n          \"_preferences\": {\n            \"messages\": {\n              \"phone.invalid\": {\n                \"source\": \"Phone number is invalid\",\n                \"rendered\": \"Phone number is invalid\",\n                \"_template\": null\n              },\n              \"iban.invalid\": {\n                \"source\": \"IBAN is invalid\",\n                \"rendered\": \"IBAN is invalid\",\n                \"_template\": null\n              },\n              \"bic.invalid\": {\n                \"source\": \"BIC is invalid\",\n                \"rendered\": \"BIC is invalid\",\n                \"_template\": null\n              },\n              \"country.invalid\": {\n                \"source\": \"Country is invalid\",\n                \"rendered\": \"Country is invalid\",\n                \"_template\": null\n              },\n              \"id.invalid\": {\n                \"source\": \"Id is invalid\",\n                \"rendered\": \"Id is invalid\",\n                \"_template\": null\n              }\n            }\n          },\n          \"_valids\": null,\n          \"_invalids\": null,\n          \"_rules\": [],\n          \"_singleRules\": {},\n          \"_refs\": {\n            \"refs\": []\n          },\n          \"_flags\": {\n            \"presence\": \"required\",\n            \"description\": \"The ID of the ticket\"\n          },\n          \"_cache\": null,\n          \"$_terms\": {\n            \"alterations\": null,\n            \"examples\": null,\n            \"externals\": null,\n            \"notes\": [],\n            \"shared\": null,\n            \"tags\": [],\n            \"whens\": null,\n            \"replacements\": null\n          },\n          \"$_super\": {}\n        }\n      },\n      {\n        \"key\": \"_id\",\n        \"schema\": {\n          \"type\": \"string\",\n          \"$_root\": {\n            \"_types\": {},\n            \"version\": \"18.2.1\",\n            \"cache\": {}\n          },\n          \"$_temp\": {\n            \"ruleset\": false,\n            \"whens\": {}\n          },\n          \"_ids\": {\n            \"_byId\": {},\n            \"_byKey\": {},\n            \"_schemaChain\": false\n          },\n          \"_preferences\": {\n            \"messages\": {\n              \"phone.invalid\": {\n                \"source\": \"Phone number is invalid\",\n                \"rendered\": \"Phone number is invalid\",\n                \"_template\": null\n              },\n              \"iban.invalid\": {\n                \"source\": \"IBAN is invalid\",\n                \"rendered\": \"IBAN is invalid\",\n                \"_template\": null\n              },\n              \"bic.invalid\": {\n                \"source\": \"BIC is invalid\",\n                \"rendered\": \"BIC is invalid\",\n                \"_template\": null\n              },\n              \"country.invalid\": {\n                \"source\": \"Country is invalid\",\n                \"rendered\": \"Country is invalid\",\n                \"_template\": null\n              },\n              \"id.invalid\": {\n                \"source\": \"Id is invalid\",\n                \"rendered\": \"Id is invalid\",\n                \"_template\": null\n              }\n            }\n          },\n          \"_valids\": null,\n          \"_invalids\": null,\n          \"_rules\": [],\n          \"_singleRules\": {},\n          \"_refs\": {\n            \"refs\": []\n          },\n          \"_flags\": {\n            \"presence\": \"required\",\n            \"description\": \"The ID of the ticket\"\n          },\n          \"_cache\": null,\n          \"$_terms\": {\n            \"alterations\": null,\n            \"examples\": null,\n            \"externals\": null,\n            \"notes\": [],\n            \"shared\": null,\n            \"tags\": [],\n            \"whens\": null,\n            \"replacements\": null\n          },\n          \"$_super\": {}\n        }\n      },\n      {\n        \"key\": \"barcode\",\n        \"schema\": {\n          \"type\": \"string\",\n          \"$_root\": {\n            \"_types\": {},\n            \"version\": \"18.2.1\",\n            \"cache\": {}\n          },\n          \"$_temp\": {\n            \"ruleset\": false,\n            \"whens\": {}\n          },\n          \"_ids\": {\n            \"_byId\": {},\n            \"_byKey\": {},\n            \"_schemaChain\": false\n          },\n          \"_preferences\": {\n            \"messages\": {\n              \"phone.invalid\": {\n                \"source\": \"Phone number is invalid\",\n                \"rendered\": \"Phone number is invalid\",\n                \"_template\": null\n              },\n              \"iban.invalid\": {\n                \"source\": \"IBAN is invalid\",\n                \"rendered\": \"IBAN is invalid\",\n                \"_template\": null\n              },\n              \"bic.invalid\": {\n                \"source\": \"BIC is invalid\",\n                \"rendered\": \"BIC is invalid\",\n                \"_template\": null\n              },\n              \"country.invalid\": {\n                \"source\": \"Country is invalid\",\n                \"rendered\": \"Country is invalid\",\n                \"_template\": null\n              },\n              \"id.invalid\": {\n                \"source\": \"Id is invalid\",\n                \"rendered\": \"Id is invalid\",\n                \"_template\": null\n              }\n            }\n          },\n          \"_valids\": null,\n          \"_invalids\": null,\n          \"_rules\": [],\n          \"_singleRules\": {},\n          \"_refs\": {\n            \"refs\": []\n          },\n          \"_flags\": {\n            \"presence\": \"required\",\n            \"description\": \"The barcode of the ticket\"\n          },\n          \"_cache\": null,\n          \"$_terms\": {\n            \"alterations\": null,\n            \"examples\": null,\n            \"externals\": null,\n            \"notes\": [],\n            \"shared\": null,\n            \"tags\": [],\n            \"whens\": null,\n            \"replacements\": null\n          },\n          \"$_super\": {}\n        }\n      },\n      {\n        \"key\": \"swappable\",\n        \"schema\": {\n          \"type\": \"boolean\",\n          \"$_root\": {\n            \"_types\": {},\n            \"version\": \"18.2.1\",\n            \"cache\": {}\n          },\n          \"$_temp\": {\n            \"ruleset\": false,\n            \"whens\": {}\n          },\n          \"_ids\": {\n            \"_byId\": {},\n            \"_byKey\": {},\n            \"_schemaChain\": false\n          },\n          \"_preferences\": {\n            \"messages\": {\n              \"phone.invalid\": {\n                \"source\": \"Phone number is invalid\",\n                \"rendered\": \"Phone number is invalid\",\n                \"_template\": null\n              },\n              \"iban.invalid\": {\n                \"source\": \"IBAN is invalid\",\n                \"rendered\": \"IBAN is invalid\",\n                \"_template\": null\n              },\n              \"bic.invalid\": {\n                \"source\": \"BIC is invalid\",\n                \"rendered\": \"BIC is invalid\",\n                \"_template\": null\n              },\n              \"country.invalid\": {\n                \"source\": \"Country is invalid\",\n                \"rendered\": \"Country is invalid\",\n                \"_template\": null\n              },\n              \"id.invalid\": {\n                \"source\": \"Id is invalid\",\n                \"rendered\": \"Id is invalid\",\n                \"_template\": null\n              }\n            }\n          },\n          \"_valids\": null,\n          \"_invalids\": null,\n          \"_rules\": [],\n          \"_singleRules\": {},\n          \"_refs\": {\n            \"refs\": []\n          },\n          \"_flags\": {\n            \"presence\": \"required\",\n            \"description\": \"If the ticket is swappable or not\"\n          },\n          \"_cache\": null,\n          \"$_terms\": {\n            \"alterations\": null,\n            \"examples\": null,\n            \"externals\": null,\n            \"notes\": [],\n            \"shared\": null,\n            \"tags\": [],\n            \"whens\": null,\n            \"falsy\": null,\n            \"truthy\": null\n          },\n          \"$_super\": {}\n        }\n      },\n      {\n        \"key\": \"valid\",\n        \"schema\": {\n          \"type\": \"boolean\",\n          \"$_root\": {\n            \"_types\": {},\n            \"version\": \"18.2.1\",\n            \"cache\": {}\n          },\n          \"$_temp\": {\n            \"ruleset\": false,\n            \"whens\": {}\n          },\n          \"_ids\": {\n            \"_byId\": {},\n            \"_byKey\": {},\n            \"_schemaChain\": false\n          },\n          \"_preferences\": {\n            \"messages\": {\n              \"phone.invalid\": {\n                \"source\": \"Phone number is invalid\",\n                \"rendered\": \"Phone number is invalid\",\n                \"_template\": null\n              },\n              \"iban.invalid\": {\n                \"source\": \"IBAN is invalid\",\n                \"rendered\": \"IBAN is invalid\",\n                \"_template\": null\n              },\n              \"bic.invalid\": {\n                \"source\": \"BIC is invalid\",\n                \"rendered\": \"BIC is invalid\",\n                \"_template\": null\n              },\n              \"country.invalid\": {\n                \"source\": \"Country is invalid\",\n                \"rendered\": \"Country is invalid\",\n                \"_template\": null\n              },\n              \"id.invalid\": {\n                \"source\": \"Id is invalid\",\n                \"rendered\": \"Id is invalid\",\n                \"_template\": null\n              }\n            }\n          },\n          \"_valids\": null,\n          \"_invalids\": null,\n          \"_rules\": [],\n          \"_singleRules\": {},\n          \"_refs\": {\n            \"refs\": []\n          },\n          \"_flags\": {\n            \"presence\": \"required\",\n            \"description\": \"If the ticket is valid or not\"\n          },\n          \"_cache\": null,\n          \"$_terms\": {\n            \"alterations\": null,\n            \"examples\": null,\n            \"externals\": null,\n            \"notes\": [],\n            \"shared\": null,\n            \"tags\": [],\n            \"whens\": null,\n            \"falsy\": null,\n            \"truthy\": null\n          },\n          \"$_super\": {}\n        }\n      },\n      {\n        \"key\": \"event\",\n        \"schema\": {\n          \"type\": \"object\",\n          \"$_root\": {\n            \"_types\": {},\n            \"version\": \"18.2.1\",\n            \"cache\": {}\n          },\n          \"$_temp\": {\n            \"ruleset\": false,\n            \"whens\": {}\n          },\n          \"_ids\": {\n            \"_byId\": {},\n            \"_byKey\": {},\n            \"_schemaChain\": false\n          },\n          \"_preferences\": {\n            \"messages\": {\n              \"phone.invalid\": {\n                \"source\": \"Phone number is invalid\",\n                \"rendered\": \"Phone number is invalid\",\n                \"_template\": null\n              },\n              \"iban.invalid\": {\n                \"source\": \"IBAN is invalid\",\n                \"rendered\": \"IBAN is invalid\",\n                \"_template\": null\n              },\n              \"bic.invalid\": {\n                \"source\": \"BIC is invalid\",\n                \"rendered\": \"BIC is invalid\",\n                \"_template\": null\n              },\n              \"country.invalid\": {\n                \"source\": \"Country is invalid\",\n                \"rendered\": \"Country is invalid\",\n                \"_template\": null\n              },\n              \"id.invalid\": {\n                \"source\": \"Id is invalid\",\n                \"rendered\": \"Id is invalid\",\n                \"_template\": null\n              }\n            }\n          },\n          \"_valids\": null,\n          \"_invalids\": null,\n          \"_rules\": [],\n          \"_singleRules\": {},\n          \"_refs\": {\n            \"refs\": []\n          },\n          \"_flags\": {\n            \"presence\": \"optional\",\n            \"description\": \"The corresponding event to the ticket\"\n          },\n          \"_cache\": null,\n          \"$_terms\": {\n            \"alterations\": null,\n            \"examples\": null,\n            \"externals\": null,\n            \"notes\": [],\n            \"shared\": null,\n            \"tags\": [],\n            \"whens\": null,\n            \"dependencies\": null,\n            \"keys\": [\n              {\n                \"key\": \"id\",\n                \"schema\": {\n                  \"type\": \"string\",\n                  \"$_root\": {\n                    \"_types\": {},\n                    \"version\": \"18.2.1\",\n                    \"cache\": {}\n                  },\n                  \"$_temp\": {\n                    \"ruleset\": false,\n                    \"whens\": {}\n                  },\n                  \"_ids\": {\n                    \"_byId\": {},\n                    \"_byKey\": {},\n                    \"_schemaChain\": false\n                  },\n                  \"_preferences\": {\n                    \"messages\": {\n                      \"phone.invalid\": {\n                        \"source\": \"Phone number is invalid\",\n                        \"rendered\": \"Phone number is invalid\",\n                        \"_template\": null\n                      },\n                      \"iban.invalid\": {\n                        \"source\": \"IBAN is invalid\",\n                        \"rendered\": \"IBAN is invalid\",\n                        \"_template\": null\n                      },\n                      \"bic.invalid\": {\n                        \"source\": \"BIC is invalid\",\n                        \"rendered\": \"BIC is invalid\",\n                        \"_template\": null\n                      },\n                      \"country.invalid\": {\n                        \"source\": \"Country is invalid\",\n                        \"rendered\": \"Country is invalid\",\n                        \"_template\": null\n                      },\n                      \"id.invalid\": {\n                        \"source\": \"Id is invalid\",\n                        \"rendered\": \"Id is invalid\",\n                        \"_template\": null\n                      }\n                    }\n                  },\n                  \"_valids\": null,\n                  \"_invalids\": null,\n                  \"_rules\": [],\n                  \"_singleRules\": {},\n                  \"_refs\": {\n                    \"refs\": []\n                  },\n                  \"_flags\": {\n                    \"presence\": \"required\",\n                    \"description\": \"The ID of the event\"\n                  },\n                  \"_cache\": null,\n                  \"$_terms\": {\n                    \"alterations\": null,\n                    \"examples\": null,\n                    \"externals\": null,\n                    \"notes\": [],\n                    \"shared\": null,\n                    \"tags\": [],\n                    \"whens\": null,\n                    \"replacements\": null\n                  },\n                  \"$_super\": {}\n                }\n              },\n              {\n                \"key\": \"name\",\n                \"schema\": {\n                  \"type\": \"string\",\n                  \"$_root\": {\n                    \"_types\": {},\n                    \"version\": \"18.2.1\",\n                    \"cache\": {}\n                  },\n                  \"$_temp\": {\n                    \"ruleset\": false,\n                    \"whens\": {}\n                  },\n                  \"_ids\": {\n                    \"_byId\": {},\n                    \"_byKey\": {},\n                    \"_schemaChain\": false\n                  },\n                  \"_preferences\": {\n                    \"messages\": {\n                      \"phone.invalid\": {\n                        \"source\": \"Phone number is invalid\",\n                        \"rendered\": \"Phone number is invalid\",\n                        \"_template\": null\n                      },\n                      \"iban.invalid\": {\n                        \"source\": \"IBAN is invalid\",\n                        \"rendered\": \"IBAN is invalid\",\n                        \"_template\": null\n                      },\n                      \"bic.invalid\": {\n                        \"source\": \"BIC is invalid\",\n                        \"rendered\": \"BIC is invalid\",\n                        \"_template\": null\n                      },\n                      \"country.invalid\": {\n                        \"source\": \"Country is invalid\",\n                        \"rendered\": \"Country is invalid\",\n                        \"_template\": null\n                      },\n                      \"id.invalid\": {\n                        \"source\": \"Id is invalid\",\n                        \"rendered\": \"Id is invalid\",\n                        \"_template\": null\n                      }\n                    }\n                  },\n                  \"_valids\": null,\n                  \"_invalids\": null,\n                  \"_rules\": [],\n                  \"_singleRules\": {},\n                  \"_refs\": {\n                    \"refs\": []\n                  },\n                  \"_flags\": {\n                    \"presence\": \"required\",\n                    \"description\": \"The name of the event\"\n                  },\n                  \"_cache\": null,\n                  \"$_terms\": {\n                    \"alterations\": null,\n                    \"examples\": null,\n                    \"externals\": null,\n                    \"notes\": [],\n                    \"shared\": null,\n                    \"tags\": [],\n                    \"whens\": null,\n                    \"replacements\": null\n                  },\n                  \"$_super\": {}\n                }\n              },\n              {\n                \"key\": \"start\",\n                \"schema\": {\n                  \"type\": \"date\",\n                  \"$_root\": {\n                    \"_types\": {},\n                    \"version\": \"18.2.1\",\n                    \"cache\": {}\n                  },\n                  \"$_temp\": {\n                    \"ruleset\": false,\n                    \"whens\": {}\n                  },\n                  \"_ids\": {\n                    \"_byId\": {},\n                    \"_byKey\": {},\n                    \"_schemaChain\": false\n                  },\n                  \"_preferences\": {\n                    \"messages\": {\n                      \"phone.invalid\": {\n                        \"source\": \"Phone number is invalid\",\n                        \"rendered\": \"Phone number is invalid\",\n                        \"_template\": null\n                      },\n                      \"iban.invalid\": {\n                        \"source\": \"IBAN is invalid\",\n                        \"rendered\": \"IBAN is invalid\",\n                        \"_template\": null\n                      },\n                      \"bic.invalid\": {\n                        \"source\": \"BIC is invalid\",\n                        \"rendered\": \"BIC is invalid\",\n                        \"_template\": null\n                      },\n                      \"country.invalid\": {\n                        \"source\": \"Country is invalid\",\n                        \"rendered\": \"Country is invalid\",\n                        \"_template\": null\n                      },\n                      \"id.invalid\": {\n                        \"source\": \"Id is invalid\",\n                        \"rendered\": \"Id is invalid\",\n                        \"_template\": null\n                      }\n                    }\n                  },\n                  \"_valids\": null,\n                  \"_invalids\": null,\n                  \"_rules\": [],\n                  \"_singleRules\": {},\n                  \"_refs\": {\n                    \"refs\": []\n                  },\n                  \"_flags\": {\n                    \"format\": \"iso\",\n                    \"presence\": \"required\",\n                    \"description\": \"The end date of the event\"\n                  },\n                  \"_cache\": null,\n                  \"$_terms\": {\n                    \"alterations\": null,\n                    \"examples\": null,\n                    \"externals\": null,\n                    \"notes\": [],\n                    \"shared\": null,\n                    \"tags\": [],\n                    \"whens\": null\n                  },\n                  \"$_super\": {}\n                }\n              },\n              {\n                \"key\": \"end\",\n                \"schema\": {\n                  \"type\": \"date\",\n                  \"$_root\": {\n                    \"_types\": {},\n                    \"version\": \"18.2.1\",\n                    \"cache\": {}\n                  },\n                  \"$_temp\": {\n                    \"ruleset\": false,\n                    \"whens\": {}\n                  },\n                  \"_ids\": {\n                    \"_byId\": {},\n                    \"_byKey\": {},\n                    \"_schemaChain\": false\n                  },\n                  \"_preferences\": {\n                    \"messages\": {\n                      \"phone.invalid\": {\n                        \"source\": \"Phone number is invalid\",\n                        \"rendered\": \"Phone number is invalid\",\n                        \"_template\": null\n                      },\n                      \"iban.invalid\": {\n                        \"source\": \"IBAN is invalid\",\n                        \"rendered\": \"IBAN is invalid\",\n                        \"_template\": null\n                      },\n                      \"bic.invalid\": {\n                        \"source\": \"BIC is invalid\",\n                        \"rendered\": \"BIC is invalid\",\n                        \"_template\": null\n                      },\n                      \"country.invalid\": {\n                        \"source\": \"Country is invalid\",\n                        \"rendered\": \"Country is invalid\",\n                        \"_template\": null\n                      },\n                      \"id.invalid\": {\n                        \"source\": \"Id is invalid\",\n                        \"rendered\": \"Id is invalid\",\n                        \"_template\": null\n                      }\n                    }\n                  },\n                  \"_valids\": null,\n                  \"_invalids\": null,\n                  \"_rules\": [],\n                  \"_singleRules\": {},\n                  \"_refs\": {\n                    \"refs\": []\n                  },\n                  \"_flags\": {\n                    \"format\": \"iso\",\n                    \"presence\": \"required\",\n                    \"description\": \"The start date of the event\"\n                  },\n                  \"_cache\": null,\n                  \"$_terms\": {\n                    \"alterations\": null,\n                    \"examples\": null,\n                    \"externals\": null,\n                    \"notes\": [],\n                    \"shared\": null,\n                    \"tags\": [],\n                    \"whens\": null\n                  },\n                  \"$_super\": {}\n                }\n              },\n              {\n                \"key\": \"eventUrl\",\n                \"schema\": {\n                  \"type\": \"string\",\n                  \"$_root\": {\n                    \"_types\": {},\n                    \"version\": \"18.2.1\",\n                    \"cache\": {}\n                  },\n                  \"$_temp\": {\n                    \"ruleset\": false,\n                    \"whens\": {}\n                  },\n                  \"_ids\": {\n                    \"_byId\": {},\n                    \"_byKey\": {},\n                    \"_schemaChain\": false\n                  },\n                  \"_preferences\": {\n                    \"messages\": {\n                      \"phone.invalid\": {\n                        \"source\": \"Phone number is invalid\",\n                        \"rendered\": \"Phone number is invalid\",\n                        \"_template\": null\n                      },\n                      \"iban.invalid\": {\n                        \"source\": \"IBAN is invalid\",\n                        \"rendered\": \"IBAN is invalid\",\n                        \"_template\": null\n                      },\n                      \"bic.invalid\": {\n                        \"source\": \"BIC is invalid\",\n                        \"rendered\": \"BIC is invalid\",\n                        \"_template\": null\n                      },\n                      \"country.invalid\": {\n                        \"source\": \"Country is invalid\",\n                        \"rendered\": \"Country is invalid\",\n                        \"_template\": null\n                      },\n                      \"id.invalid\": {\n                        \"source\": \"Id is invalid\",\n                        \"rendered\": \"Id is invalid\",\n                        \"_template\": null\n                      }\n                    }\n                  },\n                  \"_valids\": null,\n                  \"_invalids\": null,\n                  \"_rules\": [\n                    {\n                      \"name\": \"uri\",\n                      \"args\": {\n                        \"options\": {}\n                      },\n                      \"regex\": {},\n                      \"domain\": null,\n                      \"scheme\": \"\",\n                      \"_resolve\": [],\n                      \"method\": \"uri\"\n                    }\n                  ],\n                  \"_singleRules\": {},\n                  \"_refs\": {\n                    \"refs\": []\n                  },\n                  \"_flags\": {\n                    \"description\": \"The URL to the ticketshop\"\n                  },\n                  \"_cache\": null,\n                  \"$_terms\": {\n                    \"alterations\": null,\n                    \"examples\": null,\n                    \"externals\": null,\n                    \"notes\": [],\n                    \"shared\": null,\n                    \"tags\": [],\n                    \"whens\": null,\n                    \"replacements\": null\n                  },\n                  \"$_super\": {}\n                }\n              }\n            ],\n            \"patterns\": null,\n            \"renames\": null\n          },\n          \"$_super\": {}\n        }\n      },\n      {\n        \"key\": \"type\",\n        \"schema\": {\n          \"type\": \"object\",\n          \"$_root\": {\n            \"_types\": {},\n            \"version\": \"18.2.1\",\n            \"cache\": {}\n          },\n          \"$_temp\": {\n            \"ruleset\": false,\n            \"whens\": {}\n          },\n          \"_ids\": {\n            \"_byId\": {},\n            \"_byKey\": {},\n            \"_schemaChain\": false\n          },\n          \"_preferences\": {\n            \"messages\": {\n              \"phone.invalid\": {\n                \"source\": \"Phone number is invalid\",\n                \"rendered\": \"Phone number is invalid\",\n                \"_template\": null\n              },\n              \"iban.invalid\": {\n                \"source\": \"IBAN is invalid\",\n                \"rendered\": \"IBAN is invalid\",\n                \"_template\": null\n              },\n              \"bic.invalid\": {\n                \"source\": \"BIC is invalid\",\n                \"rendered\": \"BIC is invalid\",\n                \"_template\": null\n              },\n              \"country.invalid\": {\n                \"source\": \"Country is invalid\",\n                \"rendered\": \"Country is invalid\",\n                \"_template\": null\n              },\n              \"id.invalid\": {\n                \"source\": \"Id is invalid\",\n                \"rendered\": \"Id is invalid\",\n                \"_template\": null\n              }\n            }\n          },\n          \"_valids\": null,\n          \"_invalids\": null,\n          \"_rules\": [],\n          \"_singleRules\": {},\n          \"_refs\": {\n            \"refs\": []\n          },\n          \"_flags\": {\n            \"presence\": \"optional\",\n            \"description\": \"Tickettype of the found ticket\"\n          },\n          \"_cache\": null,\n          \"$_terms\": {\n            \"alterations\": null,\n            \"examples\": null,\n            \"externals\": null,\n            \"notes\": [],\n            \"shared\": null,\n            \"tags\": [],\n            \"whens\": null,\n            \"dependencies\": null,\n            \"keys\": [\n              {\n                \"key\": \"id\",\n                \"schema\": {\n                  \"type\": \"string\",\n                  \"$_root\": {\n                    \"_types\": {},\n                    \"version\": \"18.2.1\",\n                    \"cache\": {}\n                  },\n                  \"$_temp\": {\n                    \"ruleset\": false,\n                    \"whens\": {}\n                  },\n                  \"_ids\": {\n                    \"_byId\": {},\n                    \"_byKey\": {},\n                    \"_schemaChain\": false\n                  },\n                  \"_preferences\": {\n                    \"messages\": {\n                      \"phone.invalid\": {\n                        \"source\": \"Phone number is invalid\",\n                        \"rendered\": \"Phone number is invalid\",\n                        \"_template\": null\n                      },\n                      \"iban.invalid\": {\n                        \"source\": \"IBAN is invalid\",\n                        \"rendered\": \"IBAN is invalid\",\n                        \"_template\": null\n                      },\n                      \"bic.invalid\": {\n                        \"source\": \"BIC is invalid\",\n                        \"rendered\": \"BIC is invalid\",\n                        \"_template\": null\n                      },\n                      \"country.invalid\": {\n                        \"source\": \"Country is invalid\",\n                        \"rendered\": \"Country is invalid\",\n                        \"_template\": null\n                      },\n                      \"id.invalid\": {\n                        \"source\": \"Id is invalid\",\n                        \"rendered\": \"Id is invalid\",\n                        \"_template\": null\n                      }\n                    }\n                  },\n                  \"_valids\": null,\n                  \"_invalids\": null,\n                  \"_rules\": [],\n                  \"_singleRules\": {},\n                  \"_refs\": {\n                    \"refs\": []\n                  },\n                  \"_flags\": {\n                    \"presence\": \"required\",\n                    \"description\": \"The ID of the tickettype\"\n                  },\n                  \"_cache\": null,\n                  \"$_terms\": {\n                    \"alterations\": null,\n                    \"examples\": null,\n                    \"externals\": null,\n                    \"notes\": [],\n                    \"shared\": null,\n                    \"tags\": [],\n                    \"whens\": null,\n                    \"replacements\": null\n                  },\n                  \"$_super\": {}\n                }\n              },\n              {\n                \"key\": \"name\",\n                \"schema\": {\n                  \"type\": \"string\",\n                  \"$_root\": {\n                    \"_types\": {},\n                    \"version\": \"18.2.1\",\n                    \"cache\": {}\n                  },\n                  \"$_temp\": {\n                    \"ruleset\": false,\n                    \"whens\": {}\n                  },\n                  \"_ids\": {\n                    \"_byId\": {},\n                    \"_byKey\": {},\n                    \"_schemaChain\": false\n                  },\n                  \"_preferences\": {\n                    \"messages\": {\n                      \"phone.invalid\": {\n                        \"source\": \"Phone number is invalid\",\n                        \"rendered\": \"Phone number is invalid\",\n                        \"_template\": null\n                      },\n                      \"iban.invalid\": {\n                        \"source\": \"IBAN is invalid\",\n                        \"rendered\": \"IBAN is invalid\",\n                        \"_template\": null\n                      },\n                      \"bic.invalid\": {\n                        \"source\": \"BIC is invalid\",\n                        \"rendered\": \"BIC is invalid\",\n                        \"_template\": null\n                      },\n                      \"country.invalid\": {\n                        \"source\": \"Country is invalid\",\n                        \"rendered\": \"Country is invalid\",\n                        \"_template\": null\n                      },\n                      \"id.invalid\": {\n                        \"source\": \"Id is invalid\",\n                        \"rendered\": \"Id is invalid\",\n                        \"_template\": null\n                      }\n                    }\n                  },\n                  \"_valids\": null,\n                  \"_invalids\": null,\n                  \"_rules\": [],\n                  \"_singleRules\": {},\n                  \"_refs\": {\n                    \"refs\": []\n                  },\n                  \"_flags\": {\n                    \"presence\": \"required\",\n                    \"description\": \"The name of the tickettype\"\n                  },\n                  \"_cache\": null,\n                  \"$_terms\": {\n                    \"alterations\": null,\n                    \"examples\": null,\n                    \"externals\": null,\n                    \"notes\": [],\n                    \"shared\": null,\n                    \"tags\": [],\n                    \"whens\": null,\n                    \"replacements\": null\n                  },\n                  \"$_super\": {}\n                }\n              },\n              {\n                \"key\": \"price\",\n                \"schema\": {\n                  \"type\": \"number\",\n                  \"$_root\": {\n                    \"_types\": {},\n                    \"version\": \"18.2.1\",\n                    \"cache\": {}\n                  },\n                  \"$_temp\": {\n                    \"ruleset\": false,\n                    \"whens\": {}\n                  },\n                  \"_ids\": {\n                    \"_byId\": {},\n                    \"_byKey\": {},\n                    \"_schemaChain\": false\n                  },\n                  \"_preferences\": {\n                    \"messages\": {\n                      \"phone.invalid\": {\n                        \"source\": \"Phone number is invalid\",\n                        \"rendered\": \"Phone number is invalid\",\n                        \"_template\": null\n                      },\n                      \"iban.invalid\": {\n                        \"source\": \"IBAN is invalid\",\n                        \"rendered\": \"IBAN is invalid\",\n                        \"_template\": null\n                      },\n                      \"bic.invalid\": {\n                        \"source\": \"BIC is invalid\",\n                        \"rendered\": \"BIC is invalid\",\n                        \"_template\": null\n                      },\n                      \"country.invalid\": {\n                        \"source\": \"Country is invalid\",\n                        \"rendered\": \"Country is invalid\",\n                        \"_template\": null\n                      },\n                      \"id.invalid\": {\n                        \"source\": \"Id is invalid\",\n                        \"rendered\": \"Id is invalid\",\n                        \"_template\": null\n                      }\n                    }\n                  },\n                  \"_valids\": null,\n                  \"_invalids\": null,\n                  \"_rules\": [],\n                  \"_singleRules\": {},\n                  \"_refs\": {\n                    \"refs\": []\n                  },\n                  \"_flags\": {\n                    \"presence\": \"required\",\n                    \"description\": \"The base price of the tickettype\"\n                  },\n                  \"_cache\": null,\n                  \"$_terms\": {\n                    \"alterations\": null,\n                    \"examples\": null,\n                    \"externals\": null,\n                    \"notes\": [],\n                    \"shared\": null,\n                    \"tags\": [],\n                    \"whens\": null\n                  },\n                  \"$_super\": {}\n                }\n              },\n              {\n                \"key\": \"fee\",\n                \"schema\": {\n                  \"type\": \"number\",\n                  \"$_root\": {\n                    \"_types\": {},\n                    \"version\": \"18.2.1\",\n                    \"cache\": {}\n                  },\n                  \"$_temp\": {\n                    \"ruleset\": false,\n                    \"whens\": {}\n                  },\n                  \"_ids\": {\n                    \"_byId\": {},\n                    \"_byKey\": {},\n                    \"_schemaChain\": false\n                  },\n                  \"_preferences\": {\n                    \"messages\": {\n                      \"phone.invalid\": {\n                        \"source\": \"Phone number is invalid\",\n                        \"rendered\": \"Phone number is invalid\",\n                        \"_template\": null\n                      },\n                      \"iban.invalid\": {\n                        \"source\": \"IBAN is invalid\",\n                        \"rendered\": \"IBAN is invalid\",\n                        \"_template\": null\n                      },\n                      \"bic.invalid\": {\n                        \"source\": \"BIC is invalid\",\n                        \"rendered\": \"BIC is invalid\",\n                        \"_template\": null\n                      },\n                      \"country.invalid\": {\n                        \"source\": \"Country is invalid\",\n                        \"rendered\": \"Country is invalid\",\n                        \"_template\": null\n                      },\n                      \"id.invalid\": {\n                        \"source\": \"Id is invalid\",\n                        \"rendered\": \"Id is invalid\",\n                        \"_template\": null\n                      }\n                    }\n                  },\n                  \"_valids\": null,\n                  \"_invalids\": null,\n                  \"_rules\": [],\n                  \"_singleRules\": {},\n                  \"_refs\": {\n                    \"refs\": []\n                  },\n                  \"_flags\": {\n                    \"presence\": \"required\",\n                    \"description\": \"The service fee on top of the base price\"\n                  },\n                  \"_cache\": null,\n                  \"$_terms\": {\n                    \"alterations\": null,\n                    \"examples\": null,\n                    \"externals\": null,\n                    \"notes\": [],\n                    \"shared\": null,\n                    \"tags\": [],\n                    \"whens\": null\n                  },\n                  \"$_super\": {}\n                }\n              },\n              {\n                \"key\": \"currency\",\n                \"schema\": {\n                  \"type\": \"string\",\n                  \"$_root\": {\n                    \"_types\": {},\n                    \"version\": \"18.2.1\",\n                    \"cache\": {}\n                  },\n                  \"$_temp\": {\n                    \"ruleset\": false,\n                    \"whens\": {}\n                  },\n                  \"_ids\": {\n                    \"_byId\": {},\n                    \"_byKey\": {},\n                    \"_schemaChain\": false\n                  },\n                  \"_preferences\": {\n                    \"messages\": {\n                      \"phone.invalid\": {\n                        \"source\": \"Phone number is invalid\",\n                        \"rendered\": \"Phone number is invalid\",\n                        \"_template\": null\n                      },\n                      \"iban.invalid\": {\n                        \"source\": \"IBAN is invalid\",\n                        \"rendered\": \"IBAN is invalid\",\n                        \"_template\": null\n                      },\n                      \"bic.invalid\": {\n                        \"source\": \"BIC is invalid\",\n                        \"rendered\": \"BIC is invalid\",\n                        \"_template\": null\n                      },\n                      \"country.invalid\": {\n                        \"source\": \"Country is invalid\",\n                        \"rendered\": \"Country is invalid\",\n                        \"_template\": null\n                      },\n                      \"id.invalid\": {\n                        \"source\": \"Id is invalid\",\n                        \"rendered\": \"Id is invalid\",\n                        \"_template\": null\n                      }\n                    }\n                  },\n                  \"_valids\": {\n                    \"_values\": {},\n                    \"_refs\": {},\n                    \"_lowercase\": {},\n                    \"_override\": false\n                  },\n                  \"_invalids\": null,\n                  \"_rules\": [],\n                  \"_singleRules\": {},\n                  \"_refs\": {\n                    \"refs\": []\n                  },\n                  \"_flags\": {\n                    \"only\": true,\n                    \"description\": \"The currency for the prices\"\n                  },\n                  \"_cache\": null,\n                  \"$_terms\": {\n                    \"alterations\": null,\n                    \"examples\": null,\n                    \"externals\": null,\n                    \"notes\": [],\n                    \"shared\": null,\n                    \"tags\": [],\n                    \"whens\": null,\n                    \"replacements\": null\n                  },\n                  \"$_super\": {}\n                }\n              }\n            ],\n            \"patterns\": null,\n            \"renames\": null\n          },\n          \"$_super\": {}\n        }\n      }\n    ],\n    \"patterns\": null,\n    \"renames\": null\n  },\n  \"$_super\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a479160d-fb1e-4503-97fa-fcfa013fe206",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "third",
+                    "exchange",
+                    "swap",
+                    "tickets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ticketIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"eventId\": \"<string>\",\n  \"customer\": {\n    \"email\": \"<string>\",\n    \"name\": \"<string>\",\n    \"prename\": \"<string>\",\n    \"lastname\": \"<string>\"\n  },\n  \"listingId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "94f0bf9b-4878-4c44-bc38-25b313c34013",
+          "name": "notifies the system that a listings has been canceled on a third party platform",
+          "request": {
+            "name": "notifies the system that a listings has been canceled on a third party platform",
+            "description": {
+              "content": "Notifies the system that a listings has been canceled on a third party platform",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "third",
+                "exchange",
+                "listings",
+                ":id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "48fef60c-bae6-43d5-ba91-9f050d895cfc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "third",
+                    "exchange",
+                    "listings",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dbe4aeac-4bd5-43a1-88a2-ee493ccd8c20",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "third",
+                    "exchange",
+                    "listings",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://vivenu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5eb04015-c8d1-4f1c-b139-c0036aa1b97c",
+    "name": "vivenu access-lists third API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "vivenu API Documentation\n\nContact Support:\n Name: vivenu GmbH",
+      "type": "text/plain"
+    }
+  }
+}

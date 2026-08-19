@@ -1,0 +1,544 @@
+{
+  "item": [
+    {
+      "id": "d834ff1b-ba63-4961-834d-05444fa9f97d",
+      "name": "subscription-plans",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cd6e8b53-8d23-4ef5-bf31-424e9b88c5bf",
+          "name": "create a subscription plan",
+          "request": {
+            "name": "create a subscription plan",
+            "description": {
+              "content": "Create a subscription Plan",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "subscriptions",
+                "plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"pricingPolicy\": \"<string>\",\n  \"paymentSchedules\": [\n    {}\n  ],\n  \"billingCycle\": {},\n  \"renewalPolicy\": {\n    \"changesPeriodStart\": \"<dateTime>\",\n    \"changesPeriodEnd\": \"<dateTime>\",\n    \"allowedChanges\": {},\n    \"confirmationPeriodStart\": \"<dateTime>\",\n    \"confirmationPeriodEnd\": \"<dateTime>\"\n  },\n  \"paymentPolicy\": {\n    \"interaction\": \"customerPaymentMethod\",\n    \"changePaymentMethodPolicy\": \"always\"\n  },\n  \"requestedConsents\": [\n    {\n      \"type\": \"<string>\",\n      \"description\": \"<string>\",\n      \"default\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"description\": \"<string>\",\n      \"default\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cda5ffb2-03db-4fbb-8774-c7d3855e2254",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscriptions",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"pricingPolicy\": \"<string>\",\n  \"paymentSchedules\": [\n    {}\n  ],\n  \"billingCycle\": {},\n  \"renewalPolicy\": {\n    \"changesPeriodStart\": \"<dateTime>\",\n    \"changesPeriodEnd\": \"<dateTime>\",\n    \"allowedChanges\": {},\n    \"confirmationPeriodStart\": \"<dateTime>\",\n    \"confirmationPeriodEnd\": \"<dateTime>\"\n  },\n  \"paymentPolicy\": {\n    \"interaction\": \"customerPaymentMethod\",\n    \"changePaymentMethodPolicy\": \"always\"\n  },\n  \"requestedConsents\": [\n    {\n      \"type\": \"<string>\",\n      \"description\": \"<string>\",\n      \"default\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"description\": \"<string>\",\n      \"default\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"sellerId\": \"string\",\n  \"pricingPolicy\": \"inherited\",\n  \"billingCycle\": {},\n  \"paymentSchedules\": [\n    {}\n  ],\n  \"renewalPolicy\": {\n    \"changesPeriodStart\": \"2006-05-27T23:07:57.355Z\",\n    \"changesPeriodEnd\": \"2025-11-15T09:45:21.910Z\",\n    \"allowedChanges\": {},\n    \"confirmationPeriodStart\": \"1973-11-12T20:42:37.840Z\",\n    \"confirmationPeriodEnd\": \"1966-05-19T10:49:32.413Z\"\n  },\n  \"paymentPolicy\": {\n    \"interaction\": \"customerPaymentMethod\",\n    \"changePaymentMethodPolicy\": \"always\"\n  },\n  \"requestedConsents\": [\n    {\n      \"type\": \"autorenewal\",\n      \"description\": \"string\",\n      \"default\": false\n    },\n    {\n      \"type\": \"autorenewal\",\n      \"description\": \"string\",\n      \"default\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97c6e87c-9e11-4e5e-bedf-ef2cb593758a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscriptions",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"pricingPolicy\": \"<string>\",\n  \"paymentSchedules\": [\n    {}\n  ],\n  \"billingCycle\": {},\n  \"renewalPolicy\": {\n    \"changesPeriodStart\": \"<dateTime>\",\n    \"changesPeriodEnd\": \"<dateTime>\",\n    \"allowedChanges\": {},\n    \"confirmationPeriodStart\": \"<dateTime>\",\n    \"confirmationPeriodEnd\": \"<dateTime>\"\n  },\n  \"paymentPolicy\": {\n    \"interaction\": \"customerPaymentMethod\",\n    \"changePaymentMethodPolicy\": \"always\"\n  },\n  \"requestedConsents\": [\n    {\n      \"type\": \"<string>\",\n      \"description\": \"<string>\",\n      \"default\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"description\": \"<string>\",\n      \"default\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9436cfe6-6191-4a83-b508-735b56f2c6f7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscriptions",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"pricingPolicy\": \"<string>\",\n  \"paymentSchedules\": [\n    {}\n  ],\n  \"billingCycle\": {},\n  \"renewalPolicy\": {\n    \"changesPeriodStart\": \"<dateTime>\",\n    \"changesPeriodEnd\": \"<dateTime>\",\n    \"allowedChanges\": {},\n    \"confirmationPeriodStart\": \"<dateTime>\",\n    \"confirmationPeriodEnd\": \"<dateTime>\"\n  },\n  \"paymentPolicy\": {\n    \"interaction\": \"customerPaymentMethod\",\n    \"changePaymentMethodPolicy\": \"always\"\n  },\n  \"requestedConsents\": [\n    {\n      \"type\": \"<string>\",\n      \"description\": \"<string>\",\n      \"default\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"description\": \"<string>\",\n      \"default\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "27021382-aa91-4566-836f-c95bc9c81778",
+          "name": "update a subscription plan",
+          "request": {
+            "name": "update a subscription plan",
+            "description": {
+              "content": "Update a subscription Plan",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "subscriptions",
+                "plans",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"pricingPolicy\": \"<string>\",\n  \"paymentSchedules\": [\n    {}\n  ],\n  \"billingCycle\": {},\n  \"renewalPolicy\": {\n    \"changesPeriodStart\": \"<dateTime>\",\n    \"changesPeriodEnd\": \"<dateTime>\",\n    \"allowedChanges\": {},\n    \"confirmationPeriodStart\": \"<dateTime>\",\n    \"confirmationPeriodEnd\": \"<dateTime>\"\n  },\n  \"paymentPolicy\": {\n    \"interaction\": \"customerPaymentMethod\",\n    \"changePaymentMethodPolicy\": \"always\"\n  },\n  \"requestedConsents\": [\n    {\n      \"type\": \"<string>\",\n      \"description\": \"<string>\",\n      \"default\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"description\": \"<string>\",\n      \"default\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d503a44e-bf4f-4c4c-a5ab-d1fdf9b7d923",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscriptions",
+                    "plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"pricingPolicy\": \"<string>\",\n  \"paymentSchedules\": [\n    {}\n  ],\n  \"billingCycle\": {},\n  \"renewalPolicy\": {\n    \"changesPeriodStart\": \"<dateTime>\",\n    \"changesPeriodEnd\": \"<dateTime>\",\n    \"allowedChanges\": {},\n    \"confirmationPeriodStart\": \"<dateTime>\",\n    \"confirmationPeriodEnd\": \"<dateTime>\"\n  },\n  \"paymentPolicy\": {\n    \"interaction\": \"customerPaymentMethod\",\n    \"changePaymentMethodPolicy\": \"always\"\n  },\n  \"requestedConsents\": [\n    {\n      \"type\": \"<string>\",\n      \"description\": \"<string>\",\n      \"default\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"description\": \"<string>\",\n      \"default\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"sellerId\": \"string\",\n  \"pricingPolicy\": \"fixed\",\n  \"billingCycle\": {},\n  \"paymentSchedules\": [\n    {}\n  ],\n  \"renewalPolicy\": {\n    \"changesPeriodStart\": \"1961-11-28T06:03:23.657Z\",\n    \"changesPeriodEnd\": \"1947-02-06T20:40:17.057Z\",\n    \"allowedChanges\": {},\n    \"confirmationPeriodStart\": \"1973-12-27T12:57:34.187Z\",\n    \"confirmationPeriodEnd\": \"1986-10-05T08:16:10.374Z\"\n  },\n  \"paymentPolicy\": {\n    \"interaction\": \"customerPaymentMethod\",\n    \"changePaymentMethodPolicy\": \"always\"\n  },\n  \"requestedConsents\": [\n    {\n      \"type\": \"autorenewal\",\n      \"description\": \"string\",\n      \"default\": false\n    },\n    {\n      \"type\": \"autorenewal\",\n      \"description\": \"string\",\n      \"default\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12228721-7080-46cf-827c-a5cabd689793",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscriptions",
+                    "plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"pricingPolicy\": \"<string>\",\n  \"paymentSchedules\": [\n    {}\n  ],\n  \"billingCycle\": {},\n  \"renewalPolicy\": {\n    \"changesPeriodStart\": \"<dateTime>\",\n    \"changesPeriodEnd\": \"<dateTime>\",\n    \"allowedChanges\": {},\n    \"confirmationPeriodStart\": \"<dateTime>\",\n    \"confirmationPeriodEnd\": \"<dateTime>\"\n  },\n  \"paymentPolicy\": {\n    \"interaction\": \"customerPaymentMethod\",\n    \"changePaymentMethodPolicy\": \"always\"\n  },\n  \"requestedConsents\": [\n    {\n      \"type\": \"<string>\",\n      \"description\": \"<string>\",\n      \"default\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"description\": \"<string>\",\n      \"default\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "639b8dbf-27ca-4401-9219-02576cc3dce6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscriptions",
+                    "plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"pricingPolicy\": \"<string>\",\n  \"paymentSchedules\": [\n    {}\n  ],\n  \"billingCycle\": {},\n  \"renewalPolicy\": {\n    \"changesPeriodStart\": \"<dateTime>\",\n    \"changesPeriodEnd\": \"<dateTime>\",\n    \"allowedChanges\": {},\n    \"confirmationPeriodStart\": \"<dateTime>\",\n    \"confirmationPeriodEnd\": \"<dateTime>\"\n  },\n  \"paymentPolicy\": {\n    \"interaction\": \"customerPaymentMethod\",\n    \"changePaymentMethodPolicy\": \"always\"\n  },\n  \"requestedConsents\": [\n    {\n      \"type\": \"<string>\",\n      \"description\": \"<string>\",\n      \"default\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"description\": \"<string>\",\n      \"default\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "191156ca-f851-464e-ac0e-212779076cbc",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscriptions",
+                    "plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"pricingPolicy\": \"<string>\",\n  \"paymentSchedules\": [\n    {}\n  ],\n  \"billingCycle\": {},\n  \"renewalPolicy\": {\n    \"changesPeriodStart\": \"<dateTime>\",\n    \"changesPeriodEnd\": \"<dateTime>\",\n    \"allowedChanges\": {},\n    \"confirmationPeriodStart\": \"<dateTime>\",\n    \"confirmationPeriodEnd\": \"<dateTime>\"\n  },\n  \"paymentPolicy\": {\n    \"interaction\": \"customerPaymentMethod\",\n    \"changePaymentMethodPolicy\": \"always\"\n  },\n  \"requestedConsents\": [\n    {\n      \"type\": \"<string>\",\n      \"description\": \"<string>\",\n      \"default\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"description\": \"<string>\",\n      \"default\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://vivenu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7b6b6fa8-613a-4127-b859-64dec8a3e0b7",
+    "name": "vivenu access-lists subscription-plans API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "vivenu API Documentation\n\nContact Support:\n Name: vivenu GmbH",
+      "type": "text/plain"
+    }
+  }
+}

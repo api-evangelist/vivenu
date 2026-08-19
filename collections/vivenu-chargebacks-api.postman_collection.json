@@ -1,0 +1,586 @@
+{
+  "item": [
+    {
+      "id": "ff17dac9-2d9f-4698-b491-85bd5cdf5ede",
+      "name": "chargebacks",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5a0eae9b-e05f-4b58-9ada-753caa00322a",
+          "name": "get all chargebacks",
+          "request": {
+            "name": "get all chargebacks",
+            "description": {
+              "content": "Get all chargebacks",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payments",
+                "chargebacks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<float>"
+                },
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "25"
+                },
+                {
+                  "disabled": false,
+                  "key": "gateway",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "gatewayId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$gt]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$gte]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$lt]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$lte]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$eq]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$ne]",
+                  "value": "<dateTime>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b01d14fb-b619-41ad-91d0-16a61f3fad04",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "chargebacks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "gateway",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gatewayId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "createdAt[$gt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$eq]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$ne]",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"docs\": [\n    {\n      \"_id\": \"string\",\n      \"createdAt\": \"1987-12-07T08:02:08.454Z\",\n      \"updatedAt\": \"2005-07-30T06:19:31.855Z\",\n      \"transactionId\": \"string\",\n      \"eventId\": \"string\",\n      \"sellerId\": \"string\",\n      \"pspRef\": \"string\",\n      \"gateway\": \"managed\",\n      \"fee\": 2889.68857361236,\n      \"amount\": 2811.4985003714955,\n      \"currency\": \"EUR\"\n    },\n    {\n      \"_id\": \"string\",\n      \"createdAt\": \"1967-04-04T03:54:50.974Z\",\n      \"updatedAt\": \"2022-02-11T22:40:07.124Z\",\n      \"transactionId\": \"string\",\n      \"eventId\": \"string\",\n      \"sellerId\": \"string\",\n      \"pspRef\": \"string\",\n      \"gateway\": \"managed\",\n      \"fee\": 6326.66934947441,\n      \"amount\": 7093.805358120378,\n      \"currency\": \"EUR\"\n    }\n  ],\n  \"total\": 8638\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77587eca-e64f-456d-b517-6712fbfcfacb",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "chargebacks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "gateway",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gatewayId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "createdAt[$gt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$eq]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$ne]",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "12e8d266-bfd0-49a7-9f37-d4cdc4dff747",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "chargebacks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "gateway",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gatewayId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "createdAt[$gt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$eq]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$ne]",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "de3d559c-8188-47d8-8332-02205b88f663",
+          "name": "get a chargeback",
+          "request": {
+            "name": "get a chargeback",
+            "description": {
+              "content": "Get a chargeback",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payments",
+                "chargebacks",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "87983e8d-56e8-4b75-9dc2-de5d581da3d0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "chargebacks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"createdAt\": \"1996-06-05T03:18:21.100Z\",\n  \"updatedAt\": \"1974-03-11T01:26:49.720Z\",\n  \"transactionId\": \"string\",\n  \"eventId\": \"string\",\n  \"sellerId\": \"string\",\n  \"pspRef\": \"string\",\n  \"gateway\": \"managed\",\n  \"fee\": 4600.5542473811975,\n  \"amount\": 6794.574860981166,\n  \"currency\": \"EUR\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a28ec4d-0bd3-4022-adec-ef57c3577e75",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "chargebacks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "441f7b85-46f9-447d-ac47-b89509955156",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "chargebacks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://vivenu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "baa85dff-dab1-4126-855d-d2f89d3be3b8",
+    "name": "vivenu access-lists chargebacks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "vivenu API Documentation\n\nContact Support:\n Name: vivenu GmbH",
+      "type": "text/plain"
+    }
+  }
+}

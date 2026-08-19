@@ -1,0 +1,603 @@
+{
+  "item": [
+    {
+      "id": "5a263ce1-23e6-475f-a170-0681c3829ab8",
+      "name": "refunds",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2cc7c272-841c-44f4-8c5a-b98b8403ea09",
+          "name": "get all refunds",
+          "request": {
+            "name": "get all refunds",
+            "description": {
+              "content": "Get all refunds",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payments",
+                "refunds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<float>"
+                },
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "25"
+                },
+                {
+                  "disabled": false,
+                  "key": "gateway",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "gatewayId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$gt]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$gte]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$lt]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$lte]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$eq]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$ne]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "08a1a56d-d01c-4a20-9ed0-d9177da8dc19",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "refunds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "gateway",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gatewayId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "createdAt[$gt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$eq]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$ne]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "target",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"docs\": [\n    {\n      \"_id\": \"string\",\n      \"createdAt\": \"1994-05-20T01:12:59.920Z\",\n      \"updatedAt\": \"1949-03-14T05:03:06.377Z\",\n      \"transactionId\": \"string\",\n      \"eventId\": \"string\",\n      \"sellerId\": \"string\",\n      \"pspRef\": \"string\",\n      \"gateway\": \"managed\",\n      \"amount\": 4440.4953486780305,\n      \"currency\": \"EUR\"\n    },\n    {\n      \"_id\": \"string\",\n      \"createdAt\": \"2001-05-15T19:52:08.246Z\",\n      \"updatedAt\": \"1998-11-06T03:46:29.368Z\",\n      \"transactionId\": \"string\",\n      \"eventId\": \"string\",\n      \"sellerId\": \"string\",\n      \"pspRef\": \"string\",\n      \"gateway\": \"managed\",\n      \"amount\": 7672.333158064629,\n      \"currency\": \"EUR\"\n    }\n  ],\n  \"total\": 8303\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "555435b7-a1c0-4faf-911f-8facaec4626a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "refunds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "gateway",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gatewayId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "createdAt[$gt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$eq]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$ne]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "target",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a8231b79-7474-4a40-8a5d-afeb260e6476",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "refunds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "gateway",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gatewayId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "createdAt[$gt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$eq]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$ne]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "target",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b2bc075-ac8d-4b06-9ec9-0a32ade87708",
+          "name": "get a refund",
+          "request": {
+            "name": "get a refund",
+            "description": {
+              "content": "Get a refund",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payments",
+                "refunds",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "44370c5d-8a9e-4416-b4d1-eeb9f0626c6d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "refunds",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"createdAt\": \"1988-05-31T06:54:22.030Z\",\n  \"updatedAt\": \"1954-01-28T20:24:58.092Z\",\n  \"transactionId\": \"string\",\n  \"eventId\": \"string\",\n  \"sellerId\": \"string\",\n  \"pspRef\": \"string\",\n  \"gateway\": \"managed\",\n  \"amount\": 7300.869045360821,\n  \"currency\": \"EUR\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2396381f-0264-443b-a2ae-e83ed0353b56",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "refunds",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "da8c0e8a-287a-4d5f-9666-025fc4c1afbf",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "refunds",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://vivenu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0b7a3f4c-7fc8-4bfc-90a3-0feab234fe37",
+    "name": "vivenu access-lists refunds API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "vivenu API Documentation\n\nContact Support:\n Name: vivenu GmbH",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,1222 @@
+{
+  "item": [
+    {
+      "id": "5665077f-8937-4b81-9193-fe712a67af20",
+      "name": "payment-strategies",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ba125198-01e8-40cc-8dbe-76a7f6232179",
+          "name": "get payment strategies",
+          "request": {
+            "name": "get payment strategies",
+            "description": {
+              "content": "Get Payment Strategies",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payments",
+                "strategies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "25"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "optionId",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2a230365-8bc5-49f7-ad4a-b5d7b286f74b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "strategies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "optionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"docs\": [\n    {\n      \"_id\": \"string\",\n      \"sellerId\": \"string\",\n      \"name\": \"string\",\n      \"policy\": {\n        \"allowedPaymentGateways\": [\n          {\n            \"gatewayId\": \"string\"\n          },\n          {\n            \"gatewayId\": \"string\"\n          }\n        ],\n        \"changePaymentMethodPolicy\": \"never\",\n        \"paymentCompletionPolicy\": {\n          \"target\": \"event_start_date\"\n        }\n      },\n      \"options\": [\n        {\n          \"status\": \"ENABLED\",\n          \"name\": \"string\",\n          \"scheme\": \"one-off\",\n          \"_id\": \"string\",\n          \"installmentOptions\": {\n            \"interval\": \"MONTH\",\n            \"numberOfInstallments\": 5286,\n            \"every\": 3419,\n            \"timingOptions\": {\n              \"type\": \"first_installment\",\n              \"offsetOptions\": {\n                \"anchor\": \"order_date\",\n                \"offset\": 2379,\n                \"offsetUnit\": \"DAY\"\n              }\n            }\n          },\n          \"downPaymentOptions\": {\n            \"type\": \"fixed\",\n            \"value\": 5795.129436661267\n          },\n          \"requirements\": {\n            \"minAmount\": 2427.200555301807,\n            \"maxAmount\": 2812.862820377117\n          },\n          \"feeOptions\": {\n            \"outerChargeVar\": 5174.482859085749,\n            \"outerChargeFix\": 2680.209346477421\n          }\n        },\n        {\n          \"status\": \"DISABLED\",\n          \"name\": \"string\",\n          \"scheme\": \"one-off\",\n          \"_id\": \"string\",\n          \"installmentOptions\": {\n            \"interval\": \"WEEK\",\n            \"numberOfInstallments\": 4336,\n            \"every\": 8845,\n            \"timingOptions\": {\n              \"type\": \"first_installment\",\n              \"offsetOptions\": {\n                \"anchor\": \"order_date\",\n                \"offset\": 901,\n                \"offsetUnit\": \"MONTH\"\n              }\n            }\n          },\n          \"downPaymentOptions\": {\n            \"type\": \"none\",\n            \"value\": 3854.854460885273\n          },\n          \"requirements\": {\n            \"minAmount\": 24.534867532128857,\n            \"maxAmount\": 3019.345623192503\n          },\n          \"feeOptions\": {\n            \"outerChargeVar\": 876.5257082268063,\n            \"outerChargeFix\": 1098.5504120756916\n          }\n        }\n      ]\n    },\n    {\n      \"_id\": \"string\",\n      \"sellerId\": \"string\",\n      \"name\": \"string\",\n      \"policy\": {\n        \"allowedPaymentGateways\": [\n          {\n            \"gatewayId\": \"string\"\n          },\n          {\n            \"gatewayId\": \"string\"\n          }\n        ],\n        \"changePaymentMethodPolicy\": \"never\",\n        \"paymentCompletionPolicy\": {\n          \"target\": \"event_end_date\"\n        }\n      },\n      \"options\": [\n        {\n          \"status\": \"ENABLED\",\n          \"name\": \"string\",\n          \"scheme\": \"one-off\",\n          \"_id\": \"string\",\n          \"installmentOptions\": {\n            \"interval\": \"MONTH\",\n            \"numberOfInstallments\": 8161,\n            \"every\": 9622,\n            \"timingOptions\": {\n              \"type\": \"last_installment\",\n              \"offsetOptions\": {\n                \"anchor\": \"order_date\",\n                \"offset\": 5679,\n                \"offsetUnit\": \"MONTH\"\n              }\n            }\n          },\n          \"downPaymentOptions\": {\n            \"type\": \"none\",\n            \"value\": 1666.2475292239988\n          },\n          \"requirements\": {\n            \"minAmount\": 2964.8715320160636,\n            \"maxAmount\": 6130.62353599779\n          },\n          \"feeOptions\": {\n            \"outerChargeVar\": 8693.355271332412,\n            \"outerChargeFix\": 4574.733001640336\n          }\n        },\n        {\n          \"status\": \"ENABLED\",\n          \"name\": \"string\",\n          \"scheme\": \"installments\",\n          \"_id\": \"string\",\n          \"installmentOptions\": {\n            \"interval\": \"WEEK\",\n            \"numberOfInstallments\": 8737,\n            \"every\": 2306,\n            \"timingOptions\": {\n              \"type\": \"last_installment\",\n              \"offsetOptions\": {\n                \"anchor\": \"order_date\",\n                \"offset\": 6935,\n                \"offsetUnit\": \"WEEK\"\n              }\n            }\n          },\n          \"downPaymentOptions\": {\n            \"type\": \"fixed\",\n            \"value\": 9578.53733592494\n          },\n          \"requirements\": {\n            \"minAmount\": 198.7297834144508,\n            \"maxAmount\": 9192.05918121762\n          },\n          \"feeOptions\": {\n            \"outerChargeVar\": 3988.055185365431,\n            \"outerChargeFix\": 1957.9263085616249\n          }\n        }\n      ]\n    }\n  ],\n  \"total\": 1769\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8171931f-213a-4068-9d50-e6364252908a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "strategies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "optionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f4cf270c-65e6-451f-9d4d-8a8d9869a3ce",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "strategies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "optionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56eb3e39-8d5f-4348-bc4f-ecc7d0fa7bc4",
+          "name": "create a payment strategy",
+          "request": {
+            "name": "create a payment strategy",
+            "description": {
+              "content": "Create a Payment Strategy",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payments",
+                "strategies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"policy\": {\n    \"allowedPaymentGateways\": [\n      {\n        \"gatewayId\": \"<string>\"\n      },\n      {\n        \"gatewayId\": \"<string>\"\n      }\n    ],\n    \"changePaymentMethodPolicy\": \"<string>\",\n    \"paymentCompletionPolicy\": {\n      \"target\": \"<string>\"\n    }\n  },\n  \"options\": [\n    {\n      \"status\": \"<string>\",\n      \"name\": \"<string>\",\n      \"scheme\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"installmentOptions\": {\n        \"interval\": \"<string>\",\n        \"numberOfInstallments\": \"<integer>\",\n        \"every\": \"<integer>\",\n        \"timingOptions\": {\n          \"type\": \"<string>\",\n          \"offsetOptions\": {\n            \"anchor\": \"<string>\",\n            \"offset\": \"<integer>\",\n            \"offsetUnit\": \"<string>\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"<string>\",\n        \"value\": \"<float>\"\n      },\n      \"requirements\": {\n        \"minAmount\": \"<float>\",\n        \"maxAmount\": \"<float>\"\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": \"<float>\",\n        \"outerChargeFix\": \"<float>\"\n      }\n    },\n    {\n      \"status\": \"<string>\",\n      \"name\": \"<string>\",\n      \"scheme\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"installmentOptions\": {\n        \"interval\": \"<string>\",\n        \"numberOfInstallments\": \"<integer>\",\n        \"every\": \"<integer>\",\n        \"timingOptions\": {\n          \"type\": \"<string>\",\n          \"offsetOptions\": {\n            \"anchor\": \"<string>\",\n            \"offset\": \"<integer>\",\n            \"offsetUnit\": \"<string>\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"<string>\",\n        \"value\": \"<float>\"\n      },\n      \"requirements\": {\n        \"minAmount\": \"<float>\",\n        \"maxAmount\": \"<float>\"\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": \"<float>\",\n        \"outerChargeFix\": \"<float>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6756902d-caa7-485b-9b1e-6ee0b049733c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "strategies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"policy\": {\n    \"allowedPaymentGateways\": [\n      {\n        \"gatewayId\": \"<string>\"\n      },\n      {\n        \"gatewayId\": \"<string>\"\n      }\n    ],\n    \"changePaymentMethodPolicy\": \"<string>\",\n    \"paymentCompletionPolicy\": {\n      \"target\": \"<string>\"\n    }\n  },\n  \"options\": [\n    {\n      \"status\": \"<string>\",\n      \"name\": \"<string>\",\n      \"scheme\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"installmentOptions\": {\n        \"interval\": \"<string>\",\n        \"numberOfInstallments\": \"<integer>\",\n        \"every\": \"<integer>\",\n        \"timingOptions\": {\n          \"type\": \"<string>\",\n          \"offsetOptions\": {\n            \"anchor\": \"<string>\",\n            \"offset\": \"<integer>\",\n            \"offsetUnit\": \"<string>\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"<string>\",\n        \"value\": \"<float>\"\n      },\n      \"requirements\": {\n        \"minAmount\": \"<float>\",\n        \"maxAmount\": \"<float>\"\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": \"<float>\",\n        \"outerChargeFix\": \"<float>\"\n      }\n    },\n    {\n      \"status\": \"<string>\",\n      \"name\": \"<string>\",\n      \"scheme\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"installmentOptions\": {\n        \"interval\": \"<string>\",\n        \"numberOfInstallments\": \"<integer>\",\n        \"every\": \"<integer>\",\n        \"timingOptions\": {\n          \"type\": \"<string>\",\n          \"offsetOptions\": {\n            \"anchor\": \"<string>\",\n            \"offset\": \"<integer>\",\n            \"offsetUnit\": \"<string>\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"<string>\",\n        \"value\": \"<float>\"\n      },\n      \"requirements\": {\n        \"minAmount\": \"<float>\",\n        \"maxAmount\": \"<float>\"\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": \"<float>\",\n        \"outerChargeFix\": \"<float>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"sellerId\": \"string\",\n  \"name\": \"string\",\n  \"policy\": {\n    \"allowedPaymentGateways\": [\n      {\n        \"gatewayId\": \"string\"\n      },\n      {\n        \"gatewayId\": \"string\"\n      }\n    ],\n    \"changePaymentMethodPolicy\": \"always\",\n    \"paymentCompletionPolicy\": {\n      \"target\": \"none\"\n    }\n  },\n  \"options\": [\n    {\n      \"status\": \"ENABLED\",\n      \"name\": \"string\",\n      \"scheme\": \"installments\",\n      \"_id\": \"string\",\n      \"installmentOptions\": {\n        \"interval\": \"DAY\",\n        \"numberOfInstallments\": 2200,\n        \"every\": 2338,\n        \"timingOptions\": {\n          \"type\": \"first_installment\",\n          \"offsetOptions\": {\n            \"anchor\": \"order_date\",\n            \"offset\": 8467,\n            \"offsetUnit\": \"MONTH\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"fixed\",\n        \"value\": 6500.404024211889\n      },\n      \"requirements\": {\n        \"minAmount\": 833.5211320276748,\n        \"maxAmount\": 2722.878420945665\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": 1049.6345839392275,\n        \"outerChargeFix\": 6942.189439782937\n      }\n    },\n    {\n      \"status\": \"DISABLED\",\n      \"name\": \"string\",\n      \"scheme\": \"one-off\",\n      \"_id\": \"string\",\n      \"installmentOptions\": {\n        \"interval\": \"MONTH\",\n        \"numberOfInstallments\": 7142,\n        \"every\": 656,\n        \"timingOptions\": {\n          \"type\": \"first_installment\",\n          \"offsetOptions\": {\n            \"anchor\": \"order_date\",\n            \"offset\": 8211,\n            \"offsetUnit\": \"DAY\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"none\",\n        \"value\": 9480.818307552503\n      },\n      \"requirements\": {\n        \"minAmount\": 8210.799306973771,\n        \"maxAmount\": 5166.666130432463\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": 6939.279636708753,\n        \"outerChargeFix\": 9660.633153470975\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "384ac02c-360a-4c51-a2f3-b468094f84bf",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "strategies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"policy\": {\n    \"allowedPaymentGateways\": [\n      {\n        \"gatewayId\": \"<string>\"\n      },\n      {\n        \"gatewayId\": \"<string>\"\n      }\n    ],\n    \"changePaymentMethodPolicy\": \"<string>\",\n    \"paymentCompletionPolicy\": {\n      \"target\": \"<string>\"\n    }\n  },\n  \"options\": [\n    {\n      \"status\": \"<string>\",\n      \"name\": \"<string>\",\n      \"scheme\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"installmentOptions\": {\n        \"interval\": \"<string>\",\n        \"numberOfInstallments\": \"<integer>\",\n        \"every\": \"<integer>\",\n        \"timingOptions\": {\n          \"type\": \"<string>\",\n          \"offsetOptions\": {\n            \"anchor\": \"<string>\",\n            \"offset\": \"<integer>\",\n            \"offsetUnit\": \"<string>\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"<string>\",\n        \"value\": \"<float>\"\n      },\n      \"requirements\": {\n        \"minAmount\": \"<float>\",\n        \"maxAmount\": \"<float>\"\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": \"<float>\",\n        \"outerChargeFix\": \"<float>\"\n      }\n    },\n    {\n      \"status\": \"<string>\",\n      \"name\": \"<string>\",\n      \"scheme\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"installmentOptions\": {\n        \"interval\": \"<string>\",\n        \"numberOfInstallments\": \"<integer>\",\n        \"every\": \"<integer>\",\n        \"timingOptions\": {\n          \"type\": \"<string>\",\n          \"offsetOptions\": {\n            \"anchor\": \"<string>\",\n            \"offset\": \"<integer>\",\n            \"offsetUnit\": \"<string>\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"<string>\",\n        \"value\": \"<float>\"\n      },\n      \"requirements\": {\n        \"minAmount\": \"<float>\",\n        \"maxAmount\": \"<float>\"\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": \"<float>\",\n        \"outerChargeFix\": \"<float>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5ebc4584-42bb-42bf-9168-81bb58d3010e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "strategies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"policy\": {\n    \"allowedPaymentGateways\": [\n      {\n        \"gatewayId\": \"<string>\"\n      },\n      {\n        \"gatewayId\": \"<string>\"\n      }\n    ],\n    \"changePaymentMethodPolicy\": \"<string>\",\n    \"paymentCompletionPolicy\": {\n      \"target\": \"<string>\"\n    }\n  },\n  \"options\": [\n    {\n      \"status\": \"<string>\",\n      \"name\": \"<string>\",\n      \"scheme\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"installmentOptions\": {\n        \"interval\": \"<string>\",\n        \"numberOfInstallments\": \"<integer>\",\n        \"every\": \"<integer>\",\n        \"timingOptions\": {\n          \"type\": \"<string>\",\n          \"offsetOptions\": {\n            \"anchor\": \"<string>\",\n            \"offset\": \"<integer>\",\n            \"offsetUnit\": \"<string>\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"<string>\",\n        \"value\": \"<float>\"\n      },\n      \"requirements\": {\n        \"minAmount\": \"<float>\",\n        \"maxAmount\": \"<float>\"\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": \"<float>\",\n        \"outerChargeFix\": \"<float>\"\n      }\n    },\n    {\n      \"status\": \"<string>\",\n      \"name\": \"<string>\",\n      \"scheme\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"installmentOptions\": {\n        \"interval\": \"<string>\",\n        \"numberOfInstallments\": \"<integer>\",\n        \"every\": \"<integer>\",\n        \"timingOptions\": {\n          \"type\": \"<string>\",\n          \"offsetOptions\": {\n            \"anchor\": \"<string>\",\n            \"offset\": \"<integer>\",\n            \"offsetUnit\": \"<string>\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"<string>\",\n        \"value\": \"<float>\"\n      },\n      \"requirements\": {\n        \"minAmount\": \"<float>\",\n        \"maxAmount\": \"<float>\"\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": \"<float>\",\n        \"outerChargeFix\": \"<float>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa9805b6-a8e0-4059-b2ed-535045f402b8",
+          "name": "get a payment strategy",
+          "request": {
+            "name": "get a payment strategy",
+            "description": {
+              "content": "Get a Payment Strategy",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payments",
+                "strategies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ecae6a63-1693-4f29-b47a-7bae1e8944af",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "strategies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"sellerId\": \"string\",\n  \"name\": \"string\",\n  \"policy\": {\n    \"allowedPaymentGateways\": [\n      {\n        \"gatewayId\": \"string\"\n      },\n      {\n        \"gatewayId\": \"string\"\n      }\n    ],\n    \"changePaymentMethodPolicy\": \"always\",\n    \"paymentCompletionPolicy\": {\n      \"target\": \"none\"\n    }\n  },\n  \"options\": [\n    {\n      \"status\": \"ENABLED\",\n      \"name\": \"string\",\n      \"scheme\": \"installments\",\n      \"_id\": \"string\",\n      \"installmentOptions\": {\n        \"interval\": \"DAY\",\n        \"numberOfInstallments\": 2200,\n        \"every\": 2338,\n        \"timingOptions\": {\n          \"type\": \"first_installment\",\n          \"offsetOptions\": {\n            \"anchor\": \"order_date\",\n            \"offset\": 8467,\n            \"offsetUnit\": \"MONTH\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"fixed\",\n        \"value\": 6500.404024211889\n      },\n      \"requirements\": {\n        \"minAmount\": 833.5211320276748,\n        \"maxAmount\": 2722.878420945665\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": 1049.6345839392275,\n        \"outerChargeFix\": 6942.189439782937\n      }\n    },\n    {\n      \"status\": \"DISABLED\",\n      \"name\": \"string\",\n      \"scheme\": \"one-off\",\n      \"_id\": \"string\",\n      \"installmentOptions\": {\n        \"interval\": \"MONTH\",\n        \"numberOfInstallments\": 7142,\n        \"every\": 656,\n        \"timingOptions\": {\n          \"type\": \"first_installment\",\n          \"offsetOptions\": {\n            \"anchor\": \"order_date\",\n            \"offset\": 8211,\n            \"offsetUnit\": \"DAY\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"none\",\n        \"value\": 9480.818307552503\n      },\n      \"requirements\": {\n        \"minAmount\": 8210.799306973771,\n        \"maxAmount\": 5166.666130432463\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": 6939.279636708753,\n        \"outerChargeFix\": 9660.633153470975\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d087424-a290-4204-9c60-3879c29c2728",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "strategies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e5b9fda3-e1b2-4927-8e1f-41b50b477ad7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "strategies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "91afa663-4ab8-4e27-9532-96666eebc630",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "strategies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff686bee-a58f-4c2c-8674-482109c48652",
+          "name": "update a payment strategy",
+          "request": {
+            "name": "update a payment strategy",
+            "description": {
+              "content": "Update a Payment Strategy",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payments",
+                "strategies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"policy\": {\n    \"allowedPaymentGateways\": [\n      {\n        \"gatewayId\": \"<string>\"\n      },\n      {\n        \"gatewayId\": \"<string>\"\n      }\n    ],\n    \"changePaymentMethodPolicy\": \"<string>\",\n    \"paymentCompletionPolicy\": {\n      \"target\": \"<string>\"\n    }\n  },\n  \"options\": [\n    {\n      \"status\": \"<string>\",\n      \"name\": \"<string>\",\n      \"scheme\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"installmentOptions\": {\n        \"interval\": \"<string>\",\n        \"numberOfInstallments\": \"<integer>\",\n        \"every\": \"<integer>\",\n        \"timingOptions\": {\n          \"type\": \"<string>\",\n          \"offsetOptions\": {\n            \"anchor\": \"<string>\",\n            \"offset\": \"<integer>\",\n            \"offsetUnit\": \"<string>\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"<string>\",\n        \"value\": \"<float>\"\n      },\n      \"requirements\": {\n        \"minAmount\": \"<float>\",\n        \"maxAmount\": \"<float>\"\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": \"<float>\",\n        \"outerChargeFix\": \"<float>\"\n      }\n    },\n    {\n      \"status\": \"<string>\",\n      \"name\": \"<string>\",\n      \"scheme\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"installmentOptions\": {\n        \"interval\": \"<string>\",\n        \"numberOfInstallments\": \"<integer>\",\n        \"every\": \"<integer>\",\n        \"timingOptions\": {\n          \"type\": \"<string>\",\n          \"offsetOptions\": {\n            \"anchor\": \"<string>\",\n            \"offset\": \"<integer>\",\n            \"offsetUnit\": \"<string>\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"<string>\",\n        \"value\": \"<float>\"\n      },\n      \"requirements\": {\n        \"minAmount\": \"<float>\",\n        \"maxAmount\": \"<float>\"\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": \"<float>\",\n        \"outerChargeFix\": \"<float>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "16152ba8-5add-46be-aa81-6eba7290e00b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "strategies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"policy\": {\n    \"allowedPaymentGateways\": [\n      {\n        \"gatewayId\": \"<string>\"\n      },\n      {\n        \"gatewayId\": \"<string>\"\n      }\n    ],\n    \"changePaymentMethodPolicy\": \"<string>\",\n    \"paymentCompletionPolicy\": {\n      \"target\": \"<string>\"\n    }\n  },\n  \"options\": [\n    {\n      \"status\": \"<string>\",\n      \"name\": \"<string>\",\n      \"scheme\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"installmentOptions\": {\n        \"interval\": \"<string>\",\n        \"numberOfInstallments\": \"<integer>\",\n        \"every\": \"<integer>\",\n        \"timingOptions\": {\n          \"type\": \"<string>\",\n          \"offsetOptions\": {\n            \"anchor\": \"<string>\",\n            \"offset\": \"<integer>\",\n            \"offsetUnit\": \"<string>\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"<string>\",\n        \"value\": \"<float>\"\n      },\n      \"requirements\": {\n        \"minAmount\": \"<float>\",\n        \"maxAmount\": \"<float>\"\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": \"<float>\",\n        \"outerChargeFix\": \"<float>\"\n      }\n    },\n    {\n      \"status\": \"<string>\",\n      \"name\": \"<string>\",\n      \"scheme\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"installmentOptions\": {\n        \"interval\": \"<string>\",\n        \"numberOfInstallments\": \"<integer>\",\n        \"every\": \"<integer>\",\n        \"timingOptions\": {\n          \"type\": \"<string>\",\n          \"offsetOptions\": {\n            \"anchor\": \"<string>\",\n            \"offset\": \"<integer>\",\n            \"offsetUnit\": \"<string>\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"<string>\",\n        \"value\": \"<float>\"\n      },\n      \"requirements\": {\n        \"minAmount\": \"<float>\",\n        \"maxAmount\": \"<float>\"\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": \"<float>\",\n        \"outerChargeFix\": \"<float>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"sellerId\": \"string\",\n  \"name\": \"string\",\n  \"policy\": {\n    \"allowedPaymentGateways\": [\n      {\n        \"gatewayId\": \"string\"\n      },\n      {\n        \"gatewayId\": \"string\"\n      }\n    ],\n    \"changePaymentMethodPolicy\": \"always\",\n    \"paymentCompletionPolicy\": {\n      \"target\": \"none\"\n    }\n  },\n  \"options\": [\n    {\n      \"status\": \"ENABLED\",\n      \"name\": \"string\",\n      \"scheme\": \"installments\",\n      \"_id\": \"string\",\n      \"installmentOptions\": {\n        \"interval\": \"DAY\",\n        \"numberOfInstallments\": 2200,\n        \"every\": 2338,\n        \"timingOptions\": {\n          \"type\": \"first_installment\",\n          \"offsetOptions\": {\n            \"anchor\": \"order_date\",\n            \"offset\": 8467,\n            \"offsetUnit\": \"MONTH\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"fixed\",\n        \"value\": 6500.404024211889\n      },\n      \"requirements\": {\n        \"minAmount\": 833.5211320276748,\n        \"maxAmount\": 2722.878420945665\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": 1049.6345839392275,\n        \"outerChargeFix\": 6942.189439782937\n      }\n    },\n    {\n      \"status\": \"DISABLED\",\n      \"name\": \"string\",\n      \"scheme\": \"one-off\",\n      \"_id\": \"string\",\n      \"installmentOptions\": {\n        \"interval\": \"MONTH\",\n        \"numberOfInstallments\": 7142,\n        \"every\": 656,\n        \"timingOptions\": {\n          \"type\": \"first_installment\",\n          \"offsetOptions\": {\n            \"anchor\": \"order_date\",\n            \"offset\": 8211,\n            \"offsetUnit\": \"DAY\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"none\",\n        \"value\": 9480.818307552503\n      },\n      \"requirements\": {\n        \"minAmount\": 8210.799306973771,\n        \"maxAmount\": 5166.666130432463\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": 6939.279636708753,\n        \"outerChargeFix\": 9660.633153470975\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2633693-8260-433a-83e9-14b3931096d2",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "strategies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"policy\": {\n    \"allowedPaymentGateways\": [\n      {\n        \"gatewayId\": \"<string>\"\n      },\n      {\n        \"gatewayId\": \"<string>\"\n      }\n    ],\n    \"changePaymentMethodPolicy\": \"<string>\",\n    \"paymentCompletionPolicy\": {\n      \"target\": \"<string>\"\n    }\n  },\n  \"options\": [\n    {\n      \"status\": \"<string>\",\n      \"name\": \"<string>\",\n      \"scheme\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"installmentOptions\": {\n        \"interval\": \"<string>\",\n        \"numberOfInstallments\": \"<integer>\",\n        \"every\": \"<integer>\",\n        \"timingOptions\": {\n          \"type\": \"<string>\",\n          \"offsetOptions\": {\n            \"anchor\": \"<string>\",\n            \"offset\": \"<integer>\",\n            \"offsetUnit\": \"<string>\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"<string>\",\n        \"value\": \"<float>\"\n      },\n      \"requirements\": {\n        \"minAmount\": \"<float>\",\n        \"maxAmount\": \"<float>\"\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": \"<float>\",\n        \"outerChargeFix\": \"<float>\"\n      }\n    },\n    {\n      \"status\": \"<string>\",\n      \"name\": \"<string>\",\n      \"scheme\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"installmentOptions\": {\n        \"interval\": \"<string>\",\n        \"numberOfInstallments\": \"<integer>\",\n        \"every\": \"<integer>\",\n        \"timingOptions\": {\n          \"type\": \"<string>\",\n          \"offsetOptions\": {\n            \"anchor\": \"<string>\",\n            \"offset\": \"<integer>\",\n            \"offsetUnit\": \"<string>\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"<string>\",\n        \"value\": \"<float>\"\n      },\n      \"requirements\": {\n        \"minAmount\": \"<float>\",\n        \"maxAmount\": \"<float>\"\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": \"<float>\",\n        \"outerChargeFix\": \"<float>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "88359c77-cb5d-4377-a184-280f41346ce8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "strategies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"policy\": {\n    \"allowedPaymentGateways\": [\n      {\n        \"gatewayId\": \"<string>\"\n      },\n      {\n        \"gatewayId\": \"<string>\"\n      }\n    ],\n    \"changePaymentMethodPolicy\": \"<string>\",\n    \"paymentCompletionPolicy\": {\n      \"target\": \"<string>\"\n    }\n  },\n  \"options\": [\n    {\n      \"status\": \"<string>\",\n      \"name\": \"<string>\",\n      \"scheme\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"installmentOptions\": {\n        \"interval\": \"<string>\",\n        \"numberOfInstallments\": \"<integer>\",\n        \"every\": \"<integer>\",\n        \"timingOptions\": {\n          \"type\": \"<string>\",\n          \"offsetOptions\": {\n            \"anchor\": \"<string>\",\n            \"offset\": \"<integer>\",\n            \"offsetUnit\": \"<string>\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"<string>\",\n        \"value\": \"<float>\"\n      },\n      \"requirements\": {\n        \"minAmount\": \"<float>\",\n        \"maxAmount\": \"<float>\"\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": \"<float>\",\n        \"outerChargeFix\": \"<float>\"\n      }\n    },\n    {\n      \"status\": \"<string>\",\n      \"name\": \"<string>\",\n      \"scheme\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"installmentOptions\": {\n        \"interval\": \"<string>\",\n        \"numberOfInstallments\": \"<integer>\",\n        \"every\": \"<integer>\",\n        \"timingOptions\": {\n          \"type\": \"<string>\",\n          \"offsetOptions\": {\n            \"anchor\": \"<string>\",\n            \"offset\": \"<integer>\",\n            \"offsetUnit\": \"<string>\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"<string>\",\n        \"value\": \"<float>\"\n      },\n      \"requirements\": {\n        \"minAmount\": \"<float>\",\n        \"maxAmount\": \"<float>\"\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": \"<float>\",\n        \"outerChargeFix\": \"<float>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1399f086-d7c5-405c-aae4-68cf49fca65a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "strategies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"policy\": {\n    \"allowedPaymentGateways\": [\n      {\n        \"gatewayId\": \"<string>\"\n      },\n      {\n        \"gatewayId\": \"<string>\"\n      }\n    ],\n    \"changePaymentMethodPolicy\": \"<string>\",\n    \"paymentCompletionPolicy\": {\n      \"target\": \"<string>\"\n    }\n  },\n  \"options\": [\n    {\n      \"status\": \"<string>\",\n      \"name\": \"<string>\",\n      \"scheme\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"installmentOptions\": {\n        \"interval\": \"<string>\",\n        \"numberOfInstallments\": \"<integer>\",\n        \"every\": \"<integer>\",\n        \"timingOptions\": {\n          \"type\": \"<string>\",\n          \"offsetOptions\": {\n            \"anchor\": \"<string>\",\n            \"offset\": \"<integer>\",\n            \"offsetUnit\": \"<string>\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"<string>\",\n        \"value\": \"<float>\"\n      },\n      \"requirements\": {\n        \"minAmount\": \"<float>\",\n        \"maxAmount\": \"<float>\"\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": \"<float>\",\n        \"outerChargeFix\": \"<float>\"\n      }\n    },\n    {\n      \"status\": \"<string>\",\n      \"name\": \"<string>\",\n      \"scheme\": \"<string>\",\n      \"_id\": \"<string>\",\n      \"installmentOptions\": {\n        \"interval\": \"<string>\",\n        \"numberOfInstallments\": \"<integer>\",\n        \"every\": \"<integer>\",\n        \"timingOptions\": {\n          \"type\": \"<string>\",\n          \"offsetOptions\": {\n            \"anchor\": \"<string>\",\n            \"offset\": \"<integer>\",\n            \"offsetUnit\": \"<string>\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"<string>\",\n        \"value\": \"<float>\"\n      },\n      \"requirements\": {\n        \"minAmount\": \"<float>\",\n        \"maxAmount\": \"<float>\"\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": \"<float>\",\n        \"outerChargeFix\": \"<float>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f1b94e82-c327-419b-8fbf-20665ba01862",
+          "name": "get public payment strategy",
+          "request": {
+            "name": "get public payment strategy",
+            "description": {
+              "content": "Get Public Payment Strategy",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "public",
+                "payments",
+                "strategies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "219e634f-cbf0-438e-a7f2-bed470692735",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "payments",
+                    "strategies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"sellerId\": \"string\",\n  \"name\": \"string\",\n  \"policy\": {\n    \"allowedPaymentGateways\": [\n      {\n        \"gatewayId\": \"string\"\n      },\n      {\n        \"gatewayId\": \"string\"\n      }\n    ],\n    \"changePaymentMethodPolicy\": \"always\",\n    \"paymentCompletionPolicy\": {\n      \"target\": \"none\"\n    }\n  },\n  \"options\": [\n    {\n      \"status\": \"ENABLED\",\n      \"name\": \"string\",\n      \"scheme\": \"installments\",\n      \"_id\": \"string\",\n      \"installmentOptions\": {\n        \"interval\": \"DAY\",\n        \"numberOfInstallments\": 2200,\n        \"every\": 2338,\n        \"timingOptions\": {\n          \"type\": \"first_installment\",\n          \"offsetOptions\": {\n            \"anchor\": \"order_date\",\n            \"offset\": 8467,\n            \"offsetUnit\": \"MONTH\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"fixed\",\n        \"value\": 6500.404024211889\n      },\n      \"requirements\": {\n        \"minAmount\": 833.5211320276748,\n        \"maxAmount\": 2722.878420945665\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": 1049.6345839392275,\n        \"outerChargeFix\": 6942.189439782937\n      }\n    },\n    {\n      \"status\": \"DISABLED\",\n      \"name\": \"string\",\n      \"scheme\": \"one-off\",\n      \"_id\": \"string\",\n      \"installmentOptions\": {\n        \"interval\": \"MONTH\",\n        \"numberOfInstallments\": 7142,\n        \"every\": 656,\n        \"timingOptions\": {\n          \"type\": \"first_installment\",\n          \"offsetOptions\": {\n            \"anchor\": \"order_date\",\n            \"offset\": 8211,\n            \"offsetUnit\": \"DAY\"\n          }\n        }\n      },\n      \"downPaymentOptions\": {\n        \"type\": \"none\",\n        \"value\": 9480.818307552503\n      },\n      \"requirements\": {\n        \"minAmount\": 8210.799306973771,\n        \"maxAmount\": 5166.666130432463\n      },\n      \"feeOptions\": {\n        \"outerChargeVar\": 6939.279636708753,\n        \"outerChargeFix\": 9660.633153470975\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc5633a0-71ff-42b3-9a84-56efb09d3716",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "payments",
+                    "strategies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "15c474da-8f33-4c84-98ab-b7bf1bf6d5ae",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "payments",
+                    "strategies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://vivenu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9332b4a7-9e5c-44b8-b261-c6889346553f",
+    "name": "vivenu access-lists payment-strategies API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "vivenu API Documentation\n\nContact Support:\n Name: vivenu GmbH",
+      "type": "text/plain"
+    }
+  }
+}

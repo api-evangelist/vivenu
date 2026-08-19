@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "vivenu access-lists disputes API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "disputes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "get_disputes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/disputes",
+            "params": [
+              {
+                "name": "top",
+                "value": "",
+                "type": "query",
+                "description": "A limit on the number of objects to be returned. Can range between 1 and 1000."
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "The number of objects to skip for the requested result"
+              },
+              {
+                "name": "sellerId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "reference",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "paymentId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "paymentGatewayId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "createdAt",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get disputes"
+        },
+        {
+          "info": {
+            "name": "stop_dispute_automation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/disputes/:id/stop-automation",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Stop dispute automation"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

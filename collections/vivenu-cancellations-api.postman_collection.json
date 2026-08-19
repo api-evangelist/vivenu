@@ -1,0 +1,464 @@
+{
+  "item": [
+    {
+      "id": "a1f4f346-0f2f-4155-9ffa-291da054fd3a",
+      "name": "cancellations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e18bd97a-fb6b-443f-b1b0-175b0bcfcf25",
+          "name": "get all cancellations",
+          "request": {
+            "name": "get all cancellations",
+            "description": {
+              "content": "Get all cancellations",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "cancellations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "transactionId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "25"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<float>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9e525343-bed5-4f48-afb2-9a37a5553621",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "cancellations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 2\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3da27253-4468-4039-93ae-dc33641563f9",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "cancellations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "100d7e1f-fca1-43c5-a358-077bd2c00671",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "cancellations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e80c5f18-4e4f-431f-ab59-e456202eb2d4",
+          "name": "create invoice for cancellation",
+          "request": {
+            "name": "create invoice for cancellation",
+            "description": {
+              "content": "Create invoice for cancellation",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "cancellations",
+                ":id",
+                "invoice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6b01454d-8c7c-4cb6-9a3d-335cbbd4f7e7",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "cancellations",
+                    ":id",
+                    "invoice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"sellerId\": \"string\",\n  \"recipient\": {\n    \"name\": \"string\",\n    \"firstname\": \"string\",\n    \"lastname\": \"string\",\n    \"company\": \"string\",\n    \"address\": {\n      \"fullAddress\": \"string\",\n      \"street\": \"string\",\n      \"line2\": \"string\",\n      \"postal\": \"string\",\n      \"city\": \"string\",\n      \"country\": \"string\",\n      \"state\": \"string\"\n    }\n  },\n  \"counter\": 2863.324547561195,\n  \"no\": \"string\",\n  \"items\": [\n    {\n      \"title\": \"string\",\n      \"amount\": 8497.129429303712,\n      \"total\": 9677.7700859667,\n      \"regularTotal\": 7868.291959034014,\n      \"includedTax\": 9746.320480761686,\n      \"taxRate\": 7497.890999874575,\n      \"type\": \"insurance\"\n    },\n    {\n      \"title\": \"string\",\n      \"amount\": 7933.160534402763,\n      \"total\": 1432.3212456188792,\n      \"regularTotal\": 8222.963866178283,\n      \"includedTax\": 2068.298578618427,\n      \"taxRate\": 2704.538633461649,\n      \"type\": \"discount\"\n    }\n  ],\n  \"currency\": \"EUR\",\n  \"type\": \"invoice\",\n  \"transactionId\": \"string\",\n  \"cancellationId\": \"string\",\n  \"components\": [\n    {\n      \"name\": \"string\",\n      \"total\": 1467.0292513414217\n    },\n    {\n      \"name\": \"string\",\n      \"total\": 4126.645850963485\n    }\n  ],\n  \"total\": 8949.477515565126,\n  \"discountSum\": 5821.947699253639,\n  \"detailsPerRate\": [\n    {\n      \"taxRate\": 3633.7129227612827,\n      \"includedTax\": 8383.01738370552,\n      \"reducedTax\": 9675.859786634092\n    },\n    {\n      \"taxRate\": 3539.9174580123645,\n      \"includedTax\": 4353.328888232825,\n      \"reducedTax\": 7177.082641246627\n    }\n  ],\n  \"taxItems\": [\n    {\n      \"rate\": 222.41186048297502,\n      \"perUnit\": 3660.986632783879,\n      \"total\": 9585.647978463898,\n      \"name\": \"string\",\n      \"taxTypeId\": \"string\",\n      \"netTotal\": 8025.684809952774,\n      \"netPerUnit\": 9806.745437138801,\n      \"taxPayableAccountId\": \"string\",\n      \"taxPayableAccountCode\": \"string\"\n    },\n    {\n      \"rate\": 6391.762893287776,\n      \"perUnit\": 3104.0060935643,\n      \"total\": 4455.15495438037,\n      \"name\": \"string\",\n      \"taxTypeId\": \"string\",\n      \"netTotal\": 2178.993362862466,\n      \"netPerUnit\": 1357.8090476121417,\n      \"taxPayableAccountId\": \"string\",\n      \"taxPayableAccountCode\": \"string\"\n    }\n  ],\n  \"includedTax\": 6444.819546837051,\n  \"taxRate\": 0.41104141146929296,\n  \"includedOuterChargeTax\": 9559.146026855042,\n  \"outerChargeTaxRate\": 0.2916872864140757,\n  \"origin\": \"onlinesale\",\n  \"extraFields\": {},\n  \"secret\": \"string\",\n  \"referenceInvoiceId\": \"string\",\n  \"footerText\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdAt\": \"1964-08-13T11:25:47.833Z\",\n  \"updatedAt\": \"1953-03-18T00:06:19.742Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52576b79-73df-4be5-9605-12b2b2d7bf2f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "cancellations",
+                    ":id",
+                    "invoice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "66a05394-ba81-4ea5-a4da-0825b3e8453b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "cancellations",
+                    ":id",
+                    "invoice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://vivenu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "77794b72-eb45-4943-9bab-3b93c4660549",
+    "name": "vivenu access-lists cancellations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "vivenu API Documentation\n\nContact Support:\n Name: vivenu GmbH",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,890 @@
+{
+  "item": [
+    {
+      "id": "391d0c71-e209-44d1-a9c1-d60d3f55436a",
+      "name": "entitlements",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "162374d7-2966-4e0d-9bd8-c7657c1b32ee",
+          "name": "entitlements/list",
+          "request": {
+            "name": "entitlements/list",
+            "description": {
+              "content": "List entitlements",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "entitlements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "25",
+                  "description": "(Required) A limit on the number of objects to be returned. Can range between 1 and 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "0",
+                  "description": "(Required) The number of objects to skip for the requested result"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "11593a46-a09a-4922-bf05-f75aa4b16424",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "entitlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"docs\": [\n    {\n      \"_id\": \"string\",\n      \"name\": \"string\",\n      \"publicName\": \"string\",\n      \"modifiers\": [\n        {\n          \"_id\": \"string\",\n          \"type\": \"var_discount\",\n          \"config\": {\n            \"value\": 0.8334687238635413,\n            \"max\": 5214.923515348968\n          }\n        },\n        {\n          \"_id\": \"string\",\n          \"type\": \"var_discount\",\n          \"config\": {\n            \"value\": 0.9641499620572271,\n            \"max\": 47.336684429726276\n          }\n        }\n      ],\n      \"sellerId\": \"string\",\n      \"createdAt\": \"1953-07-02T19:44:29.260Z\",\n      \"updatedAt\": \"1981-02-19T11:29:03.846Z\",\n      \"active\": false,\n      \"conditions\": {\n        \"$or\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n          }\n        ],\n        \"$and\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n          }\n        ],\n        \"$condition\": {\n          \"type\": \"product_in_cart\",\n          \"config\": {\n            \"productId\": \"string\",\n            \"productVariantId\": \"string\",\n            \"minQuantity\": 5663.043034153083,\n            \"maxQuantity\": 9674.71968941758\n          }\n        }\n      }\n    },\n    {\n      \"_id\": \"string\",\n      \"name\": \"string\",\n      \"publicName\": \"string\",\n      \"modifiers\": [\n        {\n          \"_id\": \"string\",\n          \"type\": \"var_discount\",\n          \"config\": {\n            \"value\": 0.09483668884047303,\n            \"max\": 1918.9436658613402\n          }\n        },\n        {\n          \"_id\": \"string\",\n          \"type\": \"var_discount\",\n          \"config\": {\n            \"value\": 0.5432483037153678,\n            \"max\": 8124.887037389599\n          }\n        }\n      ],\n      \"sellerId\": \"string\",\n      \"createdAt\": \"2012-02-14T04:36:52.723Z\",\n      \"updatedAt\": \"2000-04-29T17:41:05.134Z\",\n      \"active\": false,\n      \"conditions\": {\n        \"$or\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n          }\n        ],\n        \"$and\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n          }\n        ],\n        \"$condition\": {\n          \"type\": \"product_in_cart\",\n          \"config\": {\n            \"productId\": \"string\",\n            \"productVariantId\": \"string\",\n            \"minQuantity\": 4361.543534333103,\n            \"maxQuantity\": 44.236921309507984\n          }\n        }\n      }\n    }\n  ],\n  \"total\": 4819.592190339909\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "984b8fa1-311e-4e04-9f6e-aeaa49f1ae00",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "entitlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c69a5f8c-03d6-4a78-a651-844e3a65f305",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "entitlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97d4dec6-2fe1-4ab9-aaba-d2093d8158f3",
+          "name": "entitlements-create/create",
+          "request": {
+            "name": "entitlements-create/create",
+            "description": {
+              "content": "Create a new entitlement",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "entitlements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"publicName\": \"<string>\",\n  \"modifiers\": [\n    {\n      \"_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"config\": {\n        \"value\": \"<number>\",\n        \"max\": \"<number>\"\n      }\n    },\n    {\n      \"_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"config\": {\n        \"value\": \"<number>\",\n        \"max\": \"<number>\"\n      }\n    }\n  ],\n  \"conditions\": {\n    \"$or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      }\n    ],\n    \"$and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      }\n    ],\n    \"$condition\": {\n      \"type\": \"<string>\",\n      \"config\": {\n        \"productId\": \"<string>\",\n        \"productVariantId\": \"<string>\",\n        \"minQuantity\": \"<number>\",\n        \"maxQuantity\": \"<number>\"\n      }\n    }\n  },\n  \"active\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c7ccd32d-3efe-4196-9f16-1813f71f2bdc",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "entitlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"publicName\": \"<string>\",\n  \"modifiers\": [\n    {\n      \"_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"config\": {\n        \"value\": \"<number>\",\n        \"max\": \"<number>\"\n      }\n    },\n    {\n      \"_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"config\": {\n        \"value\": \"<number>\",\n        \"max\": \"<number>\"\n      }\n    }\n  ],\n  \"conditions\": {\n    \"$or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      }\n    ],\n    \"$and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      }\n    ],\n    \"$condition\": {\n      \"type\": \"<string>\",\n      \"config\": {\n        \"productId\": \"<string>\",\n        \"productVariantId\": \"<string>\",\n        \"minQuantity\": \"<number>\",\n        \"maxQuantity\": \"<number>\"\n      }\n    }\n  },\n  \"active\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"publicName\": \"string\",\n  \"modifiers\": [\n    {\n      \"_id\": \"string\",\n      \"type\": \"var_discount\",\n      \"config\": {\n        \"value\": 0.5175571356792569,\n        \"max\": 3760.6745065249024\n      }\n    },\n    {\n      \"_id\": \"string\",\n      \"type\": \"var_discount\",\n      \"config\": {\n        \"value\": 0.5854072805347327,\n        \"max\": 7847.136731224765\n      }\n    }\n  ],\n  \"sellerId\": \"string\",\n  \"createdAt\": \"1982-11-08T06:25:15.241Z\",\n  \"updatedAt\": \"2015-10-26T21:48:42.619Z\",\n  \"active\": false,\n  \"conditions\": {\n    \"$or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      }\n    ],\n    \"$and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      }\n    ],\n    \"$condition\": {\n      \"type\": \"<string>\",\n      \"config\": {\n        \"productId\": \"<string>\",\n        \"productVariantId\": \"<string>\",\n        \"minQuantity\": \"<number>\",\n        \"maxQuantity\": \"<number>\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "382b518a-3c51-4faa-a4b0-1d56b38fc63b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "entitlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"publicName\": \"<string>\",\n  \"modifiers\": [\n    {\n      \"_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"config\": {\n        \"value\": \"<number>\",\n        \"max\": \"<number>\"\n      }\n    },\n    {\n      \"_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"config\": {\n        \"value\": \"<number>\",\n        \"max\": \"<number>\"\n      }\n    }\n  ],\n  \"conditions\": {\n    \"$or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      }\n    ],\n    \"$and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      }\n    ],\n    \"$condition\": {\n      \"type\": \"<string>\",\n      \"config\": {\n        \"productId\": \"<string>\",\n        \"productVariantId\": \"<string>\",\n        \"minQuantity\": \"<number>\",\n        \"maxQuantity\": \"<number>\"\n      }\n    }\n  },\n  \"active\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fd2c86c1-de25-4cac-9ffa-44e1b3616ecc",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "entitlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"publicName\": \"<string>\",\n  \"modifiers\": [\n    {\n      \"_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"config\": {\n        \"value\": \"<number>\",\n        \"max\": \"<number>\"\n      }\n    },\n    {\n      \"_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"config\": {\n        \"value\": \"<number>\",\n        \"max\": \"<number>\"\n      }\n    }\n  ],\n  \"conditions\": {\n    \"$or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      }\n    ],\n    \"$and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      }\n    ],\n    \"$condition\": {\n      \"type\": \"<string>\",\n      \"config\": {\n        \"productId\": \"<string>\",\n        \"productVariantId\": \"<string>\",\n        \"minQuantity\": \"<number>\",\n        \"maxQuantity\": \"<number>\"\n      }\n    }\n  },\n  \"active\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a39e5eea-d659-4857-8241-753f5f804d45",
+          "name": "entitlements/get",
+          "request": {
+            "name": "entitlements/get",
+            "description": {
+              "content": "Get an entitlement by ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "entitlements",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "acf405a2-7712-4386-94a8-08fa95c3033d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "entitlements",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"publicName\": \"string\",\n  \"modifiers\": [\n    {\n      \"_id\": \"string\",\n      \"type\": \"var_discount\",\n      \"config\": {\n        \"value\": 0.5175571356792569,\n        \"max\": 3760.6745065249024\n      }\n    },\n    {\n      \"_id\": \"string\",\n      \"type\": \"var_discount\",\n      \"config\": {\n        \"value\": 0.5854072805347327,\n        \"max\": 7847.136731224765\n      }\n    }\n  ],\n  \"sellerId\": \"string\",\n  \"createdAt\": \"1982-11-08T06:25:15.241Z\",\n  \"updatedAt\": \"2015-10-26T21:48:42.619Z\",\n  \"active\": false,\n  \"conditions\": {\n    \"$or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      }\n    ],\n    \"$and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      }\n    ],\n    \"$condition\": {\n      \"type\": \"<string>\",\n      \"config\": {\n        \"productId\": \"<string>\",\n        \"productVariantId\": \"<string>\",\n        \"minQuantity\": \"<number>\",\n        \"maxQuantity\": \"<number>\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec4b3f4b-e973-47ea-81d0-728e6e8c36ce",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "entitlements",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "67194fb3-d0cf-483b-b504-b674ff963cfe",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "entitlements",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6994c71e-ff86-42d6-ab4d-f1ac101ba860",
+          "name": "entitlements/update",
+          "request": {
+            "name": "entitlements/update",
+            "description": {
+              "content": "Update an entitlement",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "entitlements",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"publicName\": \"<string>\",\n  \"conditions\": {\n    \"$or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      }\n    ],\n    \"$and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      }\n    ],\n    \"$condition\": {\n      \"type\": \"<string>\",\n      \"config\": {\n        \"productId\": \"<string>\",\n        \"productVariantId\": \"<string>\",\n        \"minQuantity\": \"<number>\",\n        \"maxQuantity\": \"<number>\"\n      }\n    }\n  },\n  \"modifiers\": [\n    {\n      \"_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"config\": {\n        \"value\": \"<number>\",\n        \"max\": \"<number>\"\n      }\n    },\n    {\n      \"_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"config\": {\n        \"value\": \"<number>\",\n        \"max\": \"<number>\"\n      }\n    }\n  ],\n  \"active\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aa913af7-621f-4017-b7a1-d7fa6cb98dcc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "entitlements",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"publicName\": \"<string>\",\n  \"conditions\": {\n    \"$or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      }\n    ],\n    \"$and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      }\n    ],\n    \"$condition\": {\n      \"type\": \"<string>\",\n      \"config\": {\n        \"productId\": \"<string>\",\n        \"productVariantId\": \"<string>\",\n        \"minQuantity\": \"<number>\",\n        \"maxQuantity\": \"<number>\"\n      }\n    }\n  },\n  \"modifiers\": [\n    {\n      \"_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"config\": {\n        \"value\": \"<number>\",\n        \"max\": \"<number>\"\n      }\n    },\n    {\n      \"_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"config\": {\n        \"value\": \"<number>\",\n        \"max\": \"<number>\"\n      }\n    }\n  ],\n  \"active\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"publicName\": \"string\",\n  \"modifiers\": [\n    {\n      \"_id\": \"string\",\n      \"type\": \"var_discount\",\n      \"config\": {\n        \"value\": 0.5175571356792569,\n        \"max\": 3760.6745065249024\n      }\n    },\n    {\n      \"_id\": \"string\",\n      \"type\": \"var_discount\",\n      \"config\": {\n        \"value\": 0.5854072805347327,\n        \"max\": 7847.136731224765\n      }\n    }\n  ],\n  \"sellerId\": \"string\",\n  \"createdAt\": \"1982-11-08T06:25:15.241Z\",\n  \"updatedAt\": \"2015-10-26T21:48:42.619Z\",\n  \"active\": false,\n  \"conditions\": {\n    \"$or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      }\n    ],\n    \"$and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      }\n    ],\n    \"$condition\": {\n      \"type\": \"<string>\",\n      \"config\": {\n        \"productId\": \"<string>\",\n        \"productVariantId\": \"<string>\",\n        \"minQuantity\": \"<number>\",\n        \"maxQuantity\": \"<number>\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fff9751b-cdc7-48b2-b16f-5971ecad864d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "entitlements",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"publicName\": \"<string>\",\n  \"conditions\": {\n    \"$or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      }\n    ],\n    \"$and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      }\n    ],\n    \"$condition\": {\n      \"type\": \"<string>\",\n      \"config\": {\n        \"productId\": \"<string>\",\n        \"productVariantId\": \"<string>\",\n        \"minQuantity\": \"<number>\",\n        \"maxQuantity\": \"<number>\"\n      }\n    }\n  },\n  \"modifiers\": [\n    {\n      \"_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"config\": {\n        \"value\": \"<number>\",\n        \"max\": \"<number>\"\n      }\n    },\n    {\n      \"_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"config\": {\n        \"value\": \"<number>\",\n        \"max\": \"<number>\"\n      }\n    }\n  ],\n  \"active\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "459ae030-5b4f-4105-a764-03028762091e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "entitlements",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"publicName\": \"<string>\",\n  \"conditions\": {\n    \"$or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      }\n    ],\n    \"$and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/EntitlementConditionTree detected>\"\n      }\n    ],\n    \"$condition\": {\n      \"type\": \"<string>\",\n      \"config\": {\n        \"productId\": \"<string>\",\n        \"productVariantId\": \"<string>\",\n        \"minQuantity\": \"<number>\",\n        \"maxQuantity\": \"<number>\"\n      }\n    }\n  },\n  \"modifiers\": [\n    {\n      \"_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"config\": {\n        \"value\": \"<number>\",\n        \"max\": \"<number>\"\n      }\n    },\n    {\n      \"_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"config\": {\n        \"value\": \"<number>\",\n        \"max\": \"<number>\"\n      }\n    }\n  ],\n  \"active\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://vivenu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f75e7de2-49bd-4269-b9cd-0adaf28ed2f8",
+    "name": "vivenu access-lists entitlements API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "vivenu API Documentation\n\nContact Support:\n Name: vivenu GmbH",
+      "type": "text/plain"
+    }
+  }
+}

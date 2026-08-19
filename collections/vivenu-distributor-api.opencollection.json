@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "vivenu access-lists distributor API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "distributor",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "get_distributor_for_sales_channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/distributors",
+            "params": [
+              {
+                "name": "salesChannelId",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get distributor for sales channel"
+        },
+        {
+          "info": {
+            "name": "get_a_distributor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/distributors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a distributor"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

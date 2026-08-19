@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "vivenu access-lists credit-notes API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "credit-notes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "credit-notes/list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/credit-notes",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offerId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "top",
+                "value": "",
+                "type": "query",
+                "description": "A limit on the number of objects to be returned. Can range between 1 and 1000."
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "The number of objects to skip for the requested result"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Credit Notes"
+        },
+        {
+          "info": {
+            "name": "credit-notes/info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/public/credit-notes/:id/info",
+            "params": [
+              {
+                "name": "secret",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Credit Note Info"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,342 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "vivenu access-lists distribution-api API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "distribution-api",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "get_all_events_for_a_seller",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/distribution/events",
+            "params": [
+              {
+                "name": "distributorId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get all events for a seller."
+        },
+        {
+          "info": {
+            "name": "get_all_sellers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/distribution/sellers",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sellerId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get all sellers."
+        },
+        {
+          "info": {
+            "name": "get_a_checkout",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/distribution/checkout/:id",
+            "params": [
+              {
+                "name": "distributorId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a checkout."
+        },
+        {
+          "info": {
+            "name": "get_an_event_for_a_seller",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/distribution/events/:id",
+            "params": [
+              {
+                "name": "distributorId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an event for a seller."
+        },
+        {
+          "info": {
+            "name": "get_the_availabilities_for_an_event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/distribution/events/:id/availabilities",
+            "params": [
+              {
+                "name": "distributorId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the availabilities for an event."
+        },
+        {
+          "info": {
+            "name": "get_seating_groups_for_an_event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/distribution/events/:eventId/availabilities/:availabilityId/seating-groups",
+            "params": [
+              {
+                "name": "distributorId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "availabilityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get seating groups for an event."
+        },
+        {
+          "info": {
+            "name": "get_the_state_for_a_seating_group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/distribution/events/:eventId/availabilities/:availabilityId/seating-groups/:groupId",
+            "params": [
+              {
+                "name": "distributorId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "availabilityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the state for a seating group."
+        },
+        {
+          "info": {
+            "name": "create_a_checkout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/distribution/checkout",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a checkout."
+        },
+        {
+          "info": {
+            "name": "extend_the_expiry_time_of_a_checkout_by_one_hour",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/distribution/checkout/:id/extend",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Extend the expiry time of a checkout by one hour."
+        },
+        {
+          "info": {
+            "name": "complete_a_checkout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/distribution/checkout/:id/complete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Complete a checkout."
+        },
+        {
+          "info": {
+            "name": "abort_a_checkout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/distribution/checkout/:id/abort",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Abort a checkout."
+        },
+        {
+          "info": {
+            "name": "cancel_a_transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/distribution/transaction/:id/cancel",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel a transaction."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

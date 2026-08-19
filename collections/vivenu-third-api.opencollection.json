@@ -1,0 +1,150 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "vivenu access-lists third API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "third",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "validate_a_ticket_by_its_barcode",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/third/exchange/validate",
+            "params": [
+              {
+                "name": "barcode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ticketId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Validate a ticket by its barcode"
+        },
+        {
+          "info": {
+            "name": "receive_the_ticket_exchange_payload_for_multiple_tickets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/third/exchange/validate/tickets",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ticketIds",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Receive the ticket exchange payload for multiple tickets"
+        },
+        {
+          "info": {
+            "name": "validates_the_active_listing_for_multiple_tickets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://vivenu.com/api/third/exchange/listings/:id/validate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Validates the active listing for multiple tickets"
+        },
+        {
+          "info": {
+            "name": "notifies_the_system_that_a_ticket_has_been_listed_on_a_third_party_platform",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/third/exchange/listings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Notifies the system that a ticket has been listed on a third party platform"
+        },
+        {
+          "info": {
+            "name": "swap_a_ticket_with_barcode_and_new_customer_information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/third/exchange/swap",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Swap a ticket with barcode and new customer information"
+        },
+        {
+          "info": {
+            "name": "swap_multiple_tickets_with_new_customer_information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/third/exchange/swap/tickets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Swap multiple tickets with new customer information"
+        },
+        {
+          "info": {
+            "name": "notifies_the_system_that_a_listings_has_been_canceled_on_a_third_party_platform",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://vivenu.com/api/third/exchange/listings/:id/cancel",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Notifies the system that a listings has been canceled on a third party platform"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

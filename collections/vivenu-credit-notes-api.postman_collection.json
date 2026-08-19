@@ -1,0 +1,472 @@
+{
+  "item": [
+    {
+      "id": "bdafb82f-6d20-4716-9719-04f0ef72f27e",
+      "name": "credit-notes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8681e7e3-6d86-46f3-b00a-1d8c96abd6cb",
+          "name": "credit-notes/list",
+          "request": {
+            "name": "credit-notes/list",
+            "description": {
+              "content": "List Credit Notes",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "credit-notes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "transactionId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offerId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "25",
+                  "description": "A limit on the number of objects to be returned. Can range between 1 and 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "0",
+                  "description": "The number of objects to skip for the requested result"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1f6c738b-8a3a-4e36-8bce-84097971db43",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "credit-notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"docs\": [\n    {\n      \"customerId\": \"string\",\n      \"sellerId\": \"string\",\n      \"amount\": 534.1015487741118,\n      \"currency\": \"CAD\",\n      \"source\": {\n        \"type\": \"resell_offer\",\n        \"offerId\": \"string\"\n      },\n      \"createdAt\": \"2015-07-01T20:15:06.729Z\",\n      \"updatedAt\": \"1982-04-15T10:59:39.016Z\",\n      \"_id\": \"string\",\n      \"transactionId\": \"string\",\n      \"secret\": \"string\",\n      \"no\": \"string\",\n      \"counter\": \"string\",\n      \"items\": [\n        {\n          \"price\": 5521.712908967008,\n          \"type\": \"ticket\",\n          \"taxRate\": 3787.131628359659,\n          \"taxInfo\": {\n            \"serviceTypeId\": \"string\",\n            \"exceptionId\": \"string\",\n            \"proceedsAccountId\": \"string\",\n            \"proceedsAccountCode\": \"string\",\n            \"taxItems\": [\n              {\n                \"rate\": 3850.994217782021,\n                \"perUnit\": 952.6712219904898,\n                \"total\": 1370.9255884524773,\n                \"name\": \"string\",\n                \"taxTypeId\": \"string\",\n                \"netTotal\": 6484.690043431236,\n                \"netPerUnit\": 1485.7188444008352,\n                \"taxPayableAccountId\": \"string\",\n                \"taxPayableAccountCode\": \"string\"\n              },\n              {\n                \"rate\": 211.53489202172636,\n                \"perUnit\": 3175.6880977025016,\n                \"total\": 9249.24643342498,\n                \"name\": \"string\",\n                \"taxTypeId\": \"string\",\n                \"netTotal\": 7307.618966519278,\n                \"netPerUnit\": 3614.777691890794,\n                \"taxPayableAccountId\": \"string\",\n                \"taxPayableAccountCode\": \"string\"\n              }\n            ]\n          },\n          \"components\": [\n            \"string\",\n            \"string\"\n          ],\n          \"offerItemId\": \"string\",\n          \"referenceCartItemId\": \"string\",\n          \"name\": \"string\"\n        },\n        {\n          \"price\": 8661.974397887534,\n          \"type\": \"ticket\",\n          \"taxRate\": 3632.6025907045987,\n          \"taxInfo\": {\n            \"serviceTypeId\": \"string\",\n            \"exceptionId\": \"string\",\n            \"proceedsAccountId\": \"string\",\n            \"proceedsAccountCode\": \"string\",\n            \"taxItems\": [\n              {\n                \"rate\": 3778.312108283567,\n                \"perUnit\": 4586.614383534994,\n                \"total\": 4650.294340083417,\n                \"name\": \"string\",\n                \"taxTypeId\": \"string\",\n                \"netTotal\": 5126.8082877877505,\n                \"netPerUnit\": 1890.250712771381,\n                \"taxPayableAccountId\": \"string\",\n                \"taxPayableAccountCode\": \"string\"\n              },\n              {\n                \"rate\": 3999.58781825682,\n                \"perUnit\": 9409.703355096988,\n                \"total\": 6752.828616485266,\n                \"name\": \"string\",\n                \"taxTypeId\": \"string\",\n                \"netTotal\": 1036.9056854800108,\n                \"netPerUnit\": 2431.482516636334,\n                \"taxPayableAccountId\": \"string\",\n                \"taxPayableAccountCode\": \"string\"\n              }\n            ]\n          },\n          \"components\": [\n            \"string\",\n            \"string\"\n          ],\n          \"offerItemId\": \"string\",\n          \"referenceCartItemId\": \"string\",\n          \"name\": \"string\"\n        }\n      ]\n    },\n    {\n      \"customerId\": \"string\",\n      \"sellerId\": \"string\",\n      \"amount\": 3263.237803567506,\n      \"currency\": \"SZL\",\n      \"source\": {\n        \"type\": \"resell_offer\",\n        \"offerId\": \"string\"\n      },\n      \"createdAt\": \"1993-03-19T10:11:29.441Z\",\n      \"updatedAt\": \"2021-07-04T08:01:22.477Z\",\n      \"_id\": \"string\",\n      \"transactionId\": \"string\",\n      \"secret\": \"string\",\n      \"no\": \"string\",\n      \"counter\": \"string\",\n      \"items\": [\n        {\n          \"price\": 3084.172061544591,\n          \"type\": \"ticket\",\n          \"taxRate\": 2116.0630365441557,\n          \"taxInfo\": {\n            \"serviceTypeId\": \"string\",\n            \"exceptionId\": \"string\",\n            \"proceedsAccountId\": \"string\",\n            \"proceedsAccountCode\": \"string\",\n            \"taxItems\": [\n              {\n                \"rate\": 7270.140035665782,\n                \"perUnit\": 810.5863132949731,\n                \"total\": 9980.521307722373,\n                \"name\": \"string\",\n                \"taxTypeId\": \"string\",\n                \"netTotal\": 7339.117976163362,\n                \"netPerUnit\": 4571.07141711824,\n                \"taxPayableAccountId\": \"string\",\n                \"taxPayableAccountCode\": \"string\"\n              },\n              {\n                \"rate\": 2833.788160543641,\n                \"perUnit\": 6216.489180847373,\n                \"total\": 7107.037589046024,\n                \"name\": \"string\",\n                \"taxTypeId\": \"string\",\n                \"netTotal\": 6253.996295591796,\n                \"netPerUnit\": 9260.114730253446,\n                \"taxPayableAccountId\": \"string\",\n                \"taxPayableAccountCode\": \"string\"\n              }\n            ]\n          },\n          \"components\": [\n            \"string\",\n            \"string\"\n          ],\n          \"offerItemId\": \"string\",\n          \"referenceCartItemId\": \"string\",\n          \"name\": \"string\"\n        },\n        {\n          \"price\": 248.523040976234,\n          \"type\": \"ticket\",\n          \"taxRate\": 8311.968156586312,\n          \"taxInfo\": {\n            \"serviceTypeId\": \"string\",\n            \"exceptionId\": \"string\",\n            \"proceedsAccountId\": \"string\",\n            \"proceedsAccountCode\": \"string\",\n            \"taxItems\": [\n              {\n                \"rate\": 5562.828822471659,\n                \"perUnit\": 1721.2378495352366,\n                \"total\": 8620.539075198618,\n                \"name\": \"string\",\n                \"taxTypeId\": \"string\",\n                \"netTotal\": 1312.1712318993073,\n                \"netPerUnit\": 8246.19325768893,\n                \"taxPayableAccountId\": \"string\",\n                \"taxPayableAccountCode\": \"string\"\n              },\n              {\n                \"rate\": 3682.0915551311086,\n                \"perUnit\": 5536.992308104925,\n                \"total\": 9561.211295046069,\n                \"name\": \"string\",\n                \"taxTypeId\": \"string\",\n                \"netTotal\": 8861.62133129483,\n                \"netPerUnit\": 6858.268885908126,\n                \"taxPayableAccountId\": \"string\",\n                \"taxPayableAccountCode\": \"string\"\n              }\n            ]\n          },\n          \"components\": [\n            \"string\",\n            \"string\"\n          ],\n          \"offerItemId\": \"string\",\n          \"referenceCartItemId\": \"string\",\n          \"name\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"total\": 356\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d08e0a1-758f-44a0-bcb1-d43d0d45ddd2",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "credit-notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "58e50da5-1a30-49da-afbf-ac3bbc4bfa54",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "credit-notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b8ea1cfc-be3b-4a7e-8895-f8bb02b6d916",
+          "name": "credit-notes/info",
+          "request": {
+            "name": "credit-notes/info",
+            "description": {
+              "content": "Get Credit Note Info",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "public",
+                "credit-notes",
+                ":id",
+                "info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "secret",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "14abc568-c711-4f4c-966a-587ba400fe54",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "credit-notes",
+                    ":id",
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timezone\": \"Europe/Amsterdam\",\n  \"creditNote\": {\n    \"customerId\": \"string\",\n    \"sellerId\": \"string\",\n    \"amount\": 3660.741279217835,\n    \"currency\": \"ISK\",\n    \"source\": {\n      \"type\": \"resell_offer\",\n      \"offerId\": \"string\"\n    },\n    \"createdAt\": \"2006-09-08T19:47:30.711Z\",\n    \"updatedAt\": \"2012-08-01T03:34:07.111Z\",\n    \"_id\": \"string\",\n    \"transactionId\": \"string\",\n    \"secret\": \"string\",\n    \"no\": \"string\",\n    \"counter\": \"string\",\n    \"items\": [\n      {\n        \"price\": 1860.1334169575368,\n        \"type\": \"ticket\",\n        \"taxRate\": 1700.171238145931,\n        \"taxInfo\": {\n          \"serviceTypeId\": \"string\",\n          \"exceptionId\": \"string\",\n          \"proceedsAccountId\": \"string\",\n          \"proceedsAccountCode\": \"string\",\n          \"taxItems\": [\n            {\n              \"rate\": 2236.606054472291,\n              \"perUnit\": 8267.381145286272,\n              \"total\": 5414.577133340473,\n              \"name\": \"string\",\n              \"taxTypeId\": \"string\",\n              \"netTotal\": 4311.651161544385,\n              \"netPerUnit\": 5916.996534395646,\n              \"taxPayableAccountId\": \"string\",\n              \"taxPayableAccountCode\": \"string\"\n            },\n            {\n              \"rate\": 9722.588479671767,\n              \"perUnit\": 1801.7637982748736,\n              \"total\": 2462.3802826140095,\n              \"name\": \"string\",\n              \"taxTypeId\": \"string\",\n              \"netTotal\": 9506.843273608114,\n              \"netPerUnit\": 5021.273837720296,\n              \"taxPayableAccountId\": \"string\",\n              \"taxPayableAccountCode\": \"string\"\n            }\n          ]\n        },\n        \"components\": [\n          \"string\",\n          \"string\"\n        ],\n        \"offerItemId\": \"string\",\n        \"referenceCartItemId\": \"string\",\n        \"name\": \"string\"\n      },\n      {\n        \"price\": 1483.2652880356688,\n        \"type\": \"ticket\",\n        \"taxRate\": 2302.2881747774613,\n        \"taxInfo\": {\n          \"serviceTypeId\": \"string\",\n          \"exceptionId\": \"string\",\n          \"proceedsAccountId\": \"string\",\n          \"proceedsAccountCode\": \"string\",\n          \"taxItems\": [\n            {\n              \"rate\": 8166.485642645046,\n              \"perUnit\": 9799.169577053888,\n              \"total\": 4920.432563523167,\n              \"name\": \"string\",\n              \"taxTypeId\": \"string\",\n              \"netTotal\": 1824.908174817298,\n              \"netPerUnit\": 9655.498613852911,\n              \"taxPayableAccountId\": \"string\",\n              \"taxPayableAccountCode\": \"string\"\n            },\n            {\n              \"rate\": 7424.671283905457,\n              \"perUnit\": 5399.748213419993,\n              \"total\": 8293.116463126193,\n              \"name\": \"string\",\n              \"taxTypeId\": \"string\",\n              \"netTotal\": 406.309172957392,\n              \"netPerUnit\": 7134.030967079791,\n              \"taxPayableAccountId\": \"string\",\n              \"taxPayableAccountCode\": \"string\"\n            }\n          ]\n        },\n        \"components\": [\n          \"string\",\n          \"string\"\n        ],\n        \"offerItemId\": \"string\",\n        \"referenceCartItemId\": \"string\",\n        \"name\": \"string\"\n      }\n    ]\n  },\n  \"transaction\": {\n    \"_id\": \"string\",\n    \"sellerId\": \"string\",\n    \"eventId\": \"string\",\n    \"realPrice\": 8975.085267110995,\n    \"status\": \"CANCELED\",\n    \"secret\": \"string\",\n    \"customerId\": \"string\",\n    \"company\": \"string\",\n    \"name\": \"string\",\n    \"prename\": \"string\",\n    \"lastname\": \"string\",\n    \"email\": \"uh1cs@dpoYumpByn.ici\",\n    \"street\": \"string\",\n    \"line2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"country\": \"string\",\n    \"postal\": \"string\",\n    \"deliveryAddress\": {\n      \"fullAddress\": \"string\",\n      \"street\": \"string\",\n      \"line2\": \"string\",\n      \"postal\": \"string\",\n      \"city\": \"string\",\n      \"country\": \"string\",\n      \"state\": \"string\",\n      \"name\": \"string\"\n    },\n    \"identification\": [\n      {\n        \"type\": \"spain_tax_id\",\n        \"identifier\": \"string\"\n      },\n      {\n        \"type\": \"spain_tax_id\",\n        \"identifier\": \"string\"\n      }\n    ],\n    \"currency\": \"EUR\",\n    \"regularPrice\": 6211.19838454062,\n    \"paymentCharge\": 9680.816292553434,\n    \"innerCharge\": 2177.0484136260393,\n    \"outerCharge\": 1406.4426653171347,\n    \"innerFeeComponents\": {\n      \"_id\": \"string\",\n      \"fix\": [\n        {\n          \"_id\": \"string\",\n          \"amount\": 6852.978301439091,\n          \"value\": 5864.657543212514,\n          \"total\": 8303.571363862657,\n          \"type\": \"onHardTicket\",\n          \"name\": \"string\",\n          \"publicName\": \"string\",\n          \"exposed\": false,\n          \"scheme\": {\n            \"schemeId\": \"string\",\n            \"feeId\": \"string\"\n          }\n        },\n        {\n          \"_id\": \"string\",\n          \"amount\": 5115.837650823943,\n          \"value\": 9520.293732560456,\n          \"total\": 7925.771370309104,\n          \"type\": \"onTicket\",\n          \"name\": \"string\",\n          \"publicName\": \"string\",\n          \"exposed\": false,\n          \"scheme\": {\n            \"schemeId\": \"string\",\n            \"feeId\": \"string\"\n          }\n        }\n      ],\n      \"var\": [\n        {\n          \"_id\": \"string\",\n          \"amount\": 120.56855442334368,\n          \"value\": 9937.354715701036,\n          \"total\": 9477.784015860136,\n          \"type\": \"onTicket\",\n          \"name\": \"string\",\n          \"publicName\": \"string\",\n          \"exposed\": false,\n          \"scheme\": {\n            \"schemeId\": \"string\",\n            \"feeId\": \"string\"\n          }\n        },\n        {\n          \"_id\": \"string\",\n          \"amount\": 4732.1248358609155,\n          \"value\": 2217.2708718845834,\n          \"total\": 9112.245030314783,\n          \"type\": \"onCart\",\n          \"name\": \"string\",\n          \"publicName\": \"string\",\n          \"exposed\": true,\n          \"scheme\": {\n            \"schemeId\": \"string\",\n            \"feeId\": \"string\"\n          }\n        }\n      ]\n    },\n    \"outerFeeComponents\": {\n      \"_id\": \"string\",\n      \"fix\": [\n        {\n          \"_id\": \"string\",\n          \"amount\": 9380.838506722197,\n          \"value\": 5327.303640100467,\n          \"total\": 6053.233513167124,\n          \"type\": \"onTicket\",\n          \"name\": \"string\",\n          \"publicName\": \"string\",\n          \"exposed\": true,\n          \"scheme\": {\n            \"schemeId\": \"string\",\n            \"feeId\": \"string\"\n          }\n        },\n        {\n          \"_id\": \"string\",\n          \"amount\": 7571.033160991634,\n          \"value\": 2217.317965181559,\n          \"total\": 2084.8081427498346,\n          \"type\": \"onHardTicket\",\n          \"name\": \"string\",\n          \"publicName\": \"string\",\n          \"exposed\": true,\n          \"scheme\": {\n            \"schemeId\": \"string\",\n            \"feeId\": \"string\"\n          }\n        }\n      ],\n      \"var\": [\n        {\n          \"_id\": \"string\",\n          \"amount\": 4426.886263822297,\n          \"value\": 7485.511148935463,\n          \"total\": 312.4724083910135,\n          \"type\": \"onCart\",\n          \"name\": \"string\",\n          \"publicName\": \"string\",\n          \"exposed\": false,\n          \"scheme\": {\n            \"schemeId\": \"string\",\n            \"feeId\": \"string\"\n          }\n        },\n        {\n          \"_id\": \"string\",\n          \"amount\": 8830.164622426793,\n          \"value\": 9862.893121418752,\n          \"total\": 1147.2087411445432,\n          \"type\": \"onTicket\",\n          \"name\": \"string\",\n          \"publicName\": \"string\",\n          \"exposed\": true,\n          \"scheme\": {\n            \"schemeId\": \"string\",\n            \"feeId\": \"string\"\n          }\n        }\n      ]\n    },\n    \"cancellationFee\": {\n      \"_id\": \"string\",\n      \"amount\": 6454.658256837225,\n      \"value\": 451.2237691673515,\n      \"total\": 8077.98667698175,\n      \"type\": \"onCart\",\n      \"name\": \"string\",\n      \"publicName\": \"string\",\n      \"exposed\": false,\n      \"scheme\": {\n        \"schemeId\": \"string\",\n        \"feeId\": \"string\"\n      }\n    },\n    \"cancellationInfo\": {\n      \"cancellableItems\": [\n        {\n          \"cartItemId\": \"string\",\n          \"type\": \"insurance\",\n          \"price\": 4887.477704481854,\n          \"name\": \"string\",\n          \"taxRate\": 1495.4459333268899,\n          \"origin\": {\n            \"fee\": {\n              \"_id\": \"string\",\n              \"amount\": 6942.284422908002,\n              \"value\": 7774.4060015319465,\n              \"total\": 2975.3603728834687,\n              \"type\": \"onTicket\",\n              \"name\": \"string\",\n              \"publicName\": \"string\",\n              \"exposed\": true,\n              \"scheme\": {\n                \"schemeId\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"feeId\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          },\n          \"cancellationFee\": {\n            \"_id\": \"string\",\n            \"amount\": 9118.97388132762,\n            \"value\": 9045.82008653711,\n            \"total\": 7633.807272770849,\n            \"type\": \"onHardTicket\",\n            \"name\": \"string\",\n            \"publicName\": \"string\",\n            \"exposed\": false,\n            \"scheme\": {\n              \"schemeId\": \"string\",\n              \"feeId\": \"string\"\n            }\n          },\n          \"refundId\": \"string\",\n          \"cancelledAt\": \"1978-03-17T02:49:05.587Z\"\n        },\n        {\n          \"cartItemId\": \"string\",\n          \"type\": \"product\",\n          \"price\": 9631.463191208784,\n          \"name\": \"string\",\n          \"taxRate\": 4652.393965111694,\n          \"origin\": {\n            \"fee\": {\n              \"_id\": \"string\",\n              \"amount\": 2224.0842698144925,\n              \"value\": 1731.8880281799165,\n              \"total\": 3649.676469409041,\n              \"type\": \"onHardTicket\",\n              \"name\": \"string\",\n              \"publicName\": \"string\",\n              \"exposed\": true,\n              \"scheme\": {\n                \"schemeId\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"feeId\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          },\n          \"cancellationFee\": {\n            \"_id\": \"string\",\n            \"amount\": 6768.104219160167,\n            \"value\": 1307.9415764799562,\n            \"total\": 8717.503748497576,\n            \"type\": \"onHardTicket\",\n            \"name\": \"string\",\n            \"publicName\": \"string\",\n            \"exposed\": true,\n            \"scheme\": {\n              \"schemeId\": \"string\",\n              \"feeId\": \"string\"\n            }\n          },\n          \"refundId\": \"string\",\n          \"cancelledAt\": \"1990-10-15T09:02:00.626Z\"\n        }\n      ]\n    },\n    \"taxRate\": 0.19,\n    \"createdAt\": \"1965-05-07T21:47:38.184Z\",\n    \"updatedAt\": \"2006-09-11T19:08:26.506Z\",\n    \"psp\": \"string\",\n    \"paymentMethod\": \"external\",\n    \"paymentInfo\": {\n      \"_id\": \"string\",\n      \"psp\": \"string\",\n      \"gateway\": \"managed\",\n      \"providerType\": \"vivenu\",\n      \"providerId\": \"string\",\n      \"method\": \"string\",\n      \"methodVariant\": \"string\",\n      \"locale\": \"string\",\n      \"riskLevel\": \"string\",\n      \"riskScore\": 7894.626855214812,\n      \"refundId\": \"string\",\n      \"collectedApplicationFee\": 2383.516148368282\n    },\n    \"paymentStatus\": \"AWAITING\",\n    \"origin\": \"rebooking\",\n    \"userId\": \"string\",\n    \"posId\": \"string\",\n    \"posInfo\": {\n      \"_id\": \"string\",\n      \"sessionId\": \"string\",\n      \"billingNo\": \"string\",\n      \"taxId\": \"string\",\n      \"paymentMethod\": \"string\",\n      \"canceledAt\": \"1971-06-21T10:24:05.781Z\",\n      \"cancellationNo\": \"1957-07-18T21:08:50.071Z\"\n    },\n    \"history\": [\n      {\n        \"_id\": \"string\",\n        \"date\": \"1995-11-23T09:10:00.913Z\",\n        \"title\": \"string\",\n        \"message\": \"string\",\n        \"type\": \"YOURTICKET\",\n        \"risk\": \"NEUTRAL\"\n      },\n      {\n        \"_id\": \"string\",\n        \"date\": \"1989-05-04T21:53:33.548Z\",\n        \"title\": \"string\",\n        \"message\": \"string\",\n        \"type\": \"YOURTICKET\",\n        \"risk\": \"NEUTRAL\"\n      }\n    ],\n    \"historyEntries\": [\n      {\n        \"_id\": \"string\",\n        \"date\": \"2002-04-01T11:13:42.495Z\",\n        \"userId\": \"string\",\n        \"data\": {},\n        \"type\": \"pos.created\",\n        \"risk\": \"NEUTRAL\"\n      },\n      {\n        \"_id\": \"string\",\n        \"date\": \"1984-07-19T12:41:51.026Z\",\n        \"userId\": \"string\",\n        \"data\": {},\n        \"type\": \"payment.chargeback\",\n        \"risk\": \"NEUTRAL\"\n      }\n    ],\n    \"ticketMailSend\": false,\n    \"orderMailSend\": false,\n    \"extraFields\": {},\n    \"channel\": \"string\",\n    \"underShop\": \"string\",\n    \"userAgent\": {\n      \"_id\": \"string\",\n      \"ua\": \"string\",\n      \"browser\": {},\n      \"device\": {},\n      \"engine\": {},\n      \"os\": {},\n      \"cpu\": {}\n    },\n    \"ipLookup\": {\n      \"ip\": \"string\",\n      \"lookup\": {\n        \"range\": [\n          2302.9461345890113,\n          6602.943002682131\n        ],\n        \"country\": \"string\",\n        \"region\": \"string\",\n        \"eu\": \"string\",\n        \"timezone\": \"string\",\n        \"city\": \"string\",\n        \"ll\": [\n          9083.853412745257,\n          3281.6033050092487\n        ],\n        \"metro\": 4001.296545948461,\n        \"area\": 3819.688312807438\n      }\n    },\n    \"locationCenter\": [\n      1945.007909069556,\n      1061.302599626408\n    ],\n    \"vouchers\": [\n      \"string\",\n      \"string\"\n    ],\n    \"redeemedVouchers\": {\n      \"totalRedeemedAmount\": 1110.6036550818933,\n      \"vouchers\": [\n        {\n          \"code\": \"string\",\n          \"redeemedAmount\": 8639.097328495343,\n          \"_id\": \"string\"\n        },\n        {\n          \"code\": \"string\",\n          \"redeemedAmount\": 5727.860183675628,\n          \"_id\": \"string\"\n        }\n      ]\n    },\n    \"appliedCoupons\": [\n      {\n        \"_id\": \"string\",\n        \"code\": \"string\"\n      },\n      {\n        \"_id\": \"string\",\n        \"code\": \"string\"\n      }\n    ],\n    \"appliedDiscountGroups\": [\n      \"string\",\n      \"string\"\n    ],\n    \"posDiscounts\": [\n      {\n        \"_id\": \"string\",\n        \"name\": \"string\",\n        \"value\": 8115.9760653073745,\n        \"discountType\": \"fix\"\n      },\n      {\n        \"_id\": \"string\",\n        \"name\": \"string\",\n        \"value\": 4761.991332568277,\n        \"discountType\": \"fix\"\n      }\n    ],\n    \"preferredLanguage\": \"de\",\n    \"cancellationReason\": \"REQUESTED_BY_CUSTOMER\",\n    \"appliedDiscountInfo\": {\n      \"items\": [\n        {\n          \"_id\": \"string\",\n          \"itemId\": \"string\",\n          \"amount\": 4049.261020948156,\n          \"regularPrice\": 2600.630622363418,\n          \"price\": 9020.942188820762,\n          \"varDiscounts\": [\n            {\n              \"_id\": \"string\",\n              \"type\": \"fix\",\n              \"discountId\": \"string\",\n              \"category\": \"groupDiscount\",\n              \"name\": \"string\",\n              \"value\": 4357.460975613186,\n              \"allowedItems\": [\n                \"string\",\n                \"string\"\n              ]\n            },\n            {\n              \"_id\": \"string\",\n              \"type\": \"fixPerItem\",\n              \"discountId\": \"string\",\n              \"category\": \"system\",\n              \"name\": \"string\",\n              \"value\": 9092.281369963555,\n              \"allowedItems\": [\n                \"string\",\n                \"string\"\n              ]\n            }\n          ],\n          \"fixDiscounts\": [\n            {\n              \"_id\": \"string\",\n              \"type\": \"waiveFees\",\n              \"discountId\": \"string\",\n              \"category\": \"voucher\",\n              \"name\": \"string\",\n              \"value\": 2081.0669745001064,\n              \"allowedItems\": [\n                \"string\",\n                \"string\"\n              ]\n            },\n            {\n              \"_id\": \"string\",\n              \"type\": \"fix\",\n              \"discountId\": \"string\",\n              \"category\": \"voucher\",\n              \"name\": \"string\",\n              \"value\": 8198.96788426402,\n              \"allowedItems\": [\n                \"string\",\n                \"string\"\n              ]\n            }\n          ]\n        },\n        {\n          \"_id\": \"string\",\n          \"itemId\": \"string\",\n          \"amount\": 9813.78918891264,\n          \"regularPrice\": 7978.025863557657,\n          \"price\": 3231.5350485757244,\n          \"varDiscounts\": [\n            {\n              \"_id\": \"string\",\n              \"type\": \"waiveFees\",\n              \"discountId\": \"string\",\n              \"category\": \"posDiscount\",\n              \"name\": \"string\",\n              \"value\": 9999.321087582322,\n              \"allowedItems\": [\n                \"string\",\n                \"string\"\n              ]\n            },\n            {\n              \"_id\": \"string\",\n              \"type\": \"fix\",\n              \"discountId\": \"string\",\n              \"category\": \"system\",\n              \"name\": \"string\",\n              \"value\": 2268.6653119124735,\n              \"allowedItems\": [\n                \"string\",\n                \"string\"\n              ]\n            }\n          ],\n          \"fixDiscounts\": [\n            {\n              \"_id\": \"string\",\n              \"type\": \"fix\",\n              \"discountId\": \"string\",\n              \"category\": \"coupon\",\n              \"name\": \"string\",\n              \"value\": 57.94360070431992,\n              \"allowedItems\": [\n                \"string\",\n                \"string\"\n              ]\n            },\n            {\n              \"_id\": \"string\",\n              \"type\": \"waiveFees\",\n              \"discountId\": \"string\",\n              \"category\": \"system\",\n              \"name\": \"string\",\n              \"value\": 9425.005076701676,\n              \"allowedItems\": [\n                \"string\",\n                \"string\"\n              ]\n            }\n          ]\n        }\n      ],\n      \"discounts\": [\n        {\n          \"_id\": \"string\",\n          \"type\": \"waiveFees\",\n          \"discountId\": \"string\",\n          \"category\": \"coupon\",\n          \"name\": \"string\",\n          \"value\": 8609.115700037779,\n          \"allowedItems\": [\n            \"string\",\n            \"string\"\n          ],\n          \"maxItemsInCart\": 9753.70824210898,\n          \"maxAbsoluteValue\": 9802.370328426234,\n          \"absoluteDiscountValue\": 1914.186638364982\n        },\n        {\n          \"_id\": \"string\",\n          \"type\": \"fixPerItem\",\n          \"discountId\": \"string\",\n          \"category\": \"modifier\",\n          \"name\": \"string\",\n          \"value\": 3828.998526606163,\n          \"allowedItems\": [\n            \"string\",\n            \"string\"\n          ],\n          \"maxItemsInCart\": 6586.739874858771,\n          \"maxAbsoluteValue\": 2289.390503500147,\n          \"absoluteDiscountValue\": 1031.3669388237622\n        }\n      ]\n    },\n    \"invoiceVersion\": \"v2\",\n    \"seatingReservationToken\": \"string\"\n  },\n  \"customer\": {\n    \"_id\": \"string\",\n    \"primaryEmail\": \"ZOuKS4u@EkQ.yx\",\n    \"company\": \"string\",\n    \"name\": \"string\",\n    \"prename\": \"string\",\n    \"lastname\": \"string\",\n    \"image\": \"string\",\n    \"number\": 5176.916954846549,\n    \"phone\": \"string\",\n    \"location\": {\n      \"street\": \"string\",\n      \"line2\": \"string\",\n      \"postal\": \"string\",\n      \"city\": \"string\",\n      \"locale\": \"string\",\n      \"state\": \"string\",\n      \"center\": [\n        9264.937889083656,\n        1613.4952902871414\n      ],\n      \"country\": \"string\"\n    },\n    \"sellerId\": \"string\",\n    \"notes\": \"string\",\n    \"extraFields\": {},\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"segments\": [\n      \"string\",\n      \"string\"\n    ],\n    \"blocked\": false,\n    \"verified\": false,\n    \"identification\": [\n      {\n        \"type\": \"spain_tax_id\",\n        \"identifier\": \"string\"\n      },\n      {\n        \"type\": \"spain_tax_id\",\n        \"identifier\": \"string\"\n      }\n    ],\n    \"_account\": {\n      \"verificationToken\": \"string\",\n      \"passwordResetToken\": \"string\",\n      \"limitations\": {\n        \"nextVerificationMailRequest\": \"1954-10-10T19:00:08.378Z\"\n      },\n      \"loginType\": \"identityprovider\"\n    },\n    \"meta\": {},\n    \"externalId\": \"string\",\n    \"createdAt\": \"1975-08-09T21:55:11.663Z\",\n    \"updatedAt\": \"2005-06-02T23:50:47.480Z\"\n  },\n  \"seller\": {\n    \"_id\": \"string\",\n    \"name\": \"string\",\n    \"image\": \"string\",\n    \"city\": \"string\",\n    \"documentSettings\": {\n      \"image\": \"string\",\n      \"invoice\": {\n        \"footerColumns\": [\n          {\n            \"text\": \"string\",\n            \"active\": true\n          },\n          {\n            \"text\": \"string\",\n            \"active\": false\n          }\n        ]\n      }\n    },\n    \"street\": \"string\",\n    \"postal\": \"string\",\n    \"locationName\": \"string\",\n    \"country\": \"string\",\n    \"taxRate\": 0.19,\n    \"taxNo\": \"string\",\n    \"localTaxName\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac5f6bec-1148-4131-a090-312eecc0d42f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "credit-notes",
+                    ":id",
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "445dac87-247e-410d-8e1c-fda402954c4e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "credit-notes",
+                    ":id",
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://vivenu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ae9a35e2-ddb7-4a96-80f4-8d7fb0325e38",
+    "name": "vivenu access-lists credit-notes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "vivenu API Documentation\n\nContact Support:\n Name: vivenu GmbH",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,183 @@
+{
+  "item": [
+    {
+      "id": "597cc5b8-f7b6-4f3f-b50f-494425beaa66",
+      "name": "methods",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "40e197e5-c638-42e4-9748-81a4db056bdd",
+          "name": "get sellers payment methods",
+          "request": {
+            "name": "get sellers payment methods",
+            "description": {
+              "content": "Get Sellers Payment Methods",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "public",
+                "sellers",
+                ":id",
+                "payment-methods"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "channel",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9f92f9de-f6d0-4d07-a2f8-f7f91706a6c2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "sellers",
+                    ":id",
+                    "payment-methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"paypal\": true,\n    \"klarna\": false,\n    \"ideal\": true,\n    \"sepa\": true,\n    \"creditcard\": false,\n    \"mobilepay\": false,\n    \"gateways\": [\n      {\n        \"_id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"stripe\",\n        \"data\": {}\n      },\n      {\n        \"_id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"stripe\",\n        \"data\": {}\n      }\n    ]\n  },\n  {\n    \"paypal\": false,\n    \"klarna\": false,\n    \"ideal\": false,\n    \"sepa\": false,\n    \"creditcard\": true,\n    \"mobilepay\": true,\n    \"gateways\": [\n      {\n        \"_id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"stripe\",\n        \"data\": {}\n      },\n      {\n        \"_id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"stripe\",\n        \"data\": {}\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e668780f-7c0d-4a2a-8c4e-95699fa3406c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "sellers",
+                    ":id",
+                    "payment-methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://vivenu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b632ec25-e33a-4fd3-81eb-cdaa7e8a2eca",
+    "name": "vivenu access-lists methods API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "vivenu API Documentation\n\nContact Support:\n Name: vivenu GmbH",
+      "type": "text/plain"
+    }
+  }
+}

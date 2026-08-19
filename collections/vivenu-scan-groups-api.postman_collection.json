@@ -1,0 +1,1161 @@
+{
+  "item": [
+    {
+      "id": "b6b8d5de-c445-4961-b407-b629c1d532c3",
+      "name": "scan-groups",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "841db5f7-f97c-4858-8a11-f7a0d9052b16",
+          "name": "get all scan groups",
+          "request": {
+            "name": "get all scan groups",
+            "description": {
+              "content": "Get All Scan Groups",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "scan-groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "25",
+                  "description": "A limit on the number of objects to be returned. Can range between 1 and 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "0",
+                  "description": "The number of objects to skip for the requested result"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "The filter by name."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "60a6ae2e-a58e-4a2b-b2b8-92700bd9b981",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "scan-groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"docs\": [\n    {\n      \"_id\": \"string\",\n      \"name\": \"string\",\n      \"sellerId\": \"string\",\n      \"createdAt\": \"1998-04-02T08:00:03.432Z\",\n      \"updatedAt\": \"1993-12-22T06:23:12.200Z\",\n      \"scanConfig\": {\n        \"mode\": \"default\",\n        \"events\": [\n          {\n            \"eventId\": \"string\",\n            \"allowAllTicketTypes\": false,\n            \"allowedTicketTypeIds\": [\n              \"string\",\n              \"string\"\n            ],\n            \"timeslotSettings\": {\n              \"beforeMinutes\": 0,\n              \"afterMinutes\": 0\n            }\n          },\n          {\n            \"eventId\": \"string\",\n            \"allowAllTicketTypes\": false,\n            \"allowedTicketTypeIds\": [\n              \"string\",\n              \"string\"\n            ],\n            \"timeslotSettings\": {\n              \"beforeMinutes\": 0,\n              \"afterMinutes\": 0\n            }\n          }\n        ],\n        \"scanZoneId\": \"string\",\n        \"scanTypes\": {\n          \"checkin\": true,\n          \"checkout\": true\n        },\n        \"enableMultiCheckin\": false,\n        \"checkTimeslots\": false,\n        \"tapAndGo\": {\n          \"enabled\": false,\n          \"eventIds\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      },\n      \"deviceSettings\": {\n        \"colorSettings\": {\n          \"success\": \"green\",\n          \"declined\": \"red\",\n          \"repeated\": \"orange\",\n          \"highlighted\": \"blue\",\n          \"actionRequired\": \"green\"\n        },\n        \"enableSoundFeedback\": true,\n        \"enableHapticFeedback\": false,\n        \"scanRevealInterval\": 1,\n        \"ticketSyncInterval\": 15\n      }\n    },\n    {\n      \"_id\": \"string\",\n      \"name\": \"string\",\n      \"sellerId\": \"string\",\n      \"createdAt\": \"1999-05-15T02:26:47.080Z\",\n      \"updatedAt\": \"1968-04-04T21:41:16.704Z\",\n      \"scanConfig\": {\n        \"mode\": \"default\",\n        \"events\": [\n          {\n            \"eventId\": \"string\",\n            \"allowAllTicketTypes\": false,\n            \"allowedTicketTypeIds\": [\n              \"string\",\n              \"string\"\n            ],\n            \"timeslotSettings\": {\n              \"beforeMinutes\": 0,\n              \"afterMinutes\": 0\n            }\n          },\n          {\n            \"eventId\": \"string\",\n            \"allowAllTicketTypes\": false,\n            \"allowedTicketTypeIds\": [\n              \"string\",\n              \"string\"\n            ],\n            \"timeslotSettings\": {\n              \"beforeMinutes\": 0,\n              \"afterMinutes\": 0\n            }\n          }\n        ],\n        \"scanZoneId\": \"string\",\n        \"scanTypes\": {\n          \"checkin\": true,\n          \"checkout\": true\n        },\n        \"enableMultiCheckin\": false,\n        \"checkTimeslots\": true,\n        \"tapAndGo\": {\n          \"enabled\": false,\n          \"eventIds\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      },\n      \"deviceSettings\": {\n        \"colorSettings\": {\n          \"success\": \"green\",\n          \"declined\": \"red\",\n          \"repeated\": \"orange\",\n          \"highlighted\": \"blue\",\n          \"actionRequired\": \"orange\"\n        },\n        \"enableSoundFeedback\": false,\n        \"enableHapticFeedback\": false,\n        \"scanRevealInterval\": 1,\n        \"ticketSyncInterval\": 600\n      }\n    }\n  ],\n  \"total\": 619.2221566117385\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2fa7b6ad-ab6c-42a1-b025-4e19d4681754",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "scan-groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "49344b64-5d26-4755-ae5d-b838a3df6ee2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "scan-groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "25"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af8717b0-e4fa-461c-b8d2-8f0ee29cde24",
+          "name": "create a scan group",
+          "request": {
+            "name": "create a scan group",
+            "description": {
+              "content": "Create a Scan Group",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "scan-groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"scanConfig\": {\n    \"mode\": \"<string>\",\n    \"events\": [\n      {\n        \"eventId\": \"<string>\",\n        \"allowAllTicketTypes\": false,\n        \"allowedTicketTypeIds\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"timeslotSettings\": {\n          \"beforeMinutes\": 0,\n          \"afterMinutes\": 0\n        }\n      },\n      {\n        \"eventId\": \"<string>\",\n        \"allowAllTicketTypes\": false,\n        \"allowedTicketTypeIds\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"timeslotSettings\": {\n          \"beforeMinutes\": 0,\n          \"afterMinutes\": 0\n        }\n      }\n    ],\n    \"scanZoneId\": \"<string>\",\n    \"scanTypes\": {\n      \"checkin\": \"<boolean>\",\n      \"checkout\": \"<boolean>\"\n    },\n    \"enableMultiCheckin\": \"<boolean>\",\n    \"checkTimeslots\": \"<boolean>\",\n    \"tapAndGo\": {\n      \"enabled\": \"<boolean>\",\n      \"eventIds\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"deviceSettings\": {\n    \"colorSettings\": {\n      \"success\": \"<string>\",\n      \"declined\": \"<string>\",\n      \"repeated\": \"<string>\",\n      \"highlighted\": \"<string>\",\n      \"actionRequired\": \"<string>\"\n    },\n    \"enableSoundFeedback\": \"<boolean>\",\n    \"enableHapticFeedback\": \"<boolean>\",\n    \"scanRevealInterval\": \"<number>\",\n    \"ticketSyncInterval\": \"<number>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e2edbfa5-1258-4560-bde4-fd8c0c21963f",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "scan-groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scanConfig\": {\n    \"mode\": \"<string>\",\n    \"events\": [\n      {\n        \"eventId\": \"<string>\",\n        \"allowAllTicketTypes\": false,\n        \"allowedTicketTypeIds\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"timeslotSettings\": {\n          \"beforeMinutes\": 0,\n          \"afterMinutes\": 0\n        }\n      },\n      {\n        \"eventId\": \"<string>\",\n        \"allowAllTicketTypes\": false,\n        \"allowedTicketTypeIds\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"timeslotSettings\": {\n          \"beforeMinutes\": 0,\n          \"afterMinutes\": 0\n        }\n      }\n    ],\n    \"scanZoneId\": \"<string>\",\n    \"scanTypes\": {\n      \"checkin\": \"<boolean>\",\n      \"checkout\": \"<boolean>\"\n    },\n    \"enableMultiCheckin\": \"<boolean>\",\n    \"checkTimeslots\": \"<boolean>\",\n    \"tapAndGo\": {\n      \"enabled\": \"<boolean>\",\n      \"eventIds\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"deviceSettings\": {\n    \"colorSettings\": {\n      \"success\": \"<string>\",\n      \"declined\": \"<string>\",\n      \"repeated\": \"<string>\",\n      \"highlighted\": \"<string>\",\n      \"actionRequired\": \"<string>\"\n    },\n    \"enableSoundFeedback\": \"<boolean>\",\n    \"enableHapticFeedback\": \"<boolean>\",\n    \"scanRevealInterval\": \"<number>\",\n    \"ticketSyncInterval\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"sellerId\": \"string\",\n  \"createdAt\": \"1949-04-07T04:25:15.562Z\",\n  \"updatedAt\": \"1954-12-30T16:47:14.253Z\",\n  \"scanConfig\": {\n    \"mode\": \"lock\",\n    \"events\": [\n      {\n        \"eventId\": \"string\",\n        \"allowAllTicketTypes\": false,\n        \"allowedTicketTypeIds\": [\n          \"string\",\n          \"string\"\n        ],\n        \"timeslotSettings\": {\n          \"beforeMinutes\": 0,\n          \"afterMinutes\": 0\n        }\n      },\n      {\n        \"eventId\": \"string\",\n        \"allowAllTicketTypes\": false,\n        \"allowedTicketTypeIds\": [\n          \"string\",\n          \"string\"\n        ],\n        \"timeslotSettings\": {\n          \"beforeMinutes\": 0,\n          \"afterMinutes\": 0\n        }\n      }\n    ],\n    \"scanZoneId\": \"string\",\n    \"scanTypes\": {\n      \"checkin\": true,\n      \"checkout\": false\n    },\n    \"enableMultiCheckin\": false,\n    \"checkTimeslots\": true,\n    \"tapAndGo\": {\n      \"enabled\": false,\n      \"eventIds\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  },\n  \"deviceSettings\": {\n    \"colorSettings\": {\n      \"success\": \"green\",\n      \"declined\": \"red\",\n      \"repeated\": \"pink\",\n      \"highlighted\": \"orange\",\n      \"actionRequired\": \"green\"\n    },\n    \"enableSoundFeedback\": true,\n    \"enableHapticFeedback\": true,\n    \"scanRevealInterval\": 10,\n    \"ticketSyncInterval\": 900\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbd56ec8-6d74-4e84-ad08-817c6d7a4655",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "scan-groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scanConfig\": {\n    \"mode\": \"<string>\",\n    \"events\": [\n      {\n        \"eventId\": \"<string>\",\n        \"allowAllTicketTypes\": false,\n        \"allowedTicketTypeIds\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"timeslotSettings\": {\n          \"beforeMinutes\": 0,\n          \"afterMinutes\": 0\n        }\n      },\n      {\n        \"eventId\": \"<string>\",\n        \"allowAllTicketTypes\": false,\n        \"allowedTicketTypeIds\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"timeslotSettings\": {\n          \"beforeMinutes\": 0,\n          \"afterMinutes\": 0\n        }\n      }\n    ],\n    \"scanZoneId\": \"<string>\",\n    \"scanTypes\": {\n      \"checkin\": \"<boolean>\",\n      \"checkout\": \"<boolean>\"\n    },\n    \"enableMultiCheckin\": \"<boolean>\",\n    \"checkTimeslots\": \"<boolean>\",\n    \"tapAndGo\": {\n      \"enabled\": \"<boolean>\",\n      \"eventIds\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"deviceSettings\": {\n    \"colorSettings\": {\n      \"success\": \"<string>\",\n      \"declined\": \"<string>\",\n      \"repeated\": \"<string>\",\n      \"highlighted\": \"<string>\",\n      \"actionRequired\": \"<string>\"\n    },\n    \"enableSoundFeedback\": \"<boolean>\",\n    \"enableHapticFeedback\": \"<boolean>\",\n    \"scanRevealInterval\": \"<number>\",\n    \"ticketSyncInterval\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4ac68039-d3a7-4b0c-8640-d8dbe74cd63b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "scan-groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scanConfig\": {\n    \"mode\": \"<string>\",\n    \"events\": [\n      {\n        \"eventId\": \"<string>\",\n        \"allowAllTicketTypes\": false,\n        \"allowedTicketTypeIds\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"timeslotSettings\": {\n          \"beforeMinutes\": 0,\n          \"afterMinutes\": 0\n        }\n      },\n      {\n        \"eventId\": \"<string>\",\n        \"allowAllTicketTypes\": false,\n        \"allowedTicketTypeIds\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"timeslotSettings\": {\n          \"beforeMinutes\": 0,\n          \"afterMinutes\": 0\n        }\n      }\n    ],\n    \"scanZoneId\": \"<string>\",\n    \"scanTypes\": {\n      \"checkin\": \"<boolean>\",\n      \"checkout\": \"<boolean>\"\n    },\n    \"enableMultiCheckin\": \"<boolean>\",\n    \"checkTimeslots\": \"<boolean>\",\n    \"tapAndGo\": {\n      \"enabled\": \"<boolean>\",\n      \"eventIds\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"deviceSettings\": {\n    \"colorSettings\": {\n      \"success\": \"<string>\",\n      \"declined\": \"<string>\",\n      \"repeated\": \"<string>\",\n      \"highlighted\": \"<string>\",\n      \"actionRequired\": \"<string>\"\n    },\n    \"enableSoundFeedback\": \"<boolean>\",\n    \"enableHapticFeedback\": \"<boolean>\",\n    \"scanRevealInterval\": \"<number>\",\n    \"ticketSyncInterval\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8932a1c0-8565-4198-96d0-f08d76b4f6f1",
+          "name": "get a scan group",
+          "request": {
+            "name": "get a scan group",
+            "description": {
+              "content": "Get a Scan Group",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "scan-groups",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2825658e-23f3-448c-896c-cc5a28d8ca90",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "scan-groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"sellerId\": \"string\",\n  \"createdAt\": \"1949-04-07T04:25:15.562Z\",\n  \"updatedAt\": \"1954-12-30T16:47:14.253Z\",\n  \"scanConfig\": {\n    \"mode\": \"lock\",\n    \"events\": [\n      {\n        \"eventId\": \"string\",\n        \"allowAllTicketTypes\": false,\n        \"allowedTicketTypeIds\": [\n          \"string\",\n          \"string\"\n        ],\n        \"timeslotSettings\": {\n          \"beforeMinutes\": 0,\n          \"afterMinutes\": 0\n        }\n      },\n      {\n        \"eventId\": \"string\",\n        \"allowAllTicketTypes\": false,\n        \"allowedTicketTypeIds\": [\n          \"string\",\n          \"string\"\n        ],\n        \"timeslotSettings\": {\n          \"beforeMinutes\": 0,\n          \"afterMinutes\": 0\n        }\n      }\n    ],\n    \"scanZoneId\": \"string\",\n    \"scanTypes\": {\n      \"checkin\": true,\n      \"checkout\": false\n    },\n    \"enableMultiCheckin\": false,\n    \"checkTimeslots\": true,\n    \"tapAndGo\": {\n      \"enabled\": false,\n      \"eventIds\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  },\n  \"deviceSettings\": {\n    \"colorSettings\": {\n      \"success\": \"green\",\n      \"declined\": \"red\",\n      \"repeated\": \"pink\",\n      \"highlighted\": \"orange\",\n      \"actionRequired\": \"green\"\n    },\n    \"enableSoundFeedback\": true,\n    \"enableHapticFeedback\": true,\n    \"scanRevealInterval\": 10,\n    \"ticketSyncInterval\": 900\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fcca0fb3-a7ed-4c4e-b9d4-06b04c0cfb5d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "scan-groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "37895e3a-1fa9-4245-bb80-15201264b3b8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "scan-groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f2feea49-2531-494f-9441-e5c57fb76dfa",
+          "name": "update a scan group",
+          "request": {
+            "name": "update a scan group",
+            "description": {
+              "content": "Update a Scan Group",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "scan-groups",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"scanConfig\": {\n    \"mode\": \"<string>\",\n    \"events\": [\n      {\n        \"eventId\": \"<string>\",\n        \"allowAllTicketTypes\": false,\n        \"allowedTicketTypeIds\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"timeslotSettings\": {\n          \"beforeMinutes\": 0,\n          \"afterMinutes\": 0\n        }\n      },\n      {\n        \"eventId\": \"<string>\",\n        \"allowAllTicketTypes\": false,\n        \"allowedTicketTypeIds\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"timeslotSettings\": {\n          \"beforeMinutes\": 0,\n          \"afterMinutes\": 0\n        }\n      }\n    ],\n    \"scanZoneId\": \"<string>\",\n    \"scanTypes\": {\n      \"checkin\": \"<boolean>\",\n      \"checkout\": \"<boolean>\"\n    },\n    \"enableMultiCheckin\": \"<boolean>\",\n    \"checkTimeslots\": \"<boolean>\",\n    \"tapAndGo\": {\n      \"enabled\": \"<boolean>\",\n      \"eventIds\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"deviceSettings\": {\n    \"colorSettings\": {\n      \"success\": \"<string>\",\n      \"declined\": \"<string>\",\n      \"repeated\": \"<string>\",\n      \"highlighted\": \"<string>\",\n      \"actionRequired\": \"<string>\"\n    },\n    \"enableSoundFeedback\": \"<boolean>\",\n    \"enableHapticFeedback\": \"<boolean>\",\n    \"scanRevealInterval\": \"<number>\",\n    \"ticketSyncInterval\": \"<number>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "07de549a-c890-4563-be50-2b1c5139d9b9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "scan-groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scanConfig\": {\n    \"mode\": \"<string>\",\n    \"events\": [\n      {\n        \"eventId\": \"<string>\",\n        \"allowAllTicketTypes\": false,\n        \"allowedTicketTypeIds\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"timeslotSettings\": {\n          \"beforeMinutes\": 0,\n          \"afterMinutes\": 0\n        }\n      },\n      {\n        \"eventId\": \"<string>\",\n        \"allowAllTicketTypes\": false,\n        \"allowedTicketTypeIds\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"timeslotSettings\": {\n          \"beforeMinutes\": 0,\n          \"afterMinutes\": 0\n        }\n      }\n    ],\n    \"scanZoneId\": \"<string>\",\n    \"scanTypes\": {\n      \"checkin\": \"<boolean>\",\n      \"checkout\": \"<boolean>\"\n    },\n    \"enableMultiCheckin\": \"<boolean>\",\n    \"checkTimeslots\": \"<boolean>\",\n    \"tapAndGo\": {\n      \"enabled\": \"<boolean>\",\n      \"eventIds\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"deviceSettings\": {\n    \"colorSettings\": {\n      \"success\": \"<string>\",\n      \"declined\": \"<string>\",\n      \"repeated\": \"<string>\",\n      \"highlighted\": \"<string>\",\n      \"actionRequired\": \"<string>\"\n    },\n    \"enableSoundFeedback\": \"<boolean>\",\n    \"enableHapticFeedback\": \"<boolean>\",\n    \"scanRevealInterval\": \"<number>\",\n    \"ticketSyncInterval\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"sellerId\": \"string\",\n  \"createdAt\": \"1949-04-07T04:25:15.562Z\",\n  \"updatedAt\": \"1954-12-30T16:47:14.253Z\",\n  \"scanConfig\": {\n    \"mode\": \"lock\",\n    \"events\": [\n      {\n        \"eventId\": \"string\",\n        \"allowAllTicketTypes\": false,\n        \"allowedTicketTypeIds\": [\n          \"string\",\n          \"string\"\n        ],\n        \"timeslotSettings\": {\n          \"beforeMinutes\": 0,\n          \"afterMinutes\": 0\n        }\n      },\n      {\n        \"eventId\": \"string\",\n        \"allowAllTicketTypes\": false,\n        \"allowedTicketTypeIds\": [\n          \"string\",\n          \"string\"\n        ],\n        \"timeslotSettings\": {\n          \"beforeMinutes\": 0,\n          \"afterMinutes\": 0\n        }\n      }\n    ],\n    \"scanZoneId\": \"string\",\n    \"scanTypes\": {\n      \"checkin\": true,\n      \"checkout\": false\n    },\n    \"enableMultiCheckin\": false,\n    \"checkTimeslots\": true,\n    \"tapAndGo\": {\n      \"enabled\": false,\n      \"eventIds\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  },\n  \"deviceSettings\": {\n    \"colorSettings\": {\n      \"success\": \"green\",\n      \"declined\": \"red\",\n      \"repeated\": \"pink\",\n      \"highlighted\": \"orange\",\n      \"actionRequired\": \"green\"\n    },\n    \"enableSoundFeedback\": true,\n    \"enableHapticFeedback\": true,\n    \"scanRevealInterval\": 10,\n    \"ticketSyncInterval\": 900\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7e45df7-1387-4874-b751-37aa50700424",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "scan-groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scanConfig\": {\n    \"mode\": \"<string>\",\n    \"events\": [\n      {\n        \"eventId\": \"<string>\",\n        \"allowAllTicketTypes\": false,\n        \"allowedTicketTypeIds\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"timeslotSettings\": {\n          \"beforeMinutes\": 0,\n          \"afterMinutes\": 0\n        }\n      },\n      {\n        \"eventId\": \"<string>\",\n        \"allowAllTicketTypes\": false,\n        \"allowedTicketTypeIds\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"timeslotSettings\": {\n          \"beforeMinutes\": 0,\n          \"afterMinutes\": 0\n        }\n      }\n    ],\n    \"scanZoneId\": \"<string>\",\n    \"scanTypes\": {\n      \"checkin\": \"<boolean>\",\n      \"checkout\": \"<boolean>\"\n    },\n    \"enableMultiCheckin\": \"<boolean>\",\n    \"checkTimeslots\": \"<boolean>\",\n    \"tapAndGo\": {\n      \"enabled\": \"<boolean>\",\n      \"eventIds\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"deviceSettings\": {\n    \"colorSettings\": {\n      \"success\": \"<string>\",\n      \"declined\": \"<string>\",\n      \"repeated\": \"<string>\",\n      \"highlighted\": \"<string>\",\n      \"actionRequired\": \"<string>\"\n    },\n    \"enableSoundFeedback\": \"<boolean>\",\n    \"enableHapticFeedback\": \"<boolean>\",\n    \"scanRevealInterval\": \"<number>\",\n    \"ticketSyncInterval\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8bac879f-123a-465f-857b-7948889f4a63",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "scan-groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scanConfig\": {\n    \"mode\": \"<string>\",\n    \"events\": [\n      {\n        \"eventId\": \"<string>\",\n        \"allowAllTicketTypes\": false,\n        \"allowedTicketTypeIds\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"timeslotSettings\": {\n          \"beforeMinutes\": 0,\n          \"afterMinutes\": 0\n        }\n      },\n      {\n        \"eventId\": \"<string>\",\n        \"allowAllTicketTypes\": false,\n        \"allowedTicketTypeIds\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"timeslotSettings\": {\n          \"beforeMinutes\": 0,\n          \"afterMinutes\": 0\n        }\n      }\n    ],\n    \"scanZoneId\": \"<string>\",\n    \"scanTypes\": {\n      \"checkin\": \"<boolean>\",\n      \"checkout\": \"<boolean>\"\n    },\n    \"enableMultiCheckin\": \"<boolean>\",\n    \"checkTimeslots\": \"<boolean>\",\n    \"tapAndGo\": {\n      \"enabled\": \"<boolean>\",\n      \"eventIds\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"deviceSettings\": {\n    \"colorSettings\": {\n      \"success\": \"<string>\",\n      \"declined\": \"<string>\",\n      \"repeated\": \"<string>\",\n      \"highlighted\": \"<string>\",\n      \"actionRequired\": \"<string>\"\n    },\n    \"enableSoundFeedback\": \"<boolean>\",\n    \"enableHapticFeedback\": \"<boolean>\",\n    \"scanRevealInterval\": \"<number>\",\n    \"ticketSyncInterval\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80a8e02c-9d65-43bf-b550-f535397f8bb9",
+          "name": "delete a scan group",
+          "request": {
+            "name": "delete a scan group",
+            "description": {
+              "content": "Delete a Scan Group",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "scan-groups",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0a75de43-be70-4fff-9667-3f4e21c22c6d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "scan-groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"sellerId\": \"string\",\n  \"createdAt\": \"1949-04-07T04:25:15.562Z\",\n  \"updatedAt\": \"1954-12-30T16:47:14.253Z\",\n  \"scanConfig\": {\n    \"mode\": \"lock\",\n    \"events\": [\n      {\n        \"eventId\": \"string\",\n        \"allowAllTicketTypes\": false,\n        \"allowedTicketTypeIds\": [\n          \"string\",\n          \"string\"\n        ],\n        \"timeslotSettings\": {\n          \"beforeMinutes\": 0,\n          \"afterMinutes\": 0\n        }\n      },\n      {\n        \"eventId\": \"string\",\n        \"allowAllTicketTypes\": false,\n        \"allowedTicketTypeIds\": [\n          \"string\",\n          \"string\"\n        ],\n        \"timeslotSettings\": {\n          \"beforeMinutes\": 0,\n          \"afterMinutes\": 0\n        }\n      }\n    ],\n    \"scanZoneId\": \"string\",\n    \"scanTypes\": {\n      \"checkin\": true,\n      \"checkout\": false\n    },\n    \"enableMultiCheckin\": false,\n    \"checkTimeslots\": true,\n    \"tapAndGo\": {\n      \"enabled\": false,\n      \"eventIds\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  },\n  \"deviceSettings\": {\n    \"colorSettings\": {\n      \"success\": \"green\",\n      \"declined\": \"red\",\n      \"repeated\": \"pink\",\n      \"highlighted\": \"orange\",\n      \"actionRequired\": \"green\"\n    },\n    \"enableSoundFeedback\": true,\n    \"enableHapticFeedback\": true,\n    \"scanRevealInterval\": 10,\n    \"ticketSyncInterval\": 900\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05eda209-cd83-4f67-8b3d-8a7396b18bf0",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "scan-groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3c26b85d-9c10-4859-a1f2-fa9a2e7ccaaa",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "scan-groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "94a040f0-3ea0-454d-8d6a-c59b9d5f5531",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "scan-groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://vivenu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bbe8bb4e-2b79-4a59-ab9a-33802b091954",
+    "name": "vivenu access-lists scan-groups API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "vivenu API Documentation\n\nContact Support:\n Name: vivenu GmbH",
+      "type": "text/plain"
+    }
+  }
+}

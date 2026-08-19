@@ -1,0 +1,1744 @@
+{
+  "item": [
+    {
+      "id": "053fb119-6660-4536-8319-beec61800b73",
+      "name": "payment-requests",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6769546b-b300-4b0f-84b3-bf16186bb5e5",
+          "name": "payment-requests/list",
+          "request": {
+            "name": "payment-requests/list",
+            "description": {
+              "content": "Get Payment Requests",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payments",
+                "requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "customerId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "checkoutId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<array>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<array>"
+                },
+                {
+                  "disabled": false,
+                  "key": "gatewayId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "origin",
+                  "value": "<array>"
+                },
+                {
+                  "disabled": false,
+                  "key": "origin",
+                  "value": "<array>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$gt]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$gte]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$lt]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$lte]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$eq]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt[$ne]",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<float>"
+                },
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "25"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d2c597c1-e8d2-4852-a5d8-1df540a986df",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "checkoutId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<array>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<array>"
+                    },
+                    {
+                      "key": "gatewayId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "origin",
+                      "value": "<array>"
+                    },
+                    {
+                      "key": "origin",
+                      "value": "<array>"
+                    },
+                    {
+                      "key": "createdAt[$gt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$eq]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$ne]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"docs\": [\n    {\n      \"_id\": \"string\",\n      \"secret\": \"string\",\n      \"status\": \"NEW\",\n      \"sellerId\": \"string\",\n      \"createdAt\": \"1966-12-23T18:01:36.622Z\",\n      \"updatedAt\": \"1965-12-28T03:16:11.334Z\",\n      \"amount\": 4635.42426745816,\n      \"currency\": \"XOF\",\n      \"checkoutId\": \"string\",\n      \"subscriptionId\": \"string\",\n      \"paymentPlanId\": \"string\",\n      \"paymentGatewayId\": \"string\",\n      \"reference\": \"string\",\n      \"processors\": [\n        {\n          \"paymentGatewayType\": \"wallee\",\n          \"createdAt\": \"1975-01-17T20:13:01.323Z\",\n          \"paymentGatewayId\": \"string\",\n          \"reference\": \"string\",\n          \"redirectUrl\": \"string\"\n        },\n        {\n          \"paymentGatewayType\": \"worldline\",\n          \"createdAt\": \"1964-05-17T07:18:19.721Z\",\n          \"paymentGatewayId\": \"string\",\n          \"reference\": \"string\",\n          \"redirectUrl\": \"string\"\n        }\n      ],\n      \"history\": [\n        {\n          \"type\": \"payment_request.verified\",\n          \"date\": \"1950-05-30T09:08:45.968Z\"\n        },\n        {\n          \"type\": \"payment_request.succeeded\",\n          \"date\": \"1959-09-26T10:46:12.110Z\"\n        }\n      ],\n      \"applications\": [\n        {\n          \"amount\": 8820.337574011857,\n          \"method\": \"deposit\"\n        },\n        {\n          \"amount\": 2830.0689831402683,\n          \"method\": \"deposit\"\n        }\n      ],\n      \"customer\": {\n        \"customerId\": \"string\",\n        \"email\": \"fApM2l@xwJVlMWYJlHEaBKdRRZq.bza\",\n        \"country\": \"string\"\n      },\n      \"expiresAt\": \"1977-10-28T10:05:51.766Z\"\n    },\n    {\n      \"_id\": \"string\",\n      \"secret\": \"string\",\n      \"status\": \"NEW\",\n      \"sellerId\": \"string\",\n      \"createdAt\": \"1947-10-08T19:38:16.113Z\",\n      \"updatedAt\": \"1966-03-12T03:38:18.218Z\",\n      \"amount\": 4034.2622128518415,\n      \"currency\": \"TZS\",\n      \"checkoutId\": \"string\",\n      \"subscriptionId\": \"string\",\n      \"paymentPlanId\": \"string\",\n      \"paymentGatewayId\": \"string\",\n      \"reference\": \"string\",\n      \"processors\": [\n        {\n          \"paymentGatewayType\": \"paypal\",\n          \"createdAt\": \"1961-11-27T15:14:34.069Z\",\n          \"paymentGatewayId\": \"string\",\n          \"reference\": \"string\",\n          \"redirectUrl\": \"string\"\n        },\n        {\n          \"paymentGatewayType\": \"stripe\",\n          \"createdAt\": \"1997-11-02T09:24:37.087Z\",\n          \"paymentGatewayId\": \"string\",\n          \"reference\": \"string\",\n          \"redirectUrl\": \"string\"\n        }\n      ],\n      \"history\": [\n        {\n          \"type\": \"payment_request.created\",\n          \"date\": \"2022-02-05T12:52:00.094Z\"\n        },\n        {\n          \"type\": \"payment_request.canceled\",\n          \"date\": \"1965-02-28T17:41:04.907Z\"\n        }\n      ],\n      \"applications\": [\n        {\n          \"amount\": 5884.433506977608,\n          \"method\": \"deposit\"\n        },\n        {\n          \"amount\": 4836.473688669877,\n          \"method\": \"deposit\"\n        }\n      ],\n      \"customer\": {\n        \"customerId\": \"string\",\n        \"email\": \"UOffDI9cqsZ@JzGMBcHGMaPcoQoKnAaQWyUigfxbKPieP.yvqi\",\n        \"country\": \"string\"\n      },\n      \"expiresAt\": \"2020-09-30T15:45:16.460Z\"\n    }\n  ],\n  \"total\": 5966\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0dd0a5d2-6ccf-454d-9d8a-0ed06bf80872",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "checkoutId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<array>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<array>"
+                    },
+                    {
+                      "key": "gatewayId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "origin",
+                      "value": "<array>"
+                    },
+                    {
+                      "key": "origin",
+                      "value": "<array>"
+                    },
+                    {
+                      "key": "createdAt[$gt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$eq]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$ne]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "21f7f409-f222-481b-8193-69bcedf6fd67",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "checkoutId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<array>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<array>"
+                    },
+                    {
+                      "key": "gatewayId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "origin",
+                      "value": "<array>"
+                    },
+                    {
+                      "key": "origin",
+                      "value": "<array>"
+                    },
+                    {
+                      "key": "createdAt[$gt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$lte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$eq]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAt[$ne]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ec85594-b74c-46c1-ba85-0525e5047984",
+          "name": "payment-requests/create",
+          "request": {
+            "name": "payment-requests/create",
+            "description": {
+              "content": "Create a Payment Request",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payments",
+                "requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"secret\": \"<string>\",\n  \"checkoutId\": \"<string>\",\n  \"transactionId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "49bd70b9-5ac6-4275-9448-b385f1d7ff7e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"secret\": \"<string>\",\n  \"checkoutId\": \"<string>\",\n  \"transactionId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"secret\": \"string\",\n  \"status\": \"NEW\",\n  \"sellerId\": \"string\",\n  \"createdAt\": \"2005-09-03T22:37:16.090Z\",\n  \"updatedAt\": \"2013-08-21T15:00:23.203Z\",\n  \"amount\": 298.0287140270621,\n  \"currency\": \"ZAR\",\n  \"checkoutId\": \"string\",\n  \"subscriptionId\": \"string\",\n  \"paymentPlanId\": \"string\",\n  \"paymentGatewayId\": \"string\",\n  \"reference\": \"string\",\n  \"processors\": [\n    {\n      \"paymentGatewayType\": \"paypal\",\n      \"createdAt\": \"1966-05-29T03:58:06.915Z\",\n      \"paymentGatewayId\": \"string\",\n      \"reference\": \"string\",\n      \"redirectUrl\": \"string\"\n    },\n    {\n      \"paymentGatewayType\": \"payfast\",\n      \"createdAt\": \"1988-08-02T14:09:06.790Z\",\n      \"paymentGatewayId\": \"string\",\n      \"reference\": \"string\",\n      \"redirectUrl\": \"string\"\n    }\n  ],\n  \"history\": [\n    {\n      \"type\": \"payment_request.details_submitted\",\n      \"date\": \"2010-04-01T12:18:24.540Z\"\n    },\n    {\n      \"type\": \"payment_request.succeeded\",\n      \"date\": \"1995-11-14T14:44:47.196Z\"\n    }\n  ],\n  \"applications\": [\n    {\n      \"amount\": 8430.208531932329,\n      \"method\": \"deposit\"\n    },\n    {\n      \"amount\": 9536.037420895838,\n      \"method\": \"deposit\"\n    }\n  ],\n  \"customer\": {\n    \"customerId\": \"string\",\n    \"email\": \"TBwqbMkc4@GzvRoEfhQkjJcouQjpfbZizQjqBJF.vktj\",\n    \"country\": \"string\"\n  },\n  \"expiresAt\": \"1999-12-21T18:07:57.666Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e395096a-49ba-47c7-9328-4cd5e92cd15c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"secret\": \"<string>\",\n  \"checkoutId\": \"<string>\",\n  \"transactionId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "236687c6-3bc7-49e3-8bf9-7ec36c920b06",
+          "name": "payment-requests/get",
+          "request": {
+            "name": "payment-requests/get",
+            "description": {
+              "content": "Get a Payment Request",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payments",
+                "requests",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "secret",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c668206c-8a39-4e01-8e4d-41abb87b6fa4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "requests",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"secret\": \"string\",\n  \"status\": \"NEW\",\n  \"sellerId\": \"string\",\n  \"createdAt\": \"2005-09-03T22:37:16.090Z\",\n  \"updatedAt\": \"2013-08-21T15:00:23.203Z\",\n  \"amount\": 298.0287140270621,\n  \"currency\": \"ZAR\",\n  \"checkoutId\": \"string\",\n  \"subscriptionId\": \"string\",\n  \"paymentPlanId\": \"string\",\n  \"paymentGatewayId\": \"string\",\n  \"reference\": \"string\",\n  \"processors\": [\n    {\n      \"paymentGatewayType\": \"paypal\",\n      \"createdAt\": \"1966-05-29T03:58:06.915Z\",\n      \"paymentGatewayId\": \"string\",\n      \"reference\": \"string\",\n      \"redirectUrl\": \"string\"\n    },\n    {\n      \"paymentGatewayType\": \"payfast\",\n      \"createdAt\": \"1988-08-02T14:09:06.790Z\",\n      \"paymentGatewayId\": \"string\",\n      \"reference\": \"string\",\n      \"redirectUrl\": \"string\"\n    }\n  ],\n  \"history\": [\n    {\n      \"type\": \"payment_request.details_submitted\",\n      \"date\": \"2010-04-01T12:18:24.540Z\"\n    },\n    {\n      \"type\": \"payment_request.succeeded\",\n      \"date\": \"1995-11-14T14:44:47.196Z\"\n    }\n  ],\n  \"applications\": [\n    {\n      \"amount\": 8430.208531932329,\n      \"method\": \"deposit\"\n    },\n    {\n      \"amount\": 9536.037420895838,\n      \"method\": \"deposit\"\n    }\n  ],\n  \"customer\": {\n    \"customerId\": \"string\",\n    \"email\": \"TBwqbMkc4@GzvRoEfhQkjJcouQjpfbZizQjqBJF.vktj\",\n    \"country\": \"string\"\n  },\n  \"expiresAt\": \"1999-12-21T18:07:57.666Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d787073-63e6-43c9-b7c6-3e0be7215bb1",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "requests",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "628a50af-ca93-450b-87f8-fa459aeeeb08",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "requests",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6451265b-5205-4e06-99ec-36102aecc00c",
+          "name": "payment-requests/update",
+          "request": {
+            "name": "payment-requests/update",
+            "description": {
+              "content": "Update a Payment Request",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payments",
+                "requests",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"secret\": \"<string>\",\n  \"paymentStrategyId\": \"<string>\",\n  \"paymentOptionId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9bfc6c60-e2e5-4bd0-95ed-bc7480a33343",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "requests",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"secret\": \"<string>\",\n  \"paymentStrategyId\": \"<string>\",\n  \"paymentOptionId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"secret\": \"string\",\n  \"status\": \"NEW\",\n  \"sellerId\": \"string\",\n  \"createdAt\": \"2005-09-03T22:37:16.090Z\",\n  \"updatedAt\": \"2013-08-21T15:00:23.203Z\",\n  \"amount\": 298.0287140270621,\n  \"currency\": \"ZAR\",\n  \"checkoutId\": \"string\",\n  \"subscriptionId\": \"string\",\n  \"paymentPlanId\": \"string\",\n  \"paymentGatewayId\": \"string\",\n  \"reference\": \"string\",\n  \"processors\": [\n    {\n      \"paymentGatewayType\": \"paypal\",\n      \"createdAt\": \"1966-05-29T03:58:06.915Z\",\n      \"paymentGatewayId\": \"string\",\n      \"reference\": \"string\",\n      \"redirectUrl\": \"string\"\n    },\n    {\n      \"paymentGatewayType\": \"payfast\",\n      \"createdAt\": \"1988-08-02T14:09:06.790Z\",\n      \"paymentGatewayId\": \"string\",\n      \"reference\": \"string\",\n      \"redirectUrl\": \"string\"\n    }\n  ],\n  \"history\": [\n    {\n      \"type\": \"payment_request.details_submitted\",\n      \"date\": \"2010-04-01T12:18:24.540Z\"\n    },\n    {\n      \"type\": \"payment_request.succeeded\",\n      \"date\": \"1995-11-14T14:44:47.196Z\"\n    }\n  ],\n  \"applications\": [\n    {\n      \"amount\": 8430.208531932329,\n      \"method\": \"deposit\"\n    },\n    {\n      \"amount\": 9536.037420895838,\n      \"method\": \"deposit\"\n    }\n  ],\n  \"customer\": {\n    \"customerId\": \"string\",\n    \"email\": \"TBwqbMkc4@GzvRoEfhQkjJcouQjpfbZizQjqBJF.vktj\",\n    \"country\": \"string\"\n  },\n  \"expiresAt\": \"1999-12-21T18:07:57.666Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "343a5e18-02f2-4e19-b4b1-c4b6d4846824",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "requests",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"secret\": \"<string>\",\n  \"paymentStrategyId\": \"<string>\",\n  \"paymentOptionId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "27fb1fcf-5748-4a28-8d1b-34a0c8f09dfa",
+          "name": "payment-requests/create Setup",
+          "request": {
+            "name": "payment-requests/create Setup",
+            "description": {
+              "content": "Create a Payment Request for Customer Payment Method Setup",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payments",
+                "requests",
+                "setup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"<string>\",\n  \"amount\": 1,\n  \"paymentStrategyId\": \"<string>\",\n  \"paymentOptionId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aad79330-12d4-4d23-936a-e35cc139d399",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "requests",
+                    "setup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"<string>\",\n  \"amount\": 1,\n  \"paymentStrategyId\": \"<string>\",\n  \"paymentOptionId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"secret\": \"string\",\n  \"status\": \"NEW\",\n  \"sellerId\": \"string\",\n  \"createdAt\": \"2005-09-03T22:37:16.090Z\",\n  \"updatedAt\": \"2013-08-21T15:00:23.203Z\",\n  \"amount\": 298.0287140270621,\n  \"currency\": \"ZAR\",\n  \"checkoutId\": \"string\",\n  \"subscriptionId\": \"string\",\n  \"paymentPlanId\": \"string\",\n  \"paymentGatewayId\": \"string\",\n  \"reference\": \"string\",\n  \"processors\": [\n    {\n      \"paymentGatewayType\": \"paypal\",\n      \"createdAt\": \"1966-05-29T03:58:06.915Z\",\n      \"paymentGatewayId\": \"string\",\n      \"reference\": \"string\",\n      \"redirectUrl\": \"string\"\n    },\n    {\n      \"paymentGatewayType\": \"payfast\",\n      \"createdAt\": \"1988-08-02T14:09:06.790Z\",\n      \"paymentGatewayId\": \"string\",\n      \"reference\": \"string\",\n      \"redirectUrl\": \"string\"\n    }\n  ],\n  \"history\": [\n    {\n      \"type\": \"payment_request.details_submitted\",\n      \"date\": \"2010-04-01T12:18:24.540Z\"\n    },\n    {\n      \"type\": \"payment_request.succeeded\",\n      \"date\": \"1995-11-14T14:44:47.196Z\"\n    }\n  ],\n  \"applications\": [\n    {\n      \"amount\": 8430.208531932329,\n      \"method\": \"deposit\"\n    },\n    {\n      \"amount\": 9536.037420895838,\n      \"method\": \"deposit\"\n    }\n  ],\n  \"customer\": {\n    \"customerId\": \"string\",\n    \"email\": \"TBwqbMkc4@GzvRoEfhQkjJcouQjpfbZizQjqBJF.vktj\",\n    \"country\": \"string\"\n  },\n  \"expiresAt\": \"1999-12-21T18:07:57.666Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da4a5766-acef-48d8-ae30-024aa12d1586",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "requests",
+                    "setup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"<string>\",\n  \"amount\": 1,\n  \"paymentStrategyId\": \"<string>\",\n  \"paymentOptionId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a174306a-ee59-4eb9-b537-1e5bc0493864",
+          "name": "payment-requests/receive Processor",
+          "request": {
+            "name": "payment-requests/receive Processor",
+            "description": {
+              "content": "Receive Processor Info",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payments",
+                "requests",
+                ":id",
+                "processor"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentGatewayId\": \"<string>\",\n  \"returnUrl\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3e6c0a19-1926-44d2-9d6b-ff1dd99e9d3f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "requests",
+                    ":id",
+                    "processor"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentGatewayId\": \"<string>\",\n  \"returnUrl\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"paymentGatewayType\": \"wallee\",\n  \"createdAt\": \"1965-11-11T12:18:37.659Z\",\n  \"paymentGatewayId\": \"string\",\n  \"reference\": \"string\",\n  \"redirectUrl\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f2d9ec4-0809-4dff-8ef5-10d305c1ae2e",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "requests",
+                    ":id",
+                    "processor"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentGatewayId\": \"<string>\",\n  \"returnUrl\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a14c2bef-4538-40a8-bd0e-f72e60dcf0aa",
+          "name": "payment-requests/confirm",
+          "request": {
+            "name": "payment-requests/confirm",
+            "description": {
+              "content": "Confirm a Payment Request",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payments",
+                "requests",
+                ":id",
+                "confirm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"gatewaySecret\": \"<string>\",\n  \"reference\": \"<string>\",\n  \"paymentStatus\": \"SUCCEEDED\",\n  \"paymentMethod\": \"<string>\",\n  \"paymentMethodVariant\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "64483100-ebc8-4ee4-b173-e3c2275a349f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "requests",
+                    ":id",
+                    "confirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"gatewaySecret\": \"<string>\",\n  \"reference\": \"<string>\",\n  \"paymentStatus\": \"SUCCEEDED\",\n  \"paymentMethod\": \"<string>\",\n  \"paymentMethodVariant\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"secret\": \"string\",\n  \"status\": \"NEW\",\n  \"sellerId\": \"string\",\n  \"createdAt\": \"2005-09-03T22:37:16.090Z\",\n  \"updatedAt\": \"2013-08-21T15:00:23.203Z\",\n  \"amount\": 298.0287140270621,\n  \"currency\": \"ZAR\",\n  \"checkoutId\": \"string\",\n  \"subscriptionId\": \"string\",\n  \"paymentPlanId\": \"string\",\n  \"paymentGatewayId\": \"string\",\n  \"reference\": \"string\",\n  \"processors\": [\n    {\n      \"paymentGatewayType\": \"paypal\",\n      \"createdAt\": \"1966-05-29T03:58:06.915Z\",\n      \"paymentGatewayId\": \"string\",\n      \"reference\": \"string\",\n      \"redirectUrl\": \"string\"\n    },\n    {\n      \"paymentGatewayType\": \"payfast\",\n      \"createdAt\": \"1988-08-02T14:09:06.790Z\",\n      \"paymentGatewayId\": \"string\",\n      \"reference\": \"string\",\n      \"redirectUrl\": \"string\"\n    }\n  ],\n  \"history\": [\n    {\n      \"type\": \"payment_request.details_submitted\",\n      \"date\": \"2010-04-01T12:18:24.540Z\"\n    },\n    {\n      \"type\": \"payment_request.succeeded\",\n      \"date\": \"1995-11-14T14:44:47.196Z\"\n    }\n  ],\n  \"applications\": [\n    {\n      \"amount\": 8430.208531932329,\n      \"method\": \"deposit\"\n    },\n    {\n      \"amount\": 9536.037420895838,\n      \"method\": \"deposit\"\n    }\n  ],\n  \"customer\": {\n    \"customerId\": \"string\",\n    \"email\": \"TBwqbMkc4@GzvRoEfhQkjJcouQjpfbZizQjqBJF.vktj\",\n    \"country\": \"string\"\n  },\n  \"expiresAt\": \"1999-12-21T18:07:57.666Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70acfc3e-c8d0-431c-bdd7-3af41cbdb3bc",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "requests",
+                    ":id",
+                    "confirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"gatewaySecret\": \"<string>\",\n  \"reference\": \"<string>\",\n  \"paymentStatus\": \"SUCCEEDED\",\n  \"paymentMethod\": \"<string>\",\n  \"paymentMethodVariant\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f102c599-2c2f-4224-b4c9-ed8492fd0ea1",
+          "name": "payment-requests/change Status",
+          "request": {
+            "name": "payment-requests/change Status",
+            "description": {
+              "content": "Change Payment Request Payment Status",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payments",
+                "requests",
+                ":id",
+                "payment-status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentStatus\": \"<string>\",\n  \"gatewaySecret\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7c9334b0-c403-4ab4-8a3b-9942b90047c7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "requests",
+                    ":id",
+                    "payment-status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentStatus\": \"<string>\",\n  \"gatewaySecret\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"secret\": \"string\",\n  \"status\": \"NEW\",\n  \"sellerId\": \"string\",\n  \"createdAt\": \"2005-09-03T22:37:16.090Z\",\n  \"updatedAt\": \"2013-08-21T15:00:23.203Z\",\n  \"amount\": 298.0287140270621,\n  \"currency\": \"ZAR\",\n  \"checkoutId\": \"string\",\n  \"subscriptionId\": \"string\",\n  \"paymentPlanId\": \"string\",\n  \"paymentGatewayId\": \"string\",\n  \"reference\": \"string\",\n  \"processors\": [\n    {\n      \"paymentGatewayType\": \"paypal\",\n      \"createdAt\": \"1966-05-29T03:58:06.915Z\",\n      \"paymentGatewayId\": \"string\",\n      \"reference\": \"string\",\n      \"redirectUrl\": \"string\"\n    },\n    {\n      \"paymentGatewayType\": \"payfast\",\n      \"createdAt\": \"1988-08-02T14:09:06.790Z\",\n      \"paymentGatewayId\": \"string\",\n      \"reference\": \"string\",\n      \"redirectUrl\": \"string\"\n    }\n  ],\n  \"history\": [\n    {\n      \"type\": \"payment_request.details_submitted\",\n      \"date\": \"2010-04-01T12:18:24.540Z\"\n    },\n    {\n      \"type\": \"payment_request.succeeded\",\n      \"date\": \"1995-11-14T14:44:47.196Z\"\n    }\n  ],\n  \"applications\": [\n    {\n      \"amount\": 8430.208531932329,\n      \"method\": \"deposit\"\n    },\n    {\n      \"amount\": 9536.037420895838,\n      \"method\": \"deposit\"\n    }\n  ],\n  \"customer\": {\n    \"customerId\": \"string\",\n    \"email\": \"TBwqbMkc4@GzvRoEfhQkjJcouQjpfbZizQjqBJF.vktj\",\n    \"country\": \"string\"\n  },\n  \"expiresAt\": \"1999-12-21T18:07:57.666Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e606de8-71d1-4d9a-94d1-04c3906caf94",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "requests",
+                    ":id",
+                    "payment-status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentStatus\": \"<string>\",\n  \"gatewaySecret\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "be55ce8e-b6eb-4044-a477-d6c6f723265a",
+          "name": "payment-requests/verify",
+          "request": {
+            "name": "payment-requests/verify",
+            "description": {
+              "content": "Verify a payment request",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payments",
+                "requests",
+                ":id",
+                "verify"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentGatewayId\": \"<string>\",\n  \"data\": \"<array>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c7ba4161-4318-4fa7-8560-b7f3d768a934",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "requests",
+                    ":id",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentGatewayId\": \"<string>\",\n  \"data\": \"<array>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"secret\": \"string\",\n  \"status\": \"NEW\",\n  \"sellerId\": \"string\",\n  \"createdAt\": \"2005-09-03T22:37:16.090Z\",\n  \"updatedAt\": \"2013-08-21T15:00:23.203Z\",\n  \"amount\": 298.0287140270621,\n  \"currency\": \"ZAR\",\n  \"checkoutId\": \"string\",\n  \"subscriptionId\": \"string\",\n  \"paymentPlanId\": \"string\",\n  \"paymentGatewayId\": \"string\",\n  \"reference\": \"string\",\n  \"processors\": [\n    {\n      \"paymentGatewayType\": \"paypal\",\n      \"createdAt\": \"1966-05-29T03:58:06.915Z\",\n      \"paymentGatewayId\": \"string\",\n      \"reference\": \"string\",\n      \"redirectUrl\": \"string\"\n    },\n    {\n      \"paymentGatewayType\": \"payfast\",\n      \"createdAt\": \"1988-08-02T14:09:06.790Z\",\n      \"paymentGatewayId\": \"string\",\n      \"reference\": \"string\",\n      \"redirectUrl\": \"string\"\n    }\n  ],\n  \"history\": [\n    {\n      \"type\": \"payment_request.details_submitted\",\n      \"date\": \"2010-04-01T12:18:24.540Z\"\n    },\n    {\n      \"type\": \"payment_request.succeeded\",\n      \"date\": \"1995-11-14T14:44:47.196Z\"\n    }\n  ],\n  \"applications\": [\n    {\n      \"amount\": 8430.208531932329,\n      \"method\": \"deposit\"\n    },\n    {\n      \"amount\": 9536.037420895838,\n      \"method\": \"deposit\"\n    }\n  ],\n  \"customer\": {\n    \"customerId\": \"string\",\n    \"email\": \"TBwqbMkc4@GzvRoEfhQkjJcouQjpfbZizQjqBJF.vktj\",\n    \"country\": \"string\"\n  },\n  \"expiresAt\": \"1999-12-21T18:07:57.666Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5154bfa-d14a-4dda-a606-d2811de409be",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payments",
+                    "requests",
+                    ":id",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentGatewayId\": \"<string>\",\n  \"data\": \"<array>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://vivenu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d5e587dd-0d02-470a-ab4c-6c2db446dd96",
+    "name": "vivenu access-lists payment-requests API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "vivenu API Documentation\n\nContact Support:\n Name: vivenu GmbH",
+      "type": "text/plain"
+    }
+  }
+}
