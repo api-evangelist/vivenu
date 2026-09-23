@@ -2,19 +2,24 @@ generated: '2026-07-21'
 method: searched
 source: probe of https://vivenu.com/.well-known/* and https://vivenu.dev/.well-known/*
 host: https://vivenu.com
-documents:
-- path: /.well-known/security.txt
-  status: 404
-- path: /.well-known/openid-configuration
-  status: 404
-- path: /.well-known/oauth-authorization-server
-  status: 404
-- path: /.well-known/api-catalog
-  status: 404
-- path: /.well-known/ai-plugin.json
-  status: 404
-notes: >-
-  No /.well-known/ discovery documents are published on either the production
-  (vivenu.com) or staging (vivenu.dev) host. The API is authenticated with a
-  bearer API key (Authorization header), not OAuth/OIDC, so there is no
-  authorization-server metadata to advertise. Absence recorded as valid data.
+notes: No /.well-known/ discovery documents are published on either the production (vivenu.com) or staging
+  (vivenu.dev) host. The API is authenticated with a bearer API key (Authorization header), not OAuth/OIDC,
+  so there is no authorization-server metadata to advertise. Absence recorded as valid data.
+hosts:
+- host: https://vivenu.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+x-shape-fix:
+  converted: '2026-08-20'
+  from: documents
+  note: Rewritten into hosts[] -> documents[], the only shape well_known_docs() in score.rb reads. A served
+    .well-known surface recorded in any other shape scores as absent.
