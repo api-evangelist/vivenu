@@ -1,0 +1,819 @@
+openapi: 3.2.0
+info:
+  title: vivenu Supports API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: supports
+paths:
+  /api/supports:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: top
+        required: false
+        schema:
+          type: number
+          format: float
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: number
+          format: float
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: name
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: assignedToSeller
+        required: false
+        schema:
+          type: boolean
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: onlymy
+        required: false
+        schema:
+          type: boolean
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: preferredLanguage
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: status
+        required: false
+        schema:
+          oneOf:
+          - type: string
+            metas: {}
+          - type: array
+            items:
+              type: string
+              metas: {}
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: assignee
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: tags
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - supports
+      operationId: get_all_supports_tickets
+      summary: Get all supports tickets
+      x-summary-source: derived
+  /api/support/status:
+    get:
+      security:
+      - jwt: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+      tags:
+      - supports
+      description: Count unfinished Support requests
+      operationId: count_unfinished_support_requests
+      summary: Count unfinished support requests
+      x-summary-source: derived
+  /api/support/{id}:
+    get:
+      parameters:
+      - name: secret
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicSupportResource'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+      tags:
+      - supports
+      operationId: get_a_support_ticket
+      summary: Get a support ticket
+      x-summary-source: derived
+    put:
+      parameters:
+      - name: secret
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Supports_SendAMessage'
+      tags:
+      - supports
+      operationId: send_a_message
+      summary: Send a message
+      x-summary-source: derived
+  /api/supports/{id}:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - supports
+      operationId: get_support_ticket
+      summary: Get support ticket
+      x-summary-source: derived
+    patch:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PATCH_Supports_PatchASupportTicket'
+      tags:
+      - supports
+      operationId: patch_a_support_ticket
+      summary: Patch a support ticket
+      x-summary-source: derived
+    put:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Supports_UpdateASupportTicket'
+      tags:
+      - supports
+      operationId: update_a_support_ticket
+      summary: Update a support ticket
+      x-summary-source: derived
+    delete:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - supports
+      operationId: delete_support_ticket
+      summary: Delete support ticket
+      x-summary-source: derived
+  /api/supports/{id}/context:
+    get:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - supports
+      operationId: get_support_context
+      summary: Get support context
+      x-summary-source: derived
+  /api/support:
+    post:
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicSupportResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Supports_CreateASupportTicket'
+      tags:
+      - supports
+      operationId: create_a_support_ticket
+      summary: Create a support ticket
+      x-summary-source: derived
+  /api/support/ticket-lookup:
+    post:
+      parameters: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  pattern: ^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$
+                sellerId:
+                  type: string
+              required:
+              - email
+              - sellerId
+              additionalProperties: false
+      tags:
+      - supports
+      operationId: look_up_the_last_transaction_by_email_and_resend_the_order_confirmation
+      summary: Look up the last transaction by email and resend the order confirmation
+      x-summary-source: derived
+  /api/supports/{id}/assign-seller:
+    post:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Supports_UpdateSellerAssignment'
+      tags:
+      - supports
+      operationId: update_seller_assignment
+      summary: Update seller assignment
+      x-summary-source: derived
+  /api/supports/{id}/assignee:
+    post:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Supports_ChangeSupportTicketAssignee'
+      tags:
+      - supports
+      operationId: change_support_ticket_assignee
+      summary: Change support ticket assignee
+      x-summary-source: derived
+  /api/supports/{id}/message:
+    post:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Supports_ReplyToSupportTicket'
+      tags:
+      - supports
+      operationId: reply_to_support_ticket
+      summary: Reply to support ticket
+      x-summary-source: derived
+  /api/supports/{id}/status:
+    post:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Supports_ChangeSupportTicketStatus'
+      tags:
+      - supports
+      operationId: change_support_ticket_status
+      summary: Change support ticket status
+      x-summary-source: derived
+  /api/supports/{id}/seller:
+    post:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Supports_ChangeSupportTicketSeller'
+      tags:
+      - supports
+      operationId: change_support_ticket_seller
+      summary: Change support ticket seller
+      x-summary-source: derived
+  /api/supports/{id}/prio:
+    post:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Supports_ChangeSupportTicketPrio'
+      tags:
+      - supports
+      operationId: change_support_ticket_prio
+      summary: Change support ticket prio
+      x-summary-source: derived
+  /api/supports/{id}/messages/{messageId}:
+    put:
+      security:
+      - jwt: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      - name: messageId
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - supports
+      operationId: update_a_support_message
+      summary: Update a support message
+      x-summary-source: derived
+components:
+  schemas:
+    PUT_Supports_SendAMessage:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    PUT_Supports_UpdateASupportTicket:
+      type: object
+      properties:
+        note:
+          type:
+          - string
+          - 'null'
+    POST_Supports_UpdateSellerAssignment:
+      type: object
+      properties:
+        assignedToSeller:
+          type: boolean
+      required:
+      - assignedToSeller
+    POST_Supports_ChangeSupportTicketSeller:
+      type: object
+      properties:
+        sellerId:
+          type: string
+      required:
+      - sellerId
+    POST_Supports_CreateASupportTicket:
+      type: object
+      properties:
+        firstname:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+          format: email
+        message:
+          type: string
+        transactionId:
+          type: string
+        sellerId:
+          type: string
+        assignToSeller:
+          type: boolean
+      required:
+      - firstname
+      - lastname
+      - message
+    PATCH_Supports_PatchASupportTicket:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+    POST_Supports_ChangeSupportTicketStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+      - status
+    POST_Supports_ReplyToSupportTicket:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    POST_Supports_ChangeSupportTicketAssignee:
+      type: object
+      properties:
+        assignee:
+          type: string
+      required:
+      - assignee
+    POST_Supports_ChangeSupportTicketPrio:
+      type: object
+      properties:
+        priority:
+          type: string
+      required:
+      - priority
+    PublicSupportResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the status
+        transactionId:
+          type: string
+          description: The ID of the corresponding transaction
+        name:
+          type: string
+          description: The name of the ticket
+        firstname:
+          type: string
+          description: The firstname of the ticket creator
+        lastname:
+          type: string
+          description: The lastname of the ticket creator
+        email:
+          type: string
+          format: email
+          description: The email of the ticket creator
+        status:
+          type: string
+          enum:
+          - NEW
+          - INPROGRESS
+          - RESOLVED
+          description: The current status of the support ticket
+          default: NEW
+        messages:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the support message
+              userId:
+                type: string
+                description: The ID of the user who sent the message
+              senderName:
+                type: string
+                description: The name of the message sender
+              message:
+                type: string
+                description: The text content of the support message
+              createdAt:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the message was created
+            required:
+            - _id
+            - userId
+            - senderName
+            - message
+          description: The sent messages associated with this ticket
+        secret:
+          type: string
+          description: The secret of the support ticket
+        assignee:
+          type: string
+          description: The userId of the assignee
+        assignedToSeller:
+          type: boolean
+          description: Flag indicating whether the ticket is assigned to the seller
+        lastInteraction:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating the last interaction with the ticket
+        sellerId:
+          type: string
+          description: The ID of the seller of the support ticket
+        preferredLanguage:
+          type: string
+          enum:
+          - de
+          - de-CH
+          - en
+          - en-GB
+          - en-AU
+          - fr
+          - es
+          - es-MX
+          - is
+          - it
+          - ru
+          - pt
+          - tr
+          - nb
+          - nl
+          - pl
+          - sv
+          - sl
+          - da
+          - cs
+          - lv
+          - he
+          - ar
+          - th
+          - ko
+          - ja
+          - zh-TW
+          default: de
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the support ticket was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the support ticket was updated
+        customerId:
+          type: string
+          description: The ID of the customer
+        context:
+          type: object
+      required:
+      - _id
+      - name
+      - email
+      - status
+      - secret
+      - lastInteraction
+      - createdAt
+      - updatedAt
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

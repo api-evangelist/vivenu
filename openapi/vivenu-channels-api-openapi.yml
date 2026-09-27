@@ -1,0 +1,233 @@
+openapi: 3.2.0
+info:
+  title: vivenu Channels API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: Channels
+paths:
+  /api/channels:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: top
+        required: false
+        schema:
+          type: number
+          format: float
+          default: 100
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: number
+          format: float
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - Channels
+      description: Get all Channels
+      operationId: get_all_channels
+      summary: Get all channels
+      x-summary-source: derived
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POST_Channels_CreateAChannel'
+      tags:
+      - Channels
+      description: Create a Channel
+      operationId: create_a_channel
+      summary: Create a channel
+      x-summary-source: derived
+  /api/channels/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          description: The ID of the Channel
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - Channels
+      description: Get Channel
+      operationId: channels/get
+      summary: Channels/get
+      x-summary-source: derived
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Channels_UpdateAChannel'
+      tags:
+      - Channels
+      description: Update a Channel
+      operationId: update_a_channel
+      summary: Update a channel
+      x-summary-source: derived
+  /api/channels/{code}/info:
+    get:
+      parameters:
+      - name: code
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+      tags:
+      - Channels
+      description: Get Channel Info by code
+      operationId: get_channel_info_by_code
+      summary: Get channel info by code
+      x-summary-source: derived
+components:
+  schemas:
+    PUT_Channels_UpdateAChannel:
+      type: object
+      properties:
+        name:
+          type: string
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              target:
+                type: string
+              underShop:
+                type: string
+              code:
+                type: string
+              deletedAt:
+                type: string
+                format: date-time
+        color:
+          type: string
+      required:
+      - name
+      - links
+    POST_Channels_CreateAChannel:
+      type: object
+      properties:
+        name:
+          type: string
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              target:
+                type: string
+              underShop:
+                type: string
+              code:
+                type: string
+              deletedAt:
+                type: string
+                format: date-time
+        color:
+          type: string
+      required:
+      - name
+      - links
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

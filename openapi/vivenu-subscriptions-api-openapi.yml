@@ -1,0 +1,1502 @@
+openapi: 3.2.0
+info:
+  title: vivenu Subscriptions API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: Subscriptions
+paths:
+  /api/subscriptions:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: top
+        required: false
+        schema:
+          type: number
+          format: float
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: number
+          format: float
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: customerId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: planId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: planVariantIds
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: eventId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: customerPaymentMethodId
+        required: false
+        schema:
+          type: string
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: updatedAt
+        required: false
+        schema:
+          type: object
+          properties:
+            $gt:
+              type: string
+              format: date-time
+              description: value is greater than
+              metas: {}
+            $gte:
+              type: string
+              format: date-time
+              description: value is greater than or equal
+              metas: {}
+            $lt:
+              type: string
+              format: date-time
+              description: value is less than
+              metas: {}
+            $lte:
+              type: string
+              format: date-time
+              description: value is less than or equal
+              metas: {}
+            $eq:
+              type: string
+              format: date-time
+              description: value is equal
+              metas: {}
+            $ne:
+              type: string
+              format: date-time
+              description: value is not equal
+              metas: {}
+          metas: {}
+        in: query
+        style: deepObject
+        explode: true
+      - name: status
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - DRAFT
+            - ACTIVE
+            - INCOMPLETE
+            - CANCELED
+            - ARCHIVED
+            - PENDING-CANCELLATION
+            metas: {}
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Api_GetAllSubscriptions_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - Subscriptions
+      description: Get all Subscriptions
+      operationId: get_all_subscriptions
+      summary: Get all subscriptions
+      x-summary-source: derived
+  /api/subscriptions/plans:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: top
+        required: false
+        schema:
+          type: number
+          format: float
+          description: A limit on the number of objects to be returned. Can range between 1 and 1000.
+          default: 25
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: skip
+        required: false
+        schema:
+          type: number
+          format: float
+          description: The number of objects to skip for the requested result
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GET_Api_GetAllSubscriptionPlans_200_response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - Subscriptions
+      description: Get all Subscription Plans
+      operationId: get_all_subscription_plans
+      summary: Get all subscription plans
+      x-summary-source: derived
+  /api/subscriptions/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - Subscriptions
+      description: Get a Subscription
+      operationId: get_a_subscription
+      summary: Get a subscription
+      x-summary-source: derived
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Api_UpdateASubscription'
+      tags:
+      - Subscriptions
+      description: Update a Subscription
+      operationId: update_a_subscription
+      summary: Update a subscription
+      x-summary-source: derived
+  /api/subscriptions/plans/{id}:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionPlanResource'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - Subscriptions
+      description: Get a Subscription Plan
+      operationId: get_a_subscription_plan
+      summary: Get a subscription plan
+      x-summary-source: derived
+  /api/subscriptions/{id}/cycles:
+    get:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - Subscriptions
+      description: Get all Subscription Cycles
+      operationId: get_all_subscription_cycles
+      summary: Get all subscription cycles
+      x-summary-source: derived
+  /api/subscriptions/{id}/transactions/{transactionId}/retry:
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      - name: transactionId
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - Subscriptions
+      operationId: retry_a_transaction
+      summary: Retry a transaction
+      x-summary-source: derived
+  /api/subscriptions/{id}/items/{itemId}:
+    put:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      - name: itemId
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUT_Api_UpdateSubscriptionItems'
+      tags:
+      - Subscriptions
+      description: Update Subscription Items
+      operationId: update_subscription_items
+      summary: Update subscription items
+      x-summary-source: derived
+    delete:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      - name: itemId
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: path
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - Subscriptions
+      description: Update Subscription Items
+      operationId: deleteApiSubscriptionsByIdItemsByItemId
+      summary: Update subscription items
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: update_subscription_items
+  /api/subscriptions/{id}/checkout:
+    post:
+      security:
+      - jwt: []
+      - apikey: []
+      parameters:
+      - name: id
+        schema:
+          type: string
+          description: ID of the subscription
+        description: ID of the subscription
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - Subscriptions
+      description: Creates a checkout for a draft subscription (internal)
+      operationId: creates_a_checkout_for_a_draft_subscription_internal
+      summary: Creates a checkout for a draft subscription internal
+      x-summary-source: derived
+components:
+  schemas:
+    SubscriptionResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the subscription
+        sellerId:
+          type: string
+          description: The ID of the seller of the subscription
+        status:
+          type: string
+          enum:
+          - DRAFT
+          - ACTIVE
+          - INCOMPLETE
+          - CANCELED
+          - ARCHIVED
+          - PENDING-CANCELLATION
+          description: The status of the subscription
+        customerId:
+          type: string
+          description: The ID of the customer of the subscription
+        planId:
+          type: string
+          description: The ID of the plan of the subscription
+        currency:
+          type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: An ISO 4217 3-character code of the currency
+        customerPaymentMethodId:
+          type: string
+          description: The ID of the payment method of the subscription
+        origin:
+          type: object
+          properties:
+            eventId:
+              type: string
+              description: The ID of the event of the origin
+            shopId:
+              type: string
+              description: The ID of the shop of the origin
+          required:
+          - eventId
+          description: The origin information of the subscription
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionItemResource'
+          description: The origin information of the subscription
+        billing:
+          type: object
+          properties:
+            cycles:
+              type: array
+              items:
+                type: object
+                properties:
+                  start:
+                    type: string
+                    format: date-time
+                    description: An ISO timestamp indicating when the billing start is
+                  end:
+                    type: string
+                    format: date-time
+                    description: An ISO timestamp indicating when the billing end is
+                  due:
+                    type: string
+                    format: date-time
+                    description: An ISO timestamp indicating when the billing due is
+                  status:
+                    type: string
+                    enum:
+                    - FAILED
+                    - SCHEDULED
+                    - BILLED
+                    - CANCELED
+                    description: The status of the billing
+                  transactionId:
+                    type: string
+                  isMinimumInterval:
+                    type: boolean
+                required:
+                - start
+                - end
+                - status
+              description: An array of billing cycles
+          required:
+          - cycles
+          description: The billing information of the subscription
+        consents:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - autorenewal
+                description: The type of the subscription consent
+              granted:
+                type: string
+                format: date-time
+                description: The date when the consent was granted
+            required:
+            - type
+            - granted
+          description: An array of granted consents
+        payment:
+          type: object
+          properties:
+            anchor:
+              type: string
+              format: date-time
+              description: The anchor date of the payment
+            schedules:
+              type: array
+              items:
+                type: object
+                properties:
+                  due:
+                    type: string
+                    format: date-time
+                    description: An ISO timestamp indicating when the due of the payment schedule is
+                  status:
+                    type: string
+                    enum:
+                    - SCHEDULED
+                    - PENDING
+                    - SUCCEEDED
+                    - FAILED
+                    - REFUNDED
+                    description: The status of the payment schedule resource
+                  total:
+                    type: number
+                    format: float
+                    description: The total to be charged of the payment schedule
+                  billingCycleId:
+                    type: string
+                    description: The Billing Cycle ID of the payment schedule
+                  paymentId:
+                    type: string
+                    description: The Payment ID of the payment schedule
+                  paymentRequestId:
+                    type: string
+                    description: The Payment Request ID of the payment schedule
+                  attempts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          description: The ID of the payment schedule attempt
+                        date:
+                          type: string
+                          format: date-time
+                          description: The date of the payment schedule attempt
+                        status:
+                          type: string
+                          enum:
+                          - SCHEDULED
+                          - PENDING
+                          - SUCCEEDED
+                          - FAILED
+                          - REFUNDED
+                          description: The status of the payment schedule attempt
+                        paymentRequestId:
+                          type: string
+                          description: The Payment Request ID of the payment schedule attempt
+                        paymentMethodId:
+                          type: string
+                          description: The Payment Method ID of the payment schedule attempt
+                      required:
+                      - _id
+                      - date
+                      - status
+                      - paymentRequestId
+                      - paymentMethodId
+                    description: An array of payment schedule attempts
+                    default: []
+                  nextAttempt:
+                    type: string
+                    format: date-time
+                    description: An ISO timestamp indicating when the next attempt of the payment schedule is
+                required:
+                - status
+                - total
+                - billingCycleId
+              default: []
+          required:
+          - anchor
+          - schedules
+          description: The payment of the subscription
+        cycles:
+          type: array
+          items:
+            type: object
+            properties:
+              cycleId:
+                type: string
+                description: The cycle ID of the applied cycle
+              appliedAt:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the cycle was applied
+          description: An array of applied cycles on the subscription
+          default: []
+        history:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - subscription.created
+                - subscription.status_changed
+                - subscription.cycle_applied
+                - subscription.cycle_failed
+                - subscription.billing_cycle_applied
+                - subscription.payment_method_changed
+                - subscription.item_changed
+                - subscription.item_deleted
+                - subscription.consent_granted
+                - subscription.consent_revoked
+                - subscription.upgraded
+                description: The type of the history item
+              date:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating the date of the history item
+              userId:
+                type:
+                - string
+                - 'null'
+                description: The user ID if the history item comes from a non-subscription-holders
+              data:
+                type: object
+                description: The data of the history item
+          description: An array of history items indicating changes on the subscription
+          default: []
+        transactionId:
+          type: string
+          description: The ID of the transaction of the subscription
+        startAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the subscription starts
+        cancelAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the subscription cancels
+        canceledAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the subscription was canceled
+        company:
+          type: string
+          description: The company of the subscription holder
+        firstname:
+          type: string
+          description: The first name of the subscription holder
+        lastname:
+          type: string
+          description: The last name of the subscription holder
+        name:
+          type: string
+          description: The name of the subscription holder
+        email:
+          type: string
+          format: email
+          description: The email of the subscription holder
+        phone:
+          type:
+          - string
+          - 'null'
+          description: The phone number of the subscription holder
+        address:
+          type: object
+          properties:
+            fullAddress:
+              type:
+              - string
+              - 'null'
+              description: Optional full address
+            street:
+              type:
+              - string
+              - 'null'
+              description: The street of the address. Street name including number.
+            line2:
+              type:
+              - string
+              - 'null'
+              description: The additional field of the address.
+            postal:
+              type:
+              - string
+              - 'null'
+              description: The postal code of the address.
+            city:
+              type:
+              - string
+              - 'null'
+              description: The city of the address.
+            country:
+              type:
+              - string
+              - 'null'
+              description: The country of the address. An ISO 3166 country code.
+            state:
+              type:
+              - string
+              - 'null'
+              description: The state of the address. If applicable
+          description: The address information of the subscription holder
+        secret:
+          type: string
+          format: date-time
+          description: The secret token of the subscription
+        attributes:
+          type: object
+      required:
+      - _id
+      - sellerId
+      - status
+      - customerId
+      - planId
+      - currency
+      - items
+    SubscriptionItemResource:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - ticket
+          description: The type of the cart item.
+          default: ticket
+        _id:
+          type: string
+          description: Unique identifier for the cart item. If omitted, the system will automatically generate one.
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the cart item.
+        amount:
+          type: integer
+          minimum: 1
+          description: The amount of the cart item.
+        netPrice:
+          type: number
+          format: float
+          description: The single piece net price of the cart item.
+        price:
+          type: number
+          format: float
+          description: The single piece price of the cart item.
+        taxRate:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: The tax rate to be applied to this cart item. If not present the tax rate of the transaction is taken.
+        triggeredBy:
+          oneOf:
+          - type: string
+            description: An ID of another cart item which triggered the buy action of the cart item.
+          - type: array
+            items:
+              type: string
+            description: An array of IDs of other cart items which triggered the buy action of the cart item.
+          description: An ID or an array of IDs of other cart items which triggered the buy action of the cart item.
+        bundleInfo:
+          type:
+          - object
+          - 'null'
+          properties:
+            bundleId:
+              type: string
+            componentId:
+              type: string
+            optionId:
+              type: string
+        ticketTypeId:
+          type: string
+          description: The ID of the ticket type of the cart item.
+        categoryRef:
+          type: string
+          description: The category reference of the ticket type.
+        seatingInfo:
+          type:
+          - object
+          - 'null'
+          properties:
+            _id:
+              type: string
+              description: The ID of the seating object.
+            _type:
+              type: number
+              format: float
+              enum:
+              - 6
+              - 7
+              description: Indicates the type of seating object. Seat = 6, General Admission = 7.
+            categoryId:
+              type: string
+              description: The ID of the category containing the seating object.
+            statusId:
+              type: string
+              description: The ID of a container holding information about the seating status of the seating object.
+            name:
+              type:
+              - string
+              - 'null'
+              description: If _type == 7. The name of the general admission.
+            seatType:
+              type:
+              - string
+              - 'null'
+              enum:
+              - handicapped
+              - limitedView
+              - foldable
+              description: If _type == 6. The type of the seat. null = normal.
+            sectionName:
+              type:
+              - string
+              - 'null'
+              description: If _type == 6. The name of the section where the seat is located.
+            groupName:
+              type:
+              - string
+              - 'null'
+              description: If _type == 6. The name of the row group where the seat is located.
+            rowName:
+              type:
+              - string
+              - 'null'
+              description: If _type == 6. The name of the row where the seat is located.
+            seatName:
+              type:
+              - string
+              - 'null'
+              description: If _type == 6. The seat name.
+            gate:
+              type:
+              - string
+              - 'null'
+              description: The entry gate associated with the seating object.
+          required:
+          - _type
+          - statusId
+          description: The associated seating object.
+        slotInfo:
+          type:
+          - object
+          - 'null'
+          properties:
+            slotId:
+              type: string
+              description: The ID of the time slot.
+            slotStartTime:
+              type: string
+              description: The start time of the time slot.
+          required:
+          - slotId
+          - slotStartTime
+          description: The associated time slot object.
+        asHardTicket:
+          type:
+          - boolean
+          - 'null'
+          description: Whether this ticket is a hard ticket.
+        listingId:
+          type:
+          - string
+          - 'null'
+          description: Listing in secondary market.
+        listingItemId:
+          type:
+          - string
+          - 'null'
+          description: The ID of the listing item in the secondary market.
+        triggeredAutomations:
+          type:
+          - boolean
+          - 'null'
+          description: Whether the cart item triggered automations.
+        meta:
+          type:
+          - object
+          - 'null'
+          description: Meta data which is propagated to the ticket.
+        addOns:
+          type: array
+          items:
+            type: object
+            properties:
+              productId:
+                type: string
+              productVariantId:
+                type: string
+              name:
+                type: string
+            required:
+            - productId
+            - productVariantId
+            - name
+          description: A list of Add-Ons of the ticket.
+        capabilities:
+          type:
+          - array
+          - 'null'
+          items:
+            oneOf:
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - self_service_return
+                settings:
+                  type: object
+                  properties:
+                    returnRelatedItems:
+                      type: boolean
+                      default: true
+                    phases:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          condition:
+                            type: object
+                            properties:
+                              target:
+                                type:
+                                - string
+                                - 'null'
+                                description: The target of the relative date
+                              unit:
+                                type: string
+                                enum:
+                                - hours
+                                - days
+                                - weeks
+                                - months
+                                - years
+                                description: The unit in which the offset is specified
+                              offset:
+                                type: integer
+                                description: The offset to the date
+                            required:
+                            - unit
+                            - offset
+                          refundPercentage:
+                            type: number
+                            format: float
+                            minimum: 0
+                            maximum: 1
+                        required:
+                        - condition
+                        - refundPercentage
+                  required:
+                  - phases
+              required:
+              - type
+              - settings
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - repersonalization
+                settings:
+                  type: object
+                  properties:
+                    inherit:
+                      type: boolean
+                    repersonalizationDeadline:
+                      type: object
+                      properties:
+                        target:
+                          type:
+                          - string
+                          - 'null'
+                          description: The target of the relative date
+                        unit:
+                          type: string
+                          enum:
+                          - hours
+                          - days
+                          - weeks
+                          - months
+                          - years
+                          description: The unit in which the offset is specified
+                        offset:
+                          type: integer
+                          description: The offset to the date
+                      required:
+                      - unit
+                      - offset
+                    repersonalizationsLimit:
+                      type:
+                      - number
+                      - 'null'
+                      format: float
+                    repersonalizationFee:
+                      type:
+                      - number
+                      - 'null'
+                      format: float
+                    limitOnlyNameChanges:
+                      type: boolean
+                  required:
+                  - repersonalizationDeadline
+              required:
+              - type
+              - settings
+          description: The capabilities of the ticket.
+        taxInfo:
+          type: object
+          properties:
+            serviceTypeId:
+              type: string
+              description: The ID of the service type.
+            exceptionId:
+              type: string
+              description: The ID of the exception.
+            proceedsAccountId:
+              type: string
+              description: The ID of the proceeds account.
+            proceedsAccountCode:
+              type: string
+              description: The code of the proceeds account.
+            taxItems:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type:
+                    - string
+                    - 'null'
+                  taxTypeId:
+                    type:
+                    - string
+                    - 'null'
+                  rate:
+                    type: number
+                    format: float
+                  perUnit:
+                    type: number
+                    format: float
+                  total:
+                    type: number
+                    format: float
+                  netTotal:
+                    type:
+                    - number
+                    - 'null'
+                    format: float
+                  netPerUnit:
+                    type:
+                    - number
+                    - 'null'
+                    format: float
+                  taxPayableAccountId:
+                    type:
+                    - string
+                    - 'null'
+                  taxPayableAccountCode:
+                    type:
+                    - string
+                    - 'null'
+                required:
+                - rate
+                - perUnit
+                - total
+              description: The array of tax items.
+          description: The tax info details.
+        ticketId:
+          type: string
+          description: The ticket ID of the item
+        planVariantId:
+          type: string
+          description: The plan variant ID of the item
+      required:
+      - amount
+      - price
+      - ticketTypeId
+      - ticketId
+    PUT_Api_UpdateASubscription:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - DRAFT
+          - ACTIVE
+          - INCOMPLETE
+          - CANCELED
+          - ARCHIVED
+          - PENDING-CANCELLATION
+          description: The status of the subscription
+        customerPaymentMethodId:
+          type: string
+          description: The ID of the payment method of the subscription
+        attributes:
+          type: object
+        consents:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - autorenewal
+                description: The type of the subscription consent
+              granted:
+                type: string
+                format: date-time
+                description: The date when the consent was granted
+            required:
+            - type
+            - granted
+          description: An array of granted consents
+        secret:
+          type: string
+      required:
+      - secret
+    GET_Api_GetAllSubscriptionPlans_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionPlanResource'
+        total:
+          type: integer
+    PUT_Api_UpdateSubscriptionItems:
+      type: object
+      properties:
+        secret:
+          type: string
+        seatingReservationToken:
+          type: string
+        item:
+          $ref: '#/components/schemas/SubscriptionItemResource'
+      required:
+      - secret
+    SubscriptionPlanResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the subscription plan
+        name:
+          type: string
+          description: The name of the subscription plan
+        pricingPolicy:
+          type: string
+          enum:
+          - fixed
+          - inherited
+          description: The pricing policy of the subscription plan
+        variants:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the plan variant
+              name:
+                type: string
+                description: The name of the plan variant
+              canChangeVariant:
+                type: boolean
+                description: Whether the variant is changeable or not
+              allowedVariants:
+                type: array
+                items:
+                  type: string
+                description: Allowed variants to change of the variant
+            required:
+            - _id
+            - name
+          description: An array of variants of the subscription plan
+          default: []
+        billingCycle:
+          type: object
+          properties:
+            scheme:
+              type: string
+              enum:
+              - one-off
+              - recurring
+              - interactive_recurring
+              description: The scheme of the billing cycle
+              default: one-off
+            interval:
+              type: string
+              enum:
+              - DAY
+              - WEEK
+              - MONTH
+              description: The interval of the billing cycle
+            every:
+              type: number
+              format: float
+              description: The recurrence of the billing cycle
+            minimumIntervals:
+              type:
+              - number
+              - 'null'
+              format: float
+            renewalOptions:
+              type: object
+              properties:
+                periodStart:
+                  type: object
+                  properties:
+                    target:
+                      type:
+                      - string
+                      - 'null'
+                      description: The target of the relative date
+                    unit:
+                      type: string
+                      enum:
+                      - hours
+                      - days
+                      - weeks
+                      - months
+                      - years
+                      description: The unit in which the offset is specified
+                    offset:
+                      type: integer
+                      description: The offset to the date
+                  required:
+                  - unit
+                  - offset
+                  description: When the renewal window opens, relative to the current cycle end
+              required:
+              - periodStart
+              description: Renewal options for interactive recurring billing
+          required:
+          - scheme
+          description: The billing plan of the subscription plan
+          default: {}
+        paymentSchedules:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              scheme:
+                type: string
+                enum:
+                - one-off
+                - installments
+                description: The scheme of the payment
+                default: one-off
+              interval:
+                type: string
+                enum:
+                - DAY
+                - WEEK
+                - MONTH
+                description: The interval of the payment
+              numberOfInstallments:
+                type: number
+                format: float
+                description: The number of installments of the payment
+            required:
+            - _id
+          description: An array of payment plans of the subscription plan
+          default:
+          - {}
+        renewalPolicy:
+          type: object
+          properties:
+            changesPeriodStart:
+              type: string
+              format: date-time
+              description: An ISO timestamp indicating when the changes period starts
+            changesPeriodEnd:
+              type: string
+              format: date-time
+              description: An ISO timestamp indicating when the changes period ends
+            allowedChanges:
+              type: object
+              properties:
+                ticketType:
+                  type: boolean
+                  description: Whether changes of ticketTypes are allowed or not
+                seat:
+                  type: boolean
+                  description: Whether changes of seats are allowed or not
+              description: Allowed Changes settings of the renewal policy
+              default: {}
+            confirmationPeriodStart:
+              type: string
+              format: date-time
+              description: An ISO timestamp indicating when the confirmation period starts
+            confirmationPeriodEnd:
+              type: string
+              format: date-time
+              description: An ISO timestamp indicating when the confirmation period ends
+          description: The renewal policy of the subscription plan
+        paymentPolicy:
+          type: object
+          properties:
+            interaction:
+              type: string
+              enum:
+              - payNowOnly
+              - customerPaymentMethod
+              description: The interaction type of the payment policy
+              default: customerPaymentMethod
+            allowedPaymentGateways:
+              type: array
+              items:
+                type: string
+              description: Allowed payment gateways
+              default: []
+            changePaymentMethodPolicy:
+              type: string
+              enum:
+              - always
+              - never
+              - onDraft
+              description: Change payment method policy
+              default: always
+            allowedChangePaymentMethodGateways:
+              type: array
+              items:
+                type: string
+              description: Allowed change payment method gateways
+              default: []
+          description: The payment policy of the subscription plan
+        requestedConsents:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - autorenewal
+              description:
+                type: string
+              default:
+                type: boolean
+          description: The subscription consent types requested during checkout
+        sellerId:
+          type: string
+          description: The ID of the seller of the subscription plan
+      required:
+      - _id
+      - name
+      - sellerId
+    GET_Api_GetAllSubscriptions_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionResource'
+        total:
+          type: integer
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization

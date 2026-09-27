@@ -1,0 +1,89 @@
+openapi: 3.2.0
+info:
+  title: vivenu Upload API
+  description: vivenu API Documentation
+  version: 1.0.0
+  contact:
+    name: vivenu GmbH
+    url: https://vivenu.com
+servers:
+- url: https://vivenu.com
+  description: Production API
+- url: https://vivenu.dev
+  description: Staging API
+tags:
+- name: Upload
+paths:
+  /api/upload:
+    post:
+      security:
+      - jwt: []
+      parameters:
+      - name: bucket
+        required: false
+        schema:
+          type: string
+          enum:
+          - jobs
+          - default
+          metas: {}
+        in: query
+        style: form
+        explode: true
+      - name: x-asset-type
+        required: false
+        schema:
+          type: string
+          enum:
+          - img
+          - video
+          - document
+          default: img
+          metas: {}
+        in: header
+      - name: content-type
+        required: true
+        schema:
+          type: string
+          metas: {}
+        in: header
+      - name: content-length
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          metas: {}
+        in: header
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - Upload
+      operationId: postApiUpload
+      summary: Create api upload
+      x-summary-source: derived
+      x-operation-id-source: derived
+components:
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apikey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
+    customer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    orgApiKey:
+      type: apiKey
+      scheme: bearer
+      in: header
+      name: Authorization
