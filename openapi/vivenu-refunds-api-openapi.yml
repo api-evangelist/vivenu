@@ -156,15 +156,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GET_Refunds_GetAllRefunds_200_response:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/RefundResource'
-        total:
-          type: integer
     RefundResource:
       type: object
       properties:
@@ -271,6 +262,15 @@ components:
       - _id
       - createdAt
       - updatedAt
+    GET_Refunds_GetAllRefunds_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/RefundResource'
+        total:
+          type: integer
   securitySchemes:
     jwt:
       type: http

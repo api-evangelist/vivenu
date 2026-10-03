@@ -234,24 +234,9 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PUT_Subscription-cycles_UpdateASubscriptionCycle_200_response:
+    PUT_Subscription-cycles_UpdateASubscriptionCycle:
       type: object
       properties:
-        _id:
-          type: string
-          description: The ID of the subscription cycle
-        name:
-          type: string
-          description: The name of the subscription cycle
-        status:
-          type: string
-          enum:
-          - DRAFT
-          - SCHEDULED
-          - ACTIVE
-          - COMPLETED
-          description: The status of the subscription cycle
-          default: DRAFT
         action:
           type: string
           enum:
@@ -343,29 +328,6 @@ components:
               type: object
               description: A mapping of the subscription plan variants from the base event to the target event in key/value format where the key is the subscription plan variant ID of a base event and the value is the subscription plan variant ID of the target event
           description: The renewal settings of the subscription cycle
-        sellerId:
-          type: string
-          description: The ID of the seller of the subscription cycle
-        createdAt:
-          type: string
-          format: date-time
-          description: An ISO timestamp indicating when the cycle was created
-        updatedAt:
-          type: string
-          format: date-time
-          description: An ISO timestamp indicating when the cycle was created
-        startedAt:
-          type: string
-          format: date-time
-          description: An ISO timestamp indicating when the cycle was created
-        finishedAt:
-          type: string
-          format: date-time
-          description: An ISO timestamp indicating when the cycle was created
-        subscriptionsAffected:
-          type: number
-          format: float
-          description: Amount of affected subscription after cycle applied
         deliverySettings:
           type: object
           properties:
@@ -375,35 +337,13 @@ components:
           description: The delivery settings of the subscription cycle
           default:
             notifyCustomer: true
-        failedActions:
-          type: array
-          items:
-            type: object
-            properties:
-              subscriptionId:
-                type: string
-                description: The subscription ID which failed in the subscription cycle action
-              error:
-                type: string
-                description: The error message why the subscription failed in the subscription cycle action
-            required:
-            - subscriptionId
-          description: An array of subscriptions which failed during subscription cycle action and related error
         subscriptionFilter:
           type: object
           description: The subscription filters to apply to the subscriptions in the cycle. This is used to filter subscriptions that should be affected by the cycle
-      required:
-      - _id
-      - name
-      - status
-      - action
-      - planId
-      - planVariantIds
-      - eventId
-      - sellerId
-      - createdAt
-      - updatedAt
-    POST_Subscription-cycles_CreateASubscriptionCycle_201_response:
+        name:
+          type: string
+          description: The name of the subscription cycle
+    GET_Subscription-cycles_GetASubscriptionCycle_200_response:
       type: object
       properties:
         _id:
@@ -683,7 +623,352 @@ components:
           description: The name of the subscription cycle
       required:
       - name
-    GET_Subscription-cycles_GetASubscriptionCycle_200_response:
+    GET_Subscription-cycles_GetAllSubscriptionCycles_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the subscription cycle
+              name:
+                type: string
+                description: The name of the subscription cycle
+              status:
+                type: string
+                enum:
+                - DRAFT
+                - SCHEDULED
+                - ACTIVE
+                - COMPLETED
+                description: The status of the subscription cycle
+                default: DRAFT
+              action:
+                type: string
+                enum:
+                - extension
+                - renewal
+                - status-change
+                description: The action of the subscription cycle
+              planId:
+                type: string
+                description: The ID of the plan of the subscription cycle
+              planVariantIds:
+                type: array
+                items:
+                  type: string
+                description: The ID of the plan variant of the subscription cycle
+              eventId:
+                type: string
+                description: The ID of the event of the subscription cycle
+              billing:
+                type:
+                - object
+                - 'null'
+                properties: {}
+                description: The billing of the subscription cycle
+              statusChange:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - draft-to-active
+                    - draft-to-canceled
+                    description: The type of the status change
+                description: The status change settings of the subscription cycle
+              extension:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - purchaseIntent
+                    - freeticket
+                    - transaction
+                    description: The type of the extension
+                  baseEventId:
+                    type: string
+                    description: The Base Event Id from which the mapping of the extension starts
+                  targetEventId:
+                    type: string
+                    description: The Target Event Id to which the mapping of the extension goes
+                  ticketTypeMapping:
+                    type: object
+                    description: A mapping of the ticketTypes from the base event to the target event in key/value format where the key is the ticket type ID of a base event and the value is the ticket type ID of the target event
+                  keepSameBarcodes:
+                    type: boolean
+                    description: Whether to keep the same barcode between base ticket and target ticket or not
+                  issueTickets:
+                    type: boolean
+                    description: Whether the tickets should be issued or not on extension
+                description: The extension settings of the subscription cycle
+              renewal:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - purchaseIntent
+                    - subscription
+                    description: The type of the renewal
+                  status:
+                    type: string
+                    description: The status of the renewal
+                  baseEventId:
+                    type: string
+                    description: The Base Event Id from which the mapping of the renewal starts
+                  targetEventId:
+                    type: string
+                    description: The Target Event Id to which the mapping of the renewal goes
+                  ticketTypeMapping:
+                    type: object
+                    description: A mapping of the ticketTypes from the base event to the target event in key/value format where the key is the ticket type ID of a base event and the value is the ticket type ID of the target event
+                  keepSameBarcodes:
+                    type: boolean
+                    description: Whether to keep the same barcode between base ticket and target ticket or not
+                  targetSubscriptionPlanId:
+                    type: string
+                    description: The target subscription plan ID to which the mapping of the renewal goes
+                  subscriptionPlanVariantMapping:
+                    type: object
+                    description: A mapping of the subscription plan variants from the base event to the target event in key/value format where the key is the subscription plan variant ID of a base event and the value is the subscription plan variant ID of the target event
+                description: The renewal settings of the subscription cycle
+              sellerId:
+                type: string
+                description: The ID of the seller of the subscription cycle
+              createdAt:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the cycle was created
+              updatedAt:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the cycle was created
+              startedAt:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the cycle was created
+              finishedAt:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the cycle was created
+              subscriptionsAffected:
+                type: number
+                format: float
+                description: Amount of affected subscription after cycle applied
+              deliverySettings:
+                type: object
+                properties:
+                  notifyCustomer:
+                    type: boolean
+                    description: Whether the customer should be notified or not on cycle apply
+                description: The delivery settings of the subscription cycle
+                default:
+                  notifyCustomer: true
+              failedActions:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    subscriptionId:
+                      type: string
+                      description: The subscription ID which failed in the subscription cycle action
+                    error:
+                      type: string
+                      description: The error message why the subscription failed in the subscription cycle action
+                  required:
+                  - subscriptionId
+                description: An array of subscriptions which failed during subscription cycle action and related error
+              subscriptionFilter:
+                type: object
+                description: The subscription filters to apply to the subscriptions in the cycle. This is used to filter subscriptions that should be affected by the cycle
+            required:
+            - _id
+            - name
+            - status
+            - action
+            - planId
+            - planVariantIds
+            - eventId
+            - sellerId
+            - createdAt
+            - updatedAt
+        total:
+          type: integer
+    POST_Subscription-cycles_CreateASubscriptionCycle_201_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the subscription cycle
+        name:
+          type: string
+          description: The name of the subscription cycle
+        status:
+          type: string
+          enum:
+          - DRAFT
+          - SCHEDULED
+          - ACTIVE
+          - COMPLETED
+          description: The status of the subscription cycle
+          default: DRAFT
+        action:
+          type: string
+          enum:
+          - extension
+          - renewal
+          - status-change
+          description: The action of the subscription cycle
+        planId:
+          type: string
+          description: The ID of the plan of the subscription cycle
+        planVariantIds:
+          type: array
+          items:
+            type: string
+          description: The ID of the plan variant of the subscription cycle
+        eventId:
+          type: string
+          description: The ID of the event of the subscription cycle
+        billing:
+          type:
+          - object
+          - 'null'
+          properties: {}
+          description: The billing of the subscription cycle
+        statusChange:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - draft-to-active
+              - draft-to-canceled
+              description: The type of the status change
+          description: The status change settings of the subscription cycle
+        extension:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - purchaseIntent
+              - freeticket
+              - transaction
+              description: The type of the extension
+            baseEventId:
+              type: string
+              description: The Base Event Id from which the mapping of the extension starts
+            targetEventId:
+              type: string
+              description: The Target Event Id to which the mapping of the extension goes
+            ticketTypeMapping:
+              type: object
+              description: A mapping of the ticketTypes from the base event to the target event in key/value format where the key is the ticket type ID of a base event and the value is the ticket type ID of the target event
+            keepSameBarcodes:
+              type: boolean
+              description: Whether to keep the same barcode between base ticket and target ticket or not
+            issueTickets:
+              type: boolean
+              description: Whether the tickets should be issued or not on extension
+          description: The extension settings of the subscription cycle
+        renewal:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - purchaseIntent
+              - subscription
+              description: The type of the renewal
+            status:
+              type: string
+              description: The status of the renewal
+            baseEventId:
+              type: string
+              description: The Base Event Id from which the mapping of the renewal starts
+            targetEventId:
+              type: string
+              description: The Target Event Id to which the mapping of the renewal goes
+            ticketTypeMapping:
+              type: object
+              description: A mapping of the ticketTypes from the base event to the target event in key/value format where the key is the ticket type ID of a base event and the value is the ticket type ID of the target event
+            keepSameBarcodes:
+              type: boolean
+              description: Whether to keep the same barcode between base ticket and target ticket or not
+            targetSubscriptionPlanId:
+              type: string
+              description: The target subscription plan ID to which the mapping of the renewal goes
+            subscriptionPlanVariantMapping:
+              type: object
+              description: A mapping of the subscription plan variants from the base event to the target event in key/value format where the key is the subscription plan variant ID of a base event and the value is the subscription plan variant ID of the target event
+          description: The renewal settings of the subscription cycle
+        sellerId:
+          type: string
+          description: The ID of the seller of the subscription cycle
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the cycle was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the cycle was created
+        startedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the cycle was created
+        finishedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the cycle was created
+        subscriptionsAffected:
+          type: number
+          format: float
+          description: Amount of affected subscription after cycle applied
+        deliverySettings:
+          type: object
+          properties:
+            notifyCustomer:
+              type: boolean
+              description: Whether the customer should be notified or not on cycle apply
+          description: The delivery settings of the subscription cycle
+          default:
+            notifyCustomer: true
+        failedActions:
+          type: array
+          items:
+            type: object
+            properties:
+              subscriptionId:
+                type: string
+                description: The subscription ID which failed in the subscription cycle action
+              error:
+                type: string
+                description: The error message why the subscription failed in the subscription cycle action
+            required:
+            - subscriptionId
+          description: An array of subscriptions which failed during subscription cycle action and related error
+        subscriptionFilter:
+          type: object
+          description: The subscription filters to apply to the subscriptions in the cycle. This is used to filter subscriptions that should be affected by the cycle
+      required:
+      - _id
+      - name
+      - status
+      - action
+      - planId
+      - planVariantIds
+      - eventId
+      - sellerId
+      - createdAt
+      - updatedAt
+    POST_Subscription-cycles_RetryASubscriptionCyclesFailedActions_200_response:
       type: object
       properties:
         _id:
@@ -1021,292 +1306,7 @@ components:
       - sellerId
       - createdAt
       - updatedAt
-    PUT_Subscription-cycles_UpdateASubscriptionCycle:
-      type: object
-      properties:
-        action:
-          type: string
-          enum:
-          - extension
-          - renewal
-          - status-change
-          description: The action of the subscription cycle
-        planId:
-          type: string
-          description: The ID of the plan of the subscription cycle
-        planVariantIds:
-          type: array
-          items:
-            type: string
-          description: The ID of the plan variant of the subscription cycle
-        eventId:
-          type: string
-          description: The ID of the event of the subscription cycle
-        billing:
-          type:
-          - object
-          - 'null'
-          properties: {}
-          description: The billing of the subscription cycle
-        statusChange:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - draft-to-active
-              - draft-to-canceled
-              description: The type of the status change
-          description: The status change settings of the subscription cycle
-        extension:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - purchaseIntent
-              - freeticket
-              - transaction
-              description: The type of the extension
-            baseEventId:
-              type: string
-              description: The Base Event Id from which the mapping of the extension starts
-            targetEventId:
-              type: string
-              description: The Target Event Id to which the mapping of the extension goes
-            ticketTypeMapping:
-              type: object
-              description: A mapping of the ticketTypes from the base event to the target event in key/value format where the key is the ticket type ID of a base event and the value is the ticket type ID of the target event
-            keepSameBarcodes:
-              type: boolean
-              description: Whether to keep the same barcode between base ticket and target ticket or not
-            issueTickets:
-              type: boolean
-              description: Whether the tickets should be issued or not on extension
-          description: The extension settings of the subscription cycle
-        renewal:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - purchaseIntent
-              - subscription
-              description: The type of the renewal
-            status:
-              type: string
-              description: The status of the renewal
-            baseEventId:
-              type: string
-              description: The Base Event Id from which the mapping of the renewal starts
-            targetEventId:
-              type: string
-              description: The Target Event Id to which the mapping of the renewal goes
-            ticketTypeMapping:
-              type: object
-              description: A mapping of the ticketTypes from the base event to the target event in key/value format where the key is the ticket type ID of a base event and the value is the ticket type ID of the target event
-            keepSameBarcodes:
-              type: boolean
-              description: Whether to keep the same barcode between base ticket and target ticket or not
-            targetSubscriptionPlanId:
-              type: string
-              description: The target subscription plan ID to which the mapping of the renewal goes
-            subscriptionPlanVariantMapping:
-              type: object
-              description: A mapping of the subscription plan variants from the base event to the target event in key/value format where the key is the subscription plan variant ID of a base event and the value is the subscription plan variant ID of the target event
-          description: The renewal settings of the subscription cycle
-        deliverySettings:
-          type: object
-          properties:
-            notifyCustomer:
-              type: boolean
-              description: Whether the customer should be notified or not on cycle apply
-          description: The delivery settings of the subscription cycle
-          default:
-            notifyCustomer: true
-        subscriptionFilter:
-          type: object
-          description: The subscription filters to apply to the subscriptions in the cycle. This is used to filter subscriptions that should be affected by the cycle
-        name:
-          type: string
-          description: The name of the subscription cycle
-    GET_Subscription-cycles_GetAllSubscriptionCycles_200_response:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            type: object
-            properties:
-              _id:
-                type: string
-                description: The ID of the subscription cycle
-              name:
-                type: string
-                description: The name of the subscription cycle
-              status:
-                type: string
-                enum:
-                - DRAFT
-                - SCHEDULED
-                - ACTIVE
-                - COMPLETED
-                description: The status of the subscription cycle
-                default: DRAFT
-              action:
-                type: string
-                enum:
-                - extension
-                - renewal
-                - status-change
-                description: The action of the subscription cycle
-              planId:
-                type: string
-                description: The ID of the plan of the subscription cycle
-              planVariantIds:
-                type: array
-                items:
-                  type: string
-                description: The ID of the plan variant of the subscription cycle
-              eventId:
-                type: string
-                description: The ID of the event of the subscription cycle
-              billing:
-                type:
-                - object
-                - 'null'
-                properties: {}
-                description: The billing of the subscription cycle
-              statusChange:
-                type: object
-                properties:
-                  type:
-                    type: string
-                    enum:
-                    - draft-to-active
-                    - draft-to-canceled
-                    description: The type of the status change
-                description: The status change settings of the subscription cycle
-              extension:
-                type: object
-                properties:
-                  type:
-                    type: string
-                    enum:
-                    - purchaseIntent
-                    - freeticket
-                    - transaction
-                    description: The type of the extension
-                  baseEventId:
-                    type: string
-                    description: The Base Event Id from which the mapping of the extension starts
-                  targetEventId:
-                    type: string
-                    description: The Target Event Id to which the mapping of the extension goes
-                  ticketTypeMapping:
-                    type: object
-                    description: A mapping of the ticketTypes from the base event to the target event in key/value format where the key is the ticket type ID of a base event and the value is the ticket type ID of the target event
-                  keepSameBarcodes:
-                    type: boolean
-                    description: Whether to keep the same barcode between base ticket and target ticket or not
-                  issueTickets:
-                    type: boolean
-                    description: Whether the tickets should be issued or not on extension
-                description: The extension settings of the subscription cycle
-              renewal:
-                type: object
-                properties:
-                  type:
-                    type: string
-                    enum:
-                    - purchaseIntent
-                    - subscription
-                    description: The type of the renewal
-                  status:
-                    type: string
-                    description: The status of the renewal
-                  baseEventId:
-                    type: string
-                    description: The Base Event Id from which the mapping of the renewal starts
-                  targetEventId:
-                    type: string
-                    description: The Target Event Id to which the mapping of the renewal goes
-                  ticketTypeMapping:
-                    type: object
-                    description: A mapping of the ticketTypes from the base event to the target event in key/value format where the key is the ticket type ID of a base event and the value is the ticket type ID of the target event
-                  keepSameBarcodes:
-                    type: boolean
-                    description: Whether to keep the same barcode between base ticket and target ticket or not
-                  targetSubscriptionPlanId:
-                    type: string
-                    description: The target subscription plan ID to which the mapping of the renewal goes
-                  subscriptionPlanVariantMapping:
-                    type: object
-                    description: A mapping of the subscription plan variants from the base event to the target event in key/value format where the key is the subscription plan variant ID of a base event and the value is the subscription plan variant ID of the target event
-                description: The renewal settings of the subscription cycle
-              sellerId:
-                type: string
-                description: The ID of the seller of the subscription cycle
-              createdAt:
-                type: string
-                format: date-time
-                description: An ISO timestamp indicating when the cycle was created
-              updatedAt:
-                type: string
-                format: date-time
-                description: An ISO timestamp indicating when the cycle was created
-              startedAt:
-                type: string
-                format: date-time
-                description: An ISO timestamp indicating when the cycle was created
-              finishedAt:
-                type: string
-                format: date-time
-                description: An ISO timestamp indicating when the cycle was created
-              subscriptionsAffected:
-                type: number
-                format: float
-                description: Amount of affected subscription after cycle applied
-              deliverySettings:
-                type: object
-                properties:
-                  notifyCustomer:
-                    type: boolean
-                    description: Whether the customer should be notified or not on cycle apply
-                description: The delivery settings of the subscription cycle
-                default:
-                  notifyCustomer: true
-              failedActions:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    subscriptionId:
-                      type: string
-                      description: The subscription ID which failed in the subscription cycle action
-                    error:
-                      type: string
-                      description: The error message why the subscription failed in the subscription cycle action
-                  required:
-                  - subscriptionId
-                description: An array of subscriptions which failed during subscription cycle action and related error
-              subscriptionFilter:
-                type: object
-                description: The subscription filters to apply to the subscriptions in the cycle. This is used to filter subscriptions that should be affected by the cycle
-            required:
-            - _id
-            - name
-            - status
-            - action
-            - planId
-            - planVariantIds
-            - eventId
-            - sellerId
-            - createdAt
-            - updatedAt
-        total:
-          type: integer
-    POST_Subscription-cycles_RetryASubscriptionCyclesFailedActions_200_response:
+    PUT_Subscription-cycles_UpdateASubscriptionCycle_200_response:
       type: object
       properties:
         _id:

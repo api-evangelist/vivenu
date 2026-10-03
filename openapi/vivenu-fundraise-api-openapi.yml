@@ -643,6 +643,140 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    DonationResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the Donation
+        amount:
+          type: number
+          description: The amount of the donation
+        currency:
+          type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: The currency of the donation
+        applications:
+          description: An array of pledges that have been fulfilled through this donation.
+          type: array
+          items:
+            type: object
+            properties:
+              pledgeId:
+                type: string
+                description: The ID of the pledge that was fulfilled through this donation.
+              amount:
+                type: number
+                description: The amount of the donation that was applied to the pledge.
+            required:
+            - pledgeId
+            - amount
+            additionalProperties: false
+        customerId:
+          type: string
+          description: The ID of the customer of the donation
+        fundId:
+          type: string
+          description: The ID of the fund of the donation
+        campaignId:
+          description: The ID of the campaign of the donation
+          type: string
+        salesChannelId:
+          description: The ID of the sales channel of the donation
+          type: string
+        notes:
+          description: The notes of the donation
+          type: string
+        externalId:
+          description: The external ID of the donation
+          type: string
+        cartItemId:
+          description: The ID of the cart item from which the donation created
+          type: string
+        appliedAt:
+          description: An ISO timestamp indicating when the donation was applied. (esp. helpful for donations from external integrations)
+          type: string
+          format: date-time
+        sellerId:
+          type: string
+          description: The ID of the seller owning the donation
+        createdAt:
+          description: An ISO timestamp indicating when the donation was created.
+          type: string
+          format: date-time
+        updatedAt:
+          description: An ISO timestamp indicating when the donation was updated.
+          type: string
+          format: date-time
+      required:
+      - _id
+      - amount
+      - currency
+      - customerId
+      - fundId
+      - sellerId
+      - createdAt
+      - updatedAt
+      additionalProperties: false
     PledgeResource:
       type: object
       properties:
@@ -783,136 +917,44 @@ components:
       - createdAt
       - updatedAt
       additionalProperties: false
-    DonationResource:
+    FundResource:
       type: object
       properties:
         _id:
           type: string
-          description: The ID of the Donation
-        amount:
-          type: number
-          description: The amount of the donation
-        currency:
+          description: The ID of the Fund
+        name:
           type: string
-          enum:
-          - EUR
-          - USD
-          - GBP
-          - AUD
-          - CHF
-          - THB
-          - ILS
-          - COP
-          - MXN
-          - DKK
-          - NOK
-          - SEK
-          - QAR
-          - CAD
-          - ISK
-          - GTQ
-          - INR
-          - DOP
-          - SGD
-          - PLN
-          - SAR
-          - TTD
-          - ZAR
-          - KYD
-          - HKD
-          - CZK
-          - KRW
-          - JPY
-          - NZD
-          - AED
-          - MAD
-          - TWD
-          - BRL
-          - BWP
-          - NAD
-          - KES
-          - SCR
-          - TRY
-          - SZL
-          - LSL
-          - TZS
-          - UGX
-          - ZMW
-          - ZWG
-          - GHS
-          - NGN
-          - SLE
-          - LRD
-          - XOF
-          - XAF
-          - GEL
-          - IDR
-          - ARS
-          - CRC
-          - HUF
-          - EGP
-          - MYR
-          - VND
-          - PHP
-          description: The currency of the donation
-        applications:
-          description: An array of pledges that have been fulfilled through this donation.
-          type: array
-          items:
-            type: object
-            properties:
-              pledgeId:
-                type: string
-                description: The ID of the pledge that was fulfilled through this donation.
-              amount:
-                type: number
-                description: The amount of the donation that was applied to the pledge.
-            required:
-            - pledgeId
-            - amount
-            additionalProperties: false
-        customerId:
-          type: string
-          description: The ID of the customer of the donation
-        fundId:
-          type: string
-          description: The ID of the fund of the donation
-        campaignId:
-          description: The ID of the campaign of the donation
-          type: string
-        salesChannelId:
-          description: The ID of the sales channel of the donation
-          type: string
-        notes:
-          description: The notes of the donation
-          type: string
+          description: The name of the fund
+        target:
+          description: The target (goal) amount and date of the fund
+          type: object
+          properties:
+            amount:
+              description: The target amount of the fund
+              type: number
+            date:
+              description: An ISO timestamp indicating when the fund is planned to reach the goal (amount).
+              type: string
+              format: date-time
+          additionalProperties: false
         externalId:
-          description: The external ID of the donation
+          description: The external ID of the fund
           type: string
-        cartItemId:
-          description: The ID of the cart item from which the donation created
-          type: string
-        appliedAt:
-          description: An ISO timestamp indicating when the donation was applied. (esp. helpful for donations from external integrations)
-          type: string
-          format: date-time
         sellerId:
           type: string
-          description: The ID of the seller owning the donation
+          description: The ID of the seller owning the fund
         createdAt:
-          description: An ISO timestamp indicating when the donation was created.
+          description: An ISO timestamp indicating when the fund was created.
           type: string
           format: date-time
         updatedAt:
-          description: An ISO timestamp indicating when the donation was updated.
+          description: An ISO timestamp indicating when the fund was created.
           type: string
           format: date-time
       required:
       - _id
-      - amount
-      - currency
-      - customerId
-      - fundId
+      - name
       - sellerId
       - createdAt
       - updatedAt
@@ -972,48 +1014,6 @@ components:
       - createdBy
       - sellerId
       - isArchived
-      - createdAt
-      - updatedAt
-      additionalProperties: false
-    FundResource:
-      type: object
-      properties:
-        _id:
-          type: string
-          description: The ID of the Fund
-        name:
-          type: string
-          description: The name of the fund
-        target:
-          description: The target (goal) amount and date of the fund
-          type: object
-          properties:
-            amount:
-              description: The target amount of the fund
-              type: number
-            date:
-              description: An ISO timestamp indicating when the fund is planned to reach the goal (amount).
-              type: string
-              format: date-time
-          additionalProperties: false
-        externalId:
-          description: The external ID of the fund
-          type: string
-        sellerId:
-          type: string
-          description: The ID of the seller owning the fund
-        createdAt:
-          description: An ISO timestamp indicating when the fund was created.
-          type: string
-          format: date-time
-        updatedAt:
-          description: An ISO timestamp indicating when the fund was created.
-          type: string
-          format: date-time
-      required:
-      - _id
-      - name
-      - sellerId
       - createdAt
       - updatedAt
       additionalProperties: false

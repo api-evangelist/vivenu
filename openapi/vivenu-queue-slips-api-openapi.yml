@@ -907,35 +907,7 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    DELETE_Queue-slips_DeleteQueueSlips:
-      type: object
-      properties:
-        queueId:
-          type: string
-        status:
-          type: string
-          enum:
-          - queued
-          - scheduled
-          - received
-          - succeeded
-          - confirmed
-          - errored
-        printStatus:
-          type:
-          - string
-          - 'null'
-          enum:
-          - SUCCEEDED
-          - ABORTED
-          - FAILED
-          - PENDING
-          - REPRINT
-      required:
-      - queueId
-      - status
-      - printStatus
-    POST_Queue-slips_CreateVoucherQueueSlipPopulatorJob:
+    POST_Queue-slips_CreateCheckoutQueueSlipPopulatorJob:
       type: object
       properties:
         queueId:
@@ -1032,16 +1004,20 @@ components:
         filter:
           type: object
           properties:
-            transactionId:
+            checkoutId:
               type: string
-            fulfillmentTypeId:
-              type: string
-            aggregations:
+            deliveryType:
               type: array
               items:
-                type: string
-                enum:
-                - checkouts
+                oneOf:
+                - type: string
+                  enum:
+                  - HARD
+                - type: string
+                  enum:
+                  - VIRTUAL
+            fulfillmentTypeId:
+              type: string
             printStatus:
               type: array
               items:
@@ -1061,7 +1037,68 @@ components:
                 - type: string
                   enum:
                   - REPRINT
-            code:
+            paymentStatus:
+              type: array
+              items:
+                oneOf:
+                - type: string
+                  enum:
+                  - AWAITING
+                - type: string
+                  enum:
+                  - PENDING
+                - type: string
+                  enum:
+                  - RECEIVED
+                - type: string
+                  enum:
+                  - REFUND
+                - type: string
+                  enum:
+                  - CANCELED
+                - type: string
+                  enum:
+                  - FAILED
+                - type: string
+                  enum:
+                  - DISPUTE
+                - type: string
+                  enum:
+                  - CHARGEBACK
+                - type: string
+                  enum:
+                  - POS-RECEIVED
+                - type: string
+                  enum:
+                  - POS-CANCELED
+                - type: string
+                  enum:
+                  - LOCAL-PENDING
+                - type: string
+                  enum:
+                  - LOCAL-AWAITING
+                - type: string
+                  enum:
+                  - LOCAL-RECEIVED
+                - type: string
+                  enum:
+                  - EXTERNAL
+            status:
+              type: array
+              items:
+                oneOf:
+                - type: string
+                  enum:
+                  - NEW
+                - type: string
+                  enum:
+                  - ABORTED
+                - type: string
+                  enum:
+                  - COMPLETE
+            name:
+              type: string
+            email:
               type: string
             seller:
               type: array
@@ -1301,7 +1338,7 @@ components:
       required:
       - queueId
       - filter
-    POST_Queue-slips_CreateCheckoutQueueSlipPopulatorJob:
+    POST_Queue-slips_CreateVoucherQueueSlipPopulatorJob:
       type: object
       properties:
         queueId:
@@ -1398,20 +1435,16 @@ components:
         filter:
           type: object
           properties:
-            checkoutId:
+            transactionId:
               type: string
-            deliveryType:
-              type: array
-              items:
-                oneOf:
-                - type: string
-                  enum:
-                  - HARD
-                - type: string
-                  enum:
-                  - VIRTUAL
             fulfillmentTypeId:
               type: string
+            aggregations:
+              type: array
+              items:
+                type: string
+                enum:
+                - checkouts
             printStatus:
               type: array
               items:
@@ -1431,68 +1464,7 @@ components:
                 - type: string
                   enum:
                   - REPRINT
-            paymentStatus:
-              type: array
-              items:
-                oneOf:
-                - type: string
-                  enum:
-                  - AWAITING
-                - type: string
-                  enum:
-                  - PENDING
-                - type: string
-                  enum:
-                  - RECEIVED
-                - type: string
-                  enum:
-                  - REFUND
-                - type: string
-                  enum:
-                  - CANCELED
-                - type: string
-                  enum:
-                  - FAILED
-                - type: string
-                  enum:
-                  - DISPUTE
-                - type: string
-                  enum:
-                  - CHARGEBACK
-                - type: string
-                  enum:
-                  - POS-RECEIVED
-                - type: string
-                  enum:
-                  - POS-CANCELED
-                - type: string
-                  enum:
-                  - LOCAL-PENDING
-                - type: string
-                  enum:
-                  - LOCAL-AWAITING
-                - type: string
-                  enum:
-                  - LOCAL-RECEIVED
-                - type: string
-                  enum:
-                  - EXTERNAL
-            status:
-              type: array
-              items:
-                oneOf:
-                - type: string
-                  enum:
-                  - NEW
-                - type: string
-                  enum:
-                  - ABORTED
-                - type: string
-                  enum:
-                  - COMPLETE
-            name:
-              type: string
-            email:
+            code:
               type: string
             seller:
               type: array
@@ -1511,6 +1483,34 @@ components:
       required:
       - queueId
       - filter
+    DELETE_Queue-slips_DeleteQueueSlips:
+      type: object
+      properties:
+        queueId:
+          type: string
+        status:
+          type: string
+          enum:
+          - queued
+          - scheduled
+          - received
+          - succeeded
+          - confirmed
+          - errored
+        printStatus:
+          type:
+          - string
+          - 'null'
+          enum:
+          - SUCCEEDED
+          - ABORTED
+          - FAILED
+          - PENDING
+          - REPRINT
+      required:
+      - queueId
+      - status
+      - printStatus
   securitySchemes:
     jwt:
       type: http

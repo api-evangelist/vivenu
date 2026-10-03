@@ -175,6 +175,887 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PUT_Organizations_UpdateAnOrganization_200_response:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the organization
+        image:
+          type: string
+          description: The image url of the organization
+        legalSettings:
+          type: object
+          properties:
+            imprint:
+              type: string
+              description: The imprint of the organization
+            agb:
+              type: string
+              description: The terms and conditions of the organization
+            privacy:
+              type: string
+              description: The privacy policy of the organization
+            accessibility:
+              type: string
+              description: The accessibility policy of the organization
+        ticketSettings:
+          type: object
+          properties:
+            disclaimer:
+              type:
+              - string
+              - 'null'
+              description: The ticket disclaimer of the organization
+        branding:
+          type: object
+          properties:
+            favicon:
+              type: string
+              description: The favicon url of the organization
+            footerLogo:
+              type: string
+              description: The footer logo url of the organization
+            backgroundImage:
+              type: string
+              description: The background image url of the organization
+        billingSettings:
+          type: object
+          properties:
+            currency:
+              type: string
+              enum:
+              - EUR
+              - USD
+              - GBP
+              - AUD
+              - CHF
+              - THB
+              - ILS
+              - COP
+              - MXN
+              - DKK
+              - NOK
+              - SEK
+              - QAR
+              - CAD
+              - ISK
+              - GTQ
+              - INR
+              - DOP
+              - SGD
+              - PLN
+              - SAR
+              - TTD
+              - ZAR
+              - KYD
+              - HKD
+              - CZK
+              - KRW
+              - JPY
+              - NZD
+              - AED
+              - MAD
+              - TWD
+              - BRL
+              - BWP
+              - NAD
+              - KES
+              - SCR
+              - TRY
+              - SZL
+              - LSL
+              - TZS
+              - UGX
+              - ZMW
+              - ZWG
+              - GHS
+              - NGN
+              - SLE
+              - LRD
+              - XOF
+              - XAF
+              - GEL
+              - IDR
+              - ARS
+              - CRC
+              - HUF
+              - EGP
+              - MYR
+              - VND
+              - PHP
+              description: An ISO 4217 3-character code of the currency
+            fees:
+              type: object
+              properties:
+                ticketFee:
+                  type: number
+                  format: float
+                freeTicketFee:
+                  type: number
+                  format: float
+                cartFee:
+                  type: number
+                  format: float
+                freeCartFee:
+                  type: number
+                  format: float
+                posTicketFee:
+                  type: number
+                  format: float
+                posFreeTicketFee:
+                  type: number
+                  format: float
+            taxId:
+              type:
+              - string
+              - 'null'
+              description: The Tax-ID of the organization
+        address:
+          type: object
+          properties:
+            fullAddress:
+              type:
+              - string
+              - 'null'
+              description: Optional full address
+            street:
+              type:
+              - string
+              - 'null'
+              description: The street of the address. Street name including number.
+            line2:
+              type:
+              - string
+              - 'null'
+              description: The additional field of the address.
+            postal:
+              type:
+              - string
+              - 'null'
+              description: The postal code of the address.
+            city:
+              type:
+              - string
+              - 'null'
+              description: The city of the address.
+            country:
+              type:
+              - string
+              - 'null'
+              description: The country of the address. An ISO 3166 country code.
+            state:
+              type:
+              - string
+              - 'null'
+              description: The state of the address. If applicable
+        owner:
+          type: string
+          enum:
+          - de_vivenu_gmbh
+          - us_vivenu_inc
+          - ch_vivenu_switzerland_gmbh
+          description: Owner of the organization
+      required:
+      - name
+      - image
+    PUT_Organizations_UpdateAnOrganization:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the organization
+        image:
+          type: string
+          description: The image url of the organization
+        billingSettings:
+          type: object
+          properties:
+            currency:
+              type: string
+              enum:
+              - EUR
+              - USD
+              - GBP
+              - AUD
+              - CHF
+              - THB
+              - ILS
+              - COP
+              - MXN
+              - DKK
+              - NOK
+              - SEK
+              - QAR
+              - CAD
+              - ISK
+              - GTQ
+              - INR
+              - DOP
+              - SGD
+              - PLN
+              - SAR
+              - TTD
+              - ZAR
+              - KYD
+              - HKD
+              - CZK
+              - KRW
+              - JPY
+              - NZD
+              - AED
+              - MAD
+              - TWD
+              - BRL
+              - BWP
+              - NAD
+              - KES
+              - SCR
+              - TRY
+              - SZL
+              - LSL
+              - TZS
+              - UGX
+              - ZMW
+              - ZWG
+              - GHS
+              - NGN
+              - SLE
+              - LRD
+              - XOF
+              - XAF
+              - GEL
+              - IDR
+              - ARS
+              - CRC
+              - HUF
+              - EGP
+              - MYR
+              - VND
+              - PHP
+              description: An ISO 4217 3-character code of the currency
+            fees:
+              type: object
+              properties:
+                ticketFee:
+                  type: number
+                  format: float
+                freeTicketFee:
+                  type: number
+                  format: float
+                cartFee:
+                  type: number
+                  format: float
+                freeCartFee:
+                  type: number
+                  format: float
+                posTicketFee:
+                  type: number
+                  format: float
+                posFreeTicketFee:
+                  type: number
+                  format: float
+            taxId:
+              type:
+              - string
+              - 'null'
+              description: The Tax-ID of the organization
+        branding:
+          type: object
+          properties:
+            favicon:
+              type: string
+              description: The favicon url of the organization
+            footerLogo:
+              type: string
+              description: The footer logo url of the organization
+            backgroundImage:
+              type: string
+              description: The background image url of the organization
+        legalSettings:
+          type: object
+          properties:
+            imprint:
+              type: string
+              description: The imprint of the organization
+            agb:
+              type: string
+              description: The terms and conditions of the organization
+            privacy:
+              type: string
+              description: The privacy policy of the organization
+            accessibility:
+              type: string
+              description: The accessibility policy of the organization
+        ticketSettings:
+          type: object
+          properties:
+            disclaimer:
+              type:
+              - string
+              - 'null'
+              description: The ticket disclaimer of the organization
+        address:
+          type: object
+          properties:
+            fullAddress:
+              type:
+              - string
+              - 'null'
+              description: Optional full address
+            street:
+              type:
+              - string
+              - 'null'
+              description: The street of the address. Street name including number.
+            line2:
+              type:
+              - string
+              - 'null'
+              description: The additional field of the address.
+            postal:
+              type:
+              - string
+              - 'null'
+              description: The postal code of the address.
+            city:
+              type:
+              - string
+              - 'null'
+              description: The city of the address.
+            country:
+              type:
+              - string
+              - 'null'
+              description: The country of the address. An ISO 3166 country code.
+            state:
+              type:
+              - string
+              - 'null'
+              description: The state of the address. If applicable
+        owner:
+          type: string
+          enum:
+          - de_vivenu_gmbh
+          - us_vivenu_inc
+          - ch_vivenu_switzerland_gmbh
+          description: Owner of the organization
+    GET_Organizations_GetAnOrganization_200_response:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the organization
+        image:
+          type: string
+          description: The image url of the organization
+        legalSettings:
+          type: object
+          properties:
+            imprint:
+              type: string
+              description: The imprint of the organization
+            agb:
+              type: string
+              description: The terms and conditions of the organization
+            privacy:
+              type: string
+              description: The privacy policy of the organization
+            accessibility:
+              type: string
+              description: The accessibility policy of the organization
+        ticketSettings:
+          type: object
+          properties:
+            disclaimer:
+              type:
+              - string
+              - 'null'
+              description: The ticket disclaimer of the organization
+        branding:
+          type: object
+          properties:
+            favicon:
+              type: string
+              description: The favicon url of the organization
+            footerLogo:
+              type: string
+              description: The footer logo url of the organization
+            backgroundImage:
+              type: string
+              description: The background image url of the organization
+        billingSettings:
+          type: object
+          properties:
+            currency:
+              type: string
+              enum:
+              - EUR
+              - USD
+              - GBP
+              - AUD
+              - CHF
+              - THB
+              - ILS
+              - COP
+              - MXN
+              - DKK
+              - NOK
+              - SEK
+              - QAR
+              - CAD
+              - ISK
+              - GTQ
+              - INR
+              - DOP
+              - SGD
+              - PLN
+              - SAR
+              - TTD
+              - ZAR
+              - KYD
+              - HKD
+              - CZK
+              - KRW
+              - JPY
+              - NZD
+              - AED
+              - MAD
+              - TWD
+              - BRL
+              - BWP
+              - NAD
+              - KES
+              - SCR
+              - TRY
+              - SZL
+              - LSL
+              - TZS
+              - UGX
+              - ZMW
+              - ZWG
+              - GHS
+              - NGN
+              - SLE
+              - LRD
+              - XOF
+              - XAF
+              - GEL
+              - IDR
+              - ARS
+              - CRC
+              - HUF
+              - EGP
+              - MYR
+              - VND
+              - PHP
+              description: An ISO 4217 3-character code of the currency
+            fees:
+              type: object
+              properties:
+                ticketFee:
+                  type: number
+                  format: float
+                freeTicketFee:
+                  type: number
+                  format: float
+                cartFee:
+                  type: number
+                  format: float
+                freeCartFee:
+                  type: number
+                  format: float
+                posTicketFee:
+                  type: number
+                  format: float
+                posFreeTicketFee:
+                  type: number
+                  format: float
+            taxId:
+              type:
+              - string
+              - 'null'
+              description: The Tax-ID of the organization
+        address:
+          type: object
+          properties:
+            fullAddress:
+              type:
+              - string
+              - 'null'
+              description: Optional full address
+            street:
+              type:
+              - string
+              - 'null'
+              description: The street of the address. Street name including number.
+            line2:
+              type:
+              - string
+              - 'null'
+              description: The additional field of the address.
+            postal:
+              type:
+              - string
+              - 'null'
+              description: The postal code of the address.
+            city:
+              type:
+              - string
+              - 'null'
+              description: The city of the address.
+            country:
+              type:
+              - string
+              - 'null'
+              description: The country of the address. An ISO 3166 country code.
+            state:
+              type:
+              - string
+              - 'null'
+              description: The state of the address. If applicable
+        owner:
+          type: string
+          enum:
+          - de_vivenu_gmbh
+          - us_vivenu_inc
+          - ch_vivenu_switzerland_gmbh
+          description: Owner of the organization
+      required:
+      - name
+      - image
+    GET_Organizations_GetAnOrganizationsPublicInfo_200_response:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the organization
+        image:
+          type: string
+          description: The image url of the organization
+        branding:
+          type: object
+          properties:
+            favicon:
+              type: string
+              description: The favicon url of the organization
+            footerLogo:
+              type: string
+              description: The footer logo url of the organization
+        legalSettings:
+          type: object
+          properties:
+            imprint:
+              type: string
+              description: The imprint of the organization
+            agb:
+              type: string
+              description: The terms and conditions of the organization
+            privacy:
+              type: string
+              description: The privacy policy of the organization
+            accessibility:
+              type: string
+              description: The accessibility policy of the organization
+        ticketSettings:
+          type: object
+          properties:
+            disclaimer:
+              type:
+              - string
+              - 'null'
+              description: The ticket disclaimer of the organization
+      required:
+      - name
+      - image
+    POST_Organizations_CreateAnOrganization:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the organization
+        image:
+          type: string
+          description: The image url of the organization
+        billingSettings:
+          type: object
+          properties:
+            currency:
+              type: string
+              enum:
+              - EUR
+              - USD
+              - GBP
+              - AUD
+              - CHF
+              - THB
+              - ILS
+              - COP
+              - MXN
+              - DKK
+              - NOK
+              - SEK
+              - QAR
+              - CAD
+              - ISK
+              - GTQ
+              - INR
+              - DOP
+              - SGD
+              - PLN
+              - SAR
+              - TTD
+              - ZAR
+              - KYD
+              - HKD
+              - CZK
+              - KRW
+              - JPY
+              - NZD
+              - AED
+              - MAD
+              - TWD
+              - BRL
+              - BWP
+              - NAD
+              - KES
+              - SCR
+              - TRY
+              - SZL
+              - LSL
+              - TZS
+              - UGX
+              - ZMW
+              - ZWG
+              - GHS
+              - NGN
+              - SLE
+              - LRD
+              - XOF
+              - XAF
+              - GEL
+              - IDR
+              - ARS
+              - CRC
+              - HUF
+              - EGP
+              - MYR
+              - VND
+              - PHP
+              description: An ISO 4217 3-character code of the currency
+            fees:
+              type: object
+              properties:
+                ticketFee:
+                  type: number
+                  format: float
+                freeTicketFee:
+                  type: number
+                  format: float
+                cartFee:
+                  type: number
+                  format: float
+                freeCartFee:
+                  type: number
+                  format: float
+                posTicketFee:
+                  type: number
+                  format: float
+                posFreeTicketFee:
+                  type: number
+                  format: float
+            taxId:
+              type:
+              - string
+              - 'null'
+              description: The Tax-ID of the organization
+      required:
+      - name
+      - image
+    POST_Organizations_CreateAnOrganization_201_response:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the organization
+        image:
+          type: string
+          description: The image url of the organization
+        legalSettings:
+          type: object
+          properties:
+            imprint:
+              type: string
+              description: The imprint of the organization
+            agb:
+              type: string
+              description: The terms and conditions of the organization
+            privacy:
+              type: string
+              description: The privacy policy of the organization
+            accessibility:
+              type: string
+              description: The accessibility policy of the organization
+        ticketSettings:
+          type: object
+          properties:
+            disclaimer:
+              type:
+              - string
+              - 'null'
+              description: The ticket disclaimer of the organization
+        branding:
+          type: object
+          properties:
+            favicon:
+              type: string
+              description: The favicon url of the organization
+            footerLogo:
+              type: string
+              description: The footer logo url of the organization
+            backgroundImage:
+              type: string
+              description: The background image url of the organization
+        billingSettings:
+          type: object
+          properties:
+            currency:
+              type: string
+              enum:
+              - EUR
+              - USD
+              - GBP
+              - AUD
+              - CHF
+              - THB
+              - ILS
+              - COP
+              - MXN
+              - DKK
+              - NOK
+              - SEK
+              - QAR
+              - CAD
+              - ISK
+              - GTQ
+              - INR
+              - DOP
+              - SGD
+              - PLN
+              - SAR
+              - TTD
+              - ZAR
+              - KYD
+              - HKD
+              - CZK
+              - KRW
+              - JPY
+              - NZD
+              - AED
+              - MAD
+              - TWD
+              - BRL
+              - BWP
+              - NAD
+              - KES
+              - SCR
+              - TRY
+              - SZL
+              - LSL
+              - TZS
+              - UGX
+              - ZMW
+              - ZWG
+              - GHS
+              - NGN
+              - SLE
+              - LRD
+              - XOF
+              - XAF
+              - GEL
+              - IDR
+              - ARS
+              - CRC
+              - HUF
+              - EGP
+              - MYR
+              - VND
+              - PHP
+              description: An ISO 4217 3-character code of the currency
+            fees:
+              type: object
+              properties:
+                ticketFee:
+                  type: number
+                  format: float
+                freeTicketFee:
+                  type: number
+                  format: float
+                cartFee:
+                  type: number
+                  format: float
+                freeCartFee:
+                  type: number
+                  format: float
+                posTicketFee:
+                  type: number
+                  format: float
+                posFreeTicketFee:
+                  type: number
+                  format: float
+            taxId:
+              type:
+              - string
+              - 'null'
+              description: The Tax-ID of the organization
+        address:
+          type: object
+          properties:
+            fullAddress:
+              type:
+              - string
+              - 'null'
+              description: Optional full address
+            street:
+              type:
+              - string
+              - 'null'
+              description: The street of the address. Street name including number.
+            line2:
+              type:
+              - string
+              - 'null'
+              description: The additional field of the address.
+            postal:
+              type:
+              - string
+              - 'null'
+              description: The postal code of the address.
+            city:
+              type:
+              - string
+              - 'null'
+              description: The city of the address.
+            country:
+              type:
+              - string
+              - 'null'
+              description: The country of the address. An ISO 3166 country code.
+            state:
+              type:
+              - string
+              - 'null'
+              description: The state of the address. If applicable
+        owner:
+          type: string
+          enum:
+          - de_vivenu_gmbh
+          - us_vivenu_inc
+          - ch_vivenu_switzerland_gmbh
+          description: Owner of the organization
+      required:
+      - name
+      - image
     GET_Organizations_GetAllOrganizations_200_response:
       type: object
       properties:
@@ -366,887 +1247,6 @@ components:
             - image
         total:
           type: integer
-    PUT_Organizations_UpdateAnOrganization:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the organization
-        image:
-          type: string
-          description: The image url of the organization
-        billingSettings:
-          type: object
-          properties:
-            currency:
-              type: string
-              enum:
-              - EUR
-              - USD
-              - GBP
-              - AUD
-              - CHF
-              - THB
-              - ILS
-              - COP
-              - MXN
-              - DKK
-              - NOK
-              - SEK
-              - QAR
-              - CAD
-              - ISK
-              - GTQ
-              - INR
-              - DOP
-              - SGD
-              - PLN
-              - SAR
-              - TTD
-              - ZAR
-              - KYD
-              - HKD
-              - CZK
-              - KRW
-              - JPY
-              - NZD
-              - AED
-              - MAD
-              - TWD
-              - BRL
-              - BWP
-              - NAD
-              - KES
-              - SCR
-              - TRY
-              - SZL
-              - LSL
-              - TZS
-              - UGX
-              - ZMW
-              - ZWG
-              - GHS
-              - NGN
-              - SLE
-              - LRD
-              - XOF
-              - XAF
-              - GEL
-              - IDR
-              - ARS
-              - CRC
-              - HUF
-              - EGP
-              - MYR
-              - VND
-              - PHP
-              description: An ISO 4217 3-character code of the currency
-            fees:
-              type: object
-              properties:
-                ticketFee:
-                  type: number
-                  format: float
-                freeTicketFee:
-                  type: number
-                  format: float
-                cartFee:
-                  type: number
-                  format: float
-                freeCartFee:
-                  type: number
-                  format: float
-                posTicketFee:
-                  type: number
-                  format: float
-                posFreeTicketFee:
-                  type: number
-                  format: float
-            taxId:
-              type:
-              - string
-              - 'null'
-              description: The Tax-ID of the organization
-        branding:
-          type: object
-          properties:
-            favicon:
-              type: string
-              description: The favicon url of the organization
-            footerLogo:
-              type: string
-              description: The footer logo url of the organization
-            backgroundImage:
-              type: string
-              description: The background image url of the organization
-        legalSettings:
-          type: object
-          properties:
-            imprint:
-              type: string
-              description: The imprint of the organization
-            agb:
-              type: string
-              description: The terms and conditions of the organization
-            privacy:
-              type: string
-              description: The privacy policy of the organization
-            accessibility:
-              type: string
-              description: The accessibility policy of the organization
-        ticketSettings:
-          type: object
-          properties:
-            disclaimer:
-              type:
-              - string
-              - 'null'
-              description: The ticket disclaimer of the organization
-        address:
-          type: object
-          properties:
-            fullAddress:
-              type:
-              - string
-              - 'null'
-              description: Optional full address
-            street:
-              type:
-              - string
-              - 'null'
-              description: The street of the address. Street name including number.
-            line2:
-              type:
-              - string
-              - 'null'
-              description: The additional field of the address.
-            postal:
-              type:
-              - string
-              - 'null'
-              description: The postal code of the address.
-            city:
-              type:
-              - string
-              - 'null'
-              description: The city of the address.
-            country:
-              type:
-              - string
-              - 'null'
-              description: The country of the address. An ISO 3166 country code.
-            state:
-              type:
-              - string
-              - 'null'
-              description: The state of the address. If applicable
-        owner:
-          type: string
-          enum:
-          - de_vivenu_gmbh
-          - us_vivenu_inc
-          - ch_vivenu_switzerland_gmbh
-          description: Owner of the organization
-    POST_Organizations_CreateAnOrganization_201_response:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the organization
-        image:
-          type: string
-          description: The image url of the organization
-        legalSettings:
-          type: object
-          properties:
-            imprint:
-              type: string
-              description: The imprint of the organization
-            agb:
-              type: string
-              description: The terms and conditions of the organization
-            privacy:
-              type: string
-              description: The privacy policy of the organization
-            accessibility:
-              type: string
-              description: The accessibility policy of the organization
-        ticketSettings:
-          type: object
-          properties:
-            disclaimer:
-              type:
-              - string
-              - 'null'
-              description: The ticket disclaimer of the organization
-        branding:
-          type: object
-          properties:
-            favicon:
-              type: string
-              description: The favicon url of the organization
-            footerLogo:
-              type: string
-              description: The footer logo url of the organization
-            backgroundImage:
-              type: string
-              description: The background image url of the organization
-        billingSettings:
-          type: object
-          properties:
-            currency:
-              type: string
-              enum:
-              - EUR
-              - USD
-              - GBP
-              - AUD
-              - CHF
-              - THB
-              - ILS
-              - COP
-              - MXN
-              - DKK
-              - NOK
-              - SEK
-              - QAR
-              - CAD
-              - ISK
-              - GTQ
-              - INR
-              - DOP
-              - SGD
-              - PLN
-              - SAR
-              - TTD
-              - ZAR
-              - KYD
-              - HKD
-              - CZK
-              - KRW
-              - JPY
-              - NZD
-              - AED
-              - MAD
-              - TWD
-              - BRL
-              - BWP
-              - NAD
-              - KES
-              - SCR
-              - TRY
-              - SZL
-              - LSL
-              - TZS
-              - UGX
-              - ZMW
-              - ZWG
-              - GHS
-              - NGN
-              - SLE
-              - LRD
-              - XOF
-              - XAF
-              - GEL
-              - IDR
-              - ARS
-              - CRC
-              - HUF
-              - EGP
-              - MYR
-              - VND
-              - PHP
-              description: An ISO 4217 3-character code of the currency
-            fees:
-              type: object
-              properties:
-                ticketFee:
-                  type: number
-                  format: float
-                freeTicketFee:
-                  type: number
-                  format: float
-                cartFee:
-                  type: number
-                  format: float
-                freeCartFee:
-                  type: number
-                  format: float
-                posTicketFee:
-                  type: number
-                  format: float
-                posFreeTicketFee:
-                  type: number
-                  format: float
-            taxId:
-              type:
-              - string
-              - 'null'
-              description: The Tax-ID of the organization
-        address:
-          type: object
-          properties:
-            fullAddress:
-              type:
-              - string
-              - 'null'
-              description: Optional full address
-            street:
-              type:
-              - string
-              - 'null'
-              description: The street of the address. Street name including number.
-            line2:
-              type:
-              - string
-              - 'null'
-              description: The additional field of the address.
-            postal:
-              type:
-              - string
-              - 'null'
-              description: The postal code of the address.
-            city:
-              type:
-              - string
-              - 'null'
-              description: The city of the address.
-            country:
-              type:
-              - string
-              - 'null'
-              description: The country of the address. An ISO 3166 country code.
-            state:
-              type:
-              - string
-              - 'null'
-              description: The state of the address. If applicable
-        owner:
-          type: string
-          enum:
-          - de_vivenu_gmbh
-          - us_vivenu_inc
-          - ch_vivenu_switzerland_gmbh
-          description: Owner of the organization
-      required:
-      - name
-      - image
-    PUT_Organizations_UpdateAnOrganization_200_response:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the organization
-        image:
-          type: string
-          description: The image url of the organization
-        legalSettings:
-          type: object
-          properties:
-            imprint:
-              type: string
-              description: The imprint of the organization
-            agb:
-              type: string
-              description: The terms and conditions of the organization
-            privacy:
-              type: string
-              description: The privacy policy of the organization
-            accessibility:
-              type: string
-              description: The accessibility policy of the organization
-        ticketSettings:
-          type: object
-          properties:
-            disclaimer:
-              type:
-              - string
-              - 'null'
-              description: The ticket disclaimer of the organization
-        branding:
-          type: object
-          properties:
-            favicon:
-              type: string
-              description: The favicon url of the organization
-            footerLogo:
-              type: string
-              description: The footer logo url of the organization
-            backgroundImage:
-              type: string
-              description: The background image url of the organization
-        billingSettings:
-          type: object
-          properties:
-            currency:
-              type: string
-              enum:
-              - EUR
-              - USD
-              - GBP
-              - AUD
-              - CHF
-              - THB
-              - ILS
-              - COP
-              - MXN
-              - DKK
-              - NOK
-              - SEK
-              - QAR
-              - CAD
-              - ISK
-              - GTQ
-              - INR
-              - DOP
-              - SGD
-              - PLN
-              - SAR
-              - TTD
-              - ZAR
-              - KYD
-              - HKD
-              - CZK
-              - KRW
-              - JPY
-              - NZD
-              - AED
-              - MAD
-              - TWD
-              - BRL
-              - BWP
-              - NAD
-              - KES
-              - SCR
-              - TRY
-              - SZL
-              - LSL
-              - TZS
-              - UGX
-              - ZMW
-              - ZWG
-              - GHS
-              - NGN
-              - SLE
-              - LRD
-              - XOF
-              - XAF
-              - GEL
-              - IDR
-              - ARS
-              - CRC
-              - HUF
-              - EGP
-              - MYR
-              - VND
-              - PHP
-              description: An ISO 4217 3-character code of the currency
-            fees:
-              type: object
-              properties:
-                ticketFee:
-                  type: number
-                  format: float
-                freeTicketFee:
-                  type: number
-                  format: float
-                cartFee:
-                  type: number
-                  format: float
-                freeCartFee:
-                  type: number
-                  format: float
-                posTicketFee:
-                  type: number
-                  format: float
-                posFreeTicketFee:
-                  type: number
-                  format: float
-            taxId:
-              type:
-              - string
-              - 'null'
-              description: The Tax-ID of the organization
-        address:
-          type: object
-          properties:
-            fullAddress:
-              type:
-              - string
-              - 'null'
-              description: Optional full address
-            street:
-              type:
-              - string
-              - 'null'
-              description: The street of the address. Street name including number.
-            line2:
-              type:
-              - string
-              - 'null'
-              description: The additional field of the address.
-            postal:
-              type:
-              - string
-              - 'null'
-              description: The postal code of the address.
-            city:
-              type:
-              - string
-              - 'null'
-              description: The city of the address.
-            country:
-              type:
-              - string
-              - 'null'
-              description: The country of the address. An ISO 3166 country code.
-            state:
-              type:
-              - string
-              - 'null'
-              description: The state of the address. If applicable
-        owner:
-          type: string
-          enum:
-          - de_vivenu_gmbh
-          - us_vivenu_inc
-          - ch_vivenu_switzerland_gmbh
-          description: Owner of the organization
-      required:
-      - name
-      - image
-    GET_Organizations_GetAnOrganization_200_response:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the organization
-        image:
-          type: string
-          description: The image url of the organization
-        legalSettings:
-          type: object
-          properties:
-            imprint:
-              type: string
-              description: The imprint of the organization
-            agb:
-              type: string
-              description: The terms and conditions of the organization
-            privacy:
-              type: string
-              description: The privacy policy of the organization
-            accessibility:
-              type: string
-              description: The accessibility policy of the organization
-        ticketSettings:
-          type: object
-          properties:
-            disclaimer:
-              type:
-              - string
-              - 'null'
-              description: The ticket disclaimer of the organization
-        branding:
-          type: object
-          properties:
-            favicon:
-              type: string
-              description: The favicon url of the organization
-            footerLogo:
-              type: string
-              description: The footer logo url of the organization
-            backgroundImage:
-              type: string
-              description: The background image url of the organization
-        billingSettings:
-          type: object
-          properties:
-            currency:
-              type: string
-              enum:
-              - EUR
-              - USD
-              - GBP
-              - AUD
-              - CHF
-              - THB
-              - ILS
-              - COP
-              - MXN
-              - DKK
-              - NOK
-              - SEK
-              - QAR
-              - CAD
-              - ISK
-              - GTQ
-              - INR
-              - DOP
-              - SGD
-              - PLN
-              - SAR
-              - TTD
-              - ZAR
-              - KYD
-              - HKD
-              - CZK
-              - KRW
-              - JPY
-              - NZD
-              - AED
-              - MAD
-              - TWD
-              - BRL
-              - BWP
-              - NAD
-              - KES
-              - SCR
-              - TRY
-              - SZL
-              - LSL
-              - TZS
-              - UGX
-              - ZMW
-              - ZWG
-              - GHS
-              - NGN
-              - SLE
-              - LRD
-              - XOF
-              - XAF
-              - GEL
-              - IDR
-              - ARS
-              - CRC
-              - HUF
-              - EGP
-              - MYR
-              - VND
-              - PHP
-              description: An ISO 4217 3-character code of the currency
-            fees:
-              type: object
-              properties:
-                ticketFee:
-                  type: number
-                  format: float
-                freeTicketFee:
-                  type: number
-                  format: float
-                cartFee:
-                  type: number
-                  format: float
-                freeCartFee:
-                  type: number
-                  format: float
-                posTicketFee:
-                  type: number
-                  format: float
-                posFreeTicketFee:
-                  type: number
-                  format: float
-            taxId:
-              type:
-              - string
-              - 'null'
-              description: The Tax-ID of the organization
-        address:
-          type: object
-          properties:
-            fullAddress:
-              type:
-              - string
-              - 'null'
-              description: Optional full address
-            street:
-              type:
-              - string
-              - 'null'
-              description: The street of the address. Street name including number.
-            line2:
-              type:
-              - string
-              - 'null'
-              description: The additional field of the address.
-            postal:
-              type:
-              - string
-              - 'null'
-              description: The postal code of the address.
-            city:
-              type:
-              - string
-              - 'null'
-              description: The city of the address.
-            country:
-              type:
-              - string
-              - 'null'
-              description: The country of the address. An ISO 3166 country code.
-            state:
-              type:
-              - string
-              - 'null'
-              description: The state of the address. If applicable
-        owner:
-          type: string
-          enum:
-          - de_vivenu_gmbh
-          - us_vivenu_inc
-          - ch_vivenu_switzerland_gmbh
-          description: Owner of the organization
-      required:
-      - name
-      - image
-    POST_Organizations_CreateAnOrganization:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the organization
-        image:
-          type: string
-          description: The image url of the organization
-        billingSettings:
-          type: object
-          properties:
-            currency:
-              type: string
-              enum:
-              - EUR
-              - USD
-              - GBP
-              - AUD
-              - CHF
-              - THB
-              - ILS
-              - COP
-              - MXN
-              - DKK
-              - NOK
-              - SEK
-              - QAR
-              - CAD
-              - ISK
-              - GTQ
-              - INR
-              - DOP
-              - SGD
-              - PLN
-              - SAR
-              - TTD
-              - ZAR
-              - KYD
-              - HKD
-              - CZK
-              - KRW
-              - JPY
-              - NZD
-              - AED
-              - MAD
-              - TWD
-              - BRL
-              - BWP
-              - NAD
-              - KES
-              - SCR
-              - TRY
-              - SZL
-              - LSL
-              - TZS
-              - UGX
-              - ZMW
-              - ZWG
-              - GHS
-              - NGN
-              - SLE
-              - LRD
-              - XOF
-              - XAF
-              - GEL
-              - IDR
-              - ARS
-              - CRC
-              - HUF
-              - EGP
-              - MYR
-              - VND
-              - PHP
-              description: An ISO 4217 3-character code of the currency
-            fees:
-              type: object
-              properties:
-                ticketFee:
-                  type: number
-                  format: float
-                freeTicketFee:
-                  type: number
-                  format: float
-                cartFee:
-                  type: number
-                  format: float
-                freeCartFee:
-                  type: number
-                  format: float
-                posTicketFee:
-                  type: number
-                  format: float
-                posFreeTicketFee:
-                  type: number
-                  format: float
-            taxId:
-              type:
-              - string
-              - 'null'
-              description: The Tax-ID of the organization
-      required:
-      - name
-      - image
-    GET_Organizations_GetAnOrganizationsPublicInfo_200_response:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the organization
-        image:
-          type: string
-          description: The image url of the organization
-        branding:
-          type: object
-          properties:
-            favicon:
-              type: string
-              description: The favicon url of the organization
-            footerLogo:
-              type: string
-              description: The footer logo url of the organization
-        legalSettings:
-          type: object
-          properties:
-            imprint:
-              type: string
-              description: The imprint of the organization
-            agb:
-              type: string
-              description: The terms and conditions of the organization
-            privacy:
-              type: string
-              description: The privacy policy of the organization
-            accessibility:
-              type: string
-              description: The accessibility policy of the organization
-        ticketSettings:
-          type: object
-          properties:
-            disclaimer:
-              type:
-              - string
-              - 'null'
-              description: The ticket disclaimer of the organization
-      required:
-      - name
-      - image
   securitySchemes:
     jwt:
       type: http

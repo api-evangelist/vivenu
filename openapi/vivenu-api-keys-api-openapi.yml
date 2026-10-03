@@ -177,10 +177,50 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GET_Api_keys_GetAllApiKeys_200_response:
-      type: array
-      items:
-        $ref: '#/components/schemas/RedactedAPIKeyResource'
+    POST_Api_keys_GetOrCreateADefaultApiKey:
+      type: object
+      properties:
+        sellerId:
+          type: string
+          description: The seller ID to get or create the API key for.
+      required:
+      - sellerId
+    POST_Api_keys_CreateAnApiKey:
+      type: object
+      properties:
+        name:
+          type: string
+          description: An internal name to identify the API key.
+        orgId:
+          type: string
+          description: The organization ID for which to create the API key.
+        expiresAt:
+          type: string
+          format: date-time
+          description: Optional expiry time (strictly future, at most one year); omit for keys that do not auto-expire.
+      required:
+      - name
+    PUT_Api_keys_UpdateAnApiKey:
+      type: object
+      properties:
+        active:
+          type: boolean
+          description: Whether the API key can be used to authenticate against the API.
+          default: true
+        name:
+          type: string
+          description: An internal name to identify the API key.
+        expiresAt:
+          oneOf:
+          - oneOf:
+            - type: array
+            - type: boolean
+            - type: number
+            - type: object
+            - type: string
+          - type: string
+            format: date-time
+          description: Optional expiry; send null to clear automatic expiry.
     APIKeyResource:
       type: object
       properties:
@@ -243,29 +283,6 @@ components:
       - key
       - createdAt
       - updatedAt
-    POST_Api_keys_GetOrCreateADefaultApiKey:
-      type: object
-      properties:
-        sellerId:
-          type: string
-          description: The seller ID to get or create the API key for.
-      required:
-      - sellerId
-    POST_Api_keys_CreateAnApiKey:
-      type: object
-      properties:
-        name:
-          type: string
-          description: An internal name to identify the API key.
-        orgId:
-          type: string
-          description: The organization ID for which to create the API key.
-        expiresAt:
-          type: string
-          format: date-time
-          description: Optional expiry time (strictly future, at most one year); omit for keys that do not auto-expire.
-      required:
-      - name
     RedactedAPIKeyResource:
       type: object
       properties:
@@ -323,27 +340,10 @@ components:
       - name
       - createdAt
       - updatedAt
-    PUT_Api_keys_UpdateAnApiKey:
-      type: object
-      properties:
-        active:
-          type: boolean
-          description: Whether the API key can be used to authenticate against the API.
-          default: true
-        name:
-          type: string
-          description: An internal name to identify the API key.
-        expiresAt:
-          oneOf:
-          - oneOf:
-            - type: array
-            - type: boolean
-            - type: number
-            - type: object
-            - type: string
-          - type: string
-            format: date-time
-          description: Optional expiry; send null to clear automatic expiry.
+    GET_Api_keys_GetAllApiKeys_200_response:
+      type: array
+      items:
+        $ref: '#/components/schemas/RedactedAPIKeyResource'
   securitySchemes:
     jwt:
       type: http

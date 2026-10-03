@@ -471,6 +471,282 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    POST_Accessusers_CreateScans:
+      type: array
+      items:
+        type: object
+        properties:
+          ticketId:
+            type: string
+          barcode:
+            type: string
+            minLength: 8
+            description: The barcode of the ticket
+          scanned_at:
+            type: string
+            format: date-time
+            description: An ISO Timestamp indicating when the ticket was scanned.
+          type:
+            type: string
+            enum:
+            - OK
+            - FAIL
+            description: Whether the scan succeeded or failed
+          direction:
+            type: string
+            enum:
+            - IN
+            - OUT
+            description: Indicates in which direction the scan was.
+        required:
+        - barcode
+        - scanned_at
+        - type
+        - direction
+    POST_Accessusers_CreateAnAccessUser:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+          description: An internal name to identify the access user
+        isIntegration:
+          type: boolean
+          description: Whether an integration belongs to the access user
+      required:
+      - name
+    POST_Accessusers_ScanTicketWithBarcode_200_response:
+      type: object
+      properties:
+        access:
+          type: string
+          enum:
+          - GRANTED
+          - DENIED
+        ticket:
+          type: object
+          properties:
+            _id:
+              type: string
+            barcode:
+              type: string
+              minLength: 8
+              description: The barcode of the ticket
+            name:
+              type: string
+              description: The name of the ticket owner
+            status:
+              type: string
+              enum:
+              - VALID
+              - INVALID
+              - RESERVED
+              - DETAILSREQUIRED
+              - BLANK
+              description: The status of the ticket
+            ticketTypeId:
+              type: string
+              description: The ID of the ticket type this ticket inherits from
+            ticketName:
+              type: string
+              description: The name of the ticket type this ticket inherits from
+            categoryRef:
+              type: string
+              description: A UUID of the category the ticket belongs to.
+            eventId:
+              type: string
+              description: The ID of the event the ticket belongs to
+            sellerId:
+              type: string
+              description: The ID of the seller that ticket belongs to.
+            createdAt:
+              type: string
+              format: date-time
+              description: An ISO Timestamp indicating when the ticket was created.
+            updatedAt:
+              type: string
+              format: date-time
+              description: An ISO Timestamp indicating when the ticket was updated.
+          required:
+          - _id
+          - barcode
+          - status
+          - ticketTypeId
+          - ticketName
+          - eventId
+          - sellerId
+          - createdAt
+          - updatedAt
+    GET_Accessusers_GetAssociatedSellerId_200_response:
+      type: object
+      properties:
+        sellerId:
+          type: string
+          description: The ID of the seller that owns the access user.
+      required:
+      - sellerId
+    GET_Accessusers_GetTicketWithBarcode_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+        barcode:
+          type: string
+          minLength: 8
+          description: The barcode of the ticket
+        name:
+          type: string
+          description: The name of the ticket owner
+        ticketTypeId:
+          type: string
+          description: The ID of the ticket type this ticket inherits from
+        ticketName:
+          type: string
+          description: The name of the ticket type this ticket inherits from
+        categoryRef:
+          type: string
+          description: A UUID of the category the ticket belongs to.
+        priceCategoryId:
+          type: string
+        eventId:
+          type: string
+          description: The ID of the event the ticket belongs to
+        sellerId:
+          type: string
+          description: The ID of the seller that ticket belongs to.
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the ticket was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the ticket was updated.
+        priceCategory:
+          type: object
+          properties:
+            categoryId:
+              type: string
+            description:
+              type: string
+        status:
+          type: string
+          enum:
+          - VALID
+          - INVALID
+          default: VALID
+      required:
+      - _id
+      - barcode
+      - ticketTypeId
+      - ticketName
+      - eventId
+      - sellerId
+      - createdAt
+      - updatedAt
+    GET_Accessusers_GetTicketsForAnEventV2_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              barcode:
+                type: string
+                minLength: 8
+                description: The barcode of the ticket
+              name:
+                type: string
+                description: The name of the ticket owner
+              ticketTypeId:
+                type: string
+                description: The ID of the ticket type this ticket inherits from
+              ticketName:
+                type: string
+                description: The name of the ticket type this ticket inherits from
+              priceCategoryId:
+                type: string
+              eventId:
+                type: string
+                description: The ID of the event the ticket belongs to
+              sellerId:
+                type: string
+                description: The ID of the seller that ticket belongs to.
+              createdAt:
+                type: string
+                format: date-time
+                description: An ISO Timestamp indicating when the ticket was created.
+              updatedAt:
+                type: string
+                format: date-time
+                description: An ISO Timestamp indicating when the ticket was updated.
+              categoryRef:
+                type: string
+                description: A UUID of the category the ticket belongs to.
+              priceCategory:
+                type: object
+                properties:
+                  categoryId:
+                    type: string
+                  description:
+                    type: string
+              status:
+                type: string
+                enum:
+                - VALID
+                - INVALID
+                - DETAILSREQUIRED
+                default: VALID
+              area:
+                type: string
+                description: If the ticket has a seat. The area where the seat is located
+              row:
+                type: string
+                description: If the ticket has a seat. The row where the seat is located
+              seat:
+                type: string
+                description: If the ticket has a seat. The seat number
+              discountId:
+                type: string
+                description: If the ticket has a special price category. The id of the price category
+              discount:
+                type: string
+                description: If the ticket has a special price category. The description of the price category
+              entry:
+                type: array
+                items:
+                  type: string
+                  description: The id of the entry
+                description: If the ticket has entry permissions. An array of entry-ids where the ticket has access
+            required:
+            - _id
+            - barcode
+            - ticketTypeId
+            - ticketName
+            - eventId
+            - sellerId
+            - createdAt
+            - updatedAt
+        total:
+          type: integer
+    GET_Accessusers_GetAllAccessibleEvents_200_response:
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+            description: The ID of the event
+          name:
+            type: string
+            description: The name of the event
+        required:
+        - _id
+        - name
+      description: An array of all events the access user has access to.
     POST_Accessusers_CreateScans_200_response:
       type: object
       properties:
@@ -532,14 +808,176 @@ components:
       required:
       - name
       - accessAllEvents
-    GET_Accessusers_GetAssociatedSellerId_200_response:
+    GET_Accessusers_GetTicketsForAnEvent_200_response:
       type: object
       properties:
+        docs:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              barcode:
+                type: string
+                minLength: 8
+                description: The barcode of the ticket
+              name:
+                type: string
+                description: The name of the ticket owner
+              ticketTypeId:
+                type: string
+                description: The ID of the ticket type this ticket inherits from
+              ticketName:
+                type: string
+                description: The name of the ticket type this ticket inherits from
+              priceCategoryId:
+                type: string
+              eventId:
+                type: string
+                description: The ID of the event the ticket belongs to
+              sellerId:
+                type: string
+                description: The ID of the seller that ticket belongs to.
+              createdAt:
+                type: string
+                format: date-time
+                description: An ISO Timestamp indicating when the ticket was created.
+              updatedAt:
+                type: string
+                format: date-time
+                description: An ISO Timestamp indicating when the ticket was updated.
+              priceCategory:
+                type: object
+                properties:
+                  categoryId:
+                    type: string
+                  description:
+                    type: string
+              parentEventId:
+                type: string
+              status:
+                type: string
+                enum:
+                - VALID
+                - INVALID
+                - DETAILSREQUIRED
+                default: VALID
+              area:
+                type: string
+                description: If the ticket has a seat. The area where the seat is located
+              row:
+                type: string
+                description: If the ticket has a seat. The row where the seat is located
+              seat:
+                type: string
+                description: If the ticket has a seat. The seat number
+              discountId:
+                type: string
+                description: If the ticket has a special price category. The id of the price category
+              discount:
+                type: string
+                description: If the ticket has a special price category. The description of the price category
+              entry:
+                type: array
+                items:
+                  type: string
+                  description: The id of the entry
+                description: If the ticket has entry permissions. An array of entry-ids where the ticket has access
+            required:
+            - _id
+            - barcode
+            - ticketTypeId
+            - ticketName
+            - eventId
+            - sellerId
+            - createdAt
+            - updatedAt
+        total:
+          type: integer
+    AccessUserResource:
+      type: object
+      properties:
+        _id:
+          type: string
         sellerId:
           type: string
           description: The ID of the seller that owns the access user.
+        active:
+          type: boolean
+          description: Whether the access user is active or not.
+          default: true
+        name:
+          type: string
+          maxLength: 200
+          description: An internal name to identify the access user
+        token:
+          type: string
+          description: The token to authenticate against the access-control endpoints.
+        accessAllEvents:
+          type: boolean
+          description: Whether the access user can access all events of his seller
+        events:
+          type: array
+          items:
+            type: string
+          description: An array of events the access user can access. Only if accessAllEvents=false.
+        lastRequest:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the access user made the last request.
+        expires:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the access user should expire
+        isIntegration:
+          type: boolean
+          description: Whether an integration belongs to the access user
+        integration:
+          type: string
+          enum:
+          - simplyX
+          - axess
+          - skidata
+          description: The type of integration belongs to this access user
+        deviceSettings:
+          type: object
+          properties:
+            accessMode:
+              type: string
+              enum:
+              - full
+              - restricted
+              description: '''restricted'' mode limits access-user visibility while keeping assigned access-control capabilities available.'
+              default: full
+            scanGroupId:
+              type:
+              - string
+              - 'null'
+              description: The ID of the scan group to which the access user assigned.
+          description: An object of settings which will be used on the device
+          default: {}
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the access user was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the access user was updated.
+        __v:
+          type: integer
       required:
       - sellerId
+      - name
+      - token
+      - accessAllEvents
+      - createdAt
+      - updatedAt
+    GET_Accessusers_GetAllAccessUsers_200_response:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccessUserResource'
     AccessUserInfoResource:
       type: object
       properties:
@@ -759,444 +1197,6 @@ components:
       - deviceSettings
       - accessControlSettings
       additionalProperties: false
-    GET_Accessusers_GetTicketWithBarcode_200_response:
-      type: object
-      properties:
-        _id:
-          type: string
-        barcode:
-          type: string
-          minLength: 8
-          description: The barcode of the ticket
-        name:
-          type: string
-          description: The name of the ticket owner
-        ticketTypeId:
-          type: string
-          description: The ID of the ticket type this ticket inherits from
-        ticketName:
-          type: string
-          description: The name of the ticket type this ticket inherits from
-        categoryRef:
-          type: string
-          description: A UUID of the category the ticket belongs to.
-        priceCategoryId:
-          type: string
-        eventId:
-          type: string
-          description: The ID of the event the ticket belongs to
-        sellerId:
-          type: string
-          description: The ID of the seller that ticket belongs to.
-        createdAt:
-          type: string
-          format: date-time
-          description: An ISO Timestamp indicating when the ticket was created.
-        updatedAt:
-          type: string
-          format: date-time
-          description: An ISO Timestamp indicating when the ticket was updated.
-        priceCategory:
-          type: object
-          properties:
-            categoryId:
-              type: string
-            description:
-              type: string
-        status:
-          type: string
-          enum:
-          - VALID
-          - INVALID
-          default: VALID
-      required:
-      - _id
-      - barcode
-      - ticketTypeId
-      - ticketName
-      - eventId
-      - sellerId
-      - createdAt
-      - updatedAt
-    POST_Accessusers_CreateAnAccessUser:
-      type: object
-      properties:
-        name:
-          type: string
-          maxLength: 200
-          description: An internal name to identify the access user
-        isIntegration:
-          type: boolean
-          description: Whether an integration belongs to the access user
-      required:
-      - name
-    POST_Accessusers_ScanTicketWithBarcode_200_response:
-      type: object
-      properties:
-        access:
-          type: string
-          enum:
-          - GRANTED
-          - DENIED
-        ticket:
-          type: object
-          properties:
-            _id:
-              type: string
-            barcode:
-              type: string
-              minLength: 8
-              description: The barcode of the ticket
-            name:
-              type: string
-              description: The name of the ticket owner
-            status:
-              type: string
-              enum:
-              - VALID
-              - INVALID
-              - RESERVED
-              - DETAILSREQUIRED
-              - BLANK
-              description: The status of the ticket
-            ticketTypeId:
-              type: string
-              description: The ID of the ticket type this ticket inherits from
-            ticketName:
-              type: string
-              description: The name of the ticket type this ticket inherits from
-            categoryRef:
-              type: string
-              description: A UUID of the category the ticket belongs to.
-            eventId:
-              type: string
-              description: The ID of the event the ticket belongs to
-            sellerId:
-              type: string
-              description: The ID of the seller that ticket belongs to.
-            createdAt:
-              type: string
-              format: date-time
-              description: An ISO Timestamp indicating when the ticket was created.
-            updatedAt:
-              type: string
-              format: date-time
-              description: An ISO Timestamp indicating when the ticket was updated.
-          required:
-          - _id
-          - barcode
-          - status
-          - ticketTypeId
-          - ticketName
-          - eventId
-          - sellerId
-          - createdAt
-          - updatedAt
-    AccessUserResource:
-      type: object
-      properties:
-        _id:
-          type: string
-        sellerId:
-          type: string
-          description: The ID of the seller that owns the access user.
-        active:
-          type: boolean
-          description: Whether the access user is active or not.
-          default: true
-        name:
-          type: string
-          maxLength: 200
-          description: An internal name to identify the access user
-        token:
-          type: string
-          description: The token to authenticate against the access-control endpoints.
-        accessAllEvents:
-          type: boolean
-          description: Whether the access user can access all events of his seller
-        events:
-          type: array
-          items:
-            type: string
-          description: An array of events the access user can access. Only if accessAllEvents=false.
-        lastRequest:
-          type: string
-          format: date-time
-          description: An ISO Timestamp indicating when the access user made the last request.
-        expires:
-          type: string
-          format: date-time
-          description: An ISO Timestamp indicating when the access user should expire
-        isIntegration:
-          type: boolean
-          description: Whether an integration belongs to the access user
-        integration:
-          type: string
-          enum:
-          - simplyX
-          - axess
-          - skidata
-          description: The type of integration belongs to this access user
-        deviceSettings:
-          type: object
-          properties:
-            accessMode:
-              type: string
-              enum:
-              - full
-              - restricted
-              description: '''restricted'' mode limits access-user visibility while keeping assigned access-control capabilities available.'
-              default: full
-            scanGroupId:
-              type:
-              - string
-              - 'null'
-              description: The ID of the scan group to which the access user assigned.
-          description: An object of settings which will be used on the device
-          default: {}
-        createdAt:
-          type: string
-          format: date-time
-          description: An ISO Timestamp indicating when the access user was created.
-        updatedAt:
-          type: string
-          format: date-time
-          description: An ISO Timestamp indicating when the access user was updated.
-        __v:
-          type: integer
-      required:
-      - sellerId
-      - name
-      - token
-      - accessAllEvents
-      - createdAt
-      - updatedAt
-    GET_Accessusers_GetTicketsForAnEvent_200_response:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            type: object
-            properties:
-              _id:
-                type: string
-              barcode:
-                type: string
-                minLength: 8
-                description: The barcode of the ticket
-              name:
-                type: string
-                description: The name of the ticket owner
-              ticketTypeId:
-                type: string
-                description: The ID of the ticket type this ticket inherits from
-              ticketName:
-                type: string
-                description: The name of the ticket type this ticket inherits from
-              priceCategoryId:
-                type: string
-              eventId:
-                type: string
-                description: The ID of the event the ticket belongs to
-              sellerId:
-                type: string
-                description: The ID of the seller that ticket belongs to.
-              createdAt:
-                type: string
-                format: date-time
-                description: An ISO Timestamp indicating when the ticket was created.
-              updatedAt:
-                type: string
-                format: date-time
-                description: An ISO Timestamp indicating when the ticket was updated.
-              priceCategory:
-                type: object
-                properties:
-                  categoryId:
-                    type: string
-                  description:
-                    type: string
-              parentEventId:
-                type: string
-              status:
-                type: string
-                enum:
-                - VALID
-                - INVALID
-                - DETAILSREQUIRED
-                default: VALID
-              area:
-                type: string
-                description: If the ticket has a seat. The area where the seat is located
-              row:
-                type: string
-                description: If the ticket has a seat. The row where the seat is located
-              seat:
-                type: string
-                description: If the ticket has a seat. The seat number
-              discountId:
-                type: string
-                description: If the ticket has a special price category. The id of the price category
-              discount:
-                type: string
-                description: If the ticket has a special price category. The description of the price category
-              entry:
-                type: array
-                items:
-                  type: string
-                  description: The id of the entry
-                description: If the ticket has entry permissions. An array of entry-ids where the ticket has access
-            required:
-            - _id
-            - barcode
-            - ticketTypeId
-            - ticketName
-            - eventId
-            - sellerId
-            - createdAt
-            - updatedAt
-        total:
-          type: integer
-    GET_Accessusers_GetAllAccessUsers_200_response:
-      type: array
-      items:
-        $ref: '#/components/schemas/AccessUserResource'
-    GET_Accessusers_GetTicketsForAnEventV2_200_response:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            type: object
-            properties:
-              _id:
-                type: string
-              barcode:
-                type: string
-                minLength: 8
-                description: The barcode of the ticket
-              name:
-                type: string
-                description: The name of the ticket owner
-              ticketTypeId:
-                type: string
-                description: The ID of the ticket type this ticket inherits from
-              ticketName:
-                type: string
-                description: The name of the ticket type this ticket inherits from
-              priceCategoryId:
-                type: string
-              eventId:
-                type: string
-                description: The ID of the event the ticket belongs to
-              sellerId:
-                type: string
-                description: The ID of the seller that ticket belongs to.
-              createdAt:
-                type: string
-                format: date-time
-                description: An ISO Timestamp indicating when the ticket was created.
-              updatedAt:
-                type: string
-                format: date-time
-                description: An ISO Timestamp indicating when the ticket was updated.
-              categoryRef:
-                type: string
-                description: A UUID of the category the ticket belongs to.
-              priceCategory:
-                type: object
-                properties:
-                  categoryId:
-                    type: string
-                  description:
-                    type: string
-              status:
-                type: string
-                enum:
-                - VALID
-                - INVALID
-                - DETAILSREQUIRED
-                default: VALID
-              area:
-                type: string
-                description: If the ticket has a seat. The area where the seat is located
-              row:
-                type: string
-                description: If the ticket has a seat. The row where the seat is located
-              seat:
-                type: string
-                description: If the ticket has a seat. The seat number
-              discountId:
-                type: string
-                description: If the ticket has a special price category. The id of the price category
-              discount:
-                type: string
-                description: If the ticket has a special price category. The description of the price category
-              entry:
-                type: array
-                items:
-                  type: string
-                  description: The id of the entry
-                description: If the ticket has entry permissions. An array of entry-ids where the ticket has access
-            required:
-            - _id
-            - barcode
-            - ticketTypeId
-            - ticketName
-            - eventId
-            - sellerId
-            - createdAt
-            - updatedAt
-        total:
-          type: integer
-    POST_Accessusers_CreateScans:
-      type: array
-      items:
-        type: object
-        properties:
-          ticketId:
-            type: string
-          barcode:
-            type: string
-            minLength: 8
-            description: The barcode of the ticket
-          scanned_at:
-            type: string
-            format: date-time
-            description: An ISO Timestamp indicating when the ticket was scanned.
-          type:
-            type: string
-            enum:
-            - OK
-            - FAIL
-            description: Whether the scan succeeded or failed
-          direction:
-            type: string
-            enum:
-            - IN
-            - OUT
-            description: Indicates in which direction the scan was.
-        required:
-        - barcode
-        - scanned_at
-        - type
-        - direction
-    GET_Accessusers_GetAllAccessibleEvents_200_response:
-      type: array
-      items:
-        type: object
-        properties:
-          _id:
-            type: string
-            description: The ID of the event
-          name:
-            type: string
-            description: The name of the event
-        required:
-        - _id
-        - name
-      description: An array of all events the access user has access to.
   securitySchemes:
     jwt:
       type: http

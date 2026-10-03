@@ -193,15 +193,21 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GET_Notifications_GetNotificationSettingsForTheAuthenticatedUser_200_response:
+    POST_Notifications_UpdateActionNotificationSubscription:
       type: object
       properties:
-        triggers:
+        subscribed:
+          type: boolean
+          default: true
+    PATCH_Notifications_UpdateNotificationSettingsForTheAuthenticatedUser:
+      type: object
+      properties:
+        preferences:
           type: array
           items:
             type: object
             properties:
-              type:
+              trigger:
                 type: string
                 enum:
                 - job.completed
@@ -225,7 +231,6 @@ components:
                 - pos.closed
                 - accounting.payout.initiated
                 - invoice.fiscalization.failed
-                description: The notification trigger type
               methods:
                 type: array
                 items:
@@ -234,48 +239,12 @@ components:
                   - push
                   - email
                   - dashboard
-                description: Selected notification methods
-              defaultMethods:
-                type: array
-                items:
-                  type: string
-                  enum:
-                  - push
-                  - email
-                  - dashboard
-                description: Default notification methods
-              requiredMethods:
-                type: array
-                items:
-                  type: string
-                  enum:
-                  - push
-                  - email
-                  - dashboard
-                description: Required notification methods that cannot be disabled
-              defaultLevel:
-                type: string
-                enum:
-                - critical
-                - high
-                - medium
-                - low
-                - none
-                description: Default notification level
             required:
-            - type
+            - trigger
             - methods
-            - defaultMethods
-            - defaultLevel
-          description: All notification triggers with their settings
+          minItems: 1
       required:
-      - triggers
-    POST_Notifications_UpdateActionNotificationSubscription:
-      type: object
-      properties:
-        subscribed:
-          type: boolean
-          default: true
+      - preferences
     PATCH_Notifications_UpdateNotificationSettingsForTheAuthenticatedUser_200_response:
       type: object
       properties:
@@ -353,15 +322,15 @@ components:
           description: All notification triggers with their settings
       required:
       - triggers
-    PATCH_Notifications_UpdateNotificationSettingsForTheAuthenticatedUser:
+    GET_Notifications_GetNotificationSettingsForTheAuthenticatedUser_200_response:
       type: object
       properties:
-        preferences:
+        triggers:
           type: array
           items:
             type: object
             properties:
-              trigger:
+              type:
                 type: string
                 enum:
                 - job.completed
@@ -385,6 +354,7 @@ components:
                 - pos.closed
                 - accounting.payout.initiated
                 - invoice.fiscalization.failed
+                description: The notification trigger type
               methods:
                 type: array
                 items:
@@ -393,12 +363,42 @@ components:
                   - push
                   - email
                   - dashboard
+                description: Selected notification methods
+              defaultMethods:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - push
+                  - email
+                  - dashboard
+                description: Default notification methods
+              requiredMethods:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - push
+                  - email
+                  - dashboard
+                description: Required notification methods that cannot be disabled
+              defaultLevel:
+                type: string
+                enum:
+                - critical
+                - high
+                - medium
+                - low
+                - none
+                description: Default notification level
             required:
-            - trigger
+            - type
             - methods
-          minItems: 1
+            - defaultMethods
+            - defaultLevel
+          description: All notification triggers with their settings
       required:
-      - preferences
+      - triggers
   securitySchemes:
     jwt:
       type: http

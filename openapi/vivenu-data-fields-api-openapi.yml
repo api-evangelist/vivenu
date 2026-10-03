@@ -332,44 +332,10 @@ components:
       - name
       - type
       - slug
-    GET_Data-fields_GetAllDataFieldsByReference_200_response:
+    GET_Data-fields_GetAllDataFields_200_response:
       type: array
       items:
-        type: object
-        properties:
-          _id:
-            type: string
-          name:
-            type: string
-          type:
-            type: string
-            enum:
-            - text
-            - number
-            - select
-            - checkbox
-            - tel
-            - country
-            - email
-            - date
-            - documentUpload
-            - signature
-            - address
-            - string
-            - boolean
-          options:
-            type: array
-            items:
-              type: string
-          slug:
-            type: string
-          description:
-            type: string
-        required:
-        - _id
-        - name
-        - type
-        - slug
+        $ref: '#/components/schemas/DataFieldResource'
     POST_Data-fields_CreateADataField:
       type: object
       properties:
@@ -482,10 +448,44 @@ components:
       required:
       - type
       - name
-    GET_Data-fields_GetAllDataFields_200_response:
+    GET_Data-fields_GetAllDataFieldsByReference_200_response:
       type: array
       items:
-        $ref: '#/components/schemas/DataFieldResource'
+        type: object
+        properties:
+          _id:
+            type: string
+          name:
+            type: string
+          type:
+            type: string
+            enum:
+            - text
+            - number
+            - select
+            - checkbox
+            - tel
+            - country
+            - email
+            - date
+            - documentUpload
+            - signature
+            - address
+            - string
+            - boolean
+          options:
+            type: array
+            items:
+              type: string
+          slug:
+            type: string
+          description:
+            type: string
+        required:
+        - _id
+        - name
+        - type
+        - slug
     PUT_Data-fields_UpdateADataField:
       type: object
       properties:

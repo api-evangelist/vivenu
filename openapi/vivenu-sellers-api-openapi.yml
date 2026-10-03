@@ -596,389 +596,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GET_Sellers_GetSellerInfo_200_response:
-      type: object
-      properties:
-        _id:
-          type: string
-          description: The ID of the seller
-        orgId:
-          type: string
-        name:
-          type: string
-          description: The name of the seller
-        description:
-          type: string
-          description: The description of the seller
-        locationName:
-          type: string
-        locationStreet:
-          type: string
-        locationCity:
-          type: string
-        locationPostal:
-          type: string
-        locationCountry:
-          type: string
-        image:
-          type: string
-          description: The logo of the seller
-        darkImage:
-          type: string
-          description: The logo of the seller in dark mode
-        backgroundImage:
-          type: string
-        agb:
-          type: string
-        modules:
-          type: object
-          properties:
-            accounts:
-              type: boolean
-            customBranding:
-              type: boolean
-            entryPermissions:
-              type: boolean
-            support:
-              type: boolean
-            purchaseIntents:
-              type: boolean
-            externalPaymentMethods:
-              type: boolean
-            hardtickets:
-              type: boolean
-            pos:
-              type: boolean
-            products:
-              type: boolean
-            seatmaps:
-              type: boolean
-            webhooks:
-              type: boolean
-            customLegalDocs:
-              type: boolean
-            stay22:
-              type: boolean
-            multiLanguageData:
-              type: boolean
-            domains:
-              type: boolean
-            dynamicFees:
-              type: boolean
-            eventSeries:
-              type: boolean
-            appDeveloper:
-              type: boolean
-          description: A Hashmap which modules are enabled.
-        privacy:
-          type: string
-        imprint:
-          type: string
-        url:
-          type: string
-        website:
-          type: string
-        supportUrl:
-          type: string
-          description: An url to a custom support page of the seller
-        accentColor:
-          type: string
-        localeSettings:
-          type: object
-          properties:
-            defaultLanguage:
-              type: string
-              enum:
-              - de
-              - de-CH
-              - en
-              - en-GB
-              - en-AU
-              - fr
-              - es
-              - es-MX
-              - is
-              - it
-              - ru
-              - pt
-              - tr
-              - nb
-              - nl
-              - pl
-              - sv
-              - sl
-              - da
-              - cs
-              - lv
-              - he
-              - ar
-              - th
-              - ko
-              - ja
-              - zh-TW
-              default: de
-            timezone:
-              type: string
-              default: Europe/Amsterdam
-            timeFormatPreference:
-              type: string
-              enum:
-              - browser
-              - enforceMeridiemFormat
-              - enforceMilitaryFormat
-              default: browser
-          required:
-          - defaultLanguage
-          - timezone
-          - timeFormatPreference
-        legalSettings:
-          type: object
-          properties:
-            ticketTransfer:
-              type: object
-              properties:
-                strategy:
-                  type: string
-                  enum:
-                  - notAllowed
-                  - allowedResaleOnPlatform
-                  - allowedWithRestrictions
-                ticketPriceCapped:
-                  type: boolean
-                noCommercialDistribution:
-                  type: boolean
-                withPenalty:
-                  type: boolean
-            cancellation:
-              type: object
-              properties:
-                noMajorChangesToEvent:
-                  type: object
-                  properties:
-                    strategy:
-                      type: string
-                      enum:
-                      - notAllowed
-                      - cancellationAllowed
-                      - exchangeAllowed
-                    cancellationDaysLimit:
-                      type: number
-                      format: float
-                    exchangeDaysLimit:
-                      type: number
-                      format: float
-                    voucherMonthsLimit:
-                      type: number
-                      format: float
-                    withPenalty:
-                      type: boolean
-                withMajorChangesToEvent:
-                  type: object
-                  properties:
-                    strategy:
-                      type: string
-        customTextConfig:
-          type: object
-          description: A Hashmap of custom text configuration for some actions.
-        shopSettings:
-          type: object
-        currency:
-          type: string
-          enum:
-          - EUR
-          - USD
-          - GBP
-          - AUD
-          - CHF
-          - THB
-          - ILS
-          - COP
-          - MXN
-          - DKK
-          - NOK
-          - SEK
-          - QAR
-          - CAD
-          - ISK
-          - GTQ
-          - INR
-          - DOP
-          - SGD
-          - PLN
-          - SAR
-          - TTD
-          - ZAR
-          - KYD
-          - HKD
-          - CZK
-          - KRW
-          - JPY
-          - NZD
-          - AED
-          - MAD
-          - TWD
-          - BRL
-          - BWP
-          - NAD
-          - KES
-          - SCR
-          - TRY
-          - SZL
-          - LSL
-          - TZS
-          - UGX
-          - ZMW
-          - ZWG
-          - GHS
-          - NGN
-          - SLE
-          - LRD
-          - XOF
-          - XAF
-          - GEL
-          - IDR
-          - ARS
-          - CRC
-          - HUF
-          - EGP
-          - MYR
-          - VND
-          - PHP
-          description: The currency for the seller.
-          default: EUR
-        dataRequestSettings:
-          type: object
-          properties:
-            capturePhoneNumber:
-              type: boolean
-              description: Wheter to capture phone number during checkout
-            allowDifferentDeliveryAddress:
-              type: boolean
-              description: Wheter to allow customers enter different delivery address during checkout
-        fulfillmentTypes:
-          type: array
-          items:
-            type: object
-            properties:
-              _id:
-                type: string
-                description: The ID of the fulfillment type.
-              name:
-                type: string
-                minLength: 3
-                description: The name of the fulfillment type.
-              description:
-                type:
-                - string
-                - 'null'
-                description: The name of the fulfillment type.
-              type:
-                type: string
-                enum:
-                - NONE
-                - PICK_UP
-                - SHIPPING
-                description: The delivery type of the fulfillment type
-              fee:
-                type: object
-                properties:
-                  type:
-                    type: string
-                    enum:
-                    - onTransaction
-                    - onCheckout
-                    description: "The mode of the fee calculation.\n          onTransaction = add fee to each transaction.\n          onCheckout = split fee proportionally over transactions."
-                    default: onTransaction
-                  var:
-                    type: number
-                    format: float
-                    minimum: 0
-                    description: The percentage value of fee to be applied.
-                  fix:
-                    type: number
-                    format: float
-                    minimum: 0
-                    description: The fix value of fee to be applied.
-                required:
-                - type
-                description: The price configuration of the fulfillment type.
-              deliveryDeadline:
-                type: object
-                properties:
-                  target:
-                    type:
-                    - string
-                    - 'null'
-                    description: The target of the relative date
-                  unit:
-                    type: string
-                    enum:
-                    - hours
-                    - days
-                    - weeks
-                    - months
-                    - years
-                    description: The unit in which the offset is specified
-                  offset:
-                    type: integer
-                    description: The offset to the date
-                required:
-                - unit
-                - offset
-                description: A relatve date specification until fulfillment will be delivered.
-              availableCountries:
-                type: array
-                items:
-                  type: string
-                description: The array of countries to which delivery is possible. An empty lists makes the method available to all countries. An ISO 3166 country code.
-                default: []
-              taxServiceTypeId:
-                type:
-                - string
-                - 'null'
-                description: The ID of the tax service type
-              discountable:
-                type: boolean
-                description: Whether the fulfillment type is discountable.
-                default: true
-            required:
-            - _id
-            - name
-            - type
-          description: Fulfillment types
-        brandingSettings:
-          type: object
-          properties:
-            customBrandingEnabled:
-              type: boolean
-            shopLogoUrl:
-              type: string
-            customLogo:
-              type: string
-            walletLogo:
-              type: string
-            walletBackgroundColor:
-              type: string
-            googleWalletLogo:
-              type: string
-        documentSettings:
-          type: object
-          properties:
-            image:
-              type: string
-        taxSetting:
-          type: object
-          properties:
-            taxCalculationMethod:
-              type: string
-              enum:
-              - inclusive
-              - exclusive
-            showTaxDetails:
-              type: boolean
-      required:
-      - _id
-      - name
     PATCH_Sellers_UpdateConsentInformation_200_response:
       type: object
       properties:
@@ -1660,26 +1277,20 @@ components:
       required:
       - _id
       - name
-    PATCH_Sellers_UpdateConsentInformation:
+    GET_Sellers_GetSellerInfo_200_response:
       type: object
       properties:
-        apiTerms:
-          type: boolean
-    PUT_Sellers_UpdateASeller:
-      type: object
-      properties:
+        _id:
+          type: string
+          description: The ID of the seller
+        orgId:
+          type: string
         name:
           type: string
+          description: The name of the seller
         description:
-          type:
-          - string
-          - 'null'
-        category:
-          type:
-          - string
-          - 'null'
-          enum:
-          - sports
+          type: string
+          description: The description of the seller
         locationName:
           type: string
         locationStreet:
@@ -1690,206 +1301,69 @@ components:
           type: string
         locationCountry:
           type: string
-        outerChargeVar:
-          type: number
-          format: float
-        outerChargeFix:
-          type: number
-          format: float
-        cartOuterChargeFix:
-          type: number
-          format: float
-        cartInnerChargeFix:
-          type: number
-          format: float
-          minimum: 0
-        freeCartOuterChargeFix:
-          type: number
-          format: float
-        freeCartInnerChargeFix:
-          type: number
-          format: float
-          minimum: 0
-        innerChargeVar:
-          type: number
-          format: float
-          minimum: 0
-        innerChargeFix:
-          type: number
-          format: float
-          minimum: 0
-        groupInnerChargeFix:
-          type: number
-          format: float
-          minimum: 0
-        paymentChargeVar:
-          type: number
-          format: float
-          minimum: 0
-        rebookingOuterChargeFix:
-          type: number
-          format: float
-          minimum: 0
-        freeTicketInnerChargeFix:
-          type: number
-          format: float
-          minimum: 0
-        posChargeVar:
-          type: number
-          format: float
-          minimum: 0
-        posChargeFix:
-          type: number
-          format: float
-          minimum: 0
-        freeTicketPOSChargeFix:
-          type: number
-          format: float
-          minimum: 0
-        posOuterChargeVar:
-          type: number
-          format: float
-        posOuterChargeFix:
-          type: number
-          format: float
-        active:
-          type: boolean
         image:
           type: string
-        backgroundImage:
-          type:
-          - string
-          - 'null'
-        accentColor:
+          description: The logo of the seller
+        darkImage:
           type: string
-        website:
-          type:
-          - string
-          - 'null'
-        facebookUrl:
-          type:
-          - string
-          - 'null'
-        payment:
-          type: object
+          description: The logo of the seller in dark mode
+        backgroundImage:
+          type: string
         agb:
           type: string
-        privacy:
-          type: string
-        taxSetting:
-          type: object
-        url:
-          type: string
-        customFieldsConfig:
-          type: object
-        shopSettings:
-          type: object
-          properties:
-            checkoutExpirationMinutes:
-              type:
-              - number
-              - 'null'
-              format: float
-              minimum: 5
-              maximum: 45
-            enforceAuthentication:
-              type:
-              - string
-              - 'null'
-              enum:
-              - DISABLED
-              - PREVENT_CHECKOUT
-              - PREVENT_DETAILS_STEP
-              default: DISABLED
-        documentSettings:
-          type: object
-          properties:
-            image:
-              type: string
-            invoice:
-              type: object
-              properties:
-                footerColumns:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      text:
-                        type:
-                        - string
-                        - 'null'
-                      active:
-                        type: boolean
-                  minItems: 3
-                  maxItems: 3
-                numberFormat:
-                  type:
-                  - string
-                  - 'null'
-                  enum:
-                  - short
-          default: {}
         modules:
           type: object
-        mailingSettings:
-          type: object
           properties:
-            _id:
-              type: string
-            sendPersonalizationReminder:
+            accounts:
               type: boolean
-            personalizationReminders:
-              type: array
-              items:
-                type: string
-                enum:
-                - 30days
-                - 14days
-                - 7days
-                - 2days
-                - 0days
-              default: []
-            personalizationRemindersAfterTicketBooking:
-              type: array
-              items:
-                type: string
-                enum:
-                - 30days
-                - 14days
-                - 7days
-                - 2days
-                - 0days
-              default: []
-            sendPurchaseIntentsReservationEmail:
+            customBranding:
               type: boolean
-              default: true
-            sendPurchaseIntentsRejectionEmail:
+            entryPermissions:
               type: boolean
-            sendTicketTransferEmail:
+            support:
               type: boolean
-              default: true
-            sendSubscriptionActivatedEmail:
+            purchaseIntents:
               type: boolean
-              default: true
-            sendSubscriptionCreatedDraftEmail:
+            externalPaymentMethods:
               type: boolean
-              default: true
-            sendSubscriptionPaymentReminderEmail:
+            hardtickets:
               type: boolean
-              default: true
-            sendSubscriptionRenewalReminderEmail:
+            pos:
               type: boolean
-              default: true
-            sendSubscriptionPaymentRetryReminderEmail:
+            products:
               type: boolean
-              default: true
-            sendSubscriptionPaymentFailedEmail:
+            seatmaps:
               type: boolean
-              default: true
-        accessControlSettings:
-          type: object
-        customTextConfig:
-          type: object
+            webhooks:
+              type: boolean
+            customLegalDocs:
+              type: boolean
+            stay22:
+              type: boolean
+            multiLanguageData:
+              type: boolean
+            domains:
+              type: boolean
+            dynamicFees:
+              type: boolean
+            eventSeries:
+              type: boolean
+            appDeveloper:
+              type: boolean
+          description: A Hashmap which modules are enabled.
+        privacy:
+          type: string
+        imprint:
+          type: string
+        url:
+          type: string
+        website:
+          type: string
+        supportUrl:
+          type: string
+          description: An url to a custom support page of the seller
+        accentColor:
+          type: string
         localeSettings:
           type: object
           properties:
@@ -1926,359 +1400,150 @@ components:
               default: de
             timezone:
               type: string
-              enum:
-              - Pacific/Midway
-              - Pacific/Honolulu
-              - America/Juneau
-              - America/Boise
-              - America/Dawson
-              - America/Chihuahua
-              - America/Phoenix
-              - America/Chicago
-              - America/Regina
-              - America/Mexico_City
-              - America/Belize
-              - America/Detroit
-              - America/New_York
-              - America/Bogota
-              - America/Caracas
-              - America/Santiago
-              - America/St_Johns
-              - America/Sao_Paulo
-              - America/Tijuana
-              - America/Argentina/Buenos_Aires
-              - America/Godthab
-              - Atlantic/Azores
-              - Atlantic/Cape_Verde
-              - GMT
-              - Africa/Casablanca
-              - Atlantic/Canary
-              - Europe/Dublin
-              - Europe/London
-              - Europe/Lisbon
-              - Europe/Belgrade
-              - Europe/Sarajevo
-              - Europe/Brussels
-              - Europe/Paris
-              - Europe/Amsterdam
-              - Africa/Algiers
-              - Europe/Bucharest
-              - Africa/Cairo
-              - Europe/Helsinki
-              - Europe/Athens
-              - Asia/Jerusalem
-              - Africa/Harare
-              - Europe/Moscow
-              - Asia/Kuwait
-              - Africa/Nairobi
-              - Asia/Baghdad
-              - Asia/Tehran
-              - Asia/Dubai
-              - Asia/Baku
-              - Asia/Kabul
-              - Asia/Yekaterinburg
-              - Asia/Karachi
-              - Asia/Kolkata
-              - Asia/Kathmandu
-              - Asia/Dhaka
-              - Asia/Colombo
-              - Asia/Almaty
-              - Asia/Rangoon
-              - Asia/Bangkok
-              - Asia/Krasnoyarsk
-              - Asia/Shanghai
-              - Asia/Kuala_Lumpur
-              - Asia/Taipei
-              - Australia/Perth
-              - Asia/Irkutsk
-              - Asia/Seoul
-              - Asia/Tokyo
-              - Asia/Yakutsk
-              - Australia/Darwin
-              - Australia/Adelaide
-              - Australia/Sydney
-              - Australia/Brisbane
-              - Australia/Hobart
-              - Asia/Vladivostok
-              - Pacific/Guam
-              - Asia/Magadan
-              - Asia/Kamchatka
-              - Pacific/Fiji
-              - Pacific/Auckland
-              - Pacific/Tongatapu
               default: Europe/Amsterdam
+            timeFormatPreference:
+              type: string
+              enum:
+              - browser
+              - enforceMeridiemFormat
+              - enforceMilitaryFormat
+              default: browser
           required:
           - defaultLanguage
           - timezone
-          default:
-            defaultLanguage: de
-        documentTemplateSettings:
-          type: object
-        ticketSettings:
-          oneOf:
-          - type: object
-            properties:
-              barcodeType:
-                type: string
-                enum:
-                - numeric
-              barcodePrefix:
-                type: string
-                maxLength: 2
-              revealingSettings:
-                type: object
-                properties:
-                  enabled:
-                    type: boolean
-                  beforeEvent:
-                    type: object
-                    properties:
-                      target:
-                        type:
-                        - string
-                        - 'null'
-                        description: The target of the relative date
-                      unit:
-                        type: string
-                        enum:
-                        - hours
-                        - days
-                        - weeks
-                        - months
-                        - years
-                        description: The unit in which the offset is specified
-                      offset:
-                        type: integer
-                        description: The offset to the date
-              ticketSwapping:
-                type: object
-                properties:
-                  enabled:
-                    type: boolean
-              changeSeatMode:
-                type: string
-                enum:
-                - SAME_TIER
-                - ANY_TIER
-              transferSettings:
-                type: object
-                properties:
-                  mode:
-                    type: string
-                    enum:
-                    - ALLOWED
-                    - DISABLED
-                  expiresAfter:
-                    type: object
-                    properties:
-                      target:
-                        type:
-                        - string
-                        - 'null'
-                        description: The target of the relative date
-                      unit:
-                        type: string
-                        enum:
-                        - hours
-                        - days
-                        - weeks
-                        - months
-                        - years
-                        description: The unit in which the offset is specified
-                      offset:
-                        type: integer
-                        description: The offset to the date
-                    required:
-                    - unit
-                    - offset
-                  retransferMode:
-                    type: string
-                    enum:
-                    - ALLOWED
-                    - DISABLED
-                  allowedUntil:
-                    type: object
-                    properties:
-                      target:
-                        type:
-                        - string
-                        - 'null'
-                        description: The target of the relative date
-                      unit:
-                        type: string
-                        enum:
-                        - hours
-                        - days
-                        - weeks
-                        - months
-                        - years
-                        description: The unit in which the offset is specified
-                      offset:
-                        type: integer
-                        description: The offset to the date
-                    required:
-                    - unit
-                    - offset
-                  hardTicketsMode:
-                    type: string
-                    enum:
-                    - ALLOWED
-                    - DISABLED
-                  seasonTicketMode:
-                    type: string
-                    enum:
-                    - NO_RESTRICTION
-                    - CHILDREN_ONLY
-                    - GROUP_ONLY
-              barcodeLength:
-                type:
-                - number
-                - 'null'
-                format: float
-                minimum: 16
-                maximum: 20
-                default: 16
-          - type: object
-            properties:
-              barcodePrefix:
-                type: string
-                maxLength: 2
-              revealingSettings:
-                type: object
-                properties:
-                  enabled:
-                    type: boolean
-                  beforeEvent:
-                    type: object
-                    properties:
-                      target:
-                        type:
-                        - string
-                        - 'null'
-                        description: The target of the relative date
-                      unit:
-                        type: string
-                        enum:
-                        - hours
-                        - days
-                        - weeks
-                        - months
-                        - years
-                        description: The unit in which the offset is specified
-                      offset:
-                        type: integer
-                        description: The offset to the date
-              ticketSwapping:
-                type: object
-                properties:
-                  enabled:
-                    type: boolean
-              changeSeatMode:
-                type: string
-                enum:
-                - SAME_TIER
-                - ANY_TIER
-              transferSettings:
-                type: object
-                properties:
-                  mode:
-                    type: string
-                    enum:
-                    - ALLOWED
-                    - DISABLED
-                  expiresAfter:
-                    type: object
-                    properties:
-                      target:
-                        type:
-                        - string
-                        - 'null'
-                        description: The target of the relative date
-                      unit:
-                        type: string
-                        enum:
-                        - hours
-                        - days
-                        - weeks
-                        - months
-                        - years
-                        description: The unit in which the offset is specified
-                      offset:
-                        type: integer
-                        description: The offset to the date
-                    required:
-                    - unit
-                    - offset
-                  retransferMode:
-                    type: string
-                    enum:
-                    - ALLOWED
-                    - DISABLED
-                  allowedUntil:
-                    type: object
-                    properties:
-                      target:
-                        type:
-                        - string
-                        - 'null'
-                        description: The target of the relative date
-                      unit:
-                        type: string
-                        enum:
-                        - hours
-                        - days
-                        - weeks
-                        - months
-                        - years
-                        description: The unit in which the offset is specified
-                      offset:
-                        type: integer
-                        description: The offset to the date
-                    required:
-                    - unit
-                    - offset
-                  hardTicketsMode:
-                    type: string
-                    enum:
-                    - ALLOWED
-                    - DISABLED
-                  seasonTicketMode:
-                    type: string
-                    enum:
-                    - NO_RESTRICTION
-                    - CHILDREN_ONLY
-                    - GROUP_ONLY
-              barcodeType:
-                type: string
-                enum:
-                - mixed
-        customerSettings:
+          - timeFormatPreference
+        legalSettings:
           type: object
           properties:
-            numberingEnabled:
+            ticketTransfer:
+              type: object
+              properties:
+                strategy:
+                  type: string
+                  enum:
+                  - notAllowed
+                  - allowedResaleOnPlatform
+                  - allowedWithRestrictions
+                ticketPriceCapped:
+                  type: boolean
+                noCommercialDistribution:
+                  type: boolean
+                withPenalty:
+                  type: boolean
+            cancellation:
+              type: object
+              properties:
+                noMajorChangesToEvent:
+                  type: object
+                  properties:
+                    strategy:
+                      type: string
+                      enum:
+                      - notAllowed
+                      - cancellationAllowed
+                      - exchangeAllowed
+                    cancellationDaysLimit:
+                      type: number
+                      format: float
+                    exchangeDaysLimit:
+                      type: number
+                      format: float
+                    voucherMonthsLimit:
+                      type: number
+                      format: float
+                    withPenalty:
+                      type: boolean
+                withMajorChangesToEvent:
+                  type: object
+                  properties:
+                    strategy:
+                      type: string
+        customTextConfig:
+          type: object
+          description: A Hashmap of custom text configuration for some actions.
+        shopSettings:
+          type: object
+        currency:
+          type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: The currency for the seller.
+          default: EUR
+        dataRequestSettings:
+          type: object
+          properties:
+            capturePhoneNumber:
               type: boolean
-            numberingStartNumber:
-              type: integer
-        supportSettings:
-          type: object
-          properties:
-            managedBy:
-              type: string
-              enum:
-              - vivenu
-              - seller
-            instructions:
-              type: string
-            faqUrl:
-              type: string
-              format: uri
-        dataRequestsSettings:
-          type: object
+              description: Wheter to capture phone number during checkout
+            allowDifferentDeliveryAddress:
+              type: boolean
+              description: Wheter to allow customers enter different delivery address during checkout
         fulfillmentTypes:
           type: array
           items:
             type: object
             properties:
+              _id:
+                type: string
+                description: The ID of the fulfillment type.
               name:
                 type: string
                 minLength: 3
@@ -2357,32 +1622,423 @@ components:
                 type: boolean
                 description: Whether the fulfillment type is discountable.
                 default: true
-              _id:
-                type:
-                - string
-                - 'null'
-        status:
-          type: string
-          enum:
-          - ACTIVE
-          - DISABLED
-        productPlans:
-          oneOf:
-          - type: array
-          - type: boolean
-          - type: number
-          - type: object
-          - type: string
+            required:
+            - _id
+            - name
+            - type
+          description: Fulfillment types
+        brandingSettings:
+          type: object
+          properties:
+            customBrandingEnabled:
+              type: boolean
+            shopLogoUrl:
+              type: string
+            customLogo:
+              type: string
+            walletLogo:
+              type: string
+            walletBackgroundColor:
+              type: string
+            googleWalletLogo:
+              type: string
+        documentSettings:
+          type: object
+          properties:
+            image:
+              type: string
+        taxSetting:
+          type: object
+          properties:
+            taxCalculationMethod:
+              type: string
+              enum:
+              - inclusive
+              - exclusive
+            showTaxDetails:
+              type: boolean
       required:
+      - _id
       - name
-      - locationName
-      - locationStreet
-      - locationCity
-      - locationPostal
-      - locationCountry
-      - outerChargeVar
-      - outerChargeFix
-      - active
+    POST_Sellers_InitializeFiscalizationOfASeller:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - RKSV_FON_CREDENTIALS
+          participantId:
+            type: string
+            maxLength: 12
+            minLength: 8
+          userId:
+            type: string
+            maxLength: 12
+            minLength: 5
+          userPin:
+            type: string
+            maxLength: 128
+            minLength: 5
+        required:
+        - type
+        - participantId
+        - userId
+        - userPin
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - ES_TAX_PAYER_CREATION
+          content:
+            type: object
+            properties:
+              issuer:
+                type: object
+                properties:
+                  legal_name:
+                    type: string
+                    maxLength: 120
+                    minLength: 1
+                  tax_number:
+                    type: string
+                    pattern: ^(([A-Za-z][0-9]{7}[A-Za-z])|([0-9]{8}[A-Za-z])|([A-Za-z][0-9]{8}))$
+                    length: 9
+                required:
+                - legal_name
+                - tax_number
+              territory:
+                type: string
+                enum:
+                - ARABA
+                - BIZKAIA
+                - GIPUZKOA
+                - NAVARRE
+                - CANARY_ISLANDS
+                - CEUTA
+                - MELILLA
+                - SPAIN_OTHER
+              address:
+                type: object
+                properties:
+                  municipality:
+                    type: string
+                    maxLength: 120
+                    minLength: 1
+                  city:
+                    type: string
+                    maxLength: 120
+                    minLength: 1
+                  street:
+                    type: string
+                    maxLength: 120
+                    minLength: 1
+                  number:
+                    type: string
+                    maxLength: 20
+                    minLength: 1
+                  postal_code:
+                    type: string
+                    maxLength: 20
+                    minLength: 1
+                  country_code:
+                    type: string
+                    length: 2
+                required:
+                - municipality
+                - city
+                - street
+                - number
+                - postal_code
+                - country_code
+              email:
+                type: string
+                format: email
+            required:
+            - issuer
+            - territory
+          metadata:
+            oneOf:
+            - type: array
+            - type: boolean
+            - type: number
+            - type: object
+            - type: string
+        required:
+        - type
+        - content
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - ES_AGREEMENT_GENERATION
+          content:
+            type: object
+            properties:
+              representative:
+                type: object
+                properties:
+                  full_name:
+                    type: string
+                    maxLength: 120
+                    minLength: 1
+                  tax_number:
+                    type: string
+                    pattern: ^(([A-Za-z][0-9]{7}[A-Za-z])|([0-9]{8}[A-Za-z])|([A-Za-z][0-9]{8}))$
+                    length: 9
+                  address:
+                    type: object
+                    properties:
+                      municipality:
+                        type: string
+                        maxLength: 120
+                        minLength: 1
+                      city:
+                        type: string
+                        maxLength: 120
+                        minLength: 1
+                      street:
+                        type: string
+                        maxLength: 120
+                        minLength: 1
+                      number:
+                        type: string
+                        maxLength: 20
+                        minLength: 1
+                      postal_code:
+                        type: string
+                        maxLength: 20
+                        minLength: 1
+                      country_code:
+                        type: string
+                        length: 2
+                    required:
+                    - municipality
+                    - city
+                    - street
+                    - number
+                    - postal_code
+                    - country_code
+                required:
+                - full_name
+                - tax_number
+                - address
+            required:
+            - representative
+        required:
+        - type
+        - content
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - ES_AGREEMENT_SIGNED_UPLOAD
+          content:
+            type: object
+            properties:
+              binary:
+                type: string
+            required:
+            - binary
+        required:
+        - type
+        - content
+    PATCH_Sellers_UpdateModules:
+      type: object
+      properties:
+        pos:
+          type: boolean
+        hardtickets:
+          type: boolean
+        entryPermissions:
+          type: boolean
+        support:
+          type: boolean
+        supportFAQ:
+          type: boolean
+        seatmaps:
+          type: boolean
+        simplyX:
+          type: boolean
+        ac-axess:
+          type: boolean
+        ac-skidata:
+          type: boolean
+        accounts:
+          type: boolean
+        externalPaymentMethods:
+          type: boolean
+        recurringEvents:
+          type: boolean
+        webhooks:
+          type: boolean
+        customBranding:
+          type: boolean
+        products:
+          type: boolean
+        thirdpartypayments:
+          type: boolean
+        apiKeys:
+          type: boolean
+        purchaseIntents:
+          type: boolean
+        paymentgateways:
+          type: boolean
+        customBarcodeTypes:
+          type: boolean
+        customLegalDocs:
+          type: boolean
+        appDeveloper:
+          type: boolean
+        stay22:
+          type: boolean
+        multiLanguageData:
+          type: boolean
+        domains:
+          type: boolean
+        VIIntercom:
+          type: boolean
+        dynamicFees:
+          type: boolean
+        eventSeries:
+          type: boolean
+        printing:
+          type: boolean
+        checkoutsPrinting:
+          type: boolean
+        customMails:
+          type: boolean
+        PerformanceMode:
+          type: boolean
+        TaxEngine:
+          type: boolean
+        DashboardIdentityProvider:
+          type: boolean
+        subscriptions:
+          type: boolean
+        StubHub:
+          type: boolean
+        TicketSwap:
+          type: boolean
+        MentaTech:
+          type: boolean
+        AccessLists:
+          type: boolean
+        EmailTemplateEditor:
+          type: boolean
+        SenderlessEmailTemplateEditor:
+          type: boolean
+        CustomTermsAndConditions:
+          type: boolean
+        Moto:
+          type: boolean
+        MotoSaveCardDetails:
+          type: boolean
+        MotoAdyen:
+          type: boolean
+        FulfillmentTypes:
+          type: boolean
+        ChangeEventDate:
+          type: boolean
+        PriceTables:
+          type: boolean
+        MassBooking:
+          type: boolean
+        TicketUpgrades:
+          type: boolean
+        DATEVTransactionExport:
+          type: boolean
+        DynamicPricing:
+          type: boolean
+        DynamicPriceTiers:
+          type: boolean
+        RevealingBarcodes:
+          type: boolean
+        SecureTicketAccess:
+          type: boolean
+        Deposits:
+          type: boolean
+        DistributionChannels:
+          type: boolean
+        RebookingStrategies:
+          type: boolean
+        CompleteMultiplePurchaseIntents:
+          type: boolean
+        EventTimeSlots:
+          type: boolean
+        PriceComponents:
+          type: boolean
+        TouchnetPayments:
+          type: boolean
+        PaymentPlans:
+          type: boolean
+        PaymentStrategies:
+          type: boolean
+        Consents:
+          type: boolean
+        TicketRangeInvalidation:
+          type: boolean
+        Hooks:
+          type: boolean
+        Web3:
+          type: boolean
+        SeatingGroupBooking:
+          type: boolean
+        IsolatedEventContingents:
+          type: boolean
+        VivenuPayments:
+          type: boolean
+        memberships:
+          type: boolean
+        Resell:
+          type: boolean
+        workflows:
+          type: boolean
+        BotProtection:
+          type: boolean
+        Packages:
+          type: boolean
+        Addons:
+          type: boolean
+        Fundraise:
+          type: boolean
+        ContractTypes:
+          type: boolean
+        CustomerSegments:
+          type: boolean
+        TicketInsurances:
+          type: boolean
+        OfflineBarcodes:
+          type: boolean
+        PassesTenantConfiguration:
+          type: boolean
+        EventRevenueReports:
+          type: boolean
+        AlphaReports:
+          type: boolean
+        Dashboards:
+          type: boolean
+        Entitlements:
+          type: boolean
+        EmailCampaigns:
+          type: boolean
+        NewEmailTemplateEditor:
+          type: boolean
+        AddressAutocomplete:
+          type: boolean
+        StripeTerminalServerIntegration:
+          type: boolean
+        Kiosk:
+          type: boolean
+        StackedGAContingents:
+          type: boolean
+        AIAssistant:
+          type: boolean
+        POSInvoiceFiscalization:
+          type: boolean
     PATCH_Sellers_UpdateModules_200_response:
       type: object
       properties:
@@ -3367,385 +3023,729 @@ components:
       - outerChargeVar
       - outerChargeFix
       - paymentChargeVar
-    POST_Sellers_InitializeFiscalizationOfASeller:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - RKSV_FON_CREDENTIALS
-          participantId:
-            type: string
-            maxLength: 12
-            minLength: 8
-          userId:
-            type: string
-            maxLength: 12
-            minLength: 5
-          userPin:
-            type: string
-            maxLength: 128
-            minLength: 5
-        required:
-        - type
-        - participantId
-        - userId
-        - userPin
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - ES_TAX_PAYER_CREATION
-          content:
-            type: object
-            properties:
-              issuer:
-                type: object
-                properties:
-                  legal_name:
-                    type: string
-                    maxLength: 120
-                    minLength: 1
-                  tax_number:
-                    type: string
-                    pattern: ^(([A-Za-z][0-9]{7}[A-Za-z])|([0-9]{8}[A-Za-z])|([A-Za-z][0-9]{8}))$
-                    length: 9
-                required:
-                - legal_name
-                - tax_number
-              territory:
-                type: string
-                enum:
-                - ARABA
-                - BIZKAIA
-                - GIPUZKOA
-                - NAVARRE
-                - CANARY_ISLANDS
-                - CEUTA
-                - MELILLA
-                - SPAIN_OTHER
-              address:
-                type: object
-                properties:
-                  municipality:
-                    type: string
-                    maxLength: 120
-                    minLength: 1
-                  city:
-                    type: string
-                    maxLength: 120
-                    minLength: 1
-                  street:
-                    type: string
-                    maxLength: 120
-                    minLength: 1
-                  number:
-                    type: string
-                    maxLength: 20
-                    minLength: 1
-                  postal_code:
-                    type: string
-                    maxLength: 20
-                    minLength: 1
-                  country_code:
-                    type: string
-                    length: 2
-                required:
-                - municipality
-                - city
-                - street
-                - number
-                - postal_code
-                - country_code
-              email:
-                type: string
-                format: email
-            required:
-            - issuer
-            - territory
-          metadata:
-            oneOf:
-            - type: array
-            - type: boolean
-            - type: number
-            - type: object
-            - type: string
-        required:
-        - type
-        - content
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - ES_AGREEMENT_GENERATION
-          content:
-            type: object
-            properties:
-              representative:
-                type: object
-                properties:
-                  full_name:
-                    type: string
-                    maxLength: 120
-                    minLength: 1
-                  tax_number:
-                    type: string
-                    pattern: ^(([A-Za-z][0-9]{7}[A-Za-z])|([0-9]{8}[A-Za-z])|([A-Za-z][0-9]{8}))$
-                    length: 9
-                  address:
-                    type: object
-                    properties:
-                      municipality:
-                        type: string
-                        maxLength: 120
-                        minLength: 1
-                      city:
-                        type: string
-                        maxLength: 120
-                        minLength: 1
-                      street:
-                        type: string
-                        maxLength: 120
-                        minLength: 1
-                      number:
-                        type: string
-                        maxLength: 20
-                        minLength: 1
-                      postal_code:
-                        type: string
-                        maxLength: 20
-                        minLength: 1
-                      country_code:
-                        type: string
-                        length: 2
-                    required:
-                    - municipality
-                    - city
-                    - street
-                    - number
-                    - postal_code
-                    - country_code
-                required:
-                - full_name
-                - tax_number
-                - address
-            required:
-            - representative
-        required:
-        - type
-        - content
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - ES_AGREEMENT_SIGNED_UPLOAD
-          content:
-            type: object
-            properties:
-              binary:
-                type: string
-            required:
-            - binary
-        required:
-        - type
-        - content
-    PATCH_Sellers_UpdateModules:
+    PATCH_Sellers_UpdateConsentInformation:
       type: object
       properties:
-        pos:
-          type: boolean
-        hardtickets:
-          type: boolean
-        entryPermissions:
-          type: boolean
-        support:
-          type: boolean
-        supportFAQ:
-          type: boolean
-        seatmaps:
-          type: boolean
-        simplyX:
-          type: boolean
-        ac-axess:
-          type: boolean
-        ac-skidata:
-          type: boolean
-        accounts:
-          type: boolean
-        externalPaymentMethods:
-          type: boolean
-        recurringEvents:
-          type: boolean
-        webhooks:
-          type: boolean
-        customBranding:
-          type: boolean
-        products:
-          type: boolean
-        thirdpartypayments:
-          type: boolean
-        apiKeys:
-          type: boolean
-        purchaseIntents:
-          type: boolean
-        paymentgateways:
-          type: boolean
-        customBarcodeTypes:
-          type: boolean
-        customLegalDocs:
-          type: boolean
-        appDeveloper:
-          type: boolean
-        stay22:
-          type: boolean
-        multiLanguageData:
-          type: boolean
-        domains:
-          type: boolean
-        VIIntercom:
-          type: boolean
-        dynamicFees:
-          type: boolean
-        eventSeries:
-          type: boolean
-        printing:
-          type: boolean
-        checkoutsPrinting:
-          type: boolean
-        customMails:
-          type: boolean
-        PerformanceMode:
-          type: boolean
-        TaxEngine:
-          type: boolean
-        DashboardIdentityProvider:
-          type: boolean
-        subscriptions:
-          type: boolean
-        StubHub:
-          type: boolean
-        TicketSwap:
-          type: boolean
-        MentaTech:
-          type: boolean
-        AccessLists:
-          type: boolean
-        EmailTemplateEditor:
-          type: boolean
-        SenderlessEmailTemplateEditor:
-          type: boolean
-        CustomTermsAndConditions:
-          type: boolean
-        Moto:
-          type: boolean
-        MotoSaveCardDetails:
-          type: boolean
-        MotoAdyen:
-          type: boolean
-        FulfillmentTypes:
-          type: boolean
-        ChangeEventDate:
-          type: boolean
-        PriceTables:
-          type: boolean
-        MassBooking:
-          type: boolean
-        TicketUpgrades:
-          type: boolean
-        DATEVTransactionExport:
-          type: boolean
-        DynamicPricing:
-          type: boolean
-        DynamicPriceTiers:
-          type: boolean
-        RevealingBarcodes:
-          type: boolean
-        SecureTicketAccess:
-          type: boolean
-        Deposits:
-          type: boolean
-        DistributionChannels:
-          type: boolean
-        RebookingStrategies:
-          type: boolean
-        CompleteMultiplePurchaseIntents:
-          type: boolean
-        EventTimeSlots:
-          type: boolean
-        PriceComponents:
-          type: boolean
-        TouchnetPayments:
-          type: boolean
-        PaymentPlans:
-          type: boolean
-        PaymentStrategies:
-          type: boolean
-        Consents:
-          type: boolean
-        TicketRangeInvalidation:
-          type: boolean
-        Hooks:
-          type: boolean
-        Web3:
-          type: boolean
-        SeatingGroupBooking:
-          type: boolean
-        IsolatedEventContingents:
-          type: boolean
-        VivenuPayments:
-          type: boolean
-        memberships:
-          type: boolean
-        Resell:
-          type: boolean
-        workflows:
-          type: boolean
-        BotProtection:
-          type: boolean
-        Packages:
-          type: boolean
-        Addons:
-          type: boolean
-        Fundraise:
-          type: boolean
-        ContractTypes:
-          type: boolean
-        CustomerSegments:
-          type: boolean
-        TicketInsurances:
-          type: boolean
-        OfflineBarcodes:
-          type: boolean
-        PassesTenantConfiguration:
-          type: boolean
-        EventRevenueReports:
-          type: boolean
-        AlphaReports:
-          type: boolean
-        Dashboards:
-          type: boolean
-        Entitlements:
-          type: boolean
-        EmailCampaigns:
-          type: boolean
-        NewEmailTemplateEditor:
-          type: boolean
-        AddressAutocomplete:
-          type: boolean
-        StripeTerminalServerIntegration:
-          type: boolean
-        Kiosk:
-          type: boolean
-        StackedGAContingents:
-          type: boolean
-        AIAssistant:
-          type: boolean
-        POSInvoiceFiscalization:
-          type: boolean
+        apiTerms:
+          type: boolean
+    PUT_Sellers_UpdateASeller:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        category:
+          type:
+          - string
+          - 'null'
+          enum:
+          - sports
+        locationName:
+          type: string
+        locationStreet:
+          type: string
+        locationCity:
+          type: string
+        locationPostal:
+          type: string
+        locationCountry:
+          type: string
+        outerChargeVar:
+          type: number
+          format: float
+        outerChargeFix:
+          type: number
+          format: float
+        cartOuterChargeFix:
+          type: number
+          format: float
+        cartInnerChargeFix:
+          type: number
+          format: float
+          minimum: 0
+        freeCartOuterChargeFix:
+          type: number
+          format: float
+        freeCartInnerChargeFix:
+          type: number
+          format: float
+          minimum: 0
+        innerChargeVar:
+          type: number
+          format: float
+          minimum: 0
+        innerChargeFix:
+          type: number
+          format: float
+          minimum: 0
+        groupInnerChargeFix:
+          type: number
+          format: float
+          minimum: 0
+        paymentChargeVar:
+          type: number
+          format: float
+          minimum: 0
+        rebookingOuterChargeFix:
+          type: number
+          format: float
+          minimum: 0
+        freeTicketInnerChargeFix:
+          type: number
+          format: float
+          minimum: 0
+        posChargeVar:
+          type: number
+          format: float
+          minimum: 0
+        posChargeFix:
+          type: number
+          format: float
+          minimum: 0
+        freeTicketPOSChargeFix:
+          type: number
+          format: float
+          minimum: 0
+        posOuterChargeVar:
+          type: number
+          format: float
+        posOuterChargeFix:
+          type: number
+          format: float
+        active:
+          type: boolean
+        image:
+          type: string
+        backgroundImage:
+          type:
+          - string
+          - 'null'
+        accentColor:
+          type: string
+        website:
+          type:
+          - string
+          - 'null'
+        facebookUrl:
+          type:
+          - string
+          - 'null'
+        payment:
+          type: object
+        agb:
+          type: string
+        privacy:
+          type: string
+        taxSetting:
+          type: object
+        url:
+          type: string
+        customFieldsConfig:
+          type: object
+        shopSettings:
+          type: object
+          properties:
+            checkoutExpirationMinutes:
+              type:
+              - number
+              - 'null'
+              format: float
+              minimum: 5
+              maximum: 45
+            enforceAuthentication:
+              type:
+              - string
+              - 'null'
+              enum:
+              - DISABLED
+              - PREVENT_CHECKOUT
+              - PREVENT_DETAILS_STEP
+              default: DISABLED
+        documentSettings:
+          type: object
+          properties:
+            image:
+              type: string
+            invoice:
+              type: object
+              properties:
+                footerColumns:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      text:
+                        type:
+                        - string
+                        - 'null'
+                      active:
+                        type: boolean
+                  minItems: 3
+                  maxItems: 3
+                numberFormat:
+                  type:
+                  - string
+                  - 'null'
+                  enum:
+                  - short
+          default: {}
+        modules:
+          type: object
+        mailingSettings:
+          type: object
+          properties:
+            _id:
+              type: string
+            sendPersonalizationReminder:
+              type: boolean
+            personalizationReminders:
+              type: array
+              items:
+                type: string
+                enum:
+                - 30days
+                - 14days
+                - 7days
+                - 2days
+                - 0days
+              default: []
+            personalizationRemindersAfterTicketBooking:
+              type: array
+              items:
+                type: string
+                enum:
+                - 30days
+                - 14days
+                - 7days
+                - 2days
+                - 0days
+              default: []
+            sendPurchaseIntentsReservationEmail:
+              type: boolean
+              default: true
+            sendPurchaseIntentsRejectionEmail:
+              type: boolean
+            sendTicketTransferEmail:
+              type: boolean
+              default: true
+            sendSubscriptionActivatedEmail:
+              type: boolean
+              default: true
+            sendSubscriptionCreatedDraftEmail:
+              type: boolean
+              default: true
+            sendSubscriptionPaymentReminderEmail:
+              type: boolean
+              default: true
+            sendSubscriptionRenewalReminderEmail:
+              type: boolean
+              default: true
+            sendSubscriptionPaymentRetryReminderEmail:
+              type: boolean
+              default: true
+            sendSubscriptionPaymentFailedEmail:
+              type: boolean
+              default: true
+        accessControlSettings:
+          type: object
+        customTextConfig:
+          type: object
+        localeSettings:
+          type: object
+          properties:
+            defaultLanguage:
+              type: string
+              enum:
+              - de
+              - de-CH
+              - en
+              - en-GB
+              - en-AU
+              - fr
+              - es
+              - es-MX
+              - is
+              - it
+              - ru
+              - pt
+              - tr
+              - nb
+              - nl
+              - pl
+              - sv
+              - sl
+              - da
+              - cs
+              - lv
+              - he
+              - ar
+              - th
+              - ko
+              - ja
+              - zh-TW
+              default: de
+            timezone:
+              type: string
+              enum:
+              - Pacific/Midway
+              - Pacific/Honolulu
+              - America/Juneau
+              - America/Boise
+              - America/Dawson
+              - America/Chihuahua
+              - America/Phoenix
+              - America/Chicago
+              - America/Regina
+              - America/Mexico_City
+              - America/Belize
+              - America/Detroit
+              - America/New_York
+              - America/Bogota
+              - America/Caracas
+              - America/Santiago
+              - America/St_Johns
+              - America/Sao_Paulo
+              - America/Tijuana
+              - America/Argentina/Buenos_Aires
+              - America/Godthab
+              - Atlantic/Azores
+              - Atlantic/Cape_Verde
+              - GMT
+              - Africa/Casablanca
+              - Atlantic/Canary
+              - Europe/Dublin
+              - Europe/London
+              - Europe/Lisbon
+              - Europe/Belgrade
+              - Europe/Sarajevo
+              - Europe/Brussels
+              - Europe/Paris
+              - Europe/Amsterdam
+              - Africa/Algiers
+              - Europe/Bucharest
+              - Africa/Cairo
+              - Europe/Helsinki
+              - Europe/Athens
+              - Asia/Jerusalem
+              - Africa/Harare
+              - Europe/Moscow
+              - Asia/Kuwait
+              - Africa/Nairobi
+              - Asia/Baghdad
+              - Asia/Tehran
+              - Asia/Dubai
+              - Asia/Baku
+              - Asia/Kabul
+              - Asia/Yekaterinburg
+              - Asia/Karachi
+              - Asia/Kolkata
+              - Asia/Kathmandu
+              - Asia/Dhaka
+              - Asia/Colombo
+              - Asia/Almaty
+              - Asia/Rangoon
+              - Asia/Bangkok
+              - Asia/Krasnoyarsk
+              - Asia/Shanghai
+              - Asia/Kuala_Lumpur
+              - Asia/Taipei
+              - Australia/Perth
+              - Asia/Irkutsk
+              - Asia/Seoul
+              - Asia/Tokyo
+              - Asia/Yakutsk
+              - Australia/Darwin
+              - Australia/Adelaide
+              - Australia/Sydney
+              - Australia/Brisbane
+              - Australia/Hobart
+              - Asia/Vladivostok
+              - Pacific/Guam
+              - Asia/Magadan
+              - Asia/Kamchatka
+              - Pacific/Fiji
+              - Pacific/Auckland
+              - Pacific/Tongatapu
+              default: Europe/Amsterdam
+          required:
+          - defaultLanguage
+          - timezone
+          default:
+            defaultLanguage: de
+        documentTemplateSettings:
+          type: object
+        ticketSettings:
+          oneOf:
+          - type: object
+            properties:
+              barcodeType:
+                type: string
+                enum:
+                - numeric
+              barcodePrefix:
+                type: string
+                maxLength: 2
+              revealingSettings:
+                type: object
+                properties:
+                  enabled:
+                    type: boolean
+                  beforeEvent:
+                    type: object
+                    properties:
+                      target:
+                        type:
+                        - string
+                        - 'null'
+                        description: The target of the relative date
+                      unit:
+                        type: string
+                        enum:
+                        - hours
+                        - days
+                        - weeks
+                        - months
+                        - years
+                        description: The unit in which the offset is specified
+                      offset:
+                        type: integer
+                        description: The offset to the date
+              ticketSwapping:
+                type: object
+                properties:
+                  enabled:
+                    type: boolean
+              changeSeatMode:
+                type: string
+                enum:
+                - SAME_TIER
+                - ANY_TIER
+              transferSettings:
+                type: object
+                properties:
+                  mode:
+                    type: string
+                    enum:
+                    - ALLOWED
+                    - DISABLED
+                  expiresAfter:
+                    type: object
+                    properties:
+                      target:
+                        type:
+                        - string
+                        - 'null'
+                        description: The target of the relative date
+                      unit:
+                        type: string
+                        enum:
+                        - hours
+                        - days
+                        - weeks
+                        - months
+                        - years
+                        description: The unit in which the offset is specified
+                      offset:
+                        type: integer
+                        description: The offset to the date
+                    required:
+                    - unit
+                    - offset
+                  retransferMode:
+                    type: string
+                    enum:
+                    - ALLOWED
+                    - DISABLED
+                  allowedUntil:
+                    type: object
+                    properties:
+                      target:
+                        type:
+                        - string
+                        - 'null'
+                        description: The target of the relative date
+                      unit:
+                        type: string
+                        enum:
+                        - hours
+                        - days
+                        - weeks
+                        - months
+                        - years
+                        description: The unit in which the offset is specified
+                      offset:
+                        type: integer
+                        description: The offset to the date
+                    required:
+                    - unit
+                    - offset
+                  hardTicketsMode:
+                    type: string
+                    enum:
+                    - ALLOWED
+                    - DISABLED
+                  seasonTicketMode:
+                    type: string
+                    enum:
+                    - NO_RESTRICTION
+                    - CHILDREN_ONLY
+                    - GROUP_ONLY
+              barcodeLength:
+                type:
+                - number
+                - 'null'
+                format: float
+                minimum: 16
+                maximum: 20
+                default: 16
+          - type: object
+            properties:
+              barcodePrefix:
+                type: string
+                maxLength: 2
+              revealingSettings:
+                type: object
+                properties:
+                  enabled:
+                    type: boolean
+                  beforeEvent:
+                    type: object
+                    properties:
+                      target:
+                        type:
+                        - string
+                        - 'null'
+                        description: The target of the relative date
+                      unit:
+                        type: string
+                        enum:
+                        - hours
+                        - days
+                        - weeks
+                        - months
+                        - years
+                        description: The unit in which the offset is specified
+                      offset:
+                        type: integer
+                        description: The offset to the date
+              ticketSwapping:
+                type: object
+                properties:
+                  enabled:
+                    type: boolean
+              changeSeatMode:
+                type: string
+                enum:
+                - SAME_TIER
+                - ANY_TIER
+              transferSettings:
+                type: object
+                properties:
+                  mode:
+                    type: string
+                    enum:
+                    - ALLOWED
+                    - DISABLED
+                  expiresAfter:
+                    type: object
+                    properties:
+                      target:
+                        type:
+                        - string
+                        - 'null'
+                        description: The target of the relative date
+                      unit:
+                        type: string
+                        enum:
+                        - hours
+                        - days
+                        - weeks
+                        - months
+                        - years
+                        description: The unit in which the offset is specified
+                      offset:
+                        type: integer
+                        description: The offset to the date
+                    required:
+                    - unit
+                    - offset
+                  retransferMode:
+                    type: string
+                    enum:
+                    - ALLOWED
+                    - DISABLED
+                  allowedUntil:
+                    type: object
+                    properties:
+                      target:
+                        type:
+                        - string
+                        - 'null'
+                        description: The target of the relative date
+                      unit:
+                        type: string
+                        enum:
+                        - hours
+                        - days
+                        - weeks
+                        - months
+                        - years
+                        description: The unit in which the offset is specified
+                      offset:
+                        type: integer
+                        description: The offset to the date
+                    required:
+                    - unit
+                    - offset
+                  hardTicketsMode:
+                    type: string
+                    enum:
+                    - ALLOWED
+                    - DISABLED
+                  seasonTicketMode:
+                    type: string
+                    enum:
+                    - NO_RESTRICTION
+                    - CHILDREN_ONLY
+                    - GROUP_ONLY
+              barcodeType:
+                type: string
+                enum:
+                - mixed
+        customerSettings:
+          type: object
+          properties:
+            numberingEnabled:
+              type: boolean
+            numberingStartNumber:
+              type: integer
+        supportSettings:
+          type: object
+          properties:
+            managedBy:
+              type: string
+              enum:
+              - vivenu
+              - seller
+            instructions:
+              type: string
+            faqUrl:
+              type: string
+              format: uri
+        dataRequestsSettings:
+          type: object
+        fulfillmentTypes:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                minLength: 3
+                description: The name of the fulfillment type.
+              description:
+                type:
+                - string
+                - 'null'
+                description: The name of the fulfillment type.
+              type:
+                type: string
+                enum:
+                - NONE
+                - PICK_UP
+                - SHIPPING
+                description: The delivery type of the fulfillment type
+              fee:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - onTransaction
+                    - onCheckout
+                    description: "The mode of the fee calculation.\n          onTransaction = add fee to each transaction.\n          onCheckout = split fee proportionally over transactions."
+                    default: onTransaction
+                  var:
+                    type: number
+                    format: float
+                    minimum: 0
+                    description: The percentage value of fee to be applied.
+                  fix:
+                    type: number
+                    format: float
+                    minimum: 0
+                    description: The fix value of fee to be applied.
+                required:
+                - type
+                description: The price configuration of the fulfillment type.
+              deliveryDeadline:
+                type: object
+                properties:
+                  target:
+                    type:
+                    - string
+                    - 'null'
+                    description: The target of the relative date
+                  unit:
+                    type: string
+                    enum:
+                    - hours
+                    - days
+                    - weeks
+                    - months
+                    - years
+                    description: The unit in which the offset is specified
+                  offset:
+                    type: integer
+                    description: The offset to the date
+                required:
+                - unit
+                - offset
+                description: A relatve date specification until fulfillment will be delivered.
+              availableCountries:
+                type: array
+                items:
+                  type: string
+                description: The array of countries to which delivery is possible. An empty lists makes the method available to all countries. An ISO 3166 country code.
+                default: []
+              taxServiceTypeId:
+                type:
+                - string
+                - 'null'
+                description: The ID of the tax service type
+              discountable:
+                type: boolean
+                description: Whether the fulfillment type is discountable.
+                default: true
+              _id:
+                type:
+                - string
+                - 'null'
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - DISABLED
+        productPlans:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+      required:
+      - name
+      - locationName
+      - locationStreet
+      - locationCity
+      - locationPostal
+      - locationCountry
+      - outerChargeVar
+      - outerChargeFix
+      - active
     GET_Methods_GetSellersPaymentMethods_200_response:
       type: array
       items:

@@ -1458,6 +1458,29 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    POST_Users_RefreshAuthenticationToken:
+      type:
+      - object
+      - 'null'
+      properties:
+        posId:
+          type: string
+    POST_Users_UnsubscribeNotificationType:
+      type: object
+      properties:
+        eventType:
+          type: string
+        deviceId:
+          type: string
+      required:
+      - eventType
+      - deviceId
+    POST_Users_RequestAPasswordResetMail:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
     POST_Users_ChangeSellerOnUser:
       type: object
       properties:
@@ -1469,13 +1492,6 @@ components:
             pattern: ^[a-z]+_.*$
       required:
       - sellerId
-    POST_Users_RefreshAuthenticationToken:
-      type:
-      - object
-      - 'null'
-      properties:
-        posId:
-          type: string
     PUT_Users_UpdateUserInfo:
       type: object
       properties:
@@ -1483,13 +1499,22 @@ components:
           type: string
       required:
       - name
-    POST_Users_GetNotificationDeviceInfo:
+    POST_Users_SubscribeNotificationType:
       type: object
       properties:
+        eventType:
+          type: string
+        deviceName:
+          type: string
         deviceId:
           type: string
+        token:
+          type: string
       required:
+      - eventType
+      - deviceName
       - deviceId
+      - token
     DELETE_Users_RemoveASellerOfAUser:
       type: object
       properties:
@@ -1497,12 +1522,6 @@ components:
           type: string
       required:
       - sellerId
-    POST_Users_RequestAPasswordResetMail:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
     PUT_Users_AddSellerToAUser:
       type: object
       properties:
@@ -1535,31 +1554,12 @@ components:
           default: []
       required:
       - sellerId
-    POST_Users_SubscribeNotificationType:
+    POST_Users_GetNotificationDeviceInfo:
       type: object
       properties:
-        eventType:
-          type: string
-        deviceName:
-          type: string
-        deviceId:
-          type: string
-        token:
-          type: string
-      required:
-      - eventType
-      - deviceName
-      - deviceId
-      - token
-    POST_Users_UnsubscribeNotificationType:
-      type: object
-      properties:
-        eventType:
-          type: string
         deviceId:
           type: string
       required:
-      - eventType
       - deviceId
   securitySchemes:
     jwt:

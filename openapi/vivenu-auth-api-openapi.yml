@@ -113,18 +113,14 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    POST_Auth_CreateAnExchangeToken_200_response:
+    POST_Auth_ExchangeAToken:
       type: object
       properties:
         exchangeToken:
           type: string
-        expiresIn:
-          type: number
-          format: float
-          example: 900
+          description: The token to be exchanged for an access token
       required:
       - exchangeToken
-      - expiresIn
     POST_Auth_CreateAnExchangeToken:
       oneOf:
       - type: object
@@ -140,6 +136,18 @@ components:
         required:
         - resourceType
         - customerId
+    POST_Auth_CreateAnExchangeToken_200_response:
+      type: object
+      properties:
+        exchangeToken:
+          type: string
+        expiresIn:
+          type: number
+          format: float
+          example: 900
+      required:
+      - exchangeToken
+      - expiresIn
     POST_Auth_ExchangeAToken_200_response:
       type: object
       properties:
@@ -152,14 +160,6 @@ components:
       required:
       - token
       - expiresIn
-    POST_Auth_ExchangeAToken:
-      type: object
-      properties:
-        exchangeToken:
-          type: string
-          description: The token to be exchanged for an access token
-      required:
-      - exchangeToken
   securitySchemes:
     jwt:
       type: http

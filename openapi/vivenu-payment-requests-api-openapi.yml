@@ -404,31 +404,22 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    POST_Payment-requests_CreateAPaymentRequest:
+    PUT_Payment-requests_UpdateAPaymentRequest:
       type: object
       properties:
-        checkoutId:
-          type: string
-          description: The ID of the checkout object to create the payment request
-        transactionId:
-          type: string
-          description: The ID of the transaction object to create the payment request
         secret:
           type: string
-          description: The secret of the transaction
+          description: The secret of the payment request
+        paymentStrategyId:
+          type: string
+          description: The ID of the payment strategy
+        paymentOptionId:
+          type: string
+          description: The ID of the payment option
       required:
       - secret
-    POST_Payment-requests_ReceiveProcessorInfo:
-      type: object
-      properties:
-        paymentGatewayId:
-          type: string
-          description: The ID of the payment gateway the client intents to use
-        returnUrl:
-          type: string
-          description: The URL to return after the user has completed the payment
-      required:
-      - paymentGatewayId
+      - paymentStrategyId
+      - paymentOptionId
     PaymentRequestResource:
       type: object
       properties:
@@ -609,109 +600,20 @@ components:
       - sellerId
       - createdAt
       - updatedAt
-    POST_Payment-requests_VerifyAPaymentRequest:
+    POST_Payment-requests_CreateAPaymentRequest:
       type: object
       properties:
-        paymentGatewayId:
+        checkoutId:
           type: string
-          description: The ID of the payment gateway the client intents to use
-        data:
-          oneOf:
-          - type: array
-          - type: boolean
-          - type: number
-          - type: object
-          - type: string
-          description: custom data to verify the payment
-      required:
-      - paymentGatewayId
-    PUT_Payment-requests_UpdateAPaymentRequest:
-      type: object
-      properties:
+          description: The ID of the checkout object to create the payment request
+        transactionId:
+          type: string
+          description: The ID of the transaction object to create the payment request
         secret:
           type: string
-          description: The secret of the payment request
-        paymentStrategyId:
-          type: string
-          description: The ID of the payment strategy
-        paymentOptionId:
-          type: string
-          description: The ID of the payment option
+          description: The secret of the transaction
       required:
       - secret
-      - paymentStrategyId
-      - paymentOptionId
-    POST_Payment-requests_CreateAPaymentRequestForCustomerPaymentMethodSetup:
-      type: object
-      properties:
-        customerId:
-          type: string
-          description: The ID of the customer object to create the payment request for
-        amount:
-          type: number
-          format: float
-          description: The amount to charge
-          default: 1
-        paymentStrategyId:
-          type: string
-          description: The ID of the payment strategy to use
-        paymentOptionId:
-          type: string
-          description: The ID of the payment option to use
-    PaymentRequestProcessorResource:
-      type: object
-      properties:
-        paymentGatewayType:
-          type: string
-          enum:
-          - stripe
-          - paypal
-          - adyen
-          - custom
-          - cardconnect
-          - worldline
-          - shift4
-          - authorizenet
-          - wallee
-          - square
-          - payfast
-          - touchnet
-          - transact
-          - unzer
-          - monext
-          - vivenuPayments
-          - ebanx
-          - rapyd
-          - additional-payment-method
-        paymentGatewayId:
-          type: string
-        reference:
-          type: string
-        redirectUrl:
-          type: string
-        data:
-          oneOf:
-          - type: array
-          - type: boolean
-          - type: number
-          - type: object
-          - type: string
-        createdAt:
-          type: string
-          format: date-time
-          description: An ISO timestamp indicating when the payment request processor was created
-      required:
-      - paymentGatewayType
-      - createdAt
-    GET_Payment-requests_GetPaymentRequests_200_response:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentRequestResource'
-        total:
-          type: integer
     POST_Payment-requests_ConfirmAPaymentRequest:
       type: object
       properties:
@@ -785,6 +687,78 @@ components:
           description: The payment variant used to pay
       required:
       - gatewaySecret
+    PaymentRequestProcessorResource:
+      type: object
+      properties:
+        paymentGatewayType:
+          type: string
+          enum:
+          - stripe
+          - paypal
+          - adyen
+          - custom
+          - cardconnect
+          - worldline
+          - shift4
+          - authorizenet
+          - wallee
+          - square
+          - payfast
+          - touchnet
+          - transact
+          - unzer
+          - monext
+          - vivenuPayments
+          - ebanx
+          - rapyd
+          - additional-payment-method
+        paymentGatewayId:
+          type: string
+        reference:
+          type: string
+        redirectUrl:
+          type: string
+        data:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the payment request processor was created
+      required:
+      - paymentGatewayType
+      - createdAt
+    POST_Payment-requests_VerifyAPaymentRequest:
+      type: object
+      properties:
+        paymentGatewayId:
+          type: string
+          description: The ID of the payment gateway the client intents to use
+        data:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+          description: custom data to verify the payment
+      required:
+      - paymentGatewayId
+    POST_Payment-requests_ReceiveProcessorInfo:
+      type: object
+      properties:
+        paymentGatewayId:
+          type: string
+          description: The ID of the payment gateway the client intents to use
+        returnUrl:
+          type: string
+          description: The URL to return after the user has completed the payment
+      required:
+      - paymentGatewayId
     POST_Payment-requests_ChangePaymentRequestPaymentStatus:
       type: object
       properties:
@@ -800,6 +774,32 @@ components:
       required:
       - paymentStatus
       - gatewaySecret
+    GET_Payment-requests_GetPaymentRequests_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentRequestResource'
+        total:
+          type: integer
+    POST_Payment-requests_CreateAPaymentRequestForCustomerPaymentMethodSetup:
+      type: object
+      properties:
+        customerId:
+          type: string
+          description: The ID of the customer object to create the payment request for
+        amount:
+          type: number
+          format: float
+          description: The amount to charge
+          default: 1
+        paymentStrategyId:
+          type: string
+          description: The ID of the payment strategy to use
+        paymentOptionId:
+          type: string
+          description: The ID of the payment option to use
   securitySchemes:
     jwt:
       type: http

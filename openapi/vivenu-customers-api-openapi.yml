@@ -1005,1009 +1005,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    POST_Customers_LoginCustomer:
-      type: object
-      properties:
-        sellerId:
-          type: string
-          description: The ID of the seller to login
-        email:
-          type: string
-          format: email
-          description: The email of the customer
-        password:
-          type: string
-          description: The password of the customer
-        otp:
-          type: string
-          description: A OTP that was provided via email
-      required:
-      - sellerId
-      - email
-      - password
-    GET_Customers_GetTransactionsOfCustomer_200_response:
-      type: object
-      properties:
-        transactions:
-          type: array
-          items:
-            type: object
-            properties:
-              tid:
-                type: string
-                description: The ID of the transaction
-              secret:
-                type: string
-                description: The secret token of the transaction
-              tickets:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    type:
-                      type: string
-                      enum:
-                      - ticket
-                      description: The type of the cart item.
-                      default: ticket
-                    _id:
-                      type: string
-                      description: Unique identifier for the cart item. If omitted, the system will automatically generate one.
-                    name:
-                      type:
-                      - string
-                      - 'null'
-                      description: The name of the cart item.
-                    amount:
-                      type: integer
-                      minimum: 1
-                      description: The amount of the cart item.
-                    netPrice:
-                      type: number
-                      format: float
-                      description: The single piece net price of the cart item.
-                    price:
-                      type: number
-                      format: float
-                      description: The single piece price of the cart item.
-                    taxRate:
-                      type:
-                      - number
-                      - 'null'
-                      format: float
-                      description: The tax rate to be applied to this cart item. If not present the tax rate of the transaction is taken.
-                    triggeredBy:
-                      oneOf:
-                      - type: string
-                        description: An ID of another cart item which triggered the buy action of the cart item.
-                      - type: array
-                        items:
-                          type: string
-                        description: An array of IDs of other cart items which triggered the buy action of the cart item.
-                      description: An ID or an array of IDs of other cart items which triggered the buy action of the cart item.
-                    bundleInfo:
-                      type:
-                      - object
-                      - 'null'
-                      properties:
-                        bundleId:
-                          type: string
-                        componentId:
-                          type: string
-                        optionId:
-                          type: string
-                    ticketTypeId:
-                      type: string
-                      description: The ID of the ticket type of the cart item.
-                    categoryRef:
-                      type: string
-                      description: The category reference of the ticket type.
-                    seatingInfo:
-                      type:
-                      - object
-                      - 'null'
-                      properties:
-                        _id:
-                          type: string
-                          description: The ID of the seating object.
-                        _type:
-                          type: number
-                          format: float
-                          enum:
-                          - 6
-                          - 7
-                          description: Indicates the type of seating object. Seat = 6, General Admission = 7.
-                        categoryId:
-                          type: string
-                          description: The ID of the category containing the seating object.
-                        statusId:
-                          type: string
-                          description: The ID of a container holding information about the seating status of the seating object.
-                        name:
-                          type:
-                          - string
-                          - 'null'
-                          description: If _type == 7. The name of the general admission.
-                        seatType:
-                          type:
-                          - string
-                          - 'null'
-                          enum:
-                          - handicapped
-                          - limitedView
-                          - foldable
-                          description: If _type == 6. The type of the seat. null = normal.
-                        sectionName:
-                          type:
-                          - string
-                          - 'null'
-                          description: If _type == 6. The name of the section where the seat is located.
-                        groupName:
-                          type:
-                          - string
-                          - 'null'
-                          description: If _type == 6. The name of the row group where the seat is located.
-                        rowName:
-                          type:
-                          - string
-                          - 'null'
-                          description: If _type == 6. The name of the row where the seat is located.
-                        seatName:
-                          type:
-                          - string
-                          - 'null'
-                          description: If _type == 6. The seat name.
-                        gate:
-                          type:
-                          - string
-                          - 'null'
-                          description: The entry gate associated with the seating object.
-                      required:
-                      - _type
-                      - statusId
-                      description: The associated seating object.
-                    slotInfo:
-                      type:
-                      - object
-                      - 'null'
-                      properties:
-                        slotId:
-                          type: string
-                          description: The ID of the time slot.
-                        slotStartTime:
-                          type: string
-                          description: The start time of the time slot.
-                      required:
-                      - slotId
-                      - slotStartTime
-                      description: The associated time slot object.
-                    asHardTicket:
-                      type:
-                      - boolean
-                      - 'null'
-                      description: Whether this ticket is a hard ticket.
-                    listingId:
-                      type:
-                      - string
-                      - 'null'
-                      description: Listing in secondary market.
-                    listingItemId:
-                      type:
-                      - string
-                      - 'null'
-                      description: The ID of the listing item in the secondary market.
-                    triggeredAutomations:
-                      type:
-                      - boolean
-                      - 'null'
-                      description: Whether the cart item triggered automations.
-                    meta:
-                      type:
-                      - object
-                      - 'null'
-                      description: Meta data which is propagated to the ticket.
-                    addOns:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          productId:
-                            type: string
-                          productVariantId:
-                            type: string
-                          name:
-                            type: string
-                        required:
-                        - productId
-                        - productVariantId
-                        - name
-                      description: A list of Add-Ons of the ticket.
-                    capabilities:
-                      type:
-                      - array
-                      - 'null'
-                      items:
-                        oneOf:
-                        - type: object
-                          properties:
-                            type:
-                              type: string
-                              enum:
-                              - self_service_return
-                            settings:
-                              type: object
-                              properties:
-                                returnRelatedItems:
-                                  type: boolean
-                                  default: true
-                                phases:
-                                  type: array
-                                  items:
-                                    type: object
-                                    properties:
-                                      condition:
-                                        type: object
-                                        properties:
-                                          target:
-                                            type:
-                                            - string
-                                            - 'null'
-                                            description: The target of the relative date
-                                          unit:
-                                            type: string
-                                            enum:
-                                            - hours
-                                            - days
-                                            - weeks
-                                            - months
-                                            - years
-                                            description: The unit in which the offset is specified
-                                          offset:
-                                            type: integer
-                                            description: The offset to the date
-                                        required:
-                                        - unit
-                                        - offset
-                                      refundPercentage:
-                                        type: number
-                                        format: float
-                                        minimum: 0
-                                        maximum: 1
-                                    required:
-                                    - condition
-                                    - refundPercentage
-                              required:
-                              - phases
-                          required:
-                          - type
-                          - settings
-                        - type: object
-                          properties:
-                            type:
-                              type: string
-                              enum:
-                              - repersonalization
-                            settings:
-                              type: object
-                              properties:
-                                inherit:
-                                  type: boolean
-                                repersonalizationDeadline:
-                                  type: object
-                                  properties:
-                                    target:
-                                      type:
-                                      - string
-                                      - 'null'
-                                      description: The target of the relative date
-                                    unit:
-                                      type: string
-                                      enum:
-                                      - hours
-                                      - days
-                                      - weeks
-                                      - months
-                                      - years
-                                      description: The unit in which the offset is specified
-                                    offset:
-                                      type: integer
-                                      description: The offset to the date
-                                  required:
-                                  - unit
-                                  - offset
-                                repersonalizationsLimit:
-                                  type:
-                                  - number
-                                  - 'null'
-                                  format: float
-                                repersonalizationFee:
-                                  type:
-                                  - number
-                                  - 'null'
-                                  format: float
-                                limitOnlyNameChanges:
-                                  type: boolean
-                              required:
-                              - repersonalizationDeadline
-                          required:
-                          - type
-                          - settings
-                      description: The capabilities of the ticket.
-                    taxInfo:
-                      type: object
-                      properties:
-                        serviceTypeId:
-                          type: string
-                          description: The ID of the service type.
-                        exceptionId:
-                          type: string
-                          description: The ID of the exception.
-                        proceedsAccountId:
-                          type: string
-                          description: The ID of the proceeds account.
-                        proceedsAccountCode:
-                          type: string
-                          description: The code of the proceeds account.
-                        taxItems:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              name:
-                                type:
-                                - string
-                                - 'null'
-                              taxTypeId:
-                                type:
-                                - string
-                                - 'null'
-                              rate:
-                                type: number
-                                format: float
-                              perUnit:
-                                type: number
-                                format: float
-                              total:
-                                type: number
-                                format: float
-                              netTotal:
-                                type:
-                                - number
-                                - 'null'
-                                format: float
-                              netPerUnit:
-                                type:
-                                - number
-                                - 'null'
-                                format: float
-                              taxPayableAccountId:
-                                type:
-                                - string
-                                - 'null'
-                              taxPayableAccountCode:
-                                type:
-                                - string
-                                - 'null'
-                            required:
-                            - rate
-                            - perUnit
-                            - total
-                          description: The array of tax items.
-                      description: The tax info details.
-                  required:
-                  - amount
-                  - price
-                  - ticketTypeId
-                description: An array of cart ticket items of the transaction
-                default: []
-              products:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    type:
-                      type: string
-                      enum:
-                      - product
-                      description: The type of the cart item.
-                    _id:
-                      type: string
-                      description: Unique identifier for the cart item. If omitted, the system will automatically generate one.
-                    name:
-                      type:
-                      - string
-                      - 'null'
-                      description: The name of the cart item.
-                    amount:
-                      type: integer
-                      minimum: 1
-                      description: The amount of the cart item.
-                    netPrice:
-                      type: number
-                      format: float
-                      description: The single piece net price of the cart item.
-                    price:
-                      type: number
-                      format: float
-                      description: The single piece price of the cart item.
-                    taxRate:
-                      type:
-                      - number
-                      - 'null'
-                      format: float
-                      description: The tax rate to be applied to this cart item. If not present the tax rate of the transaction is taken.
-                    triggeredBy:
-                      oneOf:
-                      - type: string
-                        description: An ID of another cart item which triggered the buy action of the cart item.
-                      - type: array
-                        items:
-                          type: string
-                        description: An array of IDs of other cart items which triggered the buy action of the cart item.
-                      description: An ID or an array of IDs of other cart items which triggered the buy action of the cart item.
-                    bundleInfo:
-                      type:
-                      - object
-                      - 'null'
-                      properties:
-                        bundleId:
-                          type: string
-                        componentId:
-                          type: string
-                        optionId:
-                          type: string
-                    productVariantId:
-                      type: string
-                      description: The ID of the product variant.
-                    isFulfillable:
-                      type: boolean
-                      description: Whether the product can be delivered
-                    taxInfo:
-                      type: object
-                      properties:
-                        serviceTypeId:
-                          type: string
-                          description: The ID of the service type.
-                        exceptionId:
-                          type: string
-                          description: The ID of the exception.
-                        proceedsAccountId:
-                          type: string
-                          description: The ID of the proceeds account.
-                        proceedsAccountCode:
-                          type: string
-                          description: The code of the proceeds account.
-                        taxItems:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              name:
-                                type:
-                                - string
-                                - 'null'
-                              taxTypeId:
-                                type:
-                                - string
-                                - 'null'
-                              rate:
-                                type: number
-                                format: float
-                              perUnit:
-                                type: number
-                                format: float
-                              total:
-                                type: number
-                                format: float
-                              netTotal:
-                                type:
-                                - number
-                                - 'null'
-                                format: float
-                              netPerUnit:
-                                type:
-                                - number
-                                - 'null'
-                                format: float
-                              taxPayableAccountId:
-                                type:
-                                - string
-                                - 'null'
-                              taxPayableAccountCode:
-                                type:
-                                - string
-                                - 'null'
-                            required:
-                            - rate
-                            - perUnit
-                            - total
-                          description: The array of tax items.
-                      description: The tax info details.
-                  required:
-                  - type
-                  - amount
-                  - price
-                  - productVariantId
-                description: An array of cart product items of the transaction
-                default: []
-              realPrice:
-                type: number
-                format: float
-                description: The calculated real price of the transaction
-              currency:
-                type: string
-                enum:
-                - EUR
-                - USD
-                - GBP
-                - AUD
-                - CHF
-                - THB
-                - ILS
-                - COP
-                - MXN
-                - DKK
-                - NOK
-                - SEK
-                - QAR
-                - CAD
-                - ISK
-                - GTQ
-                - INR
-                - DOP
-                - SGD
-                - PLN
-                - SAR
-                - TTD
-                - ZAR
-                - KYD
-                - HKD
-                - CZK
-                - KRW
-                - JPY
-                - NZD
-                - AED
-                - MAD
-                - TWD
-                - BRL
-                - BWP
-                - NAD
-                - KES
-                - SCR
-                - TRY
-                - SZL
-                - LSL
-                - TZS
-                - UGX
-                - ZMW
-                - ZWG
-                - GHS
-                - NGN
-                - SLE
-                - LRD
-                - XOF
-                - XAF
-                - GEL
-                - IDR
-                - ARS
-                - CRC
-                - HUF
-                - EGP
-                - MYR
-                - VND
-                - PHP
-                description: An ISO 4217 3-character code of the currency
-                default: EUR
-              vouchers:
-                type: array
-                items:
-                  type: string
-                description: An array of voucher codes applied to this transaction
-              redeemedVouchers:
-                type: object
-                properties:
-                  totalRedeemedAmount:
-                    type: number
-                    format: float
-                    description: The sum of all vouchers applied.
-                  vouchers:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        _id:
-                          type: string
-                          description: The ID of the voucher.
-                        code:
-                          type: string
-                          description: The Code of the voucher.
-                        redeemedAmount:
-                          type: number
-                          format: float
-                          description: The applied value of the voucher.
-                      required:
-                      - code
-                      - redeemedAmount
-                    description: An array of all redeemed vouchers.
-                required:
-                - totalRedeemedAmount
-                description: An array of voucher codes redeemed for this transaction
-              email:
-                type: string
-                format: email
-                description: The email of the user of the transaction
-              status:
-                type: string
-                enum:
-                - NEW
-                - RESERVED-BY-SYSTEM
-                - ABORTED
-                - COMPLETE
-                - CANCELED
-                description: The status of the transaction.
-              company:
-                type: string
-                description: The company name of the user of the transaction
-              name:
-                type: string
-                description: The name of the user of the transaction
-              prename:
-                type: string
-                description: The firstname of the user of the transaction
-              lastname:
-                type: string
-                description: The lastname of the user of the transaction
-              street:
-                type: string
-                description: The street of the user of the transaction
-              line2:
-                type: string
-                description: The additional address field of the user of the transaction.
-              postal:
-                type: string
-                description: The postal of the user of the transaction
-              city:
-                type: string
-                description: The city of the user of the transaction
-              state:
-                type: string
-                description: The state of the user of the transaction
-              country:
-                type: string
-                description: The country of the user of the transaction
-              createdAt:
-                type: string
-                format: date-time
-                description: An ISO timestamp indicating when the transaction was created
-              eventId:
-                type: string
-                description: The ID of the event containing this transaction
-              paymentStatus:
-                type: string
-                enum:
-                - AWAITING
-                - PENDING
-                - RECEIVED
-                - REFUND
-                - CANCELED
-                - FAILED
-                - DISPUTE
-                - CHARGEBACK
-                - POS-RECEIVED
-                - POS-CANCELED
-                - LOCAL-PENDING
-                - LOCAL-AWAITING
-                - LOCAL-RECEIVED
-                - EXTERNAL
-                description: The payment status of the transaction.
-                default: AWAITING
-              outerCharge:
-                type: number
-                format: float
-                description: The outer charge of the transaction
-              paymentMethod:
-                type: string
-                enum:
-                - paypal
-                - stripe
-                - local
-                - external
-                - vivenu-payments
-                description: The payment method of the transaction.
-              preferredLanguage:
-                type: string
-                enum:
-                - de
-                - de-CH
-                - en
-                - en-GB
-                - en-AU
-                - fr
-                - es
-                - es-MX
-                - is
-                - it
-                - ru
-                - pt
-                - tr
-                - nb
-                - nl
-                - pl
-                - sv
-                - sl
-                - da
-                - cs
-                - lv
-                - he
-                - ar
-                - th
-                - ko
-                - ja
-                - zh-TW
-                description: The preferred language of the transaction. It is determined automatically
-                default: de
-              extraFields:
-                type: object
-                description: The extra fields of the transaction
-              underShop:
-                type: string
-                description: The under shop of the transaction
-              paymentInfoMethod:
-                type: string
-                description: The method of the payment
-              coupons:
-                type: array
-                items:
-                  type: string
-                description: An array of coupon codes applied
-            required:
-            - tid
-            - secret
-            - realPrice
-            - status
-            - eventId
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/PublicEventResource'
-    PublicResellOfferInfoResource:
-      type: object
-      properties:
-        _id:
-          type: string
-          description: The ID of the offer
-        customerId:
-          type: string
-          description: The ID of the customer of this offer
-        status:
-          oneOf:
-          - type: array
-          - type: boolean
-          - type: number
-          - type: object
-          - type: string
-          enum:
-          - ACTIVE
-          - SOLD
-          - CANCELED
-          description: The status of this offer
-        eventId:
-          type: string
-          description: The ID of the event of this offer
-        cpmId:
-          type: string
-          description: The customer payment method where the proceeds of this offer will be paid
-        updatedAt:
-          type: string
-          format: date-time
-          description: An ISO Timestamp indicating when the offer was updated.
-        createdAt:
-          type: string
-          format: date-time
-          description: An ISO Timestamp indicating when the offer was created.
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              ticketId:
-                type: string
-                description: The ID of the ticket
-              ticketTypeId:
-                type: string
-                description: The ID of the ticket type of the ticket
-              categoryRef:
-                type: string
-                description: The category of the ticket
-              price:
-                type: number
-                format: float
-                description: The price of this item
-              resellFee:
-                type: number
-                format: float
-                description: The fee for reselling this item
-              seatingInfo:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    _id:
-                      type: string
-                      description: The ID of the seating object.
-                    _type:
-                      type: number
-                      format: float
-                      enum:
-                      - 6
-                      - 7
-                      description: Indicates the type of seating object. Seat = 6, General Admission = 7.
-                    categoryId:
-                      type: string
-                      description: The ID of the category containing the seating object.
-                    statusId:
-                      type: string
-                      description: The ID of a container holding information about the seating status of the seating object.
-                    name:
-                      type:
-                      - string
-                      - 'null'
-                      description: If _type == 7. The name of the general admission.
-                    seatType:
-                      type:
-                      - string
-                      - 'null'
-                      enum:
-                      - handicapped
-                      - limitedView
-                      - foldable
-                      description: If _type == 6. The type of the seat. null = normal.
-                    sectionName:
-                      type:
-                      - string
-                      - 'null'
-                      description: If _type == 6. The name of the section where the seat is located.
-                    groupName:
-                      type:
-                      - string
-                      - 'null'
-                      description: If _type == 6. The name of the row group where the seat is located.
-                    rowName:
-                      type:
-                      - string
-                      - 'null'
-                      description: If _type == 6. The name of the row where the seat is located.
-                    seatName:
-                      type:
-                      - string
-                      - 'null'
-                      description: If _type == 6. The seat name.
-                    gate:
-                      type:
-                      - string
-                      - 'null'
-                      description: The entry gate associated with the seating object.
-                  required:
-                  - _type
-                  - statusId
-                  description: The associated seating object.
-                description: The seating info for this ticket
-              ticket:
-                type: object
-                properties:
-                  _id:
-                    type: string
-                  categoryName:
-                    type: string
-                    description: The name of the category the ticket belongs to.
-                  ticketName:
-                    type: string
-                    description: The name of the ticket type this ticket inherits from
-                  seatingInfo:
-                    type: object
-                    properties:
-                      _id:
-                        type: string
-                        description: The ID of the seating object.
-                      _type:
-                        type: number
-                        format: float
-                        enum:
-                        - 6
-                        - 7
-                        description: Indicates the type of seating object. Seat = 6, General Admission = 7.
-                      categoryId:
-                        type: string
-                        description: The ID of the category containing the seating object.
-                      statusId:
-                        type: string
-                        description: The ID of a container holding information about the seating status of the seating object.
-                      name:
-                        type:
-                        - string
-                        - 'null'
-                        description: If _type == 7. The name of the general admission.
-                      seatType:
-                        type:
-                        - string
-                        - 'null'
-                        enum:
-                        - handicapped
-                        - limitedView
-                        - foldable
-                        description: If _type == 6. The type of the seat. null = normal.
-                      sectionName:
-                        type:
-                        - string
-                        - 'null'
-                        description: If _type == 6. The name of the section where the seat is located.
-                      groupName:
-                        type:
-                        - string
-                        - 'null'
-                        description: If _type == 6. The name of the row group where the seat is located.
-                      rowName:
-                        type:
-                        - string
-                        - 'null'
-                        description: If _type == 6. The name of the row where the seat is located.
-                      seatName:
-                        type:
-                        - string
-                        - 'null'
-                        description: If _type == 6. The seat name.
-                      gate:
-                        type:
-                        - string
-                        - 'null'
-                        description: The entry gate associated with the seating object.
-                    required:
-                    - _type
-                    - statusId
-                    description: The associated seating object.
-                  type:
-                    type: string
-                    enum:
-                    - SINGLE
-                    - MULTI
-                    description: The type of the ticket
-                required:
-                - _id
-                - ticketName
-            required:
-            - ticketId
-            - ticketTypeId
-            - categoryRef
-            - price
-            - resellFee
-      required:
-      - _id
-      - customerId
-      - status
-      - eventId
-      - cpmId
-      - updatedAt
-      - createdAt
-    GET_Customers_GetTicketTransfersOfCustomer_200_response:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/PublicTicketTransferResource'
-        total:
-          type: integer
-    POST_Customers_RequestAPasswordResetMail:
-      type: object
-      properties:
-        sellerId:
-          type: string
-        email:
-          type: string
-          format: email
-      required:
-      - sellerId
-      - email
     GET_Customers_ResetPassword_200_response:
       type: object
       properties:
@@ -2015,280 +1012,11 @@ components:
           type: string
       required:
       - passwordResetToken
-    LegalIdentificationDocumentResource:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - spain_tax_id
-          identifier:
-            type: string
-        required:
-        - type
-        - identifier
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - origin_country_id
-            description: The type of the identification document.
-        required:
-        - type
-    POST_Customers_LoginCustomer_200_response:
-      type: object
-      properties:
-        token:
-          type: string
-          description: A JWT token for the customer
-      required:
-      - token
-    GET_Customers_GetTicketsOfCustomer_200_response:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            type: object
-            properties:
-              sellerId:
-                type: string
-                description: The ID of the seller that ticket belongs to.
-              name:
-                type: string
-                description: The name of the ticket owner
-              firstname:
-                type: string
-                description: The first name of the ticket owner
-              lastname:
-                type: string
-                description: The last name of the ticket owner
-              email:
-                type: string
-              street:
-                type: string
-              line2:
-                type: string
-                description: The additional address field of the user of the ticket
-              city:
-                type: string
-              postal:
-                type: string
-              state:
-                type: string
-                description: The state of the user of the ticket
-              country:
-                type: string
-                description: The country of the user of the ticket
-              eventId:
-                type: string
-                description: The ID of the event the ticket belongs to
-              categoryRef:
-                type: string
-                description: A UUID of the category the ticket belongs to.
-              ticketTypeId:
-                type: string
-                description: The ID of the ticket type this ticket inherits from
-              ticketName:
-                type: string
-                description: The name of the ticket type this ticket inherits from
-              categoryName:
-                type: string
-                description: The name of the category the ticket belongs to.
-              regularPrice:
-                type: number
-                format: float
-                description: The original non discounted price for the ticket
-              realPrice:
-                type: number
-                format: float
-                description: The real price for the ticket
-              completed:
-                type: boolean
-                description: Whether all steps for validating the ticket has been made
-              createdAt:
-                type: string
-                format: date-time
-                description: An ISO Timestamp indicating when the ticket was created.
-              updatedAt:
-                type: string
-                format: date-time
-                description: An ISO Timestamp indicating when the ticket was updated.
-              status:
-                type: string
-                enum:
-                - VALID
-                - INVALID
-                - RESERVED
-                - DETAILSREQUIRED
-                - BLANK
-                description: The status of the ticket
-              secret:
-                type: string
-                description: The secret token of the ticket
-              barcode:
-                type: string
-                minLength: 8
-                description: The barcode of the ticket
-              seat:
-                type: string
-              seatingInfo:
-                type: object
-                properties:
-                  _id:
-                    type: string
-                    description: The ID of the seating object.
-                  _type:
-                    type: number
-                    format: float
-                    enum:
-                    - 6
-                    - 7
-                    description: Indicates the type of seating object. Seat = 6, General Admission = 7.
-                  categoryId:
-                    type: string
-                    description: The ID of the category containing the seating object.
-                  statusId:
-                    type: string
-                    description: The ID of a container holding information about the seating status of the seating object.
-                  name:
-                    type:
-                    - string
-                    - 'null'
-                    description: If _type == 7. The name of the general admission.
-                  seatType:
-                    type:
-                    - string
-                    - 'null'
-                    enum:
-                    - handicapped
-                    - limitedView
-                    - foldable
-                    description: If _type == 6. The type of the seat. null = normal.
-                  sectionName:
-                    type:
-                    - string
-                    - 'null'
-                    description: If _type == 6. The name of the section where the seat is located.
-                  groupName:
-                    type:
-                    - string
-                    - 'null'
-                    description: If _type == 6. The name of the row group where the seat is located.
-                  rowName:
-                    type:
-                    - string
-                    - 'null'
-                    description: If _type == 6. The name of the row where the seat is located.
-                  seatName:
-                    type:
-                    - string
-                    - 'null'
-                    description: If _type == 6. The seat name.
-                  gate:
-                    type:
-                    - string
-                    - 'null'
-                    description: The entry gate associated with the seating object.
-                required:
-                - _type
-                - statusId
-                description: The associated seating object.
-              type:
-                type: string
-                enum:
-                - SINGLE
-                - MULTI
-                description: The type of the ticket
-              origin:
-                type: string
-                enum:
-                - yourticket
-                - pos
-                - rebooking
-                - upgrade
-                - subscription
-                - transfer
-              extraFields:
-                type: object
-                description: A hashmap of extra fields for the ticket
-              deliveryType:
-                type: string
-                enum:
-                - HARD
-                - VIRTUAL
-                description: The delivery type of the ticket
-              transactionId:
-                type: string
-                description: The transaction the ticket originated from
-              batchCounter:
-                type: number
-                format: float
-                description: A counter indicating the order of the ticket in the batch
-              slotId:
-                type: string
-                description: The ID of the time slot this ticket belongs to, if exists
-              slotStartTime:
-                type: string
-                description: The start time of the time slot this ticket belongs to, if exists.
-              personalized:
-                type: boolean
-              _locks:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    by:
-                      type: string
-                    at:
-                      type: string
-                      format: date-time
-                    eventId:
-                      type: string
-                    type:
-                      oneOf:
-                      - type: array
-                      - type: boolean
-                      - type: number
-                      - type: object
-                      - type: string
-                      enum:
-                      - resell
-                  required:
-                  - by
-                  - at
-                description: List of locks on this ticket
-              barcodeRevealed:
-                type: boolean
-                description: Whether the ticket barcode revealed.
-              barcodeRevealDate:
-                type: string
-                format: date-time
-                description: The date on which the ticket barcode will be revealed.
-            required:
-            - sellerId
-            - eventId
-            - ticketTypeId
-            - ticketName
-            - createdAt
-            - updatedAt
-            - status
-            - secret
-            - barcode
-        total:
-          type: integer
-    POST_Customers_VerifyACustomer_200_response:
-      type: object
-      properties:
-        ok:
-          type: boolean
-          enum:
-          - true
-      required:
-      - ok
-    POST_Customers_UpdateCurrentCustomer:
+    GET_Customers_GetPurchaseIntentsOfCustomer_200_response:
+      type: array
+      items:
+        $ref: '#/components/schemas/PublicPurchaseIntentResource'
+    POST_Customers_CreateCustomer:
       type: object
       properties:
         company:
@@ -2296,6 +1024,11 @@ components:
           - string
           - 'null'
           description: The company of the customer
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the customer collected from first name and last name
         prename:
           type:
           - string
@@ -2306,6 +1039,20 @@ components:
           - string
           - 'null'
           description: The lastname of the customer
+        number:
+          type: number
+          format: float
+          description: The number of the customer. Need to be unique and incrementing
+        image:
+          type:
+          - string
+          - 'null'
+          description: The image of the customer
+          deprecated: true
+        primaryEmail:
+          type: string
+          format: email
+          description: The primary email of the customer
         location:
           type: object
           properties:
@@ -2355,10 +1102,75 @@ components:
               - 'null'
               description: An ISO-3166-1 Alpha 2 country code of the location
           description: The location of the customer
-    GET_Customers_GetPurchaseIntentsOfCustomer_200_response:
-      type: array
-      items:
-        $ref: '#/components/schemas/PublicPurchaseIntentResource'
+        notes:
+          type:
+          - string
+          - 'null'
+          description: Notes of the customer
+        extraFields:
+          type:
+          - object
+          - 'null'
+          description: Extra fields of the customer
+        tags:
+          type: array
+          items:
+            type: string
+          description: An array of tags
+        verified:
+          type: boolean
+          description: Whether the customer is verified
+        meta:
+          type: object
+          description: Custom key-value data. Metadata is useful for storing additional, structured information on an object.
+        externalId:
+          type:
+          - string
+          - 'null'
+          description: An external identifier of the customer
+        identification:
+          type: array
+          items:
+            $ref: '#/components/schemas/LegalIdentificationDocumentResource'
+          description: An array of identification items
+        consents:
+          type: array
+          items:
+            type: object
+            properties:
+              consentId:
+                type: string
+              status:
+                type: string
+                enum:
+                - granted
+                - denied
+            required:
+            - consentId
+            - status
+          description: Optional consents provided during creation
+        phone:
+          type:
+          - string
+          - 'null'
+          description: The phone number of the customer
+        upsert:
+          type: boolean
+          description: If false, reject creation when the email already exists
+          default: true
+      required:
+      - primaryEmail
+    POST_Customers_RequestAPasswordResetMail:
+      type: object
+      properties:
+        sellerId:
+          type: string
+        email:
+          type: string
+          format: email
+      required:
+      - sellerId
+      - email
     CustomerResource:
       type: object
       properties:
@@ -2531,174 +1343,197 @@ components:
       - _id
       - primaryEmail
       description: The associated customer which has been updated
-    GET_Customers_GetUndershopsOfCustomer_200_response:
+    PublicTicketTransferResource:
       type: object
       properties:
-        shops:
-          type: array
-          items:
-            type: object
-            properties:
-              _id:
-                type: string
-              name:
-                type: string
-            required:
-            - _id
-            - name
-    GET_Customers_GetResellOffersOfCustomer_200_response:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/PublicResellOfferInfoResource'
-        total:
-          type: integer
-    POST_Customers_CreateCustomer:
-      type: object
-      properties:
-        company:
-          type:
-          - string
-          - 'null'
-          description: The company of the customer
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name of the customer collected from first name and last name
-        prename:
-          type:
-          - string
-          - 'null'
-          description: The first name of the customer
-        lastname:
-          type:
-          - string
-          - 'null'
-          description: The lastname of the customer
-        number:
-          type: number
-          format: float
-          description: The number of the customer. Need to be unique and incrementing
-        image:
-          type:
-          - string
-          - 'null'
-          description: The image of the customer
-          deprecated: true
-        primaryEmail:
+        _id:
           type: string
-          format: email
-          description: The primary email of the customer
-        location:
+          description: The ID of the ticket transfer.
+        secret:
+          type: string
+          description: The secret token of the ticket transfer.
+        sender:
           type: object
           properties:
-            street:
+            email:
+              type: string
+              format: email
+              description: The email of the ticket transfer sender.
+            customerId:
               type:
               - string
               - 'null'
-              description: The street of the location
-            line2:
+              description: The ID of the ticket transfer sender.
+            firstname:
               type:
               - string
               - 'null'
-              description: The additional address fields of the location
-            postal:
+              description: The first name of the ticket transfer sender.
+            lastname:
               type:
               - string
               - 'null'
-              description: The postal of the location
-            city:
-              type:
-              - string
-              - 'null'
-              description: The city of the location
-            locale:
-              type:
-              - string
-              - 'null'
-              description: The locale of the location
-              deprecated: true
-            state:
-              type:
-              - string
-              - 'null'
-              description: The state of the location
-            center:
-              type:
-              - array
-              - 'null'
-              items:
-                type: number
-                format: float
-              description: The center of the location
-              deprecated: true
-            country:
-              type:
-              - string
-              - 'null'
-              description: An ISO-3166-1 Alpha 2 country code of the location
-          description: The location of the customer
-        notes:
-          type:
-          - string
-          - 'null'
-          description: Notes of the customer
-        extraFields:
-          type:
-          - object
-          - 'null'
-          description: Extra fields of the customer
-        tags:
-          type: array
-          items:
-            type: string
-          description: An array of tags
-        verified:
-          type: boolean
-          description: Whether the customer is verified
-        meta:
+              description: The last name ticket transfer sender.
+          default: {}
+        recipient:
           type: object
-          description: Custom key-value data. Metadata is useful for storing additional, structured information on an object.
-        externalId:
-          type:
-          - string
-          - 'null'
-          description: An external identifier of the customer
-        identification:
-          type: array
-          items:
-            $ref: '#/components/schemas/LegalIdentificationDocumentResource'
-          description: An array of identification items
-        consents:
+          properties:
+            email:
+              type: string
+              format: email
+              description: The email of the ticket transfer recipient.
+            phone:
+              type:
+              - string
+              - 'null'
+              description: The phone number of the ticket transfer recipient.
+            customerId:
+              type:
+              - string
+              - 'null'
+              description: The ID of the ticket transfer recipient.
+          required:
+          - email
+        status:
+          type: string
+          enum:
+          - CREATED
+          - REJECTED
+          - TRANSFERRED
+          - EXPIRED
+          description: The status of the ticket ticket transfer.
+          default: CREATED
+        outcome:
+          type: object
+          properties:
+            tickets:
+              type: array
+              items:
+                type: object
+                properties:
+                  ticketId:
+                    type: string
+                    description: The ID of the transfered ticket.
+                  originTicketId:
+                    type: string
+                    description: The ID of the origin ticket.
+                required:
+                - ticketId
+                - originTicketId
+              description: The array of objects having transfered and origin tickets.
+          description: The object representing result of the completed ticket transfer
+        eventId:
+          type: string
+          description: The ID of the event the ticket transfer belongs to.
+        groupEventId:
+          type: string
+          description: The ID of the group event the ticket transfer belongs to. Only filled in season card case.
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the ticket transfer was created.
+        tickets:
           type: array
           items:
             type: object
             properties:
-              consentId:
+              id:
                 type: string
-              status:
+                description: The ID of the ticket
+              ticketName:
                 type: string
-                enum:
-                - granted
-                - denied
+                description: The name of the ticket type of the event
+              seatingInfo:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: The ID of the seating object.
+                  _type:
+                    type: number
+                    format: float
+                    enum:
+                    - 6
+                    - 7
+                    description: Indicates the type of seating object. Seat = 6, General Admission = 7.
+                  categoryId:
+                    type: string
+                    description: The ID of the category containing the seating object.
+                  statusId:
+                    type: string
+                    description: The ID of a container holding information about the seating status of the seating object.
+                  name:
+                    type:
+                    - string
+                    - 'null'
+                    description: If _type == 7. The name of the general admission.
+                  seatType:
+                    type:
+                    - string
+                    - 'null'
+                    enum:
+                    - handicapped
+                    - limitedView
+                    - foldable
+                    description: If _type == 6. The type of the seat. null = normal.
+                  sectionName:
+                    type:
+                    - string
+                    - 'null'
+                    description: If _type == 6. The name of the section where the seat is located.
+                  groupName:
+                    type:
+                    - string
+                    - 'null'
+                    description: If _type == 6. The name of the row group where the seat is located.
+                  rowName:
+                    type:
+                    - string
+                    - 'null'
+                    description: If _type == 6. The name of the row where the seat is located.
+                  seatName:
+                    type:
+                    - string
+                    - 'null'
+                    description: If _type == 6. The seat name.
+                  gate:
+                    type:
+                    - string
+                    - 'null'
+                    description: The entry gate associated with the seating object.
+                required:
+                - _type
+                - statusId
+                description: The associated seating object.
+              secret:
+                type: string
+                description: The secret token of the ticket
+              email:
+                type: string
+                format: email
+                description: The email of the ticket
+              name:
+                type: string
+                description: The name of the ticket
+              excludedEventIds:
+                type: array
+                items:
+                  type: string
+                description: An array of IDs of events for which the ticket has been blocked
+              createdAt:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the ticket was created
             required:
-            - consentId
-            - status
-          description: Optional consents provided during creation
-        phone:
-          type:
-          - string
-          - 'null'
-          description: The phone number of the customer
-        upsert:
-          type: boolean
-          description: If false, reject creation when the email already exists
-          default: true
+            - id
+            - ticketName
+            - secret
       required:
-      - primaryEmail
+      - _id
+      - secret
+      - status
+      - eventId
+      - createdAt
     PublicEventResource:
       type: object
       properties:
@@ -4321,11 +3156,1539 @@ components:
       - name
       - start
       - end
+    POST_Customers_LoginCustomer_200_response:
+      type: object
+      properties:
+        token:
+          type: string
+          description: A JWT token for the customer
+      required:
+      - token
+    GET_Customers_GetAllCustomers_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerResource'
+        total:
+          type: integer
+    LegalIdentificationDocumentResource:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - spain_tax_id
+          identifier:
+            type: string
+        required:
+        - type
+        - identifier
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - origin_country_id
+            description: The type of the identification document.
+        required:
+        - type
+    PUT_Customers_SetANewPassword:
+      type: object
+      properties:
+        sellerId:
+          type: string
+        password:
+          type: string
+          minLength: 9
+      required:
+      - sellerId
+      - password
+    GET_Customers_GetResellOffersOfCustomer_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicResellOfferInfoResource'
+        total:
+          type: integer
+    POST_Customers_VerifyACustomer_200_response:
+      type: object
+      properties:
+        ok:
+          type: boolean
+          enum:
+          - true
+      required:
+      - ok
+    POST_Customers_UpdateCurrentCustomer:
+      type: object
+      properties:
+        company:
+          type:
+          - string
+          - 'null'
+          description: The company of the customer
+        prename:
+          type:
+          - string
+          - 'null'
+          description: The first name of the customer
+        lastname:
+          type:
+          - string
+          - 'null'
+          description: The lastname of the customer
+        location:
+          type: object
+          properties:
+            street:
+              type:
+              - string
+              - 'null'
+              description: The street of the location
+            line2:
+              type:
+              - string
+              - 'null'
+              description: The additional address fields of the location
+            postal:
+              type:
+              - string
+              - 'null'
+              description: The postal of the location
+            city:
+              type:
+              - string
+              - 'null'
+              description: The city of the location
+            locale:
+              type:
+              - string
+              - 'null'
+              description: The locale of the location
+              deprecated: true
+            state:
+              type:
+              - string
+              - 'null'
+              description: The state of the location
+            center:
+              type:
+              - array
+              - 'null'
+              items:
+                type: number
+                format: float
+              description: The center of the location
+              deprecated: true
+            country:
+              type:
+              - string
+              - 'null'
+              description: An ISO-3166-1 Alpha 2 country code of the location
+          description: The location of the customer
     GET_Customers_GetAllCustomerTags_200_response:
       type: array
       items:
         type: string
       description: An array of tags
+    GET_Customers_GetUndershopsOfCustomer_200_response:
+      type: object
+      properties:
+        shops:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              name:
+                type: string
+            required:
+            - _id
+            - name
+    POST_Customers_LoginCustomer:
+      type: object
+      properties:
+        sellerId:
+          type: string
+          description: The ID of the seller to login
+        email:
+          type: string
+          format: email
+          description: The email of the customer
+        password:
+          type: string
+          description: The password of the customer
+        otp:
+          type: string
+          description: A OTP that was provided via email
+      required:
+      - sellerId
+      - email
+      - password
+    PUT_Customers_SetANewPassword_200_response:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - ok
+      required:
+      - status
+    PUT_Customers_UpdateCustomer:
+      type: object
+      properties:
+        company:
+          type:
+          - string
+          - 'null'
+          description: The company of the customer
+        name:
+          type: string
+          description: The name of the customer collected from first name and last name
+        image:
+          type:
+          - string
+          - 'null'
+          description: The image of the customer
+          deprecated: true
+        location:
+          type: object
+          properties:
+            street:
+              type:
+              - string
+              - 'null'
+              description: The street of the location
+            line2:
+              type:
+              - string
+              - 'null'
+              description: The additional address fields of the location
+            postal:
+              type:
+              - string
+              - 'null'
+              description: The postal of the location
+            city:
+              type:
+              - string
+              - 'null'
+              description: The city of the location
+            locale:
+              type:
+              - string
+              - 'null'
+              description: The locale of the location
+              deprecated: true
+            state:
+              type:
+              - string
+              - 'null'
+              description: The state of the location
+            center:
+              type:
+              - array
+              - 'null'
+              items:
+                type: number
+                format: float
+              description: The center of the location
+              deprecated: true
+            country:
+              type:
+              - string
+              - 'null'
+              description: An ISO-3166-1 Alpha 2 country code of the location
+          description: The location of the customer
+        tags:
+          type: array
+          items:
+            type: string
+          description: An array of tags
+        extraFields:
+          type:
+          - object
+          - 'null'
+          description: Extra fields of the customer
+        verified:
+          type: boolean
+          description: Whether the customer is verified
+        meta:
+          type: object
+          description: Custom key-value data. Metadata is useful for storing additional, structured information on an object.
+        externalId:
+          type:
+          - string
+          - 'null'
+          description: An external identifier of the customer
+        identification:
+          type: array
+          items:
+            $ref: '#/components/schemas/LegalIdentificationDocumentResource'
+          description: An array of identification items
+        primaryEmail:
+          type: string
+          format: email
+          description: The primary email of the customer
+        phone:
+          type:
+          - string
+          - 'null'
+          description: The phone number of the customer
+        prename:
+          type:
+          - string
+          - 'null'
+          description: The first name of the customer
+        lastname:
+          type:
+          - string
+          - 'null'
+          description: The last name of the customer
+        notes:
+          type:
+          - string
+          - 'null'
+          description: Notes for the customer
+        blocked:
+          type: boolean
+          description: Whether the customer is blocked
+        consents:
+          type: array
+          items:
+            type: object
+            properties:
+              consentId:
+                type: string
+              status:
+                type: string
+                enum:
+                - granted
+                - denied
+            required:
+            - consentId
+            - status
+          description: Optional consents to merge into the customer
+    GET_Customers_GetTicketTransfersOfCustomer_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicTicketTransferResource'
+        total:
+          type: integer
+    PublicResellOfferInfoResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the offer
+        customerId:
+          type: string
+          description: The ID of the customer of this offer
+        status:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+          enum:
+          - ACTIVE
+          - SOLD
+          - CANCELED
+          description: The status of this offer
+        eventId:
+          type: string
+          description: The ID of the event of this offer
+        cpmId:
+          type: string
+          description: The customer payment method where the proceeds of this offer will be paid
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the offer was updated.
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the offer was created.
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              ticketId:
+                type: string
+                description: The ID of the ticket
+              ticketTypeId:
+                type: string
+                description: The ID of the ticket type of the ticket
+              categoryRef:
+                type: string
+                description: The category of the ticket
+              price:
+                type: number
+                format: float
+                description: The price of this item
+              resellFee:
+                type: number
+                format: float
+                description: The fee for reselling this item
+              seatingInfo:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The ID of the seating object.
+                    _type:
+                      type: number
+                      format: float
+                      enum:
+                      - 6
+                      - 7
+                      description: Indicates the type of seating object. Seat = 6, General Admission = 7.
+                    categoryId:
+                      type: string
+                      description: The ID of the category containing the seating object.
+                    statusId:
+                      type: string
+                      description: The ID of a container holding information about the seating status of the seating object.
+                    name:
+                      type:
+                      - string
+                      - 'null'
+                      description: If _type == 7. The name of the general admission.
+                    seatType:
+                      type:
+                      - string
+                      - 'null'
+                      enum:
+                      - handicapped
+                      - limitedView
+                      - foldable
+                      description: If _type == 6. The type of the seat. null = normal.
+                    sectionName:
+                      type:
+                      - string
+                      - 'null'
+                      description: If _type == 6. The name of the section where the seat is located.
+                    groupName:
+                      type:
+                      - string
+                      - 'null'
+                      description: If _type == 6. The name of the row group where the seat is located.
+                    rowName:
+                      type:
+                      - string
+                      - 'null'
+                      description: If _type == 6. The name of the row where the seat is located.
+                    seatName:
+                      type:
+                      - string
+                      - 'null'
+                      description: If _type == 6. The seat name.
+                    gate:
+                      type:
+                      - string
+                      - 'null'
+                      description: The entry gate associated with the seating object.
+                  required:
+                  - _type
+                  - statusId
+                  description: The associated seating object.
+                description: The seating info for this ticket
+              ticket:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                  categoryName:
+                    type: string
+                    description: The name of the category the ticket belongs to.
+                  ticketName:
+                    type: string
+                    description: The name of the ticket type this ticket inherits from
+                  seatingInfo:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                        description: The ID of the seating object.
+                      _type:
+                        type: number
+                        format: float
+                        enum:
+                        - 6
+                        - 7
+                        description: Indicates the type of seating object. Seat = 6, General Admission = 7.
+                      categoryId:
+                        type: string
+                        description: The ID of the category containing the seating object.
+                      statusId:
+                        type: string
+                        description: The ID of a container holding information about the seating status of the seating object.
+                      name:
+                        type:
+                        - string
+                        - 'null'
+                        description: If _type == 7. The name of the general admission.
+                      seatType:
+                        type:
+                        - string
+                        - 'null'
+                        enum:
+                        - handicapped
+                        - limitedView
+                        - foldable
+                        description: If _type == 6. The type of the seat. null = normal.
+                      sectionName:
+                        type:
+                        - string
+                        - 'null'
+                        description: If _type == 6. The name of the section where the seat is located.
+                      groupName:
+                        type:
+                        - string
+                        - 'null'
+                        description: If _type == 6. The name of the row group where the seat is located.
+                      rowName:
+                        type:
+                        - string
+                        - 'null'
+                        description: If _type == 6. The name of the row where the seat is located.
+                      seatName:
+                        type:
+                        - string
+                        - 'null'
+                        description: If _type == 6. The seat name.
+                      gate:
+                        type:
+                        - string
+                        - 'null'
+                        description: The entry gate associated with the seating object.
+                    required:
+                    - _type
+                    - statusId
+                    description: The associated seating object.
+                  type:
+                    type: string
+                    enum:
+                    - SINGLE
+                    - MULTI
+                    description: The type of the ticket
+                required:
+                - _id
+                - ticketName
+            required:
+            - ticketId
+            - ticketTypeId
+            - categoryRef
+            - price
+            - resellFee
+      required:
+      - _id
+      - customerId
+      - status
+      - eventId
+      - cpmId
+      - updatedAt
+      - createdAt
+    GET_Customers_GetTransactionsOfCustomer_200_response:
+      type: object
+      properties:
+        transactions:
+          type: array
+          items:
+            type: object
+            properties:
+              tid:
+                type: string
+                description: The ID of the transaction
+              secret:
+                type: string
+                description: The secret token of the transaction
+              tickets:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - ticket
+                      description: The type of the cart item.
+                      default: ticket
+                    _id:
+                      type: string
+                      description: Unique identifier for the cart item. If omitted, the system will automatically generate one.
+                    name:
+                      type:
+                      - string
+                      - 'null'
+                      description: The name of the cart item.
+                    amount:
+                      type: integer
+                      minimum: 1
+                      description: The amount of the cart item.
+                    netPrice:
+                      type: number
+                      format: float
+                      description: The single piece net price of the cart item.
+                    price:
+                      type: number
+                      format: float
+                      description: The single piece price of the cart item.
+                    taxRate:
+                      type:
+                      - number
+                      - 'null'
+                      format: float
+                      description: The tax rate to be applied to this cart item. If not present the tax rate of the transaction is taken.
+                    triggeredBy:
+                      oneOf:
+                      - type: string
+                        description: An ID of another cart item which triggered the buy action of the cart item.
+                      - type: array
+                        items:
+                          type: string
+                        description: An array of IDs of other cart items which triggered the buy action of the cart item.
+                      description: An ID or an array of IDs of other cart items which triggered the buy action of the cart item.
+                    bundleInfo:
+                      type:
+                      - object
+                      - 'null'
+                      properties:
+                        bundleId:
+                          type: string
+                        componentId:
+                          type: string
+                        optionId:
+                          type: string
+                    ticketTypeId:
+                      type: string
+                      description: The ID of the ticket type of the cart item.
+                    categoryRef:
+                      type: string
+                      description: The category reference of the ticket type.
+                    seatingInfo:
+                      type:
+                      - object
+                      - 'null'
+                      properties:
+                        _id:
+                          type: string
+                          description: The ID of the seating object.
+                        _type:
+                          type: number
+                          format: float
+                          enum:
+                          - 6
+                          - 7
+                          description: Indicates the type of seating object. Seat = 6, General Admission = 7.
+                        categoryId:
+                          type: string
+                          description: The ID of the category containing the seating object.
+                        statusId:
+                          type: string
+                          description: The ID of a container holding information about the seating status of the seating object.
+                        name:
+                          type:
+                          - string
+                          - 'null'
+                          description: If _type == 7. The name of the general admission.
+                        seatType:
+                          type:
+                          - string
+                          - 'null'
+                          enum:
+                          - handicapped
+                          - limitedView
+                          - foldable
+                          description: If _type == 6. The type of the seat. null = normal.
+                        sectionName:
+                          type:
+                          - string
+                          - 'null'
+                          description: If _type == 6. The name of the section where the seat is located.
+                        groupName:
+                          type:
+                          - string
+                          - 'null'
+                          description: If _type == 6. The name of the row group where the seat is located.
+                        rowName:
+                          type:
+                          - string
+                          - 'null'
+                          description: If _type == 6. The name of the row where the seat is located.
+                        seatName:
+                          type:
+                          - string
+                          - 'null'
+                          description: If _type == 6. The seat name.
+                        gate:
+                          type:
+                          - string
+                          - 'null'
+                          description: The entry gate associated with the seating object.
+                      required:
+                      - _type
+                      - statusId
+                      description: The associated seating object.
+                    slotInfo:
+                      type:
+                      - object
+                      - 'null'
+                      properties:
+                        slotId:
+                          type: string
+                          description: The ID of the time slot.
+                        slotStartTime:
+                          type: string
+                          description: The start time of the time slot.
+                      required:
+                      - slotId
+                      - slotStartTime
+                      description: The associated time slot object.
+                    asHardTicket:
+                      type:
+                      - boolean
+                      - 'null'
+                      description: Whether this ticket is a hard ticket.
+                    listingId:
+                      type:
+                      - string
+                      - 'null'
+                      description: Listing in secondary market.
+                    listingItemId:
+                      type:
+                      - string
+                      - 'null'
+                      description: The ID of the listing item in the secondary market.
+                    triggeredAutomations:
+                      type:
+                      - boolean
+                      - 'null'
+                      description: Whether the cart item triggered automations.
+                    meta:
+                      type:
+                      - object
+                      - 'null'
+                      description: Meta data which is propagated to the ticket.
+                    addOns:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          productId:
+                            type: string
+                          productVariantId:
+                            type: string
+                          name:
+                            type: string
+                        required:
+                        - productId
+                        - productVariantId
+                        - name
+                      description: A list of Add-Ons of the ticket.
+                    capabilities:
+                      type:
+                      - array
+                      - 'null'
+                      items:
+                        oneOf:
+                        - type: object
+                          properties:
+                            type:
+                              type: string
+                              enum:
+                              - self_service_return
+                            settings:
+                              type: object
+                              properties:
+                                returnRelatedItems:
+                                  type: boolean
+                                  default: true
+                                phases:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      condition:
+                                        type: object
+                                        properties:
+                                          target:
+                                            type:
+                                            - string
+                                            - 'null'
+                                            description: The target of the relative date
+                                          unit:
+                                            type: string
+                                            enum:
+                                            - hours
+                                            - days
+                                            - weeks
+                                            - months
+                                            - years
+                                            description: The unit in which the offset is specified
+                                          offset:
+                                            type: integer
+                                            description: The offset to the date
+                                        required:
+                                        - unit
+                                        - offset
+                                      refundPercentage:
+                                        type: number
+                                        format: float
+                                        minimum: 0
+                                        maximum: 1
+                                    required:
+                                    - condition
+                                    - refundPercentage
+                              required:
+                              - phases
+                          required:
+                          - type
+                          - settings
+                        - type: object
+                          properties:
+                            type:
+                              type: string
+                              enum:
+                              - repersonalization
+                            settings:
+                              type: object
+                              properties:
+                                inherit:
+                                  type: boolean
+                                repersonalizationDeadline:
+                                  type: object
+                                  properties:
+                                    target:
+                                      type:
+                                      - string
+                                      - 'null'
+                                      description: The target of the relative date
+                                    unit:
+                                      type: string
+                                      enum:
+                                      - hours
+                                      - days
+                                      - weeks
+                                      - months
+                                      - years
+                                      description: The unit in which the offset is specified
+                                    offset:
+                                      type: integer
+                                      description: The offset to the date
+                                  required:
+                                  - unit
+                                  - offset
+                                repersonalizationsLimit:
+                                  type:
+                                  - number
+                                  - 'null'
+                                  format: float
+                                repersonalizationFee:
+                                  type:
+                                  - number
+                                  - 'null'
+                                  format: float
+                                limitOnlyNameChanges:
+                                  type: boolean
+                              required:
+                              - repersonalizationDeadline
+                          required:
+                          - type
+                          - settings
+                      description: The capabilities of the ticket.
+                    taxInfo:
+                      type: object
+                      properties:
+                        serviceTypeId:
+                          type: string
+                          description: The ID of the service type.
+                        exceptionId:
+                          type: string
+                          description: The ID of the exception.
+                        proceedsAccountId:
+                          type: string
+                          description: The ID of the proceeds account.
+                        proceedsAccountCode:
+                          type: string
+                          description: The code of the proceeds account.
+                        taxItems:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type:
+                                - string
+                                - 'null'
+                              taxTypeId:
+                                type:
+                                - string
+                                - 'null'
+                              rate:
+                                type: number
+                                format: float
+                              perUnit:
+                                type: number
+                                format: float
+                              total:
+                                type: number
+                                format: float
+                              netTotal:
+                                type:
+                                - number
+                                - 'null'
+                                format: float
+                              netPerUnit:
+                                type:
+                                - number
+                                - 'null'
+                                format: float
+                              taxPayableAccountId:
+                                type:
+                                - string
+                                - 'null'
+                              taxPayableAccountCode:
+                                type:
+                                - string
+                                - 'null'
+                            required:
+                            - rate
+                            - perUnit
+                            - total
+                          description: The array of tax items.
+                      description: The tax info details.
+                  required:
+                  - amount
+                  - price
+                  - ticketTypeId
+                description: An array of cart ticket items of the transaction
+                default: []
+              products:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - product
+                      description: The type of the cart item.
+                    _id:
+                      type: string
+                      description: Unique identifier for the cart item. If omitted, the system will automatically generate one.
+                    name:
+                      type:
+                      - string
+                      - 'null'
+                      description: The name of the cart item.
+                    amount:
+                      type: integer
+                      minimum: 1
+                      description: The amount of the cart item.
+                    netPrice:
+                      type: number
+                      format: float
+                      description: The single piece net price of the cart item.
+                    price:
+                      type: number
+                      format: float
+                      description: The single piece price of the cart item.
+                    taxRate:
+                      type:
+                      - number
+                      - 'null'
+                      format: float
+                      description: The tax rate to be applied to this cart item. If not present the tax rate of the transaction is taken.
+                    triggeredBy:
+                      oneOf:
+                      - type: string
+                        description: An ID of another cart item which triggered the buy action of the cart item.
+                      - type: array
+                        items:
+                          type: string
+                        description: An array of IDs of other cart items which triggered the buy action of the cart item.
+                      description: An ID or an array of IDs of other cart items which triggered the buy action of the cart item.
+                    bundleInfo:
+                      type:
+                      - object
+                      - 'null'
+                      properties:
+                        bundleId:
+                          type: string
+                        componentId:
+                          type: string
+                        optionId:
+                          type: string
+                    productVariantId:
+                      type: string
+                      description: The ID of the product variant.
+                    isFulfillable:
+                      type: boolean
+                      description: Whether the product can be delivered
+                    taxInfo:
+                      type: object
+                      properties:
+                        serviceTypeId:
+                          type: string
+                          description: The ID of the service type.
+                        exceptionId:
+                          type: string
+                          description: The ID of the exception.
+                        proceedsAccountId:
+                          type: string
+                          description: The ID of the proceeds account.
+                        proceedsAccountCode:
+                          type: string
+                          description: The code of the proceeds account.
+                        taxItems:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type:
+                                - string
+                                - 'null'
+                              taxTypeId:
+                                type:
+                                - string
+                                - 'null'
+                              rate:
+                                type: number
+                                format: float
+                              perUnit:
+                                type: number
+                                format: float
+                              total:
+                                type: number
+                                format: float
+                              netTotal:
+                                type:
+                                - number
+                                - 'null'
+                                format: float
+                              netPerUnit:
+                                type:
+                                - number
+                                - 'null'
+                                format: float
+                              taxPayableAccountId:
+                                type:
+                                - string
+                                - 'null'
+                              taxPayableAccountCode:
+                                type:
+                                - string
+                                - 'null'
+                            required:
+                            - rate
+                            - perUnit
+                            - total
+                          description: The array of tax items.
+                      description: The tax info details.
+                  required:
+                  - type
+                  - amount
+                  - price
+                  - productVariantId
+                description: An array of cart product items of the transaction
+                default: []
+              realPrice:
+                type: number
+                format: float
+                description: The calculated real price of the transaction
+              currency:
+                type: string
+                enum:
+                - EUR
+                - USD
+                - GBP
+                - AUD
+                - CHF
+                - THB
+                - ILS
+                - COP
+                - MXN
+                - DKK
+                - NOK
+                - SEK
+                - QAR
+                - CAD
+                - ISK
+                - GTQ
+                - INR
+                - DOP
+                - SGD
+                - PLN
+                - SAR
+                - TTD
+                - ZAR
+                - KYD
+                - HKD
+                - CZK
+                - KRW
+                - JPY
+                - NZD
+                - AED
+                - MAD
+                - TWD
+                - BRL
+                - BWP
+                - NAD
+                - KES
+                - SCR
+                - TRY
+                - SZL
+                - LSL
+                - TZS
+                - UGX
+                - ZMW
+                - ZWG
+                - GHS
+                - NGN
+                - SLE
+                - LRD
+                - XOF
+                - XAF
+                - GEL
+                - IDR
+                - ARS
+                - CRC
+                - HUF
+                - EGP
+                - MYR
+                - VND
+                - PHP
+                description: An ISO 4217 3-character code of the currency
+                default: EUR
+              vouchers:
+                type: array
+                items:
+                  type: string
+                description: An array of voucher codes applied to this transaction
+              redeemedVouchers:
+                type: object
+                properties:
+                  totalRedeemedAmount:
+                    type: number
+                    format: float
+                    description: The sum of all vouchers applied.
+                  vouchers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          description: The ID of the voucher.
+                        code:
+                          type: string
+                          description: The Code of the voucher.
+                        redeemedAmount:
+                          type: number
+                          format: float
+                          description: The applied value of the voucher.
+                      required:
+                      - code
+                      - redeemedAmount
+                    description: An array of all redeemed vouchers.
+                required:
+                - totalRedeemedAmount
+                description: An array of voucher codes redeemed for this transaction
+              email:
+                type: string
+                format: email
+                description: The email of the user of the transaction
+              status:
+                type: string
+                enum:
+                - NEW
+                - RESERVED-BY-SYSTEM
+                - ABORTED
+                - COMPLETE
+                - CANCELED
+                description: The status of the transaction.
+              company:
+                type: string
+                description: The company name of the user of the transaction
+              name:
+                type: string
+                description: The name of the user of the transaction
+              prename:
+                type: string
+                description: The firstname of the user of the transaction
+              lastname:
+                type: string
+                description: The lastname of the user of the transaction
+              street:
+                type: string
+                description: The street of the user of the transaction
+              line2:
+                type: string
+                description: The additional address field of the user of the transaction.
+              postal:
+                type: string
+                description: The postal of the user of the transaction
+              city:
+                type: string
+                description: The city of the user of the transaction
+              state:
+                type: string
+                description: The state of the user of the transaction
+              country:
+                type: string
+                description: The country of the user of the transaction
+              createdAt:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the transaction was created
+              eventId:
+                type: string
+                description: The ID of the event containing this transaction
+              paymentStatus:
+                type: string
+                enum:
+                - AWAITING
+                - PENDING
+                - RECEIVED
+                - REFUND
+                - CANCELED
+                - FAILED
+                - DISPUTE
+                - CHARGEBACK
+                - POS-RECEIVED
+                - POS-CANCELED
+                - LOCAL-PENDING
+                - LOCAL-AWAITING
+                - LOCAL-RECEIVED
+                - EXTERNAL
+                description: The payment status of the transaction.
+                default: AWAITING
+              outerCharge:
+                type: number
+                format: float
+                description: The outer charge of the transaction
+              paymentMethod:
+                type: string
+                enum:
+                - paypal
+                - stripe
+                - local
+                - external
+                - vivenu-payments
+                description: The payment method of the transaction.
+              preferredLanguage:
+                type: string
+                enum:
+                - de
+                - de-CH
+                - en
+                - en-GB
+                - en-AU
+                - fr
+                - es
+                - es-MX
+                - is
+                - it
+                - ru
+                - pt
+                - tr
+                - nb
+                - nl
+                - pl
+                - sv
+                - sl
+                - da
+                - cs
+                - lv
+                - he
+                - ar
+                - th
+                - ko
+                - ja
+                - zh-TW
+                description: The preferred language of the transaction. It is determined automatically
+                default: de
+              extraFields:
+                type: object
+                description: The extra fields of the transaction
+              underShop:
+                type: string
+                description: The under shop of the transaction
+              paymentInfoMethod:
+                type: string
+                description: The method of the payment
+              coupons:
+                type: array
+                items:
+                  type: string
+                description: An array of coupon codes applied
+            required:
+            - tid
+            - secret
+            - realPrice
+            - status
+            - eventId
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicEventResource'
+    POST_Customers_CreateAccountForCustomer:
+      type:
+      - object
+      - 'null'
+      properties:
+        suppressEmail:
+          type: boolean
+          description: Whether the email of the customer should be suppressed in the account of the customer
+    GET_Customers_GetTicketsOfCustomer_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            type: object
+            properties:
+              sellerId:
+                type: string
+                description: The ID of the seller that ticket belongs to.
+              name:
+                type: string
+                description: The name of the ticket owner
+              firstname:
+                type: string
+                description: The first name of the ticket owner
+              lastname:
+                type: string
+                description: The last name of the ticket owner
+              email:
+                type: string
+              street:
+                type: string
+              line2:
+                type: string
+                description: The additional address field of the user of the ticket
+              city:
+                type: string
+              postal:
+                type: string
+              state:
+                type: string
+                description: The state of the user of the ticket
+              country:
+                type: string
+                description: The country of the user of the ticket
+              eventId:
+                type: string
+                description: The ID of the event the ticket belongs to
+              categoryRef:
+                type: string
+                description: A UUID of the category the ticket belongs to.
+              ticketTypeId:
+                type: string
+                description: The ID of the ticket type this ticket inherits from
+              ticketName:
+                type: string
+                description: The name of the ticket type this ticket inherits from
+              categoryName:
+                type: string
+                description: The name of the category the ticket belongs to.
+              regularPrice:
+                type: number
+                format: float
+                description: The original non discounted price for the ticket
+              realPrice:
+                type: number
+                format: float
+                description: The real price for the ticket
+              completed:
+                type: boolean
+                description: Whether all steps for validating the ticket has been made
+              createdAt:
+                type: string
+                format: date-time
+                description: An ISO Timestamp indicating when the ticket was created.
+              updatedAt:
+                type: string
+                format: date-time
+                description: An ISO Timestamp indicating when the ticket was updated.
+              status:
+                type: string
+                enum:
+                - VALID
+                - INVALID
+                - RESERVED
+                - DETAILSREQUIRED
+                - BLANK
+                description: The status of the ticket
+              secret:
+                type: string
+                description: The secret token of the ticket
+              barcode:
+                type: string
+                minLength: 8
+                description: The barcode of the ticket
+              seat:
+                type: string
+              seatingInfo:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: The ID of the seating object.
+                  _type:
+                    type: number
+                    format: float
+                    enum:
+                    - 6
+                    - 7
+                    description: Indicates the type of seating object. Seat = 6, General Admission = 7.
+                  categoryId:
+                    type: string
+                    description: The ID of the category containing the seating object.
+                  statusId:
+                    type: string
+                    description: The ID of a container holding information about the seating status of the seating object.
+                  name:
+                    type:
+                    - string
+                    - 'null'
+                    description: If _type == 7. The name of the general admission.
+                  seatType:
+                    type:
+                    - string
+                    - 'null'
+                    enum:
+                    - handicapped
+                    - limitedView
+                    - foldable
+                    description: If _type == 6. The type of the seat. null = normal.
+                  sectionName:
+                    type:
+                    - string
+                    - 'null'
+                    description: If _type == 6. The name of the section where the seat is located.
+                  groupName:
+                    type:
+                    - string
+                    - 'null'
+                    description: If _type == 6. The name of the row group where the seat is located.
+                  rowName:
+                    type:
+                    - string
+                    - 'null'
+                    description: If _type == 6. The name of the row where the seat is located.
+                  seatName:
+                    type:
+                    - string
+                    - 'null'
+                    description: If _type == 6. The seat name.
+                  gate:
+                    type:
+                    - string
+                    - 'null'
+                    description: The entry gate associated with the seating object.
+                required:
+                - _type
+                - statusId
+                description: The associated seating object.
+              type:
+                type: string
+                enum:
+                - SINGLE
+                - MULTI
+                description: The type of the ticket
+              origin:
+                type: string
+                enum:
+                - yourticket
+                - pos
+                - rebooking
+                - upgrade
+                - subscription
+                - transfer
+              extraFields:
+                type: object
+                description: A hashmap of extra fields for the ticket
+              deliveryType:
+                type: string
+                enum:
+                - HARD
+                - VIRTUAL
+                description: The delivery type of the ticket
+              transactionId:
+                type: string
+                description: The transaction the ticket originated from
+              batchCounter:
+                type: number
+                format: float
+                description: A counter indicating the order of the ticket in the batch
+              slotId:
+                type: string
+                description: The ID of the time slot this ticket belongs to, if exists
+              slotStartTime:
+                type: string
+                description: The start time of the time slot this ticket belongs to, if exists.
+              personalized:
+                type: boolean
+              _locks:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    by:
+                      type: string
+                    at:
+                      type: string
+                      format: date-time
+                    eventId:
+                      type: string
+                    type:
+                      oneOf:
+                      - type: array
+                      - type: boolean
+                      - type: number
+                      - type: object
+                      - type: string
+                      enum:
+                      - resell
+                  required:
+                  - by
+                  - at
+                description: List of locks on this ticket
+              barcodeRevealed:
+                type: boolean
+                description: Whether the ticket barcode revealed.
+              barcodeRevealDate:
+                type: string
+                format: date-time
+                description: The date on which the ticket barcode will be revealed.
+            required:
+            - sellerId
+            - eventId
+            - ticketTypeId
+            - ticketName
+            - createdAt
+            - updatedAt
+            - status
+            - secret
+            - barcode
+        total:
+          type: integer
     PublicPurchaseIntentResource:
       type: object
       properties:
@@ -5325,369 +5688,6 @@ components:
       - secret
       - createdAt
       - updatedAt
-    PUT_Customers_SetANewPassword:
-      type: object
-      properties:
-        sellerId:
-          type: string
-        password:
-          type: string
-          minLength: 9
-      required:
-      - sellerId
-      - password
-    PUT_Customers_SetANewPassword_200_response:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - ok
-      required:
-      - status
-    POST_Customers_CreateAccountForCustomer:
-      type:
-      - object
-      - 'null'
-      properties:
-        suppressEmail:
-          type: boolean
-          description: Whether the email of the customer should be suppressed in the account of the customer
-    PublicTicketTransferResource:
-      type: object
-      properties:
-        _id:
-          type: string
-          description: The ID of the ticket transfer.
-        secret:
-          type: string
-          description: The secret token of the ticket transfer.
-        sender:
-          type: object
-          properties:
-            email:
-              type: string
-              format: email
-              description: The email of the ticket transfer sender.
-            customerId:
-              type:
-              - string
-              - 'null'
-              description: The ID of the ticket transfer sender.
-            firstname:
-              type:
-              - string
-              - 'null'
-              description: The first name of the ticket transfer sender.
-            lastname:
-              type:
-              - string
-              - 'null'
-              description: The last name ticket transfer sender.
-          default: {}
-        recipient:
-          type: object
-          properties:
-            email:
-              type: string
-              format: email
-              description: The email of the ticket transfer recipient.
-            phone:
-              type:
-              - string
-              - 'null'
-              description: The phone number of the ticket transfer recipient.
-            customerId:
-              type:
-              - string
-              - 'null'
-              description: The ID of the ticket transfer recipient.
-          required:
-          - email
-        status:
-          type: string
-          enum:
-          - CREATED
-          - REJECTED
-          - TRANSFERRED
-          - EXPIRED
-          description: The status of the ticket ticket transfer.
-          default: CREATED
-        outcome:
-          type: object
-          properties:
-            tickets:
-              type: array
-              items:
-                type: object
-                properties:
-                  ticketId:
-                    type: string
-                    description: The ID of the transfered ticket.
-                  originTicketId:
-                    type: string
-                    description: The ID of the origin ticket.
-                required:
-                - ticketId
-                - originTicketId
-              description: The array of objects having transfered and origin tickets.
-          description: The object representing result of the completed ticket transfer
-        eventId:
-          type: string
-          description: The ID of the event the ticket transfer belongs to.
-        groupEventId:
-          type: string
-          description: The ID of the group event the ticket transfer belongs to. Only filled in season card case.
-        createdAt:
-          type: string
-          format: date-time
-          description: An ISO Timestamp indicating when the ticket transfer was created.
-        tickets:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: The ID of the ticket
-              ticketName:
-                type: string
-                description: The name of the ticket type of the event
-              seatingInfo:
-                type: object
-                properties:
-                  _id:
-                    type: string
-                    description: The ID of the seating object.
-                  _type:
-                    type: number
-                    format: float
-                    enum:
-                    - 6
-                    - 7
-                    description: Indicates the type of seating object. Seat = 6, General Admission = 7.
-                  categoryId:
-                    type: string
-                    description: The ID of the category containing the seating object.
-                  statusId:
-                    type: string
-                    description: The ID of a container holding information about the seating status of the seating object.
-                  name:
-                    type:
-                    - string
-                    - 'null'
-                    description: If _type == 7. The name of the general admission.
-                  seatType:
-                    type:
-                    - string
-                    - 'null'
-                    enum:
-                    - handicapped
-                    - limitedView
-                    - foldable
-                    description: If _type == 6. The type of the seat. null = normal.
-                  sectionName:
-                    type:
-                    - string
-                    - 'null'
-                    description: If _type == 6. The name of the section where the seat is located.
-                  groupName:
-                    type:
-                    - string
-                    - 'null'
-                    description: If _type == 6. The name of the row group where the seat is located.
-                  rowName:
-                    type:
-                    - string
-                    - 'null'
-                    description: If _type == 6. The name of the row where the seat is located.
-                  seatName:
-                    type:
-                    - string
-                    - 'null'
-                    description: If _type == 6. The seat name.
-                  gate:
-                    type:
-                    - string
-                    - 'null'
-                    description: The entry gate associated with the seating object.
-                required:
-                - _type
-                - statusId
-                description: The associated seating object.
-              secret:
-                type: string
-                description: The secret token of the ticket
-              email:
-                type: string
-                format: email
-                description: The email of the ticket
-              name:
-                type: string
-                description: The name of the ticket
-              excludedEventIds:
-                type: array
-                items:
-                  type: string
-                description: An array of IDs of events for which the ticket has been blocked
-              createdAt:
-                type: string
-                format: date-time
-                description: An ISO timestamp indicating when the ticket was created
-            required:
-            - id
-            - ticketName
-            - secret
-      required:
-      - _id
-      - secret
-      - status
-      - eventId
-      - createdAt
-    GET_Customers_GetAllCustomers_200_response:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomerResource'
-        total:
-          type: integer
-    PUT_Customers_UpdateCustomer:
-      type: object
-      properties:
-        company:
-          type:
-          - string
-          - 'null'
-          description: The company of the customer
-        name:
-          type: string
-          description: The name of the customer collected from first name and last name
-        image:
-          type:
-          - string
-          - 'null'
-          description: The image of the customer
-          deprecated: true
-        location:
-          type: object
-          properties:
-            street:
-              type:
-              - string
-              - 'null'
-              description: The street of the location
-            line2:
-              type:
-              - string
-              - 'null'
-              description: The additional address fields of the location
-            postal:
-              type:
-              - string
-              - 'null'
-              description: The postal of the location
-            city:
-              type:
-              - string
-              - 'null'
-              description: The city of the location
-            locale:
-              type:
-              - string
-              - 'null'
-              description: The locale of the location
-              deprecated: true
-            state:
-              type:
-              - string
-              - 'null'
-              description: The state of the location
-            center:
-              type:
-              - array
-              - 'null'
-              items:
-                type: number
-                format: float
-              description: The center of the location
-              deprecated: true
-            country:
-              type:
-              - string
-              - 'null'
-              description: An ISO-3166-1 Alpha 2 country code of the location
-          description: The location of the customer
-        tags:
-          type: array
-          items:
-            type: string
-          description: An array of tags
-        extraFields:
-          type:
-          - object
-          - 'null'
-          description: Extra fields of the customer
-        verified:
-          type: boolean
-          description: Whether the customer is verified
-        meta:
-          type: object
-          description: Custom key-value data. Metadata is useful for storing additional, structured information on an object.
-        externalId:
-          type:
-          - string
-          - 'null'
-          description: An external identifier of the customer
-        identification:
-          type: array
-          items:
-            $ref: '#/components/schemas/LegalIdentificationDocumentResource'
-          description: An array of identification items
-        primaryEmail:
-          type: string
-          format: email
-          description: The primary email of the customer
-        phone:
-          type:
-          - string
-          - 'null'
-          description: The phone number of the customer
-        prename:
-          type:
-          - string
-          - 'null'
-          description: The first name of the customer
-        lastname:
-          type:
-          - string
-          - 'null'
-          description: The last name of the customer
-        notes:
-          type:
-          - string
-          - 'null'
-          description: Notes for the customer
-        blocked:
-          type: boolean
-          description: Whether the customer is blocked
-        consents:
-          type: array
-          items:
-            type: object
-            properties:
-              consentId:
-                type: string
-              status:
-                type: string
-                enum:
-                - granted
-                - denied
-            required:
-            - consentId
-            - status
-          description: Optional consents to merge into the customer
   securitySchemes:
     jwt:
       type: http

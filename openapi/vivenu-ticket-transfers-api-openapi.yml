@@ -487,183 +487,23 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    POST_Ticket-transfers_AcceptTicketTransfer:
+    GET_Ticket-transfers_GetAllTicketTransfers_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/TicketTransferResource'
+        total:
+          type: integer
+    POST_Ticket-transfers_RejectTicketTransfer:
       type: object
       properties:
         secret:
           type: string
           description: The secret of the ticket transfer.
-        prename:
-          type: string
-          description: The first name of the customer
-        lastname:
-          type: string
-          description: The last name of the customer
-        ticketIds:
-          type: array
-          items:
-            type: string
-          minItems: 1
-          description: The array of ticket IDs to be accepted. If not specified - all tickets will be accepted.
-          deprecated: true
       required:
       - secret
-      - prename
-      - lastname
-    TicketTransferResource:
-      type: object
-      properties:
-        _id:
-          type: string
-          description: The ID of the ticket transfer.
-        secret:
-          type: string
-          description: The secret token of the ticket transfer.
-        ticketIds:
-          type: array
-          items:
-            type: string
-          description: The ID of the tickets that ticket transfer belongs to.
-        eventId:
-          type: string
-          description: The ID of the event the ticket transfer belongs to.
-        groupEventId:
-          type: string
-          description: The ID of the group event the ticket transfer belongs to. Only filled in season card case.
-        sellerId:
-          type: string
-          description: The ID of the seller that ticket transfer belongs to.
-        status:
-          type: string
-          enum:
-          - CREATED
-          - REJECTED
-          - TRANSFERRED
-          - EXPIRED
-          description: The status of the ticket ticket transfer.
-          default: CREATED
-        origin:
-          type: string
-          enum:
-          - customer
-          - stubhub
-          description: The origin of the ticket transfer.
-          default: customer
-        recipient:
-          type: object
-          properties:
-            email:
-              type: string
-              format: email
-              description: The email of the ticket transfer recipient.
-            phone:
-              type:
-              - string
-              - 'null'
-              description: The phone number of the ticket transfer recipient.
-            customerId:
-              type:
-              - string
-              - 'null'
-              description: The ID of the ticket transfer recipient.
-          required:
-          - email
-        sender:
-          type: object
-          properties:
-            email:
-              type: string
-              format: email
-              description: The email of the ticket transfer sender.
-            customerId:
-              type:
-              - string
-              - 'null'
-              description: The ID of the ticket transfer sender.
-            firstname:
-              type:
-              - string
-              - 'null'
-              description: The first name of the ticket transfer sender.
-            lastname:
-              type:
-              - string
-              - 'null'
-              description: The last name ticket transfer sender.
-          default: {}
-        outcome:
-          type: object
-          properties:
-            tickets:
-              type: array
-              items:
-                type: object
-                properties:
-                  ticketId:
-                    type: string
-                    description: The ID of the transfered ticket.
-                  originTicketId:
-                    type: string
-                    description: The ID of the origin ticket.
-                required:
-                - ticketId
-                - originTicketId
-              description: The array of objects having transfered and origin tickets.
-          description: The object representing result of the completed ticket transfer
-        history:
-          type: array
-          items:
-            type: object
-            properties:
-              _id:
-                type: string
-                description: The ID of the ticket transfer history entry.
-              date:
-                type: string
-                format: date-time
-                description: The date of the history entry.
-              userId:
-                type:
-                - string
-                - 'null'
-                description: The ID of the user of the ticket transfer history entry.
-              type:
-                type: string
-                enum:
-                - created
-                - rejected
-                - transferred
-                - expired
-                description: The type of the ticket transfer history entry.
-            required:
-            - _id
-            - date
-          description: An array of history entry items of the ticket transfer.
-        expiresAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: An ISO Timestamp indicating when the ticket transfer will be expired.
-        createdAt:
-          type: string
-          format: date-time
-          description: An ISO Timestamp indicating when the ticket transfer was created.
-        updatedAt:
-          type: string
-          format: date-time
-          description: An ISO Timestamp indicating when the ticket transfer was updated.
-      required:
-      - _id
-      - secret
-      - ticketIds
-      - eventId
-      - sellerId
-      - status
-      - origin
-      - createdAt
-      - updatedAt
-      description: The associated ticket transfer which has been expired
     PublicTicketTransferResource:
       type: object
       properties:
@@ -855,10 +695,187 @@ components:
       - status
       - eventId
       - createdAt
+    TicketTransferResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the ticket transfer.
+        secret:
+          type: string
+          description: The secret token of the ticket transfer.
+        ticketIds:
+          type: array
+          items:
+            type: string
+          description: The ID of the tickets that ticket transfer belongs to.
+        eventId:
+          type: string
+          description: The ID of the event the ticket transfer belongs to.
+        groupEventId:
+          type: string
+          description: The ID of the group event the ticket transfer belongs to. Only filled in season card case.
+        sellerId:
+          type: string
+          description: The ID of the seller that ticket transfer belongs to.
+        status:
+          type: string
+          enum:
+          - CREATED
+          - REJECTED
+          - TRANSFERRED
+          - EXPIRED
+          description: The status of the ticket ticket transfer.
+          default: CREATED
+        origin:
+          type: string
+          enum:
+          - customer
+          - stubhub
+          description: The origin of the ticket transfer.
+          default: customer
+        recipient:
+          type: object
+          properties:
+            email:
+              type: string
+              format: email
+              description: The email of the ticket transfer recipient.
+            phone:
+              type:
+              - string
+              - 'null'
+              description: The phone number of the ticket transfer recipient.
+            customerId:
+              type:
+              - string
+              - 'null'
+              description: The ID of the ticket transfer recipient.
+          required:
+          - email
+        sender:
+          type: object
+          properties:
+            email:
+              type: string
+              format: email
+              description: The email of the ticket transfer sender.
+            customerId:
+              type:
+              - string
+              - 'null'
+              description: The ID of the ticket transfer sender.
+            firstname:
+              type:
+              - string
+              - 'null'
+              description: The first name of the ticket transfer sender.
+            lastname:
+              type:
+              - string
+              - 'null'
+              description: The last name ticket transfer sender.
+          default: {}
+        outcome:
+          type: object
+          properties:
+            tickets:
+              type: array
+              items:
+                type: object
+                properties:
+                  ticketId:
+                    type: string
+                    description: The ID of the transfered ticket.
+                  originTicketId:
+                    type: string
+                    description: The ID of the origin ticket.
+                required:
+                - ticketId
+                - originTicketId
+              description: The array of objects having transfered and origin tickets.
+          description: The object representing result of the completed ticket transfer
+        history:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the ticket transfer history entry.
+              date:
+                type: string
+                format: date-time
+                description: The date of the history entry.
+              userId:
+                type:
+                - string
+                - 'null'
+                description: The ID of the user of the ticket transfer history entry.
+              type:
+                type: string
+                enum:
+                - created
+                - rejected
+                - transferred
+                - expired
+                description: The type of the ticket transfer history entry.
+            required:
+            - _id
+            - date
+          description: An array of history entry items of the ticket transfer.
+        expiresAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: An ISO Timestamp indicating when the ticket transfer will be expired.
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the ticket transfer was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the ticket transfer was updated.
+      required:
+      - _id
+      - secret
+      - ticketIds
+      - eventId
+      - sellerId
+      - status
+      - origin
+      - createdAt
+      - updatedAt
+      description: The associated ticket transfer which has been expired
     GET_Ticket-transfers_GetPublicTicketTransfers_200_response:
       type: array
       items:
         $ref: '#/components/schemas/PublicTicketTransferResource'
+    POST_Ticket-transfers_AcceptTicketTransfer:
+      type: object
+      properties:
+        secret:
+          type: string
+          description: The secret of the ticket transfer.
+        prename:
+          type: string
+          description: The first name of the customer
+        lastname:
+          type: string
+          description: The last name of the customer
+        ticketIds:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          description: The array of ticket IDs to be accepted. If not specified - all tickets will be accepted.
+          deprecated: true
+      required:
+      - secret
+      - prename
+      - lastname
     POST_Ticket-transfers_CreateTicketTransfer:
       type: object
       properties:
@@ -908,23 +925,6 @@ components:
       required:
       - tickets
       - recipient
-    GET_Ticket-transfers_GetAllTicketTransfers_200_response:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/TicketTransferResource'
-        total:
-          type: integer
-    POST_Ticket-transfers_RejectTicketTransfer:
-      type: object
-      properties:
-        secret:
-          type: string
-          description: The secret of the ticket transfer.
-      required:
-      - secret
   securitySchemes:
     jwt:
       type: http

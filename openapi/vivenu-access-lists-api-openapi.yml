@@ -472,6 +472,105 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    GET_Access-lists_GetAllAccessListEntries_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessListEntryResource'
+        total:
+          type: integer
+    POST_Access-lists_CreateAnAccessList:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the access list.
+        http:
+          type: object
+          properties:
+            url:
+              type: string
+              format: uri
+              description: The remote URL of the access list.
+            hmacKey:
+              type: string
+              description: The HMAC key used to sign requests to the remote URL.
+          required:
+          - url
+          description: The remote URL of the access list.
+        type:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+          enum:
+          - static
+          - remote
+          description: The type of the access list.
+      required:
+      - name
+    POST_Access-lists_CreateAnAccessListEntry:
+      type: object
+      properties:
+        externalCode:
+          type: string
+          description: The external code of the access list entry.
+        customerId:
+          type:
+          - string
+          - 'null'
+          description: The ID of the customer of the access list entry.
+        firstname:
+          type:
+          - string
+          - 'null'
+          description: The first name of the access list entry.
+        lastname:
+          type:
+          - string
+          - 'null'
+          description: The last name of the access list entry.
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: The email of the access list entry.
+        phone:
+          type:
+          - string
+          - 'null'
+          description: The phone number of the access list entry.
+        meta:
+          type: object
+          description: The key-value pairs of the extra data of the access list entry.
+      required:
+      - externalCode
+    PUT_Access-lists_UpdateAnAccessList:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the access list.
+        http:
+          type: object
+          properties:
+            url:
+              type: string
+              format: uri
+              description: The remote URL of the access list.
+            hmacKey:
+              type: string
+              description: The HMAC key used to sign requests to the remote URL.
+          required:
+          - url
+          description: The remote URL of the access list.
+      required:
+      - name
     GET_Access-lists_GetAccessLists_200_response:
       type: object
       properties:
@@ -708,80 +807,6 @@ components:
       - status
       - secret
       - barcode
-    PUT_Access-lists_UpdateAnAccessListEntry:
-      type: object
-      properties:
-        externalCode:
-          type: string
-          description: The external code of the access list entry.
-        customerId:
-          type:
-          - string
-          - 'null'
-          description: The ID of the customer of the access list entry.
-        firstname:
-          type:
-          - string
-          - 'null'
-          description: The first name of the access list entry.
-        lastname:
-          type:
-          - string
-          - 'null'
-          description: The last name of the access list entry.
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: The email of the access list entry.
-        phone:
-          type:
-          - string
-          - 'null'
-          description: The phone number of the access list entry.
-        meta:
-          type: object
-          description: The key-value pairs of the extra data of the access list entry.
-      required:
-      - externalCode
-    POST_Access-lists_CreateAnAccessListEntry:
-      type: object
-      properties:
-        externalCode:
-          type: string
-          description: The external code of the access list entry.
-        customerId:
-          type:
-          - string
-          - 'null'
-          description: The ID of the customer of the access list entry.
-        firstname:
-          type:
-          - string
-          - 'null'
-          description: The first name of the access list entry.
-        lastname:
-          type:
-          - string
-          - 'null'
-          description: The last name of the access list entry.
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: The email of the access list entry.
-        phone:
-          type:
-          - string
-          - 'null'
-          description: The phone number of the access list entry.
-        meta:
-          type: object
-          description: The key-value pairs of the extra data of the access list entry.
-      required:
-      - externalCode
     AccessListEntryResource:
       type: object
       properties:
@@ -831,68 +856,43 @@ components:
       - listId
       - externalCode
       - sellerId
-    POST_Access-lists_CreateAnAccessList:
+    PUT_Access-lists_UpdateAnAccessListEntry:
       type: object
       properties:
-        name:
+        externalCode:
           type: string
-          description: The name of the access list.
-        http:
+          description: The external code of the access list entry.
+        customerId:
+          type:
+          - string
+          - 'null'
+          description: The ID of the customer of the access list entry.
+        firstname:
+          type:
+          - string
+          - 'null'
+          description: The first name of the access list entry.
+        lastname:
+          type:
+          - string
+          - 'null'
+          description: The last name of the access list entry.
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: The email of the access list entry.
+        phone:
+          type:
+          - string
+          - 'null'
+          description: The phone number of the access list entry.
+        meta:
           type: object
-          properties:
-            url:
-              type: string
-              format: uri
-              description: The remote URL of the access list.
-            hmacKey:
-              type: string
-              description: The HMAC key used to sign requests to the remote URL.
-          required:
-          - url
-          description: The remote URL of the access list.
-        type:
-          oneOf:
-          - type: array
-          - type: boolean
-          - type: number
-          - type: object
-          - type: string
-          enum:
-          - static
-          - remote
-          description: The type of the access list.
+          description: The key-value pairs of the extra data of the access list entry.
       required:
-      - name
-    GET_Access-lists_GetAllAccessListEntries_200_response:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/AccessListEntryResource'
-        total:
-          type: integer
-    PUT_Access-lists_UpdateAnAccessList:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the access list.
-        http:
-          type: object
-          properties:
-            url:
-              type: string
-              format: uri
-              description: The remote URL of the access list.
-            hmacKey:
-              type: string
-              description: The HMAC key used to sign requests to the remote URL.
-          required:
-          - url
-          description: The remote URL of the access list.
-      required:
-      - name
+      - externalCode
     AccessListResource:
       type: object
       properties:

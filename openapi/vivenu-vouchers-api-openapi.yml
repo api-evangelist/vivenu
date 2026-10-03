@@ -343,6 +343,141 @@ components:
           description: The date until the voucher can be redeemed.
       required:
       - amount
+    VoucherWithBalanceResource:
+      type: object
+      properties:
+        code:
+          type: string
+          minLength: 4
+          pattern: ^[^;]*$
+          description: Code used to redeem the voucher
+        amount:
+          type: number
+          format: float
+          description: The amount of the voucher in seller's currency. eg. 50.0 -> 50 EUR
+        validUntil:
+          type: string
+          format: date-time
+          description: The date until this voucher can be redeemed.
+        sellerId:
+          type: string
+          description: The ID of the seller of the voucher
+        transactionId:
+          type: string
+          description: The ID of the transaction if the voucher was a result of a transaction
+        productId:
+          type: string
+          description: The ID of the product if the voucher was a result of a product
+        refundId:
+          type: string
+          description: The ID of the refund if the voucher was a result of a refund
+        customerId:
+          type: string
+          description: The ID of the customer if the voucher was created for a specific customer
+        origin:
+          type: string
+          enum:
+          - default
+          - shop
+          - import
+          - upgrade
+          - refund
+          description: The origin of the voucher
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the voucher was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the voucher was last updated.
+        balance:
+          type: number
+          format: float
+          description: The remaining balance of the voucher in seller's currency
+      required:
+      - code
+      - amount
+      - createdAt
+      - updatedAt
+      - balance
+    GET_Vouchers_GetAllVouchers_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoucherWithBalanceResource'
+        total:
+          type: integer
+    PUT_Vouchers_UpdateAVoucher:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: float
+          description: The amount of the voucher in seller's currency. eg. 50.0 -> 50 EUR
+        validUntil:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The date until the voucher can be redeemed. If no date is specified, the voucher has no expiration
+      required:
+      - amount
+    VoucherResource:
+      type: object
+      properties:
+        code:
+          type: string
+          minLength: 4
+          pattern: ^[^;]*$
+          description: Code used to redeem the voucher
+        amount:
+          type: number
+          format: float
+          description: The amount of the voucher in seller's currency. eg. 50.0 -> 50 EUR
+        validUntil:
+          type: string
+          format: date-time
+          description: The date until this voucher can be redeemed.
+        sellerId:
+          type: string
+          description: The ID of the seller of the voucher
+        transactionId:
+          type: string
+          description: The ID of the transaction if the voucher was a result of a transaction
+        productId:
+          type: string
+          description: The ID of the product if the voucher was a result of a product
+        refundId:
+          type: string
+          description: The ID of the refund if the voucher was a result of a refund
+        customerId:
+          type: string
+          description: The ID of the customer if the voucher was created for a specific customer
+        origin:
+          type: string
+          enum:
+          - default
+          - shop
+          - import
+          - upgrade
+          - refund
+          description: The origin of the voucher
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the voucher was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the voucher was last updated.
+      required:
+      - code
+      - amount
+      - createdAt
+      - updatedAt
     GET_Vouchers_GetVoucherByIdAndCode_200_response:
       type: object
       properties:
@@ -429,141 +564,6 @@ components:
           type: string
         useDocumentTemplate:
           type: boolean
-    PUT_Vouchers_UpdateAVoucher:
-      type: object
-      properties:
-        amount:
-          type: number
-          format: float
-          description: The amount of the voucher in seller's currency. eg. 50.0 -> 50 EUR
-        validUntil:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The date until the voucher can be redeemed. If no date is specified, the voucher has no expiration
-      required:
-      - amount
-    GET_Vouchers_GetAllVouchers_200_response:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/VoucherWithBalanceResource'
-        total:
-          type: integer
-    VoucherResource:
-      type: object
-      properties:
-        code:
-          type: string
-          minLength: 4
-          pattern: ^[^;]*$
-          description: Code used to redeem the voucher
-        amount:
-          type: number
-          format: float
-          description: The amount of the voucher in seller's currency. eg. 50.0 -> 50 EUR
-        validUntil:
-          type: string
-          format: date-time
-          description: The date until this voucher can be redeemed.
-        sellerId:
-          type: string
-          description: The ID of the seller of the voucher
-        transactionId:
-          type: string
-          description: The ID of the transaction if the voucher was a result of a transaction
-        productId:
-          type: string
-          description: The ID of the product if the voucher was a result of a product
-        refundId:
-          type: string
-          description: The ID of the refund if the voucher was a result of a refund
-        customerId:
-          type: string
-          description: The ID of the customer if the voucher was created for a specific customer
-        origin:
-          type: string
-          enum:
-          - default
-          - shop
-          - import
-          - upgrade
-          - refund
-          description: The origin of the voucher
-        createdAt:
-          type: string
-          format: date-time
-          description: An ISO Timestamp indicating when the voucher was created.
-        updatedAt:
-          type: string
-          format: date-time
-          description: An ISO Timestamp indicating when the voucher was last updated.
-      required:
-      - code
-      - amount
-      - createdAt
-      - updatedAt
-    VoucherWithBalanceResource:
-      type: object
-      properties:
-        code:
-          type: string
-          minLength: 4
-          pattern: ^[^;]*$
-          description: Code used to redeem the voucher
-        amount:
-          type: number
-          format: float
-          description: The amount of the voucher in seller's currency. eg. 50.0 -> 50 EUR
-        validUntil:
-          type: string
-          format: date-time
-          description: The date until this voucher can be redeemed.
-        sellerId:
-          type: string
-          description: The ID of the seller of the voucher
-        transactionId:
-          type: string
-          description: The ID of the transaction if the voucher was a result of a transaction
-        productId:
-          type: string
-          description: The ID of the product if the voucher was a result of a product
-        refundId:
-          type: string
-          description: The ID of the refund if the voucher was a result of a refund
-        customerId:
-          type: string
-          description: The ID of the customer if the voucher was created for a specific customer
-        origin:
-          type: string
-          enum:
-          - default
-          - shop
-          - import
-          - upgrade
-          - refund
-          description: The origin of the voucher
-        createdAt:
-          type: string
-          format: date-time
-          description: An ISO Timestamp indicating when the voucher was created.
-        updatedAt:
-          type: string
-          format: date-time
-          description: An ISO Timestamp indicating when the voucher was last updated.
-        balance:
-          type: number
-          format: float
-          description: The remaining balance of the voucher in seller's currency
-      required:
-      - code
-      - amount
-      - createdAt
-      - updatedAt
-      - balance
   securitySchemes:
     jwt:
       type: http

@@ -215,6 +215,56 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    POST_Third_SwapMultipleTicketsWithNewCustomerInformation:
+      type: object
+      properties:
+        ticketIds:
+          type: array
+          items:
+            type: string
+          description: The IDs of the tickets to be swapped
+        eventId:
+          type: string
+          description: The ID of the event
+        customer:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The name of the customer
+            prename:
+              type: string
+              description: The prename of the customer
+            lastname:
+              type: string
+              description: The lastname of the customer
+            email:
+              type: string
+              description: The email of the customer
+          required:
+          - email
+        listingId:
+          type: string
+          description: The ID of the listing
+      required:
+      - ticketIds
+      - eventId
+      - customer
+    POST_Third_NotifiesTheSystemThatATicketHasBeenListedOnAThirdPartyPlatform:
+      type: object
+      properties:
+        eventId:
+          type: string
+          description: The ID of the event
+        ticketIds:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          description: The IDs of the tickets to be listed
+      required:
+      - eventId
+      - ticketIds
     POST_Third_SwapMultipleTicketsWithNewCustomerInformation_200_response:
       type: array
       items:
@@ -1249,7 +1299,7 @@ components:
           patterns: null
           renames: null
         $_super: {}
-    GET_Third_ValidatesTheActiveListingForMultipleTickets_200_response:
+    POST_Third_NotifiesTheSystemThatATicketHasBeenListedOnAThirdPartyPlatform_200_response:
       type: object
       properties:
         customer:
@@ -1688,196 +1738,6 @@ components:
           description: The tickets to be swapped
       required:
       - tickets
-    POST_Third_NotifiesTheSystemThatATicketHasBeenListedOnAThirdPartyPlatform:
-      type: object
-      properties:
-        eventId:
-          type: string
-          description: The ID of the event
-        ticketIds:
-          type: array
-          items:
-            type: string
-          minItems: 1
-          description: The IDs of the tickets to be listed
-      required:
-      - eventId
-      - ticketIds
-    POST_Third_NotifiesTheSystemThatAListingsHasBeenCanceledOnAThirdPartyPlatform_200_response:
-      type: object
-      properties: {}
-    POST_Third_SwapMultipleTicketsWithNewCustomerInformation:
-      type: object
-      properties:
-        ticketIds:
-          type: array
-          items:
-            type: string
-          description: The IDs of the tickets to be swapped
-        eventId:
-          type: string
-          description: The ID of the event
-        customer:
-          type: object
-          properties:
-            name:
-              type: string
-              description: The name of the customer
-            prename:
-              type: string
-              description: The prename of the customer
-            lastname:
-              type: string
-              description: The lastname of the customer
-            email:
-              type: string
-              description: The email of the customer
-          required:
-          - email
-        listingId:
-          type: string
-          description: The ID of the listing
-      required:
-      - ticketIds
-      - eventId
-      - customer
-    POST_Third_SwapATicketWithBarcodeAndNewCustomerInformation_200_response:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the ticket
-        _id:
-          type: string
-          description: The ID of the ticket
-        barcode:
-          type: string
-          description: The barcode of the ticket
-        swappable:
-          type: boolean
-          description: If the ticket is swappable or not
-        valid:
-          type: boolean
-          description: If the ticket is valid or not
-        event:
-          type: object
-          properties:
-            id:
-              type: string
-              description: The ID of the event
-            name:
-              type: string
-              description: The name of the event
-            start:
-              type: string
-              format: date-time
-              description: The end date of the event
-            end:
-              type: string
-              format: date-time
-              description: The start date of the event
-            eventUrl:
-              type: string
-              format: uri
-              description: The URL to the ticketshop
-          required:
-          - id
-          - name
-          - start
-          - end
-          description: The corresponding event to the ticket
-        type:
-          type: object
-          properties:
-            id:
-              type: string
-              description: The ID of the tickettype
-            name:
-              type: string
-              description: The name of the tickettype
-            price:
-              type: number
-              format: float
-              description: The base price of the tickettype
-            fee:
-              type: number
-              format: float
-              description: The service fee on top of the base price
-            currency:
-              type: string
-              enum:
-              - EUR
-              - USD
-              - GBP
-              - AUD
-              - CHF
-              - THB
-              - ILS
-              - COP
-              - MXN
-              - DKK
-              - NOK
-              - SEK
-              - QAR
-              - CAD
-              - ISK
-              - GTQ
-              - INR
-              - DOP
-              - SGD
-              - PLN
-              - SAR
-              - TTD
-              - ZAR
-              - KYD
-              - HKD
-              - CZK
-              - KRW
-              - JPY
-              - NZD
-              - AED
-              - MAD
-              - TWD
-              - BRL
-              - BWP
-              - NAD
-              - KES
-              - SCR
-              - TRY
-              - SZL
-              - LSL
-              - TZS
-              - UGX
-              - ZMW
-              - ZWG
-              - GHS
-              - NGN
-              - SLE
-              - LRD
-              - XOF
-              - XAF
-              - GEL
-              - IDR
-              - ARS
-              - CRC
-              - HUF
-              - EGP
-              - MYR
-              - VND
-              - PHP
-              description: The currency for the prices
-          required:
-          - id
-          - name
-          - price
-          - fee
-          description: Tickettype of the found ticket
-      required:
-      - id
-      - _id
-      - barcode
-      - swappable
-      - valid
     GET_Third_ValidateATicketByItsBarcode_200_response:
       type: object
       properties:
@@ -2454,7 +2314,40 @@ components:
           description: The tickets to be swapped
       required:
       - tickets
-    POST_Third_NotifiesTheSystemThatATicketHasBeenListedOnAThirdPartyPlatform_200_response:
+    POST_Third_SwapATicketWithBarcodeAndNewCustomerInformation:
+      type: object
+      properties:
+        ticket:
+          oneOf:
+          - type: object
+            properties:
+              barcode:
+                type: string
+                description: The barcode of the ticket to be swapped
+            required:
+            - barcode
+          - type: object
+            properties:
+              id:
+                type: string
+                description: The ID of the ticket to be swapped
+            required:
+            - id
+        customer:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The name of the customer
+            email:
+              type: string
+              description: The email of the customer
+          required:
+          - name
+          - email
+      required:
+      - customer
+    GET_Third_ValidatesTheActiveListingForMultipleTickets_200_response:
       type: object
       properties:
         customer:
@@ -2893,39 +2786,146 @@ components:
           description: The tickets to be swapped
       required:
       - tickets
-    POST_Third_SwapATicketWithBarcodeAndNewCustomerInformation:
+    POST_Third_SwapATicketWithBarcodeAndNewCustomerInformation_200_response:
       type: object
       properties:
-        ticket:
-          oneOf:
-          - type: object
-            properties:
-              barcode:
-                type: string
-                description: The barcode of the ticket to be swapped
-            required:
-            - barcode
-          - type: object
-            properties:
-              id:
-                type: string
-                description: The ID of the ticket to be swapped
-            required:
-            - id
-        customer:
+        id:
+          type: string
+          description: The ID of the ticket
+        _id:
+          type: string
+          description: The ID of the ticket
+        barcode:
+          type: string
+          description: The barcode of the ticket
+        swappable:
+          type: boolean
+          description: If the ticket is swappable or not
+        valid:
+          type: boolean
+          description: If the ticket is valid or not
+        event:
           type: object
           properties:
+            id:
+              type: string
+              description: The ID of the event
             name:
               type: string
-              description: The name of the customer
-            email:
+              description: The name of the event
+            start:
               type: string
-              description: The email of the customer
+              format: date-time
+              description: The end date of the event
+            end:
+              type: string
+              format: date-time
+              description: The start date of the event
+            eventUrl:
+              type: string
+              format: uri
+              description: The URL to the ticketshop
           required:
+          - id
           - name
-          - email
+          - start
+          - end
+          description: The corresponding event to the ticket
+        type:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The ID of the tickettype
+            name:
+              type: string
+              description: The name of the tickettype
+            price:
+              type: number
+              format: float
+              description: The base price of the tickettype
+            fee:
+              type: number
+              format: float
+              description: The service fee on top of the base price
+            currency:
+              type: string
+              enum:
+              - EUR
+              - USD
+              - GBP
+              - AUD
+              - CHF
+              - THB
+              - ILS
+              - COP
+              - MXN
+              - DKK
+              - NOK
+              - SEK
+              - QAR
+              - CAD
+              - ISK
+              - GTQ
+              - INR
+              - DOP
+              - SGD
+              - PLN
+              - SAR
+              - TTD
+              - ZAR
+              - KYD
+              - HKD
+              - CZK
+              - KRW
+              - JPY
+              - NZD
+              - AED
+              - MAD
+              - TWD
+              - BRL
+              - BWP
+              - NAD
+              - KES
+              - SCR
+              - TRY
+              - SZL
+              - LSL
+              - TZS
+              - UGX
+              - ZMW
+              - ZWG
+              - GHS
+              - NGN
+              - SLE
+              - LRD
+              - XOF
+              - XAF
+              - GEL
+              - IDR
+              - ARS
+              - CRC
+              - HUF
+              - EGP
+              - MYR
+              - VND
+              - PHP
+              description: The currency for the prices
+          required:
+          - id
+          - name
+          - price
+          - fee
+          description: Tickettype of the found ticket
       required:
-      - customer
+      - id
+      - _id
+      - barcode
+      - swappable
+      - valid
+    POST_Third_NotifiesTheSystemThatAListingsHasBeenCanceledOnAThirdPartyPlatform_200_response:
+      type: object
+      properties: {}
   securitySchemes:
     jwt:
       type: http
