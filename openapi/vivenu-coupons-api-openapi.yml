@@ -447,6 +447,47 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    CouponSeriesGenerateCouponsPayloadResource:
+      type: object
+      properties:
+        couponSeriesId:
+          type: string
+          description: The ID of the coupon series.
+        sellerId:
+          type: string
+          description: The ID of the seller.
+        couponAmount:
+          type: integer
+          minimum: 1
+          maximum: 10000
+          description: The amount of coupons to generate
+        couponCodePrefix:
+          type:
+          - string
+          - 'null'
+          maxLength: 30
+          description: The prefix of the coupon code
+      required:
+      - couponSeriesId
+      - sellerId
+      - couponAmount
+    GET_Coupons_GetAllCouponSeries_200_response:
+      type: array
+      items:
+        $ref: '#/components/schemas/CouponSeriesResource'
+    CouponResource:
+      oneOf:
+      - $ref: '#/components/schemas/CouponWithSeriesResource'
+      - $ref: '#/components/schemas/CouponSingleResource'
+    GET_Coupons_GetAllCoupons_200_response:
+      type: object
+      properties:
+        rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/CouponRichResource'
+        total:
+          type: integer
     CouponRichResource:
       oneOf:
       - type: object
@@ -664,118 +705,161 @@ components:
         required:
         - name
         - used
-    GET_Coupons_GetCouponOrVoucherByCode_200_response:
+    CouponSeriesResource:
       type: object
       properties:
-        message:
+        name:
+          type: string
+          maxLength: 200
+          description: The Name for the coupon. Visible to public.
+        singleUsage:
+          type: boolean
+          description: Whether this coupon can only be used once
+        active:
+          type: boolean
+          description: Whether the coupon can be used
+          default: true
+        maxUsage:
+          type: number
+          format: float
+          minimum: 0
+          description: The max amount of usages. A usage is counted as a completed transaction that used the coupon.
+          default: 1
+        maxUsagePerEvent:
+          type:
+          - number
+          - 'null'
+          format: float
+          minimum: 0
+          description: The max amount of usages per event. A usage is counted as a completed transaction that used the coupon.
+        maxTickets:
+          type:
+          - number
+          - 'null'
+          format: float
+          minimum: 0
+          description: The number of tickets that can be purchased with this coupon
+        canBeCombined:
+          type: boolean
+          description: Whether this coupon can be combined with others within one transaction.
+        discountType:
           type: string
           enum:
-          - notYetValid
-          - expired
-          - invalid
-          - valid
-          - unauthenticated
-          description: The status of the coupon/voucher.
-        coupon:
-          type: object
-          properties:
-            code:
-              type: string
-              description: The code of the coupon.
-            couponId:
-              type: string
-              description: The ID of the coupon.
-            name:
-              type: string
-              maxLength: 200
-              description: The Name for the coupon. Visible to public.
-            canBeCombined:
-              type: boolean
-              description: Whether this coupon can be combined with others within one transaction.
-            discountType:
-              type: string
-              enum:
-              - fix
-              - var
-              - fixPerItem
-              - waiveFees
-            discountValue:
-              type: number
-              format: float
-              description: The amount of the discount in seller's currency. eg. 50.0 -> 50 EUR
-            discountMaxValue:
-              type:
-              - number
-              - 'null'
-              format: float
-              description: When discountType is VAR the max amount of the discount in seller's currency
-            allowAllTickets:
-              type: boolean
-              description: Whether the coupon can be used across all tickets within the events
-              default: true
-            allowedTickets:
-              type: array
-              items:
-                type: string
-              description: The ID's of the ticket types on which the coupon should be applied
-            allowAllEvents:
-              type: boolean
-              description: Whether the coupon can be used across all events
-              default: true
-            limitMaxTicketsInCart:
-              type: boolean
-              description: Whether this coupon limits the max tickets in cart.
-            maxTicketsInCart:
-              type:
-              - number
-              - 'null'
-              format: float
-              description: If limitMaxTicketsInCart is true, the amount of the max allowed tickets.
-            minTicketsInCart:
-              type:
-              - number
-              - 'null'
-              format: float
-              minimum: 0
-              description: The minimum number of tickets that need to be purchased with this coupon
-            maxTickets:
-              type:
-              - number
-              - 'null'
-              format: float
-              minimum: 0
-              description: The number of tickets that can be purchased with this coupon
-            revealAllowedTickets:
-              type: boolean
-              description: Whether this coupon reveals the allowed tickets.
-          required:
-          - code
-          - couponId
-          - name
-        voucher:
-          type: object
-          properties:
-            _id:
-              type: string
-              description: The ID of the voucher.
-            code:
-              type: string
-              description: The code of the voucher.
-            balance:
-              type: number
-              format: float
-              description: The available balance on the voucher.
-          required:
-          - _id
-          - code
-        type:
+          - fix
+          - var
+          - fixPerItem
+          - waiveFees
+        discountValue:
+          type: number
+          format: float
+          description: The amount of the discount in seller's currency. eg. 50.0 -> 50 EUR
+        discountMaxValue:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: When discountType is VAR the max amount of the discount in seller's currency
+        allowAllEvents:
+          type: boolean
+          description: Whether the coupon can be used across all events
+          default: true
+        allowedEvents:
+          type: array
+          items:
+            type: string
+          description: The ID's of events where the coupon can be used
+        allowAllTickets:
+          type: boolean
+          description: Whether the coupon can be used across all tickets within the events
+          default: true
+        allowedTickets:
+          type: array
+          items:
+            type: string
+          description: The ID's of the ticket types on which the coupon should be applied
+        taggingEnabled:
+          type: boolean
+          description: Whether this coupon tags customers
+        tags:
+          type: array
+          items:
+            type: string
+          description: Which tags to add to customers which bought with this coupon
+        validFrom:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The date from which this coupon can be redeemed.
+        validUntil:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The date until this coupon can be redeemed.
+        limitMaxTicketsInCart:
+          type: boolean
+          description: Whether this coupon limits the max tickets in cart.
+        maxTicketsInCart:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: If limitMaxTicketsInCart is true, the amount of the max allowed tickets.
+        minTicketsInCart:
+          type:
+          - number
+          - 'null'
+          format: float
+          minimum: 0
+          description: The minimum number of tickets that need to be purchased with this coupon
+        note:
+          type:
+          - string
+          - 'null'
+          description: The Note for this coupon.
+        revealAllowedTickets:
+          type: boolean
+          description: Whether this coupon reveals the allowed tickets.
+        unlocks:
+          type: array
+          items:
+            oneOf:
+            - type: object
+              properties:
+                target:
+                  type: string
+                  enum:
+                  - underShop
+                eventId:
+                  type: string
+                  description: The ID of the event.
+                underShopId:
+                  type: string
+                  description: The ID of the under shop.
+              required:
+              - target
+              - eventId
+              - underShopId
+          description: The array of the resources unlocked by undershop.
+        _id:
           type: string
-          enum:
-          - voucher
-          - coupon
-          description: The type of resource.
+          description: The ID of the coupon series.
+        sellerId:
+          type: string
+          description: The ID of the seller.
+        createdAt:
+          type: string
+          format: date-time
+          description: The date the coupon was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: The date the coupon was last updated.
       required:
-      - message
+      - name
+      - _id
+      - sellerId
     CouponSeriesCreateResource:
       type: object
       properties:
@@ -915,30 +999,6 @@ components:
           description: The array of the resources unlocked by undershop.
       required:
       - name
-    CouponSeriesGenerateCouponsPayloadResource:
-      type: object
-      properties:
-        couponSeriesId:
-          type: string
-          description: The ID of the coupon series.
-        sellerId:
-          type: string
-          description: The ID of the seller.
-        couponAmount:
-          type: integer
-          minimum: 1
-          maximum: 10000
-          description: The amount of coupons to generate
-        couponCodePrefix:
-          type:
-          - string
-          - 'null'
-          maxLength: 30
-          description: The prefix of the coupon code
-      required:
-      - couponSeriesId
-      - sellerId
-      - couponAmount
     CouponCreateResource:
       oneOf:
       - type: object
@@ -1116,181 +1176,118 @@ components:
             default: coupon
         required:
         - name
-    CouponResource:
-      oneOf:
-      - $ref: '#/components/schemas/CouponWithSeriesResource'
-      - $ref: '#/components/schemas/CouponSingleResource'
-    GET_Coupons_GetAllCoupons_200_response:
+    GET_Coupons_GetCouponOrVoucherByCode_200_response:
       type: object
       properties:
-        rows:
-          type: array
-          items:
-            $ref: '#/components/schemas/CouponRichResource'
-        total:
-          type: integer
-    GET_Coupons_GetAllCouponSeries_200_response:
-      type: array
-      items:
-        $ref: '#/components/schemas/CouponSeriesResource'
-    CouponSeriesUpdateResource:
-      type: object
-      properties:
-        name:
-          type: string
-          maxLength: 200
-          description: The Name for the coupon. Visible to public.
-        singleUsage:
-          type: boolean
-          description: Whether this coupon can only be used once
-        active:
-          type: boolean
-          description: Whether the coupon can be used
-          default: true
-        maxUsage:
-          type: number
-          format: float
-          minimum: 0
-          description: The max amount of usages. A usage is counted as a completed transaction that used the coupon.
-          default: 1
-        maxUsagePerEvent:
-          type:
-          - number
-          - 'null'
-          format: float
-          minimum: 0
-          description: The max amount of usages per event. A usage is counted as a completed transaction that used the coupon.
-        maxTickets:
-          type:
-          - number
-          - 'null'
-          format: float
-          minimum: 0
-          description: The number of tickets that can be purchased with this coupon
-        canBeCombined:
-          type: boolean
-          description: Whether this coupon can be combined with others within one transaction.
-        discountType:
+        message:
           type: string
           enum:
-          - fix
-          - var
-          - fixPerItem
-          - waiveFees
-        discountValue:
-          type: number
-          format: float
-          description: The amount of the discount in seller's currency. eg. 50.0 -> 50 EUR
-        discountMaxValue:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: When discountType is VAR the max amount of the discount in seller's currency
-        allowAllEvents:
-          type: boolean
-          description: Whether the coupon can be used across all events
-          default: true
-        allowedEvents:
-          type: array
-          items:
-            type: string
-          description: The ID's of events where the coupon can be used
-        allowAllTickets:
-          type: boolean
-          description: Whether the coupon can be used across all tickets within the events
-          default: true
-        allowedTickets:
-          type: array
-          items:
-            type: string
-          description: The ID's of the ticket types on which the coupon should be applied
-        taggingEnabled:
-          type: boolean
-          description: Whether this coupon tags customers
-        tags:
-          type: array
-          items:
-            type: string
-          description: Which tags to add to customers which bought with this coupon
-        validFrom:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The date from which this coupon can be redeemed.
-        validUntil:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The date until this coupon can be redeemed.
-        limitMaxTicketsInCart:
-          type: boolean
-          description: Whether this coupon limits the max tickets in cart.
-        maxTicketsInCart:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: If limitMaxTicketsInCart is true, the amount of the max allowed tickets.
-        minTicketsInCart:
-          type:
-          - number
-          - 'null'
-          format: float
-          minimum: 0
-          description: The minimum number of tickets that need to be purchased with this coupon
-        note:
-          type:
-          - string
-          - 'null'
-          description: The Note for this coupon.
-        revealAllowedTickets:
-          type: boolean
-          description: Whether this coupon reveals the allowed tickets.
-        unlocks:
-          type: array
-          items:
-            oneOf:
-            - type: object
-              properties:
-                target:
-                  type: string
-                  enum:
-                  - underShop
-                eventId:
-                  type: string
-                  description: The ID of the event.
-                underShopId:
-                  type: string
-                  description: The ID of the under shop.
-              required:
-              - target
-              - eventId
-              - underShopId
-          description: The array of the resources unlocked by undershop.
-    CouponSeriesGenerateCouponsResponseResource:
-      type: object
-      properties:
-        status:
+          - notYetValid
+          - expired
+          - invalid
+          - valid
+          - unauthenticated
+          description: The status of the coupon/voucher.
+        coupon:
+          type: object
+          properties:
+            code:
+              type: string
+              description: The code of the coupon.
+            couponId:
+              type: string
+              description: The ID of the coupon.
+            name:
+              type: string
+              maxLength: 200
+              description: The Name for the coupon. Visible to public.
+            canBeCombined:
+              type: boolean
+              description: Whether this coupon can be combined with others within one transaction.
+            discountType:
+              type: string
+              enum:
+              - fix
+              - var
+              - fixPerItem
+              - waiveFees
+            discountValue:
+              type: number
+              format: float
+              description: The amount of the discount in seller's currency. eg. 50.0 -> 50 EUR
+            discountMaxValue:
+              type:
+              - number
+              - 'null'
+              format: float
+              description: When discountType is VAR the max amount of the discount in seller's currency
+            allowAllTickets:
+              type: boolean
+              description: Whether the coupon can be used across all tickets within the events
+              default: true
+            allowedTickets:
+              type: array
+              items:
+                type: string
+              description: The ID's of the ticket types on which the coupon should be applied
+            allowAllEvents:
+              type: boolean
+              description: Whether the coupon can be used across all events
+              default: true
+            limitMaxTicketsInCart:
+              type: boolean
+              description: Whether this coupon limits the max tickets in cart.
+            maxTicketsInCart:
+              type:
+              - number
+              - 'null'
+              format: float
+              description: If limitMaxTicketsInCart is true, the amount of the max allowed tickets.
+            minTicketsInCart:
+              type:
+              - number
+              - 'null'
+              format: float
+              minimum: 0
+              description: The minimum number of tickets that need to be purchased with this coupon
+            maxTickets:
+              type:
+              - number
+              - 'null'
+              format: float
+              minimum: 0
+              description: The number of tickets that can be purchased with this coupon
+            revealAllowedTickets:
+              type: boolean
+              description: Whether this coupon reveals the allowed tickets.
+          required:
+          - code
+          - couponId
+          - name
+        voucher:
+          type: object
+          properties:
+            _id:
+              type: string
+              description: The ID of the voucher.
+            code:
+              type: string
+              description: The code of the voucher.
+            balance:
+              type: number
+              format: float
+              description: The available balance on the voucher.
+          required:
+          - _id
+          - code
+        type:
           type: string
           enum:
-          - success
-          - partial
-          description: The status of the request
-        couponAmount:
-          type: integer
-          description: The amount of coupons to generate
-        couponIds:
-          type: array
-          items:
-            type: string
-          description: The IDs of the generated coupons
+          - voucher
+          - coupon
+          description: The type of resource.
       required:
-      - status
-      - couponAmount
-      - couponIds
+      - message
     CouponWithSeriesResource:
       type: object
       properties:
@@ -1500,7 +1497,28 @@ components:
           description: The array of the resources unlocked by undershop.
       required:
       - name
-    CouponSeriesResource:
+    CouponSeriesGenerateCouponsResponseResource:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+          - partial
+          description: The status of the request
+        couponAmount:
+          type: integer
+          description: The amount of coupons to generate
+        couponIds:
+          type: array
+          items:
+            type: string
+          description: The IDs of the generated coupons
+      required:
+      - status
+      - couponAmount
+      - couponIds
+    CouponSeriesUpdateResource:
       type: object
       properties:
         name:
@@ -1637,24 +1655,6 @@ components:
               - eventId
               - underShopId
           description: The array of the resources unlocked by undershop.
-        _id:
-          type: string
-          description: The ID of the coupon series.
-        sellerId:
-          type: string
-          description: The ID of the seller.
-        createdAt:
-          type: string
-          format: date-time
-          description: The date the coupon was created.
-        updatedAt:
-          type: string
-          format: date-time
-          description: The date the coupon was last updated.
-      required:
-      - name
-      - _id
-      - sellerId
   securitySchemes:
     jwt:
       type: http

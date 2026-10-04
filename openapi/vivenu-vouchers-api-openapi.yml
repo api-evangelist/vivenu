@@ -321,6 +321,160 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    GET_Vouchers_GetVoucherByIdAndCode_200_response:
+      type: object
+      properties:
+        voucher:
+          $ref: '#/components/schemas/VoucherResource'
+        displaySettings:
+          type: object
+          properties:
+            disclaimer:
+              type: string
+              description: The disclaimer of the voucher
+            pdfImage:
+              type: string
+              description: The image of the voucher
+        seller:
+          type: object
+          properties:
+            city:
+              type: string
+            street:
+              type: string
+            postal:
+              type: string
+            taxRate:
+              type: number
+              format: float
+            taxNo:
+              type: string
+            currency:
+              type: string
+            image:
+              type: string
+              description: The logo of the seller
+            name:
+              type: string
+              description: The name of the seller
+            locationName:
+              type: string
+            brandingSettings:
+              type: object
+              properties:
+                customBrandingEnabled:
+                  type: boolean
+                shopLogoUrl:
+                  type: string
+                eventLogo:
+                  type: string
+                mailLogo:
+                  type: string
+                customLogo:
+                  type: string
+                walletLogo:
+                  type: string
+                googleWalletLogo:
+                  type: string
+                walletBackgroundColor:
+                  type: string
+                walletForegroundColor:
+                  type: string
+                walletLabelColor:
+                  type: string
+                ticketRibbonImage:
+                  type: string
+            documentSettings:
+              type: object
+              properties:
+                image:
+                  type: string
+                invoice:
+                  type: object
+                  properties:
+                    footerColumns:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          text:
+                            type: string
+                          active:
+                            type: boolean
+          required:
+          - name
+        timezone:
+          type: string
+        useDocumentTemplate:
+          type: boolean
+    VoucherResource:
+      type: object
+      properties:
+        code:
+          type: string
+          minLength: 4
+          pattern: ^[^;]*$
+          description: Code used to redeem the voucher
+        amount:
+          type: number
+          format: float
+          description: The amount of the voucher in seller's currency. eg. 50.0 -> 50 EUR
+        validUntil:
+          type: string
+          format: date-time
+          description: The date until this voucher can be redeemed.
+        sellerId:
+          type: string
+          description: The ID of the seller of the voucher
+        transactionId:
+          type: string
+          description: The ID of the transaction if the voucher was a result of a transaction
+        productId:
+          type: string
+          description: The ID of the product if the voucher was a result of a product
+        refundId:
+          type: string
+          description: The ID of the refund if the voucher was a result of a refund
+        customerId:
+          type: string
+          description: The ID of the customer if the voucher was created for a specific customer
+        origin:
+          type: string
+          enum:
+          - default
+          - shop
+          - import
+          - upgrade
+          - refund
+          description: The origin of the voucher
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the voucher was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the voucher was last updated.
+      required:
+      - code
+      - amount
+      - createdAt
+      - updatedAt
+    PUT_Vouchers_UpdateAVoucher:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: float
+          description: The amount of the voucher in seller's currency. eg. 50.0 -> 50 EUR
+        validUntil:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The date until the voucher can be redeemed. If no date is specified, the voucher has no expiration
+      required:
+      - amount
     POST_Vouchers_CreateAVoucher:
       type: object
       properties:
@@ -410,160 +564,6 @@ components:
             $ref: '#/components/schemas/VoucherWithBalanceResource'
         total:
           type: integer
-    PUT_Vouchers_UpdateAVoucher:
-      type: object
-      properties:
-        amount:
-          type: number
-          format: float
-          description: The amount of the voucher in seller's currency. eg. 50.0 -> 50 EUR
-        validUntil:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The date until the voucher can be redeemed. If no date is specified, the voucher has no expiration
-      required:
-      - amount
-    VoucherResource:
-      type: object
-      properties:
-        code:
-          type: string
-          minLength: 4
-          pattern: ^[^;]*$
-          description: Code used to redeem the voucher
-        amount:
-          type: number
-          format: float
-          description: The amount of the voucher in seller's currency. eg. 50.0 -> 50 EUR
-        validUntil:
-          type: string
-          format: date-time
-          description: The date until this voucher can be redeemed.
-        sellerId:
-          type: string
-          description: The ID of the seller of the voucher
-        transactionId:
-          type: string
-          description: The ID of the transaction if the voucher was a result of a transaction
-        productId:
-          type: string
-          description: The ID of the product if the voucher was a result of a product
-        refundId:
-          type: string
-          description: The ID of the refund if the voucher was a result of a refund
-        customerId:
-          type: string
-          description: The ID of the customer if the voucher was created for a specific customer
-        origin:
-          type: string
-          enum:
-          - default
-          - shop
-          - import
-          - upgrade
-          - refund
-          description: The origin of the voucher
-        createdAt:
-          type: string
-          format: date-time
-          description: An ISO Timestamp indicating when the voucher was created.
-        updatedAt:
-          type: string
-          format: date-time
-          description: An ISO Timestamp indicating when the voucher was last updated.
-      required:
-      - code
-      - amount
-      - createdAt
-      - updatedAt
-    GET_Vouchers_GetVoucherByIdAndCode_200_response:
-      type: object
-      properties:
-        voucher:
-          $ref: '#/components/schemas/VoucherResource'
-        displaySettings:
-          type: object
-          properties:
-            disclaimer:
-              type: string
-              description: The disclaimer of the voucher
-            pdfImage:
-              type: string
-              description: The image of the voucher
-        seller:
-          type: object
-          properties:
-            city:
-              type: string
-            street:
-              type: string
-            postal:
-              type: string
-            taxRate:
-              type: number
-              format: float
-            taxNo:
-              type: string
-            currency:
-              type: string
-            image:
-              type: string
-              description: The logo of the seller
-            name:
-              type: string
-              description: The name of the seller
-            locationName:
-              type: string
-            brandingSettings:
-              type: object
-              properties:
-                customBrandingEnabled:
-                  type: boolean
-                shopLogoUrl:
-                  type: string
-                eventLogo:
-                  type: string
-                mailLogo:
-                  type: string
-                customLogo:
-                  type: string
-                walletLogo:
-                  type: string
-                googleWalletLogo:
-                  type: string
-                walletBackgroundColor:
-                  type: string
-                walletForegroundColor:
-                  type: string
-                walletLabelColor:
-                  type: string
-                ticketRibbonImage:
-                  type: string
-            documentSettings:
-              type: object
-              properties:
-                image:
-                  type: string
-                invoice:
-                  type: object
-                  properties:
-                    footerColumns:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          text:
-                            type: string
-                          active:
-                            type: boolean
-          required:
-          - name
-        timezone:
-          type: string
-        useDocumentTemplate:
-          type: boolean
   securitySchemes:
     jwt:
       type: http

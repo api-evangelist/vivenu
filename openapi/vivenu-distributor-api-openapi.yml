@@ -72,6 +72,15 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    GET_Distributor_GetDistributorForSalesChannel_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/DistributorResource'
+        total:
+          type: integer
     DistributorResource:
       type: object
       properties:
@@ -94,15 +103,6 @@ components:
       - salesChannelId
       - createdAt
       - updatedAt
-    GET_Distributor_GetDistributorForSalesChannel_200_response:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/DistributorResource'
-        total:
-          type: integer
   securitySchemes:
     jwt:
       type: http

@@ -472,18 +472,26 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GET_Access-lists_GetAllAccessListEntries_200_response:
+    AccessListResource:
       type: object
       properties:
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/AccessListEntryResource'
-        total:
-          type: integer
-    POST_Access-lists_CreateAnAccessList:
-      type: object
-      properties:
+        _id:
+          type: string
+          description: The ID of the access list.
+        type:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+          enum:
+          - static
+          - remote
+          description: The type of the access list.
+        sellerId:
+          type: string
+          description: The ID of the seller of the access list.
         name:
           type: string
           description: The name of the access list.
@@ -500,20 +508,12 @@ components:
           required:
           - url
           description: The remote URL of the access list.
-        type:
-          oneOf:
-          - type: array
-          - type: boolean
-          - type: number
-          - type: object
-          - type: string
-          enum:
-          - static
-          - remote
-          description: The type of the access list.
       required:
+      - _id
+      - type
+      - sellerId
       - name
-    POST_Access-lists_CreateAnAccessListEntry:
+    PUT_Access-lists_UpdateAnAccessListEntry:
       type: object
       properties:
         externalCode:
@@ -571,15 +571,87 @@ components:
           description: The remote URL of the access list.
       required:
       - name
-    GET_Access-lists_GetAccessLists_200_response:
+    POST_Access-lists_CreateAnAccessList:
       type: object
       properties:
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/AccessListResource'
-        total:
-          type: integer
+        name:
+          type: string
+          description: The name of the access list.
+        http:
+          type: object
+          properties:
+            url:
+              type: string
+              format: uri
+              description: The remote URL of the access list.
+            hmacKey:
+              type: string
+              description: The HMAC key used to sign requests to the remote URL.
+          required:
+          - url
+          description: The remote URL of the access list.
+        type:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+          enum:
+          - static
+          - remote
+          description: The type of the access list.
+      required:
+      - name
+    AccessListEntryResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the access list entry.
+        listId:
+          type: string
+          description: The ID of the access list of the access list entry.
+        externalCode:
+          type: string
+          description: The external code of the access list entry.
+        customerId:
+          type:
+          - string
+          - 'null'
+          description: The ID of the customer of the access list entry.
+        sellerId:
+          type: string
+          description: The ID of the seller of the access list entry.
+        firstname:
+          type:
+          - string
+          - 'null'
+          description: The first name of the access list entry.
+        lastname:
+          type:
+          - string
+          - 'null'
+          description: The last name of the access list entry.
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: The email of the access list entry.
+        phone:
+          type:
+          - string
+          - 'null'
+          description: The phone number of the access list entry.
+        meta:
+          type: object
+          description: The key-value pairs of the extra data of the access list entry.
+      required:
+      - _id
+      - listId
+      - externalCode
+      - sellerId
     GET_Access-lists_GetAnAccessListEntrysTicket_200_response:
       type: object
       properties:
@@ -807,56 +879,7 @@ components:
       - status
       - secret
       - barcode
-    AccessListEntryResource:
-      type: object
-      properties:
-        _id:
-          type: string
-          description: The ID of the access list entry.
-        listId:
-          type: string
-          description: The ID of the access list of the access list entry.
-        externalCode:
-          type: string
-          description: The external code of the access list entry.
-        customerId:
-          type:
-          - string
-          - 'null'
-          description: The ID of the customer of the access list entry.
-        sellerId:
-          type: string
-          description: The ID of the seller of the access list entry.
-        firstname:
-          type:
-          - string
-          - 'null'
-          description: The first name of the access list entry.
-        lastname:
-          type:
-          - string
-          - 'null'
-          description: The last name of the access list entry.
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: The email of the access list entry.
-        phone:
-          type:
-          - string
-          - 'null'
-          description: The phone number of the access list entry.
-        meta:
-          type: object
-          description: The key-value pairs of the extra data of the access list entry.
-      required:
-      - _id
-      - listId
-      - externalCode
-      - sellerId
-    PUT_Access-lists_UpdateAnAccessListEntry:
+    POST_Access-lists_CreateAnAccessListEntry:
       type: object
       properties:
         externalCode:
@@ -893,47 +916,24 @@ components:
           description: The key-value pairs of the extra data of the access list entry.
       required:
       - externalCode
-    AccessListResource:
+    GET_Access-lists_GetAccessLists_200_response:
       type: object
       properties:
-        _id:
-          type: string
-          description: The ID of the access list.
-        type:
-          oneOf:
-          - type: array
-          - type: boolean
-          - type: number
-          - type: object
-          - type: string
-          enum:
-          - static
-          - remote
-          description: The type of the access list.
-        sellerId:
-          type: string
-          description: The ID of the seller of the access list.
-        name:
-          type: string
-          description: The name of the access list.
-        http:
-          type: object
-          properties:
-            url:
-              type: string
-              format: uri
-              description: The remote URL of the access list.
-            hmacKey:
-              type: string
-              description: The HMAC key used to sign requests to the remote URL.
-          required:
-          - url
-          description: The remote URL of the access list.
-      required:
-      - _id
-      - type
-      - sellerId
-      - name
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessListResource'
+        total:
+          type: integer
+    GET_Access-lists_GetAllAccessListEntries_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessListEntryResource'
+        total:
+          type: integer
   securitySchemes:
     jwt:
       type: http

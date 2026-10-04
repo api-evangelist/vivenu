@@ -406,80 +406,9 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    POST_Payment-plans_RetryAPublicPaymentPlanSchedule_200_response:
+    PUT_Payment-plans_UpdateAPaymentPlan:
       type: object
       properties:
-        _id:
-          type: string
-          description: The ID of the payment plan
-        schedules:
-          type: array
-          items:
-            type: object
-            properties:
-              due:
-                type: string
-                format: date-time
-                description: The date when the payment is due
-              status:
-                type: string
-                enum:
-                - SCHEDULED
-                - PENDING
-                - SUCCEEDED
-                - FAILED
-                - REFUNDED
-                description: The status of the payment schedule
-              total:
-                type: number
-                format: float
-                description: The total amount of the payment schedule
-              attempts:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    _id:
-                      type: string
-                      description: The ID of the payment schedule attempt
-                    date:
-                      type: string
-                      format: date-time
-                      description: The date of the payment schedule attempt
-                    status:
-                      type: string
-                      enum:
-                      - SCHEDULED
-                      - PENDING
-                      - SUCCEEDED
-                      - FAILED
-                      - REFUNDED
-                      description: The status of the payment schedule attempt
-                    paymentRequestId:
-                      type: string
-                      description: The Payment Request ID of the payment schedule attempt
-                    paymentMethodId:
-                      type: string
-                      description: The Payment Method ID of the payment schedule attempt
-                  required:
-                  - _id
-                  - date
-                  - status
-                  - paymentRequestId
-                  - paymentMethodId
-                description: The payment schedule attempts
-              nextAttempt:
-                type: string
-                format: date-time
-                description: The date of the next payment schedule attempt
-            required:
-            - due
-            - status
-            - total
-          description: Public information about the schedules of the payment plan
-        secret:
-          type: string
-          description: The secret of the payment plan
         status:
           type: string
           enum:
@@ -489,97 +418,9 @@ components:
           - CANCELED
           - COMPLETED
           description: The status of the payment plan
-        currency:
-          type: string
-          enum:
-          - EUR
-          - USD
-          - GBP
-          - AUD
-          - CHF
-          - THB
-          - ILS
-          - COP
-          - MXN
-          - DKK
-          - NOK
-          - SEK
-          - QAR
-          - CAD
-          - ISK
-          - GTQ
-          - INR
-          - DOP
-          - SGD
-          - PLN
-          - SAR
-          - TTD
-          - ZAR
-          - KYD
-          - HKD
-          - CZK
-          - KRW
-          - JPY
-          - NZD
-          - AED
-          - MAD
-          - TWD
-          - BRL
-          - BWP
-          - NAD
-          - KES
-          - SCR
-          - TRY
-          - SZL
-          - LSL
-          - TZS
-          - UGX
-          - ZMW
-          - ZWG
-          - GHS
-          - NGN
-          - SLE
-          - LRD
-          - XOF
-          - XAF
-          - GEL
-          - IDR
-          - ARS
-          - CRC
-          - HUF
-          - EGP
-          - MYR
-          - VND
-          - PHP
-          description: The currency of the payment plan
         customerPaymentMethodId:
           type: string
           description: The ID of the customer payment method
-        paymentStrategyId:
-          type: string
-          description: The ID of the payment strategy
-        paymentOptionId:
-          type: string
-          description: The ID of the payment option
-        checkoutId:
-          type: string
-          description: The ID of the checkout
-        subscriptionId:
-          type: string
-          description: The ID of the subscription
-        sellerId:
-          type: string
-          description: The ID of the seller
-      required:
-      - _id
-      - schedules
-      - secret
-      - status
-      - currency
-      - customerPaymentMethodId
-      - paymentStrategyId
-      - paymentOptionId
-      - sellerId
     POST_Payment-plans_CompleteAPublicPaymentPlan:
       type: object
       properties:
@@ -588,784 +429,6 @@ components:
           description: The secret of the payment plan
       required:
       - secret
-    PUT_Payment-plans_UpdateAPublicPaymentPlan:
-      type: object
-      properties:
-        secret:
-          type: string
-          description: The secret of the payment plan
-        customerPaymentMethodId:
-          type: string
-          description: The ID of the customer payment method
-      required:
-      - secret
-      - customerPaymentMethodId
-    POST_Payment-plans_CompleteAPaymentPlan_200_response:
-      type: object
-      properties:
-        _id:
-          type: string
-          description: The ID of the payment plan
-        schedules:
-          type: array
-          items:
-            type: object
-            properties:
-              due:
-                type: string
-                format: date-time
-                description: The date when the payment is due
-              status:
-                type: string
-                enum:
-                - SCHEDULED
-                - PENDING
-                - SUCCEEDED
-                - FAILED
-                - REFUNDED
-                description: The status of the payment schedule
-              total:
-                type: number
-                format: float
-                description: The total amount of the payment schedule
-              attempts:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    _id:
-                      type: string
-                      description: The ID of the payment schedule attempt
-                    date:
-                      type: string
-                      format: date-time
-                      description: The date of the payment schedule attempt
-                    status:
-                      type: string
-                      enum:
-                      - SCHEDULED
-                      - PENDING
-                      - SUCCEEDED
-                      - FAILED
-                      - REFUNDED
-                      description: The status of the payment schedule attempt
-                    paymentRequestId:
-                      type: string
-                      description: The Payment Request ID of the payment schedule attempt
-                    paymentMethodId:
-                      type: string
-                      description: The Payment Method ID of the payment schedule attempt
-                  required:
-                  - _id
-                  - date
-                  - status
-                  - paymentRequestId
-                  - paymentMethodId
-                description: The payment schedule attempts
-              nextAttempt:
-                type: string
-                format: date-time
-                description: The date of the next payment schedule attempt
-            required:
-            - due
-            - status
-            - total
-          description: Public information about the schedules of the payment plan
-        secret:
-          type: string
-          description: The secret of the payment plan
-        status:
-          type: string
-          enum:
-          - DRAFT
-          - ACTIVE
-          - INCOMPLETE
-          - CANCELED
-          - COMPLETED
-          description: The status of the payment plan
-        currency:
-          type: string
-          enum:
-          - EUR
-          - USD
-          - GBP
-          - AUD
-          - CHF
-          - THB
-          - ILS
-          - COP
-          - MXN
-          - DKK
-          - NOK
-          - SEK
-          - QAR
-          - CAD
-          - ISK
-          - GTQ
-          - INR
-          - DOP
-          - SGD
-          - PLN
-          - SAR
-          - TTD
-          - ZAR
-          - KYD
-          - HKD
-          - CZK
-          - KRW
-          - JPY
-          - NZD
-          - AED
-          - MAD
-          - TWD
-          - BRL
-          - BWP
-          - NAD
-          - KES
-          - SCR
-          - TRY
-          - SZL
-          - LSL
-          - TZS
-          - UGX
-          - ZMW
-          - ZWG
-          - GHS
-          - NGN
-          - SLE
-          - LRD
-          - XOF
-          - XAF
-          - GEL
-          - IDR
-          - ARS
-          - CRC
-          - HUF
-          - EGP
-          - MYR
-          - VND
-          - PHP
-          description: The currency of the payment plan
-        customerPaymentMethodId:
-          type: string
-          description: The ID of the customer payment method
-        paymentStrategyId:
-          type: string
-          description: The ID of the payment strategy
-        paymentOptionId:
-          type: string
-          description: The ID of the payment option
-        checkoutId:
-          type: string
-          description: The ID of the checkout
-        subscriptionId:
-          type: string
-          description: The ID of the subscription
-        sellerId:
-          type: string
-          description: The ID of the seller
-      required:
-      - _id
-      - schedules
-      - secret
-      - status
-      - currency
-      - customerPaymentMethodId
-      - paymentStrategyId
-      - paymentOptionId
-      - sellerId
-    PUT_Payment-plans_UpdateAPaymentPlan_200_response:
-      type: object
-      properties:
-        _id:
-          type: string
-          description: The ID of the payment plan
-        sellerId:
-          type: string
-          description: The ID of the seller
-        status:
-          type: string
-          enum:
-          - DRAFT
-          - ACTIVE
-          - INCOMPLETE
-          - CANCELED
-          - COMPLETED
-          description: The status of the payment plan
-        customerId:
-          type: string
-          description: The ID of the customer
-        currency:
-          type: string
-          enum:
-          - EUR
-          - USD
-          - GBP
-          - AUD
-          - CHF
-          - THB
-          - ILS
-          - COP
-          - MXN
-          - DKK
-          - NOK
-          - SEK
-          - QAR
-          - CAD
-          - ISK
-          - GTQ
-          - INR
-          - DOP
-          - SGD
-          - PLN
-          - SAR
-          - TTD
-          - ZAR
-          - KYD
-          - HKD
-          - CZK
-          - KRW
-          - JPY
-          - NZD
-          - AED
-          - MAD
-          - TWD
-          - BRL
-          - BWP
-          - NAD
-          - KES
-          - SCR
-          - TRY
-          - SZL
-          - LSL
-          - TZS
-          - UGX
-          - ZMW
-          - ZWG
-          - GHS
-          - NGN
-          - SLE
-          - LRD
-          - XOF
-          - XAF
-          - GEL
-          - IDR
-          - ARS
-          - CRC
-          - HUF
-          - EGP
-          - MYR
-          - VND
-          - PHP
-          description: The currency of the payment plan
-        customerPaymentMethodId:
-          type: string
-          description: The ID of the customer payment method
-        paymentStrategyId:
-          type: string
-          description: The ID of the payment strategy
-        paymentOptionId:
-          type: string
-          description: The ID of the payment option
-        history:
-          type: array
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-                enum:
-                - paymentPlan.created
-                - paymentPlan.status_changed
-                - paymentPlan.cycle_applied
-                - paymentPlan.payment_method_changed
-                - paymentPlan.item_changed
-                - paymentPlan.down_payment_charged
-                - paymentPlan.down_payment_failed
-                - paymentPlan.canceled
-                - paymentPlan.payoff_charged
-                - paymentPlan.payoff_failed
-                - paymentPlan.schedule_retried
-                - paymentPlan.schedule_retry_failed
-                - paymentPlan.dispute_created
-                - paymentPlan.dispute_countered
-                - paymentPlan.dispute_won
-                - paymentPlan.chargeback_created
-                description: The type of the history entry
-              date:
-                type: string
-                format: date-time
-                description: The date of the history entry
-              data:
-                type: object
-                description: The data of the history entry
-              userId:
-                type: string
-                description: The ID of the user who made the history entry
-            required:
-            - type
-            - date
-          description: The history of the payment plan
-        schedules:
-          type: array
-          items:
-            type: object
-            properties:
-              _id:
-                type: string
-                description: The ID of the payment schedule
-              due:
-                type: string
-                format: date-time
-                description: The date when the payment is due
-              status:
-                type: string
-                enum:
-                - SCHEDULED
-                - PENDING
-                - SUCCEEDED
-                - FAILED
-                - REFUNDED
-                description: The status of the payment schedule
-              total:
-                type: number
-                format: float
-                description: The total amount of the payment schedule
-              paymentRequestId:
-                type: string
-                description: The ID of the payment request
-              paymentId:
-                type: string
-                description: The ID of the payment
-              attempts:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    _id:
-                      type: string
-                      description: The ID of the payment schedule attempt
-                    date:
-                      type: string
-                      format: date-time
-                      description: The date of the payment schedule attempt
-                    status:
-                      type: string
-                      enum:
-                      - SCHEDULED
-                      - PENDING
-                      - SUCCEEDED
-                      - FAILED
-                      - REFUNDED
-                      description: The status of the payment schedule attempt
-                    paymentRequestId:
-                      type: string
-                      description: The Payment Request ID of the payment schedule attempt
-                    paymentMethodId:
-                      type: string
-                      description: The Payment Method ID of the payment schedule attempt
-                  required:
-                  - _id
-                  - date
-                  - status
-                  - paymentRequestId
-                  - paymentMethodId
-                description: The payment schedule attempts
-              nextAttempt:
-                type: string
-                format: date-time
-                description: The date of the next payment schedule attempt
-            required:
-            - _id
-            - due
-            - status
-            - total
-            - paymentRequestId
-          description: The schedules of the payment plan
-        checkoutId:
-          type: string
-          description: The ID of the checkout
-        salesChannelId:
-          type: string
-          description: The ID of the sales channel
-        secret:
-          type: string
-          description: The secret of the payment plan
-        canceledAt:
-          type: string
-          format: date-time
-          description: The date when the payment plan was canceled
-        createdAt:
-          type: string
-          format: date-time
-          description: The date when the payment plan was created
-        updatedAt:
-          type: string
-          format: date-time
-          description: The date when the payment plan was updated
-      required:
-      - _id
-      - sellerId
-      - status
-      - customerId
-      - currency
-      - customerPaymentMethodId
-      - paymentStrategyId
-      - paymentOptionId
-      - schedules
-      - checkoutId
-      - salesChannelId
-      - secret
-      - createdAt
-      - updatedAt
-    GET_Payment-plans_GetAPublicPaymentPlan_200_response:
-      type: object
-      properties:
-        _id:
-          type: string
-          description: The ID of the payment plan
-        schedules:
-          type: array
-          items:
-            type: object
-            properties:
-              due:
-                type: string
-                format: date-time
-                description: The date when the payment is due
-              status:
-                type: string
-                enum:
-                - SCHEDULED
-                - PENDING
-                - SUCCEEDED
-                - FAILED
-                - REFUNDED
-                description: The status of the payment schedule
-              total:
-                type: number
-                format: float
-                description: The total amount of the payment schedule
-              attempts:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    _id:
-                      type: string
-                      description: The ID of the payment schedule attempt
-                    date:
-                      type: string
-                      format: date-time
-                      description: The date of the payment schedule attempt
-                    status:
-                      type: string
-                      enum:
-                      - SCHEDULED
-                      - PENDING
-                      - SUCCEEDED
-                      - FAILED
-                      - REFUNDED
-                      description: The status of the payment schedule attempt
-                    paymentRequestId:
-                      type: string
-                      description: The Payment Request ID of the payment schedule attempt
-                    paymentMethodId:
-                      type: string
-                      description: The Payment Method ID of the payment schedule attempt
-                  required:
-                  - _id
-                  - date
-                  - status
-                  - paymentRequestId
-                  - paymentMethodId
-                description: The payment schedule attempts
-              nextAttempt:
-                type: string
-                format: date-time
-                description: The date of the next payment schedule attempt
-            required:
-            - due
-            - status
-            - total
-          description: Public information about the schedules of the payment plan
-        secret:
-          type: string
-          description: The secret of the payment plan
-        status:
-          type: string
-          enum:
-          - DRAFT
-          - ACTIVE
-          - INCOMPLETE
-          - CANCELED
-          - COMPLETED
-          description: The status of the payment plan
-        currency:
-          type: string
-          enum:
-          - EUR
-          - USD
-          - GBP
-          - AUD
-          - CHF
-          - THB
-          - ILS
-          - COP
-          - MXN
-          - DKK
-          - NOK
-          - SEK
-          - QAR
-          - CAD
-          - ISK
-          - GTQ
-          - INR
-          - DOP
-          - SGD
-          - PLN
-          - SAR
-          - TTD
-          - ZAR
-          - KYD
-          - HKD
-          - CZK
-          - KRW
-          - JPY
-          - NZD
-          - AED
-          - MAD
-          - TWD
-          - BRL
-          - BWP
-          - NAD
-          - KES
-          - SCR
-          - TRY
-          - SZL
-          - LSL
-          - TZS
-          - UGX
-          - ZMW
-          - ZWG
-          - GHS
-          - NGN
-          - SLE
-          - LRD
-          - XOF
-          - XAF
-          - GEL
-          - IDR
-          - ARS
-          - CRC
-          - HUF
-          - EGP
-          - MYR
-          - VND
-          - PHP
-          description: The currency of the payment plan
-        customerPaymentMethodId:
-          type: string
-          description: The ID of the customer payment method
-        paymentStrategyId:
-          type: string
-          description: The ID of the payment strategy
-        paymentOptionId:
-          type: string
-          description: The ID of the payment option
-        checkoutId:
-          type: string
-          description: The ID of the checkout
-        subscriptionId:
-          type: string
-          description: The ID of the subscription
-        sellerId:
-          type: string
-          description: The ID of the seller
-      required:
-      - _id
-      - schedules
-      - secret
-      - status
-      - currency
-      - customerPaymentMethodId
-      - paymentStrategyId
-      - paymentOptionId
-      - sellerId
-    GET_Payment-plans_GetAPaymentPlansPublicInformationBasedOnTheTransaction_200_response:
-      type: object
-      properties:
-        _id:
-          type: string
-          description: The ID of the payment plan
-        schedules:
-          type: array
-          items:
-            type: object
-            properties:
-              due:
-                type: string
-                format: date-time
-                description: The date when the payment is due
-              status:
-                type: string
-                enum:
-                - SCHEDULED
-                - PENDING
-                - SUCCEEDED
-                - FAILED
-                - REFUNDED
-                description: The status of the payment schedule
-              total:
-                type: number
-                format: float
-                description: The total amount of the payment schedule
-              attempts:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    _id:
-                      type: string
-                      description: The ID of the payment schedule attempt
-                    date:
-                      type: string
-                      format: date-time
-                      description: The date of the payment schedule attempt
-                    status:
-                      type: string
-                      enum:
-                      - SCHEDULED
-                      - PENDING
-                      - SUCCEEDED
-                      - FAILED
-                      - REFUNDED
-                      description: The status of the payment schedule attempt
-                    paymentRequestId:
-                      type: string
-                      description: The Payment Request ID of the payment schedule attempt
-                    paymentMethodId:
-                      type: string
-                      description: The Payment Method ID of the payment schedule attempt
-                  required:
-                  - _id
-                  - date
-                  - status
-                  - paymentRequestId
-                  - paymentMethodId
-                description: The payment schedule attempts
-              nextAttempt:
-                type: string
-                format: date-time
-                description: The date of the next payment schedule attempt
-            required:
-            - due
-            - status
-            - total
-          description: Public information about the schedules of the payment plan
-        secret:
-          type: string
-          description: The secret of the payment plan
-        status:
-          type: string
-          enum:
-          - DRAFT
-          - ACTIVE
-          - INCOMPLETE
-          - CANCELED
-          - COMPLETED
-          description: The status of the payment plan
-        currency:
-          type: string
-          enum:
-          - EUR
-          - USD
-          - GBP
-          - AUD
-          - CHF
-          - THB
-          - ILS
-          - COP
-          - MXN
-          - DKK
-          - NOK
-          - SEK
-          - QAR
-          - CAD
-          - ISK
-          - GTQ
-          - INR
-          - DOP
-          - SGD
-          - PLN
-          - SAR
-          - TTD
-          - ZAR
-          - KYD
-          - HKD
-          - CZK
-          - KRW
-          - JPY
-          - NZD
-          - AED
-          - MAD
-          - TWD
-          - BRL
-          - BWP
-          - NAD
-          - KES
-          - SCR
-          - TRY
-          - SZL
-          - LSL
-          - TZS
-          - UGX
-          - ZMW
-          - ZWG
-          - GHS
-          - NGN
-          - SLE
-          - LRD
-          - XOF
-          - XAF
-          - GEL
-          - IDR
-          - ARS
-          - CRC
-          - HUF
-          - EGP
-          - MYR
-          - VND
-          - PHP
-          description: The currency of the payment plan
-        customerPaymentMethodId:
-          type: string
-          description: The ID of the customer payment method
-        paymentStrategyId:
-          type: string
-          description: The ID of the payment strategy
-        paymentOptionId:
-          type: string
-          description: The ID of the payment option
-        checkoutId:
-          type: string
-          description: The ID of the checkout
-        subscriptionId:
-          type: string
-          description: The ID of the subscription
-        sellerId:
-          type: string
-          description: The ID of the seller
-      required:
-      - _id
-      - schedules
-      - secret
-      - status
-      - currency
-      - customerPaymentMethodId
-      - paymentStrategyId
-      - paymentOptionId
-      - sellerId
     POST_Payment-plans_CompleteAPublicPaymentPlan_200_response:
       type: object
       properties:
@@ -1540,21 +603,6 @@ components:
       - paymentStrategyId
       - paymentOptionId
       - sellerId
-    PUT_Payment-plans_UpdateAPaymentPlan:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - DRAFT
-          - ACTIVE
-          - INCOMPLETE
-          - CANCELED
-          - COMPLETED
-          description: The status of the payment plan
-        customerPaymentMethodId:
-          type: string
-          description: The ID of the customer payment method
     GET_Payment-plans_ListPaymentPlans_200_response:
       type: object
       properties:
@@ -1806,80 +854,15 @@ components:
             - updatedAt
         total:
           type: integer
-    PUT_Payment-plans_UpdateAPublicPaymentPlan_200_response:
+    PUT_Payment-plans_UpdateAPaymentPlan_200_response:
       type: object
       properties:
         _id:
           type: string
           description: The ID of the payment plan
-        schedules:
-          type: array
-          items:
-            type: object
-            properties:
-              due:
-                type: string
-                format: date-time
-                description: The date when the payment is due
-              status:
-                type: string
-                enum:
-                - SCHEDULED
-                - PENDING
-                - SUCCEEDED
-                - FAILED
-                - REFUNDED
-                description: The status of the payment schedule
-              total:
-                type: number
-                format: float
-                description: The total amount of the payment schedule
-              attempts:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    _id:
-                      type: string
-                      description: The ID of the payment schedule attempt
-                    date:
-                      type: string
-                      format: date-time
-                      description: The date of the payment schedule attempt
-                    status:
-                      type: string
-                      enum:
-                      - SCHEDULED
-                      - PENDING
-                      - SUCCEEDED
-                      - FAILED
-                      - REFUNDED
-                      description: The status of the payment schedule attempt
-                    paymentRequestId:
-                      type: string
-                      description: The Payment Request ID of the payment schedule attempt
-                    paymentMethodId:
-                      type: string
-                      description: The Payment Method ID of the payment schedule attempt
-                  required:
-                  - _id
-                  - date
-                  - status
-                  - paymentRequestId
-                  - paymentMethodId
-                description: The payment schedule attempts
-              nextAttempt:
-                type: string
-                format: date-time
-                description: The date of the next payment schedule attempt
-            required:
-            - due
-            - status
-            - total
-          description: Public information about the schedules of the payment plan
-        secret:
+        sellerId:
           type: string
-          description: The secret of the payment plan
+          description: The ID of the seller
         status:
           type: string
           enum:
@@ -1889,6 +872,9 @@ components:
           - CANCELED
           - COMPLETED
           description: The status of the payment plan
+        customerId:
+          type: string
+          description: The ID of the customer
         currency:
           type: string
           enum:
@@ -1961,25 +947,157 @@ components:
         paymentOptionId:
           type: string
           description: The ID of the payment option
+        history:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - paymentPlan.created
+                - paymentPlan.status_changed
+                - paymentPlan.cycle_applied
+                - paymentPlan.payment_method_changed
+                - paymentPlan.item_changed
+                - paymentPlan.down_payment_charged
+                - paymentPlan.down_payment_failed
+                - paymentPlan.canceled
+                - paymentPlan.payoff_charged
+                - paymentPlan.payoff_failed
+                - paymentPlan.schedule_retried
+                - paymentPlan.schedule_retry_failed
+                - paymentPlan.dispute_created
+                - paymentPlan.dispute_countered
+                - paymentPlan.dispute_won
+                - paymentPlan.chargeback_created
+                description: The type of the history entry
+              date:
+                type: string
+                format: date-time
+                description: The date of the history entry
+              data:
+                type: object
+                description: The data of the history entry
+              userId:
+                type: string
+                description: The ID of the user who made the history entry
+            required:
+            - type
+            - date
+          description: The history of the payment plan
+        schedules:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the payment schedule
+              due:
+                type: string
+                format: date-time
+                description: The date when the payment is due
+              status:
+                type: string
+                enum:
+                - SCHEDULED
+                - PENDING
+                - SUCCEEDED
+                - FAILED
+                - REFUNDED
+                description: The status of the payment schedule
+              total:
+                type: number
+                format: float
+                description: The total amount of the payment schedule
+              paymentRequestId:
+                type: string
+                description: The ID of the payment request
+              paymentId:
+                type: string
+                description: The ID of the payment
+              attempts:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The ID of the payment schedule attempt
+                    date:
+                      type: string
+                      format: date-time
+                      description: The date of the payment schedule attempt
+                    status:
+                      type: string
+                      enum:
+                      - SCHEDULED
+                      - PENDING
+                      - SUCCEEDED
+                      - FAILED
+                      - REFUNDED
+                      description: The status of the payment schedule attempt
+                    paymentRequestId:
+                      type: string
+                      description: The Payment Request ID of the payment schedule attempt
+                    paymentMethodId:
+                      type: string
+                      description: The Payment Method ID of the payment schedule attempt
+                  required:
+                  - _id
+                  - date
+                  - status
+                  - paymentRequestId
+                  - paymentMethodId
+                description: The payment schedule attempts
+              nextAttempt:
+                type: string
+                format: date-time
+                description: The date of the next payment schedule attempt
+            required:
+            - _id
+            - due
+            - status
+            - total
+            - paymentRequestId
+          description: The schedules of the payment plan
         checkoutId:
           type: string
           description: The ID of the checkout
-        subscriptionId:
+        salesChannelId:
           type: string
-          description: The ID of the subscription
-        sellerId:
+          description: The ID of the sales channel
+        secret:
           type: string
-          description: The ID of the seller
+          description: The secret of the payment plan
+        canceledAt:
+          type: string
+          format: date-time
+          description: The date when the payment plan was canceled
+        createdAt:
+          type: string
+          format: date-time
+          description: The date when the payment plan was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: The date when the payment plan was updated
       required:
       - _id
-      - schedules
-      - secret
+      - sellerId
       - status
+      - customerId
       - currency
       - customerPaymentMethodId
       - paymentStrategyId
       - paymentOptionId
-      - sellerId
+      - schedules
+      - checkoutId
+      - salesChannelId
+      - secret
+      - createdAt
+      - updatedAt
     GET_Payment-plans_GetAPaymentPlan_200_response:
       type: object
       properties:
@@ -2224,6 +1342,354 @@ components:
       - secret
       - createdAt
       - updatedAt
+    GET_Payment-plans_GetAPaymentPlansPublicInformationBasedOnTheTransaction_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the payment plan
+        schedules:
+          type: array
+          items:
+            type: object
+            properties:
+              due:
+                type: string
+                format: date-time
+                description: The date when the payment is due
+              status:
+                type: string
+                enum:
+                - SCHEDULED
+                - PENDING
+                - SUCCEEDED
+                - FAILED
+                - REFUNDED
+                description: The status of the payment schedule
+              total:
+                type: number
+                format: float
+                description: The total amount of the payment schedule
+              attempts:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The ID of the payment schedule attempt
+                    date:
+                      type: string
+                      format: date-time
+                      description: The date of the payment schedule attempt
+                    status:
+                      type: string
+                      enum:
+                      - SCHEDULED
+                      - PENDING
+                      - SUCCEEDED
+                      - FAILED
+                      - REFUNDED
+                      description: The status of the payment schedule attempt
+                    paymentRequestId:
+                      type: string
+                      description: The Payment Request ID of the payment schedule attempt
+                    paymentMethodId:
+                      type: string
+                      description: The Payment Method ID of the payment schedule attempt
+                  required:
+                  - _id
+                  - date
+                  - status
+                  - paymentRequestId
+                  - paymentMethodId
+                description: The payment schedule attempts
+              nextAttempt:
+                type: string
+                format: date-time
+                description: The date of the next payment schedule attempt
+            required:
+            - due
+            - status
+            - total
+          description: Public information about the schedules of the payment plan
+        secret:
+          type: string
+          description: The secret of the payment plan
+        status:
+          type: string
+          enum:
+          - DRAFT
+          - ACTIVE
+          - INCOMPLETE
+          - CANCELED
+          - COMPLETED
+          description: The status of the payment plan
+        currency:
+          type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: The currency of the payment plan
+        customerPaymentMethodId:
+          type: string
+          description: The ID of the customer payment method
+        paymentStrategyId:
+          type: string
+          description: The ID of the payment strategy
+        paymentOptionId:
+          type: string
+          description: The ID of the payment option
+        checkoutId:
+          type: string
+          description: The ID of the checkout
+        subscriptionId:
+          type: string
+          description: The ID of the subscription
+        sellerId:
+          type: string
+          description: The ID of the seller
+      required:
+      - _id
+      - schedules
+      - secret
+      - status
+      - currency
+      - customerPaymentMethodId
+      - paymentStrategyId
+      - paymentOptionId
+      - sellerId
+    PUT_Payment-plans_UpdateAPublicPaymentPlan_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the payment plan
+        schedules:
+          type: array
+          items:
+            type: object
+            properties:
+              due:
+                type: string
+                format: date-time
+                description: The date when the payment is due
+              status:
+                type: string
+                enum:
+                - SCHEDULED
+                - PENDING
+                - SUCCEEDED
+                - FAILED
+                - REFUNDED
+                description: The status of the payment schedule
+              total:
+                type: number
+                format: float
+                description: The total amount of the payment schedule
+              attempts:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The ID of the payment schedule attempt
+                    date:
+                      type: string
+                      format: date-time
+                      description: The date of the payment schedule attempt
+                    status:
+                      type: string
+                      enum:
+                      - SCHEDULED
+                      - PENDING
+                      - SUCCEEDED
+                      - FAILED
+                      - REFUNDED
+                      description: The status of the payment schedule attempt
+                    paymentRequestId:
+                      type: string
+                      description: The Payment Request ID of the payment schedule attempt
+                    paymentMethodId:
+                      type: string
+                      description: The Payment Method ID of the payment schedule attempt
+                  required:
+                  - _id
+                  - date
+                  - status
+                  - paymentRequestId
+                  - paymentMethodId
+                description: The payment schedule attempts
+              nextAttempt:
+                type: string
+                format: date-time
+                description: The date of the next payment schedule attempt
+            required:
+            - due
+            - status
+            - total
+          description: Public information about the schedules of the payment plan
+        secret:
+          type: string
+          description: The secret of the payment plan
+        status:
+          type: string
+          enum:
+          - DRAFT
+          - ACTIVE
+          - INCOMPLETE
+          - CANCELED
+          - COMPLETED
+          description: The status of the payment plan
+        currency:
+          type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: The currency of the payment plan
+        customerPaymentMethodId:
+          type: string
+          description: The ID of the customer payment method
+        paymentStrategyId:
+          type: string
+          description: The ID of the payment strategy
+        paymentOptionId:
+          type: string
+          description: The ID of the payment option
+        checkoutId:
+          type: string
+          description: The ID of the checkout
+        subscriptionId:
+          type: string
+          description: The ID of the subscription
+        sellerId:
+          type: string
+          description: The ID of the seller
+      required:
+      - _id
+      - schedules
+      - secret
+      - status
+      - currency
+      - customerPaymentMethodId
+      - paymentStrategyId
+      - paymentOptionId
+      - sellerId
     POST_Payment-plans_RetryAPaymentPlanSchedule_200_response:
       type: object
       properties:
@@ -2468,6 +1934,540 @@ components:
       - secret
       - createdAt
       - updatedAt
+    PUT_Payment-plans_UpdateAPublicPaymentPlan:
+      type: object
+      properties:
+        secret:
+          type: string
+          description: The secret of the payment plan
+        customerPaymentMethodId:
+          type: string
+          description: The ID of the customer payment method
+      required:
+      - secret
+      - customerPaymentMethodId
+    POST_Payment-plans_RetryAPublicPaymentPlanSchedule_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the payment plan
+        schedules:
+          type: array
+          items:
+            type: object
+            properties:
+              due:
+                type: string
+                format: date-time
+                description: The date when the payment is due
+              status:
+                type: string
+                enum:
+                - SCHEDULED
+                - PENDING
+                - SUCCEEDED
+                - FAILED
+                - REFUNDED
+                description: The status of the payment schedule
+              total:
+                type: number
+                format: float
+                description: The total amount of the payment schedule
+              attempts:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The ID of the payment schedule attempt
+                    date:
+                      type: string
+                      format: date-time
+                      description: The date of the payment schedule attempt
+                    status:
+                      type: string
+                      enum:
+                      - SCHEDULED
+                      - PENDING
+                      - SUCCEEDED
+                      - FAILED
+                      - REFUNDED
+                      description: The status of the payment schedule attempt
+                    paymentRequestId:
+                      type: string
+                      description: The Payment Request ID of the payment schedule attempt
+                    paymentMethodId:
+                      type: string
+                      description: The Payment Method ID of the payment schedule attempt
+                  required:
+                  - _id
+                  - date
+                  - status
+                  - paymentRequestId
+                  - paymentMethodId
+                description: The payment schedule attempts
+              nextAttempt:
+                type: string
+                format: date-time
+                description: The date of the next payment schedule attempt
+            required:
+            - due
+            - status
+            - total
+          description: Public information about the schedules of the payment plan
+        secret:
+          type: string
+          description: The secret of the payment plan
+        status:
+          type: string
+          enum:
+          - DRAFT
+          - ACTIVE
+          - INCOMPLETE
+          - CANCELED
+          - COMPLETED
+          description: The status of the payment plan
+        currency:
+          type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: The currency of the payment plan
+        customerPaymentMethodId:
+          type: string
+          description: The ID of the customer payment method
+        paymentStrategyId:
+          type: string
+          description: The ID of the payment strategy
+        paymentOptionId:
+          type: string
+          description: The ID of the payment option
+        checkoutId:
+          type: string
+          description: The ID of the checkout
+        subscriptionId:
+          type: string
+          description: The ID of the subscription
+        sellerId:
+          type: string
+          description: The ID of the seller
+      required:
+      - _id
+      - schedules
+      - secret
+      - status
+      - currency
+      - customerPaymentMethodId
+      - paymentStrategyId
+      - paymentOptionId
+      - sellerId
+    POST_Payment-plans_CompleteAPaymentPlan_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the payment plan
+        schedules:
+          type: array
+          items:
+            type: object
+            properties:
+              due:
+                type: string
+                format: date-time
+                description: The date when the payment is due
+              status:
+                type: string
+                enum:
+                - SCHEDULED
+                - PENDING
+                - SUCCEEDED
+                - FAILED
+                - REFUNDED
+                description: The status of the payment schedule
+              total:
+                type: number
+                format: float
+                description: The total amount of the payment schedule
+              attempts:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The ID of the payment schedule attempt
+                    date:
+                      type: string
+                      format: date-time
+                      description: The date of the payment schedule attempt
+                    status:
+                      type: string
+                      enum:
+                      - SCHEDULED
+                      - PENDING
+                      - SUCCEEDED
+                      - FAILED
+                      - REFUNDED
+                      description: The status of the payment schedule attempt
+                    paymentRequestId:
+                      type: string
+                      description: The Payment Request ID of the payment schedule attempt
+                    paymentMethodId:
+                      type: string
+                      description: The Payment Method ID of the payment schedule attempt
+                  required:
+                  - _id
+                  - date
+                  - status
+                  - paymentRequestId
+                  - paymentMethodId
+                description: The payment schedule attempts
+              nextAttempt:
+                type: string
+                format: date-time
+                description: The date of the next payment schedule attempt
+            required:
+            - due
+            - status
+            - total
+          description: Public information about the schedules of the payment plan
+        secret:
+          type: string
+          description: The secret of the payment plan
+        status:
+          type: string
+          enum:
+          - DRAFT
+          - ACTIVE
+          - INCOMPLETE
+          - CANCELED
+          - COMPLETED
+          description: The status of the payment plan
+        currency:
+          type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: The currency of the payment plan
+        customerPaymentMethodId:
+          type: string
+          description: The ID of the customer payment method
+        paymentStrategyId:
+          type: string
+          description: The ID of the payment strategy
+        paymentOptionId:
+          type: string
+          description: The ID of the payment option
+        checkoutId:
+          type: string
+          description: The ID of the checkout
+        subscriptionId:
+          type: string
+          description: The ID of the subscription
+        sellerId:
+          type: string
+          description: The ID of the seller
+      required:
+      - _id
+      - schedules
+      - secret
+      - status
+      - currency
+      - customerPaymentMethodId
+      - paymentStrategyId
+      - paymentOptionId
+      - sellerId
+    GET_Payment-plans_GetAPublicPaymentPlan_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the payment plan
+        schedules:
+          type: array
+          items:
+            type: object
+            properties:
+              due:
+                type: string
+                format: date-time
+                description: The date when the payment is due
+              status:
+                type: string
+                enum:
+                - SCHEDULED
+                - PENDING
+                - SUCCEEDED
+                - FAILED
+                - REFUNDED
+                description: The status of the payment schedule
+              total:
+                type: number
+                format: float
+                description: The total amount of the payment schedule
+              attempts:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The ID of the payment schedule attempt
+                    date:
+                      type: string
+                      format: date-time
+                      description: The date of the payment schedule attempt
+                    status:
+                      type: string
+                      enum:
+                      - SCHEDULED
+                      - PENDING
+                      - SUCCEEDED
+                      - FAILED
+                      - REFUNDED
+                      description: The status of the payment schedule attempt
+                    paymentRequestId:
+                      type: string
+                      description: The Payment Request ID of the payment schedule attempt
+                    paymentMethodId:
+                      type: string
+                      description: The Payment Method ID of the payment schedule attempt
+                  required:
+                  - _id
+                  - date
+                  - status
+                  - paymentRequestId
+                  - paymentMethodId
+                description: The payment schedule attempts
+              nextAttempt:
+                type: string
+                format: date-time
+                description: The date of the next payment schedule attempt
+            required:
+            - due
+            - status
+            - total
+          description: Public information about the schedules of the payment plan
+        secret:
+          type: string
+          description: The secret of the payment plan
+        status:
+          type: string
+          enum:
+          - DRAFT
+          - ACTIVE
+          - INCOMPLETE
+          - CANCELED
+          - COMPLETED
+          description: The status of the payment plan
+        currency:
+          type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: The currency of the payment plan
+        customerPaymentMethodId:
+          type: string
+          description: The ID of the customer payment method
+        paymentStrategyId:
+          type: string
+          description: The ID of the payment strategy
+        paymentOptionId:
+          type: string
+          description: The ID of the payment option
+        checkoutId:
+          type: string
+          description: The ID of the checkout
+        subscriptionId:
+          type: string
+          description: The ID of the subscription
+        sellerId:
+          type: string
+          description: The ID of the seller
+      required:
+      - _id
+      - schedules
+      - secret
+      - status
+      - currency
+      - customerPaymentMethodId
+      - paymentStrategyId
+      - paymentOptionId
+      - sellerId
   securitySchemes:
     jwt:
       type: http

@@ -373,7 +373,7 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    DELETE_Jobs_DeleteAScheduledJob_200_response:
+    POST_Jobs_CreateAScheduledJob_201_response:
       type: object
       properties:
         _id:
@@ -647,6 +647,482 @@ components:
       - timezone
       - createdAt
       - updatedAt
+    PUT_Jobs_UpdateAScheduledJob_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the scheduled job
+        name:
+          type: string
+          description: The name of the scheduled job
+        sellerId:
+          type: string
+          description: The ID of the seller of the scheduled job.
+        timezone:
+          type: string
+          description: The timezone of the scheduled job.
+        scheduleFrequency:
+          oneOf:
+          - type: object
+            properties:
+              interval:
+                type: string
+                enum:
+                - WEEK
+              every:
+                type: integer
+                minimum: 1
+                maximum: 1000
+                description: The recurrence of the scheduled job.
+              time:
+                type: object
+                properties:
+                  hour:
+                    type: integer
+                    minimum: 0
+                    maximum: 23
+                  minute:
+                    type: integer
+                    minimum: 0
+                    maximum: 59
+                required:
+                - hour
+                - minute
+                description: The time when scheduled job should be executed.
+              endAt:
+                type: string
+                format: date-time
+                description: An ISO Timestamp indicating when the last execution of the scheduled job should occur.
+              repeatsOn:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - SUNDAY
+                  - MONDAY
+                  - TUESDAY
+                  - WEDNESDAY
+                  - THURSDAY
+                  - FRIDAY
+                  - SATURDAY
+                minItems: 1
+            required:
+            - interval
+            - every
+            - repeatsOn
+          - type: object
+            properties:
+              every:
+                type: integer
+                minimum: 1
+                maximum: 1000
+                description: The recurrence of the scheduled job.
+              time:
+                type: object
+                properties:
+                  hour:
+                    type: integer
+                    minimum: 0
+                    maximum: 23
+                  minute:
+                    type: integer
+                    minimum: 0
+                    maximum: 59
+                required:
+                - hour
+                - minute
+                description: The time when scheduled job should be executed.
+              endAt:
+                type: string
+                format: date-time
+                description: An ISO Timestamp indicating when the last execution of the scheduled job should occur.
+              interval:
+                type: string
+                enum:
+                - DAY
+                - MONTH
+                description: The interval of the scheduled job.
+            required:
+            - interval
+            - every
+          description: The schedule specification of the sheduled job.
+        task:
+          oneOf:
+          - type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - report
+                - dashboard
+                description: The type of the task.
+              mail:
+                type: object
+                properties:
+                  to:
+                    type: array
+                    items:
+                      type: string
+                    minItems: 1
+                    description: The array of mail recipients.
+              timeWindow:
+                oneOf:
+                - type: object
+                  properties:
+                    mode:
+                      type: string
+                      enum:
+                      - ROLLING_WINDOW
+                    range:
+                      type: object
+                      properties:
+                        interval:
+                          type: integer
+                          minimum: 0
+                        unit:
+                          type: string
+                          enum:
+                          - DAY
+                          - WEEK
+                          - MONTH
+                          - YEAR
+                        offset:
+                          type: integer
+                          minimum: 0
+                      required:
+                      - interval
+                      - unit
+                      - offset
+                  required:
+                  - mode
+                  - range
+                - type: object
+                  properties:
+                    mode:
+                      type: string
+                      enum:
+                      - EQUAL_TO_FREQUENCY
+                      description: The mode of the time window.
+                      default: EQUAL_TO_FREQUENCY
+                  required:
+                  - mode
+              reportTemplateId:
+                type: string
+                description: The ID of the template report.
+              reportType:
+                type: string
+                description: The type of the template report.
+              config:
+                type: object
+                properties:
+                  hideFilters:
+                    type: boolean
+                description: The configuration object of the report.
+            required:
+            - type
+            - mail
+            - reportTemplateId
+            - reportType
+          - type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - dashboard
+                description: The type of the task.
+              mail:
+                type: object
+                properties:
+                  to:
+                    type: array
+                    items:
+                      type: string
+                    minItems: 1
+                    description: The array of mail recipients.
+              timeWindow:
+                oneOf:
+                - type: object
+                  properties:
+                    mode:
+                      type: string
+                      enum:
+                      - ROLLING_WINDOW
+                    range:
+                      type: object
+                      properties:
+                        interval:
+                          type: integer
+                          minimum: 0
+                        unit:
+                          type: string
+                          enum:
+                          - DAY
+                          - WEEK
+                          - MONTH
+                          - YEAR
+                        offset:
+                          type: integer
+                          minimum: 0
+                      required:
+                      - interval
+                      - unit
+                      - offset
+                  required:
+                  - mode
+                  - range
+                - type: object
+                  properties:
+                    mode:
+                      type: string
+                      enum:
+                      - EQUAL_TO_FREQUENCY
+                      description: The mode of the time window.
+                      default: EQUAL_TO_FREQUENCY
+                  required:
+                  - mode
+              dashboardId:
+                type: string
+                description: The ID of the dashboard.
+            required:
+            - type
+            - mail
+            - dashboardId
+          description: The task specification of the scheduled job.
+        createdBy:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - USER
+              - APP
+              - API_KEY
+              - SYSTEM
+              description: The type of the entity
+            id:
+              type: string
+              description: The ID of the entity
+          required:
+          - type
+          - id
+          description: The entity that created this scheduled job.
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the resource was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the resource was updated.
+      required:
+      - _id
+      - sellerId
+      - timezone
+      - createdAt
+      - updatedAt
+    POST_Jobs_CreateAnJob:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - transformJob
+          title:
+            type: string
+            description: The title of the job
+          runAfter:
+            type: string
+            format: date-time
+            description: An ISO timestamp indicating after which time the job should be run.
+          payload:
+            oneOf:
+            - type: object
+              properties:
+                resource:
+                  type: string
+                  enum:
+                  - ticketRangeInvalidation
+                csv:
+                  type: string
+                  description: An URL to download the CSV data.
+                json:
+                  type: string
+                  description: An URL to download the JSON data.
+                params:
+                  type: object
+                  properties:
+                    batch:
+                      type: string
+                      description: A UUId indicating in which batch the tickets were created
+                    groups:
+                      type: array
+                      items:
+                        type: array
+                        items:
+                          type: integer
+                          minimum: 0
+                        minItems: 2
+                        maxItems: 2
+              required:
+              - resource
+            - type: object
+              properties:
+                csv:
+                  type: string
+                  description: An URL to download the CSV data.
+                json:
+                  type: string
+                  description: An URL to download the JSON data.
+              required: []
+        required:
+        - type
+      - type: object
+        properties:
+          title:
+            type: string
+            description: The title of the job
+          runAfter:
+            type: string
+            format: date-time
+            description: An ISO timestamp indicating after which time the job should be run.
+          type:
+            type: string
+            enum:
+            - import
+            - export
+            - delete
+            - scheduledJob
+            description: The type of job.
+        required:
+        - type
+    GET_Jobs_GetAnJob_200_response:
+      oneOf:
+      - type: object
+        properties:
+          _id:
+            type: string
+            description: The ID of the job
+          sellerId:
+            type: string
+            description: The ID of the seller of the job
+          title:
+            type: string
+            description: The title of the job
+          type:
+            type: string
+            enum:
+            - transformJob
+          status:
+            type: string
+            enum:
+            - SCHEDULED
+            - RUNNING
+            - FAILED
+            - COMPLETED
+            - COMPLETED_WITH_ERRORS
+            description: The status of the job.
+          runAfter:
+            type: string
+            format: date-time
+            description: An ISO timestamp indicating after which time the job should be run.
+          startedAt:
+            type: string
+            format: date-time
+            description: An ISO timestamp indicating when the job started
+          finishedAt:
+            type: string
+            format: date-time
+            description: An ISO timestamp indicating when the job finished
+          payload:
+            oneOf:
+            - type: object
+              properties:
+                resource:
+                  type: string
+                  enum:
+                  - ticketRangeInvalidation
+                csv:
+                  type: string
+                  description: An URL to download the CSV data.
+                json:
+                  type: string
+                  description: An URL to download the JSON data.
+                params:
+                  type: object
+                  properties:
+                    batch:
+                      type: string
+                      description: A UUId indicating in which batch the tickets were created
+                    groups:
+                      type: array
+                      items:
+                        type: array
+                        items:
+                          type: integer
+                          minimum: 0
+                        minItems: 2
+                        maxItems: 2
+              required:
+              - resource
+            - type: object
+              properties:
+                csv:
+                  type: string
+                  description: An URL to download the CSV data.
+                json:
+                  type: string
+                  description: An URL to download the JSON data.
+              required: []
+        required:
+        - _id
+        - sellerId
+        - type
+      - type: object
+        properties:
+          _id:
+            type: string
+            description: The ID of the job
+          sellerId:
+            type: string
+            description: The ID of the seller of the job
+          title:
+            type: string
+            description: The title of the job
+          status:
+            type: string
+            enum:
+            - SCHEDULED
+            - RUNNING
+            - FAILED
+            - COMPLETED
+            - COMPLETED_WITH_ERRORS
+            description: The status of the job.
+          runAfter:
+            type: string
+            format: date-time
+            description: An ISO timestamp indicating after which time the job should be run.
+          startedAt:
+            type: string
+            format: date-time
+            description: An ISO timestamp indicating when the job started
+          finishedAt:
+            type: string
+            format: date-time
+            description: An ISO timestamp indicating when the job finished
+          type:
+            type: string
+            enum:
+            - import
+            - export
+            - delete
+            - scheduledJob
+            description: The type of job.
+        required:
+        - _id
+        - sellerId
+        - type
     GET_Jobs_GetAllScheduledJobs_200_response:
       type: object
       properties:
@@ -928,701 +1404,140 @@ components:
             - updatedAt
         total:
           type: integer
-    PUT_Jobs_UpdateAScheduledJob:
+    GET_Jobs_GetAllJobs_200_response:
       type: object
       properties:
-        name:
-          type: string
-          description: The name of the scheduled job
-        timezone:
-          type: string
-          description: The timezone of the scheduled job.
-        scheduleFrequency:
-          oneOf:
-          - type: object
-            properties:
-              interval:
-                type: string
-                enum:
-                - WEEK
-              every:
-                type: integer
-                minimum: 1
-                maximum: 1000
-                description: The recurrence of the scheduled job.
-              time:
-                type: object
-                properties:
-                  hour:
-                    type: integer
-                    minimum: 0
-                    maximum: 23
-                  minute:
-                    type: integer
-                    minimum: 0
-                    maximum: 59
-                required:
-                - hour
-                - minute
-                description: The time when scheduled job should be executed.
-              endAt:
-                type: string
-                format: date-time
-                description: An ISO Timestamp indicating when the last execution of the scheduled job should occur.
-              repeatsOn:
-                type: array
-                items:
-                  type: string
-                  enum:
-                  - SUNDAY
-                  - MONDAY
-                  - TUESDAY
-                  - WEDNESDAY
-                  - THURSDAY
-                  - FRIDAY
-                  - SATURDAY
-                minItems: 1
-            required:
-            - interval
-            - every
-            - repeatsOn
-          - type: object
-            properties:
-              every:
-                type: integer
-                minimum: 1
-                maximum: 1000
-                description: The recurrence of the scheduled job.
-              time:
-                type: object
-                properties:
-                  hour:
-                    type: integer
-                    minimum: 0
-                    maximum: 23
-                  minute:
-                    type: integer
-                    minimum: 0
-                    maximum: 59
-                required:
-                - hour
-                - minute
-                description: The time when scheduled job should be executed.
-              endAt:
-                type: string
-                format: date-time
-                description: An ISO Timestamp indicating when the last execution of the scheduled job should occur.
-              interval:
-                type: string
-                enum:
-                - DAY
-                - MONTH
-                description: The interval of the scheduled job.
-            required:
-            - interval
-            - every
-          description: The schedule specification of the sheduled job.
-        task:
-          oneOf:
-          - type: object
-            properties:
-              type:
-                type: string
-                enum:
-                - report
-                - dashboard
-                description: The type of the task.
-              mail:
-                type: object
-                properties:
-                  to:
-                    type: array
-                    items:
-                      type: string
-                    minItems: 1
-                    description: The array of mail recipients.
-              timeWindow:
-                oneOf:
-                - type: object
-                  properties:
-                    mode:
-                      type: string
-                      enum:
-                      - ROLLING_WINDOW
-                    range:
-                      type: object
-                      properties:
-                        interval:
-                          type: integer
-                          minimum: 0
-                        unit:
-                          type: string
-                          enum:
-                          - DAY
-                          - WEEK
-                          - MONTH
-                          - YEAR
-                        offset:
-                          type: integer
-                          minimum: 0
-                      required:
-                      - interval
-                      - unit
-                      - offset
-                  required:
-                  - mode
-                  - range
-                - type: object
-                  properties:
-                    mode:
-                      type: string
-                      enum:
-                      - EQUAL_TO_FREQUENCY
-                      description: The mode of the time window.
-                      default: EQUAL_TO_FREQUENCY
-                  required:
-                  - mode
-              reportTemplateId:
-                type: string
-                description: The ID of the template report.
-              reportType:
-                type: string
-                description: The type of the template report.
-              config:
-                type: object
-                properties:
-                  hideFilters:
-                    type: boolean
-                description: The configuration object of the report.
-            required:
-            - type
-            - mail
-            - reportTemplateId
-            - reportType
-          - type: object
-            properties:
-              type:
-                type: string
-                enum:
-                - dashboard
-                description: The type of the task.
-              mail:
-                type: object
-                properties:
-                  to:
-                    type: array
-                    items:
-                      type: string
-                    minItems: 1
-                    description: The array of mail recipients.
-              timeWindow:
-                oneOf:
-                - type: object
-                  properties:
-                    mode:
-                      type: string
-                      enum:
-                      - ROLLING_WINDOW
-                    range:
-                      type: object
-                      properties:
-                        interval:
-                          type: integer
-                          minimum: 0
-                        unit:
-                          type: string
-                          enum:
-                          - DAY
-                          - WEEK
-                          - MONTH
-                          - YEAR
-                        offset:
-                          type: integer
-                          minimum: 0
-                      required:
-                      - interval
-                      - unit
-                      - offset
-                  required:
-                  - mode
-                  - range
-                - type: object
-                  properties:
-                    mode:
-                      type: string
-                      enum:
-                      - EQUAL_TO_FREQUENCY
-                      description: The mode of the time window.
-                      default: EQUAL_TO_FREQUENCY
-                  required:
-                  - mode
-              dashboardId:
-                type: string
-                description: The ID of the dashboard.
-            required:
-            - type
-            - mail
-            - dashboardId
-        createdBy:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - USER
-              - APP
-              - API_KEY
-              - SYSTEM
-              description: The type of the entity
-            id:
-              type: string
-              description: The ID of the entity
-          required:
-          - type
-          - id
-          description: The entity that created this scheduled job.
-      required:
-      - timezone
-    POST_Jobs_CreateAScheduledJob:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the scheduled job
-        timezone:
-          type: string
-          description: The timezone of the scheduled job.
-        scheduleFrequency:
-          oneOf:
-          - type: object
-            properties:
-              interval:
-                type: string
-                enum:
-                - WEEK
-              every:
-                type: integer
-                minimum: 1
-                maximum: 1000
-                description: The recurrence of the scheduled job.
-              time:
-                type: object
-                properties:
-                  hour:
-                    type: integer
-                    minimum: 0
-                    maximum: 23
-                  minute:
-                    type: integer
-                    minimum: 0
-                    maximum: 59
-                required:
-                - hour
-                - minute
-                description: The time when scheduled job should be executed.
-              endAt:
-                type: string
-                format: date-time
-                description: An ISO Timestamp indicating when the last execution of the scheduled job should occur.
-              repeatsOn:
-                type: array
-                items:
-                  type: string
-                  enum:
-                  - SUNDAY
-                  - MONDAY
-                  - TUESDAY
-                  - WEDNESDAY
-                  - THURSDAY
-                  - FRIDAY
-                  - SATURDAY
-                minItems: 1
-            required:
-            - interval
-            - every
-            - repeatsOn
-          - type: object
-            properties:
-              every:
-                type: integer
-                minimum: 1
-                maximum: 1000
-                description: The recurrence of the scheduled job.
-              time:
-                type: object
-                properties:
-                  hour:
-                    type: integer
-                    minimum: 0
-                    maximum: 23
-                  minute:
-                    type: integer
-                    minimum: 0
-                    maximum: 59
-                required:
-                - hour
-                - minute
-                description: The time when scheduled job should be executed.
-              endAt:
-                type: string
-                format: date-time
-                description: An ISO Timestamp indicating when the last execution of the scheduled job should occur.
-              interval:
-                type: string
-                enum:
-                - DAY
-                - MONTH
-                description: The interval of the scheduled job.
-            required:
-            - interval
-            - every
-          description: The schedule specification of the sheduled job.
-        task:
-          oneOf:
-          - type: object
-            properties:
-              type:
-                type: string
-                enum:
-                - report
-                - dashboard
-                description: The type of the task.
-              mail:
-                type: object
-                properties:
-                  to:
-                    type: array
-                    items:
-                      type: string
-                    minItems: 1
-                    description: The array of mail recipients.
-              timeWindow:
-                oneOf:
-                - type: object
-                  properties:
-                    mode:
-                      type: string
-                      enum:
-                      - ROLLING_WINDOW
-                    range:
-                      type: object
-                      properties:
-                        interval:
-                          type: integer
-                          minimum: 0
-                        unit:
-                          type: string
-                          enum:
-                          - DAY
-                          - WEEK
-                          - MONTH
-                          - YEAR
-                        offset:
-                          type: integer
-                          minimum: 0
-                      required:
-                      - interval
-                      - unit
-                      - offset
-                  required:
-                  - mode
-                  - range
-                - type: object
-                  properties:
-                    mode:
-                      type: string
-                      enum:
-                      - EQUAL_TO_FREQUENCY
-                      description: The mode of the time window.
-                      default: EQUAL_TO_FREQUENCY
-                  required:
-                  - mode
-              reportTemplateId:
-                type: string
-                description: The ID of the template report.
-              reportType:
-                type: string
-                description: The type of the template report.
-              config:
-                type: object
-                properties:
-                  hideFilters:
-                    type: boolean
-                description: The configuration object of the report.
-            required:
-            - type
-            - mail
-            - reportTemplateId
-            - reportType
-          - type: object
-            properties:
-              type:
-                type: string
-                enum:
-                - dashboard
-                description: The type of the task.
-              mail:
-                type: object
-                properties:
-                  to:
-                    type: array
-                    items:
-                      type: string
-                    minItems: 1
-                    description: The array of mail recipients.
-              timeWindow:
-                oneOf:
-                - type: object
-                  properties:
-                    mode:
-                      type: string
-                      enum:
-                      - ROLLING_WINDOW
-                    range:
-                      type: object
-                      properties:
-                        interval:
-                          type: integer
-                          minimum: 0
-                        unit:
-                          type: string
-                          enum:
-                          - DAY
-                          - WEEK
-                          - MONTH
-                          - YEAR
-                        offset:
-                          type: integer
-                          minimum: 0
-                      required:
-                      - interval
-                      - unit
-                      - offset
-                  required:
-                  - mode
-                  - range
-                - type: object
-                  properties:
-                    mode:
-                      type: string
-                      enum:
-                      - EQUAL_TO_FREQUENCY
-                      description: The mode of the time window.
-                      default: EQUAL_TO_FREQUENCY
-                  required:
-                  - mode
-              dashboardId:
-                type: string
-                description: The ID of the dashboard.
-            required:
-            - type
-            - mail
-            - dashboardId
-      required:
-      - timezone
-    POST_Jobs_CreateAnJob:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - transformJob
-          title:
-            type: string
-            description: The title of the job
-          runAfter:
-            type: string
-            format: date-time
-            description: An ISO timestamp indicating after which time the job should be run.
-          payload:
+        docs:
+          type: array
+          items:
             oneOf:
             - type: object
               properties:
-                resource:
+                _id:
+                  type: string
+                  description: The ID of the job
+                sellerId:
+                  type: string
+                  description: The ID of the seller of the job
+                title:
+                  type: string
+                  description: The title of the job
+                type:
                   type: string
                   enum:
-                  - ticketRangeInvalidation
-                csv:
-                  type: string
-                  description: An URL to download the CSV data.
-                json:
-                  type: string
-                  description: An URL to download the JSON data.
-                params:
-                  type: object
-                  properties:
-                    batch:
-                      type: string
-                      description: A UUId indicating in which batch the tickets were created
-                    groups:
-                      type: array
-                      items:
-                        type: array
-                        items:
-                          type: integer
-                          minimum: 0
-                        minItems: 2
-                        maxItems: 2
-              required:
-              - resource
-            - type: object
-              properties:
-                csv:
-                  type: string
-                  description: An URL to download the CSV data.
-                json:
-                  type: string
-                  description: An URL to download the JSON data.
-              required: []
-        required:
-        - type
-      - type: object
-        properties:
-          title:
-            type: string
-            description: The title of the job
-          runAfter:
-            type: string
-            format: date-time
-            description: An ISO timestamp indicating after which time the job should be run.
-          type:
-            type: string
-            enum:
-            - import
-            - export
-            - delete
-            - scheduledJob
-            description: The type of job.
-        required:
-        - type
-    POST_Jobs_CreateAnJob_202_response:
-      oneOf:
-      - type: object
-        properties:
-          _id:
-            type: string
-            description: The ID of the job
-          sellerId:
-            type: string
-            description: The ID of the seller of the job
-          title:
-            type: string
-            description: The title of the job
-          type:
-            type: string
-            enum:
-            - transformJob
-          status:
-            type: string
-            enum:
-            - SCHEDULED
-            - RUNNING
-            - FAILED
-            - COMPLETED
-            - COMPLETED_WITH_ERRORS
-            description: The status of the job.
-          runAfter:
-            type: string
-            format: date-time
-            description: An ISO timestamp indicating after which time the job should be run.
-          startedAt:
-            type: string
-            format: date-time
-            description: An ISO timestamp indicating when the job started
-          finishedAt:
-            type: string
-            format: date-time
-            description: An ISO timestamp indicating when the job finished
-          payload:
-            oneOf:
-            - type: object
-              properties:
-                resource:
+                  - transformJob
+                status:
                   type: string
                   enum:
-                  - ticketRangeInvalidation
-                csv:
+                  - SCHEDULED
+                  - RUNNING
+                  - FAILED
+                  - COMPLETED
+                  - COMPLETED_WITH_ERRORS
+                  description: The status of the job.
+                runAfter:
                   type: string
-                  description: An URL to download the CSV data.
-                json:
+                  format: date-time
+                  description: An ISO timestamp indicating after which time the job should be run.
+                startedAt:
                   type: string
-                  description: An URL to download the JSON data.
-                params:
-                  type: object
-                  properties:
-                    batch:
-                      type: string
-                      description: A UUId indicating in which batch the tickets were created
-                    groups:
-                      type: array
-                      items:
-                        type: array
-                        items:
-                          type: integer
-                          minimum: 0
-                        minItems: 2
-                        maxItems: 2
+                  format: date-time
+                  description: An ISO timestamp indicating when the job started
+                finishedAt:
+                  type: string
+                  format: date-time
+                  description: An ISO timestamp indicating when the job finished
+                payload:
+                  oneOf:
+                  - type: object
+                    properties:
+                      resource:
+                        type: string
+                        enum:
+                        - ticketRangeInvalidation
+                      csv:
+                        type: string
+                        description: An URL to download the CSV data.
+                      json:
+                        type: string
+                        description: An URL to download the JSON data.
+                      params:
+                        type: object
+                        properties:
+                          batch:
+                            type: string
+                            description: A UUId indicating in which batch the tickets were created
+                          groups:
+                            type: array
+                            items:
+                              type: array
+                              items:
+                                type: integer
+                                minimum: 0
+                              minItems: 2
+                              maxItems: 2
+                    required:
+                    - resource
+                  - type: object
+                    properties:
+                      csv:
+                        type: string
+                        description: An URL to download the CSV data.
+                      json:
+                        type: string
+                        description: An URL to download the JSON data.
+                    required: []
               required:
-              - resource
+              - _id
+              - sellerId
+              - type
             - type: object
               properties:
-                csv:
+                _id:
                   type: string
-                  description: An URL to download the CSV data.
-                json:
+                  description: The ID of the job
+                sellerId:
                   type: string
-                  description: An URL to download the JSON data.
-              required: []
-        required:
-        - _id
-        - sellerId
-        - type
-      - type: object
-        properties:
-          _id:
-            type: string
-            description: The ID of the job
-          sellerId:
-            type: string
-            description: The ID of the seller of the job
-          title:
-            type: string
-            description: The title of the job
-          status:
-            type: string
-            enum:
-            - SCHEDULED
-            - RUNNING
-            - FAILED
-            - COMPLETED
-            - COMPLETED_WITH_ERRORS
-            description: The status of the job.
-          runAfter:
-            type: string
-            format: date-time
-            description: An ISO timestamp indicating after which time the job should be run.
-          startedAt:
-            type: string
-            format: date-time
-            description: An ISO timestamp indicating when the job started
-          finishedAt:
-            type: string
-            format: date-time
-            description: An ISO timestamp indicating when the job finished
-          type:
-            type: string
-            enum:
-            - import
-            - export
-            - delete
-            - scheduledJob
-            description: The type of job.
-        required:
-        - _id
-        - sellerId
-        - type
-    POST_Jobs_CreateAScheduledJob_201_response:
+                  description: The ID of the seller of the job
+                title:
+                  type: string
+                  description: The title of the job
+                status:
+                  type: string
+                  enum:
+                  - SCHEDULED
+                  - RUNNING
+                  - FAILED
+                  - COMPLETED
+                  - COMPLETED_WITH_ERRORS
+                  description: The status of the job.
+                runAfter:
+                  type: string
+                  format: date-time
+                  description: An ISO timestamp indicating after which time the job should be run.
+                startedAt:
+                  type: string
+                  format: date-time
+                  description: An ISO timestamp indicating when the job started
+                finishedAt:
+                  type: string
+                  format: date-time
+                  description: An ISO timestamp indicating when the job finished
+                type:
+                  type: string
+                  enum:
+                  - import
+                  - export
+                  - delete
+                  - scheduledJob
+                  description: The type of job.
+              required:
+              - _id
+              - sellerId
+              - type
+        total:
+          type: integer
+    DELETE_Jobs_DeleteAScheduledJob_200_response:
       type: object
       properties:
         _id:
@@ -1904,539 +1819,6 @@ components:
           format: uri
       required:
       - url
-    PUT_Jobs_UpdateAScheduledJob_200_response:
-      type: object
-      properties:
-        _id:
-          type: string
-          description: The ID of the scheduled job
-        name:
-          type: string
-          description: The name of the scheduled job
-        sellerId:
-          type: string
-          description: The ID of the seller of the scheduled job.
-        timezone:
-          type: string
-          description: The timezone of the scheduled job.
-        scheduleFrequency:
-          oneOf:
-          - type: object
-            properties:
-              interval:
-                type: string
-                enum:
-                - WEEK
-              every:
-                type: integer
-                minimum: 1
-                maximum: 1000
-                description: The recurrence of the scheduled job.
-              time:
-                type: object
-                properties:
-                  hour:
-                    type: integer
-                    minimum: 0
-                    maximum: 23
-                  minute:
-                    type: integer
-                    minimum: 0
-                    maximum: 59
-                required:
-                - hour
-                - minute
-                description: The time when scheduled job should be executed.
-              endAt:
-                type: string
-                format: date-time
-                description: An ISO Timestamp indicating when the last execution of the scheduled job should occur.
-              repeatsOn:
-                type: array
-                items:
-                  type: string
-                  enum:
-                  - SUNDAY
-                  - MONDAY
-                  - TUESDAY
-                  - WEDNESDAY
-                  - THURSDAY
-                  - FRIDAY
-                  - SATURDAY
-                minItems: 1
-            required:
-            - interval
-            - every
-            - repeatsOn
-          - type: object
-            properties:
-              every:
-                type: integer
-                minimum: 1
-                maximum: 1000
-                description: The recurrence of the scheduled job.
-              time:
-                type: object
-                properties:
-                  hour:
-                    type: integer
-                    minimum: 0
-                    maximum: 23
-                  minute:
-                    type: integer
-                    minimum: 0
-                    maximum: 59
-                required:
-                - hour
-                - minute
-                description: The time when scheduled job should be executed.
-              endAt:
-                type: string
-                format: date-time
-                description: An ISO Timestamp indicating when the last execution of the scheduled job should occur.
-              interval:
-                type: string
-                enum:
-                - DAY
-                - MONTH
-                description: The interval of the scheduled job.
-            required:
-            - interval
-            - every
-          description: The schedule specification of the sheduled job.
-        task:
-          oneOf:
-          - type: object
-            properties:
-              type:
-                type: string
-                enum:
-                - report
-                - dashboard
-                description: The type of the task.
-              mail:
-                type: object
-                properties:
-                  to:
-                    type: array
-                    items:
-                      type: string
-                    minItems: 1
-                    description: The array of mail recipients.
-              timeWindow:
-                oneOf:
-                - type: object
-                  properties:
-                    mode:
-                      type: string
-                      enum:
-                      - ROLLING_WINDOW
-                    range:
-                      type: object
-                      properties:
-                        interval:
-                          type: integer
-                          minimum: 0
-                        unit:
-                          type: string
-                          enum:
-                          - DAY
-                          - WEEK
-                          - MONTH
-                          - YEAR
-                        offset:
-                          type: integer
-                          minimum: 0
-                      required:
-                      - interval
-                      - unit
-                      - offset
-                  required:
-                  - mode
-                  - range
-                - type: object
-                  properties:
-                    mode:
-                      type: string
-                      enum:
-                      - EQUAL_TO_FREQUENCY
-                      description: The mode of the time window.
-                      default: EQUAL_TO_FREQUENCY
-                  required:
-                  - mode
-              reportTemplateId:
-                type: string
-                description: The ID of the template report.
-              reportType:
-                type: string
-                description: The type of the template report.
-              config:
-                type: object
-                properties:
-                  hideFilters:
-                    type: boolean
-                description: The configuration object of the report.
-            required:
-            - type
-            - mail
-            - reportTemplateId
-            - reportType
-          - type: object
-            properties:
-              type:
-                type: string
-                enum:
-                - dashboard
-                description: The type of the task.
-              mail:
-                type: object
-                properties:
-                  to:
-                    type: array
-                    items:
-                      type: string
-                    minItems: 1
-                    description: The array of mail recipients.
-              timeWindow:
-                oneOf:
-                - type: object
-                  properties:
-                    mode:
-                      type: string
-                      enum:
-                      - ROLLING_WINDOW
-                    range:
-                      type: object
-                      properties:
-                        interval:
-                          type: integer
-                          minimum: 0
-                        unit:
-                          type: string
-                          enum:
-                          - DAY
-                          - WEEK
-                          - MONTH
-                          - YEAR
-                        offset:
-                          type: integer
-                          minimum: 0
-                      required:
-                      - interval
-                      - unit
-                      - offset
-                  required:
-                  - mode
-                  - range
-                - type: object
-                  properties:
-                    mode:
-                      type: string
-                      enum:
-                      - EQUAL_TO_FREQUENCY
-                      description: The mode of the time window.
-                      default: EQUAL_TO_FREQUENCY
-                  required:
-                  - mode
-              dashboardId:
-                type: string
-                description: The ID of the dashboard.
-            required:
-            - type
-            - mail
-            - dashboardId
-          description: The task specification of the scheduled job.
-        createdBy:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - USER
-              - APP
-              - API_KEY
-              - SYSTEM
-              description: The type of the entity
-            id:
-              type: string
-              description: The ID of the entity
-          required:
-          - type
-          - id
-          description: The entity that created this scheduled job.
-        createdAt:
-          type: string
-          format: date-time
-          description: An ISO Timestamp indicating when the resource was created.
-        updatedAt:
-          type: string
-          format: date-time
-          description: An ISO Timestamp indicating when the resource was updated.
-      required:
-      - _id
-      - sellerId
-      - timezone
-      - createdAt
-      - updatedAt
-    GET_Jobs_GetAnJob_200_response:
-      oneOf:
-      - type: object
-        properties:
-          _id:
-            type: string
-            description: The ID of the job
-          sellerId:
-            type: string
-            description: The ID of the seller of the job
-          title:
-            type: string
-            description: The title of the job
-          type:
-            type: string
-            enum:
-            - transformJob
-          status:
-            type: string
-            enum:
-            - SCHEDULED
-            - RUNNING
-            - FAILED
-            - COMPLETED
-            - COMPLETED_WITH_ERRORS
-            description: The status of the job.
-          runAfter:
-            type: string
-            format: date-time
-            description: An ISO timestamp indicating after which time the job should be run.
-          startedAt:
-            type: string
-            format: date-time
-            description: An ISO timestamp indicating when the job started
-          finishedAt:
-            type: string
-            format: date-time
-            description: An ISO timestamp indicating when the job finished
-          payload:
-            oneOf:
-            - type: object
-              properties:
-                resource:
-                  type: string
-                  enum:
-                  - ticketRangeInvalidation
-                csv:
-                  type: string
-                  description: An URL to download the CSV data.
-                json:
-                  type: string
-                  description: An URL to download the JSON data.
-                params:
-                  type: object
-                  properties:
-                    batch:
-                      type: string
-                      description: A UUId indicating in which batch the tickets were created
-                    groups:
-                      type: array
-                      items:
-                        type: array
-                        items:
-                          type: integer
-                          minimum: 0
-                        minItems: 2
-                        maxItems: 2
-              required:
-              - resource
-            - type: object
-              properties:
-                csv:
-                  type: string
-                  description: An URL to download the CSV data.
-                json:
-                  type: string
-                  description: An URL to download the JSON data.
-              required: []
-        required:
-        - _id
-        - sellerId
-        - type
-      - type: object
-        properties:
-          _id:
-            type: string
-            description: The ID of the job
-          sellerId:
-            type: string
-            description: The ID of the seller of the job
-          title:
-            type: string
-            description: The title of the job
-          status:
-            type: string
-            enum:
-            - SCHEDULED
-            - RUNNING
-            - FAILED
-            - COMPLETED
-            - COMPLETED_WITH_ERRORS
-            description: The status of the job.
-          runAfter:
-            type: string
-            format: date-time
-            description: An ISO timestamp indicating after which time the job should be run.
-          startedAt:
-            type: string
-            format: date-time
-            description: An ISO timestamp indicating when the job started
-          finishedAt:
-            type: string
-            format: date-time
-            description: An ISO timestamp indicating when the job finished
-          type:
-            type: string
-            enum:
-            - import
-            - export
-            - delete
-            - scheduledJob
-            description: The type of job.
-        required:
-        - _id
-        - sellerId
-        - type
-    GET_Jobs_GetAllJobs_200_response:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            oneOf:
-            - type: object
-              properties:
-                _id:
-                  type: string
-                  description: The ID of the job
-                sellerId:
-                  type: string
-                  description: The ID of the seller of the job
-                title:
-                  type: string
-                  description: The title of the job
-                type:
-                  type: string
-                  enum:
-                  - transformJob
-                status:
-                  type: string
-                  enum:
-                  - SCHEDULED
-                  - RUNNING
-                  - FAILED
-                  - COMPLETED
-                  - COMPLETED_WITH_ERRORS
-                  description: The status of the job.
-                runAfter:
-                  type: string
-                  format: date-time
-                  description: An ISO timestamp indicating after which time the job should be run.
-                startedAt:
-                  type: string
-                  format: date-time
-                  description: An ISO timestamp indicating when the job started
-                finishedAt:
-                  type: string
-                  format: date-time
-                  description: An ISO timestamp indicating when the job finished
-                payload:
-                  oneOf:
-                  - type: object
-                    properties:
-                      resource:
-                        type: string
-                        enum:
-                        - ticketRangeInvalidation
-                      csv:
-                        type: string
-                        description: An URL to download the CSV data.
-                      json:
-                        type: string
-                        description: An URL to download the JSON data.
-                      params:
-                        type: object
-                        properties:
-                          batch:
-                            type: string
-                            description: A UUId indicating in which batch the tickets were created
-                          groups:
-                            type: array
-                            items:
-                              type: array
-                              items:
-                                type: integer
-                                minimum: 0
-                              minItems: 2
-                              maxItems: 2
-                    required:
-                    - resource
-                  - type: object
-                    properties:
-                      csv:
-                        type: string
-                        description: An URL to download the CSV data.
-                      json:
-                        type: string
-                        description: An URL to download the JSON data.
-                    required: []
-              required:
-              - _id
-              - sellerId
-              - type
-            - type: object
-              properties:
-                _id:
-                  type: string
-                  description: The ID of the job
-                sellerId:
-                  type: string
-                  description: The ID of the seller of the job
-                title:
-                  type: string
-                  description: The title of the job
-                status:
-                  type: string
-                  enum:
-                  - SCHEDULED
-                  - RUNNING
-                  - FAILED
-                  - COMPLETED
-                  - COMPLETED_WITH_ERRORS
-                  description: The status of the job.
-                runAfter:
-                  type: string
-                  format: date-time
-                  description: An ISO timestamp indicating after which time the job should be run.
-                startedAt:
-                  type: string
-                  format: date-time
-                  description: An ISO timestamp indicating when the job started
-                finishedAt:
-                  type: string
-                  format: date-time
-                  description: An ISO timestamp indicating when the job finished
-                type:
-                  type: string
-                  enum:
-                  - import
-                  - export
-                  - delete
-                  - scheduledJob
-                  description: The type of job.
-              required:
-              - _id
-              - sellerId
-              - type
-        total:
-          type: integer
     GET_Jobs_GetAScheduledJob_200_response:
       type: object
       properties:
@@ -2711,6 +2093,624 @@ components:
       - timezone
       - createdAt
       - updatedAt
+    PUT_Jobs_UpdateAScheduledJob:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the scheduled job
+        timezone:
+          type: string
+          description: The timezone of the scheduled job.
+        scheduleFrequency:
+          oneOf:
+          - type: object
+            properties:
+              interval:
+                type: string
+                enum:
+                - WEEK
+              every:
+                type: integer
+                minimum: 1
+                maximum: 1000
+                description: The recurrence of the scheduled job.
+              time:
+                type: object
+                properties:
+                  hour:
+                    type: integer
+                    minimum: 0
+                    maximum: 23
+                  minute:
+                    type: integer
+                    minimum: 0
+                    maximum: 59
+                required:
+                - hour
+                - minute
+                description: The time when scheduled job should be executed.
+              endAt:
+                type: string
+                format: date-time
+                description: An ISO Timestamp indicating when the last execution of the scheduled job should occur.
+              repeatsOn:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - SUNDAY
+                  - MONDAY
+                  - TUESDAY
+                  - WEDNESDAY
+                  - THURSDAY
+                  - FRIDAY
+                  - SATURDAY
+                minItems: 1
+            required:
+            - interval
+            - every
+            - repeatsOn
+          - type: object
+            properties:
+              every:
+                type: integer
+                minimum: 1
+                maximum: 1000
+                description: The recurrence of the scheduled job.
+              time:
+                type: object
+                properties:
+                  hour:
+                    type: integer
+                    minimum: 0
+                    maximum: 23
+                  minute:
+                    type: integer
+                    minimum: 0
+                    maximum: 59
+                required:
+                - hour
+                - minute
+                description: The time when scheduled job should be executed.
+              endAt:
+                type: string
+                format: date-time
+                description: An ISO Timestamp indicating when the last execution of the scheduled job should occur.
+              interval:
+                type: string
+                enum:
+                - DAY
+                - MONTH
+                description: The interval of the scheduled job.
+            required:
+            - interval
+            - every
+          description: The schedule specification of the sheduled job.
+        task:
+          oneOf:
+          - type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - report
+                - dashboard
+                description: The type of the task.
+              mail:
+                type: object
+                properties:
+                  to:
+                    type: array
+                    items:
+                      type: string
+                    minItems: 1
+                    description: The array of mail recipients.
+              timeWindow:
+                oneOf:
+                - type: object
+                  properties:
+                    mode:
+                      type: string
+                      enum:
+                      - ROLLING_WINDOW
+                    range:
+                      type: object
+                      properties:
+                        interval:
+                          type: integer
+                          minimum: 0
+                        unit:
+                          type: string
+                          enum:
+                          - DAY
+                          - WEEK
+                          - MONTH
+                          - YEAR
+                        offset:
+                          type: integer
+                          minimum: 0
+                      required:
+                      - interval
+                      - unit
+                      - offset
+                  required:
+                  - mode
+                  - range
+                - type: object
+                  properties:
+                    mode:
+                      type: string
+                      enum:
+                      - EQUAL_TO_FREQUENCY
+                      description: The mode of the time window.
+                      default: EQUAL_TO_FREQUENCY
+                  required:
+                  - mode
+              reportTemplateId:
+                type: string
+                description: The ID of the template report.
+              reportType:
+                type: string
+                description: The type of the template report.
+              config:
+                type: object
+                properties:
+                  hideFilters:
+                    type: boolean
+                description: The configuration object of the report.
+            required:
+            - type
+            - mail
+            - reportTemplateId
+            - reportType
+          - type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - dashboard
+                description: The type of the task.
+              mail:
+                type: object
+                properties:
+                  to:
+                    type: array
+                    items:
+                      type: string
+                    minItems: 1
+                    description: The array of mail recipients.
+              timeWindow:
+                oneOf:
+                - type: object
+                  properties:
+                    mode:
+                      type: string
+                      enum:
+                      - ROLLING_WINDOW
+                    range:
+                      type: object
+                      properties:
+                        interval:
+                          type: integer
+                          minimum: 0
+                        unit:
+                          type: string
+                          enum:
+                          - DAY
+                          - WEEK
+                          - MONTH
+                          - YEAR
+                        offset:
+                          type: integer
+                          minimum: 0
+                      required:
+                      - interval
+                      - unit
+                      - offset
+                  required:
+                  - mode
+                  - range
+                - type: object
+                  properties:
+                    mode:
+                      type: string
+                      enum:
+                      - EQUAL_TO_FREQUENCY
+                      description: The mode of the time window.
+                      default: EQUAL_TO_FREQUENCY
+                  required:
+                  - mode
+              dashboardId:
+                type: string
+                description: The ID of the dashboard.
+            required:
+            - type
+            - mail
+            - dashboardId
+        createdBy:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - USER
+              - APP
+              - API_KEY
+              - SYSTEM
+              description: The type of the entity
+            id:
+              type: string
+              description: The ID of the entity
+          required:
+          - type
+          - id
+          description: The entity that created this scheduled job.
+      required:
+      - timezone
+    POST_Jobs_CreateAnJob_202_response:
+      oneOf:
+      - type: object
+        properties:
+          _id:
+            type: string
+            description: The ID of the job
+          sellerId:
+            type: string
+            description: The ID of the seller of the job
+          title:
+            type: string
+            description: The title of the job
+          type:
+            type: string
+            enum:
+            - transformJob
+          status:
+            type: string
+            enum:
+            - SCHEDULED
+            - RUNNING
+            - FAILED
+            - COMPLETED
+            - COMPLETED_WITH_ERRORS
+            description: The status of the job.
+          runAfter:
+            type: string
+            format: date-time
+            description: An ISO timestamp indicating after which time the job should be run.
+          startedAt:
+            type: string
+            format: date-time
+            description: An ISO timestamp indicating when the job started
+          finishedAt:
+            type: string
+            format: date-time
+            description: An ISO timestamp indicating when the job finished
+          payload:
+            oneOf:
+            - type: object
+              properties:
+                resource:
+                  type: string
+                  enum:
+                  - ticketRangeInvalidation
+                csv:
+                  type: string
+                  description: An URL to download the CSV data.
+                json:
+                  type: string
+                  description: An URL to download the JSON data.
+                params:
+                  type: object
+                  properties:
+                    batch:
+                      type: string
+                      description: A UUId indicating in which batch the tickets were created
+                    groups:
+                      type: array
+                      items:
+                        type: array
+                        items:
+                          type: integer
+                          minimum: 0
+                        minItems: 2
+                        maxItems: 2
+              required:
+              - resource
+            - type: object
+              properties:
+                csv:
+                  type: string
+                  description: An URL to download the CSV data.
+                json:
+                  type: string
+                  description: An URL to download the JSON data.
+              required: []
+        required:
+        - _id
+        - sellerId
+        - type
+      - type: object
+        properties:
+          _id:
+            type: string
+            description: The ID of the job
+          sellerId:
+            type: string
+            description: The ID of the seller of the job
+          title:
+            type: string
+            description: The title of the job
+          status:
+            type: string
+            enum:
+            - SCHEDULED
+            - RUNNING
+            - FAILED
+            - COMPLETED
+            - COMPLETED_WITH_ERRORS
+            description: The status of the job.
+          runAfter:
+            type: string
+            format: date-time
+            description: An ISO timestamp indicating after which time the job should be run.
+          startedAt:
+            type: string
+            format: date-time
+            description: An ISO timestamp indicating when the job started
+          finishedAt:
+            type: string
+            format: date-time
+            description: An ISO timestamp indicating when the job finished
+          type:
+            type: string
+            enum:
+            - import
+            - export
+            - delete
+            - scheduledJob
+            description: The type of job.
+        required:
+        - _id
+        - sellerId
+        - type
+    POST_Jobs_CreateAScheduledJob:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the scheduled job
+        timezone:
+          type: string
+          description: The timezone of the scheduled job.
+        scheduleFrequency:
+          oneOf:
+          - type: object
+            properties:
+              interval:
+                type: string
+                enum:
+                - WEEK
+              every:
+                type: integer
+                minimum: 1
+                maximum: 1000
+                description: The recurrence of the scheduled job.
+              time:
+                type: object
+                properties:
+                  hour:
+                    type: integer
+                    minimum: 0
+                    maximum: 23
+                  minute:
+                    type: integer
+                    minimum: 0
+                    maximum: 59
+                required:
+                - hour
+                - minute
+                description: The time when scheduled job should be executed.
+              endAt:
+                type: string
+                format: date-time
+                description: An ISO Timestamp indicating when the last execution of the scheduled job should occur.
+              repeatsOn:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - SUNDAY
+                  - MONDAY
+                  - TUESDAY
+                  - WEDNESDAY
+                  - THURSDAY
+                  - FRIDAY
+                  - SATURDAY
+                minItems: 1
+            required:
+            - interval
+            - every
+            - repeatsOn
+          - type: object
+            properties:
+              every:
+                type: integer
+                minimum: 1
+                maximum: 1000
+                description: The recurrence of the scheduled job.
+              time:
+                type: object
+                properties:
+                  hour:
+                    type: integer
+                    minimum: 0
+                    maximum: 23
+                  minute:
+                    type: integer
+                    minimum: 0
+                    maximum: 59
+                required:
+                - hour
+                - minute
+                description: The time when scheduled job should be executed.
+              endAt:
+                type: string
+                format: date-time
+                description: An ISO Timestamp indicating when the last execution of the scheduled job should occur.
+              interval:
+                type: string
+                enum:
+                - DAY
+                - MONTH
+                description: The interval of the scheduled job.
+            required:
+            - interval
+            - every
+          description: The schedule specification of the sheduled job.
+        task:
+          oneOf:
+          - type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - report
+                - dashboard
+                description: The type of the task.
+              mail:
+                type: object
+                properties:
+                  to:
+                    type: array
+                    items:
+                      type: string
+                    minItems: 1
+                    description: The array of mail recipients.
+              timeWindow:
+                oneOf:
+                - type: object
+                  properties:
+                    mode:
+                      type: string
+                      enum:
+                      - ROLLING_WINDOW
+                    range:
+                      type: object
+                      properties:
+                        interval:
+                          type: integer
+                          minimum: 0
+                        unit:
+                          type: string
+                          enum:
+                          - DAY
+                          - WEEK
+                          - MONTH
+                          - YEAR
+                        offset:
+                          type: integer
+                          minimum: 0
+                      required:
+                      - interval
+                      - unit
+                      - offset
+                  required:
+                  - mode
+                  - range
+                - type: object
+                  properties:
+                    mode:
+                      type: string
+                      enum:
+                      - EQUAL_TO_FREQUENCY
+                      description: The mode of the time window.
+                      default: EQUAL_TO_FREQUENCY
+                  required:
+                  - mode
+              reportTemplateId:
+                type: string
+                description: The ID of the template report.
+              reportType:
+                type: string
+                description: The type of the template report.
+              config:
+                type: object
+                properties:
+                  hideFilters:
+                    type: boolean
+                description: The configuration object of the report.
+            required:
+            - type
+            - mail
+            - reportTemplateId
+            - reportType
+          - type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - dashboard
+                description: The type of the task.
+              mail:
+                type: object
+                properties:
+                  to:
+                    type: array
+                    items:
+                      type: string
+                    minItems: 1
+                    description: The array of mail recipients.
+              timeWindow:
+                oneOf:
+                - type: object
+                  properties:
+                    mode:
+                      type: string
+                      enum:
+                      - ROLLING_WINDOW
+                    range:
+                      type: object
+                      properties:
+                        interval:
+                          type: integer
+                          minimum: 0
+                        unit:
+                          type: string
+                          enum:
+                          - DAY
+                          - WEEK
+                          - MONTH
+                          - YEAR
+                        offset:
+                          type: integer
+                          minimum: 0
+                      required:
+                      - interval
+                      - unit
+                      - offset
+                  required:
+                  - mode
+                  - range
+                - type: object
+                  properties:
+                    mode:
+                      type: string
+                      enum:
+                      - EQUAL_TO_FREQUENCY
+                      description: The mode of the time window.
+                      default: EQUAL_TO_FREQUENCY
+                  required:
+                  - mode
+              dashboardId:
+                type: string
+                description: The ID of the dashboard.
+            required:
+            - type
+            - mail
+            - dashboardId
+      required:
+      - timezone
   securitySchemes:
     jwt:
       type: http

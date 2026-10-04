@@ -702,15 +702,111 @@ components:
       - usesTimeSlots
       - seatingType
       - offers
-    GET_Distribution-api_GetAllSellers_200_response:
+    DistributionTransactionResource:
       type: object
       properties:
-        docs:
+        transactionId:
+          type: string
+          description: The ID of the transaction
+        distributorId:
+          type: string
+          description: The ID of the distributor
+        status:
+          type: string
+          enum:
+          - NEW
+          - RESERVED-BY-SYSTEM
+          - ABORTED
+          - COMPLETE
+          - CANCELED
+          description: The status of the transaction
+        tickets:
           type: array
           items:
-            $ref: '#/components/schemas/DistributionSellerResource'
-        total:
-          type: integer
+            type: object
+            properties:
+              ticketId:
+                type: string
+                description: The ID of the ticket
+              offerId:
+                type: string
+                description: The ID of the ticket's offer
+              barcode:
+                type: string
+                description: The barcode of the ticket
+              url:
+                type: string
+                description: The URL of the ticket
+              eventId:
+                type: string
+                description: The ID of the ticket's event
+              availabilityId:
+                type: string
+                description: The ID of the ticket's availability
+              timeSlotId:
+                type: string
+                description: The ID of the ticket's time slot
+              seatingInfo:
+                oneOf:
+                - type: object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - Seats
+                    gate:
+                      type: string
+                      description: The gate for the seat
+                    name:
+                      type: string
+                      description: The name of the section if the ticket is for a GeneralAdmission section
+                    seatId:
+                      type: string
+                    sectionName:
+                      type: string
+                      description: The section name for the seat
+                    rowName:
+                      type: string
+                      description: The row name for the seat
+                    seatName:
+                      type: string
+                      description: The seat name for the seat
+                  required:
+                  - type
+                  - seatId
+                  - sectionName
+                  - rowName
+                  - seatName
+                - type: object
+                  properties:
+                    gate:
+                      type: string
+                      description: The gate for the seat
+                    name:
+                      type: string
+                      description: The name of the section if the ticket is for a GeneralAdmission section
+                    seatId:
+                      type: string
+                    type:
+                      type: string
+                      enum:
+                      - GeneralAdmission
+                      description: The type of the seating group this seat belongs to
+                  required:
+                  - type
+                description: The seating info of the ticket
+            required:
+            - ticketId
+            - offerId
+            - barcode
+            - url
+            - eventId
+            - availabilityId
+          description: The tickets associated to the transaction
+      required:
+      - transactionId
+      - distributorId
+      - status
     POST_Distribution-api_ExtendTheExpiryTimeOfACheckoutByOneHour:
       type: object
       properties:
@@ -719,49 +815,6 @@ components:
           description: The distributor to extend a checkout for
       required:
       - distributorId
-    POST_Distribution-api_CreateACheckout:
-      type: object
-      properties:
-        externalReferenceId:
-          type: string
-          maxLength: 100
-          description: The external reference of the checkout
-        distributorId:
-          type: string
-          description: The distributor to create a checkout for
-        tickets:
-          type: array
-          items:
-            type: object
-            properties:
-              offerId:
-                type: string
-                description: The offer to create a checkout for
-              eventId:
-                type: string
-                description: The event to create a checkout for
-              availabilityId:
-                type: string
-                description: The event to create a tickets for
-              price:
-                type: number
-                format: float
-                description: The price of the ticket
-              seatId:
-                type: string
-                description: The seat id for the ticket
-              timeSlotId:
-                type: string
-                description: The time slot id for the ticket
-            required:
-            - offerId
-            - eventId
-            - availabilityId
-            - price
-          description: The tickets to create a checkout for
-      required:
-      - distributorId
-      - tickets
     DistributionSeatingGroupResource:
       type: object
       properties:
@@ -843,24 +896,229 @@ components:
       - availabityId
       - groupId
       - type
-    GET_Distribution-api_GetTheAvailabilitiesForAnEvent_200_response:
+    POST_Distribution-api_AbortACheckout:
+      type: object
+      properties:
+        distributorId:
+          type: string
+          description: The distributor to abort a checkout for
+      required:
+      - distributorId
+    GET_Distribution-api_GetAllEventsForASeller_200_response:
       type: object
       properties:
         docs:
           type: array
           items:
-            $ref: '#/components/schemas/DistributionAvailabilityResource'
+            $ref: '#/components/schemas/DistributionEventResource'
         total:
           type: integer
-    GET_Distribution-api_GetSeatingGroupsForAnEvent_200_response:
+    GET_Distribution-api_GetAllSellers_200_response:
       type: object
       properties:
         docs:
           type: array
           items:
-            $ref: '#/components/schemas/DistributionSeatingGroupResource'
+            $ref: '#/components/schemas/DistributionSellerResource'
         total:
           type: integer
+    POST_Distribution-api_CreateACheckout:
+      type: object
+      properties:
+        externalReferenceId:
+          type: string
+          maxLength: 100
+          description: The external reference of the checkout
+        distributorId:
+          type: string
+          description: The distributor to create a checkout for
+        tickets:
+          type: array
+          items:
+            type: object
+            properties:
+              offerId:
+                type: string
+                description: The offer to create a checkout for
+              eventId:
+                type: string
+                description: The event to create a checkout for
+              availabilityId:
+                type: string
+                description: The event to create a tickets for
+              price:
+                type: number
+                format: float
+                description: The price of the ticket
+              seatId:
+                type: string
+                description: The seat id for the ticket
+              timeSlotId:
+                type: string
+                description: The time slot id for the ticket
+            required:
+            - offerId
+            - eventId
+            - availabilityId
+            - price
+          description: The tickets to create a checkout for
+      required:
+      - distributorId
+      - tickets
+    DistributionSellerResource:
+      type: object
+      properties:
+        sellerId:
+          type: string
+          description: The unique seller id for the seller
+        distributorId:
+          type: string
+          description: The unique distributor id for the seller
+        name:
+          type: string
+          description: The name of the seller
+        location:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The name of the location
+            street:
+              type: string
+              description: The street of the location
+            city:
+              type: string
+              description: The city of the location
+            postalCode:
+              type: string
+              description: The postal code of the location
+            country:
+              type: string
+              description: The country of the location
+          required:
+          - name
+          - street
+          - city
+          - postalCode
+          - country
+          description: The location of the seller
+      required:
+      - sellerId
+      - distributorId
+      - name
+    DistributionCheckoutResource:
+      type: object
+      properties:
+        checkoutId:
+          type: string
+          description: The ID of the checkout
+        transactionId:
+          type: string
+          description: The ID of the transaction
+        status:
+          type: string
+          enum:
+          - NEW
+          - ABORTED
+          - COMPLETE
+          description: The status of the checkout
+        distributorId:
+          type: string
+          description: The ID of the distributor
+        expiresAt:
+          type: string
+          format: date-time
+          description: The ISO timestamp when the checkout expires
+        externalReferenceId:
+          type: string
+          description: The external reference id for the checkout
+        tickets:
+          type: array
+          items:
+            type: object
+            properties:
+              ticketId:
+                type: string
+                description: The ID of the ticket
+              offerId:
+                type: string
+                description: The ID of the ticket's offer
+              barcode:
+                type: string
+                description: The barcode of the ticket
+              url:
+                type: string
+                description: The URL of the ticket
+              eventId:
+                type: string
+                description: The ID of the ticket's event
+              availabilityId:
+                type: string
+                description: The ID of the ticket's availability
+              timeSlotId:
+                type: string
+                description: The ID of the ticket's time slot
+              seatingInfo:
+                oneOf:
+                - type: object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - Seats
+                    gate:
+                      type: string
+                      description: The gate for the seat
+                    name:
+                      type: string
+                      description: The name of the section if the ticket is for a GeneralAdmission section
+                    seatId:
+                      type: string
+                    sectionName:
+                      type: string
+                      description: The section name for the seat
+                    rowName:
+                      type: string
+                      description: The row name for the seat
+                    seatName:
+                      type: string
+                      description: The seat name for the seat
+                  required:
+                  - type
+                  - seatId
+                  - sectionName
+                  - rowName
+                  - seatName
+                - type: object
+                  properties:
+                    gate:
+                      type: string
+                      description: The gate for the seat
+                    name:
+                      type: string
+                      description: The name of the section if the ticket is for a GeneralAdmission section
+                    seatId:
+                      type: string
+                    type:
+                      type: string
+                      enum:
+                      - GeneralAdmission
+                      description: The type of the seating group this seat belongs to
+                  required:
+                  - type
+                description: The seating info of the ticket
+            required:
+            - ticketId
+            - offerId
+            - barcode
+            - url
+            - eventId
+            - availabilityId
+          description: The created tickets in the checkout when the checkout is completed
+      required:
+      - checkoutId
+      - status
+      - distributorId
     DistributionAvailabilityResource:
       type: object
       properties:
@@ -977,290 +1235,15 @@ components:
       - salesEnd
       - currency
       - offers
-    DistributionSellerResource:
-      type: object
-      properties:
-        sellerId:
-          type: string
-          description: The unique seller id for the seller
-        distributorId:
-          type: string
-          description: The unique distributor id for the seller
-        name:
-          type: string
-          description: The name of the seller
-        location:
-          type: object
-          properties:
-            name:
-              type: string
-              description: The name of the location
-            street:
-              type: string
-              description: The street of the location
-            city:
-              type: string
-              description: The city of the location
-            postalCode:
-              type: string
-              description: The postal code of the location
-            country:
-              type: string
-              description: The country of the location
-          required:
-          - name
-          - street
-          - city
-          - postalCode
-          - country
-          description: The location of the seller
-      required:
-      - sellerId
-      - distributorId
-      - name
-    DistributionTransactionResource:
-      type: object
-      properties:
-        transactionId:
-          type: string
-          description: The ID of the transaction
-        distributorId:
-          type: string
-          description: The ID of the distributor
-        status:
-          type: string
-          enum:
-          - NEW
-          - RESERVED-BY-SYSTEM
-          - ABORTED
-          - COMPLETE
-          - CANCELED
-          description: The status of the transaction
-        tickets:
-          type: array
-          items:
-            type: object
-            properties:
-              ticketId:
-                type: string
-                description: The ID of the ticket
-              offerId:
-                type: string
-                description: The ID of the ticket's offer
-              barcode:
-                type: string
-                description: The barcode of the ticket
-              url:
-                type: string
-                description: The URL of the ticket
-              eventId:
-                type: string
-                description: The ID of the ticket's event
-              availabilityId:
-                type: string
-                description: The ID of the ticket's availability
-              timeSlotId:
-                type: string
-                description: The ID of the ticket's time slot
-              seatingInfo:
-                oneOf:
-                - type: object
-                  properties:
-                    type:
-                      type: string
-                      enum:
-                      - Seats
-                    gate:
-                      type: string
-                      description: The gate for the seat
-                    name:
-                      type: string
-                      description: The name of the section if the ticket is for a GeneralAdmission section
-                    seatId:
-                      type: string
-                    sectionName:
-                      type: string
-                      description: The section name for the seat
-                    rowName:
-                      type: string
-                      description: The row name for the seat
-                    seatName:
-                      type: string
-                      description: The seat name for the seat
-                  required:
-                  - type
-                  - seatId
-                  - sectionName
-                  - rowName
-                  - seatName
-                - type: object
-                  properties:
-                    gate:
-                      type: string
-                      description: The gate for the seat
-                    name:
-                      type: string
-                      description: The name of the section if the ticket is for a GeneralAdmission section
-                    seatId:
-                      type: string
-                    type:
-                      type: string
-                      enum:
-                      - GeneralAdmission
-                      description: The type of the seating group this seat belongs to
-                  required:
-                  - type
-                description: The seating info of the ticket
-            required:
-            - ticketId
-            - offerId
-            - barcode
-            - url
-            - eventId
-            - availabilityId
-          description: The tickets associated to the transaction
-      required:
-      - transactionId
-      - distributorId
-      - status
-    POST_Distribution-api_CancelATransaction:
-      type: object
-      properties:
-        distributorId:
-          type: string
-          description: The distributor to cancel a checkout for
-      required:
-      - distributorId
-    POST_Distribution-api_AbortACheckout:
-      type: object
-      properties:
-        distributorId:
-          type: string
-          description: The distributor to abort a checkout for
-      required:
-      - distributorId
-    GET_Distribution-api_GetAllEventsForASeller_200_response:
+    GET_Distribution-api_GetSeatingGroupsForAnEvent_200_response:
       type: object
       properties:
         docs:
           type: array
           items:
-            $ref: '#/components/schemas/DistributionEventResource'
+            $ref: '#/components/schemas/DistributionSeatingGroupResource'
         total:
           type: integer
-    DistributionCheckoutResource:
-      type: object
-      properties:
-        checkoutId:
-          type: string
-          description: The ID of the checkout
-        transactionId:
-          type: string
-          description: The ID of the transaction
-        status:
-          type: string
-          enum:
-          - NEW
-          - ABORTED
-          - COMPLETE
-          description: The status of the checkout
-        distributorId:
-          type: string
-          description: The ID of the distributor
-        expiresAt:
-          type: string
-          format: date-time
-          description: The ISO timestamp when the checkout expires
-        externalReferenceId:
-          type: string
-          description: The external reference id for the checkout
-        tickets:
-          type: array
-          items:
-            type: object
-            properties:
-              ticketId:
-                type: string
-                description: The ID of the ticket
-              offerId:
-                type: string
-                description: The ID of the ticket's offer
-              barcode:
-                type: string
-                description: The barcode of the ticket
-              url:
-                type: string
-                description: The URL of the ticket
-              eventId:
-                type: string
-                description: The ID of the ticket's event
-              availabilityId:
-                type: string
-                description: The ID of the ticket's availability
-              timeSlotId:
-                type: string
-                description: The ID of the ticket's time slot
-              seatingInfo:
-                oneOf:
-                - type: object
-                  properties:
-                    type:
-                      type: string
-                      enum:
-                      - Seats
-                    gate:
-                      type: string
-                      description: The gate for the seat
-                    name:
-                      type: string
-                      description: The name of the section if the ticket is for a GeneralAdmission section
-                    seatId:
-                      type: string
-                    sectionName:
-                      type: string
-                      description: The section name for the seat
-                    rowName:
-                      type: string
-                      description: The row name for the seat
-                    seatName:
-                      type: string
-                      description: The seat name for the seat
-                  required:
-                  - type
-                  - seatId
-                  - sectionName
-                  - rowName
-                  - seatName
-                - type: object
-                  properties:
-                    gate:
-                      type: string
-                      description: The gate for the seat
-                    name:
-                      type: string
-                      description: The name of the section if the ticket is for a GeneralAdmission section
-                    seatId:
-                      type: string
-                    type:
-                      type: string
-                      enum:
-                      - GeneralAdmission
-                      description: The type of the seating group this seat belongs to
-                  required:
-                  - type
-                description: The seating info of the ticket
-            required:
-            - ticketId
-            - offerId
-            - barcode
-            - url
-            - eventId
-            - availabilityId
-          description: The created tickets in the checkout when the checkout is completed
-      required:
-      - checkoutId
-      - status
-      - distributorId
     POST_Distribution-api_CompleteACheckout:
       type: object
       properties:
@@ -1321,6 +1304,23 @@ components:
       required:
       - distributorId
       - customer
+    POST_Distribution-api_CancelATransaction:
+      type: object
+      properties:
+        distributorId:
+          type: string
+          description: The distributor to cancel a checkout for
+      required:
+      - distributorId
+    GET_Distribution-api_GetTheAvailabilitiesForAnEvent_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/DistributionAvailabilityResource'
+        total:
+          type: integer
   securitySchemes:
     jwt:
       type: http

@@ -158,15 +158,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GET_Fee-schemes_GetAllFeeSchemes_200_response:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeeSchemeResource'
-        total:
-          type: integer
     POST_Fee-schemes_CreateAFeeScheme:
       type: object
       properties:
@@ -239,76 +230,15 @@ components:
             - type
       required:
       - name
-    PUT_Fee-schemes_UpdateAFeeScheme:
+    GET_Fee-schemes_GetAllFeeSchemes_200_response:
       type: object
       properties:
-        name:
-          type: string
-          description: The name of this fee scheme.
-        fees:
+        docs:
           type: array
           items:
-            type: object
-            properties:
-              _id:
-                type: string
-                description: The ID of the Fee Scheme fee
-              enabled:
-                type: boolean
-                description: Whether this item will be applied
-                default: true
-              exposed:
-                type: boolean
-                description: Whether this fee will be exposed to the ticket buyer
-              name:
-                type: string
-                description: The name of the fee that can appear in reports.
-              type:
-                type: string
-                enum:
-                - onTicket
-                - onHardTicket
-                - onCart
-                description: Type of application for the fee.
-              included:
-                type: boolean
-              discountable:
-                type: boolean
-              asNet:
-                type: boolean
-              calculationBase:
-                type: string
-              rules:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    min:
-                      type: number
-                      format: float
-                      description: Minimum price to apply this fee.
-                    max:
-                      type:
-                      - number
-                      - 'null'
-                      format: float
-                      description: Maximum price to apply this fee
-                    fix:
-                      type: number
-                      format: float
-                      description: The fix value of fee to be applied.
-                    var:
-                      type: number
-                      format: float
-                      description: The percentage value of the fee to be applied.
-              taxServiceTypeId:
-                type:
-                - string
-                - 'null'
-                description: The ID of the tax service of the fee
-            required:
-            - name
-            - type
+            $ref: '#/components/schemas/FeeSchemeResource'
+        total:
+          type: integer
     FeeSchemeResource:
       type: object
       properties:
@@ -388,6 +318,76 @@ components:
       required:
       - sellerId
       - name
+    PUT_Fee-schemes_UpdateAFeeScheme:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of this fee scheme.
+        fees:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the Fee Scheme fee
+              enabled:
+                type: boolean
+                description: Whether this item will be applied
+                default: true
+              exposed:
+                type: boolean
+                description: Whether this fee will be exposed to the ticket buyer
+              name:
+                type: string
+                description: The name of the fee that can appear in reports.
+              type:
+                type: string
+                enum:
+                - onTicket
+                - onHardTicket
+                - onCart
+                description: Type of application for the fee.
+              included:
+                type: boolean
+              discountable:
+                type: boolean
+              asNet:
+                type: boolean
+              calculationBase:
+                type: string
+              rules:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    min:
+                      type: number
+                      format: float
+                      description: Minimum price to apply this fee.
+                    max:
+                      type:
+                      - number
+                      - 'null'
+                      format: float
+                      description: Maximum price to apply this fee
+                    fix:
+                      type: number
+                      format: float
+                      description: The fix value of fee to be applied.
+                    var:
+                      type: number
+                      format: float
+                      description: The percentage value of the fee to be applied.
+              taxServiceTypeId:
+                type:
+                - string
+                - 'null'
+                description: The ID of the tax service of the fee
+            required:
+            - name
+            - type
   securitySchemes:
     jwt:
       type: http

@@ -587,6 +587,20 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    POST_Supports_ChangeSupportTicketPrio:
+      type: object
+      properties:
+        priority:
+          type: string
+      required:
+      - priority
+    POST_Supports_UpdateSellerAssignment:
+      type: object
+      properties:
+        assignedToSeller:
+          type: boolean
+      required:
+      - assignedToSeller
     POST_Supports_ChangeSupportTicketStatus:
       type: object
       properties:
@@ -594,12 +608,62 @@ components:
           type: string
       required:
       - status
+    PUT_Supports_SendAMessage:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     POST_Supports_ReplyToSupportTicket:
       type: object
       properties:
         message:
           type: string
       required:
+      - message
+    PATCH_Supports_PatchASupportTicket:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+    PUT_Supports_UpdateASupportTicket:
+      type: object
+      properties:
+        note:
+          type:
+          - string
+          - 'null'
+    POST_Supports_ChangeSupportTicketAssignee:
+      type: object
+      properties:
+        assignee:
+          type: string
+      required:
+      - assignee
+    POST_Supports_CreateASupportTicket:
+      type: object
+      properties:
+        firstname:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+          format: email
+        message:
+          type: string
+        transactionId:
+          type: string
+        sellerId:
+          type: string
+        assignToSeller:
+          type: boolean
+      required:
+      - firstname
+      - lastname
       - message
     PublicSupportResource:
       type: object
@@ -727,63 +791,6 @@ components:
       - lastInteraction
       - createdAt
       - updatedAt
-    PUT_Supports_SendAMessage:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    POST_Supports_CreateASupportTicket:
-      type: object
-      properties:
-        firstname:
-          type: string
-        lastname:
-          type: string
-        email:
-          type: string
-          format: email
-        message:
-          type: string
-        transactionId:
-          type: string
-        sellerId:
-          type: string
-        assignToSeller:
-          type: boolean
-      required:
-      - firstname
-      - lastname
-      - message
-    POST_Supports_ChangeSupportTicketAssignee:
-      type: object
-      properties:
-        assignee:
-          type: string
-      required:
-      - assignee
-    PATCH_Supports_PatchASupportTicket:
-      type: object
-      properties:
-        tags:
-          type: array
-          items:
-            type: string
-    POST_Supports_ChangeSupportTicketPrio:
-      type: object
-      properties:
-        priority:
-          type: string
-      required:
-      - priority
-    POST_Supports_UpdateSellerAssignment:
-      type: object
-      properties:
-        assignedToSeller:
-          type: boolean
-      required:
-      - assignedToSeller
     POST_Supports_ChangeSupportTicketSeller:
       type: object
       properties:
@@ -791,13 +798,6 @@ components:
           type: string
       required:
       - sellerId
-    PUT_Supports_UpdateASupportTicket:
-      type: object
-      properties:
-        note:
-          type:
-          - string
-          - 'null'
   securitySchemes:
     jwt:
       type: http

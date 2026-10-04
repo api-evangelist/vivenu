@@ -404,6 +404,95 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    POST_Payment-requests_VerifyAPaymentRequest:
+      type: object
+      properties:
+        paymentGatewayId:
+          type: string
+          description: The ID of the payment gateway the client intents to use
+        data:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+          description: custom data to verify the payment
+      required:
+      - paymentGatewayId
+    POST_Payment-requests_ConfirmAPaymentRequest:
+      type: object
+      properties:
+        gatewaySecret:
+          type: string
+          description: The secret of the payment gateway responsible for the payment
+        reference:
+          type: string
+          description: A reference to the payment
+        paymentStatus:
+          type: string
+          enum:
+          - SUCCEEDED
+          - PENDING
+          description: The status of the payment
+          default: SUCCEEDED
+        paymentMethod:
+          type: string
+          enum:
+          - visa
+          - mc
+          - sepadirectdebit
+          - amex
+          - sofort
+          - klarna
+          - ideal
+          - giropay
+          - paypal
+          - local
+          - discover
+          - custom
+          - twint
+          - postfinance
+          - blik
+          - p24
+          - affirm
+          - dankort
+          - eps
+          - mobilepay
+          - payconiq
+          - bancontact
+          - payfast
+          - distributor
+          - marketplace
+          - cartebancaire
+          - paymentplan
+          - bizum
+          - afterpay
+          - zip
+          - ach
+          - paybybank
+          - link
+          - alipay
+          - wechatpay
+          - pix
+          - eftpos
+          - revolutpay
+          - wero
+          - scalapay
+          - vipps
+          - cashapppay
+          - crypto
+          - unknown
+          - none
+          description: The payment method used to pay
+        paymentMethodVariant:
+          type: string
+          enum:
+          - applepay
+          - googlepay
+          description: The payment variant used to pay
+      required:
+      - gatewaySecret
     PUT_Payment-requests_UpdateAPaymentRequest:
       type: object
       properties:
@@ -420,6 +509,32 @@ components:
       - secret
       - paymentStrategyId
       - paymentOptionId
+    GET_Payment-requests_GetPaymentRequests_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentRequestResource'
+        total:
+          type: integer
+    POST_Payment-requests_CreateAPaymentRequestForCustomerPaymentMethodSetup:
+      type: object
+      properties:
+        customerId:
+          type: string
+          description: The ID of the customer object to create the payment request for
+        amount:
+          type: number
+          format: float
+          description: The amount to charge
+          default: 1
+        paymentStrategyId:
+          type: string
+          description: The ID of the payment strategy to use
+        paymentOptionId:
+          type: string
+          description: The ID of the payment option to use
     PaymentRequestResource:
       type: object
       properties:
@@ -600,92 +715,31 @@ components:
       - sellerId
       - createdAt
       - updatedAt
-    POST_Payment-requests_CreateAPaymentRequest:
+    POST_Payment-requests_ReceiveProcessorInfo:
       type: object
       properties:
-        checkoutId:
+        paymentGatewayId:
           type: string
-          description: The ID of the checkout object to create the payment request
-        transactionId:
+          description: The ID of the payment gateway the client intents to use
+        returnUrl:
           type: string
-          description: The ID of the transaction object to create the payment request
-        secret:
-          type: string
-          description: The secret of the transaction
+          description: The URL to return after the user has completed the payment
       required:
-      - secret
-    POST_Payment-requests_ConfirmAPaymentRequest:
+      - paymentGatewayId
+    POST_Payment-requests_ChangePaymentRequestPaymentStatus:
       type: object
       properties:
-        gatewaySecret:
-          type: string
-          description: The secret of the payment gateway responsible for the payment
-        reference:
-          type: string
-          description: A reference to the payment
         paymentStatus:
           type: string
           enum:
           - SUCCEEDED
-          - PENDING
-          description: The status of the payment
-          default: SUCCEEDED
-        paymentMethod:
+          - FAILED
+          description: The new payment status
+        gatewaySecret:
           type: string
-          enum:
-          - visa
-          - mc
-          - sepadirectdebit
-          - amex
-          - sofort
-          - klarna
-          - ideal
-          - giropay
-          - paypal
-          - local
-          - discover
-          - custom
-          - twint
-          - postfinance
-          - blik
-          - p24
-          - affirm
-          - dankort
-          - eps
-          - mobilepay
-          - payconiq
-          - bancontact
-          - payfast
-          - distributor
-          - marketplace
-          - cartebancaire
-          - paymentplan
-          - bizum
-          - afterpay
-          - zip
-          - ach
-          - paybybank
-          - link
-          - alipay
-          - wechatpay
-          - pix
-          - eftpos
-          - revolutpay
-          - wero
-          - scalapay
-          - vipps
-          - cashapppay
-          - crypto
-          - unknown
-          - none
-          description: The payment method used to pay
-        paymentMethodVariant:
-          type: string
-          enum:
-          - applepay
-          - googlepay
-          description: The payment variant used to pay
+          description: The secret of the payment gateway responsible for the payment
       required:
+      - paymentStatus
       - gatewaySecret
     PaymentRequestProcessorResource:
       type: object
@@ -732,74 +786,20 @@ components:
       required:
       - paymentGatewayType
       - createdAt
-    POST_Payment-requests_VerifyAPaymentRequest:
+    POST_Payment-requests_CreateAPaymentRequest:
       type: object
       properties:
-        paymentGatewayId:
+        checkoutId:
           type: string
-          description: The ID of the payment gateway the client intents to use
-        data:
-          oneOf:
-          - type: array
-          - type: boolean
-          - type: number
-          - type: object
-          - type: string
-          description: custom data to verify the payment
+          description: The ID of the checkout object to create the payment request
+        transactionId:
+          type: string
+          description: The ID of the transaction object to create the payment request
+        secret:
+          type: string
+          description: The secret of the transaction
       required:
-      - paymentGatewayId
-    POST_Payment-requests_ReceiveProcessorInfo:
-      type: object
-      properties:
-        paymentGatewayId:
-          type: string
-          description: The ID of the payment gateway the client intents to use
-        returnUrl:
-          type: string
-          description: The URL to return after the user has completed the payment
-      required:
-      - paymentGatewayId
-    POST_Payment-requests_ChangePaymentRequestPaymentStatus:
-      type: object
-      properties:
-        paymentStatus:
-          type: string
-          enum:
-          - SUCCEEDED
-          - FAILED
-          description: The new payment status
-        gatewaySecret:
-          type: string
-          description: The secret of the payment gateway responsible for the payment
-      required:
-      - paymentStatus
-      - gatewaySecret
-    GET_Payment-requests_GetPaymentRequests_200_response:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentRequestResource'
-        total:
-          type: integer
-    POST_Payment-requests_CreateAPaymentRequestForCustomerPaymentMethodSetup:
-      type: object
-      properties:
-        customerId:
-          type: string
-          description: The ID of the customer object to create the payment request for
-        amount:
-          type: number
-          format: float
-          description: The amount to charge
-          default: 1
-        paymentStrategyId:
-          type: string
-          description: The ID of the payment strategy to use
-        paymentOptionId:
-          type: string
-          description: The ID of the payment option to use
+      - secret
   securitySchemes:
     jwt:
       type: http

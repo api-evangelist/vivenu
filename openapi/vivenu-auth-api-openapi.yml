@@ -113,14 +113,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    POST_Auth_ExchangeAToken:
-      type: object
-      properties:
-        exchangeToken:
-          type: string
-          description: The token to be exchanged for an access token
-      required:
-      - exchangeToken
     POST_Auth_CreateAnExchangeToken:
       oneOf:
       - type: object
@@ -148,6 +140,14 @@ components:
       required:
       - exchangeToken
       - expiresIn
+    POST_Auth_ExchangeAToken:
+      type: object
+      properties:
+        exchangeToken:
+          type: string
+          description: The token to be exchanged for an access token
+      required:
+      - exchangeToken
     POST_Auth_ExchangeAToken_200_response:
       type: object
       properties:

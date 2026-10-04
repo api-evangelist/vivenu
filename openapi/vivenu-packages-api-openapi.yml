@@ -223,6 +223,409 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    POST_Api_201_response:
+      type: object
+      properties:
+        _id:
+          type: string
+        active:
+          type: boolean
+        name:
+          type: string
+        slug:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        image:
+          type:
+          - string
+          - 'null'
+        headerImage:
+          type:
+          - string
+          - 'null'
+        sellerId:
+          type: string
+        variants:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              name:
+                type: string
+              image:
+                type:
+                - string
+                - 'null'
+            required:
+            - _id
+            - name
+        components:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              name:
+                type: string
+              description:
+                type:
+                - string
+                - 'null'
+              minOptions:
+                type: number
+                format: float
+              maxOptions:
+                type: number
+                format: float
+              options:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                    eventId:
+                      type: string
+                    shopId:
+                      type: string
+                    variants:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          variantId:
+                            type: string
+                          ticketTypeId:
+                            type: string
+                          v:
+                            type: number
+                            format: float
+                            description: Ticket volume
+                          active:
+                            type: boolean
+                            description: If ticket type related to variant is active
+                        required:
+                        - variantId
+                        - ticketTypeId
+                  required:
+                  - _id
+                  - eventId
+                  - variants
+            required:
+            - _id
+            - name
+            - options
+        tracking:
+          type: object
+          properties:
+            tagging:
+              type: object
+              properties:
+                tags:
+                  type: array
+                  items:
+                    type: string
+              required:
+              - tags
+          required:
+          - tagging
+        availableSelectionTypes:
+          type: array
+          items:
+            type: string
+            enum:
+            - INDIVIDUAL
+            - SAME_SEAT
+            - BEST_AVAILABLE
+        sellStart:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: An ISO timestamp indicating when the package sale starts.
+        sellEnd:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: An ISO timestamp indicating when the package sale ends.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - _id
+      - active
+      - name
+      - slug
+      - sellerId
+      - variants
+      - components
+      - tracking
+      - createdAt
+      - updatedAt
+    PUT_Api:
+      type: object
+      properties:
+        active:
+          type: boolean
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        image:
+          type:
+          - string
+          - 'null'
+        headerImage:
+          type:
+          - string
+          - 'null'
+        variants:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              name:
+                type: string
+              image:
+                type:
+                - string
+                - 'null'
+            required:
+            - _id
+            - name
+        components:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              name:
+                type: string
+              description:
+                type:
+                - string
+                - 'null'
+              minOptions:
+                type: number
+                format: float
+              maxOptions:
+                type: number
+                format: float
+              options:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                    eventId:
+                      type: string
+                    shopId:
+                      type: string
+                    variants:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          variantId:
+                            type: string
+                          ticketTypeId:
+                            type: string
+                          v:
+                            type: number
+                            format: float
+                            description: Ticket volume
+                          active:
+                            type: boolean
+                            description: If ticket type related to variant is active
+                        required:
+                        - variantId
+                        - ticketTypeId
+                  required:
+                  - _id
+                  - eventId
+                  - variants
+            required:
+            - _id
+            - name
+            - options
+        tracking:
+          type: object
+          properties:
+            tagging:
+              type: object
+              properties:
+                tags:
+                  type: array
+                  items:
+                    type: string
+              required:
+              - tags
+          required:
+          - tagging
+        availableSelectionTypes:
+          type: array
+          items:
+            type: string
+            enum:
+            - INDIVIDUAL
+            - SAME_SEAT
+            - BEST_AVAILABLE
+        sellStart:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: An ISO timestamp indicating when the package sale starts.
+        sellEnd:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: An ISO timestamp indicating when the package sale ends.
+    LanguageResource:
+      type:
+      - string
+      - 'null'
+      enum:
+      - de
+      - de-CH
+      - en
+      - en-GB
+      - en-AU
+      - fr
+      - es
+      - es-MX
+      - is
+      - it
+      - ru
+      - pt
+      - tr
+      - nb
+      - nl
+      - pl
+      - sv
+      - sl
+      - da
+      - cs
+      - lv
+      - he
+      - ar
+      - th
+      - ko
+      - ja
+      - zh-TW
+      description: The preferred language of the package checkout
+    POST_Api:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: float
+        variantId:
+          type: string
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              componentId:
+                type: string
+              optionId:
+                type: string
+              seats:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The ID of the seating object.
+                    _type:
+                      type: number
+                      format: float
+                      enum:
+                      - 6
+                      - 7
+                      description: Indicates the type of seating object. Seat = 6, General Admission = 7.
+                    categoryId:
+                      type: string
+                      description: The ID of the category containing the seating object.
+                    statusId:
+                      type: string
+                      description: The ID of a container holding information about the seating status of the seating object.
+                    name:
+                      type:
+                      - string
+                      - 'null'
+                      description: If _type == 7. The name of the general admission.
+                    seatType:
+                      type:
+                      - string
+                      - 'null'
+                      enum:
+                      - handicapped
+                      - limitedView
+                      - foldable
+                      description: If _type == 6. The type of the seat. null = normal.
+                    sectionName:
+                      type:
+                      - string
+                      - 'null'
+                      description: If _type == 6. The name of the section where the seat is located.
+                    groupName:
+                      type:
+                      - string
+                      - 'null'
+                      description: If _type == 6. The name of the row group where the seat is located.
+                    rowName:
+                      type:
+                      - string
+                      - 'null'
+                      description: If _type == 6. The name of the row where the seat is located.
+                    seatName:
+                      type:
+                      - string
+                      - 'null'
+                      description: If _type == 6. The seat name.
+                    gate:
+                      type:
+                      - string
+                      - 'null'
+                      description: The entry gate associated with the seating object.
+                  required:
+                  - _type
+                  - statusId
+                  description: The associated seating object.
+              seatingReservationToken:
+                type: string
+            required:
+            - componentId
+            - optionId
+        preferredLanguage:
+          $ref: '#/components/schemas/LanguageResource'
+        salesChannelId:
+          type: string
+          description: The ID of the sales channel to create the checkout item for.
+      required:
+      - amount
+      - variantId
+      - items
     GET_Api_200_response:
       type: object
       properties:
@@ -371,281 +774,6 @@ components:
       - name
       - slug
       - sellerId
-      - components
-      - tracking
-      - createdAt
-      - updatedAt
-    PUT_Api:
-      type: object
-      properties:
-        active:
-          type: boolean
-        name:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        image:
-          type:
-          - string
-          - 'null'
-        headerImage:
-          type:
-          - string
-          - 'null'
-        variants:
-          type: array
-          items:
-            type: object
-            properties:
-              _id:
-                type: string
-              name:
-                type: string
-              image:
-                type:
-                - string
-                - 'null'
-            required:
-            - _id
-            - name
-        components:
-          type: array
-          items:
-            type: object
-            properties:
-              _id:
-                type: string
-              name:
-                type: string
-              description:
-                type:
-                - string
-                - 'null'
-              minOptions:
-                type: number
-                format: float
-              maxOptions:
-                type: number
-                format: float
-              options:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    _id:
-                      type: string
-                    eventId:
-                      type: string
-                    shopId:
-                      type: string
-                    variants:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          variantId:
-                            type: string
-                          ticketTypeId:
-                            type: string
-                          v:
-                            type: number
-                            format: float
-                            description: Ticket volume
-                          active:
-                            type: boolean
-                            description: If ticket type related to variant is active
-                        required:
-                        - variantId
-                        - ticketTypeId
-                  required:
-                  - _id
-                  - eventId
-                  - variants
-            required:
-            - _id
-            - name
-            - options
-        tracking:
-          type: object
-          properties:
-            tagging:
-              type: object
-              properties:
-                tags:
-                  type: array
-                  items:
-                    type: string
-              required:
-              - tags
-          required:
-          - tagging
-        availableSelectionTypes:
-          type: array
-          items:
-            type: string
-            enum:
-            - INDIVIDUAL
-            - SAME_SEAT
-            - BEST_AVAILABLE
-        sellStart:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: An ISO timestamp indicating when the package sale starts.
-        sellEnd:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: An ISO timestamp indicating when the package sale ends.
-    POST_Api_201_response:
-      type: object
-      properties:
-        _id:
-          type: string
-        active:
-          type: boolean
-        name:
-          type: string
-        slug:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        image:
-          type:
-          - string
-          - 'null'
-        headerImage:
-          type:
-          - string
-          - 'null'
-        sellerId:
-          type: string
-        variants:
-          type: array
-          items:
-            type: object
-            properties:
-              _id:
-                type: string
-              name:
-                type: string
-              image:
-                type:
-                - string
-                - 'null'
-            required:
-            - _id
-            - name
-        components:
-          type: array
-          items:
-            type: object
-            properties:
-              _id:
-                type: string
-              name:
-                type: string
-              description:
-                type:
-                - string
-                - 'null'
-              minOptions:
-                type: number
-                format: float
-              maxOptions:
-                type: number
-                format: float
-              options:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    _id:
-                      type: string
-                    eventId:
-                      type: string
-                    shopId:
-                      type: string
-                    variants:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          variantId:
-                            type: string
-                          ticketTypeId:
-                            type: string
-                          v:
-                            type: number
-                            format: float
-                            description: Ticket volume
-                          active:
-                            type: boolean
-                            description: If ticket type related to variant is active
-                        required:
-                        - variantId
-                        - ticketTypeId
-                  required:
-                  - _id
-                  - eventId
-                  - variants
-            required:
-            - _id
-            - name
-            - options
-        tracking:
-          type: object
-          properties:
-            tagging:
-              type: object
-              properties:
-                tags:
-                  type: array
-                  items:
-                    type: string
-              required:
-              - tags
-          required:
-          - tagging
-        availableSelectionTypes:
-          type: array
-          items:
-            type: string
-            enum:
-            - INDIVIDUAL
-            - SAME_SEAT
-            - BEST_AVAILABLE
-        sellStart:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: An ISO timestamp indicating when the package sale starts.
-        sellEnd:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: An ISO timestamp indicating when the package sale ends.
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - _id
-      - active
-      - name
-      - slug
-      - sellerId
-      - variants
       - components
       - tracking
       - createdAt
@@ -799,134 +927,6 @@ components:
       - tracking
       - createdAt
       - updatedAt
-    LanguageResource:
-      type:
-      - string
-      - 'null'
-      enum:
-      - de
-      - de-CH
-      - en
-      - en-GB
-      - en-AU
-      - fr
-      - es
-      - es-MX
-      - is
-      - it
-      - ru
-      - pt
-      - tr
-      - nb
-      - nl
-      - pl
-      - sv
-      - sl
-      - da
-      - cs
-      - lv
-      - he
-      - ar
-      - th
-      - ko
-      - ja
-      - zh-TW
-      description: The preferred language of the package checkout
-    POST_Api:
-      type: object
-      properties:
-        amount:
-          type: number
-          format: float
-        variantId:
-          type: string
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              componentId:
-                type: string
-              optionId:
-                type: string
-              seats:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    _id:
-                      type: string
-                      description: The ID of the seating object.
-                    _type:
-                      type: number
-                      format: float
-                      enum:
-                      - 6
-                      - 7
-                      description: Indicates the type of seating object. Seat = 6, General Admission = 7.
-                    categoryId:
-                      type: string
-                      description: The ID of the category containing the seating object.
-                    statusId:
-                      type: string
-                      description: The ID of a container holding information about the seating status of the seating object.
-                    name:
-                      type:
-                      - string
-                      - 'null'
-                      description: If _type == 7. The name of the general admission.
-                    seatType:
-                      type:
-                      - string
-                      - 'null'
-                      enum:
-                      - handicapped
-                      - limitedView
-                      - foldable
-                      description: If _type == 6. The type of the seat. null = normal.
-                    sectionName:
-                      type:
-                      - string
-                      - 'null'
-                      description: If _type == 6. The name of the section where the seat is located.
-                    groupName:
-                      type:
-                      - string
-                      - 'null'
-                      description: If _type == 6. The name of the row group where the seat is located.
-                    rowName:
-                      type:
-                      - string
-                      - 'null'
-                      description: If _type == 6. The name of the row where the seat is located.
-                    seatName:
-                      type:
-                      - string
-                      - 'null'
-                      description: If _type == 6. The seat name.
-                    gate:
-                      type:
-                      - string
-                      - 'null'
-                      description: The entry gate associated with the seating object.
-                  required:
-                  - _type
-                  - statusId
-                  description: The associated seating object.
-              seatingReservationToken:
-                type: string
-            required:
-            - componentId
-            - optionId
-        preferredLanguage:
-          $ref: '#/components/schemas/LanguageResource'
-        salesChannelId:
-          type: string
-          description: The ID of the sales channel to create the checkout item for.
-      required:
-      - amount
-      - variantId
-      - items
   securitySchemes:
     jwt:
       type: http

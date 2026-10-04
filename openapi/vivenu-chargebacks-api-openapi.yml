@@ -145,6 +145,15 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    GET_Chargebacks_GetAllChargebacks_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargebackResource'
+        total:
+          type: integer
     ChargebackResource:
       type: object
       properties:
@@ -255,15 +264,6 @@ components:
       - _id
       - createdAt
       - updatedAt
-    GET_Chargebacks_GetAllChargebacks_200_response:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChargebackResource'
-        total:
-          type: integer
   securitySchemes:
     jwt:
       type: http

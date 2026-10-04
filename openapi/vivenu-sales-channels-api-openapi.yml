@@ -443,7 +443,7 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PUT_Sales-channels_UpdateASalesChannelGroup:
+    SalesChannelGroupResource:
       type: object
       properties:
         name:
@@ -463,34 +463,26 @@ components:
         restrictEventAccess:
           type: boolean
           description: Wether channels in this group can only access some events or all
+        _id:
+          type: string
+          description: The ID of the sales channel group
+        sellerId:
+          type: string
+          description: The ID of the seller of the sales channel group
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the sales channel group was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the sales channel group was updated
       required:
       - name
       - status
       - restrictEventAccess
-    POST_Sales-channels_CreateASalesChannelGroup:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the sales channel group
-        status:
-          type: string
-          enum:
-          - ACTIVE
-          - INACTIVE
-          description: The status of the sales channel group, whether it is active or not
-        salesChannelIds:
-          type: array
-          items:
-            type: string
-          description: The sales channels that are in the group
-        restrictEventAccess:
-          type: boolean
-          description: Wether channels in this group can only access some events or all
-      required:
-      - name
-      - status
-      - restrictEventAccess
+      - _id
+      - sellerId
     SalesChannelResource:
       type: object
       properties:
@@ -544,114 +536,6 @@ components:
       - name
       - status
       - type
-    PUT_Sales-channels_UpdateASalesChannel:
-      oneOf:
-      - type: object
-        properties:
-          name:
-            type: string
-            description: The name of the sales channel
-          status:
-            type: string
-            enum:
-            - ACTIVE
-            - INACTIVE
-            description: The status of the object, whether it is active or not
-          type:
-            type: string
-            enum:
-            - DISTRIBUTOR
-          groupId:
-            type: string
-            description: The group of the sales channel
-          contractTypeIds:
-            type: array
-            items:
-              type: string
-            description: The contract types that are available through this sales channel
-          distributor:
-            type: object
-            properties:
-              type:
-                type: string
-                enum:
-                - Redeam
-                - GetYourGuide
-                - Logitix
-                - EventDynamic
-                - StubHub
-                - TicketmasterFrance
-                - ProjectAdmission
-                - Tiqets
-                - TripCom
-                - ANI
-                - TicketNetwork
-                - KorusTicket
-                - ComeToParis
-                - Experticket
-                - Prioticket
-                - RevPro
-                - Automatiq
-                description: The type of the sales channel
-              integrationType:
-                type: string
-                enum:
-                - DistributionService
-                - Logitix
-                - EventDynamic
-                - StubHub
-                - TicketmasterFrance
-                - ProjectAdmission
-                - Tiqets
-                - TripCom
-                - ANI
-                - TicketNetwork
-                - KorusTicket
-                - ComeToParis
-                - Experticket
-                - Prioticket
-                - RevPro
-                - Automatiq
-                description: The integration type of the sales channel
-            required:
-            - type
-            - integrationType
-        required:
-        - name
-        - status
-        - type
-      - type: object
-        properties:
-          name:
-            type: string
-            description: The name of the sales channel
-          status:
-            type: string
-            enum:
-            - ACTIVE
-            - INACTIVE
-            description: The status of the object, whether it is active or not
-          groupId:
-            type: string
-            description: The group of the sales channel
-          contractTypeIds:
-            type: array
-            items:
-              type: string
-            description: The contract types that are available through this sales channel
-          type:
-            type: string
-            enum:
-            - POS
-            - INTERNAL_BOOKING
-            - WEB
-            - MARKETPLACE_APP
-            - KIOSK
-            description: The type of the sales channel
-        required:
-        - name
-        - status
-        - type
     POST_Sales-channels_CreateASalesChannel:
       oneOf:
       - type: object
@@ -760,7 +644,115 @@ components:
         - name
         - status
         - type
-    SalesChannelGroupResource:
+    PUT_Sales-channels_UpdateASalesChannel:
+      oneOf:
+      - type: object
+        properties:
+          name:
+            type: string
+            description: The name of the sales channel
+          status:
+            type: string
+            enum:
+            - ACTIVE
+            - INACTIVE
+            description: The status of the object, whether it is active or not
+          type:
+            type: string
+            enum:
+            - DISTRIBUTOR
+          groupId:
+            type: string
+            description: The group of the sales channel
+          contractTypeIds:
+            type: array
+            items:
+              type: string
+            description: The contract types that are available through this sales channel
+          distributor:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - Redeam
+                - GetYourGuide
+                - Logitix
+                - EventDynamic
+                - StubHub
+                - TicketmasterFrance
+                - ProjectAdmission
+                - Tiqets
+                - TripCom
+                - ANI
+                - TicketNetwork
+                - KorusTicket
+                - ComeToParis
+                - Experticket
+                - Prioticket
+                - RevPro
+                - Automatiq
+                description: The type of the sales channel
+              integrationType:
+                type: string
+                enum:
+                - DistributionService
+                - Logitix
+                - EventDynamic
+                - StubHub
+                - TicketmasterFrance
+                - ProjectAdmission
+                - Tiqets
+                - TripCom
+                - ANI
+                - TicketNetwork
+                - KorusTicket
+                - ComeToParis
+                - Experticket
+                - Prioticket
+                - RevPro
+                - Automatiq
+                description: The integration type of the sales channel
+            required:
+            - type
+            - integrationType
+        required:
+        - name
+        - status
+        - type
+      - type: object
+        properties:
+          name:
+            type: string
+            description: The name of the sales channel
+          status:
+            type: string
+            enum:
+            - ACTIVE
+            - INACTIVE
+            description: The status of the object, whether it is active or not
+          groupId:
+            type: string
+            description: The group of the sales channel
+          contractTypeIds:
+            type: array
+            items:
+              type: string
+            description: The contract types that are available through this sales channel
+          type:
+            type: string
+            enum:
+            - POS
+            - INTERNAL_BOOKING
+            - WEB
+            - MARKETPLACE_APP
+            - KIOSK
+            description: The type of the sales channel
+        required:
+        - name
+        - status
+        - type
+    POST_Sales-channels_CreateASalesChannelGroup:
       type: object
       properties:
         name:
@@ -780,26 +772,34 @@ components:
         restrictEventAccess:
           type: boolean
           description: Wether channels in this group can only access some events or all
-        _id:
-          type: string
-          description: The ID of the sales channel group
-        sellerId:
-          type: string
-          description: The ID of the seller of the sales channel group
-        createdAt:
-          type: string
-          format: date-time
-          description: An ISO timestamp indicating when the sales channel group was created
-        updatedAt:
-          type: string
-          format: date-time
-          description: An ISO timestamp indicating when the sales channel group was updated
       required:
       - name
       - status
       - restrictEventAccess
-      - _id
-      - sellerId
+    PUT_Sales-channels_UpdateASalesChannelGroup:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the sales channel group
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          description: The status of the sales channel group, whether it is active or not
+        salesChannelIds:
+          type: array
+          items:
+            type: string
+          description: The sales channels that are in the group
+        restrictEventAccess:
+          type: boolean
+          description: Wether channels in this group can only access some events or all
+      required:
+      - name
+      - status
+      - restrictEventAccess
     GET_Sales-channels_GetAllSalesChannels_200_response:
       type: object
       properties:

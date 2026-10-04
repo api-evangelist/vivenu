@@ -193,12 +193,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    POST_Notifications_UpdateActionNotificationSubscription:
-      type: object
-      properties:
-        subscribed:
-          type: boolean
-          default: true
     PATCH_Notifications_UpdateNotificationSettingsForTheAuthenticatedUser:
       type: object
       properties:
@@ -245,83 +239,6 @@ components:
           minItems: 1
       required:
       - preferences
-    PATCH_Notifications_UpdateNotificationSettingsForTheAuthenticatedUser_200_response:
-      type: object
-      properties:
-        triggers:
-          type: array
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-                enum:
-                - job.completed
-                - transaction.completed
-                - purchaseIntent.created
-                - fulfillmentJob.created
-                - customer.created
-                - support.supportAssignedToSeller
-                - ticket.checked-in
-                - security.new-device
-                - security.password-reset
-                - security.apiKey.created
-                - payments.chargeback.created
-                - payments.failed
-                - payments.paymentPlans.installment.failed
-                - payments.paymentPlans.completed
-                - vivenuPayments.account.restrictedSoon
-                - vivenuPayments.account.restricted
-                - subscriptions.payments.schedules.maxRetriesReached
-                - pos.opened
-                - pos.closed
-                - accounting.payout.initiated
-                - invoice.fiscalization.failed
-                description: The notification trigger type
-              methods:
-                type: array
-                items:
-                  type: string
-                  enum:
-                  - push
-                  - email
-                  - dashboard
-                description: Selected notification methods
-              defaultMethods:
-                type: array
-                items:
-                  type: string
-                  enum:
-                  - push
-                  - email
-                  - dashboard
-                description: Default notification methods
-              requiredMethods:
-                type: array
-                items:
-                  type: string
-                  enum:
-                  - push
-                  - email
-                  - dashboard
-                description: Required notification methods that cannot be disabled
-              defaultLevel:
-                type: string
-                enum:
-                - critical
-                - high
-                - medium
-                - low
-                - none
-                description: Default notification level
-            required:
-            - type
-            - methods
-            - defaultMethods
-            - defaultLevel
-          description: All notification triggers with their settings
-      required:
-      - triggers
     GET_Notifications_GetNotificationSettingsForTheAuthenticatedUser_200_response:
       type: object
       properties:
@@ -399,6 +316,89 @@ components:
           description: All notification triggers with their settings
       required:
       - triggers
+    PATCH_Notifications_UpdateNotificationSettingsForTheAuthenticatedUser_200_response:
+      type: object
+      properties:
+        triggers:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - job.completed
+                - transaction.completed
+                - purchaseIntent.created
+                - fulfillmentJob.created
+                - customer.created
+                - support.supportAssignedToSeller
+                - ticket.checked-in
+                - security.new-device
+                - security.password-reset
+                - security.apiKey.created
+                - payments.chargeback.created
+                - payments.failed
+                - payments.paymentPlans.installment.failed
+                - payments.paymentPlans.completed
+                - vivenuPayments.account.restrictedSoon
+                - vivenuPayments.account.restricted
+                - subscriptions.payments.schedules.maxRetriesReached
+                - pos.opened
+                - pos.closed
+                - accounting.payout.initiated
+                - invoice.fiscalization.failed
+                description: The notification trigger type
+              methods:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - push
+                  - email
+                  - dashboard
+                description: Selected notification methods
+              defaultMethods:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - push
+                  - email
+                  - dashboard
+                description: Default notification methods
+              requiredMethods:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - push
+                  - email
+                  - dashboard
+                description: Required notification methods that cannot be disabled
+              defaultLevel:
+                type: string
+                enum:
+                - critical
+                - high
+                - medium
+                - low
+                - none
+                description: Default notification level
+            required:
+            - type
+            - methods
+            - defaultMethods
+            - defaultLevel
+          description: All notification triggers with their settings
+      required:
+      - triggers
+    POST_Notifications_UpdateActionNotificationSubscription:
+      type: object
+      properties:
+        subscribed:
+          type: boolean
+          default: true
   securitySchemes:
     jwt:
       type: http

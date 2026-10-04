@@ -95,6 +95,15 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    GET_Cancellations_GetAllCancellations_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            type: object
+        total:
+          type: integer
     InvoiceResource:
       type: object
       properties:
@@ -449,15 +458,6 @@ components:
       - items
       - currency
       description: The invoice of the transaction
-    GET_Cancellations_GetAllCancellations_200_response:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            type: object
-        total:
-          type: integer
   securitySchemes:
     jwt:
       type: http

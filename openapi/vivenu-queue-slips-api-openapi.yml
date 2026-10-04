@@ -907,216 +907,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    POST_Queue-slips_CreateCheckoutQueueSlipPopulatorJob:
-      type: object
-      properties:
-        queueId:
-          type: string
-        printTickets:
-          type: boolean
-        printTicketsFormat:
-          type: string
-          enum:
-          - A4
-          - LETTER
-          - LEGAL
-          - BOARDING-PASS
-          - PLASTIC-CARD
-          - CARD
-          - LABEL
-          - CUSTOM
-          - APPLE
-          - GOOGLE
-          description: The format of a document template to filter for
-        printDeliveryNote:
-          type: boolean
-        customDeliveryNote:
-          type: object
-          properties:
-            name:
-              type: string
-            company:
-              type: string
-            address:
-              type: object
-              properties:
-                fullAddress:
-                  type:
-                  - string
-                  - 'null'
-                  description: Optional full address
-                street:
-                  type:
-                  - string
-                  - 'null'
-                  description: The street of the address. Street name including number.
-                line2:
-                  type:
-                  - string
-                  - 'null'
-                  description: The additional field of the address.
-                postal:
-                  type:
-                  - string
-                  - 'null'
-                  description: The postal code of the address.
-                city:
-                  type:
-                  - string
-                  - 'null'
-                  description: The city of the address.
-                country:
-                  type:
-                  - string
-                  - 'null'
-                  description: The country of the address. An ISO 3166 country code.
-                state:
-                  type:
-                  - string
-                  - 'null'
-                  description: The state of the address. If applicable
-        printInvoice:
-          type: boolean
-        printReceipt:
-          type: boolean
-        splitSeasonTickets:
-          type: boolean
-        splitSeasonTicketsEventIds:
-          type: array
-          items:
-            type: string
-        printVoucher:
-          type: boolean
-        printVouchersFormat:
-          type: string
-          enum:
-          - A4
-          - LETTER
-          - LEGAL
-          - BOARDING-PASS
-          - PLASTIC-CARD
-          - CARD
-          - LABEL
-          - CUSTOM
-          - APPLE
-          - GOOGLE
-          description: The format of a document template to filter for
-        filter:
-          type: object
-          properties:
-            checkoutId:
-              type: string
-            deliveryType:
-              type: array
-              items:
-                oneOf:
-                - type: string
-                  enum:
-                  - HARD
-                - type: string
-                  enum:
-                  - VIRTUAL
-            fulfillmentTypeId:
-              type: string
-            printStatus:
-              type: array
-              items:
-                oneOf:
-                - type: string
-                  enum:
-                  - SUCCEEDED
-                - type: string
-                  enum:
-                  - ABORTED
-                - type: string
-                  enum:
-                  - FAILED
-                - type: string
-                  enum:
-                  - PENDING
-                - type: string
-                  enum:
-                  - REPRINT
-            paymentStatus:
-              type: array
-              items:
-                oneOf:
-                - type: string
-                  enum:
-                  - AWAITING
-                - type: string
-                  enum:
-                  - PENDING
-                - type: string
-                  enum:
-                  - RECEIVED
-                - type: string
-                  enum:
-                  - REFUND
-                - type: string
-                  enum:
-                  - CANCELED
-                - type: string
-                  enum:
-                  - FAILED
-                - type: string
-                  enum:
-                  - DISPUTE
-                - type: string
-                  enum:
-                  - CHARGEBACK
-                - type: string
-                  enum:
-                  - POS-RECEIVED
-                - type: string
-                  enum:
-                  - POS-CANCELED
-                - type: string
-                  enum:
-                  - LOCAL-PENDING
-                - type: string
-                  enum:
-                  - LOCAL-AWAITING
-                - type: string
-                  enum:
-                  - LOCAL-RECEIVED
-                - type: string
-                  enum:
-                  - EXTERNAL
-            status:
-              type: array
-              items:
-                oneOf:
-                - type: string
-                  enum:
-                  - NEW
-                - type: string
-                  enum:
-                  - ABORTED
-                - type: string
-                  enum:
-                  - COMPLETE
-            name:
-              type: string
-            email:
-              type: string
-            seller:
-              type: array
-              items:
-                type: string
-            customer:
-              type: array
-              items:
-                type: string
-            start:
-              type: string
-              format: date-time
-            end:
-              type: string
-              format: date-time
-      required:
-      - queueId
-      - filter
     POST_Queue-slips_CreateTicketQueueSlipPopulatorJob:
       type: object
       properties:
@@ -1465,6 +1255,216 @@ components:
                   enum:
                   - REPRINT
             code:
+              type: string
+            seller:
+              type: array
+              items:
+                type: string
+            customer:
+              type: array
+              items:
+                type: string
+            start:
+              type: string
+              format: date-time
+            end:
+              type: string
+              format: date-time
+      required:
+      - queueId
+      - filter
+    POST_Queue-slips_CreateCheckoutQueueSlipPopulatorJob:
+      type: object
+      properties:
+        queueId:
+          type: string
+        printTickets:
+          type: boolean
+        printTicketsFormat:
+          type: string
+          enum:
+          - A4
+          - LETTER
+          - LEGAL
+          - BOARDING-PASS
+          - PLASTIC-CARD
+          - CARD
+          - LABEL
+          - CUSTOM
+          - APPLE
+          - GOOGLE
+          description: The format of a document template to filter for
+        printDeliveryNote:
+          type: boolean
+        customDeliveryNote:
+          type: object
+          properties:
+            name:
+              type: string
+            company:
+              type: string
+            address:
+              type: object
+              properties:
+                fullAddress:
+                  type:
+                  - string
+                  - 'null'
+                  description: Optional full address
+                street:
+                  type:
+                  - string
+                  - 'null'
+                  description: The street of the address. Street name including number.
+                line2:
+                  type:
+                  - string
+                  - 'null'
+                  description: The additional field of the address.
+                postal:
+                  type:
+                  - string
+                  - 'null'
+                  description: The postal code of the address.
+                city:
+                  type:
+                  - string
+                  - 'null'
+                  description: The city of the address.
+                country:
+                  type:
+                  - string
+                  - 'null'
+                  description: The country of the address. An ISO 3166 country code.
+                state:
+                  type:
+                  - string
+                  - 'null'
+                  description: The state of the address. If applicable
+        printInvoice:
+          type: boolean
+        printReceipt:
+          type: boolean
+        splitSeasonTickets:
+          type: boolean
+        splitSeasonTicketsEventIds:
+          type: array
+          items:
+            type: string
+        printVoucher:
+          type: boolean
+        printVouchersFormat:
+          type: string
+          enum:
+          - A4
+          - LETTER
+          - LEGAL
+          - BOARDING-PASS
+          - PLASTIC-CARD
+          - CARD
+          - LABEL
+          - CUSTOM
+          - APPLE
+          - GOOGLE
+          description: The format of a document template to filter for
+        filter:
+          type: object
+          properties:
+            checkoutId:
+              type: string
+            deliveryType:
+              type: array
+              items:
+                oneOf:
+                - type: string
+                  enum:
+                  - HARD
+                - type: string
+                  enum:
+                  - VIRTUAL
+            fulfillmentTypeId:
+              type: string
+            printStatus:
+              type: array
+              items:
+                oneOf:
+                - type: string
+                  enum:
+                  - SUCCEEDED
+                - type: string
+                  enum:
+                  - ABORTED
+                - type: string
+                  enum:
+                  - FAILED
+                - type: string
+                  enum:
+                  - PENDING
+                - type: string
+                  enum:
+                  - REPRINT
+            paymentStatus:
+              type: array
+              items:
+                oneOf:
+                - type: string
+                  enum:
+                  - AWAITING
+                - type: string
+                  enum:
+                  - PENDING
+                - type: string
+                  enum:
+                  - RECEIVED
+                - type: string
+                  enum:
+                  - REFUND
+                - type: string
+                  enum:
+                  - CANCELED
+                - type: string
+                  enum:
+                  - FAILED
+                - type: string
+                  enum:
+                  - DISPUTE
+                - type: string
+                  enum:
+                  - CHARGEBACK
+                - type: string
+                  enum:
+                  - POS-RECEIVED
+                - type: string
+                  enum:
+                  - POS-CANCELED
+                - type: string
+                  enum:
+                  - LOCAL-PENDING
+                - type: string
+                  enum:
+                  - LOCAL-AWAITING
+                - type: string
+                  enum:
+                  - LOCAL-RECEIVED
+                - type: string
+                  enum:
+                  - EXTERNAL
+            status:
+              type: array
+              items:
+                oneOf:
+                - type: string
+                  enum:
+                  - NEW
+                - type: string
+                  enum:
+                  - ABORTED
+                - type: string
+                  enum:
+                  - COMPLETE
+            name:
+              type: string
+            email:
               type: string
             seller:
               type: array

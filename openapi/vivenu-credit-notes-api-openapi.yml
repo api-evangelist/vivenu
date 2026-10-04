@@ -109,406 +109,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    LegalIdentificationDocumentResource:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - spain_tax_id
-          identifier:
-            type: string
-        required:
-        - type
-        - identifier
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - origin_country_id
-            description: The type of the identification document.
-        required:
-        - type
-    CustomerResource:
-      type: object
-      properties:
-        _id:
-          type: string
-          description: The ID of the customer
-        company:
-          type:
-          - string
-          - 'null'
-          description: The company of the customer
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name of the customer collected from first name and last name
-        prename:
-          type:
-          - string
-          - 'null'
-          description: The first name of the customer
-        lastname:
-          type:
-          - string
-          - 'null'
-          description: The lastname of the customer
-        image:
-          type:
-          - string
-          - 'null'
-          description: The image of the customer
-          deprecated: true
-        primaryEmail:
-          type: string
-          format: email
-          description: The primary email of the customer
-        number:
-          type: number
-          format: float
-          description: The number of the customer. Need to be unique and incrementing
-        phone:
-          type: string
-          description: The phone number of the customer
-        location:
-          type: object
-          properties:
-            street:
-              type:
-              - string
-              - 'null'
-              description: The street of the location
-            line2:
-              type:
-              - string
-              - 'null'
-              description: The additional address fields of the location
-            postal:
-              type:
-              - string
-              - 'null'
-              description: The postal of the location
-            city:
-              type:
-              - string
-              - 'null'
-              description: The city of the location
-            locale:
-              type:
-              - string
-              - 'null'
-              description: The locale of the location
-              deprecated: true
-            state:
-              type:
-              - string
-              - 'null'
-              description: The state of the location
-            center:
-              type:
-              - array
-              - 'null'
-              items:
-                type: number
-                format: float
-              description: The center of the location
-              deprecated: true
-            country:
-              type:
-              - string
-              - 'null'
-              description: An ISO-3166-1 Alpha 2 country code of the location
-          description: The location of the customer
-        sellerId:
-          type: string
-          description: The ID of the seller of the customer
-        notes:
-          type:
-          - string
-          - 'null'
-          description: Notes of the customer
-        extraFields:
-          type:
-          - object
-          - 'null'
-          description: Extra fields of the customer
-        tags:
-          type: array
-          items:
-            type: string
-          description: An array of tags
-        segments:
-          type: array
-          items:
-            type: string
-          description: An array of segment slugs, read only
-        blocked:
-          type: boolean
-          description: Whether the customer is blocked
-        verified:
-          type: boolean
-          description: Whether the customer is verified
-        identification:
-          type: array
-          items:
-            $ref: '#/components/schemas/LegalIdentificationDocumentResource'
-          description: An array of identification items
-        _account:
-          type: object
-          properties:
-            verificationToken:
-              type: string
-              description: The verification token will be sent to the customer via email within a verification link, which can be used to verify the account of the customer
-            passwordResetToken:
-              type: string
-              description: The password reset token will be sent within a password reset link via email, which can be used by the customer to reset its password
-            limitations:
-              type: object
-              properties:
-                nextVerificationMailRequest:
-                  type: string
-                  format: date-time
-                  description: An ISO timestamp indicating when the next verification mail request can be sent
-              description: Account specific limitations of the customer
-            loginType:
-              type:
-              - string
-              - 'null'
-              enum:
-              - password
-              - identityprovider
-              description: The login type of the customer.
-          description: Account specific information about the customer
-        meta:
-          type: object
-          description: Custom key-value data. Metadata is useful for storing additional, structured information on an object.
-        externalId:
-          type:
-          - string
-          - 'null'
-          description: An external identifier of the customer
-        createdAt:
-          type: string
-          format: date-time
-          description: An ISO timestamp indicating when the customer was created
-        updatedAt:
-          type: string
-          format: date-time
-          description: An ISO timestamp indicating when the customer was updated
-      required:
-      - _id
-      - primaryEmail
-      description: The associated customer which has been updated
-    GET_Credit-notes_ListCreditNotes_200_response:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            type: object
-            properties:
-              _id:
-                type: string
-              transactionId:
-                type: string
-              customerId:
-                type: string
-              sellerId:
-                type: string
-              amount:
-                type: number
-                format: float
-              currency:
-                type: string
-                enum:
-                - EUR
-                - USD
-                - GBP
-                - AUD
-                - CHF
-                - THB
-                - ILS
-                - COP
-                - MXN
-                - DKK
-                - NOK
-                - SEK
-                - QAR
-                - CAD
-                - ISK
-                - GTQ
-                - INR
-                - DOP
-                - SGD
-                - PLN
-                - SAR
-                - TTD
-                - ZAR
-                - KYD
-                - HKD
-                - CZK
-                - KRW
-                - JPY
-                - NZD
-                - AED
-                - MAD
-                - TWD
-                - BRL
-                - BWP
-                - NAD
-                - KES
-                - SCR
-                - TRY
-                - SZL
-                - LSL
-                - TZS
-                - UGX
-                - ZMW
-                - ZWG
-                - GHS
-                - NGN
-                - SLE
-                - LRD
-                - XOF
-                - XAF
-                - GEL
-                - IDR
-                - ARS
-                - CRC
-                - HUF
-                - EGP
-                - MYR
-                - VND
-                - PHP
-              secret:
-                type: string
-              'no':
-                type: string
-              counter:
-                type: string
-              items:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    price:
-                      type: number
-                      format: float
-                    type:
-                      type: string
-                      enum:
-                      - ticket
-                    taxRate:
-                      type: number
-                      format: float
-                    taxInfo:
-                      type: object
-                      properties:
-                        serviceTypeId:
-                          type: string
-                          description: The ID of the service type.
-                        exceptionId:
-                          type: string
-                          description: The ID of the exception.
-                        proceedsAccountId:
-                          type: string
-                          description: The ID of the proceeds account.
-                        proceedsAccountCode:
-                          type: string
-                          description: The code of the proceeds account.
-                        taxItems:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              name:
-                                type:
-                                - string
-                                - 'null'
-                              taxTypeId:
-                                type:
-                                - string
-                                - 'null'
-                              rate:
-                                type: number
-                                format: float
-                              perUnit:
-                                type: number
-                                format: float
-                              total:
-                                type: number
-                                format: float
-                              netTotal:
-                                type:
-                                - number
-                                - 'null'
-                                format: float
-                              netPerUnit:
-                                type:
-                                - number
-                                - 'null'
-                                format: float
-                              taxPayableAccountId:
-                                type:
-                                - string
-                                - 'null'
-                              taxPayableAccountCode:
-                                type:
-                                - string
-                                - 'null'
-                            required:
-                            - rate
-                            - perUnit
-                            - total
-                          description: The array of tax items.
-                      description: The tax info details.
-                    components:
-                      type: array
-                      items:
-                        oneOf:
-                        - type: string
-                        - type: number
-                        - type: boolean
-                        - type: integer
-                        - type: object
-                    offerItemId:
-                      type: string
-                    referenceCartItemId:
-                      type: string
-                    name:
-                      type: string
-                  required:
-                  - price
-                  - type
-              source:
-                type: object
-                properties:
-                  type:
-                    type: string
-                    enum:
-                    - resell_offer
-                  offerId:
-                    type: string
-              createdAt:
-                type: string
-                format: date-time
-              updatedAt:
-                type: string
-                format: date-time
-            required:
-            - customerId
-            - sellerId
-            - amount
-            - currency
-            - source
-            - createdAt
-            - updatedAt
-        total:
-          type: integer
     TransactionResource:
       type: object
       properties:
@@ -2476,6 +2076,406 @@ components:
       - realPrice
       - status
       - secret
+    CustomerResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the customer
+        company:
+          type:
+          - string
+          - 'null'
+          description: The company of the customer
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the customer collected from first name and last name
+        prename:
+          type:
+          - string
+          - 'null'
+          description: The first name of the customer
+        lastname:
+          type:
+          - string
+          - 'null'
+          description: The lastname of the customer
+        image:
+          type:
+          - string
+          - 'null'
+          description: The image of the customer
+          deprecated: true
+        primaryEmail:
+          type: string
+          format: email
+          description: The primary email of the customer
+        number:
+          type: number
+          format: float
+          description: The number of the customer. Need to be unique and incrementing
+        phone:
+          type: string
+          description: The phone number of the customer
+        location:
+          type: object
+          properties:
+            street:
+              type:
+              - string
+              - 'null'
+              description: The street of the location
+            line2:
+              type:
+              - string
+              - 'null'
+              description: The additional address fields of the location
+            postal:
+              type:
+              - string
+              - 'null'
+              description: The postal of the location
+            city:
+              type:
+              - string
+              - 'null'
+              description: The city of the location
+            locale:
+              type:
+              - string
+              - 'null'
+              description: The locale of the location
+              deprecated: true
+            state:
+              type:
+              - string
+              - 'null'
+              description: The state of the location
+            center:
+              type:
+              - array
+              - 'null'
+              items:
+                type: number
+                format: float
+              description: The center of the location
+              deprecated: true
+            country:
+              type:
+              - string
+              - 'null'
+              description: An ISO-3166-1 Alpha 2 country code of the location
+          description: The location of the customer
+        sellerId:
+          type: string
+          description: The ID of the seller of the customer
+        notes:
+          type:
+          - string
+          - 'null'
+          description: Notes of the customer
+        extraFields:
+          type:
+          - object
+          - 'null'
+          description: Extra fields of the customer
+        tags:
+          type: array
+          items:
+            type: string
+          description: An array of tags
+        segments:
+          type: array
+          items:
+            type: string
+          description: An array of segment slugs, read only
+        blocked:
+          type: boolean
+          description: Whether the customer is blocked
+        verified:
+          type: boolean
+          description: Whether the customer is verified
+        identification:
+          type: array
+          items:
+            $ref: '#/components/schemas/LegalIdentificationDocumentResource'
+          description: An array of identification items
+        _account:
+          type: object
+          properties:
+            verificationToken:
+              type: string
+              description: The verification token will be sent to the customer via email within a verification link, which can be used to verify the account of the customer
+            passwordResetToken:
+              type: string
+              description: The password reset token will be sent within a password reset link via email, which can be used by the customer to reset its password
+            limitations:
+              type: object
+              properties:
+                nextVerificationMailRequest:
+                  type: string
+                  format: date-time
+                  description: An ISO timestamp indicating when the next verification mail request can be sent
+              description: Account specific limitations of the customer
+            loginType:
+              type:
+              - string
+              - 'null'
+              enum:
+              - password
+              - identityprovider
+              description: The login type of the customer.
+          description: Account specific information about the customer
+        meta:
+          type: object
+          description: Custom key-value data. Metadata is useful for storing additional, structured information on an object.
+        externalId:
+          type:
+          - string
+          - 'null'
+          description: An external identifier of the customer
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the customer was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the customer was updated
+      required:
+      - _id
+      - primaryEmail
+      description: The associated customer which has been updated
+    GET_Credit-notes_ListCreditNotes_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              transactionId:
+                type: string
+              customerId:
+                type: string
+              sellerId:
+                type: string
+              amount:
+                type: number
+                format: float
+              currency:
+                type: string
+                enum:
+                - EUR
+                - USD
+                - GBP
+                - AUD
+                - CHF
+                - THB
+                - ILS
+                - COP
+                - MXN
+                - DKK
+                - NOK
+                - SEK
+                - QAR
+                - CAD
+                - ISK
+                - GTQ
+                - INR
+                - DOP
+                - SGD
+                - PLN
+                - SAR
+                - TTD
+                - ZAR
+                - KYD
+                - HKD
+                - CZK
+                - KRW
+                - JPY
+                - NZD
+                - AED
+                - MAD
+                - TWD
+                - BRL
+                - BWP
+                - NAD
+                - KES
+                - SCR
+                - TRY
+                - SZL
+                - LSL
+                - TZS
+                - UGX
+                - ZMW
+                - ZWG
+                - GHS
+                - NGN
+                - SLE
+                - LRD
+                - XOF
+                - XAF
+                - GEL
+                - IDR
+                - ARS
+                - CRC
+                - HUF
+                - EGP
+                - MYR
+                - VND
+                - PHP
+              secret:
+                type: string
+              'no':
+                type: string
+              counter:
+                type: string
+              items:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    price:
+                      type: number
+                      format: float
+                    type:
+                      type: string
+                      enum:
+                      - ticket
+                    taxRate:
+                      type: number
+                      format: float
+                    taxInfo:
+                      type: object
+                      properties:
+                        serviceTypeId:
+                          type: string
+                          description: The ID of the service type.
+                        exceptionId:
+                          type: string
+                          description: The ID of the exception.
+                        proceedsAccountId:
+                          type: string
+                          description: The ID of the proceeds account.
+                        proceedsAccountCode:
+                          type: string
+                          description: The code of the proceeds account.
+                        taxItems:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type:
+                                - string
+                                - 'null'
+                              taxTypeId:
+                                type:
+                                - string
+                                - 'null'
+                              rate:
+                                type: number
+                                format: float
+                              perUnit:
+                                type: number
+                                format: float
+                              total:
+                                type: number
+                                format: float
+                              netTotal:
+                                type:
+                                - number
+                                - 'null'
+                                format: float
+                              netPerUnit:
+                                type:
+                                - number
+                                - 'null'
+                                format: float
+                              taxPayableAccountId:
+                                type:
+                                - string
+                                - 'null'
+                              taxPayableAccountCode:
+                                type:
+                                - string
+                                - 'null'
+                            required:
+                            - rate
+                            - perUnit
+                            - total
+                          description: The array of tax items.
+                      description: The tax info details.
+                    components:
+                      type: array
+                      items:
+                        oneOf:
+                        - type: string
+                        - type: number
+                        - type: boolean
+                        - type: integer
+                        - type: object
+                    offerItemId:
+                      type: string
+                    referenceCartItemId:
+                      type: string
+                    name:
+                      type: string
+                  required:
+                  - price
+                  - type
+              source:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - resell_offer
+                  offerId:
+                    type: string
+              createdAt:
+                type: string
+                format: date-time
+              updatedAt:
+                type: string
+                format: date-time
+            required:
+            - customerId
+            - sellerId
+            - amount
+            - currency
+            - source
+            - createdAt
+            - updatedAt
+        total:
+          type: integer
+    LegalIdentificationDocumentResource:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - spain_tax_id
+          identifier:
+            type: string
+        required:
+        - type
+        - identifier
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - origin_country_id
+            description: The type of the identification document.
+        required:
+        - type
     GET_Credit-notes_GetCreditNoteInfo_200_response:
       type: object
       properties:

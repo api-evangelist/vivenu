@@ -496,14 +496,6 @@ components:
             $ref: '#/components/schemas/TicketTransferResource'
         total:
           type: integer
-    POST_Ticket-transfers_RejectTicketTransfer:
-      type: object
-      properties:
-        secret:
-          type: string
-          description: The secret of the ticket transfer.
-      required:
-      - secret
     PublicTicketTransferResource:
       type: object
       properties:
@@ -849,33 +841,6 @@ components:
       - createdAt
       - updatedAt
       description: The associated ticket transfer which has been expired
-    GET_Ticket-transfers_GetPublicTicketTransfers_200_response:
-      type: array
-      items:
-        $ref: '#/components/schemas/PublicTicketTransferResource'
-    POST_Ticket-transfers_AcceptTicketTransfer:
-      type: object
-      properties:
-        secret:
-          type: string
-          description: The secret of the ticket transfer.
-        prename:
-          type: string
-          description: The first name of the customer
-        lastname:
-          type: string
-          description: The last name of the customer
-        ticketIds:
-          type: array
-          items:
-            type: string
-          minItems: 1
-          description: The array of ticket IDs to be accepted. If not specified - all tickets will be accepted.
-          deprecated: true
-      required:
-      - secret
-      - prename
-      - lastname
     POST_Ticket-transfers_CreateTicketTransfer:
       type: object
       properties:
@@ -925,6 +890,41 @@ components:
       required:
       - tickets
       - recipient
+    POST_Ticket-transfers_RejectTicketTransfer:
+      type: object
+      properties:
+        secret:
+          type: string
+          description: The secret of the ticket transfer.
+      required:
+      - secret
+    POST_Ticket-transfers_AcceptTicketTransfer:
+      type: object
+      properties:
+        secret:
+          type: string
+          description: The secret of the ticket transfer.
+        prename:
+          type: string
+          description: The first name of the customer
+        lastname:
+          type: string
+          description: The last name of the customer
+        ticketIds:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          description: The array of ticket IDs to be accepted. If not specified - all tickets will be accepted.
+          deprecated: true
+      required:
+      - secret
+      - prename
+      - lastname
+    GET_Ticket-transfers_GetPublicTicketTransfers_200_response:
+      type: array
+      items:
+        $ref: '#/components/schemas/PublicTicketTransferResource'
   securitySchemes:
     jwt:
       type: http

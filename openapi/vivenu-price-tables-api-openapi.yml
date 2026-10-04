@@ -161,6 +161,79 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PUT_Price-tables_UpdateAPriceTable:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the price table. Is used for identification
+        categories:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the price category
+              name:
+                type: string
+                description: The name of the price category. Is used for identification
+            required:
+            - name
+          description: An array of price categories
+        types:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the price type
+              name:
+                type: string
+                description: The name of the price type. Is used for identification
+              categoryId:
+                type: string
+                description: The ID of the price category
+              price:
+                type: number
+                format: float
+                description: The default price for the type, can be overridden per price tier
+            required:
+            - name
+            - categoryId
+            - price
+          description: An array of price types
+        tiers:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              name:
+                type: string
+                description: The name of the price tier. Is used for identification
+              prices:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    priceTypeId:
+                      type: string
+                      description: The ID of the price type
+                    price:
+                      type:
+                      - number
+                      - 'null'
+                      format: float
+                      description: The price for the associated price type
+                  required:
+                  - priceTypeId
+                  - price
+            required:
+            - name
+          description: An array of price tiers
     GET_Price-tables_GetAllPriceTables_200_response:
       type: object
       properties:
@@ -328,79 +401,6 @@ components:
           description: An array of price tiers
       required:
       - name
-    PUT_Price-tables_UpdateAPriceTable:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the price table. Is used for identification
-        categories:
-          type: array
-          items:
-            type: object
-            properties:
-              _id:
-                type: string
-                description: The ID of the price category
-              name:
-                type: string
-                description: The name of the price category. Is used for identification
-            required:
-            - name
-          description: An array of price categories
-        types:
-          type: array
-          items:
-            type: object
-            properties:
-              _id:
-                type: string
-                description: The ID of the price type
-              name:
-                type: string
-                description: The name of the price type. Is used for identification
-              categoryId:
-                type: string
-                description: The ID of the price category
-              price:
-                type: number
-                format: float
-                description: The default price for the type, can be overridden per price tier
-            required:
-            - name
-            - categoryId
-            - price
-          description: An array of price types
-        tiers:
-          type: array
-          items:
-            type: object
-            properties:
-              _id:
-                type: string
-              name:
-                type: string
-                description: The name of the price tier. Is used for identification
-              prices:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    priceTypeId:
-                      type: string
-                      description: The ID of the price type
-                    price:
-                      type:
-                      - number
-                      - 'null'
-                      format: float
-                      description: The price for the associated price type
-                  required:
-                  - priceTypeId
-                  - price
-            required:
-            - name
-          description: An array of price tiers
   securitySchemes:
     jwt:
       type: http

@@ -200,27 +200,63 @@ components:
           description: Optional expiry time (strictly future, at most one year); omit for keys that do not auto-expire.
       required:
       - name
-    PUT_Api_keys_UpdateAnApiKey:
+    RedactedAPIKeyResource:
       type: object
       properties:
+        _id:
+          type: string
+          description: The ID of the API key.
         active:
           type: boolean
           description: Whether the API key can be used to authenticate against the API.
           default: true
         name:
           type: string
+          maxLength: 200
           description: An internal name to identify the API key.
+        sellerId:
+          type: string
+          description: The ID of the seller that owns the API key.
+        orgId:
+          type: string
+          description: The ID of the organisation that owns the API key.
+        createdBy:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - USER
+              - APP
+              - API_KEY
+              - SYSTEM
+              description: The type of the entity
+            id:
+              type: string
+              description: The ID of the entity
+          required:
+          - type
+          - id
+          description: The entity that created the API key.
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the API Key was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the API Key was last updated.
         expiresAt:
-          oneOf:
-          - oneOf:
-            - type: array
-            - type: boolean
-            - type: number
-            - type: object
-            - type: string
-          - type: string
-            format: date-time
-          description: Optional expiry; send null to clear automatic expiry.
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Optional ISO instant after which the key no longer authenticates; omit or null for no automatic expiry.
+      required:
+      - _id
+      - name
+      - createdAt
+      - updatedAt
     APIKeyResource:
       type: object
       properties:
@@ -283,67 +319,31 @@ components:
       - key
       - createdAt
       - updatedAt
-    RedactedAPIKeyResource:
+    GET_Api_keys_GetAllApiKeys_200_response:
+      type: array
+      items:
+        $ref: '#/components/schemas/RedactedAPIKeyResource'
+    PUT_Api_keys_UpdateAnApiKey:
       type: object
       properties:
-        _id:
-          type: string
-          description: The ID of the API key.
         active:
           type: boolean
           description: Whether the API key can be used to authenticate against the API.
           default: true
         name:
           type: string
-          maxLength: 200
           description: An internal name to identify the API key.
-        sellerId:
-          type: string
-          description: The ID of the seller that owns the API key.
-        orgId:
-          type: string
-          description: The ID of the organisation that owns the API key.
-        createdBy:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - USER
-              - APP
-              - API_KEY
-              - SYSTEM
-              description: The type of the entity
-            id:
-              type: string
-              description: The ID of the entity
-          required:
-          - type
-          - id
-          description: The entity that created the API key.
-        createdAt:
-          type: string
-          format: date-time
-          description: An ISO Timestamp indicating when the API Key was created.
-        updatedAt:
-          type: string
-          format: date-time
-          description: An ISO Timestamp indicating when the API Key was last updated.
         expiresAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Optional ISO instant after which the key no longer authenticates; omit or null for no automatic expiry.
-      required:
-      - _id
-      - name
-      - createdAt
-      - updatedAt
-    GET_Api_keys_GetAllApiKeys_200_response:
-      type: array
-      items:
-        $ref: '#/components/schemas/RedactedAPIKeyResource'
+          oneOf:
+          - oneOf:
+            - type: array
+            - type: boolean
+            - type: number
+            - type: object
+            - type: string
+          - type: string
+            format: date-time
+          description: Optional expiry; send null to clear automatic expiry.
   securitySchemes:
     jwt:
       type: http

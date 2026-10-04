@@ -783,6 +783,14 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    GET_Customer-payment-methods_GetPaymentMethodsForCustomer_200_response:
+      type: array
+      items:
+        $ref: '#/components/schemas/CustomerPaymentMethodResource'
+    GET_Customer-payment-methods_GetCustomerPaymentMethods_200_response:
+      type: array
+      items:
+        $ref: '#/components/schemas/CustomerPaymentMethodResource'
     CustomerPaymentMethodResource:
       type: object
       properties:
@@ -873,14 +881,6 @@ components:
       - primary
       - active
       - gatewayId
-    GET_Customer-payment-methods_GetCustomerPaymentMethods_200_response:
-      type: array
-      items:
-        $ref: '#/components/schemas/CustomerPaymentMethodResource'
-    GET_Customer-payment-methods_GetPaymentMethodsForCustomer_200_response:
-      type: array
-      items:
-        $ref: '#/components/schemas/CustomerPaymentMethodResource'
   securitySchemes:
     jwt:
       type: http

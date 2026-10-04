@@ -359,122 +359,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    EntitlementResource:
-      type: object
-      properties:
-        _id:
-          type: string
-          description: The ID of the entitlement
-        name:
-          type: string
-          minLength: 1
-          description: The name of the entitlement
-        publicName:
-          type: string
-          minLength: 1
-          description: The public name of the entitlement
-        active:
-          description: Whether the entitlement is active
-          default: false
-          type: boolean
-        conditions:
-          $ref: '#/components/schemas/EntitlementConditionTree'
-        modifiers:
-          type: array
-          items:
-            oneOf:
-            - type: object
-              properties:
-                _id:
-                  type: string
-                type:
-                  type: string
-                  enum:
-                  - var_discount
-                config:
-                  type: object
-                  properties:
-                    value:
-                      type: number
-                      minimum: 0
-                      maximum: 1
-                      description: Discount percentage
-                    max:
-                      description: Maximum discount amount
-                      type:
-                      - number
-                      - 'null'
-                  required:
-                  - value
-                  additionalProperties: false
-              required:
-              - _id
-              - type
-              - config
-              additionalProperties: false
-            - type: object
-              properties:
-                _id:
-                  type: string
-                type:
-                  type: string
-                  enum:
-                  - fix_discount
-                config:
-                  type: object
-                  properties:
-                    amount:
-                      type: number
-                      minimum: 0
-                      description: Fixed discount amount
-                  required:
-                  - amount
-                  additionalProperties: false
-              required:
-              - _id
-              - type
-              - config
-              additionalProperties: false
-            - type: object
-              properties:
-                _id:
-                  type: string
-                type:
-                  type: string
-                  enum:
-                  - waive_fees
-                config:
-                  default: {}
-                  type: object
-                  properties: {}
-                  additionalProperties: false
-              required:
-              - _id
-              - type
-              - config
-              additionalProperties: false
-            type: object
-          description: The checkout modifiers applied when this entitlement matches
-        sellerId:
-          type: string
-          description: The ID of the seller owning the entitlement
-        createdAt:
-          description: An ISO timestamp indicating when the entitlement was created.
-          type: string
-          format: date-time
-        updatedAt:
-          description: An ISO timestamp indicating when the entitlement was updated.
-          type: string
-          format: date-time
-      required:
-      - _id
-      - name
-      - publicName
-      - modifiers
-      - sellerId
-      - createdAt
-      - updatedAt
-      additionalProperties: false
     EntitlementConditionTree:
       type: object
       properties:
@@ -594,6 +478,122 @@ components:
             - config
             additionalProperties: false
           type: object
+      additionalProperties: false
+    EntitlementResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the entitlement
+        name:
+          type: string
+          minLength: 1
+          description: The name of the entitlement
+        publicName:
+          type: string
+          minLength: 1
+          description: The public name of the entitlement
+        active:
+          description: Whether the entitlement is active
+          default: false
+          type: boolean
+        conditions:
+          $ref: '#/components/schemas/EntitlementConditionTree'
+        modifiers:
+          type: array
+          items:
+            oneOf:
+            - type: object
+              properties:
+                _id:
+                  type: string
+                type:
+                  type: string
+                  enum:
+                  - var_discount
+                config:
+                  type: object
+                  properties:
+                    value:
+                      type: number
+                      minimum: 0
+                      maximum: 1
+                      description: Discount percentage
+                    max:
+                      description: Maximum discount amount
+                      type:
+                      - number
+                      - 'null'
+                  required:
+                  - value
+                  additionalProperties: false
+              required:
+              - _id
+              - type
+              - config
+              additionalProperties: false
+            - type: object
+              properties:
+                _id:
+                  type: string
+                type:
+                  type: string
+                  enum:
+                  - fix_discount
+                config:
+                  type: object
+                  properties:
+                    amount:
+                      type: number
+                      minimum: 0
+                      description: Fixed discount amount
+                  required:
+                  - amount
+                  additionalProperties: false
+              required:
+              - _id
+              - type
+              - config
+              additionalProperties: false
+            - type: object
+              properties:
+                _id:
+                  type: string
+                type:
+                  type: string
+                  enum:
+                  - waive_fees
+                config:
+                  default: {}
+                  type: object
+                  properties: {}
+                  additionalProperties: false
+              required:
+              - _id
+              - type
+              - config
+              additionalProperties: false
+            type: object
+          description: The checkout modifiers applied when this entitlement matches
+        sellerId:
+          type: string
+          description: The ID of the seller owning the entitlement
+        createdAt:
+          description: An ISO timestamp indicating when the entitlement was created.
+          type: string
+          format: date-time
+        updatedAt:
+          description: An ISO timestamp indicating when the entitlement was updated.
+          type: string
+          format: date-time
+      required:
+      - _id
+      - name
+      - publicName
+      - modifiers
+      - sellerId
+      - createdAt
+      - updatedAt
       additionalProperties: false
   securitySchemes:
     jwt:

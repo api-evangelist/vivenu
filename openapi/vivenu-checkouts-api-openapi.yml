@@ -293,6 +293,37 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    GET_Checkouts_GetAllCheckouts_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/CheckoutResource'
+        total:
+          type: integer
+    LegalIdentificationDocumentResource:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - spain_tax_id
+          identifier:
+            type: string
+        required:
+        - type
+        - identifier
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - origin_country_id
+            description: The type of the identification document.
+        required:
+        - type
     POST_Checkouts_CreateACheckout:
       type: object
       properties:
@@ -601,28 +632,39 @@ components:
       - eventId
       - items
       - salesChannelId
-    LegalIdentificationDocumentResource:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - spain_tax_id
-          identifier:
-            type: string
-        required:
-        - type
-        - identifier
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - origin_country_id
-            description: The type of the identification document.
-        required:
-        - type
+    LanguageResource:
+      type:
+      - string
+      - 'null'
+      enum:
+      - de
+      - de-CH
+      - en
+      - en-GB
+      - en-AU
+      - fr
+      - es
+      - es-MX
+      - is
+      - it
+      - ru
+      - pt
+      - tr
+      - nb
+      - nl
+      - pl
+      - sv
+      - sl
+      - da
+      - cs
+      - lv
+      - he
+      - ar
+      - th
+      - ko
+      - ja
+      - zh-TW
+      description: The preferred language of the package checkout
     CheckoutResource:
       type: object
       properties:
@@ -2120,48 +2162,6 @@ components:
       - items
       - realPrice
       description: The associated checkout
-    LanguageResource:
-      type:
-      - string
-      - 'null'
-      enum:
-      - de
-      - de-CH
-      - en
-      - en-GB
-      - en-AU
-      - fr
-      - es
-      - es-MX
-      - is
-      - it
-      - ru
-      - pt
-      - tr
-      - nb
-      - nl
-      - pl
-      - sv
-      - sl
-      - da
-      - cs
-      - lv
-      - he
-      - ar
-      - th
-      - ko
-      - ja
-      - zh-TW
-      description: The preferred language of the package checkout
-    GET_Checkouts_GetAllCheckouts_200_response:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/CheckoutResource'
-        total:
-          type: integer
   securitySchemes:
     jwt:
       type: http

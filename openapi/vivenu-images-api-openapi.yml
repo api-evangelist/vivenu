@@ -125,113 +125,7 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PUT_Images_UpdateAnImage:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the image.
-        tags:
-          type: array
-          items:
-            type: string
-          description: An array of tags of the image.
-        type:
-          type: string
-          enum:
-          - img
-          - video
-          description: The type of the asset (img or video)
-      required:
-      - name
-    GET_Images_GetAllImages_200_response:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            type: object
-            properties:
-              _id:
-                type: string
-                description: The ID of the image.
-              sellerId:
-                type: string
-                description: The ID of the seller of the image.
-              name:
-                type: string
-                description: The name of the image.
-              url:
-                type: string
-                format: uri
-                description: The URL of the image.
-              tags:
-                type: array
-                items:
-                  type: string
-                description: An array of tags of the image.
-              type:
-                type: string
-                enum:
-                - img
-                - video
-                description: The type of the asset (img or video)
-              createdAt:
-                type: string
-                format: date-time
-                description: An ISO timestamp indicating when the image was created.
-              updatedAt:
-                type: string
-                format: date-time
-                description: An ISO timestamp indicating when the image was updated.
-            required:
-            - _id
-            - sellerId
-            - name
-            - url
-        total:
-          type: integer
     POST_Images_CreateAnImage_201_response:
-      type: object
-      properties:
-        _id:
-          type: string
-          description: The ID of the image.
-        sellerId:
-          type: string
-          description: The ID of the seller of the image.
-        name:
-          type: string
-          description: The name of the image.
-        url:
-          type: string
-          format: uri
-          description: The URL of the image.
-        tags:
-          type: array
-          items:
-            type: string
-          description: An array of tags of the image.
-        type:
-          type: string
-          enum:
-          - img
-          - video
-          description: The type of the asset (img or video)
-        createdAt:
-          type: string
-          format: date-time
-          description: An ISO timestamp indicating when the image was created.
-        updatedAt:
-          type: string
-          format: date-time
-          description: An ISO timestamp indicating when the image was updated.
-      required:
-      - _id
-      - sellerId
-      - name
-      - url
-    DELETE_Images_DeleteAnImage_200_response:
       type: object
       properties:
         _id:
@@ -296,6 +190,112 @@ components:
       - name
       - url
     PUT_Images_UpdateAnImage_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the image.
+        sellerId:
+          type: string
+          description: The ID of the seller of the image.
+        name:
+          type: string
+          description: The name of the image.
+        url:
+          type: string
+          format: uri
+          description: The URL of the image.
+        tags:
+          type: array
+          items:
+            type: string
+          description: An array of tags of the image.
+        type:
+          type: string
+          enum:
+          - img
+          - video
+          description: The type of the asset (img or video)
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the image was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the image was updated.
+      required:
+      - _id
+      - sellerId
+      - name
+      - url
+    GET_Images_GetAllImages_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The ID of the image.
+              sellerId:
+                type: string
+                description: The ID of the seller of the image.
+              name:
+                type: string
+                description: The name of the image.
+              url:
+                type: string
+                format: uri
+                description: The URL of the image.
+              tags:
+                type: array
+                items:
+                  type: string
+                description: An array of tags of the image.
+              type:
+                type: string
+                enum:
+                - img
+                - video
+                description: The type of the asset (img or video)
+              createdAt:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the image was created.
+              updatedAt:
+                type: string
+                format: date-time
+                description: An ISO timestamp indicating when the image was updated.
+            required:
+            - _id
+            - sellerId
+            - name
+            - url
+        total:
+          type: integer
+    PUT_Images_UpdateAnImage:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the image.
+        tags:
+          type: array
+          items:
+            type: string
+          description: An array of tags of the image.
+        type:
+          type: string
+          enum:
+          - img
+          - video
+          description: The type of the asset (img or video)
+      required:
+      - name
+    DELETE_Images_DeleteAnImage_200_response:
       type: object
       properties:
         _id:

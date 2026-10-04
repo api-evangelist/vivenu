@@ -414,854 +414,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PUT_Invoices_UpdateAnInvoice:
-      type: object
-      properties:
-        recipient:
-          type: object
-          properties:
-            company:
-              type: string
-              description: The company name of the recipient.
-            name:
-              type: string
-              description: The name of the recipient.
-            firstname:
-              type: string
-              description: The first name of the recipient.
-            lastname:
-              type: string
-              description: The last name of the recipient.
-            address:
-              type: object
-              properties:
-                fullAddress:
-                  type:
-                  - string
-                  - 'null'
-                  description: Optional full address
-                street:
-                  type:
-                  - string
-                  - 'null'
-                  description: The street of the address. Street name including number.
-                line2:
-                  type:
-                  - string
-                  - 'null'
-                  description: The additional field of the address.
-                postal:
-                  type:
-                  - string
-                  - 'null'
-                  description: The postal code of the address.
-                city:
-                  type:
-                  - string
-                  - 'null'
-                  description: The city of the address.
-                country:
-                  type:
-                  - string
-                  - 'null'
-                  description: The country of the address. An ISO 3166 country code.
-                state:
-                  type:
-                  - string
-                  - 'null'
-                  description: The state of the address. If applicable
-              description: The address of the recipient.
-          required:
-          - name
-          - firstname
-          - lastname
-          description: Information on the recipient of the invoice.
-        extraFields:
-          type: object
-          description: The extra fields of the invoice.
-        mode:
-          type: string
-          enum:
-          - update
-          - reissue
-          description: The mode for editing the invoice
-      required:
-      - mode
-    LegalIdentificationDocumentResource:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - spain_tax_id
-          identifier:
-            type: string
-        required:
-        - type
-        - identifier
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - origin_country_id
-            description: The type of the identification document.
-        required:
-        - type
-    CustomerResource:
-      type: object
-      properties:
-        _id:
-          type: string
-          description: The ID of the customer
-        company:
-          type:
-          - string
-          - 'null'
-          description: The company of the customer
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name of the customer collected from first name and last name
-        prename:
-          type:
-          - string
-          - 'null'
-          description: The first name of the customer
-        lastname:
-          type:
-          - string
-          - 'null'
-          description: The lastname of the customer
-        image:
-          type:
-          - string
-          - 'null'
-          description: The image of the customer
-          deprecated: true
-        primaryEmail:
-          type: string
-          format: email
-          description: The primary email of the customer
-        number:
-          type: number
-          format: float
-          description: The number of the customer. Need to be unique and incrementing
-        phone:
-          type: string
-          description: The phone number of the customer
-        location:
-          type: object
-          properties:
-            street:
-              type:
-              - string
-              - 'null'
-              description: The street of the location
-            line2:
-              type:
-              - string
-              - 'null'
-              description: The additional address fields of the location
-            postal:
-              type:
-              - string
-              - 'null'
-              description: The postal of the location
-            city:
-              type:
-              - string
-              - 'null'
-              description: The city of the location
-            locale:
-              type:
-              - string
-              - 'null'
-              description: The locale of the location
-              deprecated: true
-            state:
-              type:
-              - string
-              - 'null'
-              description: The state of the location
-            center:
-              type:
-              - array
-              - 'null'
-              items:
-                type: number
-                format: float
-              description: The center of the location
-              deprecated: true
-            country:
-              type:
-              - string
-              - 'null'
-              description: An ISO-3166-1 Alpha 2 country code of the location
-          description: The location of the customer
-        sellerId:
-          type: string
-          description: The ID of the seller of the customer
-        notes:
-          type:
-          - string
-          - 'null'
-          description: Notes of the customer
-        extraFields:
-          type:
-          - object
-          - 'null'
-          description: Extra fields of the customer
-        tags:
-          type: array
-          items:
-            type: string
-          description: An array of tags
-        segments:
-          type: array
-          items:
-            type: string
-          description: An array of segment slugs, read only
-        blocked:
-          type: boolean
-          description: Whether the customer is blocked
-        verified:
-          type: boolean
-          description: Whether the customer is verified
-        identification:
-          type: array
-          items:
-            $ref: '#/components/schemas/LegalIdentificationDocumentResource'
-          description: An array of identification items
-        _account:
-          type: object
-          properties:
-            verificationToken:
-              type: string
-              description: The verification token will be sent to the customer via email within a verification link, which can be used to verify the account of the customer
-            passwordResetToken:
-              type: string
-              description: The password reset token will be sent within a password reset link via email, which can be used by the customer to reset its password
-            limitations:
-              type: object
-              properties:
-                nextVerificationMailRequest:
-                  type: string
-                  format: date-time
-                  description: An ISO timestamp indicating when the next verification mail request can be sent
-              description: Account specific limitations of the customer
-            loginType:
-              type:
-              - string
-              - 'null'
-              enum:
-              - password
-              - identityprovider
-              description: The login type of the customer.
-          description: Account specific information about the customer
-        meta:
-          type: object
-          description: Custom key-value data. Metadata is useful for storing additional, structured information on an object.
-        externalId:
-          type:
-          - string
-          - 'null'
-          description: An external identifier of the customer
-        createdAt:
-          type: string
-          format: date-time
-          description: An ISO timestamp indicating when the customer was created
-        updatedAt:
-          type: string
-          format: date-time
-          description: An ISO timestamp indicating when the customer was updated
-      required:
-      - _id
-      - primaryEmail
-      description: The associated customer which has been updated
-    InvoiceResource:
-      type: object
-      properties:
-        _id:
-          type: string
-          description: The ID of the invoice.
-        type:
-          type: string
-          enum:
-          - invoice
-          - cancellation
-          description: The type of the invoice.
-          default: invoice
-        sellerId:
-          type: string
-          description: The ID of the seller associated with the invoice.
-        recipient:
-          type: object
-          properties:
-            company:
-              type: string
-              description: The company name of the recipient.
-            name:
-              type: string
-              description: The name of the recipient.
-            firstname:
-              type: string
-              description: The first name of the recipient.
-            lastname:
-              type: string
-              description: The last name of the recipient.
-            address:
-              type: object
-              properties:
-                fullAddress:
-                  type:
-                  - string
-                  - 'null'
-                  description: Optional full address
-                street:
-                  type:
-                  - string
-                  - 'null'
-                  description: The street of the address. Street name including number.
-                line2:
-                  type:
-                  - string
-                  - 'null'
-                  description: The additional field of the address.
-                postal:
-                  type:
-                  - string
-                  - 'null'
-                  description: The postal code of the address.
-                city:
-                  type:
-                  - string
-                  - 'null'
-                  description: The city of the address.
-                country:
-                  type:
-                  - string
-                  - 'null'
-                  description: The country of the address. An ISO 3166 country code.
-                state:
-                  type:
-                  - string
-                  - 'null'
-                  description: The state of the address. If applicable
-              description: The address of the recipient.
-          required:
-          - name
-          - firstname
-          - lastname
-          description: Information on the recipient of the invoice.
-        transactionId:
-          type: string
-          description: The ID of the transaction the invoice originated from.
-        cancellationId:
-          type: string
-          description: The ID of the associated cancellation.
-        counter:
-          type: number
-          format: float
-          description: The counter used to create no.
-        'no':
-          type: string
-          description: A unique number for the invoice consisting of the creation date and an increasing counter.
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-                enum:
-                - product
-                - ticket
-                - fulfillment
-                - outerCharge
-                - discount
-                - voucher
-                - bundle
-                - additionalFee
-                - insurance
-                description: The type of the invoice item.
-              title:
-                type: string
-                description: The title of the invoice item.
-              amount:
-                type: number
-                format: float
-                minimum: 1
-                description: The amount of the invoice item.
-              total:
-                type: number
-                format: float
-                minimum: 1
-                description: The total of the invoice item.
-              regularTotal:
-                type: number
-                format: float
-                minimum: 1
-                description: The non-discounted total of the invoice item.
-              includedTax:
-                type: number
-                format: float
-                minimum: 1
-                description: The total of taxes included in the invoice item.
-              taxRate:
-                type: number
-                format: float
-                minimum: 1
-                description: The tax rate applied on the invoice item.
-            required:
-            - title
-            - amount
-            - total
-            - regularTotal
-            - includedTax
-            - taxRate
-            description: An invoice item.
-          description: An array of invoice items.
-        components:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              total:
-                type: number
-                format: float
-          description: An array of exposed price components.
-        total:
-          type: number
-          format: float
-          description: The invoice total after discounts and taxes.
-        discountSum:
-          type: number
-          format: float
-          description: The total of all discounts applied.
-        detailsPerRate:
-          type: array
-          items:
-            type: object
-            properties:
-              taxRate:
-                type: number
-                format: float
-                minimum: 1
-                description: The applied tax rate.
-              includedTax:
-                type: number
-                format: float
-                minimum: 1
-                description: The total of taxes associated with the tax rate.
-              reducedTax:
-                type: number
-                format: float
-                minimum: 1
-                description: The tax reduction through applied discounts.
-            required:
-            - taxRate
-            - includedTax
-            - reducedTax
-            description: The details on the applied tax rate.
-          description: The tax details grouped by tax rates.
-        taxItems:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type:
-                - string
-                - 'null'
-              taxTypeId:
-                type:
-                - string
-                - 'null'
-              rate:
-                type: number
-                format: float
-              perUnit:
-                type: number
-                format: float
-              total:
-                type: number
-                format: float
-              netTotal:
-                type:
-                - number
-                - 'null'
-                format: float
-              netPerUnit:
-                type:
-                - number
-                - 'null'
-                format: float
-              taxPayableAccountId:
-                type:
-                - string
-                - 'null'
-              taxPayableAccountCode:
-                type:
-                - string
-                - 'null'
-            required:
-            - rate
-            - perUnit
-            - total
-          description: An array of tax items.
-        includedTax:
-          type: number
-          format: float
-          description: The total of all taxes included.
-        taxRate:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1
-          description: The default tax rate applied on items.
-        includedOuterChargeTax:
-          type: number
-          format: float
-          description: The total of all taxes on included outer charges.
-        outerChargeTaxRate:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1
-          description: The tax rate applied on outer charges.
-        origin:
-          type: string
-          enum:
-          - onlinesale
-          - pos
-          description: Whether the invoice has been created through an online or offline transaction.
-        currency:
-          type: string
-          enum:
-          - EUR
-          - USD
-          - GBP
-          - AUD
-          - CHF
-          - THB
-          - ILS
-          - COP
-          - MXN
-          - DKK
-          - NOK
-          - SEK
-          - QAR
-          - CAD
-          - ISK
-          - GTQ
-          - INR
-          - DOP
-          - SGD
-          - PLN
-          - SAR
-          - TTD
-          - ZAR
-          - KYD
-          - HKD
-          - CZK
-          - KRW
-          - JPY
-          - NZD
-          - AED
-          - MAD
-          - TWD
-          - BRL
-          - BWP
-          - NAD
-          - KES
-          - SCR
-          - TRY
-          - SZL
-          - LSL
-          - TZS
-          - UGX
-          - ZMW
-          - ZWG
-          - GHS
-          - NGN
-          - SLE
-          - LRD
-          - XOF
-          - XAF
-          - GEL
-          - IDR
-          - ARS
-          - CRC
-          - HUF
-          - EGP
-          - MYR
-          - VND
-          - PHP
-          description: An ISO 4217 3-character code of the currency.
-          default: EUR
-        extraFields:
-          type: object
-          description: The extra fields of the invoice.
-        secret:
-          type: string
-          description: The secret of the invoice.
-        referenceInvoiceId:
-          type: string
-          description: The reference invoice which the invoice evolved from.
-        footerText:
-          type: array
-          items:
-            type: string
-          description: The custom footer columns of the invoice.
-        createdAt:
-          type: string
-          format: date-time
-          description: An ISO Timestamp indicating when the invoice was created.
-        updatedAt:
-          type: string
-          format: date-time
-          description: An ISO Timestamp indicating when the invoice was last updated.
-      required:
-      - _id
-      - sellerId
-      - recipient
-      - counter
-      - 'no'
-      - items
-      - currency
-      description: The invoice of the transaction
-    ? GET_Invoices_GetPublicInvoiceForTransactionDeprecatedUseGetPublicInvoicesInfoWithQueryParametersTransactionIdAndSecretInstead_200_response
-    : type: object
-      properties:
-        trans:
-          $ref: '#/components/schemas/TransactionResource'
-        invoice:
-          $ref: '#/components/schemas/InvoiceResource'
-        referenceInvoice:
-          $ref: '#/components/schemas/InvoiceResource'
-        seller:
-          type: object
-          properties:
-            _id:
-              type: string
-              description: The ID of the seller
-            image:
-              type: string
-              description: The seller image.
-            name:
-              type: string
-              description: The name of the seller
-            city:
-              type: string
-            documentSettings:
-              type: object
-              properties:
-                image:
-                  type: string
-                invoice:
-                  type: object
-                  properties:
-                    footerColumns:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          text:
-                            type: string
-                          active:
-                            type: boolean
-            street:
-              type: string
-            postal:
-              type: string
-            locationName:
-              type: string
-            country:
-              type: string
-            taxRate:
-              type: number
-              format: float
-              default: 0.19
-            taxNo:
-              type: string
-            localTaxName:
-              type: string
-          required:
-          - _id
-          - name
-        customer:
-          $ref: '#/components/schemas/CustomerResource'
-        timezone:
-          type: string
-          default: Europe/Amsterdam
-        customPaymentMethod:
-          oneOf:
-          - type: array
-          - type: boolean
-          - type: number
-          - type: object
-          - type: string
-      required:
-      - timezone
-    GET_Invoices_GetPublicInvoiceForTransaction_200_response:
-      type: object
-      properties:
-        trans:
-          $ref: '#/components/schemas/TransactionResource'
-        invoice:
-          $ref: '#/components/schemas/InvoiceResource'
-        referenceInvoice:
-          $ref: '#/components/schemas/InvoiceResource'
-        seller:
-          type: object
-          properties:
-            _id:
-              type: string
-              description: The ID of the seller
-            image:
-              type: string
-              description: The seller image.
-            name:
-              type: string
-              description: The name of the seller
-            city:
-              type: string
-            documentSettings:
-              type: object
-              properties:
-                image:
-                  type: string
-                invoice:
-                  type: object
-                  properties:
-                    footerColumns:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          text:
-                            type: string
-                          active:
-                            type: boolean
-            street:
-              type: string
-            postal:
-              type: string
-            locationName:
-              type: string
-            country:
-              type: string
-            taxRate:
-              type: number
-              format: float
-              default: 0.19
-            taxNo:
-              type: string
-            localTaxName:
-              type: string
-          required:
-          - _id
-          - name
-        customer:
-          $ref: '#/components/schemas/CustomerResource'
-        timezone:
-          type: string
-          default: Europe/Amsterdam
-        customPaymentMethod:
-          oneOf:
-          - type: array
-          - type: boolean
-          - type: number
-          - type: object
-          - type: string
-      required:
-      - timezone
-    POST_Invoices_CreateInvoiceForTransaction:
-      type: object
-      properties:
-        transactionId:
-          type: string
-          description: The ID of the transaction.
-      required:
-      - transactionId
-    GET_Invoices_GetPublicInvoice_200_response:
-      type: object
-      properties:
-        trans:
-          $ref: '#/components/schemas/TransactionResource'
-        invoice:
-          $ref: '#/components/schemas/InvoiceResource'
-        referenceInvoice:
-          $ref: '#/components/schemas/InvoiceResource'
-        seller:
-          type: object
-          properties:
-            _id:
-              type: string
-              description: The ID of the seller
-            image:
-              type: string
-              description: The seller image.
-            name:
-              type: string
-              description: The name of the seller
-            city:
-              type: string
-            documentSettings:
-              type: object
-              properties:
-                image:
-                  type: string
-                invoice:
-                  type: object
-                  properties:
-                    footerColumns:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          text:
-                            type: string
-                          active:
-                            type: boolean
-            street:
-              type: string
-            postal:
-              type: string
-            locationName:
-              type: string
-            country:
-              type: string
-            taxRate:
-              type: number
-              format: float
-              default: 0.19
-            taxNo:
-              type: string
-            localTaxName:
-              type: string
-          required:
-          - _id
-          - name
-        customer:
-          $ref: '#/components/schemas/CustomerResource'
-        timezone:
-          type: string
-          default: Europe/Amsterdam
-        customPaymentMethod:
-          oneOf:
-          - type: array
-          - type: boolean
-          - type: number
-          - type: object
-          - type: string
-      required:
-      - timezone
     TransactionResource:
       type: object
       properties:
@@ -3229,6 +2381,500 @@ components:
       - realPrice
       - status
       - secret
+    CustomerResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the customer
+        company:
+          type:
+          - string
+          - 'null'
+          description: The company of the customer
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the customer collected from first name and last name
+        prename:
+          type:
+          - string
+          - 'null'
+          description: The first name of the customer
+        lastname:
+          type:
+          - string
+          - 'null'
+          description: The lastname of the customer
+        image:
+          type:
+          - string
+          - 'null'
+          description: The image of the customer
+          deprecated: true
+        primaryEmail:
+          type: string
+          format: email
+          description: The primary email of the customer
+        number:
+          type: number
+          format: float
+          description: The number of the customer. Need to be unique and incrementing
+        phone:
+          type: string
+          description: The phone number of the customer
+        location:
+          type: object
+          properties:
+            street:
+              type:
+              - string
+              - 'null'
+              description: The street of the location
+            line2:
+              type:
+              - string
+              - 'null'
+              description: The additional address fields of the location
+            postal:
+              type:
+              - string
+              - 'null'
+              description: The postal of the location
+            city:
+              type:
+              - string
+              - 'null'
+              description: The city of the location
+            locale:
+              type:
+              - string
+              - 'null'
+              description: The locale of the location
+              deprecated: true
+            state:
+              type:
+              - string
+              - 'null'
+              description: The state of the location
+            center:
+              type:
+              - array
+              - 'null'
+              items:
+                type: number
+                format: float
+              description: The center of the location
+              deprecated: true
+            country:
+              type:
+              - string
+              - 'null'
+              description: An ISO-3166-1 Alpha 2 country code of the location
+          description: The location of the customer
+        sellerId:
+          type: string
+          description: The ID of the seller of the customer
+        notes:
+          type:
+          - string
+          - 'null'
+          description: Notes of the customer
+        extraFields:
+          type:
+          - object
+          - 'null'
+          description: Extra fields of the customer
+        tags:
+          type: array
+          items:
+            type: string
+          description: An array of tags
+        segments:
+          type: array
+          items:
+            type: string
+          description: An array of segment slugs, read only
+        blocked:
+          type: boolean
+          description: Whether the customer is blocked
+        verified:
+          type: boolean
+          description: Whether the customer is verified
+        identification:
+          type: array
+          items:
+            $ref: '#/components/schemas/LegalIdentificationDocumentResource'
+          description: An array of identification items
+        _account:
+          type: object
+          properties:
+            verificationToken:
+              type: string
+              description: The verification token will be sent to the customer via email within a verification link, which can be used to verify the account of the customer
+            passwordResetToken:
+              type: string
+              description: The password reset token will be sent within a password reset link via email, which can be used by the customer to reset its password
+            limitations:
+              type: object
+              properties:
+                nextVerificationMailRequest:
+                  type: string
+                  format: date-time
+                  description: An ISO timestamp indicating when the next verification mail request can be sent
+              description: Account specific limitations of the customer
+            loginType:
+              type:
+              - string
+              - 'null'
+              enum:
+              - password
+              - identityprovider
+              description: The login type of the customer.
+          description: Account specific information about the customer
+        meta:
+          type: object
+          description: Custom key-value data. Metadata is useful for storing additional, structured information on an object.
+        externalId:
+          type:
+          - string
+          - 'null'
+          description: An external identifier of the customer
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the customer was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the customer was updated
+      required:
+      - _id
+      - primaryEmail
+      description: The associated customer which has been updated
+    GET_Invoices_GetPublicInvoice_200_response:
+      type: object
+      properties:
+        trans:
+          $ref: '#/components/schemas/TransactionResource'
+        invoice:
+          $ref: '#/components/schemas/InvoiceResource'
+        referenceInvoice:
+          $ref: '#/components/schemas/InvoiceResource'
+        seller:
+          type: object
+          properties:
+            _id:
+              type: string
+              description: The ID of the seller
+            image:
+              type: string
+              description: The seller image.
+            name:
+              type: string
+              description: The name of the seller
+            city:
+              type: string
+            documentSettings:
+              type: object
+              properties:
+                image:
+                  type: string
+                invoice:
+                  type: object
+                  properties:
+                    footerColumns:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          text:
+                            type: string
+                          active:
+                            type: boolean
+            street:
+              type: string
+            postal:
+              type: string
+            locationName:
+              type: string
+            country:
+              type: string
+            taxRate:
+              type: number
+              format: float
+              default: 0.19
+            taxNo:
+              type: string
+            localTaxName:
+              type: string
+          required:
+          - _id
+          - name
+        customer:
+          $ref: '#/components/schemas/CustomerResource'
+        timezone:
+          type: string
+          default: Europe/Amsterdam
+        customPaymentMethod:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+      required:
+      - timezone
+    GET_Invoices_GetPublicInvoiceForTransaction_200_response:
+      type: object
+      properties:
+        trans:
+          $ref: '#/components/schemas/TransactionResource'
+        invoice:
+          $ref: '#/components/schemas/InvoiceResource'
+        referenceInvoice:
+          $ref: '#/components/schemas/InvoiceResource'
+        seller:
+          type: object
+          properties:
+            _id:
+              type: string
+              description: The ID of the seller
+            image:
+              type: string
+              description: The seller image.
+            name:
+              type: string
+              description: The name of the seller
+            city:
+              type: string
+            documentSettings:
+              type: object
+              properties:
+                image:
+                  type: string
+                invoice:
+                  type: object
+                  properties:
+                    footerColumns:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          text:
+                            type: string
+                          active:
+                            type: boolean
+            street:
+              type: string
+            postal:
+              type: string
+            locationName:
+              type: string
+            country:
+              type: string
+            taxRate:
+              type: number
+              format: float
+              default: 0.19
+            taxNo:
+              type: string
+            localTaxName:
+              type: string
+          required:
+          - _id
+          - name
+        customer:
+          $ref: '#/components/schemas/CustomerResource'
+        timezone:
+          type: string
+          default: Europe/Amsterdam
+        customPaymentMethod:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+      required:
+      - timezone
+    POST_Invoices_CreateInvoiceForTransaction:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: The ID of the transaction.
+      required:
+      - transactionId
+    ? GET_Invoices_GetPublicInvoiceForTransactionDeprecatedUseGetPublicInvoicesInfoWithQueryParametersTransactionIdAndSecretInstead_200_response
+    : type: object
+      properties:
+        trans:
+          $ref: '#/components/schemas/TransactionResource'
+        invoice:
+          $ref: '#/components/schemas/InvoiceResource'
+        referenceInvoice:
+          $ref: '#/components/schemas/InvoiceResource'
+        seller:
+          type: object
+          properties:
+            _id:
+              type: string
+              description: The ID of the seller
+            image:
+              type: string
+              description: The seller image.
+            name:
+              type: string
+              description: The name of the seller
+            city:
+              type: string
+            documentSettings:
+              type: object
+              properties:
+                image:
+                  type: string
+                invoice:
+                  type: object
+                  properties:
+                    footerColumns:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          text:
+                            type: string
+                          active:
+                            type: boolean
+            street:
+              type: string
+            postal:
+              type: string
+            locationName:
+              type: string
+            country:
+              type: string
+            taxRate:
+              type: number
+              format: float
+              default: 0.19
+            taxNo:
+              type: string
+            localTaxName:
+              type: string
+          required:
+          - _id
+          - name
+        customer:
+          $ref: '#/components/schemas/CustomerResource'
+        timezone:
+          type: string
+          default: Europe/Amsterdam
+        customPaymentMethod:
+          oneOf:
+          - type: array
+          - type: boolean
+          - type: number
+          - type: object
+          - type: string
+      required:
+      - timezone
+    PUT_Invoices_UpdateAnInvoice:
+      type: object
+      properties:
+        recipient:
+          type: object
+          properties:
+            company:
+              type: string
+              description: The company name of the recipient.
+            name:
+              type: string
+              description: The name of the recipient.
+            firstname:
+              type: string
+              description: The first name of the recipient.
+            lastname:
+              type: string
+              description: The last name of the recipient.
+            address:
+              type: object
+              properties:
+                fullAddress:
+                  type:
+                  - string
+                  - 'null'
+                  description: Optional full address
+                street:
+                  type:
+                  - string
+                  - 'null'
+                  description: The street of the address. Street name including number.
+                line2:
+                  type:
+                  - string
+                  - 'null'
+                  description: The additional field of the address.
+                postal:
+                  type:
+                  - string
+                  - 'null'
+                  description: The postal code of the address.
+                city:
+                  type:
+                  - string
+                  - 'null'
+                  description: The city of the address.
+                country:
+                  type:
+                  - string
+                  - 'null'
+                  description: The country of the address. An ISO 3166 country code.
+                state:
+                  type:
+                  - string
+                  - 'null'
+                  description: The state of the address. If applicable
+              description: The address of the recipient.
+          required:
+          - name
+          - firstname
+          - lastname
+          description: Information on the recipient of the invoice.
+        extraFields:
+          type: object
+          description: The extra fields of the invoice.
+        mode:
+          type: string
+          enum:
+          - update
+          - reissue
+          description: The mode for editing the invoice
+      required:
+      - mode
+    LegalIdentificationDocumentResource:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - spain_tax_id
+          identifier:
+            type: string
+        required:
+        - type
+        - identifier
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - origin_country_id
+            description: The type of the identification document.
+        required:
+        - type
     GET_Invoices_GetAllInvoices_200_response:
       type: object
       properties:
@@ -3238,6 +2884,360 @@ components:
             $ref: '#/components/schemas/InvoiceResource'
         total:
           type: integer
+    InvoiceResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the invoice.
+        type:
+          type: string
+          enum:
+          - invoice
+          - cancellation
+          description: The type of the invoice.
+          default: invoice
+        sellerId:
+          type: string
+          description: The ID of the seller associated with the invoice.
+        recipient:
+          type: object
+          properties:
+            company:
+              type: string
+              description: The company name of the recipient.
+            name:
+              type: string
+              description: The name of the recipient.
+            firstname:
+              type: string
+              description: The first name of the recipient.
+            lastname:
+              type: string
+              description: The last name of the recipient.
+            address:
+              type: object
+              properties:
+                fullAddress:
+                  type:
+                  - string
+                  - 'null'
+                  description: Optional full address
+                street:
+                  type:
+                  - string
+                  - 'null'
+                  description: The street of the address. Street name including number.
+                line2:
+                  type:
+                  - string
+                  - 'null'
+                  description: The additional field of the address.
+                postal:
+                  type:
+                  - string
+                  - 'null'
+                  description: The postal code of the address.
+                city:
+                  type:
+                  - string
+                  - 'null'
+                  description: The city of the address.
+                country:
+                  type:
+                  - string
+                  - 'null'
+                  description: The country of the address. An ISO 3166 country code.
+                state:
+                  type:
+                  - string
+                  - 'null'
+                  description: The state of the address. If applicable
+              description: The address of the recipient.
+          required:
+          - name
+          - firstname
+          - lastname
+          description: Information on the recipient of the invoice.
+        transactionId:
+          type: string
+          description: The ID of the transaction the invoice originated from.
+        cancellationId:
+          type: string
+          description: The ID of the associated cancellation.
+        counter:
+          type: number
+          format: float
+          description: The counter used to create no.
+        'no':
+          type: string
+          description: A unique number for the invoice consisting of the creation date and an increasing counter.
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - product
+                - ticket
+                - fulfillment
+                - outerCharge
+                - discount
+                - voucher
+                - bundle
+                - additionalFee
+                - insurance
+                description: The type of the invoice item.
+              title:
+                type: string
+                description: The title of the invoice item.
+              amount:
+                type: number
+                format: float
+                minimum: 1
+                description: The amount of the invoice item.
+              total:
+                type: number
+                format: float
+                minimum: 1
+                description: The total of the invoice item.
+              regularTotal:
+                type: number
+                format: float
+                minimum: 1
+                description: The non-discounted total of the invoice item.
+              includedTax:
+                type: number
+                format: float
+                minimum: 1
+                description: The total of taxes included in the invoice item.
+              taxRate:
+                type: number
+                format: float
+                minimum: 1
+                description: The tax rate applied on the invoice item.
+            required:
+            - title
+            - amount
+            - total
+            - regularTotal
+            - includedTax
+            - taxRate
+            description: An invoice item.
+          description: An array of invoice items.
+        components:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              total:
+                type: number
+                format: float
+          description: An array of exposed price components.
+        total:
+          type: number
+          format: float
+          description: The invoice total after discounts and taxes.
+        discountSum:
+          type: number
+          format: float
+          description: The total of all discounts applied.
+        detailsPerRate:
+          type: array
+          items:
+            type: object
+            properties:
+              taxRate:
+                type: number
+                format: float
+                minimum: 1
+                description: The applied tax rate.
+              includedTax:
+                type: number
+                format: float
+                minimum: 1
+                description: The total of taxes associated with the tax rate.
+              reducedTax:
+                type: number
+                format: float
+                minimum: 1
+                description: The tax reduction through applied discounts.
+            required:
+            - taxRate
+            - includedTax
+            - reducedTax
+            description: The details on the applied tax rate.
+          description: The tax details grouped by tax rates.
+        taxItems:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type:
+                - string
+                - 'null'
+              taxTypeId:
+                type:
+                - string
+                - 'null'
+              rate:
+                type: number
+                format: float
+              perUnit:
+                type: number
+                format: float
+              total:
+                type: number
+                format: float
+              netTotal:
+                type:
+                - number
+                - 'null'
+                format: float
+              netPerUnit:
+                type:
+                - number
+                - 'null'
+                format: float
+              taxPayableAccountId:
+                type:
+                - string
+                - 'null'
+              taxPayableAccountCode:
+                type:
+                - string
+                - 'null'
+            required:
+            - rate
+            - perUnit
+            - total
+          description: An array of tax items.
+        includedTax:
+          type: number
+          format: float
+          description: The total of all taxes included.
+        taxRate:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: The default tax rate applied on items.
+        includedOuterChargeTax:
+          type: number
+          format: float
+          description: The total of all taxes on included outer charges.
+        outerChargeTaxRate:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: The tax rate applied on outer charges.
+        origin:
+          type: string
+          enum:
+          - onlinesale
+          - pos
+          description: Whether the invoice has been created through an online or offline transaction.
+        currency:
+          type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: An ISO 4217 3-character code of the currency.
+          default: EUR
+        extraFields:
+          type: object
+          description: The extra fields of the invoice.
+        secret:
+          type: string
+          description: The secret of the invoice.
+        referenceInvoiceId:
+          type: string
+          description: The reference invoice which the invoice evolved from.
+        footerText:
+          type: array
+          items:
+            type: string
+          description: The custom footer columns of the invoice.
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the invoice was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO Timestamp indicating when the invoice was last updated.
+      required:
+      - _id
+      - sellerId
+      - recipient
+      - counter
+      - 'no'
+      - items
+      - currency
+      description: The invoice of the transaction
   securitySchemes:
     jwt:
       type: http
