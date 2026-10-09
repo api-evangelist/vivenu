@@ -1,17 +1,17 @@
-generated: '2026-07-21'
+generated: '2026-09-23'
 method: generated
-source: openapi/vivenu-openapi-original.json
+source: openapi/vivenu-api-api-openapi.yml, openapi/vivenu-payments-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 587
   by_action_class:
-    connected: 293
-    acting: 294
+    connected: 294
+    acting: 293
   by_consequence:
-    read: 293
-    write: 205
+    read: 294
+    write: 204
     physical: 83
     safety-critical: 6
   human_in_the_loop_required: 6
@@ -514,6 +514,7 @@ operations:
     audit: required
 - path: /api/packages
   method: get
+  operationId: getApiPackages
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1823,6 +1824,7 @@ operations:
     audit: required
 - path: /api/packages/configs
   method: get
+  operationId: getApiPackagesConfigs
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1832,6 +1834,7 @@ operations:
     audit: none
 - path: /api/packages/configs
   method: post
+  operationId: postApiPackagesConfigs
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1847,6 +1850,7 @@ operations:
     audit: required
 - path: /api/packages/{id}
   method: get
+  operationId: getApiPackagesById
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -2284,6 +2288,7 @@ operations:
     audit: required
 - path: /api/rebookings/strategies
   method: get
+  operationId: getApiRebookingsStrategies
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -2293,6 +2298,7 @@ operations:
     audit: none
 - path: /api/rebookings/strategies
   method: post
+  operationId: postApiRebookingsStrategies
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -3528,6 +3534,7 @@ operations:
     audit: none
 - path: /api/packages/configs/{id}
   method: get
+  operationId: getApiPackagesConfigsById
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -3537,6 +3544,7 @@ operations:
     audit: none
 - path: /api/packages/configs/{id}
   method: put
+  operationId: putApiPackagesConfigsById
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -3892,6 +3900,7 @@ operations:
     audit: none
 - path: /api/public/rebookings/info
   method: get
+  operationId: getApiPublicRebookingsInfo
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -3975,6 +3984,7 @@ operations:
     audit: required
 - path: /api/rebookings/strategies/{id}
   method: get
+  operationId: getApiRebookingsStrategiesById
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -3984,6 +3994,7 @@ operations:
     audit: none
 - path: /api/rebookings/strategies/{id}
   method: put
+  operationId: putApiRebookingsStrategiesById
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -3999,6 +4010,7 @@ operations:
     audit: required
 - path: /api/rebookings/strategies/{id}
   method: delete
+  operationId: deleteApiRebookingsStrategiesById
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -4584,32 +4596,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /api/payments/gateways/{id}/notification
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/payments/gateways/{id}/notification
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /api/pos/{id}/export/orderdiscounts
   method: get
   operationId: export_pos_order_discounts
@@ -4742,6 +4728,7 @@ operations:
     audit: none
 - path: /api/public/packages/configs/{slug}
   method: get
+  operationId: getApiPublicPackagesConfigsBySlug
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -4969,6 +4956,7 @@ operations:
     audit: none
 - path: /api/public/packages/configs/{slug}/info
   method: get
+  operationId: getApiPublicPackagesConfigsBySlugInfo
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -5094,6 +5082,7 @@ operations:
     audit: required
 - path: /api/upload
   method: post
+  operationId: postApiUpload
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -5337,6 +5326,7 @@ operations:
     audit: required
 - path: /api/public/rebookings
   method: post
+  operationId: postApiPublicRebookings
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -6634,18 +6624,12 @@ operations:
   method: post
   operationId: get_notification_device_info
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /api/users/notifications/subscribe
   method: post
   operationId: subscribe_notification_type
@@ -7258,6 +7242,7 @@ operations:
     audit: required
 - path: /api/public/packages/configs/{slug}/checkout
   method: post
+  operationId: postApiPublicPackagesConfigsBySlugCheckout
   x-agentic-access:
     action-class: acting
     consequence: physical
@@ -7791,6 +7776,34 @@ operations:
     audience: null
     token:
       max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/payments/gateways/{id}/notification
+  method: get
+  operationId: getApiPaymentsGatewaysByIdNotification
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/payments/gateways/{id}/notification
+  method: post
+  operationId: postApiPaymentsGatewaysByIdNotification
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
     escalation:
       human-in-the-loop: conditional
       triggers:
