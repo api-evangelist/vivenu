@@ -149,6 +149,10 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    GET_Payment-gateways_GetAllPaymentGateways_200_response:
+      type: array
+      items:
+        $ref: '#/components/schemas/PaymentGatewayResource'
     PaymentGatewayResource:
       type: object
       properties:
@@ -334,10 +338,6 @@ components:
           description: The ID of the organization to create this payment gateway for
       required:
       - name
-    GET_Payment-gateways_GetAllPaymentGateways_200_response:
-      type: array
-      items:
-        $ref: '#/components/schemas/PaymentGatewayResource'
   securitySchemes:
     jwt:
       type: http

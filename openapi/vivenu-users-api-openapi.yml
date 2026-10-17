@@ -1497,13 +1497,6 @@ components:
           default: []
       required:
       - sellerId
-    POST_Users_RefreshAuthenticationToken:
-      type:
-      - object
-      - 'null'
-      properties:
-        posId:
-          type: string
     PUT_Users_UpdateUserInfo:
       type: object
       properties:
@@ -1511,13 +1504,6 @@ components:
           type: string
       required:
       - name
-    POST_Users_GetNotificationDeviceInfo:
-      type: object
-      properties:
-        deviceId:
-          type: string
-      required:
-      - deviceId
     POST_Users_UnsubscribeNotificationType:
       type: object
       properties:
@@ -1534,6 +1520,13 @@ components:
         email:
           type: string
           format: email
+    POST_Users_GetNotificationDeviceInfo:
+      type: object
+      properties:
+        deviceId:
+          type: string
+      required:
+      - deviceId
     POST_Users_SubscribeNotificationType:
       type: object
       properties:
@@ -1550,6 +1543,13 @@ components:
       - deviceName
       - deviceId
       - token
+    POST_Users_RefreshAuthenticationToken:
+      type:
+      - object
+      - 'null'
+      properties:
+        posId:
+          type: string
     POST_Users_ChangeSellerOnUser:
       type: object
       properties:

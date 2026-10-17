@@ -193,6 +193,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    POST_Notifications_UpdateActionNotificationSubscription:
+      type: object
+      properties:
+        subscribed:
+          type: boolean
+          default: true
     PATCH_Notifications_UpdateNotificationSettingsForTheAuthenticatedUser:
       type: object
       properties:
@@ -393,12 +399,6 @@ components:
           description: All notification triggers with their settings
       required:
       - triggers
-    POST_Notifications_UpdateActionNotificationSubscription:
-      type: object
-      properties:
-        subscribed:
-          type: boolean
-          default: true
   securitySchemes:
     jwt:
       type: http

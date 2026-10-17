@@ -685,64 +685,6 @@ components:
       - createdAt
       - updatedAt
       additionalProperties: false
-    CampaignResource:
-      type: object
-      properties:
-        _id:
-          type: string
-          description: The ID of the marketing campaign
-        name:
-          type: string
-          minLength: 3
-          description: The name of the marketing campaign
-        code:
-          type: string
-          maxLength: 128
-          description: The code of the marketing campaign
-        createdBy:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - USER
-              - APP
-              - API_KEY
-              - SYSTEM
-              description: The type of the entity
-            id:
-              type: string
-              description: The ID of the entity
-          required:
-          - type
-          - id
-          additionalProperties: false
-          description: The entity that created this marketing campaign
-        sellerId:
-          type: string
-          description: The ID of the seller owning the marketing campaign
-        isArchived:
-          default: false
-          description: Whether the marketing campaign is archived or not.
-          type: boolean
-        createdAt:
-          description: An ISO timestamp indicating when the marketing campaign was created.
-          type: string
-          format: date-time
-        updatedAt:
-          description: An ISO timestamp indicating when the marketing campaign was updated.
-          type: string
-          format: date-time
-      required:
-      - _id
-      - name
-      - code
-      - createdBy
-      - sellerId
-      - isArchived
-      - createdAt
-      - updatedAt
-      additionalProperties: false
     DonationResource:
       type: object
       properties:
@@ -874,6 +816,64 @@ components:
       - customerId
       - fundId
       - sellerId
+      - createdAt
+      - updatedAt
+      additionalProperties: false
+    CampaignResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the marketing campaign
+        name:
+          type: string
+          minLength: 3
+          description: The name of the marketing campaign
+        code:
+          type: string
+          maxLength: 128
+          description: The code of the marketing campaign
+        createdBy:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - USER
+              - APP
+              - API_KEY
+              - SYSTEM
+              description: The type of the entity
+            id:
+              type: string
+              description: The ID of the entity
+          required:
+          - type
+          - id
+          additionalProperties: false
+          description: The entity that created this marketing campaign
+        sellerId:
+          type: string
+          description: The ID of the seller owning the marketing campaign
+        isArchived:
+          default: false
+          description: Whether the marketing campaign is archived or not.
+          type: boolean
+        createdAt:
+          description: An ISO timestamp indicating when the marketing campaign was created.
+          type: string
+          format: date-time
+        updatedAt:
+          description: An ISO timestamp indicating when the marketing campaign was updated.
+          type: string
+          format: date-time
+      required:
+      - _id
+      - name
+      - code
+      - createdBy
+      - sellerId
+      - isArchived
       - createdAt
       - updatedAt
       additionalProperties: false

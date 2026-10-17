@@ -493,31 +493,6 @@ components:
           description: The payment variant used to pay
       required:
       - gatewaySecret
-    PUT_Payment-requests_UpdateAPaymentRequest:
-      type: object
-      properties:
-        secret:
-          type: string
-          description: The secret of the payment request
-        paymentStrategyId:
-          type: string
-          description: The ID of the payment strategy
-        paymentOptionId:
-          type: string
-          description: The ID of the payment option
-      required:
-      - secret
-      - paymentStrategyId
-      - paymentOptionId
-    GET_Payment-requests_GetPaymentRequests_200_response:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentRequestResource'
-        total:
-          type: integer
     POST_Payment-requests_CreateAPaymentRequestForCustomerPaymentMethodSetup:
       type: object
       properties:
@@ -726,21 +701,45 @@ components:
           description: The URL to return after the user has completed the payment
       required:
       - paymentGatewayId
-    POST_Payment-requests_ChangePaymentRequestPaymentStatus:
+    GET_Payment-requests_GetPaymentRequests_200_response:
       type: object
       properties:
-        paymentStatus:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentRequestResource'
+        total:
+          type: integer
+    PUT_Payment-requests_UpdateAPaymentRequest:
+      type: object
+      properties:
+        secret:
           type: string
-          enum:
-          - SUCCEEDED
-          - FAILED
-          description: The new payment status
-        gatewaySecret:
+          description: The secret of the payment request
+        paymentStrategyId:
           type: string
-          description: The secret of the payment gateway responsible for the payment
+          description: The ID of the payment strategy
+        paymentOptionId:
+          type: string
+          description: The ID of the payment option
       required:
-      - paymentStatus
-      - gatewaySecret
+      - secret
+      - paymentStrategyId
+      - paymentOptionId
+    POST_Payment-requests_CreateAPaymentRequest:
+      type: object
+      properties:
+        checkoutId:
+          type: string
+          description: The ID of the checkout object to create the payment request
+        transactionId:
+          type: string
+          description: The ID of the transaction object to create the payment request
+        secret:
+          type: string
+          description: The secret of the transaction
+      required:
+      - secret
     PaymentRequestProcessorResource:
       type: object
       properties:
@@ -786,20 +785,21 @@ components:
       required:
       - paymentGatewayType
       - createdAt
-    POST_Payment-requests_CreateAPaymentRequest:
+    POST_Payment-requests_ChangePaymentRequestPaymentStatus:
       type: object
       properties:
-        checkoutId:
+        paymentStatus:
           type: string
-          description: The ID of the checkout object to create the payment request
-        transactionId:
+          enum:
+          - SUCCEEDED
+          - FAILED
+          description: The new payment status
+        gatewaySecret:
           type: string
-          description: The ID of the transaction object to create the payment request
-        secret:
-          type: string
-          description: The secret of the transaction
+          description: The secret of the payment gateway responsible for the payment
       required:
-      - secret
+      - paymentStatus
+      - gatewaySecret
   securitySchemes:
     jwt:
       type: http

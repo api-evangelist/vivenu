@@ -208,10 +208,135 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GET_Data-fields_GetAllDataFields_200_response:
+    GET_Data-fields_GetAllDataFieldsByReference_200_response:
       type: array
       items:
-        $ref: '#/components/schemas/DataFieldResource'
+        type: object
+        properties:
+          _id:
+            type: string
+          name:
+            type: string
+          type:
+            type: string
+            enum:
+            - text
+            - number
+            - select
+            - checkbox
+            - tel
+            - country
+            - email
+            - date
+            - documentUpload
+            - signature
+            - address
+            - string
+            - boolean
+          options:
+            type: array
+            items:
+              type: string
+          slug:
+            type: string
+          description:
+            type: string
+        required:
+        - _id
+        - name
+        - type
+        - slug
+    PUT_Data-fields_UpdateADataField:
+      type: object
+      properties:
+        title:
+          type:
+          - string
+          - 'null'
+          description: The default title of the data field
+        description:
+          type:
+          - string
+          - 'null'
+          description: The default description of the data field
+        isPersonalData:
+          type: boolean
+          description: Whether the data field is personal data
+        options:
+          type: array
+          items:
+            type: string
+          description: An array of options when type is select
+        minLength:
+          type:
+          - number
+          - 'null'
+          format: float
+          minimum: 1
+          description: Minimum length for a text input
+        maxLength:
+          type:
+          - number
+          - 'null'
+          format: float
+          minimum: 1
+          description: Maximum length for a text input
+        settings:
+          oneOf:
+          - type: object
+            properties:
+              allowedMimeTypes:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - application/pdf
+                  - image/jpeg
+                  - image/png
+                description: An array of allowed mime types
+            description: The settings of the upload document data field
+          - type: object
+            properties:
+              document:
+                type: object
+                properties:
+                  url:
+                    type: string
+                    format: uri
+                  fileName:
+                    type: string
+                  mimeType:
+                    type: string
+                    enum:
+                    - application/pdf
+                required:
+                - url
+                - fileName
+                - mimeType
+              documentName:
+                type: string
+              requireScrollthrough:
+                type: boolean
+            description: The settings of the signature data field
+          - type: object
+            properties:
+              variant:
+                type: string
+                enum:
+                - date
+                - birthdate
+              minimumAge:
+                type:
+                - number
+                - 'null'
+                format: float
+              maximumAge:
+                type:
+                - number
+                - 'null'
+                format: float
+            required:
+            - variant
     DataFieldResource:
       type: object
       properties:
@@ -448,135 +573,10 @@ components:
       required:
       - type
       - name
-    GET_Data-fields_GetAllDataFieldsByReference_200_response:
+    GET_Data-fields_GetAllDataFields_200_response:
       type: array
       items:
-        type: object
-        properties:
-          _id:
-            type: string
-          name:
-            type: string
-          type:
-            type: string
-            enum:
-            - text
-            - number
-            - select
-            - checkbox
-            - tel
-            - country
-            - email
-            - date
-            - documentUpload
-            - signature
-            - address
-            - string
-            - boolean
-          options:
-            type: array
-            items:
-              type: string
-          slug:
-            type: string
-          description:
-            type: string
-        required:
-        - _id
-        - name
-        - type
-        - slug
-    PUT_Data-fields_UpdateADataField:
-      type: object
-      properties:
-        title:
-          type:
-          - string
-          - 'null'
-          description: The default title of the data field
-        description:
-          type:
-          - string
-          - 'null'
-          description: The default description of the data field
-        isPersonalData:
-          type: boolean
-          description: Whether the data field is personal data
-        options:
-          type: array
-          items:
-            type: string
-          description: An array of options when type is select
-        minLength:
-          type:
-          - number
-          - 'null'
-          format: float
-          minimum: 1
-          description: Minimum length for a text input
-        maxLength:
-          type:
-          - number
-          - 'null'
-          format: float
-          minimum: 1
-          description: Maximum length for a text input
-        settings:
-          oneOf:
-          - type: object
-            properties:
-              allowedMimeTypes:
-                type: array
-                items:
-                  type: string
-                  enum:
-                  - application/pdf
-                  - image/jpeg
-                  - image/png
-                description: An array of allowed mime types
-            description: The settings of the upload document data field
-          - type: object
-            properties:
-              document:
-                type: object
-                properties:
-                  url:
-                    type: string
-                    format: uri
-                  fileName:
-                    type: string
-                  mimeType:
-                    type: string
-                    enum:
-                    - application/pdf
-                required:
-                - url
-                - fileName
-                - mimeType
-              documentName:
-                type: string
-              requireScrollthrough:
-                type: boolean
-            description: The settings of the signature data field
-          - type: object
-            properties:
-              variant:
-                type: string
-                enum:
-                - date
-                - birthdate
-              minimumAge:
-                type:
-                - number
-                - 'null'
-                format: float
-              maximumAge:
-                type:
-                - number
-                - 'null'
-                format: float
-            required:
-            - variant
+        $ref: '#/components/schemas/DataFieldResource'
   securitySchemes:
     jwt:
       type: http

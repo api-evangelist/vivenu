@@ -424,39 +424,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    POST_Rebooking:
-      type: object
-      properties:
-        target:
-          type: object
-          properties:
-            eventId:
-              type: string
-          required:
-          - eventId
-        source:
-          type: object
-          properties:
-            eventId:
-              type: string
-          required:
-          - eventId
-        transaction:
-          type: object
-          properties:
-            _id:
-              type: string
-            secret:
-              type: string
-          required:
-          - _id
-          - secret
-        ticketIds:
-          type: array
-          items:
-            type: string
-      required:
-      - ticketIds
     PUT_Rebooking:
       type: object
       properties:
@@ -497,6 +464,39 @@ components:
       required:
       - name
       - deadline
+    POST_Rebooking:
+      type: object
+      properties:
+        target:
+          type: object
+          properties:
+            eventId:
+              type: string
+          required:
+          - eventId
+        source:
+          type: object
+          properties:
+            eventId:
+              type: string
+          required:
+          - eventId
+        transaction:
+          type: object
+          properties:
+            _id:
+              type: string
+            secret:
+              type: string
+          required:
+          - _id
+          - secret
+        ticketIds:
+          type: array
+          items:
+            type: string
+      required:
+      - ticketIds
   securitySchemes:
     jwt:
       type: http

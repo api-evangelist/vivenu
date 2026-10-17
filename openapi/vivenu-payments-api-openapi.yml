@@ -237,137 +237,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GET_Payments_GetPayments_200_response:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentRequestResource'
-        total:
-          type: integer
-    PaymentResource:
-      type: object
-      properties:
-        _id:
-          type: string
-          description: The ID of the payment
-        amount:
-          type: number
-          description: The amount of the payment
-        currency:
-          type: string
-          enum:
-          - EUR
-          - USD
-          - GBP
-          - AUD
-          - CHF
-          - THB
-          - ILS
-          - COP
-          - MXN
-          - DKK
-          - NOK
-          - SEK
-          - QAR
-          - CAD
-          - ISK
-          - GTQ
-          - INR
-          - DOP
-          - SGD
-          - PLN
-          - SAR
-          - TTD
-          - ZAR
-          - KYD
-          - HKD
-          - CZK
-          - KRW
-          - JPY
-          - NZD
-          - AED
-          - MAD
-          - TWD
-          - BRL
-          - BWP
-          - NAD
-          - KES
-          - SCR
-          - TRY
-          - SZL
-          - LSL
-          - TZS
-          - UGX
-          - ZMW
-          - ZWG
-          - GHS
-          - NGN
-          - SLE
-          - LRD
-          - XOF
-          - XAF
-          - GEL
-          - IDR
-          - ARS
-          - CRC
-          - HUF
-          - EGP
-          - MYR
-          - VND
-          - PHP
-          description: An ISO 4217 3-character code of the currency
-        status:
-          type: string
-          enum:
-          - SCHEDULED
-          - PENDING
-          - SUCCEEDED
-          - FAILED
-          - REFUNDED
-          description: The status of the payment
-        checkoutId:
-          description: The ID of the checkout the payment belongs to
-          type: string
-        transactionId:
-          description: The ID of the transaction the payment belongs to
-          type: string
-        paymentRequestId:
-          type: string
-          description: The ID of the payment request the payment belongs to
-        paymentGatewayId:
-          description: The ID of the payment gateway responsible for the payment
-          type: string
-        paymentMethodDetails:
-          $ref: '#/components/schemas/PaymentMethodDetailsResource'
-        reference:
-          description: The reference of the payment
-          type: string
-        sellerId:
-          type: string
-          description: The ID of the seller owning the payment
-        customerId:
-          description: The ID of the customer of the payment
-          type: string
-        createdAt:
-          description: An ISO timestamp indicating when the payment was created
-          type: string
-          format: date-time
-        updatedAt:
-          description: An ISO timestamp indicating when the payment was last updated
-          type: string
-          format: date-time
-      required:
-      - _id
-      - amount
-      - currency
-      - status
-      - paymentRequestId
-      - sellerId
-      - createdAt
-      - updatedAt
-      additionalProperties: false
     PaymentMethodDetailsResource:
       type: object
       properties:
@@ -620,6 +489,128 @@ components:
       - sellerId
       - createdAt
       - updatedAt
+    PaymentResource:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the payment
+        amount:
+          type: number
+          description: The amount of the payment
+        currency:
+          type: string
+          enum:
+          - EUR
+          - USD
+          - GBP
+          - AUD
+          - CHF
+          - THB
+          - ILS
+          - COP
+          - MXN
+          - DKK
+          - NOK
+          - SEK
+          - QAR
+          - CAD
+          - ISK
+          - GTQ
+          - INR
+          - DOP
+          - SGD
+          - PLN
+          - SAR
+          - TTD
+          - ZAR
+          - KYD
+          - HKD
+          - CZK
+          - KRW
+          - JPY
+          - NZD
+          - AED
+          - MAD
+          - TWD
+          - BRL
+          - BWP
+          - NAD
+          - KES
+          - SCR
+          - TRY
+          - SZL
+          - LSL
+          - TZS
+          - UGX
+          - ZMW
+          - ZWG
+          - GHS
+          - NGN
+          - SLE
+          - LRD
+          - XOF
+          - XAF
+          - GEL
+          - IDR
+          - ARS
+          - CRC
+          - HUF
+          - EGP
+          - MYR
+          - VND
+          - PHP
+          description: An ISO 4217 3-character code of the currency
+        status:
+          type: string
+          enum:
+          - SCHEDULED
+          - PENDING
+          - SUCCEEDED
+          - FAILED
+          - REFUNDED
+          description: The status of the payment
+        checkoutId:
+          description: The ID of the checkout the payment belongs to
+          type: string
+        transactionId:
+          description: The ID of the transaction the payment belongs to
+          type: string
+        paymentRequestId:
+          type: string
+          description: The ID of the payment request the payment belongs to
+        paymentGatewayId:
+          description: The ID of the payment gateway responsible for the payment
+          type: string
+        paymentMethodDetails:
+          $ref: '#/components/schemas/PaymentMethodDetailsResource'
+        reference:
+          description: The reference of the payment
+          type: string
+        sellerId:
+          type: string
+          description: The ID of the seller owning the payment
+        customerId:
+          description: The ID of the customer of the payment
+          type: string
+        createdAt:
+          description: An ISO timestamp indicating when the payment was created
+          type: string
+          format: date-time
+        updatedAt:
+          description: An ISO timestamp indicating when the payment was last updated
+          type: string
+          format: date-time
+      required:
+      - _id
+      - amount
+      - currency
+      - status
+      - paymentRequestId
+      - sellerId
+      - createdAt
+      - updatedAt
+      additionalProperties: false
     PaymentRequestProcessorResource:
       type: object
       properties:
@@ -665,6 +656,15 @@ components:
       required:
       - paymentGatewayType
       - createdAt
+    GET_Payments_GetPayments_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentRequestResource'
+        total:
+          type: integer
     GET_Methods_GetSellersPaymentMethods_200_response:
       type: array
       items:

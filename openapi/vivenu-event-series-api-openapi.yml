@@ -187,7 +187,65 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    DELETE_Event-series_DeleteAnEventSeries_200_response:
+    PUT_Event-series_UpdateAnEventSeries:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the event series
+        restrictions:
+          type: object
+          properties:
+            maxTicketsPerCustomer:
+              type:
+              - number
+              - 'null'
+              format: float
+              description: The amount of ticket a customer can buy for this series
+        eventIds:
+          type: array
+          items:
+            type: string
+          description: An array of events that are included in this event series
+    GET_Event-series_GetAnEventSeries_200_response:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the event series
+        name:
+          type: string
+          description: The name of the event series
+        eventIds:
+          type: array
+          items:
+            type: string
+          description: An array of events that are included in this event series
+        sellerId:
+          type: string
+          description: The ID of the seller of the event series
+        restrictions:
+          type: object
+          properties:
+            maxTicketsPerCustomer:
+              type:
+              - number
+              - 'null'
+              format: float
+              description: The amount of ticket a customer can buy for this series
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the event series was las updated
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the event series was created
+      required:
+      - _id
+      - name
+      - sellerId
+    PUT_Event-series_UpdateAnEventSeries_200_response:
       type: object
       properties:
         _id:
@@ -330,7 +388,7 @@ components:
           description: An array of events that are included in this event series
       required:
       - name
-    GET_Event-series_GetAnEventSeries_200_response:
+    DELETE_Event-series_DeleteAnEventSeries_200_response:
       type: object
       properties:
         _id:
@@ -368,64 +426,6 @@ components:
       - _id
       - name
       - sellerId
-    PUT_Event-series_UpdateAnEventSeries_200_response:
-      type: object
-      properties:
-        _id:
-          type: string
-          description: The ID of the event series
-        name:
-          type: string
-          description: The name of the event series
-        eventIds:
-          type: array
-          items:
-            type: string
-          description: An array of events that are included in this event series
-        sellerId:
-          type: string
-          description: The ID of the seller of the event series
-        restrictions:
-          type: object
-          properties:
-            maxTicketsPerCustomer:
-              type:
-              - number
-              - 'null'
-              format: float
-              description: The amount of ticket a customer can buy for this series
-        updatedAt:
-          type: string
-          format: date-time
-          description: An ISO timestamp indicating when the event series was las updated
-        createdAt:
-          type: string
-          format: date-time
-          description: An ISO timestamp indicating when the event series was created
-      required:
-      - _id
-      - name
-      - sellerId
-    PUT_Event-series_UpdateAnEventSeries:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the event series
-        restrictions:
-          type: object
-          properties:
-            maxTicketsPerCustomer:
-              type:
-              - number
-              - 'null'
-              format: float
-              description: The amount of ticket a customer can buy for this series
-        eventIds:
-          type: array
-          items:
-            type: string
-          description: An array of events that are included in this event series
   securitySchemes:
     jwt:
       type: http

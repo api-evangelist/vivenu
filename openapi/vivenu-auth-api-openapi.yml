@@ -113,21 +113,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    POST_Auth_CreateAnExchangeToken:
-      oneOf:
-      - type: object
-        properties:
-          resourceType:
-            type: string
-            enum:
-            - customer
-            description: The type of the resource to create an exchange token for
-          customerId:
-            type: string
-            description: The id of the customer to create an exchange token for
-        required:
-        - resourceType
-        - customerId
     POST_Auth_CreateAnExchangeToken_200_response:
       type: object
       properties:
@@ -160,6 +145,21 @@ components:
       required:
       - token
       - expiresIn
+    POST_Auth_CreateAnExchangeToken:
+      oneOf:
+      - type: object
+        properties:
+          resourceType:
+            type: string
+            enum:
+            - customer
+            description: The type of the resource to create an exchange token for
+          customerId:
+            type: string
+            description: The id of the customer to create an exchange token for
+        required:
+        - resourceType
+        - customerId
   securitySchemes:
     jwt:
       type: http

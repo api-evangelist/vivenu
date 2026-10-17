@@ -443,46 +443,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SalesChannelGroupResource:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the sales channel group
-        status:
-          type: string
-          enum:
-          - ACTIVE
-          - INACTIVE
-          description: The status of the sales channel group, whether it is active or not
-        salesChannelIds:
-          type: array
-          items:
-            type: string
-          description: The sales channels that are in the group
-        restrictEventAccess:
-          type: boolean
-          description: Wether channels in this group can only access some events or all
-        _id:
-          type: string
-          description: The ID of the sales channel group
-        sellerId:
-          type: string
-          description: The ID of the seller of the sales channel group
-        createdAt:
-          type: string
-          format: date-time
-          description: An ISO timestamp indicating when the sales channel group was created
-        updatedAt:
-          type: string
-          format: date-time
-          description: An ISO timestamp indicating when the sales channel group was updated
-      required:
-      - name
-      - status
-      - restrictEventAccess
-      - _id
-      - sellerId
     SalesChannelResource:
       type: object
       properties:
@@ -536,6 +496,46 @@ components:
       - name
       - status
       - type
+    SalesChannelGroupResource:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the sales channel group
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          description: The status of the sales channel group, whether it is active or not
+        salesChannelIds:
+          type: array
+          items:
+            type: string
+          description: The sales channels that are in the group
+        restrictEventAccess:
+          type: boolean
+          description: Wether channels in this group can only access some events or all
+        _id:
+          type: string
+          description: The ID of the sales channel group
+        sellerId:
+          type: string
+          description: The ID of the seller of the sales channel group
+        createdAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the sales channel group was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: An ISO timestamp indicating when the sales channel group was updated
+      required:
+      - name
+      - status
+      - restrictEventAccess
+      - _id
+      - sellerId
     POST_Sales-channels_CreateASalesChannel:
       oneOf:
       - type: object
@@ -644,6 +644,15 @@ components:
         - name
         - status
         - type
+    GET_Sales-channels_GetAllSalesChannels_200_response:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/SalesChannelResource'
+        total:
+          type: integer
     PUT_Sales-channels_UpdateASalesChannel:
       oneOf:
       - type: object
@@ -752,30 +761,6 @@ components:
         - name
         - status
         - type
-    POST_Sales-channels_CreateASalesChannelGroup:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the sales channel group
-        status:
-          type: string
-          enum:
-          - ACTIVE
-          - INACTIVE
-          description: The status of the sales channel group, whether it is active or not
-        salesChannelIds:
-          type: array
-          items:
-            type: string
-          description: The sales channels that are in the group
-        restrictEventAccess:
-          type: boolean
-          description: Wether channels in this group can only access some events or all
-      required:
-      - name
-      - status
-      - restrictEventAccess
     PUT_Sales-channels_UpdateASalesChannelGroup:
       type: object
       properties:
@@ -800,15 +785,30 @@ components:
       - name
       - status
       - restrictEventAccess
-    GET_Sales-channels_GetAllSalesChannels_200_response:
+    POST_Sales-channels_CreateASalesChannelGroup:
       type: object
       properties:
-        docs:
+        name:
+          type: string
+          description: The name of the sales channel group
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          description: The status of the sales channel group, whether it is active or not
+        salesChannelIds:
           type: array
           items:
-            $ref: '#/components/schemas/SalesChannelResource'
-        total:
-          type: integer
+            type: string
+          description: The sales channels that are in the group
+        restrictEventAccess:
+          type: boolean
+          description: Wether channels in this group can only access some events or all
+      required:
+      - name
+      - status
+      - restrictEventAccess
   securitySchemes:
     jwt:
       type: http

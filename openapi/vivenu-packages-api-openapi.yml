@@ -223,6 +223,165 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    LanguageResource:
+      type:
+      - string
+      - 'null'
+      enum:
+      - de
+      - de-CH
+      - en
+      - en-GB
+      - en-AU
+      - fr
+      - es
+      - es-MX
+      - is
+      - it
+      - ru
+      - pt
+      - tr
+      - nb
+      - nl
+      - pl
+      - sv
+      - sl
+      - da
+      - cs
+      - lv
+      - he
+      - ar
+      - th
+      - ko
+      - ja
+      - zh-TW
+      description: The preferred language of the package checkout
+    PUT_Api:
+      type: object
+      properties:
+        active:
+          type: boolean
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        image:
+          type:
+          - string
+          - 'null'
+        headerImage:
+          type:
+          - string
+          - 'null'
+        variants:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              name:
+                type: string
+              image:
+                type:
+                - string
+                - 'null'
+            required:
+            - _id
+            - name
+        components:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              name:
+                type: string
+              description:
+                type:
+                - string
+                - 'null'
+              minOptions:
+                type: number
+                format: float
+              maxOptions:
+                type: number
+                format: float
+              options:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                    eventId:
+                      type: string
+                    shopId:
+                      type: string
+                    variants:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          variantId:
+                            type: string
+                          ticketTypeId:
+                            type: string
+                          v:
+                            type: number
+                            format: float
+                            description: Ticket volume
+                          active:
+                            type: boolean
+                            description: If ticket type related to variant is active
+                        required:
+                        - variantId
+                        - ticketTypeId
+                  required:
+                  - _id
+                  - eventId
+                  - variants
+            required:
+            - _id
+            - name
+            - options
+        tracking:
+          type: object
+          properties:
+            tagging:
+              type: object
+              properties:
+                tags:
+                  type: array
+                  items:
+                    type: string
+              required:
+              - tags
+          required:
+          - tagging
+        availableSelectionTypes:
+          type: array
+          items:
+            type: string
+            enum:
+            - INDIVIDUAL
+            - SAME_SEAT
+            - BEST_AVAILABLE
+        sellStart:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: An ISO timestamp indicating when the package sale starts.
+        sellEnd:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: An ISO timestamp indicating when the package sale ends.
     POST_Api_201_response:
       type: object
       properties:
@@ -372,165 +531,6 @@ components:
       - tracking
       - createdAt
       - updatedAt
-    PUT_Api:
-      type: object
-      properties:
-        active:
-          type: boolean
-        name:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        image:
-          type:
-          - string
-          - 'null'
-        headerImage:
-          type:
-          - string
-          - 'null'
-        variants:
-          type: array
-          items:
-            type: object
-            properties:
-              _id:
-                type: string
-              name:
-                type: string
-              image:
-                type:
-                - string
-                - 'null'
-            required:
-            - _id
-            - name
-        components:
-          type: array
-          items:
-            type: object
-            properties:
-              _id:
-                type: string
-              name:
-                type: string
-              description:
-                type:
-                - string
-                - 'null'
-              minOptions:
-                type: number
-                format: float
-              maxOptions:
-                type: number
-                format: float
-              options:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    _id:
-                      type: string
-                    eventId:
-                      type: string
-                    shopId:
-                      type: string
-                    variants:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          variantId:
-                            type: string
-                          ticketTypeId:
-                            type: string
-                          v:
-                            type: number
-                            format: float
-                            description: Ticket volume
-                          active:
-                            type: boolean
-                            description: If ticket type related to variant is active
-                        required:
-                        - variantId
-                        - ticketTypeId
-                  required:
-                  - _id
-                  - eventId
-                  - variants
-            required:
-            - _id
-            - name
-            - options
-        tracking:
-          type: object
-          properties:
-            tagging:
-              type: object
-              properties:
-                tags:
-                  type: array
-                  items:
-                    type: string
-              required:
-              - tags
-          required:
-          - tagging
-        availableSelectionTypes:
-          type: array
-          items:
-            type: string
-            enum:
-            - INDIVIDUAL
-            - SAME_SEAT
-            - BEST_AVAILABLE
-        sellStart:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: An ISO timestamp indicating when the package sale starts.
-        sellEnd:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: An ISO timestamp indicating when the package sale ends.
-    LanguageResource:
-      type:
-      - string
-      - 'null'
-      enum:
-      - de
-      - de-CH
-      - en
-      - en-GB
-      - en-AU
-      - fr
-      - es
-      - es-MX
-      - is
-      - it
-      - ru
-      - pt
-      - tr
-      - nb
-      - nl
-      - pl
-      - sv
-      - sl
-      - da
-      - cs
-      - lv
-      - he
-      - ar
-      - th
-      - ko
-      - ja
-      - zh-TW
-      description: The preferred language of the package checkout
     POST_Api:
       type: object
       properties:
